@@ -63,18 +63,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Standard Assets\Game\Modules\LoadModule.cs" />
-    <Compile Include="Assets\Standard Assets\Game\Modules\ModuleBase.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Assets.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Manifest.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Reference.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\AssetRequest.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Request\BundleAssetAsyncRequest.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\BundleAssetRequest.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\BundleAsyncRequest.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\BundleRequest.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\ManifestRequest.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\RequestDefine.cs" />
-    <Compile Include="Assets\Standard Assets\Game\XAsset\Updater.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Request\WebAssetRequest.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Request\WebBundleRequest.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Utility\StringExtension.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Utility\Utility.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\VDisk.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Versions.cs" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/unity2018.4.4/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>

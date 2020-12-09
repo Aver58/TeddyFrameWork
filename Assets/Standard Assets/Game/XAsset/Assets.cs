@@ -83,13 +83,6 @@ public sealed class Assets : MonoBehaviour
         _bundleToDependencies.Clear();
     }
 
-    private static void AddAssetRequest(AssetRequest request)
-    {
-        _assets.Add(request.name, request);
-        _loadingAssets.Add(request);
-        request.Load();
-    }
-
     public static AssetRequest LoadAssetAsync(string path, Type type)
     {
         return LoadAsset(path, type, true);
@@ -108,7 +101,6 @@ public sealed class Assets : MonoBehaviour
     #endregion
 
     #region Private
-
 
     /// <summary>
     /// Manifest加载结束回调
@@ -143,15 +135,11 @@ public sealed class Assets : MonoBehaviour
     /// <summary>
     /// 每帧最大加载bundle数
     /// </summary>
-    private static readonly int MAX_BUNDLES_PERFRAME = 0;
     private static List<AssetRequest> _unusedAssets = new List<AssetRequest>();
     private static List<AssetRequest> _loadingAssets = new List<AssetRequest>();
-    private static List<BundleRequest> _toloadBundles = new List<BundleRequest>();
-    private static List<BundleRequest> _unusedBundles = new List<BundleRequest>();
-    private static List<BundleRequest> _loadingBundles = new List<BundleRequest>();
     //private static List<SceneAssetRequest> _scenes = new List<SceneAssetRequest>();
     private static Dictionary<string, AssetRequest> _assets = new Dictionary<string, AssetRequest>();
-    private static Dictionary<string, BundleRequest> _bundles = new Dictionary<string, BundleRequest>();
+
 
     // update 驱动
     private void Update()
@@ -263,6 +251,58 @@ public sealed class Assets : MonoBehaviour
         _unusedBundles.Clear();
     }
 
+    private static void AddAssetRequest(AssetRequest request)
+    {
+        _assets.Add(request.name, request);
+        _loadingAssets.Add(request);
+        request.Load();
+    }
+
+    private static AssetRequest LoadAsset(string path, Type type, bool async)
+    {
+        if(string.IsNullOrEmpty(path))
+        {
+            Debug.LogError("invalid path");
+            return null;
+        }
+
+        path = GetExistPath(path);
+
+        AssetRequest request;
+        if(_assets.TryGetValue(path, out request))
+        {
+            request.Retain();
+            _loadingAssets.Add(request);
+            return request;
+        }
+
+        string assetBundleName;
+        if(GetAssetBundleName(path, out assetBundleName))
+        {
+            request = async ? new BundleAssetAsyncRequest(assetBundleName) : new BundleAssetRequest(assetBundleName);
+        }
+        else
+        {
+            if(path.StartsWith("http://", StringComparison.Ordinal) ||
+                path.StartsWith("https://", StringComparison.Ordinal) ||
+                path.StartsWith("file://", StringComparison.Ordinal) ||
+                path.StartsWith("ftp://", StringComparison.Ordinal) ||
+                path.StartsWith("jar:file://", StringComparison.Ordinal))
+            {
+                request = new WebAssetRequest();
+            }
+            else
+                request = new AssetRequest();
+        }
+
+        request.name = path;
+        request.assetType = type;
+        AddAssetRequest(request);
+        request.Retain();
+        Log(string.Format("LoadAsset:{0}", path));
+        return request;
+    }
+
     #endregion
 
     #region Paths
@@ -305,9 +345,108 @@ public sealed class Assets : MonoBehaviour
     #endregion
 
     #region Bundles
-    private static Dictionary<string, string> _assetToBundles = new Dictionary<string, string>();
+    private static readonly int MAX_BUNDLES_PERFRAME = 0;
+
     private static List<string> _activeVariants = new List<string>();
+    private static List<BundleRequest> _loadingBundles = new List<BundleRequest>();
+    private static List<BundleRequest> _toloadBundles = new List<BundleRequest>();
+    private static List<BundleRequest> _unusedBundles = new List<BundleRequest>();
+    private static Dictionary<string, BundleRequest> _bundles = new Dictionary<string, BundleRequest>();
+    private static Dictionary<string, string> _assetToBundles = new Dictionary<string, string>();
     private static Dictionary<string, string[]> _bundleToDependencies = new Dictionary<string, string[]>();
+    
+    internal static bool GetAssetBundleName(string path, out string assetBundleName)
+    {
+        return _assetToBundles.TryGetValue(path, out assetBundleName);
+    }
+
+    internal static string[] GetAllDependencies(string bundle)
+    {
+        string[] deps;
+        if(_bundleToDependencies.TryGetValue(bundle, out deps))
+            return deps;
+
+        return new string[0];
+    }
+
+    internal static BundleRequest LoadBundle(string assetBundleName)
+    {
+        return LoadBundle(assetBundleName, false);
+    }
+
+    internal static BundleRequest LoadBundleAsync(string assetBundleName)
+    {
+        return LoadBundle(assetBundleName, true);
+    }
+
+    internal static void UnloadBundle(BundleRequest bundle)
+    {
+        bundle.Release();
+    }
+
+    internal static BundleRequest LoadBundle(string assetBundleName, bool asyncMode)
+    {
+        if(string.IsNullOrEmpty(assetBundleName))
+        {
+            Debug.LogError("assetBundleName == null");
+            return null;
+        }
+
+        assetBundleName = RemapVariantName(assetBundleName);
+        var url = GetDataPath(assetBundleName) + assetBundleName;
+
+        BundleRequest bundle;
+
+        if(_bundles.TryGetValue(url, out bundle))
+        {
+            bundle.Retain();
+            _loadingBundles.Add(bundle);
+            return bundle;
+        }
+
+        if(url.StartsWith("http://", StringComparison.Ordinal) ||
+            url.StartsWith("https://", StringComparison.Ordinal) ||
+            url.StartsWith("file://", StringComparison.Ordinal) ||
+            url.StartsWith("ftp://", StringComparison.Ordinal))
+        {
+            bundle = new WebBundleRequest();
+        }
+        else
+            bundle = asyncMode ? new BundleAsyncRequest() : new BundleRequest();
+
+        bundle.name = url;
+        _bundles.Add(url, bundle);
+
+        if(MAX_BUNDLES_PERFRAME > 0 && (bundle is BundleAsyncRequest || bundle is WebBundleRequest))
+        {
+            _toloadBundles.Add(bundle);
+        }
+        else
+        {
+            bundle.Load();
+            _loadingBundles.Add(bundle);
+            Log("LoadBundle: " + url);
+        }
+
+        bundle.Retain();
+        return bundle;
+    }
+
+    private static string RemapVariantName(string assetBundleName)
+    {
+        return "";
+    }
+
+    private static string GetDataPath(string bundleName)
+    {
+        if(string.IsNullOrEmpty(updatePath))
+            return basePath;
+
+        if(File.Exists(updatePath + bundleName))
+            return updatePath;
+
+        return basePath;
+    }
 
     #endregion
 }

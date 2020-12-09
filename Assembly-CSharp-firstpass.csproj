@@ -75,6 +75,8 @@
     <Compile Include="Assets\Standard Assets\Engine\Network\OpCode.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Network\ProtoBufUtil.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Singleton.cs" />
+    <Compile Include="Assets\Standard Assets\Game\Modules\LoadModule.cs" />
+    <Compile Include="Assets\Standard Assets\Game\Modules\ModuleBase.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/TeddyFrameWork/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
