@@ -264,8 +264,14 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
 
         if(_step == Step.Wait)
         {
-            yield return RequestVFS();
-            _step = Step.Copy;
+            if(enableVFS)
+                _step = Step.Copy;
+            else
+            {
+                yield return RequestVFS();
+                _step = Step.Copy;
+            }
+
         }
 
         if(_step == Step.Copy)
@@ -401,7 +407,9 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
             yield break;
         }
 
-        var request = UnityWebRequest.Get(GetDownloadURL(Versions.Filename));
+        var url = GetDownloadURL(Versions.Filename);
+        Debug.Log(url);
+        var request = UnityWebRequest.Get(url);
         request.downloadHandler = new DownloadHandlerFile(_savePath + Versions.Filename);
         yield return request.SendWebRequest();
         var error = request.error;
