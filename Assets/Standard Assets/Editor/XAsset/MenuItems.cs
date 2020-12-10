@@ -131,7 +131,7 @@ namespace libx
         {
             var watch = new Stopwatch();
             watch.Start();
-			BuildScript.ApplyBuildRules ();
+			BuildScript.ApplyBuildRules();
             BuildScript.BuildAssetBundles();
             watch.Stop();
             Debug.Log("BuildAssetBundles " + watch.ElapsedMilliseconds + " ms.");

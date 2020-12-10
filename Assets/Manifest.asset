@@ -15,13 +15,30 @@ MonoBehaviour:
   activeVariants: []
   dirs:
   - Assets/Data/ui/panel
+  - Assets/_Scenes
   assets:
   - name: TestBundle.prefab
     bundle: 0
     dir: 0
+  - name: GameMain.unity
+    bundle: 2
+    dir: 1
+  - name: TestNet.unity
+    bundle: 1
+    dir: 1
   bundles:
   - name: 78a450a96b59aced86d8c23fd0774d4a.unity3d
     id: 0
     deps: 
     len: 3506
     hash: 18a2e714d2d53a8e8c0a0dfe11f4e900
+  - name: 9aed0e4bb29ea5aac109434fa4279a29.unity3d
+    id: 1
+    deps: 
+    len: 13808
+    hash: 080c13d057f177683d9e7d6abcea537b
+  - name: 9e7cf58d3eed9cf4ff4013740edce1b7.unity3d
+    id: 2
+    deps: 
+    len: 5640
+    hash: 0dc4824faeb4e3bd438cd3f625dbf3d6

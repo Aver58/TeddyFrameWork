@@ -11,7 +11,6 @@
 
 using System.Collections.Generic;
 using System.IO;
-using libx;
 
 public enum VerifyBy
 {
@@ -32,14 +31,11 @@ public static class Versions
 	{
 		var path = outputPath + "/" + Filename;
 		if(File.Exists(path))
-		{
 			File.Delete(path);
-		}
+
 		var dataPath = outputPath + "/" + Dataname;
 		if(File.Exists(dataPath))
-		{
 			File.Delete(dataPath);
-		}
 
 		var disk = new VDisk();
 		foreach(var file in bundles)

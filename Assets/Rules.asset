@@ -20,17 +20,31 @@ MonoBehaviour:
   searchPatternPrefab: '*.prefab'
   searchPatternScene: '*.unity'
   searchPatternText: '*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt'
-  version: 1
+  version: 2
   scenesInBuild: []
   rules:
   - searchPath: Assets/Data/ui/panel
     searchPattern: '*'
     nameBy: 2
     assetBundleName: 
+  - searchPath: Assets/_Scenes
+    searchPattern: '*.unity'
+    nameBy: 1
+    assetBundleName: 
   ruleAssets:
   - bundle: 78a450a96b59aced86d8c23fd0774d4a.unity3d
     path: Assets/Data/ui/panel/TestBundle.prefab
+  - bundle: 9e7cf58d3eed9cf4ff4013740edce1b7.unity3d
+    path: Assets/_Scenes/GameMain.unity
+  - bundle: 9aed0e4bb29ea5aac109434fa4279a29.unity3d
+    path: Assets/_Scenes/TestNet.unity
   ruleBundles:
   - name: 78a450a96b59aced86d8c23fd0774d4a.unity3d
     assets:
     - Assets/Data/ui/panel/TestBundle.prefab
+  - name: 9e7cf58d3eed9cf4ff4013740edce1b7.unity3d
+    assets:
+    - Assets/_Scenes/GameMain.unity
+  - name: 9aed0e4bb29ea5aac109434fa4279a29.unity3d
+    assets:
+    - Assets/_Scenes/TestNet.unity

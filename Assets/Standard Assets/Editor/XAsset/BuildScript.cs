@@ -182,9 +182,8 @@ namespace libx
 			var rules = GetBuildRules ();
 			var builds = rules.GetBuilds ();
 			var assetBundleManifest = BuildPipeline.BuildAssetBundles (outputPath, builds, options, targetPlatform);
-			if (assetBundleManifest == null) {
+			if (assetBundleManifest == null) 
 				return;
-			}
 
 			var manifest = GetManifest ();
 			var dirs = new List<string> ();

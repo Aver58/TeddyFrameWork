@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Standard Assets\Game\XAsset\Assets.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Download.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Downloader.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Manifest.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Reference.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\AssetRequest.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\RequestDefine.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\WebAssetRequest.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Request\WebBundleRequest.cs" />
+    <Compile Include="Assets\Standard Assets\Game\XAsset\Utility\CRC32.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Utility\StringExtension.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\Utility\Utility.cs" />
     <Compile Include="Assets\Standard Assets\Game\XAsset\VDisk.cs" />

@@ -29,7 +29,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace libx
 {
@@ -76,16 +75,20 @@ namespace libx
             }
 
             var getFiles = new List<string>();
-            foreach (var item in patterns)
+            foreach (string item in patterns)
             {
-                var files = Directory.GetFiles(searchPath, item, SearchOption.AllDirectories);
-                foreach (var file in files)
+                string[] files = Directory.GetFiles(searchPath, item, SearchOption.AllDirectories);
+                foreach (string file in files)
                 {
-                    if (Directory.Exists(file)) continue;
-                    var ext = Path.GetExtension(file).ToLower();
-                    if ((ext == ".fbx" || ext == ".anim") && !item.Contains(ext)) continue;
-                    if (!BuildRules.ValidateAsset(file)) continue;
-                    var asset = file.Replace("\\", "/");
+                    // 忽略目录？可以省略吧 todo 
+                    if (Directory.Exists(file)) 
+                        continue;
+                    string ext = Path.GetExtension(file).ToLower();
+                    if ((ext == ".fbx" || ext == ".anim") && !item.Contains(ext)) 
+                        continue;
+                    if (!BuildRules.ValidateAsset(file)) 
+                        continue;
+                    string asset = file.Replace("\\", "/");
                     getFiles.Add(asset);
                 }
             }
@@ -109,7 +112,7 @@ namespace libx
 		public string searchPatternPrefab = "*.prefab";
 		public string searchPatternScene = "*.unity";
 		public string searchPatternText = "*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt";
-        public static bool nameByHash = true;
+        public static bool nameByHash = false;
         
 		[Tooltip("构建的版本号")]
 		[Header("Builds")] 
@@ -159,10 +162,15 @@ namespace libx
 
         internal static bool ValidateAsset(string asset)
         {
-            if (!asset.StartsWith("Assets/")) return false;
+            if (!asset.StartsWith("Assets/")) 
+                return false;
 
             var ext = Path.GetExtension(asset).ToLower();
-            return ext != ".dll" && ext != ".cs" && ext != ".meta" && ext != ".js" && ext != ".boo";
+            return ext != ".dll" 
+                && ext != ".cs" 
+                && ext != ".meta" 
+                && ext != ".js" 
+                && ext != ".boo";
         }
 
         private static bool IsScene(string asset)
@@ -173,9 +181,7 @@ namespace libx
         private static string RuledAssetBundleName(string name)
         {
             if (nameByHash)
-            {
                 return Utility.GetMD5Hash(name) + Assets.Extension; 
-            } 
             return name.Replace("\\", "/").ToLower() + Assets.Extension;
         }
 
@@ -213,7 +219,8 @@ namespace libx
                     bundles[bundle] = list;
                 }
 
-                if (!list.Contains(item.Key)) list.Add(item.Key);
+                if (!list.Contains(item.Key)) 
+                    list.Add(item.Key);
             }
 
             return bundles;
@@ -252,8 +259,8 @@ namespace libx
             int i = 0, max = _conflicted.Count;
             foreach (var item in _conflicted)
             {
-                if (EditorUtility.DisplayCancelableProgressBar(string.Format("优化冲突{0}/{1}", i, max), item.Key,
-                    i / (float) max)) break;
+                if (EditorUtility.DisplayCancelableProgressBar(string.Format("优化冲突{0}/{1}", i, max), item.Key, i / (float) max)) 
+                    break;
                 var list = item.Value;
                 foreach (var asset in list)
                     if (!IsScene(asset))
@@ -264,8 +271,8 @@ namespace libx
             for (i = 0, max = _duplicated.Count; i < max; i++)
             {
                 var item = _duplicated[i];
-                if (EditorUtility.DisplayCancelableProgressBar(string.Format("优化冗余{0}/{1}", i, max), item,
-                    i / (float) max)) break;
+                if (EditorUtility.DisplayCancelableProgressBar(string.Format("优化冗余{0}/{1}", i, max), item, i / (float) max)) 
+                    break;
                 OptimizeAsset(item);
             }
         }
@@ -276,10 +283,10 @@ namespace libx
             int i = 0, max = getBundles.Count;
             foreach (var item in getBundles)
             {
-                var bundle = item.Key;
-                if (EditorUtility.DisplayCancelableProgressBar(string.Format("分析依赖{0}/{1}", i, max), bundle,
-                    i / (float) max)) break;
-                var assetPaths = getBundles[bundle];
+                string bundle = item.Key;
+                if (EditorUtility.DisplayCancelableProgressBar(string.Format("分析依赖{0}/{1}", i, max), bundle, i / (float) max)) 
+                    break;
+                List<string> assetPaths = getBundles[bundle];
                 if (assetPaths.Exists(IsScene) && !assetPaths.TrueForAll(IsScene))
                     _conflicted.Add(bundle, assetPaths.ToArray());
                 var dependencies = AssetDatabase.GetDependencies(assetPaths.ToArray(), true);
@@ -295,9 +302,8 @@ namespace libx
         {
             for (int i = 0, max = rules.Length; i < max; i++)
             {
-                var rule = rules[i];
-                if (EditorUtility.DisplayCancelableProgressBar(string.Format("收集资源{0}/{1}", i, max), rule.searchPath,
-                    i / (float) max))
+                BuildRule rule = rules[i];
+                if (EditorUtility.DisplayCancelableProgressBar(string.Format("收集资源{0}/{1}", i, max), rule.searchPath, i / (float) max))
                     break;
                 ApplyRule(rule);
             }
@@ -328,13 +334,15 @@ namespace libx
             {
                 case NameBy.Explicit:
                 {
-                    foreach (var asset in assets) _asset2Bundles[asset] = RuledAssetBundleName(rule.assetBundleName);
+                    foreach (var asset in assets) 
+                        _asset2Bundles[asset] = RuledAssetBundleName(rule.assetBundleName);
 
                     break;
                 }
                 case NameBy.Path:
                 {
-                    foreach (var asset in assets) _asset2Bundles[asset] = RuledAssetBundleName(asset);
+                    foreach (var asset in assets) 
+                        _asset2Bundles[asset] = RuledAssetBundleName(asset);
 
                     break;
                 }
