@@ -3,42 +3,40 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 856d16fe5cec88d4cb3ca615f845bff5, type: 3}
+  m_Script: {fileID: 11500000, guid: a5a0b90247e2cb54fb931cd37684d482, type: 3}
   m_Name: Manifest
   m_EditorClassIdentifier: 
   activeVariants: []
   dirs:
-  - Assets/Data/ui/panel
   - Assets/_Scenes
   assets:
-  - name: TestBundle.prefab
+  - name: Game.unity
     bundle: 0
     dir: 0
-  - name: GameMain.unity
-    bundle: 2
-    dir: 1
-  - name: TestNet.unity
+  - name: Init.unity
     bundle: 1
-    dir: 1
+    dir: 0
+  - name: TestNet.unity
+    bundle: 2
+    dir: 0
   bundles:
-  - name: 78a450a96b59aced86d8c23fd0774d4a.unity3d
+  - name: assets/_scenes/game.unity.unity3d
     id: 0
     deps: 
-    len: 3506
-    hash: 18a2e714d2d53a8e8c0a0dfe11f4e900
-  - name: 9aed0e4bb29ea5aac109434fa4279a29.unity3d
+    len: 127472
+    hash: a62b8460ac431c5500346f2d4076de37
+  - name: assets/_scenes/init.unity.unity3d
     id: 1
     deps: 
-    len: 13808
-    hash: 080c13d057f177683d9e7d6abcea537b
-  - name: 9e7cf58d3eed9cf4ff4013740edce1b7.unity3d
+    len: 796853
+    hash: 20cb59bf6afdc11e33244be40574b2f3
+  - name: assets/_scenes/testnet.unity.unity3d
     id: 2
     deps: 
-    len: 5640
-    hash: 0dc4824faeb4e3bd438cd3f625dbf3d6
+    len: 13087
+    hash: 1f4009a4ddc05fbea924c1e058037591

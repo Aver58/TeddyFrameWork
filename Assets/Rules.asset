@@ -3,9 +3,8 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -20,31 +19,35 @@ MonoBehaviour:
   searchPatternPrefab: '*.prefab'
   searchPatternScene: '*.unity'
   searchPatternText: '*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt'
-  version: 2
+  version: 3
   scenesInBuild: []
   rules:
-  - searchPath: Assets/Data/ui/panel
-    searchPattern: '*'
-    nameBy: 2
-    assetBundleName: 
   - searchPath: Assets/_Scenes
     searchPattern: '*.unity'
     nameBy: 1
     assetBundleName: 
+  - searchPath: Assets/Rules.asset
+    searchPattern: '*.png'
+    nameBy: 1
+    assetBundleName: 
+  - searchPath: Assets/Rules.asset
+    searchPattern: '*.asset'
+    nameBy: 1
+    assetBundleName: 
   ruleAssets:
-  - bundle: 78a450a96b59aced86d8c23fd0774d4a.unity3d
-    path: Assets/Data/ui/panel/TestBundle.prefab
-  - bundle: 9e7cf58d3eed9cf4ff4013740edce1b7.unity3d
-    path: Assets/_Scenes/GameMain.unity
-  - bundle: 9aed0e4bb29ea5aac109434fa4279a29.unity3d
+  - bundle: assets/_scenes/game.unity.unity3d
+    path: Assets/_Scenes/Game.unity
+  - bundle: assets/_scenes/init.unity.unity3d
+    path: Assets/_Scenes/Init.unity
+  - bundle: assets/_scenes/testnet.unity.unity3d
     path: Assets/_Scenes/TestNet.unity
   ruleBundles:
-  - name: 78a450a96b59aced86d8c23fd0774d4a.unity3d
+  - name: assets/_scenes/game.unity.unity3d
     assets:
-    - Assets/Data/ui/panel/TestBundle.prefab
-  - name: 9e7cf58d3eed9cf4ff4013740edce1b7.unity3d
+    - Assets/_Scenes/Game.unity
+  - name: assets/_scenes/init.unity.unity3d
     assets:
-    - Assets/_Scenes/GameMain.unity
-  - name: 9aed0e4bb29ea5aac109434fa4279a29.unity3d
+    - Assets/_Scenes/Init.unity
+  - name: assets/_scenes/testnet.unity.unity3d
     assets:
     - Assets/_Scenes/TestNet.unity
