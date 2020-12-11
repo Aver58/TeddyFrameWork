@@ -106,17 +106,16 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
         yield return init;
         if(string.IsNullOrEmpty(init.error))
         {
-            Assets.AddSearchPath("Assets/XAsset/Demo/Scenes");
+            Assets.AddSearchPath("Assets/_Scenes");
             init.Release();
             OnProgress(0);
             OnMessage("加载游戏场景");
-            //TODO
-            //var scene = Assets.LoadSceneAsync(gameScene, false);
-            //while(!scene.isDone)
-            //{
-            //    OnProgress(scene.progress);
-            //    yield return null;
-            //}
+            var scene = Assets.LoadSceneAsync(gameScene, false);
+            while(!scene.isDone)
+            {
+                OnProgress(scene.progress);
+                yield return null;
+            }
         }
         else
         {
@@ -131,7 +130,7 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
     {
         if(enableVFS)
         {
-            var dataPath = _savePath + Versions.Dataname;
+            string dataPath = _savePath + Versions.Dataname;
             var downloads = _downloader.downloads;
             if(downloads.Count > 0 && File.Exists(dataPath))
             {

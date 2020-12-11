@@ -29,6 +29,40 @@ public static class Versions
     private static readonly Dictionary<string, VFile> _updateData = new Dictionary<string, VFile>();
     private static readonly Dictionary<string, VFile> _baseData = new Dictionary<string, VFile>();
 
+	public static AssetBundle LoadAssetBundleFromFile(string url)
+	{
+		if(!File.Exists(url))
+		{
+			if(_disk != null)
+			{
+				var name = Path.GetFileName(url);
+				var file = _disk.GetFile(name, string.Empty);
+				if(file != null)
+				{
+					return AssetBundle.LoadFromFile(_disk.name, 0, (ulong)file.offset);
+				}
+			}
+		}
+		return AssetBundle.LoadFromFile(url);
+	}
+
+	public static AssetBundleCreateRequest LoadAssetBundleFromFileAsync(string url)
+	{
+		if(!File.Exists(url))
+		{
+			if(_disk != null)
+			{
+				var name = Path.GetFileName(url);
+				var file = _disk.GetFile(name, string.Empty);
+				if(file != null)
+				{
+					return AssetBundle.LoadFromFileAsync(_disk.name, 0, (ulong)file.offset);
+				}
+			}
+		}
+		return AssetBundle.LoadFromFileAsync(url);
+	}
+
 	public static void BuildVersions(string outputPath, string[] bundles, int version)
 	{
 		var path = outputPath + "/" + Filename;

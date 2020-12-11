@@ -17,28 +17,12 @@ using Object = UnityEngine.Object;
 
 public class AssetRequest : Reference, IEnumerator
 {
-    private List<Object> _requires;
     private LoadState _loadState = LoadState.Init;
-
-    public string name;
+    private List<Object> _requires;
     public Type assetType;
-    public Action<AssetRequest> OnCompleted;
-    public virtual bool isDone { get { return loadState == LoadState.Loaded || loadState == LoadState.Unload; } }
-    public virtual float progress { get { return 1; } }
-    public Object asset { get; internal set; }
-    public virtual string error { get; protected set; }
-    public string text { get; protected set; }
-    public byte[] bytes { get; protected set; }
-    public LoadState loadState
-    {
-        get { return _loadState; }
-        protected set
-        {
-            _loadState = value;
-            if(value == LoadState.Loaded)
-                Complete();
-        }
-    }
+
+    public Action<AssetRequest> completed;
+    public string name;
 
     public AssetRequest()
     {
@@ -46,57 +30,56 @@ public class AssetRequest : Reference, IEnumerator
         loadState = LoadState.Init;
     }
 
-    internal virtual void Load()
+    public LoadState loadState
     {
-        if(Assets.runtimeMode == false && Assets.loadDelegate != null)
-            asset = Assets.loadDelegate(name, assetType);
-
-        if(asset == null)
-            error = "error! file not exist:" + name;
-
-        loadState = LoadState.Loaded;
+        get { return _loadState; }
+        protected set
+        {
+            _loadState = value;
+            if(value == LoadState.Loaded)
+            {
+                Complete();
+            }
+        }
     }
 
-    internal virtual void Unload()
+    private void Complete()
     {
-        if(asset == null)
-            return;
-
-        if(Assets.runtimeMode == false)
-            if((asset is GameObject) == false)
-                Resources.UnloadAsset(asset);
-
-        asset = null;
-        loadState = LoadState.Unload;
+        if(completed != null)
+        {
+            completed(this);
+            completed = null;
+        }
     }
 
-    internal virtual bool Update()
+    public virtual bool isDone
     {
-        if(_requires != null)
-            UpdateRequires();
-        if(!isDone)
-            return true;
-        if(OnCompleted == null)
-            return false;
+        get { return loadState == LoadState.Loaded || loadState == LoadState.Unload; }
+    }
 
-        try
-        {
-            OnCompleted.Invoke(this);
-        }
-        catch(Exception ex)
-        {
-            Debug.LogException(ex);
-        }
+    public virtual float progress
+    {
+        get { return 1; }
+    }
 
-        OnCompleted = null;
-        return false;
+    public virtual string error { get; protected set; }
+
+    public string text { get; protected set; }
+
+    public byte[] bytes { get; protected set; }
+
+    public Object asset { get; internal set; }
+
+    private bool checkRequires
+    {
+        get { return _requires != null; }
     }
 
     private void UpdateRequires()
     {
-        for(int i = 0; i < _requires.Count; i++)
+        for(var i = 0; i < _requires.Count; i++)
         {
-            Object item = _requires[i];
+            var item = _requires[i];
             if(item != null)
                 continue;
             Release();
@@ -108,15 +91,50 @@ public class AssetRequest : Reference, IEnumerator
             _requires = null;
     }
 
-    internal virtual void LoadImmediate() { }
-
-    private void Complete()
+    internal virtual void Load()
     {
-        if(OnCompleted != null)
+        if(!Assets.runtimeMode && Assets.loadDelegate != null)
+            asset = Assets.loadDelegate(name, assetType);
+        if(asset == null) error = "error! file not exist:" + name;
+        loadState = LoadState.Loaded;
+    }
+
+    internal virtual void Unload()
+    {
+        if(asset == null)
+            return;
+
+        if(!Assets.runtimeMode)
+            if(!(asset is GameObject))
+                Resources.UnloadAsset(asset);
+
+        asset = null;
+        loadState = LoadState.Unload;
+    }
+
+    internal virtual bool Update()
+    {
+        if(checkRequires)
+            UpdateRequires();
+        if(!isDone)
+            return true;
+        if(completed == null)
+            return false;
+        try
         {
-            OnCompleted(this);
-            OnCompleted = null;
+            completed.Invoke(this);
         }
+        catch(Exception ex)
+        {
+            Debug.LogException(ex);
+        }
+
+        completed = null;
+        return false;
+    }
+
+    internal virtual void LoadImmediate()
+    {
     }
 
     #region IEnumerator implementation

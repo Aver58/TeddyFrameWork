@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -19,35 +20,67 @@ MonoBehaviour:
   searchPatternPrefab: '*.prefab'
   searchPatternScene: '*.unity'
   searchPatternText: '*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt'
-  version: 3
-  scenesInBuild: []
+  nameByHash: 0
+  version: 9
+  scenesInBuild:
+  - {fileID: 102900000, guid: 41515a2b3f98a445e88e746ac77f43d1, type: 3}
+  - {fileID: 102900000, guid: 0dc65c6ac185c2c47b08fa37cf3f0c53, type: 3}
   rules:
   - searchPath: Assets/_Scenes
     searchPattern: '*.unity'
     nameBy: 1
     assetBundleName: 
-  - searchPath: Assets/Rules.asset
-    searchPattern: '*.png'
-    nameBy: 1
+  - searchPath: Assets/Art/UI
+    searchPattern: '*'
+    nameBy: 2
     assetBundleName: 
-  - searchPath: Assets/Rules.asset
-    searchPattern: '*.asset'
+  - searchPath: Assets/Art/Atlas
+    searchPattern: '*'
     nameBy: 1
     assetBundleName: 
   ruleAssets:
+  - bundle: assets/art/atlas/game.spriteatlas.unity3d
+    path: Assets/Art/Atlas/Game.spriteatlas
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/Btn_Tab1_n.png
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/Dropdown_Btn_n.png
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/Dropdown_bg_n.png
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/Dropdown_menu.png
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/Dropdown_menu_bg.png
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/Slider2.png
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/Slider2_bg.png
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/bg_ItemIntrudction.png
+  - bundle: assets/art/ui/game.unity3d
+    path: Assets/Art/UI/Game/checkbox_select.png
   - bundle: assets/_scenes/game.unity.unity3d
     path: Assets/_Scenes/Game.unity
-  - bundle: assets/_scenes/init.unity.unity3d
-    path: Assets/_Scenes/Init.unity
   - bundle: assets/_scenes/testnet.unity.unity3d
     path: Assets/_Scenes/TestNet.unity
   ruleBundles:
   - name: assets/_scenes/game.unity.unity3d
     assets:
     - Assets/_Scenes/Game.unity
-  - name: assets/_scenes/init.unity.unity3d
-    assets:
-    - Assets/_Scenes/Init.unity
   - name: assets/_scenes/testnet.unity.unity3d
     assets:
     - Assets/_Scenes/TestNet.unity
+  - name: assets/art/ui/game.unity3d
+    assets:
+    - Assets/Art/UI/Game/bg_ItemIntrudction.png
+    - Assets/Art/UI/Game/Btn_Tab1_n.png
+    - Assets/Art/UI/Game/checkbox_select.png
+    - Assets/Art/UI/Game/Dropdown_bg_n.png
+    - Assets/Art/UI/Game/Dropdown_Btn_n.png
+    - Assets/Art/UI/Game/Dropdown_menu.png
+    - Assets/Art/UI/Game/Dropdown_menu_bg.png
+    - Assets/Art/UI/Game/Slider2.png
+    - Assets/Art/UI/Game/Slider2_bg.png
+  - name: assets/art/atlas/game.spriteatlas.unity3d
+    assets:
+    - Assets/Art/Atlas/Game.spriteatlas

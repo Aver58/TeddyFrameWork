@@ -31,8 +31,8 @@ namespace libx
 {
     public class ScrollContent : MonoBehaviour
     {
-        [SerializeField] private ScrollRect scroll;
-        [SerializeField] private float speed;
+        public ScrollRect scroll;
+        public float speed;
 
         private void LateUpdate()
         {

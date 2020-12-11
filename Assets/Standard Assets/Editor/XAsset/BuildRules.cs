@@ -104,15 +104,23 @@ namespace libx
         private readonly List<string> _duplicated = new List<string>();
         private readonly Dictionary<string, HashSet<string>> _tracker = new Dictionary<string, HashSet<string>>();
 		[Header("Patterns")]
-		public string searchPatternAsset = "*.asset";
-		public string searchPatternController = "*.controller";
-		public string searchPatternDir = "*";
-		public string searchPatternMaterial = "*.mat";
-		public string searchPatternPng = "*.png";
-		public string searchPatternPrefab = "*.prefab";
-		public string searchPatternScene = "*.unity";
-		public string searchPatternText = "*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt";
-        public static bool nameByHash = false;
+        [Tooltip("此文件夹下的每个Asset都会各自打成一个AB包")]
+        public string searchPatternAsset = "*.asset";
+        [Tooltip("此文件夹下的每个Controller都会各自打成一个AB包")]
+        public string searchPatternController = "*.controller";
+        [Tooltip("此文件夹下的每个文件夹都会各自打成一个AB包")]
+        public string searchPatternDir = "*";
+        [Tooltip("此文件夹下的每个Material都会各自打成一个AB包")]
+        public string searchPatternMaterial = "*.mat";
+        [Tooltip("此文件夹下的每个图片都会各自打成一个AB包")]
+        public string searchPatternPng = "*.png";
+        [Tooltip("此文件夹下的每个Prefab都会各自打成一个AB包")]
+        public string searchPatternPrefab = "*.prefab";
+        [Tooltip("此文件夹下的每个场景都会各自打成一个AB包")]
+        public string searchPatternScene = "*.unity";
+        [Tooltip("此文件夹下的每个文本文件都会各自打成一个AB包")]
+        public string searchPatternText = "*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt";
+        public bool nameByHash = false;
         
 		[Tooltip("构建的版本号")]
 		[Header("Builds")] 
@@ -122,6 +130,7 @@ namespace libx
 		[Header("Assets")]
 		[HideInInspector]public RuleAsset[] ruleAssets = new RuleAsset[0];
         [HideInInspector]public RuleBundle[] ruleBundles = new RuleBundle[0];
+
         #region API
 
         public int AddVersion()
@@ -178,7 +187,7 @@ namespace libx
             return asset.EndsWith(".unity");
         }
 
-        private static string RuledAssetBundleName(string name)
+        private string RuledAssetBundleName(string name)
         {
             if (nameByHash)
                 return Utility.GetMD5Hash(name) + Assets.Extension; 

@@ -33,10 +33,10 @@ public class WebBundleRequest : BundleRequest
 
     internal override void Load()
     {
-        //_request = cache ? UnityWebRequestAssetBundle.GetAssetBundle(name, hash)
-        //                 : UnityWebRequestAssetBundle.GetAssetBundle(name);
-        //_request.SendWebRequest();
-        //loadState = LoadState.LoadAssetBundle;
+        _request = cache ? UnityWebRequestAssetBundle.GetAssetBundle(name, hash)
+                         : UnityWebRequestAssetBundle.GetAssetBundle(name);
+        _request.SendWebRequest();
+        loadState = LoadState.LoadAssetBundle;
     }
 
     internal override void Unload()

@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -13,30 +14,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeVariants: []
   dirs:
+  - Assets/Art/Atlas
+  - Assets/Art/UI/Game
   - Assets/_Scenes
   assets:
-  - name: Game.unity
-    bundle: 0
-    dir: 0
-  - name: Init.unity
-    bundle: 1
-    dir: 0
-  - name: TestNet.unity
+  - name: Game.spriteatlas
     bundle: 2
     dir: 0
+  - name: Btn_Tab1_n.png
+    bundle: 3
+    dir: 1
+  - name: Dropdown_Btn_n.png
+    bundle: 3
+    dir: 1
+  - name: Dropdown_bg_n.png
+    bundle: 3
+    dir: 1
+  - name: Dropdown_menu.png
+    bundle: 3
+    dir: 1
+  - name: Dropdown_menu_bg.png
+    bundle: 3
+    dir: 1
+  - name: Slider2.png
+    bundle: 3
+    dir: 1
+  - name: Slider2_bg.png
+    bundle: 3
+    dir: 1
+  - name: bg_ItemIntrudction.png
+    bundle: 3
+    dir: 1
+  - name: checkbox_select.png
+    bundle: 3
+    dir: 1
+  - name: Game.unity
+    bundle: 0
+    dir: 2
+  - name: TestNet.unity
+    bundle: 1
+    dir: 2
   bundles:
   - name: assets/_scenes/game.unity.unity3d
     id: 0
-    deps: 
-    len: 127472
-    hash: a62b8460ac431c5500346f2d4076de37
-  - name: assets/_scenes/init.unity.unity3d
+    deps: 03000000
+    len: 117956
+    hash: d8f820de52fa52734fbd82b4304e5850
+  - name: assets/_scenes/testnet.unity.unity3d
     id: 1
     deps: 
-    len: 796853
-    hash: 20cb59bf6afdc11e33244be40574b2f3
-  - name: assets/_scenes/testnet.unity.unity3d
+    len: 13792
+    hash: 080c13d057f177683d9e7d6abcea537b
+  - name: assets/art/atlas/game.spriteatlas.unity3d
     id: 2
+    deps: 03000000
+    len: 12388
+    hash: 92fc0550ba80cf02c5d71c2af95edfa6
+  - name: assets/art/ui/game.unity3d
+    id: 3
     deps: 
-    len: 13087
-    hash: 1f4009a4ddc05fbea924c1e058037591
+    len: 4300
+    hash: 103be07f17876b17e938d4aa7fc7f7f3

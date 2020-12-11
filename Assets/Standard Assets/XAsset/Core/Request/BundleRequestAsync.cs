@@ -11,7 +11,7 @@
 
 using UnityEngine;
 
-public class BundleAsyncRequest : BundleRequest
+public class BundleRequestAsync : BundleRequest
 {
     private AssetBundleCreateRequest _request;
 

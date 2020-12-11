@@ -83,6 +83,38 @@ public sealed class Assets : MonoBehaviour
         _bundleToDependencies.Clear();
     }
 
+    private static SceneAssetRequest _runningScene;
+    public static SceneAssetRequest LoadSceneAsync(string path, bool additive)
+    {
+        if(string.IsNullOrEmpty(path))
+        {
+            Debug.LogError("invalid path");
+            return null;
+        }
+
+        path = GetExistPath(path);
+        var asset = new SceneAssetRequestAsync(path, additive);
+        if(!additive)
+        {
+            if(_runningScene != null)
+            {
+                _runningScene.Release(); ;
+                _runningScene = null;
+            }
+            _runningScene = asset;
+        }
+        asset.Load();
+        asset.Retain();
+        _scenes.Add(asset);
+        Log(string.Format("LoadScene:{0}", path));
+        return asset;
+    }
+
+    public static void UnloadScene(SceneAssetRequest scene)
+    {
+        scene.Release();
+    }
+
     public static AssetRequest LoadAssetAsync(string path, Type type)
     {
         return LoadAsset(path, type, true);
@@ -137,7 +169,7 @@ public sealed class Assets : MonoBehaviour
     /// </summary>
     private static List<AssetRequest> _unusedAssets = new List<AssetRequest>();
     private static List<AssetRequest> _loadingAssets = new List<AssetRequest>();
-    //private static List<SceneAssetRequest> _scenes = new List<SceneAssetRequest>();
+    private static List<SceneAssetRequest> _scenes = new List<SceneAssetRequest>();
     private static Dictionary<string, AssetRequest> _assets = new Dictionary<string, AssetRequest>();
 
 
@@ -186,16 +218,16 @@ public sealed class Assets : MonoBehaviour
             _unusedAssets.Clear();
         }
 
-        //for(var i = 0; i < _scenes.Count; ++i)
-        //{
-        //    var request = _scenes[i];
-        //    if(request.Update() || !request.IsUnused())
-        //        continue;
-        //    _scenes.RemoveAt(i);
-        //    Log(string.Format("UnloadScene:{0}", request.name));
-        //    request.Unload();
-        //    --i;
-        //}
+        for(var i = 0; i < _scenes.Count; ++i)
+        {
+            var request = _scenes[i];
+            if(request.Update() || !request.IsUnused())
+                continue;
+            _scenes.RemoveAt(i);
+            Log(string.Format("UnloadScene:{0}", request.name));
+            request.Unload();
+            --i;
+        }
     }
 
     private static void UpdateBundles()
@@ -279,7 +311,7 @@ public sealed class Assets : MonoBehaviour
         string assetBundleName;
         if(GetAssetBundleName(path, out assetBundleName))
         {
-            request = async ? new BundleAssetAsyncRequest(assetBundleName) : new BundleAssetRequest(assetBundleName);
+            request = async ? new BundleAssetRequestAsync(assetBundleName) : new BundleAssetRequest(assetBundleName);
         }
         else
         {
@@ -412,12 +444,12 @@ public sealed class Assets : MonoBehaviour
             bundle = new WebBundleRequest();
         }
         else
-            bundle = asyncMode ? new BundleAsyncRequest() : new BundleRequest();
+            bundle = asyncMode ? new BundleRequestAsync() : new BundleRequest();
 
         bundle.name = url;
         _bundles.Add(url, bundle);
 
-        if(MAX_BUNDLES_PERFRAME > 0 && (bundle is BundleAsyncRequest || bundle is WebBundleRequest))
+        if(MAX_BUNDLES_PERFRAME > 0 && (bundle is BundleRequestAsync || bundle is WebBundleRequest))
         {
             _toloadBundles.Add(bundle);
         }
@@ -432,9 +464,43 @@ public sealed class Assets : MonoBehaviour
         return bundle;
     }
 
+    // 这个函数没看懂
     private static string RemapVariantName(string assetBundleName)
     {
-        return "";
+        var bundlesWithVariant = _activeVariants;
+        // Get base bundle path
+        var baseName = assetBundleName.Split('.')[0];
+
+        var bestFit = int.MaxValue;
+        var bestFitIndex = -1;
+        // Loop all the assetBundles with variant to find the best fit variant assetBundle.
+        for(var i = 0; i < bundlesWithVariant.Count; i++)
+        {
+            var curSplit = bundlesWithVariant[i].Split('.');
+            var curBaseName = curSplit[0];
+            var curVariant = curSplit[1];
+
+            if(curBaseName != baseName)
+                continue;
+
+            var found = bundlesWithVariant.IndexOf(curVariant);
+
+            // If there is no active variant found. We still want to use the first
+            if(found == -1)
+                found = int.MaxValue - 1;
+
+            if(found >= bestFit)
+                continue;
+            bestFit = found;
+            bestFitIndex = i;
+        }
+
+        if(bestFit == int.MaxValue - 1)
+            Debug.LogWarning(
+                "Ambiguous asset bundle variant chosen because there was no matching active variant: " +
+                bundlesWithVariant[bestFitIndex]);
+
+        return bestFitIndex != -1 ? bundlesWithVariant[bestFitIndex] : assetBundleName;
     }
 
     private static string GetDataPath(string bundleName)
