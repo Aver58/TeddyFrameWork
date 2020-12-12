@@ -25,17 +25,17 @@ public class BundleAssetRequest : AssetRequest
 
     internal override void Load()
     {
-        BundleRequest = Assets.LoadBundle(assetBundleName);
-        var names = Assets.GetAllDependencies(assetBundleName);
+        BundleRequest = LoadModule.LoadBundle(assetBundleName);
+        var names = LoadModule.GetAllDependencies(assetBundleName);
         foreach(var item in names) 
-            children.Add(Assets.LoadBundle(item));
+            children.Add(LoadModule.LoadBundle(item));
         var assetName = Path.GetFileName(name);
         var ab = BundleRequest.assetBundle;
         if(ab != null) 
             asset = ab.LoadAsset(assetName, assetType);
         if(asset == null) 
             error = "asset == null";
-        loadState = LoadState.Loaded;
+        loadState = AssetLoadState.Loaded;
     }
 
     internal override void Unload()

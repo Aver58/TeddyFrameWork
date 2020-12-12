@@ -23,7 +23,7 @@ public class WebBundleRequest : BundleRequest
         get
         {
             if(isDone) return 1;
-            if(loadState == LoadState.Init) return 0;
+            if(loadState == AssetLoadState.Init) return 0;
 
             if(_request == null) return 1;
 
@@ -36,7 +36,7 @@ public class WebBundleRequest : BundleRequest
         _request = cache ? UnityWebRequestAssetBundle.GetAssetBundle(name, hash)
                          : UnityWebRequestAssetBundle.GetAssetBundle(name);
         _request.SendWebRequest();
-        loadState = LoadState.LoadAssetBundle;
+        loadState = AssetLoadState.LoadAssetBundle;
     }
 
     internal override void Unload()
@@ -47,7 +47,7 @@ public class WebBundleRequest : BundleRequest
             _request = null;
         }
 
-        loadState = LoadState.Unload;
+        loadState = AssetLoadState.Unload;
         base.Unload();
     }
 }

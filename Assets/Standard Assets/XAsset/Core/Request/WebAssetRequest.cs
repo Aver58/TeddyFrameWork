@@ -21,7 +21,7 @@ public class WebAssetRequest : AssetRequest
         get
         {
             if(isDone) return 1;
-            if(loadState == LoadState.Init) return 0;
+            if(loadState == AssetLoadState.Init) return 0;
 
             if(_www == null) return 1;
 
@@ -39,7 +39,7 @@ public class WebAssetRequest : AssetRequest
         if(!base.Update()) 
             return false;
 
-        if(loadState == LoadState.LoadAsset)
+        if(loadState == AssetLoadState.LoadAsset)
         {
             if(_www == null)
             {
@@ -50,14 +50,14 @@ public class WebAssetRequest : AssetRequest
             if(!string.IsNullOrEmpty(_www.error))
             {
                 error = _www.error;
-                loadState = LoadState.Loaded;
+                loadState = AssetLoadState.Loaded;
                 return false;
             }
 
             if(_www.isDone)
             {
                 GetAsset();
-                loadState = LoadState.Loaded;
+                loadState = AssetLoadState.Loaded;
                 return false;
             }
 
@@ -96,7 +96,7 @@ public class WebAssetRequest : AssetRequest
         }
 
         _www.SendWebRequest();
-        loadState = LoadState.LoadAsset;
+        loadState = AssetLoadState.LoadAsset;
     }
 
     internal override void Unload()
@@ -112,6 +112,6 @@ public class WebAssetRequest : AssetRequest
 
         bytes = null;
         text = null;
-        loadState = LoadState.Unload;
+        loadState = AssetLoadState.Unload;
     }
 }

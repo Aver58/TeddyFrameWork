@@ -73,7 +73,7 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
 
         _step = Step.Wait;
 
-        Assets.updatePath = _savePath;
+        LoadModule.updatePath = _savePath;
     }
 
     public void StartUpdate()
@@ -82,7 +82,7 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
 #if UNITY_EDITOR
         if(development)
         {
-            Assets.runtimeMode = false;
+            LoadModule.runtimeMode = false;
             StartCoroutine(LoadGameScene());
             return;
         }
@@ -102,15 +102,15 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
     private IEnumerator LoadGameScene()
     {
         OnMessage("正在初始化");
-        var init = Assets.Initialize();
+        var init = LoadModule.Initialize();
         yield return init;
         if(string.IsNullOrEmpty(init.error))
         {
-            Assets.AddSearchPath("Assets/_Scenes");
+            LoadModule.AddSearchPath("Assets/_Scenes");
             init.Release();
             OnProgress(0);
             OnMessage("加载游戏场景");
-            var scene = Assets.LoadSceneAsync(gameScene, false);
+            var scene = LoadModule.LoadSceneAsync(gameScene, false);
             while(!scene.isDone)
             {
                 OnProgress(scene.progress);
@@ -161,6 +161,16 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
             OnVersion(version.ToString());
 
         StartCoroutine(LoadGameScene());
+    }
+
+    public void Clear()
+    {
+        MessageBox.Show("提示", "清除数据后所有数据需要重新下载，请确认！", "清除").onComplete += id =>
+        {
+            if(id != MessageBox.EventId.Ok)
+                return;
+            OnClear();
+        };
     }
 
     private void Quit()
@@ -246,7 +256,6 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
     }
 
     #endregion
-
 
     #region Step
 
@@ -452,16 +461,6 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
 
     #endregion
 
-    public void Clear()
-    {
-        MessageBox.Show("提示", "清除数据后所有数据需要重新下载，请确认！", "清除").onComplete += id =>
-        {
-            if(id != MessageBox.EventId.Ok)
-                return;
-            OnClear();
-        };
-    }
-
     #region IUpdater
 
     public void OnMessage(string msg)
@@ -515,7 +514,7 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
         _step = Step.Wait;
         _reachabilityChanged = false;
 
-        Assets.Clear();
+        LoadModule.Clear();
 
         if(listener != null)
         {

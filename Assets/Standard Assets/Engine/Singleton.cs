@@ -1,14 +1,13 @@
-﻿public class Singleton<T> where T : class, new()
+﻿public class Singleton<T>
 {
-    private static T m_Instance = null;
+    private static T m_Instance;
     public static T instance
     {
         get
         {
             if(m_Instance == null)
-            {
-                m_Instance = new T();
-            }
+                m_Instance = default;
+
             return m_Instance;
         }
     }

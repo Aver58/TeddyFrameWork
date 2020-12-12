@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Standard Assets\Engine\Define\BaseDef.cs" />
+    <Compile Include="Assets\Standard Assets\Engine\Define\GlobalDefine.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Event\GameEventArgs.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Event\GameMsg.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Event\GameMsgDef.cs" />
@@ -75,6 +76,38 @@
     <Compile Include="Assets\Standard Assets\Engine\Network\OpCode.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Network\ProtoBufUtil.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Singleton.cs" />
+    <Compile Include="Assets\Standard Assets\Engine\UI\HierarchyUtil.cs" />
+    <Compile Include="Assets\Standard Assets\Engine\UIHierarchy\UIExportItem.cs" />
+    <Compile Include="Assets\Standard Assets\Engine\UIHierarchy\UIHierarchy.cs" />
+    <Compile Include="Assets\Standard Assets\Game\Module\ModuleBase.cs" />
+    <Compile Include="Assets\Standard Assets\Game\Module\ModuleManager.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Download.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Downloader.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\LoadModule.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Manifest.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\NetworkMonitor.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Reference.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\AssetRequest.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\BundleAssetRequest.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\BundleAssetRequestAsync.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\BundleRequest.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\BundleRequestAsync.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\ManifestRequest.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\RequestDefine.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\SceneAssetRequest.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\SceneAssetRequestAsync.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\WebAssetRequest.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Request\WebBundleRequest.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Updater.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\VDisk.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Core\Versions.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\UI\BackgroundAdapter.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\UI\BuildinSceneLoader.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\UI\MessageBox.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\UI\ScrollContent.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Utility\CRC32.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Utility\StringExtension.cs" />
+    <Compile Include="Assets\Standard Assets\XAsset\Utility\Utility.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/TeddyFrameWork/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -633,16 +666,6 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Program Files/unity2018.4.4/Unity/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="XAsset.Editor.csproj">
-      <Project>{AC47F82E-7D86-8078-00FA-AF514EAFA5D5}</Project>
-      <Name>XAsset.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="XAsset.Runtime.csproj">
-      <Project>{567A5B1F-3313-3A4B-20B2-59425DEDC67D}</Project>
-      <Name>XAsset.Runtime</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

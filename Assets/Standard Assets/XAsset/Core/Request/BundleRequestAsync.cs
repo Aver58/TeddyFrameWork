@@ -21,7 +21,7 @@ public class BundleRequestAsync : BundleRequest
         {
             if(isDone) 
                 return 1;
-            if(loadState == LoadState.Init) 
+            if(loadState == AssetLoadState.Init) 
                 return 0;
             if(_request == null) 
                 return 1;
@@ -34,13 +34,13 @@ public class BundleRequestAsync : BundleRequest
         if(!base.Update()) 
             return false;
 
-        if(loadState == LoadState.LoadAsset)
+        if(loadState == AssetLoadState.LoadAsset)
             if(_request.isDone)
             {
                 assetBundle = _request.assetBundle;
                 if(assetBundle == null) 
                     error = string.Format("unable to load assetBundle:{0}", name);
-                loadState = LoadState.Loaded;
+                loadState = AssetLoadState.Loaded;
                 return false;
             }
 
@@ -58,14 +58,14 @@ public class BundleRequestAsync : BundleRequest
                 return;
             }
 
-            loadState = LoadState.LoadAsset;
+            loadState = AssetLoadState.LoadAsset;
         }
     }
 
     internal override void Unload()
     {
         _request = null;
-        loadState = LoadState.Unload;
+        loadState = AssetLoadState.Unload;
         base.Unload();
     }
 
@@ -75,6 +75,6 @@ public class BundleRequestAsync : BundleRequest
         assetBundle = _request.assetBundle;
         if(assetBundle != null) 
             Debug.LogWarning("LoadImmediate:" + assetBundle.name);
-        loadState = LoadState.Loaded;
+        loadState = AssetLoadState.Loaded;
     }
 }

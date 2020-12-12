@@ -28,7 +28,7 @@ public class SceneAssetRequestAsync : SceneAssetRequest
         {
             if(isDone) return 1;
 
-            if(loadState == LoadState.Init) return 0;
+            if(loadState == AssetLoadState.Init) return 0;
 
             if(_request != null) return _request.progress * 0.7f + 0.3f;
 
@@ -54,7 +54,7 @@ public class SceneAssetRequestAsync : SceneAssetRequest
         error = bundleRequest.error;
         if(!string.IsNullOrEmpty(error))
         {
-            loadState = LoadState.Loaded;
+            loadState = AssetLoadState.Loaded;
             return true;
         }
 
@@ -65,14 +65,14 @@ public class SceneAssetRequestAsync : SceneAssetRequest
     {
         if(!base.Update()) return false;
 
-        if(loadState == LoadState.Init) return true;
+        if(loadState == AssetLoadState.Init) return true;
 
         if(_request == null)
         {
             if(BundleRequest == null)
             {
                 error = "bundle == null";
-                loadState = LoadState.Loaded;
+                loadState = AssetLoadState.Loaded;
                 return false;
             }
 
@@ -94,7 +94,7 @@ public class SceneAssetRequestAsync : SceneAssetRequest
 
         if(_request.isDone)
         {
-            loadState = LoadState.Loaded;
+            loadState = AssetLoadState.Loaded;
             return false;
         }
 
@@ -106,13 +106,13 @@ public class SceneAssetRequestAsync : SceneAssetRequest
         try
         {
             _request = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-            loadState = LoadState.LoadAsset;
+            loadState = AssetLoadState.LoadAsset;
         }
         catch(Exception e)
         {
             Debug.LogException(e);
             error = e.Message;
-            loadState = LoadState.Loaded;
+            loadState = AssetLoadState.Loaded;
         }
     }
 
@@ -120,10 +120,10 @@ public class SceneAssetRequestAsync : SceneAssetRequest
     {
         if(!string.IsNullOrEmpty(assetBundleName))
         {
-            BundleRequest = Assets.LoadBundleAsync(assetBundleName);
-            var bundles = Assets.GetAllDependencies(assetBundleName);
-            foreach(var item in bundles) children.Add(Assets.LoadBundleAsync(item));
-            loadState = LoadState.LoadAssetBundle;
+            BundleRequest = LoadModule.LoadBundleAsync(assetBundleName);
+            var bundles = LoadModule.GetAllDependencies(assetBundleName);
+            foreach(var item in bundles) children.Add(LoadModule.LoadBundleAsync(item));
+            loadState = AssetLoadState.LoadAssetBundle;
         }
         else
         {

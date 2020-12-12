@@ -64,7 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Demo\Game.cs" />
+    <Compile Include="Assets\Scripts\Game\Define\ViewDefine.cs" />
+    <Compile Include="Assets\Scripts\Game\Module\UIModule.cs" />
+    <Compile Include="Assets\Scripts\Game\Module\ViewBase.cs" />
     <Compile Include="Assets\Scripts\Game\UpdateScreen.cs" />
+    <Compile Include="Assets\Scripts\Game\View\TestView.cs" />
     <Compile Include="Assets\Scripts\Test\TestNet.cs" />
     <None Include="Assets\Resources\Shaders\SimpleGrabPassBlur.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
@@ -630,14 +634,6 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{85BA9F96-6724-4C32-5AAF-E8B58A293C27}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="XAsset.Editor.csproj">
-      <Project>{AC47F82E-7D86-8078-00FA-AF514EAFA5D5}</Project>
-      <Name>XAsset.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="XAsset.Runtime.csproj">
-      <Project>{567A5B1F-3313-3A4B-20B2-59425DEDC67D}</Project>
-      <Name>XAsset.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

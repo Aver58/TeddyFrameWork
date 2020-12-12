@@ -299,7 +299,7 @@ namespace libx
 
 		public static Manifest GetManifest ()
 		{
-			return GetAsset<Manifest> (Assets.ManifestAsset);
+			return GetAsset<Manifest> (LoadModule.ManifestAsset);
 		}
 	}
 }

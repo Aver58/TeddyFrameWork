@@ -2,21 +2,14 @@
 /*
 =====================================================
  AverFrameWork v1.0
- Filename:    Request.cs
+ Filename:    TestView.cs
  Author:      Zeng Zhiwei
- Time:        2020/12/9 10:21:53
+ Time:        2020/12/12 16:50:37
 =====================================================
 */
 #endregion
 
-/// <summary>
-/// 加载状态
-/// </summary>
-public enum AssetLoadState
+public class TestView
 {
-    Init,
-    LoadAssetBundle,
-    LoadAsset,
-    Loaded,
-    Unload
+
 }

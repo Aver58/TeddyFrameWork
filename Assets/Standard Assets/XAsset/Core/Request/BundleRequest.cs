@@ -25,7 +25,7 @@ public class BundleRequest : AssetRequest
         asset = AssetBundle.LoadFromFile(name);
         if(assetBundle == null)
             error = name + " LoadFromFile failed.";
-        loadState = LoadState.Loaded;
+        loadState = AssetLoadState.Loaded;
     }
 
     internal override void Unload()
@@ -34,6 +34,6 @@ public class BundleRequest : AssetRequest
             return;
         assetBundle.Unload(true);
         assetBundle = null;
-        loadState = LoadState.Unload;
+        loadState = AssetLoadState.Unload;
     }
 }

@@ -13,14 +13,33 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-public sealed class Assets : MonoBehaviour
+public sealed class LoadModule : ModuleBase
 {
+    #region Instance
+
+    static LoadModule ms_instance;
+    public static LoadModule instance
+    {
+        get
+        {
+            if(ms_instance == null)
+            {
+                ms_instance = ModuleManager.instance.Get<LoadModule>();
+            }
+
+            return ms_instance;
+        }
+    }
+
+    #endregion
+
     public static readonly string ManifestAsset = "Assets/Manifest.asset";
     public static readonly string Extension = ".unity3d";
 
     public static bool runtimeMode = true;
-    public static Func<string, Type, UnityEngine.Object> loadDelegate = null;
+    public static Func<string, Type, Object> loadDelegate = null;
     private const string TAG = "[Assets]";
 
     private static void Log(string s)
@@ -51,12 +70,13 @@ public sealed class Assets : MonoBehaviour
 
     public static ManifestRequest Initialize()
     {
-        var instance = FindObjectOfType<Assets>();
-        if(instance == null)
-        {
-            instance = new GameObject("Assets").AddComponent<Assets>();
-            DontDestroyOnLoad(instance.gameObject);
-        }
+        //改成不依赖MonoBehavior
+        //var instance = FindObjectOfType<Assets>();
+        //if(instance == null)
+        //{
+        //    instance = new GameObject("Assets").AddComponent<Assets>();
+        //    DontDestroyOnLoad(instance.gameObject);
+        //}
 
         if(string.IsNullOrEmpty(basePath))
             basePath = Application.streamingAssetsPath + Path.DirectorySeparatorChar;
@@ -115,15 +135,19 @@ public sealed class Assets : MonoBehaviour
         scene.Release();
     }
 
-    public static AssetRequest LoadAssetAsync(string path, Type type)
+    public static AssetRequest LoadAssetAsync(string path, Type type, Action<AssetRequest> loadedCallback)
     {
-        return LoadAsset(path, type, true);
+        AssetRequest assetRequest = LoadAsset(path, type, true);
+        assetRequest.completed += loadedCallback;
+        return assetRequest;
     }
 
 
-    public static AssetRequest LoadAsset(string path, Type type)
+    public static AssetRequest LoadAsset(string path, Type type, Action<AssetRequest> loadedCallback)
     {
-        return LoadAsset(path, type, false);
+        AssetRequest assetRequest = LoadAsset(path, type, false);
+        assetRequest.completed += loadedCallback;
+        return assetRequest;
     }
 
     public static void UnloadAsset(AssetRequest asset)
@@ -174,7 +198,7 @@ public sealed class Assets : MonoBehaviour
 
 
     // update 驱动
-    private void Update()
+    public void Update()
     {
         UpdateAssets();
         UpdateBundles();
@@ -202,7 +226,7 @@ public sealed class Assets : MonoBehaviour
             }
         }
 
-        //todo 惰性GC
+        //TODO 惰性GC
         //之所以叫惰性GC，是因为和上一个版本相比，上一个版本是每帧都会检查和清理未使用的资源，
         //这个版本底层只会在切换场景或者主动调用Assets.RemoveUnusedAssets(); 
         //的时候才会清理未使用的资源，这样用户可以按需调整资源回收的频率，在没有内存压力的时候，不回收可以获得更好的性能。
@@ -239,7 +263,7 @@ public sealed class Assets : MonoBehaviour
             for(int i = 0; i < Math.Min(max - _loadingBundles.Count, _toloadBundles.Count); ++i)
             {
                 BundleRequest item = _toloadBundles[i];
-                if(item.loadState == LoadState.Init)
+                if(item.loadState == AssetLoadState.Init)
                 {
                     item.Load();
                     _loadingBundles.Add(item);

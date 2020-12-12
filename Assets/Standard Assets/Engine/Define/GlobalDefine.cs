@@ -2,21 +2,16 @@
 /*
 =====================================================
  AverFrameWork v1.0
- Filename:    Request.cs
+ Filename:    GlobalDefine.cs
  Author:      Zeng Zhiwei
- Time:        2020/12/9 10:21:53
+ Time:        2020/12/12 11:35:44
 =====================================================
 */
 #endregion
 
-/// <summary>
-/// 加载状态
-/// </summary>
-public enum AssetLoadState
+public enum ViewLoadState
 {
-    Init,
-    LoadAssetBundle,
-    LoadAsset,
-    Loaded,
-    Unload
+    NONE = 0,
+    LOADING = 1,
+    LOADED = 2,
 }

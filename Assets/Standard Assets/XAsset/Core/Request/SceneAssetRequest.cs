@@ -23,7 +23,7 @@ public class SceneAssetRequest : AssetRequest
     public SceneAssetRequest(string path, bool addictive)
     {
         name = path;
-        Assets.GetAssetBundleName(path, out assetBundleName);
+        LoadModule.GetAssetBundleName(path, out assetBundleName);
         sceneName = Path.GetFileNameWithoutExtension(name);
         loadSceneMode = addictive ? LoadSceneMode.Additive : LoadSceneMode.Single;
     }
@@ -39,11 +39,11 @@ public class SceneAssetRequest : AssetRequest
     {
         if(!string.IsNullOrEmpty(assetBundleName))
         {
-            BundleRequest = Assets.LoadBundle(assetBundleName);
+            BundleRequest = LoadModule.LoadBundle(assetBundleName);
             if(BundleRequest != null)
             {
-                var bundles = Assets.GetAllDependencies(assetBundleName);
-                foreach(var item in bundles) children.Add(Assets.LoadBundle(item));
+                var bundles = LoadModule.GetAllDependencies(assetBundleName);
+                foreach(var item in bundles) children.Add(LoadModule.LoadBundle(item));
                 SceneManager.LoadScene(sceneName, loadSceneMode);
             }
         }
@@ -52,7 +52,7 @@ public class SceneAssetRequest : AssetRequest
             SceneManager.LoadScene(sceneName, loadSceneMode);
         }
 
-        loadState = LoadState.Loaded;
+        loadState = AssetLoadState.Loaded;
     }
 
     internal override void Unload()
@@ -71,6 +71,6 @@ public class SceneAssetRequest : AssetRequest
                 SceneManager.UnloadSceneAsync(sceneName);
 
         BundleRequest = null;
-        loadState = LoadState.Unload;
+        loadState = AssetLoadState.Unload;
     }
 }

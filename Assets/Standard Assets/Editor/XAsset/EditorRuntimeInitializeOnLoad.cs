@@ -36,8 +36,8 @@ namespace libx
         [RuntimeInitializeOnLoadMethod]
         private static void OnInitialize()
         {
-			Assets.basePath = BuildScript.outputPath + Path.DirectorySeparatorChar;
-            Assets.loadDelegate = AssetDatabase.LoadAssetAtPath; 
+			LoadModule.basePath = BuildScript.outputPath + Path.DirectorySeparatorChar;
+            LoadModule.loadDelegate = AssetDatabase.LoadAssetAtPath; 
             var assets = new List<string>();
             var rules = BuildScript.GetBuildRules();
             foreach (var asset in rules.scenesInBuild)
