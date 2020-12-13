@@ -135,18 +135,20 @@ public sealed class LoadModule : ModuleBase
         scene.Release();
     }
 
-    public static AssetRequest LoadAssetAsync(string path, Type type, Action<AssetRequest> loadedCallback)
+    public static AssetRequest LoadAssetAsync(string path, Type type, Action<AssetRequest> loadedCallback = null)
     {
         AssetRequest assetRequest = LoadAsset(path, type, true);
-        assetRequest.completed += loadedCallback;
+        if(loadedCallback != null)
+            assetRequest.completed += loadedCallback;
         return assetRequest;
     }
 
 
-    public static AssetRequest LoadAsset(string path, Type type, Action<AssetRequest> loadedCallback)
+    public static AssetRequest LoadAsset(string path, Type type, Action<AssetRequest> loadedCallback = null)
     {
         AssetRequest assetRequest = LoadAsset(path, type, false);
-        assetRequest.completed += loadedCallback;
+        if(loadedCallback != null)
+            assetRequest.completed += loadedCallback;
         return assetRequest;
     }
 

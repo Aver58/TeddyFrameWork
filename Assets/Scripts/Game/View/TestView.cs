@@ -9,7 +9,7 @@
 */
 #endregion
 
-public class TestView
+public class TestView : ViewBase
 {
 
 }
