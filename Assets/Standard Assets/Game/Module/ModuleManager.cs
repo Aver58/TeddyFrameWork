@@ -54,9 +54,20 @@ public class ModuleManager : Singleton<ModuleManager>
 			return;
 
 		for(int i = 0; i < m_Modules.Count; ++i)
-		{
 			m_Modules[i].Init();
+	}
+
+	public bool IsAllInit()
+	{
+		for(int i = 0; i < m_Modules.Count; ++i)
+		{
+			if(!m_Modules[i].IsInit)
+			{
+				return false;
+			}
 		}
+		m_bIsInit = true;
+		return true;
 	}
 
 	public void UnInit()
@@ -64,9 +75,7 @@ public class ModuleManager : Singleton<ModuleManager>
 		m_bIsRunning = false;
 		m_bIsInit = false;
 		for(int i = m_Modules.Count - 1; i >= 0; --i)
-		{
 			m_Modules[i].UnInit();
-		}
 	}
 
 	public void Update()
@@ -78,6 +87,18 @@ public class ModuleManager : Singleton<ModuleManager>
 		for(int i = 0; i < m_Modules.Count; ++i)
 		{
 			m_Modules[i].Update(Time.deltaTime);
+		}
+
+		if(!m_bIsRunning)
+			return;
+	}
+
+	public void StartGame()
+	{
+		m_bIsRunning = true;
+		for(int i = 0; i < m_Modules.Count; ++i)
+		{
+			m_Modules[i].StartGame();
 		}
 	}
 }

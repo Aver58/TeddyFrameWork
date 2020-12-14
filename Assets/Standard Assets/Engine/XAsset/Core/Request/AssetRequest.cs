@@ -95,7 +95,9 @@ public class AssetRequest : Reference, IEnumerator
     {
         if(!LoadModule.runtimeMode && LoadModule.loadDelegate != null)
             asset = LoadModule.loadDelegate(name, assetType);
-        if(asset == null) error = "error! file not exist:" + name;
+        if(asset == null) 
+            error = "error! file not exist:" + name;
+
         loadState = AssetLoadState.Loaded;
     }
 
@@ -133,9 +135,7 @@ public class AssetRequest : Reference, IEnumerator
         return false;
     }
 
-    internal virtual void LoadImmediate()
-    {
-    }
+    internal virtual void LoadImmediate(){}
 
     #region IEnumerator implementation
 

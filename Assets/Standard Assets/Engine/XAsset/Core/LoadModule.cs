@@ -19,17 +19,17 @@ public sealed class LoadModule : ModuleBase
 {
     #region Instance
 
-    static LoadModule ms_instance;
+    static LoadModule m_instance;
     public static LoadModule instance
     {
         get
         {
-            if(ms_instance == null)
+            if(m_instance == null)
             {
-                ms_instance = ModuleManager.instance.Get<LoadModule>();
+                m_instance = ModuleManager.instance.Get<LoadModule>();
             }
 
-            return ms_instance;
+            return m_instance;
         }
     }
 
@@ -38,7 +38,7 @@ public sealed class LoadModule : ModuleBase
     public static readonly string ManifestAsset = "Assets/Manifest.asset";
     public static readonly string Extension = ".unity3d";
 
-    public static bool runtimeMode = true;
+    public static bool runtimeMode = false;
     public static Func<string, Type, Object> loadDelegate = null;
     private const string TAG = "[Assets]";
 
@@ -48,6 +48,12 @@ public sealed class LoadModule : ModuleBase
     }
 
     #region API
+
+    public override void Init()
+    {
+        base.Init();
+        runtimeMode = Config.Instance.UseAssetBundle;
+    }
 
     /// <summary>
     /// 读取所有资源路径
@@ -143,6 +149,13 @@ public sealed class LoadModule : ModuleBase
         return assetRequest;
     }
 
+    public static AssetRequest LoadUI(string path, Type type, Action<AssetRequest> loadedCallback = null)
+    {
+        path = "Assets/Data/ui/panel/" + path;
+        string suffix = GetSuffixOfAsset(type);
+        string fullPath = string.Format("{0}.{1}", path, suffix);
+        return LoadAsset(fullPath, type,loadedCallback);
+    }
 
     public static AssetRequest LoadAsset(string path, Type type, Action<AssetRequest> loadedCallback = null)
     {
@@ -200,7 +213,7 @@ public sealed class LoadModule : ModuleBase
 
 
     // update 驱动
-    public void Update()
+    public override void Update(float dt)
     {
         UpdateAssets();
         UpdateBundles();
@@ -320,7 +333,7 @@ public sealed class LoadModule : ModuleBase
     {
         if(string.IsNullOrEmpty(path))
         {
-            Debug.LogError("invalid path");
+            Debug.LogError("empty path!");
             return null;
         }
 
@@ -400,6 +413,26 @@ public sealed class LoadModule : ModuleBase
         return path;
     }
 
+    // 获取资源在编辑器模式下的后缀
+    private static string GetSuffixOfAsset(Type type)
+    {
+        if(type == typeof(Font))
+            return BaseDef.FONT_SUFFIX;
+        else if(type == typeof(AudioClip))
+            return BaseDef.MUSIC_SUFFIX;
+        else if(type == typeof(GameObject))
+            return "prefab";
+        else if(type == typeof(TextAsset))
+            return "bytes";
+        else if(type == typeof(Texture2D) || type == typeof(Sprite))
+            return "png";
+        else if(type == typeof(Material))
+            return "mat";
+        else if(type == typeof(ScriptableObject))
+            return "asset";
+
+        return "";
+    }
     #endregion
 
     #region Bundles

@@ -45,8 +45,8 @@ public class UIModule : ModuleBase
 
     public UIModule()
     {
-        // 随缘10个
-        m_viewMap = new Dictionary<ViewID, ViewBase>(10);
+        // 随缘7个
+        m_viewMap = new Dictionary<ViewID, ViewBase>(7);
         m_viewRoot = new Dictionary<ViewType, Transform>
         {
             {ViewType.MAIN,GameObject.Find("Canvas/Main").transform },
@@ -57,22 +57,18 @@ public class UIModule : ModuleBase
 
     #region API
 
-    public static Transform GetParent(ViewType viewType)
+    public static void OpenView(ViewID key, UIEventArgs args = null)
     {
-        return m_viewRoot[viewType];
-    }
-
-    public static void OpenView(ViewID key, EventArgs eventArgs)
-    {
-        if(BeforeOpen(key))
+        if(BeforeOpen(key) == false)
             return;
 
-        var view = GetView(key);
+        ViewBase view = GetView(key);
         if(view != null)
         {
+            view.SetOpenParam(args);
 
             // 已加载过
-            if(view.IsLoaded)
+            if(view.isLoaded)
             {
                 InitView(view);
             }
@@ -83,28 +79,30 @@ public class UIModule : ModuleBase
         }
         else
         {
-            Debug.LogError("界面实例化失败"+ key.ToString());
+            Debug.LogError("[UIModule]界面实例化失败" + key.ToString());
         }
     }
 
     public static void CloseView(ViewID key)
     {
         ViewBase view = GetView(key);
-        bool needNav = PopStack(view);
+        view.Close();
+        PopStack(view);
+    }
 
+    public static Transform GetParent(ViewType viewType)
+    {
+        return m_viewRoot[viewType];
     }
 
     #region Scene
 
-    public static void SceneEnter()
-    {
+    public static void SceneEnter(){}
 
-    }
-
-    public static void SceneExit()
-    {
-
-    }
+    /// <summary>
+    /// 切换场景，资源管理相关
+    /// </summary>
+    public static void SceneExit(){}
 
     #endregion
 
@@ -113,7 +111,7 @@ public class UIModule : ModuleBase
     #region Private
     private void Update()
     {
-        // 已打开界面的update
+        // 已打开界面的update,有需求才做
 
         // 自动回收cache的界面，todo这个是不是可以用个协程做
         var curTime = Time.time;
@@ -122,9 +120,9 @@ public class UIModule : ModuleBase
             foreach(var item in m_viewMap)
             {
                 var view = item.Value;
-                if(view.closeTime - curTime > UIPANEL_CACHE_TIME && view.IsOpen)
+                if(view.closeTime - curTime > UIPANEL_CACHE_TIME && view.isOpen)
                 {
-                    m_viewMap[view.Key] = null;
+                    m_viewMap[view.key] = null;
                     view.Dispose();
                 }
             }
@@ -151,7 +149,12 @@ public class UIModule : ModuleBase
         // 反射拿到实例
         view = Activator.CreateInstance(viewClass) as ViewBase;
         if(view != null)
+        {
+            view.key = key;
+            view.assetPath = viewConfig.path;
+            view.panelName = viewConfig.name;
             return view;
+        }
 
         return null;
     }
@@ -159,19 +162,27 @@ public class UIModule : ModuleBase
     //初始化界面管理器状态
     private static void InitView(ViewBase view)
     {
-        m_viewMap.Add(view.Key, view);
+        m_viewMap.Add(view.key, view);
         PushStack(view);
-        
         view.Open();
     }
 
-    // 加入导航栈
+    /// <summary>
+    /// UI窗体入栈
+    /// </summary>
     private static bool PushStack(ViewBase view)
     {
-        // 上一个界面隐藏
-        // 当前界面显示
         if(view.needNavigation)
         {
+            if(m_viewStack == null)
+                m_viewStack = new Stack<ViewBase>();
+
+            // 弹出窗体后面的窗体冻结
+            
+            ViewBase lastView = m_viewStack.Count > 1 ? m_viewStack.Peek() : null;
+            if(lastView != null)
+                lastView.Close();
+            
             m_viewStack.Push(view);
             return true;
         }
@@ -181,22 +192,17 @@ public class UIModule : ModuleBase
     // 返回导航栈上一个界面
     private static bool PopStack(ViewBase view)
     {
-        // 当前界面隐藏，从栈中移除
-        // 上一个界面显示
-        ViewBase stackTopView = m_viewStack.Peek();
-        if(stackTopView == view)
+        if(view.needNavigation)
         {
-            m_viewStack.Pop();
-            return true;
+            // 当前界面隐藏，从栈中移除
+            ViewBase lastView = m_viewStack.Peek();
+            if(lastView == view)
+            {
+                m_viewStack.Pop();
+                return true;
+            }
         }
         return false;
-    }
-
-    //导航栈主逻辑
-    private static void OnNavigationStack()
-    {
-        //curView = m_viewStack.Peek();
-    
     }
 
     #endregion
