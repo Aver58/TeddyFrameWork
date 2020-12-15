@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{ECE38AA4-D0E5-4F6A-841B-D3B51F19079C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LockStepSimpleFramework</RootNamespace>
+    <AssemblyName>LockStepSimpleFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="battle\core\action\ActionMainManager.cs" />
+    <Compile Include="battle\core\action\ActionManager.cs" />
+    <Compile Include="battle\core\action\BaseAction.cs" />
+    <Compile Include="battle\core\action\DelayDo.cs" />
+    <Compile Include="battle\core\action\MoveTo.cs" />
+    <Compile Include="battle\core\action\MyDelegates.cs" />
+    <Compile Include="battle\core\base\BaseObject.cs" />
+    <Compile Include="battle\core\base\LiveObject.cs" />
+    <Compile Include="battle\core\base\UnityObject.cs" />
+    <Compile Include="battle\core\BattleLogic.cs" />
+    <Compile Include="battle\core\bullet\BaseBullet.cs" />
+    <Compile Include="battle\core\bullet\BulletFactory.cs" />
+    <Compile Include="battle\core\bullet\DirectionShootBullet.cs" />
+    <Compile Include="battle\core\GameData.cs" />
+    <Compile Include="battle\core\LockStepLogic.cs" />
+    <Compile Include="battle\core\soldier\BaseSoldier.cs" />
+    <Compile Include="battle\core\soldier\Grizzly.cs" />
+    <Compile Include="battle\core\soldier\SoldierFactory.cs" />
+    <Compile Include="battle\core\SRandom.cs" />
+    <Compile Include="battle\core\state\BaseState.cs" />
+    <Compile Include="battle\core\state\CoolingState.cs" />
+    <Compile Include="battle\core\state\NormalState.cs" />
+    <Compile Include="battle\core\state\StateMachine.cs" />
+    <Compile Include="battle\core\state\TowerAttackState.cs" />
+    <Compile Include="battle\core\state\TowerStandState.cs" />
+    <Compile Include="battle\core\tower\BaseTower.cs" />
+    <Compile Include="battle\core\tower\MagicStand.cs" />
+    <Compile Include="battle\core\tower\TowerFactory.cs" />
+    <Compile Include="battle\Fix64.cs" />
+    <Compile Include="battle\UnityTools.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="battle\LICENSE" />
+    <None Include="battle\README.md" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
