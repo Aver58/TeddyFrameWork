@@ -54,6 +54,7 @@ public enum LucenyType
 public enum ViewID
 {
     Test = 1,
+    Test2,
 }
 
 public struct ViewConfig
@@ -76,5 +77,6 @@ public static class ViewDefine
     public static Dictionary<ViewID, ViewConfig> ViewMapping = new Dictionary<ViewID, ViewConfig> 
     {
         { ViewID.Test,new ViewConfig("TestView","test/TestPanel",typeof(TestView))},
+        { ViewID.Test2,new ViewConfig("TestView2","test/TestPane2",typeof(TestView2))},
     };
 }

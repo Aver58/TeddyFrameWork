@@ -43,13 +43,14 @@ public class GameMain : MonoBehaviour
         m_moduleMgr.StartGame();
 
         UIModule.OpenView(ViewID.Test);
+        UIModule.OpenView(ViewID.Test2);
     }
 
     private void AddModules()
     {
         m_moduleMgr.Add<UIModule>();
     }
-
+     
     // Update is called once per frame
     private void Update()
     {

@@ -75,12 +75,18 @@ public abstract class ViewBase
         OnClose();
     }
 
-    public void Show()
+    /// <summary>
+    /// 恢复
+    /// </summary>
+    public void Resume()
     {
 
     }
 
-    public void Hide()
+    /// <summary>
+    /// 冻结
+    /// </summary>
+    public void Freeze()
     {
 
     }

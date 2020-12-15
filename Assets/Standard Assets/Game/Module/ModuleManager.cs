@@ -62,9 +62,7 @@ public class ModuleManager : Singleton<ModuleManager>
 		for(int i = 0; i < m_Modules.Count; ++i)
 		{
 			if(!m_Modules[i].IsInit)
-			{
 				return false;
-			}
 		}
 		m_bIsInit = true;
 		return true;

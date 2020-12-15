@@ -35,7 +35,7 @@ public class UIModule : ModuleBase
     /// <summary>
     /// 导航栈
     /// </summary>
-    private static Stack<ViewBase> m_viewStack;
+    private static Stack<ViewBase> m_navigationStack;
     /// <summary>
     /// 已打开过的view哈希表
     /// </summary>
@@ -87,7 +87,7 @@ public class UIModule : ModuleBase
     {
         ViewBase view = GetView(key);
         view.Close();
-        PopStack(view);
+        UINavigation.RemoveLastItem(view);
     }
 
     public static Transform GetParent(ViewType viewType)
@@ -163,46 +163,8 @@ public class UIModule : ModuleBase
     private static void InitView(ViewBase view)
     {
         m_viewMap.Add(view.key, view);
-        PushStack(view);
+        UINavigation.AddItem(view);
         view.Open();
-    }
-
-    /// <summary>
-    /// UI窗体入栈
-    /// </summary>
-    private static bool PushStack(ViewBase view)
-    {
-        if(view.needNavigation)
-        {
-            if(m_viewStack == null)
-                m_viewStack = new Stack<ViewBase>();
-
-            // 弹出窗体后面的窗体冻结
-            
-            ViewBase lastView = m_viewStack.Count > 1 ? m_viewStack.Peek() : null;
-            if(lastView != null)
-                lastView.Close();
-            
-            m_viewStack.Push(view);
-            return true;
-        }
-        return false;
-    }
-
-    // 返回导航栈上一个界面
-    private static bool PopStack(ViewBase view)
-    {
-        if(view.needNavigation)
-        {
-            // 当前界面隐藏，从栈中移除
-            ViewBase lastView = m_viewStack.Peek();
-            if(lastView == view)
-            {
-                m_viewStack.Pop();
-                return true;
-            }
-        }
-        return false;
     }
 
     #endregion
