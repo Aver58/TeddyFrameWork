@@ -11,13 +11,12 @@
 
 /*
 框架具体实现的功能和需求
-    加载，显示，隐藏，关闭页面，根据标示获得相应界面实例
+    完整的UI生命周期管理【加载，显示，隐藏，关闭页面，根据标示获得相应界面实例】
+    完整的数据更新方案【MVC】
+    UI组，
     界面层级管理
     界面导航
-    界面通用对话框管理(多类型Message Box)
-    便于进行需求和功能扩展(比如，在跳出页面之前添加逻辑处理等)
-    unity ui框架层级管理
-    https://www.jianshu.com/p/666de6c7695a?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendations
+    https://zhuanlan.zhihu.com/p/102278660
  */
 
 using System;
@@ -86,6 +85,7 @@ public class UIModule : ModuleBase
     public static void CloseView(ViewID key)
     {
         ViewBase view = GetView(key);
+        //当前界面隐藏
         view.Close();
         UINavigation.RemoveLastItem(view);
     }
@@ -165,6 +165,9 @@ public class UIModule : ModuleBase
         m_viewMap.Add(view.key, view);
         UINavigation.AddItem(view);
         view.Open();
+        //--抛出界面打开完成事件
+        //--设置场景摄像机状态
+
     }
 
     #endregion

@@ -80,7 +80,8 @@ public abstract class ViewBase
     /// </summary>
     public void Resume()
     {
-
+        isOpen = true;
+        SetActive(true);
     }
 
     /// <summary>
@@ -88,7 +89,8 @@ public abstract class ViewBase
     /// </summary>
     public void Freeze()
     {
-
+        isOpen = false;
+        SetActive(false);
     }
 
     public void Dispose()
@@ -177,7 +179,7 @@ public abstract class ViewBase
 
             canvas.overrideSorting = active;
             // 移到很远
-            transform.localPosition = active ? FarAwayPosition : Vector3.zero;
+            transform.localPosition = active ? Vector3.zero : FarAwayPosition;
         }
         else
         {

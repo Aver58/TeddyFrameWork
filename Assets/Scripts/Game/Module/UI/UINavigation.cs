@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UINavigation
 {
@@ -38,8 +39,9 @@ public class UINavigation
             // 弹出窗体后面的窗体冻结
             ViewBase lastView = GetLastItem();
             if(lastView != null)
-                lastView.Close();
+                lastView.Freeze();
             Init();
+            Debug.Log("AddItem" + view.ToString());
             History.Add(view);
         }
     }
@@ -51,7 +53,7 @@ public class UINavigation
         
         if(view.needNavigation)
         {
-            // 当前界面隐藏，从栈中移除
+            // 从栈中移除
             ViewBase lastView = GetLastItem();
             if(lastView == view)
             {
@@ -59,6 +61,7 @@ public class UINavigation
                 count = History.Count;
                 if(count == 0)
                     return;
+                Debug.Log("RemoveLastItem" + view.ToString());
                 History.RemoveAt(count - 1);
             }
         }

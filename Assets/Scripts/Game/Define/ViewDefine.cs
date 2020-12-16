@@ -19,7 +19,7 @@ public enum ViewType
     /// </summary>
     MAIN = 1,
     /// <summary>
-    /// 弹窗
+    /// 弹出窗体
     /// </summary>
     POPUP,
     /// <summary>
@@ -77,6 +77,6 @@ public static class ViewDefine
     public static Dictionary<ViewID, ViewConfig> ViewMapping = new Dictionary<ViewID, ViewConfig> 
     {
         { ViewID.Test,new ViewConfig("TestView","test/TestPanel",typeof(TestView))},
-        { ViewID.Test2,new ViewConfig("TestView2","test/TestPane2",typeof(TestView2))},
+        { ViewID.Test2,new ViewConfig("TestView2","test/TestPanel2",typeof(TestView2))},
     };
 }
