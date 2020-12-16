@@ -60,6 +60,7 @@ public abstract class ViewBase
     {
         isOpen = true;
         SetActive(true);
+        AddMessages();
         OnOpen(openParam);
 
         transform.SetAsLastSibling();
@@ -72,6 +73,7 @@ public abstract class ViewBase
 
         isOpen = false;
         SetActive(false);
+        RemoveMessages();
         OnClose();
     }
 
@@ -108,6 +110,16 @@ public abstract class ViewBase
     protected void AddListener(Button button, UnityAction action)
     {
         button.onClick.AddListener(action);
+    }
+
+    protected void AddMessage()
+    {
+        //todo 
+    }
+
+    protected void RemoveMessages()
+    {
+        //todo 
     }
 
     public void SetOpenParam(UIEventArgs args)
@@ -157,6 +169,7 @@ public abstract class ViewBase
         transform = gameObject.transform;
         UI = HierarchyUtil.GetHierarchyItems(gameObject);
 
+        AddListeners();
         OnLoaded();
 
         if(m_loadedCallback != null)

@@ -385,12 +385,14 @@ public sealed class LoadModule : ModuleBase
 #if UNITY_EDITOR
         if(runtimeMode == false)
         {
+            Debug.Log(File.Exists(path).ToString() + path);
             if(File.Exists(path))
                 return path;
 
             foreach(var item in _searchPaths)
             {
                 var existPath = string.Format("{0}/{1}", item, path);
+                Debug.Log(File.Exists(existPath));
                 if(File.Exists(existPath))
                     return existPath;
             }
