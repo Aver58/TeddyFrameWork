@@ -181,7 +181,8 @@ public class UIModule : ModuleBase
     //初始化界面管理器状态
     private static void InitView(ViewBase view)
     {
-        m_viewMap.Add(view.key, view);
+        m_viewMap[view.key] = view;
+
         UINavigation.AddItem(view);
         view.Open();
         //--抛出界面打开完成事件

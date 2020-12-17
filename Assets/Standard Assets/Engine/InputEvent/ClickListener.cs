@@ -84,4 +84,9 @@ public class ClickListener : MonoBehaviour, IPointerClickHandler
         cl.canPassClickEvent = passClickEvent;
     }
 
+    public static void ClearListener(Component component)
+    {
+        ClickListener cl = Get<ClickListener>(component);
+        cl.onClick = null;
+    }
 }

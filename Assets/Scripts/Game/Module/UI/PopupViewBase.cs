@@ -75,7 +75,7 @@ public class PopupViewBase : ViewBase
             }
             m_UIMask.transform.localPosition = Vector3.zero;
 
-            // 移走自己，不被拍到
+            // 移走自己，以防被相机拍到
             MoveFarAway(true);
             m_blurTextureOnce.GenerateRender();
             MoveFarAway(false);
@@ -97,6 +97,7 @@ public class PopupViewBase : ViewBase
         if(m_UIMask)
         {
             m_UIMask.transform.localPosition = FarAwayPosition;
+            ClickListener.ClearListener(m_blurTextureOnce);
         }
     }
 
