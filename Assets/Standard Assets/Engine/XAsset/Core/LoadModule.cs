@@ -149,8 +149,9 @@ public sealed class LoadModule : ModuleBase
         return assetRequest;
     }
 
-    public static AssetRequest LoadUI(string path, Type type, Action<AssetRequest> loadedCallback = null)
+    public static AssetRequest LoadUI(string path, Action<AssetRequest> loadedCallback = null)
     {
+        Type type = typeof(GameObject);
         path = "Assets/Data/ui/panel/" + path;
         string suffix = GetSuffixOfAsset(type);
         string fullPath = string.Format("{0}.{1}", path, suffix);
@@ -385,7 +386,6 @@ public sealed class LoadModule : ModuleBase
 #if UNITY_EDITOR
         if(runtimeMode == false)
         {
-            Debug.Log(File.Exists(path).ToString() + path);
             if(File.Exists(path))
                 return path;
 

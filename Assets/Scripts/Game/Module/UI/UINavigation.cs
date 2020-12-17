@@ -41,7 +41,7 @@ public class UINavigation
             if(lastView != null)
                 lastView.Freeze();
             Init();
-            Debug.Log("AddItem" + view.ToString());
+            //Debug.Log("AddItem：" + view.ToString());
             History.Add(view);
         }
     }
@@ -61,7 +61,7 @@ public class UINavigation
                 count = History.Count;
                 if(count == 0)
                     return;
-                Debug.Log("RemoveLastItem" + view.ToString());
+                //Debug.Log("RemoveLastItem：" + view.ToString());
                 History.RemoveAt(count - 1);
             }
         }

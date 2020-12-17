@@ -16,12 +16,12 @@ public class MainViewBase : ViewBase
         viewType = ViewType.MAIN;
     }
 
-    protected override void AddListeners()
+    protected override void AddAllListener()
     {
         throw new System.NotImplementedException();
     }
 
-    protected override void AddMessages()
+    protected override void AddAllMessage()
     {
         throw new System.NotImplementedException();
     }

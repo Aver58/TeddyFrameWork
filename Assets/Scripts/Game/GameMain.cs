@@ -43,7 +43,6 @@ public class GameMain : MonoBehaviour
         m_moduleMgr.StartGame();
 
         UIModule.OpenView(ViewID.Test);
-        UIModule.OpenView(ViewID.Test2);
     }
 
     private void AddModules()

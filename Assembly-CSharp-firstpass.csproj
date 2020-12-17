@@ -69,6 +69,7 @@
     <Compile Include="Assets\Standard Assets\Engine\Event\GameMsg.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Event\GameMsgDef.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Helper\FileHelper.cs" />
+    <Compile Include="Assets\Standard Assets\Engine\InputEvent\ClickListener.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Log\Log.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Network\ClientSocket.cs" />
     <Compile Include="Assets\Standard Assets\Engine\Network\NetMsg.cs" />

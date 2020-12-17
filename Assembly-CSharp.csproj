@@ -67,15 +67,20 @@
     <Compile Include="Assets\Scripts\Game\Define\ViewDefine.cs" />
     <Compile Include="Assets\Scripts\Game\GameMain.cs" />
     <Compile Include="Assets\Scripts\Game\Module\UI\MainViewBase.cs" />
+    <Compile Include="Assets\Scripts\Game\Module\UI\PopupViewBase.cs" />
     <Compile Include="Assets\Scripts\Game\Module\UI\UIEventArgs.cs" />
+    <Compile Include="Assets\Scripts\Game\Module\UI\UIMaskManager.cs" />
     <Compile Include="Assets\Scripts\Game\Module\UI\UIModule.cs" />
     <Compile Include="Assets\Scripts\Game\Module\UI\UINavigation.cs" />
     <Compile Include="Assets\Scripts\Game\Module\UI\ViewBase.cs" />
+    <Compile Include="Assets\Scripts\Game\UIComponent\BlurTextureOnce.cs" />
+    <Compile Include="Assets\Scripts\Game\UIComponent\EmptyRaycast.cs" />
     <Compile Include="Assets\Scripts\Game\UpdateScreen.cs" />
     <Compile Include="Assets\Scripts\Game\View\TestView.cs" />
     <Compile Include="Assets\Scripts\Game\View\TestView2.cs" />
     <Compile Include="Assets\Scripts\Test\TestNet.cs" />
     <None Include="Assets\Resources\Shaders\SimpleGrabPassBlur.shader" />
+    <None Include="Assets\Shader\Unlit\BlurShader.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/TeddyFrameWork/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

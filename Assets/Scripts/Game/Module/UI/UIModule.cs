@@ -42,6 +42,9 @@ public class UIModule : ModuleBase
     private static Dictionary<ViewType, Transform> m_viewRoot;
     private static float UIPANEL_CACHE_TIME = ViewDefine.UIPANEL_CACHE_TIME;
 
+    private static GameObject m_UIMask;
+    private static string m_prefabPath = "common/UIMask";
+
     public UIModule()
     {
         // 随缘7个
@@ -90,9 +93,25 @@ public class UIModule : ModuleBase
         UINavigation.RemoveLastItem(view);
     }
 
+    // View通过这个接口拿父节点
     public static Transform GetParent(ViewType viewType)
     {
         return m_viewRoot[viewType];
+    }
+
+    // PopupViewBase 拿Mask，全局就一个
+    public static GameObject GetUIMask()
+    {
+        if(m_UIMask == null)
+        {
+            AssetRequest assetRequest = LoadModule.LoadUI(m_prefabPath);
+            var asset = assetRequest.asset as GameObject;
+            m_UIMask = GameObject.Instantiate(asset, GetParent(ViewType.POPUP));
+            m_UIMask.transform.SetAsFirstSibling();
+            m_UIMask.transform.localPosition = Vector3.zero;
+            return m_UIMask;
+        }
+        return m_UIMask;
     }
 
     #region Scene

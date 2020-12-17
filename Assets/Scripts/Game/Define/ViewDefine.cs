@@ -31,24 +31,31 @@ public enum ViewType
 /// <summary>
 /// 模糊类型
 /// </summary>
-public enum LucenyType
+public enum LucencyType
 {
     /// <summary>
-    /// 完全透明，不能穿透
+    /// 透明
     /// </summary>
     Lucency,
     /// <summary>
-    /// 半透明，不能穿透
+    /// 半透明
     /// </summary>
     Translucence,
+}
+
+/// <summary>
+/// 穿透类型
+/// </summary>
+public enum PentrateType
+{
     /// <summary>
-    /// 低透明度，不能穿透
+    /// 能穿透
+    /// </summary>
+    Pentrate,
+    /// <summary>
+    /// 不能穿透
     /// </summary>
     ImPenetrable,
-    /// <summary>
-    /// 可以穿透
-    /// </summary>
-    Pentrate
 }
 
 public enum ViewID

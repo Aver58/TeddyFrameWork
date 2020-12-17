@@ -43,7 +43,7 @@ public abstract class ViewBase
     private AssetRequest m_assetRequest;
     private Action<AssetRequest> m_loadedCallback;
     private ViewLoadState m_loadState;// 加载状态
-    private Vector3 FarAwayPosition = new Vector3(10000, 10000,0);
+    protected Vector3 FarAwayPosition = new Vector3(10000, 10000, 0);
     
     public ViewBase(){}
 
@@ -53,14 +53,14 @@ public abstract class ViewBase
     {
         m_loadedCallback = loadedCallback;
         m_loadState = ViewLoadState.LOADING;
-        LoadModule.LoadUI(assetPath, typeof(GameObject), OnLoadCompleted);
+        LoadModule.LoadUI(assetPath, OnLoadCompleted);
     }
 
     public void Open()
     {
         isOpen = true;
         SetActive(true);
-        AddMessages();
+        AddAllMessage();
         OnOpen(openParam);
 
         transform.SetAsLastSibling();
@@ -68,12 +68,13 @@ public abstract class ViewBase
 
     public void Close()
     {
+        Debug.Log(panelName + "Close");
         closeTime = Time.time;
         openParam = null;
 
         isOpen = false;
         SetActive(false);
-        RemoveMessages();
+        RemoveAllMessage();
         OnClose();
     }
 
@@ -117,7 +118,7 @@ public abstract class ViewBase
         //todo 
     }
 
-    protected void RemoveMessages()
+    protected void RemoveAllMessage()
     {
         //todo 
     }
@@ -134,11 +135,11 @@ public abstract class ViewBase
     /// <summary>
     /// 按钮监听
     /// </summary>
-    protected abstract void AddListeners();
+    protected abstract void AddAllListener();
     /// <summary>
     /// 事件监听
     /// </summary>
-    protected abstract void AddMessages();
+    protected abstract void AddAllMessage();
     protected abstract void OnLoaded();
     protected abstract void OnOpen(UIEventArgs args = null);
     protected abstract void OnClose();
@@ -169,7 +170,7 @@ public abstract class ViewBase
         transform = gameObject.transform;
         UI = HierarchyUtil.GetHierarchyItems(gameObject);
 
-        AddListeners();
+        AddAllListener();
         OnLoaded();
 
         if(m_loadedCallback != null)
@@ -192,7 +193,7 @@ public abstract class ViewBase
 
             canvas.overrideSorting = active;
             // 移到很远
-            transform.localPosition = active ? Vector3.zero : FarAwayPosition;
+            MoveFarAway(!active);
         }
         else
         {
@@ -200,5 +201,9 @@ public abstract class ViewBase
         }
     }
 
+    protected void MoveFarAway(bool active)
+    {
+        transform.localPosition = active ? FarAwayPosition : Vector3.zero;
+    }
     #endregion
 }

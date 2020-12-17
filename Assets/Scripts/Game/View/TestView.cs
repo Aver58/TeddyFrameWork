@@ -9,13 +9,16 @@
 */
 #endregion
 
+using UnityEngine.UI;
+
 public class TestView : MainViewBase
 {
-    protected override void AddListeners()
+    protected override void AddAllListener()
     {
+        AddListener((Button)UI["BtnView2"], OpenView2);
     }
 
-    protected override void AddMessages()
+    protected override void AddAllMessage()
     {
     }
 
@@ -29,5 +32,10 @@ public class TestView : MainViewBase
 
     protected override void OnOpen(UIEventArgs args = null)
     {
+    }
+
+    private void OpenView2()
+    {
+        UIModule.OpenView(ViewID.Test2);
     }
 }
