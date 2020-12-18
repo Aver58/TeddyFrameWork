@@ -32,10 +32,6 @@ public class UIModule : ModuleBase
     /// </summary>
     private float m_lastCacheCheckTime = 0f;
     /// <summary>
-    /// 导航栈
-    /// </summary>
-    private static Stack<ViewBase> m_navigationStack;
-    /// <summary>
     /// 已打开过的view哈希表
     /// </summary>
     private static Dictionary<ViewID, ViewBase> m_viewMap;

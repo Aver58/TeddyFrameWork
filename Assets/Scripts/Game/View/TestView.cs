@@ -16,6 +16,7 @@ public class TestView : MainViewBase
     protected override void AddAllListener()
     {
         AddListener((Button)UI["BtnView2"], OpenView2);
+        AddListener((Button)UI["BtnScene"], ChangeScene);
     }
 
     protected override void AddAllMessage()
@@ -37,5 +38,10 @@ public class TestView : MainViewBase
     private void OpenView2()
     {
         UIModule.OpenView(ViewID.Test2);
+    }
+
+    private void ChangeScene()
+    {
+
     }
 }

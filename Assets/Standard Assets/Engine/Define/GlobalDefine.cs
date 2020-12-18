@@ -9,7 +9,7 @@
 */
 #endregion
 
-public enum ViewLoadState
+public enum LoadState
 {
     NONE = 0,
     LOADING = 1,

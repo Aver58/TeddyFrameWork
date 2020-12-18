@@ -22,7 +22,7 @@ public abstract class ViewBase
     public ViewType viewType { get; set; }
     public float closeTime { get; set; }
     public bool needNavigation { get { return viewType == ViewType.MAIN; } }
-    public bool isLoaded { get { return m_loadState == ViewLoadState.LOADED; } }
+    public bool isLoaded { get { return m_loadState == LoadState.LOADED; } }
     public bool isOpen { get; private set; }
     public GameObject gameObject;
     public string panelName;
@@ -42,17 +42,15 @@ public abstract class ViewBase
     private Transform m_parent;
     private AssetRequest m_assetRequest;
     private Action<AssetRequest> m_loadedCallback;
-    private ViewLoadState m_loadState;// 加载状态
+    private LoadState m_loadState;// 加载状态
     protected Vector3 FarAwayPosition = new Vector3(10000, 10000, 0);
     
-    public ViewBase(){}
-
     #region API
 
     public void Load(Action<AssetRequest> loadedCallback = null)
     {
         m_loadedCallback = loadedCallback;
-        m_loadState = ViewLoadState.LOADING;
+        m_loadState = LoadState.LOADING;
         LoadModule.LoadUI(assetPath, OnLoadCompleted);
     }
 
@@ -159,7 +157,7 @@ public abstract class ViewBase
             return;
         }
 
-        m_loadState = ViewLoadState.LOADED;
+        m_loadState = LoadState.LOADED;
 
         // 实例化
         m_parent = UIModule.GetParent(viewType);

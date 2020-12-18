@@ -33,10 +33,7 @@ public class BlurTextureOnce : MonoBehaviour
         int width = (int)m_rawImage.rectTransform.rect.width / DownSampleNum;
         int height = (int)m_rawImage.rectTransform.rect.height / DownSampleNum;
         RenderTexture rt = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGB32);
-        //rt.filterMode = FilterMode.Bilinear;
         rt.name = "UIBlurTextureOne RT";
-        //rt.Create();
-        //rt.DiscardContents();
 
         // 相机输出
         Camera camera = m_camera;
@@ -55,29 +52,10 @@ public class BlurTextureOnce : MonoBehaviour
         RenderTexture temporary = RenderTexture.GetTemporary(width, height, 0, sourceTexture.format);
         m_blurMaterial.SetFloat("_blurSize", BlurSize + 1.2f);
         // 将当前摄像机画面渲染到目标RT上
-        Graphics.Blit(sourceTexture, temporary, m_blurMaterial, 0);
-        sourceTexture.DiscardContents();
-        Graphics.Blit(temporary, sourceTexture, m_blurMaterial, 0);
-
-        // 我们只是想获得摄像机的画面，所以完事之后别忘了把画面正常输出出去
-        //Graphics.Blit(src, dest);
-
-        //temporary.filterMode = FilterMode.Bilinear;
-        //temporary.Create();
-        //temporary.filterMode = FilterMode.Bilinear;
-
-        //for(int i = 0; i < 2; i++)
-        //{
-        //    float iterationOffs = i * 1.2f;
-        //    m_blurMaterial.SetFloat("_blurSize", BlurSize + iterationOffs);
-        //    //垂直模糊
-        //    temporary.DiscardContents();
-        //    Graphics.Blit(src, temporary, m_blurMaterial, 0);
-        //    src.DiscardContents();
-        //    Graphics.Blit(temporary, src, m_blurMaterial, 0);
-        //}
-        RenderTexture.ReleaseTemporary(temporary);
-        m_renderBuffer = sourceTexture;
+        Graphics.Blit(sourceTexture, temporary, m_blurMaterial);
+   
+        RenderTexture.ReleaseTemporary(sourceTexture);
+        m_renderBuffer = temporary;
         m_rawImage.texture = m_renderBuffer;
     }
 

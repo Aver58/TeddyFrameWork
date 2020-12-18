@@ -2,7 +2,6 @@
 {
 	Properties{
 		_MainTex("Base (RGB)", 2D) = "white" {}
-
 	}
 
 	SubShader{

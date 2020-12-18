@@ -110,7 +110,7 @@ public sealed class LoadModule : ModuleBase
     }
 
     private static SceneAssetRequest _runningScene;
-    public static SceneAssetRequest LoadSceneAsync(string path, bool additive)
+    public static SceneAssetRequest LoadSceneAsync(string path, bool additive, Action<AssetRequest> loadedCallback = null)
     {
         if(string.IsNullOrEmpty(path))
         {
@@ -129,6 +129,9 @@ public sealed class LoadModule : ModuleBase
             }
             _runningScene = asset;
         }
+        if(loadedCallback != null)
+            asset.completed += loadedCallback;
+
         asset.Load();
         asset.Retain();
         _scenes.Add(asset);

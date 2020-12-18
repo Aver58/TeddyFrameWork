@@ -95,6 +95,7 @@ public class SceneAssetRequestAsync : SceneAssetRequest
         if(_request.isDone)
         {
             loadState = AssetLoadState.Loaded;
+            Complete();
             return false;
         }
 

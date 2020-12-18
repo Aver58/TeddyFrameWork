@@ -43,7 +43,7 @@ public class AssetRequest : Reference, IEnumerator
         }
     }
 
-    private void Complete()
+    protected void Complete()
     {
         if(completed != null)
         {
