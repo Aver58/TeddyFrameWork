@@ -112,12 +112,23 @@ public class UIModule : ModuleBase
 
     #region Scene
 
-    public static void SceneEnter(){}
+    public static void SceneEnter()
+    {
+    
+    }
 
     /// <summary>
     /// 切换场景，资源管理相关
     /// </summary>
-    public static void SceneExit(){}
+    public static void SceneExit()
+    {
+        foreach(var item in m_viewMap)
+        {
+            var view = item.Value;
+            if(view.isOpen)
+                view.Close();
+        }
+    }
 
     #endregion
 
@@ -135,7 +146,8 @@ public class UIModule : ModuleBase
             foreach(var item in m_viewMap)
             {
                 var view = item.Value;
-                if(view.closeTime - curTime > UIPANEL_CACHE_TIME && view.isOpen)
+                Debug.Log(view.closeTime - curTime > UIPANEL_CACHE_TIME);
+                if(view.closeTime - curTime > UIPANEL_CACHE_TIME && !view.isOpen)
                 {
                     m_viewMap[view.key] = null;
                     view.Dispose();
@@ -183,7 +195,6 @@ public class UIModule : ModuleBase
         view.Open();
         //--抛出界面打开完成事件
         //--设置场景摄像机状态
-
     }
 
     #endregion

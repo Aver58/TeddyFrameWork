@@ -264,6 +264,8 @@ MonoBehaviour:
   widgets:
   - name: BtnView2
     item: {fileID: 1459281560834295749}
+  - name: BtnScene
+    item: {fileID: 1219319080}
   effects: []
   externals: []
 --- !u!1 &4614688006373453900

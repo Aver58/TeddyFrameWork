@@ -2,25 +2,23 @@
 /*
 =====================================================
  AverFrameWork v1.0
- Filename:    TestNetScene.cs
+ Filename:    GameScene.cs
  Author:      Zeng Zhiwei
- Time:        2020\12\18 星期五 22:47:29
+ Time:        2020\12\19 星期六 11:37:55
 =====================================================
 */
 #endregion
 
-using UnityEngine;
-
-public class TestNetScene : SceneBase
+public class GameScene : SceneBase
 {
     public override void OnEnter()
     {
-        Debug.Log(panelName+"OnEnter");
+        throw new System.NotImplementedException();
     }
 
     public override void OnExit()
     {
-        Debug.Log(panelName + "OnExit");
+        throw new System.NotImplementedException();
     }
 
     public override void OnUpdate()

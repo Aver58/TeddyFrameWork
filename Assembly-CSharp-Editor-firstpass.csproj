@@ -63,37 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\~ObsoleteWindowStyler~.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_BuildInfoManager.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_BuildInfoMergerWindow.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_BuildProcessor.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_BuildReportFileInfo.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_BuildReportWindow.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_EditorData.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_ElementList.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_IgnoreList.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_IgnoreListEventActionBase.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_IIgnoreListActions.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_PreProcessor.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_SceneReferenceWindow.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_SerializationHelper.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_SerializedAssetInfo.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_SerializedBuildInfo.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_SettingsManager.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_SettingsWindow.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_TreeViewSelectionInfo.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_Utils.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_VersionUpgrader.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\AH_Window.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\External\Docker.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\TreeViewDataModel\AH_BuildInfoTreeView.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\TreeViewDataModel\AH_MultiColumnHeader.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\TreeViewDataModel\AH_TreeviewElement.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\TreeViewDataModel\AH_TreeViewWithTreeModel.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\TreeViewDataModel\TreeElement.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\TreeViewDataModel\TreeElementUtility.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\TreeViewDataModel\TreeModel.cs" />
-    <Compile Include="Assets\Plugins\Heureka\AssetHunterPRO\Editor\Scripts\TreeViewDataModel\TreeViewWithTreeModel.cs" />
     <Compile Include="Assets\Plugins\MonKey Commander\Editor\Init\GettingStartedPanel.cs" />
     <Compile Include="Assets\Plugins\MonKey Commander\Editor\Init\MonKeyInitialization.cs" />
     <Compile Include="Assets\Plugins\MonKey Commander\Editor\Menu Items\MonkeyMenuItems.cs" />
@@ -750,10 +719,6 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{85BA9F96-6724-4C32-5AAF-E8B58A293C27}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Heureka_GlobalAssemblyDefinition.csproj">
-      <Project>{D6D3A505-2958-3D94-92A5-41F114B1CDEF}</Project>
-      <Name>Heureka_GlobalAssemblyDefinition</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

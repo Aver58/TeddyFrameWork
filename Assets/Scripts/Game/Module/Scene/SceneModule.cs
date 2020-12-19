@@ -14,14 +14,15 @@ using System;
 using UnityEngine;
 /// <summary>
 /// 多场景管理器
+/// todo 场景栈
 /// </summary>
 public class SceneModule : ModuleBase
 {
-    private SceneBase m_curScene;
+    private static SceneBase m_curScene;
 
     #region API
 
-    public void ChangeScene(SceneID sceneID)
+    public static void ChangeScene(SceneID sceneID)
     {
         var lastSceneID = GetSceneID();
         if(lastSceneID == sceneID)
@@ -48,8 +49,12 @@ public class SceneModule : ModuleBase
     #endregion
 
     #region Private
+    public override void Update(float dt) 
+    {
+        // curScene Update
+    }
 
-    private SceneID GetSceneID()
+    private static SceneID GetSceneID()
     {
         if(m_curScene == null)
             return SceneID.None;
@@ -57,7 +62,7 @@ public class SceneModule : ModuleBase
         return m_curScene.SceneID;
     }
 
-    private bool IsLoading()
+    private static bool IsLoading()
     {
         if(m_curScene == null)
             return false;
@@ -65,7 +70,7 @@ public class SceneModule : ModuleBase
         return m_curScene.IsLoading();
     }
 
-    private SceneBase CreateScene(SceneID sceneID)
+    private static SceneBase CreateScene(SceneID sceneID)
     {
         SceneBase scene;
 
@@ -86,10 +91,12 @@ public class SceneModule : ModuleBase
         return null;
     }
     
-    private void ExitLastScene()
+    private static void ExitLastScene()
     {
         //卸载上一个场景，
-        m_curScene.OnExit();
+        if(m_curScene != null)
+            m_curScene.OnExit();
+
         //调用ui模块的退出场景，
         UIModule.SceneExit();
         // 卸载AB
@@ -99,7 +106,7 @@ public class SceneModule : ModuleBase
         Resources.UnloadUnusedAssets();
     }
 
-    private void EnterCurrentScene(SceneID sceneID)
+    private static void EnterCurrentScene(SceneID sceneID)
     {
         var scene = CreateScene(sceneID);
         // 异步加载场景
@@ -108,7 +115,7 @@ public class SceneModule : ModuleBase
         m_curScene = scene;
     }
 
-    private void OnSceneLoaded(AssetRequest assetRequest)
+    private static void OnSceneLoaded(AssetRequest assetRequest)
     {
         //调用ui模块的进入场景
         UIModule.SceneEnter();

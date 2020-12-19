@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Game\Module\UI\UIModule.cs" />
     <Compile Include="Assets\Scripts\Game\Module\UI\UINavigation.cs" />
     <Compile Include="Assets\Scripts\Game\Module\UI\ViewBase.cs" />
+    <Compile Include="Assets\Scripts\Game\Scene\GameScene.cs" />
     <Compile Include="Assets\Scripts\Game\Scene\TestNetScene.cs" />
     <Compile Include="Assets\Scripts\Game\UIComponent\BlurTextureOnce.cs" />
     <Compile Include="Assets\Scripts\Game\UIComponent\EmptyRaycast.cs" />
@@ -675,10 +676,6 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{85BA9F96-6724-4C32-5AAF-E8B58A293C27}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Heureka_GlobalAssemblyDefinition.csproj">
-      <Project>{D6D3A505-2958-3D94-92A5-41F114B1CDEF}</Project>
-      <Name>Heureka_GlobalAssemblyDefinition</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

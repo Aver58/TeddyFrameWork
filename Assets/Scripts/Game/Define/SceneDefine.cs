@@ -16,6 +16,7 @@ public enum SceneID
 {
     None,
     GameMain,
+    Game,
     TestNet,
 }
 
@@ -38,6 +39,7 @@ public static class SceneDefine
     public static Dictionary<SceneID, SceneConfig> SceneMap = new Dictionary<SceneID, SceneConfig>
     {
         //{SceneID.GameMain,new SceneConfig("GameMain","") }
-        {SceneID.TestNet,new SceneConfig("TestNet","_Scenes/TestNet.unity",typeof(TestNetScene)) },
+        {SceneID.TestNet,new SceneConfig("TestNet","Assets/_Scenes/TestNet.unity",typeof(TestNetScene)) },
+        {SceneID.Game,new SceneConfig("Game","Assets/_Scenes/Game.unity",typeof(GameScene)) },
     };
 }

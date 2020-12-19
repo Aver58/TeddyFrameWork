@@ -63,6 +63,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\action\ActionMainManager.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\action\ActionManager.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\action\BaseAction.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\action\DelayDo.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\action\MoveTo.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\action\MyDelegates.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\base\BaseObject.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\base\LiveObject.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\base\UnityObject.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\BattleLogic.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\bullet\BaseBullet.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\bullet\BulletFactory.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\bullet\DirectionShootBullet.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\GameData.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\LockStepLogic.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\soldier\BaseSoldier.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\soldier\Grizzly.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\soldier\SoldierFactory.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\SRandom.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\state\BaseState.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\state\CoolingState.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\state\NormalState.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\state\StateMachine.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\state\TowerAttackState.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\state\TowerStandState.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\tower\BaseTower.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\tower\MagicStand.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\core\tower\TowerFactory.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\Fix64.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\battle\UnityTools.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\BattleLogicMonoBehaviour.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\SimpleSocket.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\ui\BattleUI.cs" />
+    <Compile Include="Assets\Plugins\LockStepSimpleFramework-Client-master\Source\view\prefab.cs" />
     <Compile Include="Assets\Plugins\TiTan\UIT\Example\ControllerExample.cs" />
     <Compile Include="Assets\Plugins\TiTan\UIT\Example\ModuleExample.cs" />
     <Compile Include="Assets\Plugins\TiTan\UIT\Interface\UIColor.cs" />
@@ -135,40 +169,6 @@
     <Compile Include="Assets\Standard Assets\Game\Module\Config.cs" />
     <Compile Include="Assets\Standard Assets\Game\Module\ModuleBase.cs" />
     <Compile Include="Assets\Standard Assets\Game\Module\ModuleManager.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\action\ActionMainManager.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\action\ActionManager.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\action\BaseAction.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\action\DelayDo.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\action\MoveTo.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\action\MyDelegates.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\base\BaseObject.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\base\LiveObject.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\base\UnityObject.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\BattleLogic.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\bullet\BaseBullet.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\bullet\BulletFactory.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\bullet\DirectionShootBullet.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\GameData.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\LockStepLogic.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\soldier\BaseSoldier.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\soldier\Grizzly.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\soldier\SoldierFactory.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\SRandom.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\state\BaseState.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\state\CoolingState.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\state\NormalState.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\state\StateMachine.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\state\TowerAttackState.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\state\TowerStandState.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\tower\BaseTower.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\tower\MagicStand.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\core\tower\TowerFactory.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\Fix64.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\battle\UnityTools.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\BattleLogicMonoBehaviour.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\SimpleSocket.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\ui\BattleUI.cs" />
-    <Compile Include="Assets\Standard Assets\LockStepSimpleFramework-Client-master\Source\view\prefab.cs" />
     <None Include="Assets\Plugins\MonKey Commander\MonKey Core.xml" />
     <None Include="Assets\Plugins\TiTan\UIT\Shader\ETC1GrayShader.shader" />
     <None Include="Assets\Plugins\TiTan\UIT\Shader\ETC1Shader.shader" />
@@ -758,12 +758,6 @@
     <Reference Include="Boo.Lang">
       <HintPath>D:/MyDrivers/unity2018.4.4/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Heureka_GlobalAssemblyDefinition.csproj">
-      <Project>{D6D3A505-2958-3D94-92A5-41F114B1CDEF}</Project>
-      <Name>Heureka_GlobalAssemblyDefinition</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

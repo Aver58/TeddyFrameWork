@@ -87,3 +87,5 @@ public static class ViewDefine
         { ViewID.Test2,new ViewConfig("TestView2","test/TestPanel2",typeof(TestView2))},
     };
 }
+
+

@@ -42,6 +42,6 @@ public class TestView : MainViewBase
 
     private void ChangeScene()
     {
-
+        SceneModule.ChangeScene(SceneID.Game);
     }
 }
