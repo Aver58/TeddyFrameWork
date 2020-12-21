@@ -12,56 +12,14 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// 界面类型
+/// </summary>
 public enum ViewType
 {
-    /// <summary>
-    /// 主界面
-    /// </summary>
-    MAIN = 1,
-    /// <summary>
-    /// 弹出窗体
-    /// </summary>
-    POPUP,
-    /// <summary>
-    /// 固定弹窗
-    /// </summary>
-    FIXED,
-}
-
-/// <summary>
-/// 模糊类型
-/// </summary>
-public enum LucencyType
-{
-    /// <summary>
-    /// 透明
-    /// </summary>
-    Lucency,
-    /// <summary>
-    /// 半透明
-    /// </summary>
-    Translucence,
-}
-
-/// <summary>
-/// 穿透类型
-/// </summary>
-public enum PentrateType
-{
-    /// <summary>
-    /// 能穿透
-    /// </summary>
-    Pentrate,
-    /// <summary>
-    /// 不能穿透
-    /// </summary>
-    ImPenetrable,
-}
-
-public enum ViewID
-{
-    Test = 1,
-    Test2,
+    MAIN,//主界面
+    POPUP,//弹出窗体
+    FIXED,//固定弹窗
 }
 
 public struct ViewConfig
@@ -76,6 +34,12 @@ public struct ViewConfig
         this.path = path;
         this.viewClass = viewClass;
     }
+}
+
+public enum ViewID
+{
+    Test = 1,
+    Test2,
 }
 
 public static class ViewDefine

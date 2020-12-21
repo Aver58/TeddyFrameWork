@@ -40,9 +40,9 @@ public class UIModule : ModuleBase
 
     private static GameObject m_UIMask;
     private static string m_prefabPath = "common/UIMask";
-
     public UIModule()
     {
+        UINavigation.Init();
         // 随缘7个
         m_viewMap = new Dictionary<ViewID, ViewBase>(7);
         m_viewRoot = new Dictionary<ViewType, Transform>
@@ -57,13 +57,14 @@ public class UIModule : ModuleBase
 
     public static void OpenView(ViewID key, UIEventArgs args = null)
     {
-        if(BeforeOpen(key) == false)
-            return;
-
         ViewBase view = GetView(key);
+
         if(view != null)
         {
             view.SetOpenParam(args);
+
+            if(BeforeOpen(view) == false)
+                return;
 
             // 已加载过
             if(view.isLoaded)
@@ -72,7 +73,7 @@ public class UIModule : ModuleBase
             }
             else
             {
-                view.Load(delegate{ InitView(view); });    
+                view.Load(InitView);    
             }
         }
         else
@@ -84,9 +85,22 @@ public class UIModule : ModuleBase
     public static void CloseView(ViewID key)
     {
         ViewBase view = GetView(key);
-        //当前界面隐藏
-        view.Close();
-        UINavigation.RemoveLastItem(view);
+        if(view != null)
+        {
+            if(view.isOpen)
+            {
+                view.Close();
+                UINavigation.RemoveLastItem(view);
+            }
+            else
+            {
+                Debug.LogWarning("[UIModule]界面关闭失败，已经关闭！" + key.ToString());
+            }
+        }
+        else
+        {
+            Debug.LogError("[UIModule]界面关闭失败，没有找到指定界面！" + key.ToString());
+        }
     }
 
     // View通过这个接口拿父节点
@@ -157,10 +171,16 @@ public class UIModule : ModuleBase
     }
 
     // 界面打开前的检测
-    private static bool BeforeOpen(ViewID key)
+    private static bool BeforeOpen(ViewBase view)
     {
         // 做一些界面打开前的检查操作
-        return true;
+        return view.CanOpen();
+    }
+
+    // 界面关闭前的检测
+    private static bool BeforeClose(ViewBase view)
+    {
+        return view.CanClose();
     }
 
     private static ViewBase GetView(ViewID key)

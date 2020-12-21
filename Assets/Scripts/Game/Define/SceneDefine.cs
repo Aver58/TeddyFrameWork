@@ -12,14 +12,6 @@
 using System;
 using System.Collections.Generic;
 
-public enum SceneID
-{
-    None,
-    GameMain,
-    Game,
-    TestNet,
-}
-
 public struct SceneConfig
 {
     public string name;
@@ -34,10 +26,20 @@ public struct SceneConfig
     }
 }
 
+public enum SceneID
+{
+    None,
+    Test,
+    GameMain,
+    Game,
+    TestNet,
+}
+
 public static class SceneDefine
 {
     public static Dictionary<SceneID, SceneConfig> SceneMap = new Dictionary<SceneID, SceneConfig>
     {
+        //{SceneID.Test,new SceneConfig("Test","Assets/_Scenes/Test.unity"),typeof(TestScene) },
         //{SceneID.GameMain,new SceneConfig("GameMain","") }
         {SceneID.TestNet,new SceneConfig("TestNet","Assets/_Scenes/TestNet.unity",typeof(TestNetScene)) },
         {SceneID.Game,new SceneConfig("Game","Assets/_Scenes/Game.unity",typeof(GameScene)) },

@@ -16,6 +16,9 @@ using Object = UnityEngine.Object;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+/// <summary>
+/// 所有界面的抽象类
+/// </summary>
 public abstract class ViewBase
 {
     public ViewID key { get; set; }
@@ -41,19 +44,29 @@ public abstract class ViewBase
 
     private Transform m_parent;
     private AssetRequest m_assetRequest;
-    private Action<AssetRequest> m_loadedCallback;
+    private Action<ViewBase> m_loadedCallback;
     private LoadState m_loadState;// 加载状态
     protected Vector3 FarAwayPosition = new Vector3(10000, 10000, 0);
-    
+
     #region API
 
-    public void Load(Action<AssetRequest> loadedCallback = null)
+    public virtual bool CanOpen() { return true; }
+    public virtual bool CanClose() { return true; }
+    
+    /// <summary>
+    /// 界面加载
+    /// </summary>
+    /// <param name="loadedCallback"></param>
+    public void Load(Action<ViewBase> loadedCallback = null)
     {
         m_loadedCallback = loadedCallback;
         m_loadState = LoadState.LOADING;
         LoadModule.LoadUI(assetPath, OnLoadCompleted);
     }
 
+    /// <summary>
+    /// 界面打开
+    /// </summary>
     public void Open()
     {
         isOpen = true;
@@ -64,6 +77,9 @@ public abstract class ViewBase
         transform.SetAsLastSibling();
     }
 
+    /// <summary>
+    /// 界面关闭
+    /// </summary>
     public void Close()
     {
         Debug.Log(panelName + "Close");
@@ -77,7 +93,7 @@ public abstract class ViewBase
     }
 
     /// <summary>
-    /// 恢复
+    /// 界面恢复
     /// </summary>
     public void Resume()
     {
@@ -86,7 +102,7 @@ public abstract class ViewBase
     }
 
     /// <summary>
-    /// 冻结
+    /// 界面冻结
     /// </summary>
     public void Freeze()
     {
@@ -173,7 +189,7 @@ public abstract class ViewBase
 
         if(m_loadedCallback != null)
         {
-            m_loadedCallback(request);
+            m_loadedCallback(this);
         }
     }
 

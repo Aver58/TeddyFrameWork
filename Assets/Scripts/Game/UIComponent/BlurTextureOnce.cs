@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// 负责“弹出窗体”模态显示实现
+/// https://blog.csdn.net/SaberZG/article/details/109347619
+/// 
 public class BlurTextureOnce : MonoBehaviour
 {
     private string m_blurShaderAssetPath = "Assets/Shader/Unlit/BlurShader.shader";
@@ -11,7 +14,6 @@ public class BlurTextureOnce : MonoBehaviour
     private RawImage m_rawImage;
     private Camera m_camera;
 
-    //对输出的结果做一次降采样，也就是降低分辨率，减小RT图的大小
     public int DownSampleNum = 5;
     public float BlurSize = 0.7f;
 
@@ -35,10 +37,10 @@ public class BlurTextureOnce : MonoBehaviour
         RenderTexture rt = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGB32);
         rt.name = "UIBlurTextureOne RT";
 
-        // 相机输出
         Camera camera = m_camera;
         RenderTexture temp = camera.targetTexture;
         camera.targetTexture = rt;
+        // 将当前摄像机画面渲染到目标RT上
         camera.Render();
         camera.targetTexture = temp;
 
@@ -51,7 +53,7 @@ public class BlurTextureOnce : MonoBehaviour
         int height = sourceTexture.height;
         RenderTexture temporary = RenderTexture.GetTemporary(width, height, 0, sourceTexture.format);
         m_blurMaterial.SetFloat("_blurSize", BlurSize + 1.2f);
-        // 将当前摄像机画面渲染到目标RT上
+        // 将sourceTexture位块传输到temporary上
         Graphics.Blit(sourceTexture, temporary, m_blurMaterial);
    
         RenderTexture.ReleaseTemporary(sourceTexture);

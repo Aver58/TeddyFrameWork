@@ -17,7 +17,7 @@ public class UINavigation
     private static int count;
     public static List<ViewBase> History;
 
-    private static void Init()
+    public static void Init()
     {
         if(History != null) 
             return;
@@ -40,7 +40,6 @@ public class UINavigation
             ViewBase lastView = GetLastItem();
             if(lastView != null)
                 lastView.Freeze();
-            Init();
             //Debug.Log("AddItem：" + view.ToString());
             History.Add(view);
         }
@@ -57,7 +56,6 @@ public class UINavigation
             ViewBase lastView = GetLastItem();
             if(lastView == view)
             {
-                Init();
                 count = History.Count;
                 if(count == 0)
                     return;
@@ -67,15 +65,12 @@ public class UINavigation
         }
     }
 
-    public static ViewBase GetLastItem(bool removeFromHistory = true)
+    public static ViewBase GetLastItem()
     {
-        Init();
         count = History.Count;
         if(count == 0)
             return null;
         ViewBase data = History[count - 1];
-        if(removeFromHistory)
-            History.RemoveAt(count - 1);
 
         return data;
     }
