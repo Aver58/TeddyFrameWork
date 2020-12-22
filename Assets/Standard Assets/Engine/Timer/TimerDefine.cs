@@ -2,14 +2,16 @@
 /*
 =====================================================
  AverFrameWork v1.0
- Filename:    INetConnector.cs
+ Filename:    TimerDefine.cs
  Author:      Zeng Zhiwei
- Time:        2020/12/22 9:53:21
+ Time:        2020\12\22 星期二 20:09:13
 =====================================================
 */
 #endregion
 
-public class INetConnector
+public interface ITimerBase
 {
-
+    bool IsRunning { get; }
+    void Recycle();
+    void Update();
 }

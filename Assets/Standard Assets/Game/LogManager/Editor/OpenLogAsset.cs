@@ -12,14 +12,14 @@ public class OpenLogAsset
     static bool OnOpenAsset(int instanceID, int line)
     {
         string stackTrace = GetStackTrace();
-        if (!string.IsNullOrEmpty(stackTrace) && (stackTrace.Contains("UnityEngine.Log:Info") || stackTrace.Contains("UnityEngine.Log:Error")))
+        if (!string.IsNullOrEmpty(stackTrace) && (stackTrace.Contains("UnityEngine.Debug:Log") || stackTrace.Contains("UnityEngine.Debug:LogError")))
         {
             Match matches = Regex.Match(stackTrace, @"\(at (.+)\)", RegexOptions.IgnoreCase);
             string pathline = "";
             while(matches.Success)
             {
                 pathline = matches.Groups[1].Value;
-                if(!pathline.Contains("Log.cs"))
+                if(!pathline.Contains("Debug.cs"))
                 {
                     int splitIndex = pathline.LastIndexOf(":");
                     string path = pathline.Substring(0, splitIndex);

@@ -29,7 +29,7 @@ using System.Diagnostics;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+//using Debug = UnityEngine.Debug;
 
 namespace libx
 {

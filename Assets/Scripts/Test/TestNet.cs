@@ -14,7 +14,8 @@ public class TestNet : MonoBehaviour
         }
 
         // 初始化连接
-        ClientSocket.Instance.Connect();
+        //ClientSocket.Instance.Connect();
+        KCPConnector.instance.Connect("127.0.0.1", 8090);
 
         // 注册
         NetMsg.AddListener(Network.OpCode.S2C_TestResponse, new NetHandler(Test));
@@ -22,7 +23,7 @@ public class TestNet : MonoBehaviour
 
     private void Test(string msg)
     {
-        Log.Info(msg);
+        Debug.Log(msg);
     }
 
     private void OnBtnClick()

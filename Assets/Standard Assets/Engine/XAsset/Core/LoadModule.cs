@@ -395,7 +395,6 @@ public sealed class LoadModule : ModuleBase
             foreach(var item in _searchPaths)
             {
                 var existPath = string.Format("{0}/{1}", item, path);
-                Debug.Log(File.Exists(existPath));
                 if(File.Exists(existPath))
                     return existPath;
             }

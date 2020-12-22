@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net.Sockets;
 
-public class ClientSocket
+public class TcpClient
 {
     #region Instance
-    private class InstanceHolder { public static ClientSocket Instance = new ClientSocket(); }
-    public static ClientSocket Instance { get { return InstanceHolder.Instance; } }
+    private class InstanceHolder { public static TcpClient Instance = new TcpClient(); }
+    public static TcpClient Instance { get { return InstanceHolder.Instance; } }
     #endregion
 
     //private bool m_Active;

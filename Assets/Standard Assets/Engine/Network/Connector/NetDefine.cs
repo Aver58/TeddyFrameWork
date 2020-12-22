@@ -33,7 +33,6 @@ public enum KConnCmd
     Disconnect = 3, // 断开连接
     Data = 4,       // 数据包
     ReconnReq = 5,  // 重连请求
-    ReconnRsp = 6,  // 重连应答
 }
 
 public enum KDisconnectType

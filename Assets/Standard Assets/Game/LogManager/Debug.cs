@@ -51,16 +51,6 @@ public static class Debug
         UnityEngine.Debug.Log(Prefix + str, null);
         LogToFile("[I]" + str, false);
     }
-
-    public static void LogFormat(string message, params object[] args)
-    {
-        Log(message, args);
-    }
-
-    public static void LogErrorFormat(string message, params object[] args)
-    {
-        LogError(message, args);
-    }
     
     public static void LogException(Exception message)
     {
@@ -104,6 +94,21 @@ public static class Debug
         LogToFile("[W]" + str, true);
     }
 
+    public static void LogFormat(string message, params object[] args)
+    {
+        Log(message, args);
+    }
+
+    public static void LogErrorFormat(string message, params object[] args)
+    {
+        LogError(message, args);
+    }
+
+    public static void LogWarningFormat(string message, params object[] args)
+    {
+        LogWarning(message, args);
+    }
+    
     public static void InfoRed(string message, params object[] args)
     {
         if(!EnableLog)

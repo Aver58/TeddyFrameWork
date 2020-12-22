@@ -81,7 +81,7 @@ public class ProtoBufUtil
             }
             else
             {
-                Log.Info("协议长度错误");
+                Debug.Log("协议长度错误");
             }
         }
 

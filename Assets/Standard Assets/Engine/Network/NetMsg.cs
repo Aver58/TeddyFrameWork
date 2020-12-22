@@ -24,8 +24,8 @@ public static class NetMsg
     // 向服务器发送请求
     public static void SendMsg(NetMsgData data)
     {
-        ClientSocket.Instance.SendMsg(ProtoBufUtil.PackNetMsg(data));
-        Log.Info("[Client]client send: ID:{0},Data:{1}", data.ID, data.Data);
+        TcpClient.Instance.SendMsg(ProtoBufUtil.PackNetMsg(data));
+        Debug.Log("[Client]client send: ID:{0},Data:{1}", data.ID, data.Data);
     }
 
     // 派发
@@ -36,7 +36,7 @@ public static class NetMsg
         NetHandler callback;
         if (m_EventMap.TryGetValue(protoID, out callback))
         {
-            Log.Info("[Server]收到 ：protoID：{0}，data：{1}", protoID, data.Data);
+            Debug.Log("[Server]收到 ：protoID：{0}，data：{1}", protoID, data.Data);
             if (callback!=null)
             {
                 callback(data.Data);
@@ -44,7 +44,7 @@ public static class NetMsg
         }
         else
         {
-            Log.Info("[Server]收到未监听的服务器消息：protoID：{0}，data：{1}", protoID, data.Data);
+            Debug.Log("[Server]收到未监听的服务器消息：protoID：{0}，data：{1}", protoID, data.Data);
         }
     }
 

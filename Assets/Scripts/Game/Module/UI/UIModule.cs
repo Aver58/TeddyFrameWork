@@ -160,7 +160,7 @@ public class UIModule : ModuleBase
             foreach(var item in m_viewMap)
             {
                 var view = item.Value;
-                Debug.Log(view.closeTime - curTime > UIPANEL_CACHE_TIME);
+                Debug.Log((view.closeTime - curTime > UIPANEL_CACHE_TIME).ToString());
                 if(view.closeTime - curTime > UIPANEL_CACHE_TIME && !view.isOpen)
                 {
                     m_viewMap[view.key] = null;
