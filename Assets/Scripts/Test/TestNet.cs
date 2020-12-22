@@ -22,7 +22,7 @@ public class TestNet : MonoBehaviour
 
     private void Test(string msg)
     {
-        Log.Debug(msg);
+        Log.Info(msg);
     }
 
     private void OnBtnClick()
