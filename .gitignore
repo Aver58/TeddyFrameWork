@@ -5,3 +5,6 @@ obj/
 DLC
 Assets/Temp.meta
 Build/
+Assembly-CSharp-firstpass.csproj
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor-firstpass.csproj
