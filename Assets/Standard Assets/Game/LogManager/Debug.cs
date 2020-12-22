@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 系统日志模块
 /// </summary>
-public static class Log
+public static class Debug
 {
     public static bool EnableLog = true;    // 是否启用日志，仅可控制普通级别的日志的启用与关闭，LogError和LogWarn都是始终启用的。
     public static bool EnableSave = false;  // 是否允许保存日志，即把日志写入到文件中
@@ -33,7 +33,7 @@ public static class Log
         return str;
     }
 
-    public static void Info(string message, params object[] args)
+    public static void Log(string message, params object[] args)
     {
         if(!EnableLog)
             return;
@@ -48,11 +48,31 @@ public static class Log
             ListBugs.RemoveAt(0);
         }
         ListBugs.Add(new KeyValuePair<int, string>(1, str));
-        Debug.Log(Prefix + str, null);
+        UnityEngine.Debug.Log(Prefix + str, null);
         LogToFile("[I]" + str, false);
     }
 
-    public static void Error(string message, params object[] args)
+    public static void LogFormat(string message, params object[] args)
+    {
+        Log(message, args);
+    }
+
+    public static void LogErrorFormat(string message, params object[] args)
+    {
+        LogError(message, args);
+    }
+    
+    public static void LogException(Exception message)
+    {
+        string str = GetLogTime() + message.Message;
+        if(ListBugs.Count > LineCount)
+            ListBugs.RemoveAt(0);
+        ListBugs.Add(new KeyValuePair<int, string>(3, str));
+        UnityEngine.Debug.LogException(message);
+        LogToFile("[E]" + str, true);
+    }
+    
+    public static void LogError(string message, params object[] args)
     {
         if(args != null && args.Length > 0)
         {
@@ -64,8 +84,24 @@ public static class Log
             ListBugs.RemoveAt(0);
         }
         ListBugs.Add(new KeyValuePair<int, string>(3, str));
-        Debug.LogError(Prefix + str, null);
+        UnityEngine.Debug.LogError(Prefix + str, null);
         LogToFile("[E]" + str, true);
+    }
+
+    public static void LogWarning(string message, params object[] args)
+    {
+        if(args != null && args.Length > 0)
+        {
+            message = string.Format(message, args);
+        }
+        string str = GetLogTime() + message;
+        if(ListBugs.Count > LineCount)
+        {
+            ListBugs.RemoveAt(0);
+        }
+        ListBugs.Add(new KeyValuePair<int, string>(3, str));
+        UnityEngine.Debug.LogWarning(Prefix + str, null);
+        LogToFile("[W]" + str, true);
     }
 
     public static void InfoRed(string message, params object[] args)
@@ -83,7 +119,7 @@ public static class Log
             ListBugs.RemoveAt(0);
         }
         ListBugs.Add(new KeyValuePair<int, string>(1, str));
-        Debug.Log(Prefix + string.Concat("<color=#AB2B2B>", str, "</color>"), null);
+        UnityEngine.Debug.Log(Prefix + string.Concat("<color=#AB2B2B>", str, "</color>"), null);
         LogToFile("[I]" + str, false);
     }
 
@@ -123,7 +159,7 @@ public static class Log
                 }
                 catch(Exception exception)
                 {
-                    Debug.Log(Prefix + "获取 Application.persistentDataPath 报错！" + exception.Message, null);
+                    UnityEngine.Debug.Log(Prefix + "获取 Application.persistentDataPath 报错！" + exception.Message, null);
                     return;
                 }
             }
@@ -140,7 +176,7 @@ public static class Log
             catch(Exception exception2)
             {
                 LogFileWriter = null;
-                Debug.Log("LogToCache() " + exception2.Message + exception2.StackTrace, null);
+                UnityEngine.Debug.Log("LogToCache() " + exception2.Message + exception2.StackTrace, null);
                 return;
             }
         }
@@ -221,11 +257,11 @@ public static class Log
         {
             if(type == LogPackageType.ClientToServer)
             {
-                Log.Warning(string.Format("{0} <color=#ffff00>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
+                Debug.Warning(string.Format("{0} <color=#ffff00>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
             }
             else
             {
-                Log.Warning(string.Format("{0} <color=#01c00f>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
+                Debug.Warning(string.Format("{0} <color=#01c00f>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
             }
         }
     }
@@ -238,7 +274,7 @@ public static class Log
             ListBugs.RemoveAt(0);
         }
         ListBugs.Add(new KeyValuePair<int, string>(2, str));
-        Debug.LogWarning(str, null);
+        UnityEngine.Debug.LogWarning(str, null);
         LogToFile("[W]" + str, false);
     }
 }
