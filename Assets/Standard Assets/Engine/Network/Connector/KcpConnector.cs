@@ -89,7 +89,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
 
     public void Close()
     {
-        throw new NotImplementedException();
+        Clear();
     }
 
     // 业务层调用的发送
@@ -170,16 +170,15 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
                 Debug.Log("线程恢复");
                 return;
             }
-            // 处理接收UDP包 收到的包传入Kcp进行处理
+            // 接收UDP包 收到的包传入Kcp进行处理
             DealReceiveUdpData();
 
-            // 处理UDP发送
+            // 发送UDP包
             DealSendBuffToUdp();
 
-            // kcp处理
             if(State == ConnectState.Connected)
             {
-                // 处理接收KCP包
+                // 接收KCP包
                 DealKcpUpdateAndReceive();
             }
         }
