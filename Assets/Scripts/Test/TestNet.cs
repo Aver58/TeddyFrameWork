@@ -15,7 +15,10 @@ public class TestNet : MonoBehaviour
 
         // 初始化连接
         //ClientSocket.Instance.Connect();
-        KCPConnector.instance.Connect("127.0.0.1", 8090);
+        //KCPConnector.instance.Connect("127.0.0.1", 8090);
+        TestKCP.Connect();
+        //var text = Encoding.UTF8.GetBytes(string.Format("Hello KCP: {0}", ++counter));
+
 
         // 注册
         NetMsg.AddListener(Network.OpCode.S2C_TestResponse, new NetHandler(Test));
