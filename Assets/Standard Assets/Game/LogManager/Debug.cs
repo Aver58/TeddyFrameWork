@@ -17,6 +17,9 @@ public static class Debug
     public static string Prefix = "> ";     // 用于与Unity默认的系统日志做区分。本日志系统输出的日志头部都会带上这个标记。
     public static StreamWriter LogFileWriter = null;
 
+    /// <summary>
+    /// 日志输出最大行数
+    /// </summary>
     private static readonly int LineCount = 100;
     //日志列表
     public static List<KeyValuePair<int, string>> ListBugs = new List<KeyValuePair<int, string>>();
@@ -27,10 +30,16 @@ public static class Debug
     private static string GetLogTime()
     {
         string str = "";
-
         str = DateTime.Now.ToString("HH:mm:ss.fff") + " ";
 
         return str;
+    }
+    private static void AddLogToList(int key, string str)
+    {
+        if(ListBugs.Count > LineCount)
+            ListBugs.RemoveAt(0);
+
+        ListBugs.Add(new KeyValuePair<int, string>(key, str));
     }
 
     public static void Log(string message, params object[] args)
@@ -39,25 +48,17 @@ public static class Debug
             return;
 
         if(args != null && args.Length > 0)
-        {
             message = string.Format(message, args);
-        }
         string str = GetLogTime() + message;
-        if(ListBugs.Count > LineCount)
-        {
-            ListBugs.RemoveAt(0);
-        }
-        ListBugs.Add(new KeyValuePair<int, string>(1, str));
+        AddLogToList(1,str);
         UnityEngine.Debug.Log(Prefix + str, null);
         LogToFile("[I]" + str, false);
     }
-    
+
     public static void LogException(Exception message)
     {
         string str = GetLogTime() + message.Message;
-        if(ListBugs.Count > LineCount)
-            ListBugs.RemoveAt(0);
-        ListBugs.Add(new KeyValuePair<int, string>(3, str));
+        AddLogToList(2, str);
         UnityEngine.Debug.LogException(message);
         LogToFile("[E]" + str, true);
     }
@@ -69,11 +70,8 @@ public static class Debug
             message = string.Format(message, args);
         }
         string str = GetLogTime() + message;
-        if(ListBugs.Count > LineCount)
-        {
-            ListBugs.RemoveAt(0);
-        }
-        ListBugs.Add(new KeyValuePair<int, string>(3, str));
+        AddLogToList(3, str);
+
         UnityEngine.Debug.LogError(Prefix + str, null);
         LogToFile("[E]" + str, true);
     }
@@ -85,14 +83,20 @@ public static class Debug
             message = string.Format(message, args);
         }
         string str = GetLogTime() + message;
-        if(ListBugs.Count > LineCount)
-        {
-            ListBugs.RemoveAt(0);
-        }
-        ListBugs.Add(new KeyValuePair<int, string>(3, str));
+        AddLogToList(4, str);
         UnityEngine.Debug.LogWarning(Prefix + str, null);
         LogToFile("[W]" + str, true);
     }
+
+    private static void Warning(object message)
+    {
+        string str = Prefix + message;
+        AddLogToList(5, str);
+        UnityEngine.Debug.LogWarning(str, null);
+        LogToFile("[W]" + str, false);
+    }
+
+    #region Format
 
     public static void LogFormat(string message, params object[] args)
     {
@@ -108,25 +112,8 @@ public static class Debug
     {
         LogWarning(message, args);
     }
-    
-    public static void InfoRed(string message, params object[] args)
-    {
-        if(!EnableLog)
-            return;
 
-        if(args != null && args.Length > 0)
-        {
-            message = string.Format(message, args);
-        }
-        string str = GetLogTime() + message;
-        if(ListBugs.Count > LineCount)
-        {
-            ListBugs.RemoveAt(0);
-        }
-        ListBugs.Add(new KeyValuePair<int, string>(1, str));
-        UnityEngine.Debug.Log(Prefix + string.Concat("<color=#AB2B2B>", str, "</color>"), null);
-        LogToFile("[I]" + str, false);
-    }
+    #endregion
 
     /// <summary>
     /// 将日志写入到文件中
@@ -269,17 +256,5 @@ public static class Debug
                 Debug.Warning(string.Format("{0} <color=#01c00f>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
             }
         }
-    }
-
-    private static void Warning(object message)
-    {
-        string str = Prefix + message;
-        if(ListBugs.Count > LineCount)
-        {
-            ListBugs.RemoveAt(0);
-        }
-        ListBugs.Add(new KeyValuePair<int, string>(2, str));
-        UnityEngine.Debug.LogWarning(str, null);
-        LogToFile("[W]" + str, false);
     }
 }

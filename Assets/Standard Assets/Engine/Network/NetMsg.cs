@@ -24,8 +24,21 @@ public static class NetMsg
     // 向服务器发送请求
     public static void SendMsg(NetMsgData data)
     {
-        TcpClient.Instance.SendMsg(ProtoBufUtil.PackNetMsg(data));
-        Debug.Log("[Client]client send: ID:{0},Data:{1}", data.ID, data.Data);
+        TcpClient.Instance.Send(ProtoBufUtil.PackNetMsg(data));
+
+        Debug.Log("[Send]ID:{0},Data:{1}", data.ID, data.Data);
+    }
+
+    public static void SendUDPMsg(NetMsgData data)
+    {
+        UDPClient.instance.Send(ProtoBufUtil.PackNetMsg(data));
+        Debug.Log("[Send]ID:{0},Data:{1}", data.ID, data.Data);
+    }
+
+    public static void SendKCPMsg(NetMsgData data)
+    {
+        KCPClient.instance.Send(ProtoBufUtil.PackNetMsg(data));
+        Debug.Log("[Send]ID:{0},Data:{1}", data.ID, data.Data);
     }
 
     // 派发
@@ -36,7 +49,7 @@ public static class NetMsg
         NetHandler callback;
         if (m_EventMap.TryGetValue(protoID, out callback))
         {
-            Debug.Log("[Server]收到 ：protoID：{0}，data：{1}", protoID, data.Data);
+            Debug.Log("[Receive]Server ：protoID：{0}，data：{1}", protoID, data.Data);
             if (callback!=null)
             {
                 callback(data.Data);
@@ -44,7 +57,7 @@ public static class NetMsg
         }
         else
         {
-            Debug.Log("[Server]收到未监听的服务器消息：protoID：{0}，data：{1}", protoID, data.Data);
+            Debug.Log("[Receive]收到未监听的服务器消息：protoID：{0}，data：{1}", protoID, data.Data);
         }
     }
 

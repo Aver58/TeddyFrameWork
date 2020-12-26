@@ -108,10 +108,12 @@ namespace KcpProject
             }
 
             var rn = 0;
-            try {
+            try 
+            {
                 rn = mSocket.Receive(mRecvBuffer.RawBuffer, mRecvBuffer.WriterIndex, mRecvBuffer.WritableBytes, SocketFlags.None);
-            } catch(Exception ex) {
-                Console.WriteLine(ex);
+            } 
+            catch(Exception ex) {
+                Debug.Log(ex.Message);
                 rn = -1;
             }
 

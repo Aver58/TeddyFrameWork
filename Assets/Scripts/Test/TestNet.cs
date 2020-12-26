@@ -14,13 +14,12 @@ public class TestNet : MonoBehaviour
         }
 
         // 初始化连接
-        //ClientSocket.Instance.Connect();
+        //TcpClient.Instance.Connect();
         //KCPConnector.instance.Connect("127.0.0.1", 8090);
-        TestKCP.Connect();
-        //var text = Encoding.UTF8.GetBytes(string.Format("Hello KCP: {0}", ++counter));
+        //UDPClient.instance.Connect();
 
-
-        // 注册
+        KCPClient.instance.Connect("127.0.0.1", 8090);
+        //注册
         NetMsg.AddListener(Network.OpCode.S2C_TestResponse, new NetHandler(Test));
     }
 
@@ -31,6 +30,8 @@ public class TestNet : MonoBehaviour
 
     private void OnBtnClick()
     {
-        NetMsg.SendMsg(new NetMsgData(Network.OpCode.C2S_TestRequest, "1111"));
+        //NetMsg.SendMsg(new NetMsgData(Network.OpCode.C2S_TestRequest, "1111"));
+        //NetMsg.SendUDPMsg(new NetMsgData(Network.OpCode.C2S_TestRequest, "1111"));
+        NetMsg.SendKCPMsg(new NetMsgData(Network.OpCode.C2S_TestRequest, "1111"));
     }
 }

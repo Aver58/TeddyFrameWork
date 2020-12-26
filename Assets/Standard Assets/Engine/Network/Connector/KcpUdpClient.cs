@@ -13,6 +13,9 @@ using System;
 using System.Buffers;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
+using System.Timers;
+using KcpProject;
 /// <summary>
 /// 管理和服务器的连接状态 线程安全
 /// </summary>
@@ -38,6 +41,8 @@ public class KcpUdpClient
     private FrameTimer m_timerConn;
     private int m_conKey = 0;
     private uint m_conv = 0;
+
+
     public KcpUdpClient()
     {
         State = ConnectState.Disconnected;
@@ -70,7 +75,6 @@ public class KcpUdpClient
         m_udp.Connect(addr[0], port);
 
         m_timerConn = FrameTimer.Create(OnTimerCheckConn, 1, -1);
-
         // 发送连接请求
         SendConnectRequest();
         return;
@@ -123,6 +127,7 @@ public class KcpUdpClient
         }
         return data;
     }
+
     #endregion
 
     #region Private

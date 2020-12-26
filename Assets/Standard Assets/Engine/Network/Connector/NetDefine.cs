@@ -53,7 +53,7 @@ public interface INetConnector
     event Action OnDisconnected;
 
     void Connect(string ipOrName, int port);
-    void Close();
     void Send(byte[] data);
     byte[] Receive();
+    void Close();
 }

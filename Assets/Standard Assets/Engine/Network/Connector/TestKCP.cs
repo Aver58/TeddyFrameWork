@@ -9,6 +9,8 @@
 */
 #endregion
 
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using KcpProject;
@@ -16,7 +18,7 @@ using KcpProject;
 //https://www.jianshu.com/p/9544c2e56757
 public class TestKCP
 {
-    public static void Connect()
+    public static void Test()
     {
         var connection = new UDPSession();
         connection.AckNoDelay = true;
@@ -30,54 +32,48 @@ public class TestKCP
         var sendBytes = 0;
         var recvBytes = 0;
 
-        while(true)
-        {
-            connection.Update();
+        //while(true)
+        //{
+        //    connection.Update();
 
-            if(!stopSend)
-            {
-                //Debug.Log("Write Message...");
-                var sent = connection.Send(buffer, 0, buffer.Length);
-                if(sent < 0)
-                {
-                    Debug.Log("Write message failed.");
-                    break;
-                }
+        //    if(!stopSend)
+        //    {
+        //        Debug.Log("Write Message...");
+        //        var send = connection.Send(buffer, 0, buffer.Length);
+        //        if(send < 0)
+        //        {
+        //            Debug.Log("Write message failed.");
+        //            break;
+        //        }
 
-                if(sent > 0)
-                {
-                    counter++;
-                    sendBytes += buffer.Length;
-                    if(counter >= 500)
-                        stopSend = true;
-                }
-            }
+        //        if(send > 0)
+        //        {
+        //            counter++;
+        //            sendBytes += buffer.Length;
+        //            if(counter >= 500)
+        //                stopSend = true;
+        //        }
+        //    }
 
-            var n = connection.Recv(buffer, 0, buffer.Length);
-            if(n == 0)
-            {
-                Thread.Sleep(10);
-                continue;
-            }
-            else if(n < 0)
-            {
-                Debug.Log("Receive Message failed.");
-                break;
-            }
-            else
-            {
-                recvBytes += n;
-                Debug.Log($"{recvBytes} / {sendBytes}");
-            }
+        //    var n = connection.Recv(buffer, 0, buffer.Length);
+        //    if(n == 0)
+        //    {
+        //        Thread.Sleep(10);
+        //        continue;
+        //    }
+        //    else if(n < 0)
+        //    {
+        //        Debug.Log("Receive Message failed.");
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        recvBytes += n;
+        //        Debug.Log($"{recvBytes} / {sendBytes}");
+        //    }
 
-            //var resp = Encoding.UTF8.GetString(buffer, 0, n);
-            //Debug.Log("Received Message: " + resp);
-        }
-    }
-
-    public static void TestSend(string msg)
-    {
-        var bytes = Encoding.UTF8.GetBytes("Hello KCP");
-
+        //    var resp = Encoding.UTF8.GetString(buffer, 0, n);
+        //    Debug.Log("Received Message: " + resp);
+        //}
     }
 }

@@ -6,34 +6,17 @@ public class TcpClient
     #region Instance
     private class InstanceHolder { public static TcpClient Instance = new TcpClient(); }
     public static TcpClient Instance { get { return InstanceHolder.Instance; } }
+
+    public ConnectState State => throw new NotImplementedException();
     #endregion
 
     //private bool m_Active;
     private Socket m_Socket;
 
-    // 关闭连接并释放所有相关资源
-    public void Close()
-    {
-        if (m_Socket == null)
-            return;
-
-        //m_Active = false;
-        try
-        {
-            m_Socket.Shutdown(SocketShutdown.Both);
-        }
-        catch
-        {
-
-        }
-        finally
-        {
-            m_Socket.Close();
-            m_Socket = null;
-        }
-    }
-
     static byte[] buffer = new byte[1024];
+
+    public event Action OnConnected;
+    public event Action OnDisconnected;
 
     // 连接到远程主机
     public void Connect(string host = "127.0.0.1", int port = 8090)
@@ -79,7 +62,7 @@ public class TcpClient
         }
     }
 
-    public void SendMsg(byte[] buffer)
+    public void Send(byte[] buffer)
     {
         if (!m_Socket.Connected)
             return;
@@ -89,5 +72,27 @@ public class TcpClient
     private void HandleMsg(byte[] msg)
     {
         NetMsg.HandleMsg(msg);
+    }
+
+    // 关闭连接并释放所有相关资源
+    public void Close()
+    {
+        if(m_Socket == null)
+            return;
+
+        //m_Active = false;
+        try
+        {
+            m_Socket.Shutdown(SocketShutdown.Both);
+        }
+        catch
+        {
+
+        }
+        finally
+        {
+            m_Socket.Close();
+            m_Socket = null;
+        }
     }
 }
