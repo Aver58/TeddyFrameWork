@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: boss_01
+  m_Controller: {fileID: 9100000, guid: f82de832bb6e16746b4029c928f815a4, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: f3813ccb83fcedd46bd5dc8708a63db5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fd28981947e90cb4aa36bc5c8a889b99, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 52c0ac89173466b4cb167c80d35345bf, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 62e7c257632dcb84db8574cc48ce5c21, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 7649762ce8c3a144fb9dab7d6db4c72c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5666a5ff105e223429722bd8ae361add, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 43050e247e4552b4ba379b3af5f22087, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a194d6cfbc2b8a14ba84d0182c287c1a, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 396ee162e7d54eb4f87419165120aed4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5e66532de044b3946841931afe7a098e, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 3088743bf856c5a4484c378f37199daa, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4c8fbd73d2778084e80953eea035e357, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 632aa0dd7c7998c4a86e21dc0712afa3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a15b7606fc37add4dbc517f09fc18a37, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 0dfd8cb049d5a274d9ac68f64d512406, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5a677d86edd458b40bf044dacfeb41bf, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 50dee78e56863eb4397b25202610e7d3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: be6bdd11d2b230c48b463e43f33d7479, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 85c8b93b7a5ce9c4dba563d9c710399a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 87e1947cf4c0f734face3514ba2f2780, type: 3}

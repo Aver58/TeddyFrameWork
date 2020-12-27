@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: boss_01
+  m_Shader: {fileID: 4800000, guid: 65178537f614f654793eeef00bb20d48, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FXTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightTex:
+        m_Texture: {fileID: 2800000, guid: fc5b054d8cba24ff5a5248fa648639e3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e8dc1bc1c4e512546b7e56af6f1b1a39, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 2800000, guid: 3db0c14b367d14841b79b2a3d1dc372e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: b2ed0b5bacf480b48b3534f29ef2332e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BasicValue: 0.5
+    - _Bright: 7
+    - _ColorControl: 0.5
+    - _Contrast: 1
+    - _Gloss: 20
+    - _HeightControl: 0
+    - _LightPower: 0.6
+    - _Saturation: 1
+    - _SpecularBright: 8
+    - _Timer: 0
+    m_Colors:
+    - _FXColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlobalLight: {r: 1, g: 1, b: 1, a: 1}
+    - _HeightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LightPos: {r: 36.5, g: 51, b: 54.15, a: 1}

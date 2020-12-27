@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Hero_01
+  m_Shader: {fileID: 4800000, guid: 017bea32184c62c47aa4a434c3cb427e, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _LightTex:
+        m_Texture: {fileID: 2800000, guid: fc5b054d8cba24ff5a5248fa648639e3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 6ebf784fe6b45bd46ad9bc55e4910a73, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 2800000, guid: 1a2498f91234dd3468112983439e1b54, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Bright: 4.3
+    - _ColorControl: 0.18
+    - _Contrast: 1
+    - _Gloss: 45
+    - _HeightControl: 1
+    - _LightPower: 0.94
+    - _Saturation: 1
+    - _SpecularBright: 0.97
+    m_Colors:
+    - _GlobalLight: {r: 0.9338235, g: 0.92009085, b: 0.92009085, a: 1}
+    - _HeightColor: {r: 0.7794118, g: 0.7794118, b: 0.7794118, a: 1}
+    - _LightColor: {r: 0.47794116, g: 0.4217128, b: 0.4217128, a: 1}
+    - _LightPos: {r: 14.35, g: -8.34, b: 85.6, a: 1}
