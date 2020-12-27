@@ -12,8 +12,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using LitJson;
 using UnityEngine;
 using Object = UnityEngine.Object;
+
+public delegate void LoadedCallback(AssetRequest assetRequest);
 
 public sealed class LoadModule : ModuleBase
 {
@@ -110,7 +113,7 @@ public sealed class LoadModule : ModuleBase
     }
 
     private static SceneAssetRequest _runningScene;
-    public static SceneAssetRequest LoadSceneAsync(string path, bool additive, Action<AssetRequest> loadedCallback = null)
+    public static SceneAssetRequest LoadSceneAsync(string path, bool additive, LoadedCallback loadedCallback = null)
     {
         if(string.IsNullOrEmpty(path))
         {
@@ -144,7 +147,7 @@ public sealed class LoadModule : ModuleBase
         scene.Release();
     }
 
-    public static AssetRequest LoadAssetAsync(string path, Type type, Action<AssetRequest> loadedCallback = null)
+    public static AssetRequest LoadAssetAsync(string path, Type type, LoadedCallback loadedCallback = null)
     {
         AssetRequest assetRequest = LoadAsset(path, type, true);
         if(loadedCallback != null)
@@ -152,16 +155,16 @@ public sealed class LoadModule : ModuleBase
         return assetRequest;
     }
 
-    public static AssetRequest LoadUI(string path, Action<AssetRequest> loadedCallback = null)
+    public static AssetRequest LoadUI(string path, LoadedCallback loadedCallback = null)
     {
         Type type = typeof(GameObject);
         path = "Assets/Data/ui/panel/" + path;
         string suffix = GetSuffixOfAsset(type);
         string fullPath = string.Format("{0}.{1}", path, suffix);
-        return LoadAsset(fullPath, type,loadedCallback);
+        return LoadAsset(fullPath, type, loadedCallback);
     }
 
-    public static AssetRequest LoadAsset(string path, Type type, Action<AssetRequest> loadedCallback = null)
+    public static AssetRequest LoadAsset(string path, Type type, LoadedCallback loadedCallback = null)
     {
         AssetRequest assetRequest = LoadAsset(path, type, false);
         if(loadedCallback != null)
@@ -173,6 +176,28 @@ public sealed class LoadModule : ModuleBase
     {
         asset.Release();
     }
+
+    private string JsonPathPrefix = "Assets/Scripts/DataTable/json/";
+    public JsonData LoadJson(string path)
+    {
+        path = JsonPathPrefix + path;
+        Debug.Log("LoadJson: " + path);
+        if(FileHelper.IsFileExist(path))
+        {
+            using(StreamReader streamReader = new StreamReader(path))
+            {
+                string jsonText = streamReader.ReadToEnd();
+                JsonData jsonData = JsonMapper.ToObject(jsonText);
+                return jsonData;
+            }
+        }
+        else
+        {
+            Debug.LogError(path + "不存在!");
+            return null;
+        }
+    }
+
     #endregion
 
     #region Private

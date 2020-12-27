@@ -21,7 +21,7 @@ public class AssetRequest : Reference, IEnumerator
     private List<Object> _requires;
     public Type assetType;
 
-    public Action<AssetRequest> completed;
+    public LoadedCallback completed;
     public string name;
 
     public AssetRequest()
