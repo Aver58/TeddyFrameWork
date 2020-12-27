@@ -1,0 +1,3 @@
+﻿id	maxHp	maxMp	physic	magic	attackRange	viewRange	moveSpeed	turnSpeed	startPoint	maxRadius	modelPath	skillList
+101	1000	1000	10	10	1	8	4	3	0,0	15	Data/character/Player.prefab	10101,10102
+102	2000	2000	20	20	1	8	4	3	0,0	15	Data/character/boss/boss_01.prefab	20001,20002
