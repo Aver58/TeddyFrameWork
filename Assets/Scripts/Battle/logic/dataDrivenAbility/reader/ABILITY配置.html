@@ -1,0 +1,753 @@
+<!DOCTYPE html><html><head><title>ABILITY配置</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h1 id="ability配置">ABILITY配置</h1>
+
+<div><div class="toc"><div class="toc">
+<ul>
+<li><a href="#ability配置">ABILITY配置</a><ul>
+<li><a href="#基础属性">基础属性</a><ul>
+<li><a href="#name">Name</a></li>
+<li><a href="#abilitybehavior">AbilityBehavior</a></li>
+<li><a href="#abilitytype">AbilityType</a></li>
+<li><a href="#abilitybranch">AbilityBranch</a></li>
+<li><a href="#abilityunittargetteam">AbilityUnitTargetTeam</a></li>
+<li><a href="#abilityunittargettype">AbilityUnitTargetType</a></li>
+<li><a href="#abilityunitaitargetflag">AbilityUnitAiTargetFlag</a></li>
+<li><a href="#abilityunitaitargetcondition">AbilityUnitAiTargetCondition</a></li>
+<li><a href="#abilitycastrange">AbilityCastRange</a></li>
+<li><a href="#abilitycastpoint">AbilityCastPoint</a></li>
+<li><a href="#abilitycastanimation">AbilityCastAnimation</a></li>
+<li><a href="#abilitycastduration">AbilityCastDuration</a></li>
+<li><a href="#abilitychanneltime">AbilityChannelTime</a></li>
+<li><a href="#abilitycooldown">AbilityCooldown</a></li>
+<li><a href="#abilityinitialcooldown">AbilityInitialCooldown</a></li>
+<li><a href="#abilitycosttype">AbilityCostType</a></li>
+<li><a href="#abilitycostvalue">AbilityCostValue</a></li>
+<li><a href="#aoe范围配置">AOE范围配置</a><ul>
+<li><a href="#abilityaoeradius">AbilityAoeRadius</a></li>
+<li><a href="#abilityaoeline">AbilityAoeLine</a></li>
+<li><a href="#abilityaoesector">AbilityAoeSector</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#预载precache">预载Precache</a></li>
+<li><a href="#技能事件abilityevents">技能事件AbilityEvents</a></li>
+<li><a href="#目标">目标</a><ul>
+<li><a href="#单体目标">单体目标</a></li>
+<li><a href="#多个目标">多个目标</a><ul>
+<li><a href="#圆形区域配置">圆形区域配置</a></li>
+<li><a href="#线形区域配置">线形区域配置</a></li>
+<li><a href="#扇形区域配置">扇形区域配置</a></li>
+<li><a href="#target示例">Target示例</a></li>
+<li><a href="#center">Center</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#动作actions">动作Actions</a><ul>
+<li><a href="#一些action中的类型定义">一些Action中的类型定义</a><ul>
+<li><a href="#soundtype">SoundType</a></li>
+<li><a href="#effecttype">EffectType</a></li>
+<li><a href="#effectattachtype">EffectAttachType</a></li>
+<li><a href="#effectforwardtype">EffectForwardType</a></li>
+<li><a href="#camerashaketype">CameraShakeType</a></li>
+<li><a href="#shieldtype">ShieldType</a></li>
+<li><a href="#damagetype">DamageType</a></li>
+<li><a href="#damageflags">DamageFlags</a></li>
+<li><a href="#healflags">HealFlags</a></li>
+<li><a href="#valuesource">ValueSource</a></li>
+<li><a href="#targetflags">TargetFlags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#修改器modifier">修改器Modifier</a><ul>
+<li><a href="#一些modifier中的类型定义">一些Modifier中的类型定义</a></li>
+<li><a href="#modifier-参数">Modifier 参数</a></li>
+<li><a href="#modifier-事件">Modifier 事件</a></li>
+<li><a href="#modifier-属性">Modifier 属性</a></li>
+<li><a href="#modifier-状态">Modifier 状态</a></li>
+<li><a href="#modifier-例子">Modifier 例子</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<h2 id="基础属性">基础属性</h2>
+
+
+
+<h3 id="name">Name</h3>
+
+<blockquote>
+  <p>技能名字和描述</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"Name"</span> : <span class="hljs-string">"光击阵"</span>
+</div></code></pre>
+
+
+
+<h3 id="abilitybehavior">AbilityBehavior</h3>
+
+<blockquote>
+  <p>描述技能如何生效，生效后如何执行，可以配置多条行为。用来区分主动技能和被动技能。主要用于可以手动释放的大招技能的配置。</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityBehavior"</span> : [
+</div><div class="hljs-line">    <span class="hljs-string">"ABILITY_BEHAVIOR_NO_TARGET"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"ABILITY_BEHAVIOR_LINE_AOE"</span>
+</div><div class="hljs-line">]
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>AbilityBehavior</td>  <td>描述</td></tr><tr>  <td><code>ABILITY_BEHAVIOR_PASSIVE</code></td>  <td>被动技能，AI不会选取，不能释放，自动生效</td></tr><tr>  <td><code>ABILITY_BEHAVIOR_NO_TARGET</code></td>  <td>无目标技能，不需要选取目标或者点就能释放</td></tr><tr>  <td><code>ABILITY_BEHAVIOR_UNIT_TARGET</code></td>  <td>单位目标技能，需要目标释放</td></tr><tr>  <td><code>ABILITY_BEHAVIOR_POINT</code></td>  <td>点目标技能，释放时需要指定一个位置</td></tr><tr>  <td><code>ABILITY_BEHAVIOR_CHANNELLED</code></td>  <td>持续施法技能，施法者被眩晕等情况技能会被打断, 需要配合<code>AbilityChannelTime</code>来使用</td></tr><tr>  <td><code>ABILITY_BEHAVIOR_RADIUS_AOE</code></td>  <td>圆形AOE技能，需要配合<code>AbilityAoeRadius</code>来使用</td></tr><tr>  <td><code>ABILITY_BEHAVIOR_LINE_AOE</code></td>  <td>线形AOE技能，需要配合<code>AbilityAoeLine</code>来使用</td></tr><tr>  <td><code>ABILITY_BEHAVIOR_SECTOR_AOE</code></td>  <td>扇形AOE技能，需要配合<code>AbilityAoeSector</code>来使用</td></tr></tbody></table>
+
+
+
+<h3 id="abilitytype">AbilityType</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"AbilityType"</span> : <span class="hljs-string">"ABILITY_TYPE_ULTIMATE"</span>
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>AbilityType</td>  <td>描述</td></tr><tr>  <td><code>ABILITY_TYPE_ATTACK</code></td>  <td>普通攻击</td></tr><tr>  <td><code>ABILITY_TYPE_BASIC</code></td>  <td>普通技能</td></tr><tr>  <td><code>ABILITY_TYPE_ULTIMATE</code></td>  <td>大招</td></tr></tbody></table>
+
+
+
+<h3 id="abilitybranch">AbilityBranch</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"AbilityBranch"</span> : <span class="hljs-string">"ABILITY_BRANCH_PHYSICAL"</span>
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>AbilityBranch</td>  <td>描述</td></tr><tr>  <td><code>ABILITY_BRANCH_PHYSICAL</code></td>  <td>物理类型的技能，可被缴械等物理沉默导致技能不可释放</td></tr><tr>  <td><code>ABILITY_BRANCH_MAGICAL</code></td>  <td>法术类型的技能，可被沉默等法术沉默导致技能不可释放</td></tr></tbody></table>
+
+
+
+<h3 id="abilityunittargetteam">AbilityUnitTargetTeam</h3>
+
+<blockquote>
+  <p>技能可选取的目标队伍</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"AbilityUnitTargetTeam"</span>: <span class="hljs-string">"UNIT_TARGET_TEAM_FRIENDLY"</span>
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>AbilityUnitTargetTeam</td>  <td>描述</td></tr><tr>  <td><code>UNIT_TARGET_TEAM_ENEMY</code></td>  <td>敌人</td></tr><tr>  <td><code>UNIT_TARGET_TEAM_FRIENDLY</code></td>  <td>友军</td></tr><tr>  <td><code>UNIT_TARGET_TEAM_BOTH</code></td>  <td>全部</td></tr><tr>  <td><code>UNIT_TARGET_TEAM_NONE</code></td>  <td>无</td></tr></tbody></table>
+
+
+
+<h3 id="abilityunittargettype">AbilityUnitTargetType</h3>
+
+<blockquote>
+  <p>技能可选取的目标类型（目前这个字段没起作用，但是需要配置，要不技能会解析失败）</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"AbilityUnitTargetType"</span> : <span class="hljs-string">"UNIT_TARGET_HERO"</span>
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>AbilityUnitTargetType</td>  <td>描述</td></tr><tr>  <td><code>UNIT_TARGET_HERO</code></td>  <td>英雄类型的敌人</td></tr></tbody></table>
+
+
+
+<h3 id="abilityunitaitargetflag">AbilityUnitAiTargetFlag</h3>
+
+<blockquote>
+  <p>AI获得该技能后，对目标的一些操作</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityUnitAiTargetFlag"</span> : [
+</div><div class="hljs-line">    <span class="hljs-string">"UNIT_AI_TARGET_RESEARCH"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"UNIT_AI_TARGET_RECORD"</span>
+</div><div class="hljs-line">]
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>AbilityUnitAiTargetFlag</td>  <td>描述</td></tr><tr>  <td><code>UNIT_AI_TARGET_RESEARCH</code></td>  <td>每次都会重新搜索目标，使用<code>AbilityUnitAiTargetCondition</code>规则</td></tr><tr>  <td><code>UNIT_AI_TARGET_RECORD</code></td>  <td>选取目标后，会记录该目标</td></tr><tr>  <td><code>UNIT_AI_TARGET_CLEAN</code></td>  <td>技能施放成功后(<code>OnSpellStart</code>)，会清空记录的目标。如果配置了该字段，又配置了<code>UNIT_AI_TARGET_RECORD</code>, <code>UNIT_AI_TARGET_RECORD</code>将会无效化</td></tr></tbody></table>
+
+
+
+<h3 id="abilityunitaitargetcondition">AbilityUnitAiTargetCondition</h3>
+
+<blockquote>
+  <p>AI获得该技能后，选取目标的规则条件</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"AbilityUnitAiTargetCondition"</span> : <span class="hljs-string">"UNIT_TARGET_RANGE_MIN"</span>
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>AbilityUnitAiTargetCondition</td>  <td>描述</td></tr><tr>  <td><code>UNIT_TARGET_RANDOM</code></td>  <td>随机一个目标</td></tr><tr>  <td><code>UNIT_TARGET_RANGE_MIN</code></td>  <td>距离最近的目标</td></tr><tr>  <td><code>UNIT_TARGET_RANGE_MAX</code></td>  <td>距离最远的目标</td></tr><tr>  <td><code>UNIT_TARGET_HP_MIN</code></td>  <td>当前血量最少的目标</td></tr><tr>  <td><code>UNIT_TARGET_HP_MAX</code></td>  <td>当前血量最多的目标</td></tr><tr>  <td><code>UNIT_TARGET_HP_PERCENT_MIN</code></td>  <td>当前血量与最大血量比值最小的目标</td></tr><tr>  <td><code>UNIT_TARGET_HP_PERCENT_MAX</code></td>  <td>当前血量与最大血量比值最大的目标</td></tr><tr>  <td><code>UNIT_TARGET_ENERGY_MIN</code></td>  <td>当前能量最少的目标</td></tr><tr>  <td><code>UNIT_TARGET_ENERGY_MAX</code></td>  <td>当前能量最大的目标</td></tr><tr>  <td><code>UNIT_TARGET_SLG</code></td>  <td>SLG专用</td></tr></tbody></table>
+
+
+
+<h3 id="abilitycastrange">AbilityCastRange</h3>
+
+<blockquote>
+  <p>技能的施法距离。 <br>
+  <strong>0</strong> 表示施法者自己，会忽略<code>AbilityUnitTargetTeam</code>和<code>AbilityUnitTargetType</code>的配置。 <br>
+  <strong>-1</strong> 表示全屏目标，会根据<code>AbilityUnitTargetTeam</code>和<code>AbilityUnitTargetType</code>的配置来筛选</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityCastRange"</span> : -1
+</div></code></pre>
+
+
+
+<h3 id="abilitycastpoint">AbilityCastPoint</h3>
+
+<blockquote>
+  <p>技能的施法前摇，如果技能在前摇内被打断，技能会释放失败，但是不进入CD</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityCastPoint"</span> : 0.3
+</div></code></pre>
+
+
+
+<h3 id="abilitycastanimation">AbilityCastAnimation</h3>
+
+<blockquote>
+  <p>技能的施法动画</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"AbilityCastAnimation"</span> : <span class="hljs-string">"attack"</span>
+</div></code></pre>
+
+
+
+<h3 id="abilitycastduration">AbilityCastDuration</h3>
+
+<blockquote>
+  <p>技能的持续时间</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityCastDuration"</span> : 0.3
+</div></code></pre>
+
+
+
+<h3 id="abilitychanneltime">AbilityChannelTime</h3>
+
+<blockquote>
+  <p>技能持续施法的持续时间</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityChannelTime"</span> : 5
+</div></code></pre>
+
+
+
+<h3 id="abilitycooldown">AbilityCooldown</h3>
+
+<blockquote>
+  <p>技能的CD</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityCooldown"</span> : 20
+</div></code></pre>
+
+
+
+<h3 id="abilityinitialcooldown">AbilityInitialCooldown</h3>
+
+<blockquote>
+  <p>技能初始CD，可不配置，默认是<strong>0</strong></p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityInitialCooldown"</span> : 20
+</div></code></pre>
+
+
+
+<h3 id="abilitycosttype">AbilityCostType</h3>
+
+<blockquote>
+  <p>释放技能所需要的消耗</p>
+</blockquote>
+
+<table><tbody><tr style="font-weight:bold">  <td>AbilityCostType</td>  <td>描述</td></tr><tr>  <td><code>NO_COST</code></td>  <td>无消耗</td></tr><tr>  <td><code>ENERGY</code></td>  <td>能量消耗</td></tr></tbody></table>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"AbilityCostType"</span> : <span class="hljs-string">"ENERGY"</span>
+</div></code></pre>
+
+
+
+<h3 id="abilitycostvalue">AbilityCostValue</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityCostValue"</span> : 1000
+</div></code></pre>
+
+
+
+<h3 id="aoe范围配置">AOE范围配置</h3>
+
+
+
+<h4 id="abilityaoeradius">AbilityAoeRadius</h4>
+
+<blockquote>
+  <p>圆形AOE技能的AOE范围配置，与<code>ABILITY_BEHAVIOR_RADIUS_AOE</code>配合使用</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityAoeRadius"</span> : 5
+</div></code></pre>
+
+
+
+<h4 id="abilityaoeline">AbilityAoeLine</h4>
+
+<blockquote>
+  <p>线形AOE技能的AOE范围配置，与<code>ABILITY_BEHAVIOR_LINE_AOE</code>配合使用 <br>
+  <strong>Length</strong> 线的长度 <br>
+  <strong>Thickness</strong> 线的宽度</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityAoeLine"</span>:
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"Length"</span> : 5,
+</div><div class="hljs-line">    <span class="hljs-string">"Thickness"</span> : 3
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h4 id="abilityaoesector">AbilityAoeSector</h4>
+
+<blockquote>
+  <p>扇形AOE技能的AOE范围配置，与<code>ABILITY_BEHAVIOR_SECTOR_AOE</code>配合使用 <br>
+  <strong>Radius</strong> 扇形半径范围 <br>
+  <strong>Angle</strong> 扇形的角度</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AbilityAoeSector"</span>:
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"Radiue"</span> : 5,
+</div><div class="hljs-line">    <span class="hljs-string">"Angle"</span> : 30
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h2 id="预载precache">预载Precache</h2>
+
+<blockquote>
+  <p>用于资源的预加载。只有在这边配置的资源才会在战斗载入的时候进行预加载</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs prolog"><div class="hljs-line"><span class="hljs-string">"Precache"</span>:
+</div><div class="hljs-line">[
+</div><div class="hljs-line">    <span class="hljs-string">"effect/hero/heroFX07_02_attack"</span>
+</div><div class="hljs-line">]
+</div></code></pre>
+
+
+
+<h2 id="技能事件abilityevents">技能事件AbilityEvents</h2>
+
+<blockquote>
+  <p>技能事件在技能释放过程中根据触发条件触发。一个技能条件下可以配置任意个Action</p>
+</blockquote>
+
+<table><tbody><tr style="font-weight:bold">  <td>Ability Event</td>  <td>触发条件</td></tr><tr>  <td><code>OnAbilityPhaseStart</code></td>  <td>技能开始施法。这个事件里面目前只能配置表现型的Action，不要配置逻辑相关的Action</td></tr><tr>  <td><code>OnAbilityPhaseCharge</code></td>  <td>技能开始蓄力。这个事件里面目前只能配置表现型的Action，不要配置逻辑相关的Action</td></tr><tr>  <td><code>OnSpellStart</code></td>  <td>当施法动画<code>AbilityCastPoint</code>完成后</td></tr><tr>  <td><code>OnChannelInterrupted</code></td>  <td>持续施法被中断</td></tr><tr>  <td><code>OnChannelFinish</code></td>  <td>持续施法成功或者中断，都会触发该事件</td></tr><tr>  <td><code>OnChannelSucceeded</code></td>  <td>经过持续施法时间<code>AbilityChannelTime</code>，完整持续施法</td></tr><tr>  <td><code>OnOwnerSpawned</code></td>  <td>拥有该技能的单位出生</td></tr><tr>  <td><code>OnOwnerDied</code></td>  <td>拥有该技能的单位死亡</td></tr><tr>  <td><code>OnProjectileHitUnit</code></td>  <td>子弹击中目标(通用回调，如果子弹自己定制了击中目标的回调，这个就不触发)</td></tr></tbody></table>
+
+
+
+<h2 id="目标">目标</h2>
+
+<blockquote>
+  <p>在Action执行时，首先应该选中目标(Target)。所以基本每个Action都有Target属性。</p>
+</blockquote>
+
+
+
+<h3 id="单体目标">单体目标</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">"Target"</span> : <span class="hljs-string">"TARGET"</span>
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>目标名称</td>  <td>描述</td></tr><tr>  <td><code>CASTER</code></td>  <td>施法者</td></tr><tr>  <td><code>TARGET</code></td>  <td>目标</td></tr><tr>  <td><code>POINT</code></td>  <td>点</td></tr><tr>  <td><code>ATTACKER</code></td>  <td>攻击者</td></tr></tbody></table>
+
+
+
+<h3 id="多个目标">多个目标</h3>
+
+<blockquote>
+  <p>想要在某个区域里选中多个目标，需要指定一个中心点。 <br>
+  <strong>Center</strong> 以目标为搜索范围的中心 <br>
+  <strong>Teams</strong> 同<code>AbilityUnitTargetTeam</code> <br>
+  <strong>Types</strong> 同<code>AbilityUnitTargetType</code> <br>
+  <strong>AoeArea</strong> 目标搜索区域</p>
+</blockquote>
+
+<table><tbody><tr style="font-weight:bold">  <td>搜索区域类型</td>  <td>描述</td></tr><tr>  <td><code>DAMAGE_AREA_TYPE_RADIUS</code></td>  <td>圆形搜索区域</td></tr><tr>  <td><code>DAMAGE_AREA_TYPE_LINE</code></td>  <td>线形搜索区域</td></tr><tr>  <td><code>DAMAGE_AREA_TYPE_SECTOR</code></td>  <td>扇形搜索区域</td></tr></tbody></table>
+
+
+
+<h4 id="圆形区域配置">圆形区域配置</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"AoeArea"</span> :
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"AreaType"</span> : "<span class="hljs-type">DAMAGE_AREA_TYPE_RADIUS</span><span class="hljs-string">",</span>
+</div><div class="hljs-line"><span class="hljs-string">    "</span>Radius<span class="hljs-string">" : 5</span>
+</div><div class="hljs-line"><span class="hljs-string">}</span>
+</div></code></pre>
+
+
+
+<h4 id="线形区域配置">线形区域配置</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><div class="hljs-line"><span class="hljs-string">"AoeArea"</span> :
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"AreaType"</span> : <span class="hljs-string">"DAMAGE_AREA_TYPE_LINE"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"Line"</span> :
+</div><div class="hljs-line">    {
+</div><div class="hljs-line">        <span class="hljs-string">"Length"</span> : <span class="hljs-number">5</span>,
+</div><div class="hljs-line">        <span class="hljs-string">"Thickness"</span> : <span class="hljs-number">3</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h4 id="扇形区域配置">扇形区域配置</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><div class="hljs-line"><span class="hljs-string">"AoeArea"</span> :
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"AreaType"</span> : <span class="hljs-string">"DAMAGE_AREA_TYPE_SECTOR"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"Sector"</span> :
+</div><div class="hljs-line">    {
+</div><div class="hljs-line">        <span class="hljs-string">"Radius"</span> : <span class="hljs-number">5</span>,
+</div><div class="hljs-line">        <span class="hljs-string">"Angle"</span> : <span class="hljs-number">30</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h4 id="target示例">Target示例</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><div class="hljs-line"><span class="hljs-string">"Target"</span> : 
+</div><div class="hljs-line"> {
+</div><div class="hljs-line">     <span class="hljs-string">"Center"</span> : <span class="hljs-string">"CASTER"</span>,
+</div><div class="hljs-line">     <span class="hljs-string">"Teams"</span> : <span class="hljs-string">"UNIT_TARGET_TEAM_ENEMY"</span>,
+</div><div class="hljs-line">     <span class="hljs-string">"Types"</span> : <span class="hljs-string">"UNIT_TARGET_HERO"</span>,
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">     <span class="hljs-string">"AoeArea"</span> :
+</div><div class="hljs-line">     {
+</div><div class="hljs-line">         <span class="hljs-string">"AreaType"</span> : <span class="hljs-string">"DAMAGE_AREA_TYPE_LINE"</span>,
+</div><div class="hljs-line">         <span class="hljs-string">"Line"</span> :
+</div><div class="hljs-line">         {
+</div><div class="hljs-line">            <span class="hljs-string">"Length"</span> : <span class="hljs-number">5</span>,
+</div><div class="hljs-line">            <span class="hljs-string">"Thickness"</span> : <span class="hljs-number">3</span>
+</div><div class="hljs-line">         }
+</div><div class="hljs-line">     }
+</div><div class="hljs-line"> }
+</div></code></pre>
+
+
+
+<h4 id="center">Center</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>中心目标</td>  <td>描述</td></tr><tr>  <td><code>CASTER</code></td>  <td>施法者</td></tr><tr>  <td><code>TARGET</code></td>  <td>目标</td></tr><tr>  <td><code>POINT</code></td>  <td>点</td></tr><tr>  <td><code>ATTACKER</code></td>  <td>攻击者</td></tr></tbody></table>
+
+
+
+<h2 id="动作actions">动作Actions</h2>
+
+<blockquote>
+  <p><strong>Tip1</strong>:如果需要在同一个事件下配多个相同的Action，需要在Action名字<code>后</code>加<code>@</code>和<code>任意字符</code> <br>
+  <strong>e.g</strong>: <code>AttachEffect@1</code>, <code>AttachEffect@2</code> <br>
+  <strong>Tip2</strong>:下面的Action参数后面的<code>中括号</code>表示如果不配置，那<code>默认值</code>是该值</p>
+</blockquote>
+
+<table><tbody><tr style="font-weight:bold">  <td>Action名字</td>  <td>Action参数</td></tr><tr>  <td><code>ActOnTargets</code></td>  <td><code>Target</code>, <code>Action</code></td></tr><tr>  <td>对目标执行Action操作</td>  <td>目标，动作列表</td></tr><tr>  <td><code>LevelCondition</code></td>  <td><code>Target</code>, <code>OnSuccess</code></td></tr><tr>  <td>等级条件</td>  <td>目标，满足条件时的动作列表</td></tr><tr>  <td><code>IsHit</code></td>  <td><code>Target</code>, <code>OnSuccess</code></td></tr><tr>  <td>是否命中</td>  <td>目标，成功命中时的动作列表</td></tr><tr>  <td><code>DelayedAction</code></td>  <td><code>Delay</code>, <code>Action</code></td></tr><tr>  <td>延迟执行Action操作</td>  <td>延迟时间，动作列表</td></tr><tr>  <td><code>AttachEffect</code></td>  <td><code>Target</code>, <code>EffectType</code>, <code>EffectName</code>, <code>EffectAttachType</code>[FOLLOW_ORIGIN], <code>EffectDuration</code>[1], <a href="#effectforwardtype">EffectForwardType</a>[]</td></tr><tr>  <td>附着点特效</td>  <td>目标，<a href="#effecttype">特效类型</a>，特效名字(需要带路径)，<a href="#effectattachtype">特效附着类型</a>，特效持续时间，<a href="#effectforwardtype">特效朝向</a></td></tr><tr>  <td><code>FireSound</code></td>  <td><code>SoundType</code>[SOUND_NORMAL], <code>SoundName</code></td></tr><tr>  <td>播放音效</td>  <td><a href="#soundtype">音效类型</a>, 音效名字</td></tr><tr>  <td><code>CameraShake</code></td>  <td><code>UseDefault</code>[false], <code>Type</code>[PERIODIC], <code>Duration</code>, <code>Frequency</code>, <code>Amplitude</code>[1], <code>Decay</code>[true], <code>PositionOffset</code>[0,0,0], <code>RotateOffset</code>[0,0,0]</td></tr><tr>  <td>相机震动</td>  <td>使用默认震动配置(如果为true,后面参数都不需要配置), <a href="#camerashaketype">震动类型</a>，持续时间，频率，震幅，是否衰减，位置偏移，旋转偏移</td></tr><tr>  <td><code>HitStop</code></td>  <td><code>Duration</code></td></tr><tr>  <td>顿帧</td>  <td>持续时间</td></tr><tr>  <td><code>Damage</code></td>  <td><code>Target</code>, <code>DamageType</code>, <code>DamageFlags</code>, <a href="#valuesource">ValueSource</a>[], <code>OnSuccess</code>[]</td></tr><tr>  <td>伤害</td>  <td>目标，<a href="#damagetype">伤害类型</a>，<a href="#damageflags">伤害标记</a>，数值来源, 成功造成伤害时的动作列表(对<strong>1个目标</strong>或<strong>多个目标</strong>造成伤害都只会触发一次该动作列表)</td></tr><tr>  <td><code>Heal</code></td>  <td><code>Target</code>, <code>HealFlags</code>, <a href="#valuesource">ValueSource</a>[],</td></tr><tr>  <td>治疗</td>  <td>目标，<a href="#healflags">治疗标记</a>，数值来源</td></tr><tr>  <td><code>ChangeEnergy</code></td>  <td><code>Target</code>, <code>ChangeValue</code></td></tr><tr>  <td>能量修改</td>  <td>目标，能量增减值</td></tr><tr>  <td><code>CreateThinker</code></td>  <td><code>Target</code>, <code>ModifierName</code></td></tr><tr>  <td>创建虚拟体在目标位置</td>  <td>目标，Modifier名称, 该Modifier会被应用在这个虚拟体上</td></tr><tr>  <td><code>DestroyThinker</code></td>  <td><code>ModifierName</code></td></tr><tr>  <td>删除通过<code>CreateThinker</code>创建的的虚拟体</td>  <td>目标(这个字段在这个Action不会生效)，Modifier名称，该技能产生的拥有这个Modifier的虚拟体都会被删除</td></tr><tr>  <td><code>ApplyModifier</code></td>  <td><code>Target</code>, <code>ModifierName</code>, <code>TargetFlags</code>[]</td></tr><tr>  <td>应用Modifier</td>  <td>目标，Modifier名称, <a href="#targetflags">目标标记</a></td></tr><tr>  <td><code>RemoveModifier</code></td>  <td><code>Target</code>, <code>ModifierName</code></td></tr><tr>  <td>移除Modifier</td>  <td>目标，Modifier名称</td></tr><tr>  <td><code>RemoveShield</code></td>  <td><code>Target</code>, <code>RemoveAllShields</code>(如果为true,就不用配置ShieldType), <a href="#shieldtype">ShieldType</a></td></tr><tr>  <td>移除护盾</td>  <td>目标，是否移除所有的护盾, 要移除的护盾类型</td></tr><tr>  <td><code>Knockback</code></td>  <td><code>Target</code>, <code>Center</code>, <code>Duration</code>, <code>Distance</code>[0], <code>Height</code>[0]</td></tr><tr>  <td>击退</td>  <td>目标，<a href="#center">中心点</a>（中心点朝向目标的方向就是击退的方向），持续时间，距离, 高度</td></tr><tr>  <td><code>Dash</code></td>  <td><code>Target</code>, <code>Duration</code>, <code>Speed</code>, <code>OnReach</code>[]</td></tr><tr>  <td>冲刺</td>  <td>目标，冲刺持续时间(如果配置了<strong>持续时间</strong>，<strong>速度参数就不会起作用</strong>)，冲刺速度，冲刺到目标点后的触发的动作列表</td></tr><tr>  <td><code>Blink</code></td>  <td><code>Target</code></td></tr><tr>  <td>闪烁</td>  <td>目标(<strong>会闪现到目标身后2的位置，如果有需要控制该距离，可以开放配置</strong>)</td></tr><tr>  <td><code>TrackingProjectile</code></td>  <td><code>Target</code>, <code>MoveSpeed</code>, <code>SourceHeight</code>[0], <code>SourceX</code>[0], <code>SourceZ</code>[0], <code>EffectName</code></td></tr><tr>  <td>发射追踪型子弹</td>  <td>目标，移动速度，起始高度，起始X，起始Z，特效名字</td></tr><tr>  <td><code>BouncingProjectile</code></td>  <td><code>Target</code>, <code>Bounces</code>, <code>BounceRange</code>[1], <code>BounceDelay</code>[0], <code>TargetAverage</code>[true], <code>MoveSpeed</code>, <code>SourceHeight</code>[0], <code>SourceX</code>[0], <code>SourceZ</code>[0], <code>EffectName</code></td></tr><tr>  <td>发射弹射型子弹</td>  <td>目标，反弹次数，反弹范围，下一次反弹的延迟时间，目标平衡，移动速度，起始高度，起始X，起始Z，特效名字</td></tr><tr>  <td><code>ParabolaProjectile</code></td>  <td><code>Target</code>, <code>SourceHeight</code>[0], <code>SourceX</code>[0], <code>SourceZ</code>[0], <code>EffectName</code>, <code>HorizontalVelocity</code>[0], <code>VerticalVelocity</code>[0], <code>MaxHeight</code>[0]</td></tr><tr>  <td>抛物线型子弹</td>  <td>目标，起始高度，起始X，起始Z，特效名字, 水平速度(<strong>与垂直速度只能配一个</strong>)，垂直速度(<strong>与水平速度只能配一个</strong>)，最大高度(<strong>与水平速度配合使用，确定抛物线轨迹</strong>)</td></tr><tr>  <td><code>LinearProjectile</code></td>  <td><code>Target</code>, <code>MoveSpeed</code>, <code>FixedDistance</code>, <code>SourceHeight</code>[0], <code>SourceX</code>[0], <code>SourceZ</code>[0], <code>EffectName</code>, <code>TargetTeams</code>, <code>TargetTyeps</code>, <code>AoeArea</code>, <code>OnHitUnit</code></td></tr><tr>  <td>线性投射物（子弹）</td>  <td>目标，速度，固定飞行距离，起始高度，起始X，起始Z，特效名字, 目标队伍， 目标类型, <a href="#多个目标">子弹的碰撞区域</a>, 击中目标的动作列表(参考:<a href="#技能事件abilityevents">OnProjectileHitUnit事件</a>)</td></tr><tr>  <td><code>Reincarnation</code></td>  <td><code>ReincarnateCastAnimation</code>[],<code>ReincarnateCount</code>, <code>ReincarnateDelay</code>, <code>ReincarnateTime</code>, <code>OnSuccess</code>[]</td></tr><tr>  <td>复活(目前只能用在<code>OnOwnerDied</code>事件中)</td>  <td>复活动画,复活次数（消耗完了就不会复活了）,复活延迟（死亡到开始复活的时间），复活时间(开始复活到复活完成的时间)，复活完成的动作列表</td></tr></tbody></table>
+
+<h3 id="一些action中的类型定义">一些Action中的类型定义</h3>
+
+
+
+<h4 id="soundtype">SoundType</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>音效类型</td>  <td>描述</td></tr><tr>  <td><code>SOUND_NORMAL</code></td>  <td>普通类型音效（不循环）</td></tr><tr>  <td><code>SOUND_ULT_CHARGE</code></td>  <td>大招蓄力音效（循环）</td></tr><tr>  <td><code>SOUND_CHANNEL</code></td>  <td>持续施法的技能音效</td></tr></tbody></table>
+
+
+
+<h4 id="effecttype">EffectType</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>特效类型</td>  <td>描述</td></tr><tr>  <td><code>EFFECT_NORMAL</code></td>  <td>普通特效</td></tr><tr>  <td><code>EFFECT_ULT_START</code></td>  <td>大招开始特效</td></tr><tr>  <td><code>EFFECT_ULT_CHARGE</code></td>  <td>大招蓄力特效</td></tr></tbody></table>
+
+
+
+<h4 id="effectattachtype">EffectAttachType</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>绑点名字</td>  <td>描述</td></tr><tr>  <td><code>NO_FOLLOW_SPINE</code></td>  <td>目标胸膛，不跟随</td></tr><tr>  <td><code>NO_FOLLOW_ORIGIN</code></td>  <td>目标原点，不跟随</td></tr><tr>  <td><code>FOLLOW_ORIGIN</code></td>  <td>目标原点</td></tr><tr>  <td><code>FOLLOW_OVERHEAD</code></td>  <td>目标头顶</td></tr><tr>  <td><code>FOLLOW_BIP_FOOT</code></td>  <td>目标脚底</td></tr><tr>  <td><code>FOLLOW_BIP_HEAD</code></td>  <td>目标头部</td></tr><tr>  <td><code>FOLLOW_BIP_SPINE</code></td>  <td>目标胸膛</td></tr><tr>  <td><code>FOLLOW_BIP_LEFT_HAND</code></td>  <td>目标左手</td></tr><tr>  <td><code>FOLLOW_BIP_RIGHT_HAND</code></td>  <td>目标右手</td></tr><tr>  <td><code>FOLLOW_BIP_LEFT_CLAVICLE</code></td>  <td>目标左肩</td></tr><tr>  <td><code>FOLLOW_BIP_RIGHT_CLAVICLE</code></td>  <td>目标右肩</td></tr><tr>  <td><code>FOLLOW_BIP_WEAPON1</code></td>  <td>目标武器1</td></tr><tr>  <td><code>FOLLOW_BIP_WEAPON2</code></td>  <td>目标武器2</td></tr></tbody></table>
+
+
+
+<h4 id="effectforwardtype">EffectForwardType</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>特效朝向类型</td>  <td>描述</td></tr><tr>  <td><code>CASTER</code></td>  <td>使用施法者朝向</td></tr><tr>  <td><code>TARGET</code></td>  <td>使用目标朝向</td></tr><tr>  <td><code>WORLD_FORWARD</code></td>  <td>使用世界朝向</td></tr></tbody></table>
+
+<h4 id="camerashaketype">CameraShakeType</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>相机震动类型</td>  <td>描述</td></tr><tr>  <td><code>PERIODIC</code></td>  <td>周期性函数(SIN,COS)</td></tr><tr>  <td><code>PERLIN</code></td>  <td>柏林噪声</td></tr></tbody></table>
+
+
+
+<h4 id="shieldtype">ShieldType</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>护盾类型</td>  <td>描述</td></tr><tr>  <td><code>PHYSICAL_SHIELD</code></td>  <td>物理护盾</td></tr><tr>  <td><code>MAGIC_SHIELD</code></td>  <td>魔法护盾</td></tr><tr>  <td><code>SHIELD</code></td>  <td>物理&amp;魔法护盾</td></tr></tbody></table>
+
+
+
+<h4 id="damagetype">DamageType</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>伤害类型</td>  <td>描述</td></tr><tr>  <td><code>DAMAGE_TYPE_PHYSICAL</code></td>  <td>物理伤害</td></tr><tr>  <td><code>DAMAGE_TYPE_MAGICAL</code></td>  <td>魔法伤害</td></tr><tr>  <td><code>DAMAGE_TYPE_PURE</code></td>  <td>纯粹伤害</td></tr></tbody></table>
+
+
+
+<h4 id="damageflags">DamageFlags</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>伤害标记</td>  <td>描述</td></tr><tr>  <td><code>DAMAGE_FLAG_NONE</code></td>  <td>无特殊效果</td></tr><tr>  <td><code>DAMAGE_FLAG_CRIT</code></td>  <td>可以暴击</td></tr><tr>  <td><code>DAMAGE_FLAG_LIFELINK</code></td>  <td>可以吸血</td></tr></tbody></table>
+
+
+
+<h4 id="healflags">HealFlags</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>治疗标记</td>  <td>描述</td></tr><tr>  <td><code>HEAL_FLAG_NONE</code></td>  <td>无特殊效果</td></tr><tr>  <td><code>HEAL_FLAG_CRIT</code></td>  <td>可以暴击</td></tr></tbody></table>
+
+
+
+<h4 id="valuesource">ValueSource</h4>
+
+<blockquote>
+  <p>数值来源，用于伤害和治疗, 该字段下的所有KEY都可以不填写</p>
+</blockquote>
+
+<table><tbody><tr style="font-weight:bold">  <td>ValueSourceType</td>  <td>描述</td></tr><tr>  <td><code>SOURCE_TYPE_PHYSICAL_ATTACK</code></td>  <td>物理攻击力</td></tr><tr>  <td><code>SOURCE_TYPE_MAGICAL_ATTACK</code></td>  <td>魔法攻击力</td></tr><tr>  <td><code>SOURCE_TYPE_CASTER_MAX_HP</code></td>  <td>施法者最大血量</td></tr><tr>  <td><code>SOURCE_TYPE_CASTER_CURRENT_HP</code></td>  <td>施法者当前血量</td></tr><tr>  <td><code>SOURCE_TYPE_CASTER_LOST_HP</code></td>  <td>施法者失去的血量</td></tr><tr>  <td><code>SOURCE_TYPE_TARGET_MAX_HP</code></td>  <td>目标最大血量</td></tr><tr>  <td><code>SOURCE_TYPE_TARGET_CURRENT_HP</code></td>  <td>目标当前血量</td></tr><tr>  <td><code>SOURCE_TYPE_TARGET_LOST_HP</code></td>  <td>目标失去的血量</td></tr></tbody></table>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs prolog"><div class="hljs-line"><span class="hljs-string">"ValueSource"</span> : 
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"ValueBasicParams"</span>:[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+</div><div class="hljs-line">    <span class="hljs-string">"ValueAdditionParams"</span>:
+</div><div class="hljs-line">    [
+</div><div class="hljs-line">        {
+</div><div class="hljs-line">            <span class="hljs-string">"ValueSourceType"</span>:<span class="hljs-string">"SOURCE_TYPE_PHYSICAL_ATTACK"</span>,
+</div><div class="hljs-line">            <span class="hljs-string">"ValueSourceParams"</span>:[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        {
+</div><div class="hljs-line">            <span class="hljs-string">"ValueSourceType"</span>:<span class="hljs-string">"SOURCE_TYPE_PHYSICAL_ATTACK"</span>,
+</div><div class="hljs-line">            <span class="hljs-string">"ValueSourceParams"</span>:[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    ]
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h4 id="targetflags">TargetFlags</h4>
+
+<table><tbody><tr style="font-weight:bold">  <td>目标标记</td>  <td>描述</td></tr><tr>  <td><code>UNIT_TARGET_FLAG_NOT_CONTROLLER_IMMUNE</code></td>  <td>目标非控制免疫</td></tr></tbody></table>
+
+
+
+<h2 id="修改器modifier">修改器Modifier</h2>
+
+<blockquote>
+  <p>这个区域定义了一系列的Modifiers（一般可以认为是Buff或者DeBuff）。 <br>
+  目前Modifier通过<strong>名字</strong>来确定是不是同一个Modifier，也就是名字不一样的Modifier可以同时存在。如果想让一个Modifeir只能存在一个在目标身上，需要Modifier名字一样，并且Modifier属性里设置了不可叠加类型。</p>
+</blockquote>
+
+
+
+<h3 id="一些modifier中的类型定义">一些Modifier中的类型定义</h3>
+
+<table><tbody><tr style="font-weight:bold">  <td>Attributes</td>  <td>描述</td></tr><tr>  <td><code>MODIFIER_ATTRIBUTE_NONE</code></td>  <td>无，默认覆盖相同名字的Modifier</td></tr><tr>  <td><code>MODIFIER_ATTRIBUTE_MULTIPLE</code></td>  <td>可叠加Modifier</td></tr></tbody></table>
+
+
+
+<h3 id="modifier-参数">Modifier 参数</h3>
+
+<table><tbody><tr style="font-weight:bold">  <td>Modifier参数</td>  <td>描述</td></tr><tr>  <td><code>Attributes</code></td>  <td><strong>不配置</strong>, 默认为<code>MODIFIER_ATTRIBUTE_NONE</code></td></tr><tr>  <td><code>Duration</code></td>  <td>持续时间，<strong>不配置</strong>，默认为<code>-1</code>, 表示无限持续时间</td></tr><tr>  <td><code>ThinkInterval</code></td>  <td>循环间隔, <strong>不配置</strong>，默认为<code>-1</code>, 只有<strong>&gt;0</strong>才会触发<code>OnIntervalThink</code>事件</td></tr><tr>  <td><code>IsPassive</code></td>  <td>是否被动，为<code>true</code>将会在战斗开始的时候，自动生效。<strong>不配置</strong>，默认为<code>false</code></td></tr><tr>  <td><code>IsBuff</code></td>  <td>是否是BUFF，<strong>不配置</strong>，默认为<code>false</code></td></tr><tr>  <td><code>IsDebuff</code></td>  <td>是否是BUFF，<strong>不配置</strong>，默认为<code>false</code></td></tr><tr>  <td><code>IsHidden</code></td>  <td>是否隐藏，<strong>不配置</strong>，默认为<code>false</code></td></tr><tr>  <td></td>  <td></td></tr><tr>  <td><strong>光环</strong></td>  <td>需要光环就配置这些值</td></tr><tr>  <td><code>Aura</code></td>  <td>光环名字，拥有这个键值的<strong>Modifier</strong>将会把指定为<code>Aura</code>值的<strong>Modifier</strong>应用给<code>Aura_Radius</code>范围内的每个有效单位，并且在他们离开范围时移除</td></tr><tr>  <td><code>Aura_Radius</code></td>  <td>光环半径, <code>-1</code>表示全屏</td></tr><tr>  <td><code>Aura_Teams</code></td>  <td>同<code>AbilityUnitTargetTeam</code></td></tr><tr>  <td><code>Aura_Types</code></td>  <td>同<code>AbilityUnitTargetType</code></td></tr><tr>  <td></td>  <td></td></tr><tr>  <td><strong>特效</strong></td>  <td>需要特效就配置这些值，或者可以在<code>OnCreated</code>中使用<code>AttachEffect</code>代替</td></tr><tr>  <td><code>EffectName</code></td>  <td>特效名字</td></tr><tr>  <td><code>EffectAttachType</code></td>  <td>特效附着点</td></tr><tr>  <td></td>  <td></td></tr><tr>  <td><code>Properties</code></td>  <td>Modifier会更改的属性列表</td></tr><tr>  <td><code>States</code></td>  <td>Modifier会更改的状态列表</td></tr></tbody></table>
+
+
+
+<h3 id="modifier-事件">Modifier 事件</h3>
+
+<table><tbody><tr style="font-weight:bold">  <td>触发事件名称</td>  <td>描述</td></tr><tr>  <td><code>OnCreated</code></td>  <td>当Modifier被创建时</td></tr><tr>  <td><code>OnDestroy</code></td>  <td>当Modifier被销毁时</td></tr><tr>  <td><code>OnIntervalThink</code></td>  <td>循环执行指定的操作</td></tr><tr>  <td><code>OnDealDamage</code></td>  <td>当拥有modifier的单位施加伤害的时候</td></tr><tr>  <td><code>OnTakeDamage</code></td>  <td>当拥有modifier的单位受到伤害的时候</td></tr><tr>  <td><code>OnFriendlyDied</code></td>  <td>当友方有单位死亡时</td></tr><tr>  <td><code>OnEnemyDied</code></td>  <td>当敌方有单位死亡时</td></tr><tr>  <td><code>OnHeroDied</code></td>  <td>有单位死亡时</td></tr></tbody></table>
+
+
+
+<h3 id="modifier-属性">Modifier 属性</h3>
+
+<blockquote>
+  <p>现在支持2种配置方法:</p>
+  
+  <ul><li><p>[10, 10]</p></li>
+  <li><p><a href="#valuesource">ValueSource</a></p></li>
+  </ul>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"Properties"</span> : 
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"MODIFIER_PROPERTY_PHYSICAL_ATTACK"</span> : [10, 30],
+</div><div class="hljs-line">    <span class="hljs-string">"MODIFIER_PROPERTY_PHYSICAL_DEFENCE"</span> : [20, 30]
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-string">"Properties"</span> : 
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"MODIFIER_PROPERTY_PHYSICAL_ATTACK"</span> : 
+</div><div class="hljs-line">    {
+</div><div class="hljs-line">        <span class="hljs-string">"ValueSource"</span> : 
+</div><div class="hljs-line">        {
+</div><div class="hljs-line">            <span class="hljs-string">"ValueBasicParams"</span>:[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+</div><div class="hljs-line">            <span class="hljs-string">"ValueAdditionParams"</span>:
+</div><div class="hljs-line">            [
+</div><div class="hljs-line">                {
+</div><div class="hljs-line">                    <span class="hljs-string">"ValueSourceType"</span>:<span class="hljs-string">"SOURCE_TYPE_PHYSICAL_ATTACK"</span>,
+</div><div class="hljs-line">                    <span class="hljs-string">"ValueSourceParams"</span>:[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            ]
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>属性名称</td>  <td>描述</td></tr><tr>  <td><code>MODIFIER_PROPERTY_PHYSICAL_ATTACK</code></td>  <td>修改物理攻击</td></tr><tr>  <td><code>MODIFIER_PROPERTY_PHYSICAL_DEFENCE</code></td>  <td>修改物理防御</td></tr><tr>  <td><code>MODIFIER_PROPERTY_PHYSICAL_PENETRATION</code></td>  <td>修改物理穿透</td></tr><tr>  <td><code>MODIFIER_PROPERTY_MAGIC_ATTACK</code></td>  <td>修改魔法攻击</td></tr><tr>  <td><code>MODIFIER_PROPERTY_MAGIC_DEFENCE</code></td>  <td>修改魔法防御</td></tr><tr>  <td><code>MODIFIER_PROPERTY_MAGIC_PENETRATION</code></td>  <td>修改魔法穿透</td></tr><tr>  <td><code>MODIFIER_PROPERTY_CRIT</code></td>  <td>修改暴击</td></tr><tr>  <td><code>MODIFIER_PROPERTY_DODGE</code></td>  <td>修改闪避数值</td></tr><tr>  <td><code>MODIFIER_PROPERTY_HIT_RATE</code></td>  <td>修改命中率</td></tr><tr>  <td><code>MODIFIER_PROPERTY_LIFELINK_LEVEL</code></td>  <td>修改吸血等级</td></tr><tr>  <td><code>MODIFIER_PROPERTY_MAX_HP</code></td>  <td>修改最大生命</td></tr><tr>  <td><code>MODIFIER_PROPERTY_STATS_STRENGTH_BONUS</code></td>  <td>修改力量</td></tr><tr>  <td><code>MODIFIER_PROPERTY_STATS_AGILITY_BONUS</code></td>  <td>修改敏捷</td></tr><tr>  <td><code>MODIFIER_PROPERTY_STATS_INTELLECT_BONUS</code></td>  <td>修改智力</td></tr><tr>  <td><code>MODIFIER_PROPERTY_INCOMING_TAKE_HEAL_VALUE_PERCENTAGE</code></td>  <td>修改受到的治疗效果万分比，负数降低治疗效果，正数增加治疗效果</td></tr><tr>  <td><code>MODIFIER_PROPERTY_INCOMING_DEAL_HEAL_VALUE_PERCENTAGE</code></td>  <td>修改造成的治疗效果万分比，负数降低治疗效果，正数增加治疗效果</td></tr><tr>  <td><code>MODIFIER_PROPERTY_INCOMING_TAKE_PHYSICAL_DAMAGE_PERCENTAGE</code></td>  <td>修改受到的物理伤害万分比，负数降低伤害，正数增加伤害</td></tr><tr>  <td><code>MODIFIER_PROPERTY_INCOMING_DEAL_PHYSICAL_DAMAGE_PERCENTAGE</code></td>  <td>修改造成的物理伤害万分比，负数降低伤害，正数增加伤害</td></tr><tr>  <td><code>MODIFIER_PROPERTY_INCOMING_TAKE_MAGIC_DAMAGE_PERCENTAGE</code></td>  <td>修改受到的魔法伤害万分比，负数降低伤害，正数增加伤害</td></tr><tr>  <td><code>MODIFIER_PROPERTY_INCOMING_DEAL_MAGIC_DAMAGE_PERCENTAGE</code></td>  <td>修改造成的魔法伤害万分比，负数降低伤害，正数增加伤害</td></tr><tr>  <td><code>MODIFIER_PROPERTY_INCOMING_TAKE_ALL_DAMAGE_PERCENTAGE</code></td>  <td>修改受到的所有伤害万分比，负数降低伤害，正数增加伤害</td></tr><tr>  <td><code>MODIFIER_PROPERTY_INCOMING_DEAL_ALL_DAMAGE_PERCENTAGE</code></td>  <td>修改造成的所有伤害万分比，负数降低伤害，正数增加伤害</td></tr><tr>  <td><code>MODIFIER_PROPERTY_PHYSICAL_SHIELD</code></td>  <td>物理护盾, 负数为吸收治疗量，正数为吸收伤害(护盾类型的Property不要与其他Property在同一个Modifier中一起使用。因为护盾被打破的时候，会清除它所在的Modifier。除非想配置一种拥有护盾的时候，攻击力提升或者其他属性改变的Modifier)</td></tr><tr>  <td><code>MODIFIER_PROPERTY_MAGIC_SHIELD</code></td>  <td>魔法护盾, 负数为吸收治疗量，正数为吸收伤害(同上)</td></tr><tr>  <td><code>MODIFIER_PROPERTY_SHIELD</code></td>  <td>物理魔法护盾, 负数为吸收治疗量，正数为吸收伤害(同上)</td></tr></tbody></table>
+
+
+
+<h3 id="modifier-状态">Modifier 状态</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line"><span class="hljs-string">"States"</span> :
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"MODIFIER_STATE_STUNNED"</span> : <span class="hljs-type">true</span>
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<table><tbody><tr style="font-weight:bold">  <td>状态名称</td>  <td>描述</td>  <td>TAG</td></tr><tr>  <td><code>MODIFIER_STATE_STUNNED</code></td>  <td>眩晕</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_FROZEN</code></td>  <td>冰冻</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_NIGHTMARED</code></td>  <td>昏睡</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_SILENCED</code></td>  <td>沉默（法术沉默）</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_DISARMED</code></td>  <td>缴械（物理沉默）</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_ROOTED</code></td>  <td>缠绕（物理沉默，禁止移动）</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_TAUNTED</code></td>  <td>嘲讽</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_BANISH</code></td>  <td>放逐(无法被选中)</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_CHARM</code></td>  <td>魅惑(不改变阵营，只改变攻击目标TEAMS)</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_ENERGY_RECOVERY_DISABLED</code></td>  <td>禁止能量回复</td>  <td>控制</td></tr><tr>  <td><code>MODIFIER_STATE_CONTROLLER_IMMUNE</code></td>  <td>免疫控制</td>  <td>增益</td></tr></tbody></table>
+
+
+
+<h3 id="modifier-例子">Modifier 例子</h3>
+
+<blockquote>
+  <p>给技能拥有者配置了一个<strong>被动</strong>，每隔1秒回复XX血量</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><div class="hljs-line"><span class="hljs-string">"Modifiers"</span>:
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"test_modifier_hot"</span>:
+</div><div class="hljs-line">    {
+</div><div class="hljs-line">        <span class="hljs-string">"IsPassive"</span> : true,
+</div><div class="hljs-line">        <span class="hljs-string">"ThinkInterval"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-string">"OnIntervalThink"</span> :
+</div><div class="hljs-line">        {
+</div><div class="hljs-line">            <span class="hljs-string">"Heal"</span>:
+</div><div class="hljs-line">            {
+</div><div class="hljs-line">                <span class="hljs-string">"Target"</span> : <span class="hljs-string">"CASTER"</span>,
+</div><div class="hljs-line">                <span class="hljs-string">"HealCoefficient"</span> : <span class="hljs-number">33750</span>,
+</div><div class="hljs-line">                <span class="hljs-string">"HealCoefficientGrow"</span> : <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-string">"HealValue1"</span> : <span class="hljs-number">67.5</span>,
+</div><div class="hljs-line">                <span class="hljs-string">"HealValue1Grow"</span> : <span class="hljs-number">67.5</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<blockquote>
+  <p>配置了一个光环，提高拥有者半径范围内友方的物理攻击</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><div class="hljs-line"><span class="hljs-string">"Modifiers"</span>:
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-string">"test_aura"</span>:
+</div><div class="hljs-line">    {
+</div><div class="hljs-line">        <span class="hljs-string">"IsPassive"</span> : true,
+</div><div class="hljs-line">        <span class="hljs-string">"Aura"</span>: <span class="hljs-string">"attack_up_modifier"</span>,
+</div><div class="hljs-line">        <span class="hljs-string">"Aura_Radius"</span> : <span class="hljs-number">5</span>,
+</div><div class="hljs-line">        <span class="hljs-string">"Aura_Teams"</span> :<span class="hljs-string">"UNIT_TARGET_TEAM_FRIENDLY"</span>,
+</div><div class="hljs-line">        <span class="hljs-string">"Aura_Types"</span> : <span class="hljs-string">"UNIT_TARGET_HERO"</span>
+</div><div class="hljs-line">    },
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-string">"attack_up_modifier"</span>:
+</div><div class="hljs-line">    {
+</div><div class="hljs-line">        <span class="hljs-string">"Properties"</span>:
+</div><div class="hljs-line">        {
+</div><div class="hljs-line">            <span class="hljs-string">"MODIFIER_PROPERTY_PHYSICAL_ATTACK"</span> : [<span class="hljs-number">1000000</span>,<span class="hljs-number">1</span>]
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre></div></body></html>
