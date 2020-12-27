@@ -1,0 +1,17 @@
+//支持注释
+//表示id和数量
+tbsIdCount {
+    id int
+    count int
+}
+
+tbsKeyValue {
+    key int
+    value int
+}
+
+tbsTest {
+    a int
+    b string
+    c float
+}

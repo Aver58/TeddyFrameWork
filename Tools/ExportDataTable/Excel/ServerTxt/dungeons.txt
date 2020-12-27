@@ -1,0 +1,7 @@
+﻿id	sceneID	npcGroupID	music
+101	101102	101	rpg
+			
+			
+			
+			
+			

@@ -1,0 +1,7 @@
+﻿id	config	priority	icon
+10101	Hero101_attack.json	2	icon_armyskill_1
+10102	Hero101_skill1.json	1	icon_skill_3802
+10201	Hero102_attack.json	2	icon_armyskill_1
+10202	Hero102_skill1.json	1	icon_skill_3802
+20001	boss_01_Attack.json	2	icon_armyskill_1
+20002	boss_01_skill1.json	1	icon_skill_3802
