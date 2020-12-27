@@ -21,6 +21,8 @@ public class KCPClient:Singleton<KCPClient>
     byte[] buffer = new byte[1500];
     int recvBytes = 0;
     int sendBytes = 0;
+    bool stopSend = false;
+    int counter = 0;
 
     public void Connect(string ip, int port)
     {
@@ -47,6 +49,26 @@ public class KCPClient:Singleton<KCPClient>
         {
             try
             {
+
+                if(!stopSend)
+                {
+                    Debug.Log("Write Message...");
+                    var send = m_udpSession.Send(buffer, 0, buffer.Length);
+                    if(send < 0)
+                    {
+                        Debug.Log("Write message failed.");
+                        break;
+                    }
+
+                    if(send > 0)
+                    {
+                        counter++;
+                        sendBytes += buffer.Length;
+                        if(counter >= 500)
+                            stopSend = true;
+                    }
+                }
+
                 var n = m_udpSession.Recv(buffer, 0, buffer.Length);
                 if(n == 0)
                 {
@@ -63,12 +85,6 @@ public class KCPClient:Singleton<KCPClient>
                     recvBytes += n;
                     Debug.Log($"{recvBytes} / {sendBytes}");
                 }
-
-                //m_result = new byte[1024];
-                //m_result = m_udpSession.Recv(ref m_clientIpEndPoint);
-                //string clientId = string.Format("{0}:{1}", m_clientIpEndPoint.Address, m_clientIpEndPoint.Port);
-
-                //HandleMessage(m_clientIpEndPoint, m_result);
             }
             catch(Exception ex)
             {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace KcpProject
 {
     //https://github.com/limpo1989/kcp-csharp
+    //https://github.com/skywind3000/kcp/wiki/Network-Layer
     public class KCP
     {
         public const int IKCP_RTO_NDL = 30;  // no delay min rto
