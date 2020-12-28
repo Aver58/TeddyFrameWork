@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using LitJson;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -44,11 +45,6 @@ public sealed class LoadModule : ModuleBase
     public static bool runtimeMode = false;
     public static Func<string, Type, Object> loadDelegate = null;
     private const string TAG = "[Assets]";
-
-    private static void Log(string s)
-    {
-        Debug.Log(string.Format("{0}{1}", TAG, s));
-    }
 
     #region API
 
@@ -95,7 +91,7 @@ public sealed class LoadModule : ModuleBase
 
         Clear();
 
-        Log(string.Format(
+        Debug.Log(string.Format(
          "Initialize with: runtimeMode={0}\nbasePath：{1}\nupdatePath={2}",
          runtimeMode, basePath, updatePath));
 
@@ -138,7 +134,7 @@ public sealed class LoadModule : ModuleBase
         asset.Load();
         asset.Retain();
         _scenes.Add(asset);
-        Log(string.Format("LoadScene:{0}", path));
+        Debug.Log(string.Format("LoadScene:{0}", path));
         return asset;
     }
 
@@ -155,15 +151,6 @@ public sealed class LoadModule : ModuleBase
         return assetRequest;
     }
 
-    public static AssetRequest LoadUI(string path, LoadedCallback loadedCallback = null)
-    {
-        Type type = typeof(GameObject);
-        path = "Assets/Data/ui/panel/" + path;
-        string suffix = GetSuffixOfAsset(type);
-        string fullPath = string.Format("{0}.{1}", path, suffix);
-        return LoadAsset(fullPath, type, loadedCallback);
-    }
-
     public static AssetRequest LoadAsset(string path, Type type, LoadedCallback loadedCallback = null)
     {
         AssetRequest assetRequest = LoadAsset(path, type, false);
@@ -177,10 +164,41 @@ public sealed class LoadModule : ModuleBase
         asset.Release();
     }
 
-    private string JsonPathPrefix = "Assets/Scripts/DataTable/json/";
-    public JsonData LoadJson(string path)
+    #region 业务
+
+    private static string UIPathPrefix = "Assets/Data/ui/panel/";
+    private static string ModelPathPrefix = "Assets/Data/character/";
+    private static string JsonPathPrefix = "Assets/Scripts/DataTable/json/";
+    private static StringBuilder stringBuilder = new StringBuilder();
+
+    public static AssetRequest LoadModel(string path, LoadedCallback loadedCallback = null)
     {
-        path = JsonPathPrefix + path;
+        Type type = typeof(GameObject);
+        stringBuilder.Clear();
+        stringBuilder.Append(ModelPathPrefix);
+        stringBuilder.Append(path);
+        return LoadAsset(stringBuilder.ToString(), type, loadedCallback);
+    }
+
+    public static AssetRequest LoadUI(string path, LoadedCallback loadedCallback = null)
+    {
+        Type type = typeof(GameObject);
+        string suffix = GetSuffixOfAsset(type);
+        stringBuilder.Clear();
+        stringBuilder.Append(UIPathPrefix);
+        stringBuilder.Append(path);
+        stringBuilder.Append(".");
+        stringBuilder.Append(suffix);
+        return LoadAsset(stringBuilder.ToString(), type, loadedCallback);
+    }
+
+    public static JsonData LoadJson(string path)
+    {
+        stringBuilder.Clear();
+        stringBuilder.Append(JsonPathPrefix);
+        stringBuilder.Append(path);
+
+        path = stringBuilder.ToString();
         Debug.Log("LoadJson: " + path);
         if(FileHelper.IsFileExist(path))
         {
@@ -197,6 +215,8 @@ public sealed class LoadModule : ModuleBase
             return null;
         }
     }
+
+    #endregion
 
     #endregion
 
@@ -279,7 +299,7 @@ public sealed class LoadModule : ModuleBase
             for(int i = 0; i < _unusedAssets.Count; ++i)
             {
                 AssetRequest request = _unusedAssets[i];
-                Log(string.Format("UnloadAsset:{0}", request.name));
+                Debug.Log(string.Format("UnloadAsset:{0}", request.name));
                 _assets.Remove(request.name);
                 request.Unload();
             }
@@ -292,7 +312,7 @@ public sealed class LoadModule : ModuleBase
             if(request.Update() || !request.IsUnused())
                 continue;
             _scenes.RemoveAt(i);
-            Log(string.Format("UnloadScene:{0}", request.name));
+            Debug.Log(string.Format("UnloadScene:{0}", request.name));
             request.Unload();
             --i;
         }
@@ -345,7 +365,7 @@ public sealed class LoadModule : ModuleBase
             {
                 item.Unload();
                 _bundles.Remove(item.name);
-                Log("UnloadBundle: " + item.name);
+                Debug.Log("UnloadBundle: " + item.name);
             }
         }
         _unusedBundles.Clear();
@@ -399,7 +419,7 @@ public sealed class LoadModule : ModuleBase
         request.assetType = type;
         AddAssetRequest(request);
         request.Retain();
-        Log(string.Format("LoadAsset:{0}", path));
+        Debug.Log(string.Format("LoadAsset:{0}", path));
         return request;
     }
 
@@ -545,7 +565,7 @@ public sealed class LoadModule : ModuleBase
         {
             bundle.Load();
             _loadingBundles.Add(bundle);
-            Log("LoadBundle: " + url);
+            Debug.Log("LoadBundle: " + url);
         }
 
         bundle.Retain();

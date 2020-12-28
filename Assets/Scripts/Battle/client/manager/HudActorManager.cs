@@ -15,7 +15,7 @@ using UnityEngine;
 
 public class HudActorManager
 {
-    private const string path = "Data/ui/panel/battle/component/HpBar.prefab";
+    private const string path = "battle/component/HpBar";
     private Transform parentNode; 
     private RectTransform canvasTransform;
     private Camera uiCamera;

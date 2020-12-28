@@ -45,7 +45,7 @@ public class HeroActor
     {
         m_LoadedCallback = loadedCallback;
         string path = battleEntity.GetModelPath();
-        LoadModule.LoadAsset(path, typeof(GameObject),OnLoadComplete);
+        LoadModule.LoadModel(path, OnLoadComplete);
     }
 
     public void OnLoadComplete(AssetRequest assetRequest)
@@ -72,7 +72,8 @@ public class HeroActor
 
     public void ChangeState(HeroState newState, string skillName = null, bool isSkipCastPoint = false)
     {
-        m_HeroStateController.ChangeHeroState(newState, skillName, isSkipCastPoint);
+        if(m_HeroStateController != null)
+            m_HeroStateController.ChangeHeroState(newState, skillName, isSkipCastPoint);
     }
 
     public void InitPosition(Vector3 position)

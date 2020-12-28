@@ -186,7 +186,6 @@ public static class AbilityReader
         if(jsonData == null)
             return null;
         AbilityRange abilityRange = new AbilityRange();
-        //string targetTypeJsonData = GetJsonValueToString(jsonData, "AbilityUnitTargetType");todo
         AbilityUnitTargetTeam abilityTargetTeam = GetJsonValueToEnum<AbilityUnitTargetTeam>(jsonData, "AbilityUnitTargetTeam");
         abilityRange.SetTargetTeam(abilityTargetTeam);
 
@@ -359,7 +358,7 @@ public static class AbilityReader
 
     private static AbilityData CreateAbility(string configPath) 
     {
-        JsonData jsonData = LoadModule.instance.LoadJson(configPath);
+        JsonData jsonData = LoadModule.LoadJson(configPath);
         if(jsonData == null)
         {
             BattleLog.LogError("[CreateAbility]没有找到指定json配置！", configPath);

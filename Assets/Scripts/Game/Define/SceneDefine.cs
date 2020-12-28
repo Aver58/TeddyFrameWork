@@ -33,6 +33,7 @@ public enum SceneID
     GameMain,
     Game,
     TestNet,
+    Moba,
 }
 
 public static class SceneDefine
@@ -43,5 +44,6 @@ public static class SceneDefine
         //{SceneID.GameMain,new SceneConfig("GameMain","") }
         {SceneID.TestNet,new SceneConfig("TestNet","Assets/_Scenes/TestNet.unity",typeof(TestNetScene)) },
         {SceneID.Game,new SceneConfig("Game","Assets/_Scenes/Game.unity",typeof(GameScene)) },
+        {SceneID.Moba,new SceneConfig("Moba","Assets/_Scenes/MobaScene.unity",typeof(MobaScene)) },
     };
 }

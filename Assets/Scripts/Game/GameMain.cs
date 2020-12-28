@@ -42,7 +42,8 @@ public class GameMain : MonoBehaviour
         Debug.Log("---StartGame---");
         m_moduleMgr.StartGame();
 
-        UIModule.OpenView(ViewID.Test);
+        //UIModule.OpenView(ViewID.Test);
+        SceneModule.ChangeScene(SceneID.Moba);
     }
 
     private void AddModules()
