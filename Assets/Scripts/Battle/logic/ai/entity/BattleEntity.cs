@@ -75,9 +75,7 @@ public class BattleEntity : Entity
         foreach(Ability ability in abilities)
         {
             if(ability.IsCastable())
-            {
                 return ability;
-            }
         }
         return null;
     }
@@ -175,12 +173,12 @@ public class BattleEntity : Entity
 
     #region get interface
 
-    protected virtual TBTAction GetBehaviorTree()
+    protected virtual TBTActionPrioritizedSelector GetBehaviorTree()
     {
         return null;
     }
 
-    protected virtual TBTAction GetDecisionTree()
+    protected virtual TBTActionPrioritizedSelector GetDecisionTree()
     {
         return null;
     }
@@ -198,6 +196,12 @@ public class BattleEntity : Entity
 
     public bool IsCanDecision()
     {
+        if(IsDead())
+            return false;
+
+        if(m_HeroState != HeroState.IDLE)
+            return false;
+
         // todo 状态：眩晕、等状态不可决策
         return true;
     }

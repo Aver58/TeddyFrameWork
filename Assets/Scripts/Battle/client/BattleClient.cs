@@ -62,7 +62,6 @@ public class BattleClient : Singleton<BattleClient>
         playerActor = new HeroActor(myEntity);
         playerActor.LoadAsset(OnLoadPlayer);
         playerActor.InitPosition(new Vector3(-9,0,-9));
-        GameMsg.instance.SendMessage(GameMsgDef.BattleEntity_Created, new BattleActorCreateEventArgs(playerActor, true));
 
         //AddEnemy();
         var entyties = m_EntityMgr.GetEntities(BattleCamp.ENEMY);
@@ -73,27 +72,24 @@ public class BattleClient : Singleton<BattleClient>
             m_EnemyActors.Add(actor);
             // 绘制移动区域
             m_DrawTool.DrawMoveArea(entity.GetStartPoint(),entity.GetViewRange());
-            GameMsg.instance.SendMessage(GameMsgDef.BattleEntity_Created, new BattleActorCreateEventArgs(actor,false));
         }
     }
 
-    private void OnLoadGuard(AssetRequest data)
+    private void OnLoadGuard(GameObject go)
     {
-        GameObject guard = data.asset as GameObject;
         Transform heroParent = GameObject.Find("GuardNode").transform;
-        guard.transform.SetParent(heroParent);
+        go.transform.SetParent(heroParent);
     }
 
-    void OnLoadPlayer(AssetRequest data)
+    void OnLoadPlayer(GameObject go)
     {
-        GameObject player = data.asset as GameObject;
         Transform heroParent = GameObject.Find("HeroNode").transform;
-        player.transform.SetParent(heroParent);
+        go.transform.SetParent(heroParent);
 
-        InputController inputController = player.AddComponent<InputController>();
+        InputController inputController = go.AddComponent<InputController>();
 
-        inputController.anim = player.GetComponent<Animator>();
-        inputController.characterController = player.GetComponent<CharacterController>();
+        inputController.anim = go.GetComponent<Animator>();
+        inputController.characterController = go.GetComponent<CharacterController>();
         inputController.joystick = GameObject.Find("Joystick").GetComponent<ETCJoystick>();
         inputController.btnAttack = GameObject.Find("BtnAttack").GetComponent<Button>();
         inputController.btnSkill1 = GameObject.Find("BtnSkill1").GetComponent<Button>();

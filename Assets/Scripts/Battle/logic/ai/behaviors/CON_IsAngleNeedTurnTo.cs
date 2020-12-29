@@ -17,7 +17,6 @@ public class CON_IsAngleNeedTurnTo : TBTPreconditionLeaf
     public override bool IsTrue(TBTWorkingData wData)
     {
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-        float deltaTime = behaviorData.deltaTime;
         BattleEntity owner = behaviorData.owner;
         AIBehaviorRequest request = behaviorData.request;
         Entity target = request.target;
@@ -27,11 +26,7 @@ public class CON_IsAngleNeedTurnTo : TBTPreconditionLeaf
 
         Vector2 toForward = targetPos - ownerPos;
         Vector2 ownerForward = owner.Get2DForward();
-        float turnSpeed = owner.GetTurnSpeed();
-        float radianToTurn = turnSpeed * deltaTime;
-
         float angle = Vector2.Angle(toForward, ownerForward);
-        //BattleLog.Log("【CON_IsAngleNeedTurnTo】angle：{0} 弧度：{1}", angle.ToString(), (radianToTurn * Mathf.Rad2Deg).ToString());
-        return angle > radianToTurn * Mathf.Rad2Deg;
+        return angle > 0.1;
     }
 }

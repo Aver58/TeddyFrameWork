@@ -31,8 +31,13 @@ Shader "UI/Default"
 		{
 			Ref [_Stencil]
 			Comp [_StencilComp]
-			Pass [_StencilOp] 
-			ReadMask [_StencilReadMask]
+			Pass [_StencilOp]	// Pass/Fail表示当比较通过/不通过时对stencil buffer做什么操作
+								// Keep(保留)
+								// Replace(替换)
+								// Zero(置0)
+								// IncrementSaturate(增加)
+								// DecrementSaturate(减少)
+			ReadMask [_StencilReadMask]//ReadMask/WriteMask 表示取stencil buffer的值时用的mask（即可以忽略某些位）
 			WriteMask [_StencilWriteMask]
 		}
 

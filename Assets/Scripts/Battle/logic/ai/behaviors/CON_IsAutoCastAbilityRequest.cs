@@ -17,7 +17,6 @@ public class CON_IsAutoCastAbilityRequest : TBTPreconditionLeaf
     public override bool IsTrue(TBTWorkingData wData)
     {
         BattleBehaviorWorkingData data = wData as BattleBehaviorWorkingData;
-        //BattleLog.Log("【CON_IsAutoCastAbilityRequest】data：{0}", data.ToString());
         if(data.request != null && data.request.RequestType == RequestType.AutoCastAbility)
             return true;
         return false;

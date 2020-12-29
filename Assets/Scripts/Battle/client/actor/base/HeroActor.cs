@@ -30,7 +30,7 @@ public class HeroActor
     private AnimationController m_AnimController;
     private HeroStateController m_HeroStateController;
     private Vector3 m_InitPosition = Vector3.zero;
-    protected LoadedCallback m_LoadedCallback;
+    protected Action<GameObject> m_LoadedCallback;
 
     public HeroActor(BattleEntity battleEntity)
     {
@@ -41,7 +41,7 @@ public class HeroActor
         this.battleEntity = battleEntity;
     }
 
-    public void LoadAsset(LoadedCallback loadedCallback = null)
+    public void LoadAsset(Action<GameObject> loadedCallback = null)
     {
         m_LoadedCallback = loadedCallback;
         string path = battleEntity.GetModelPath();
@@ -51,7 +51,9 @@ public class HeroActor
     public void OnLoadComplete(AssetRequest assetRequest)
     {
         isLoadDone = true;
-        gameObject = assetRequest.asset as GameObject;
+        GameObject asset = assetRequest.asset as GameObject;
+
+        gameObject = GameObject.Instantiate<GameObject>(asset);
         m_Mover = gameObject.AddComponent<PositionController>();
         // 绘制可视区域
         m_DrawTool = gameObject.AddComponent<DebugController>();
@@ -62,12 +64,13 @@ public class HeroActor
         m_HeroStateController = new HeroStateController(battleEntity, m_AnimController);
 
         if(m_LoadedCallback != null) 
-            m_LoadedCallback(assetRequest);
+            m_LoadedCallback(gameObject);
 
         InitPosition(m_InitPosition);
 
         gameObject.name = string.Format("[{0}][{1}][UID:{2}][CID:{3}][Lv:{4}][Speed:{5}]",
             battleEntity.GetName(),camp.ToString(),battleEntity.GetUniqueID(),battleEntity.GetID(),battleEntity.GetLevel(),battleEntity.GetMoveSpeed());
+        GameMsg.instance.SendMessage(GameMsgDef.BattleEntity_Created, new BattleActorCreateEventArgs(this, camp==BattleCamp.ENEMY));
     }
 
     public void ChangeState(HeroState newState, string skillName = null, bool isSkipCastPoint = false)

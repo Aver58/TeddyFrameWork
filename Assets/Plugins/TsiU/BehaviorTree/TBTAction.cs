@@ -45,6 +45,9 @@ namespace TsiU
             _precondition = null;
         }
         //-------------------------------------------------------------
+        /// <summary>
+        /// 评估该节点是否符合准入条件
+        /// </summary>
         public bool Evaluate(/*in*/TBTWorkingData wData)
         {
             return (_precondition == null || _precondition.IsTrue(wData)) && onEvaluate(wData);

@@ -17,12 +17,12 @@ public class HeroEntity : BattleEntity
     {
     }
 
-    protected override TBTAction GetBehaviorTree()
+    protected override TBTActionPrioritizedSelector GetBehaviorTree()
     {
         return BehaviorTreeFactory.GetBehaviorTree();
     }
 
-    protected override TBTAction GetDecisionTree()
+    protected override TBTActionPrioritizedSelector GetDecisionTree()
     {
         return BehaviorTreeFactory.GetDecisionTree();
     }

@@ -8,31 +8,39 @@ public class OpenLogAsset
 {
 #if UNITY_EDITOR 
 
-    [UnityEditor.Callbacks.OnOpenAssetAttribute(0)]
+    [UnityEditor.Callbacks.OnOpenAsset(0)]
     static bool OnOpenAsset(int instanceID, int line)
     {
         string stackTrace = GetStackTrace();
-        if (!string.IsNullOrEmpty(stackTrace) && (stackTrace.Contains("UnityEngine.Debug:Log") || stackTrace.Contains("UnityEngine.Debug:LogError")))
+        if (!string.IsNullOrEmpty(stackTrace))
         {
-            Match matches = Regex.Match(stackTrace, @"\(at (.+)\)", RegexOptions.IgnoreCase);
-            string pathline = "";
-            while(matches.Success)
+            if(
+                stackTrace.Contains("UnityEngine.Debug:Log") 
+            || stackTrace.Contains("UnityEngine.Debug:LogError")
+            || stackTrace.Contains("UnityEngine.BattleLog:Log")
+            || stackTrace.Contains("UnityEngine.BattleLog:LogError")
+            )
             {
-                pathline = matches.Groups[1].Value;
-                if(!pathline.Contains("Debug.cs"))
+                Match matches = Regex.Match(stackTrace, @"\(at (.+)\)", RegexOptions.IgnoreCase);
+                string pathline = "";
+                while(matches.Success)
                 {
-                    int splitIndex = pathline.LastIndexOf(":");
-                    string path = pathline.Substring(0, splitIndex);
-                    line = Convert.ToInt32(pathline.Substring(splitIndex + 1));
-                    string fullPath = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("Assets"));
-                    fullPath += path;
-                    //Debug.LogError("fullPath = " + fullPath);
-                    UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(fullPath.Replace('/','\\'),line);
-                    break;
-;                }
-                matches = matches.NextMatch();
+                    pathline = matches.Groups[1].Value;
+                    if(!pathline.Contains("Debug.cs") && !pathline.Contains("BattleLog.cs"))
+                    {
+                        int splitIndex = pathline.LastIndexOf(":");
+                        string path = pathline.Substring(0, splitIndex);
+                        line = Convert.ToInt32(pathline.Substring(splitIndex + 1));
+                        string fullPath = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("Assets"));
+                        fullPath += path;
+                        UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(fullPath.Replace('/', '\\'), line);
+                        break;
+                        ;
+                    }
+                    matches = matches.NextMatch();
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

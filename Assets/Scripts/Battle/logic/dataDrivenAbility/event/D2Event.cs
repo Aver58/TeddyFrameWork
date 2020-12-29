@@ -21,7 +21,7 @@ public class D2Event
 
     public void Execute(BattleEntity source, RequestTarget requestTarget)
     {
-        BattleLog.Log("【D2Event】{0}，source：{1}，target：{2}", GetType().Name, source.GetName(), requestTarget.ToString());
+        //BattleLog.Log("【D2Event】{0}，source：{1}，target：{2}", GetType().Name, source.GetName(), requestTarget.ToString());
 
         foreach(D2Action action in m_Actions)
         {

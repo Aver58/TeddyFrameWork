@@ -46,15 +46,17 @@ public class HudActorManager
 
         // 创建一个血条
         LoadModule.LoadUI(path,delegate(AssetRequest data) {
-            GameObject hudGO = data.asset as GameObject;
-            hudGO.transform.SetParent(parentNode);
-            hudGO.transform.localPosition = Vector3.zero;
+            GameObject asset = data.asset as GameObject;
+
+            GameObject go = GameObject.Instantiate<GameObject>(asset);
+            go.transform.SetParent(parentNode);
+            go.transform.localPosition = Vector3.zero;
 
             GameObject heroGO = actor.gameObject;
-            HudController hudController = hudGO.GetComponent<HudController>();
+            HudController hudController = go.GetComponent<HudController>();
             Transform targetTransform = heroGO.transform.Find("Dummy OverHead");
             hudController.Init(canvasTransform, targetTransform, uiCamera, 0, isFriend);
-            HudActor hudActor = new HudActor(hudGO, hudController);
+            HudActor hudActor = new HudActor(go, hudController);
             float hpPercent = actor.battleEntity.GetHPPercent();
             hudActor.SetValue(hpPercent);
 

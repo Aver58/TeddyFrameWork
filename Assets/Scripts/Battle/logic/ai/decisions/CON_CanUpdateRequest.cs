@@ -17,16 +17,13 @@ public class CON_CanUpdateRequest : TBTPrecondition
     {
         BattleDecisionWorkingData decisionData = wData as BattleDecisionWorkingData;
         BattleEntity battleEntity = decisionData.owner;
-        //BattleLog.Log("【CON_CanUpdateRequest】decisionData：{0}", decisionData.ToString());
         if(!battleEntity.IsCanDecision())
             return false;
         
         // 新的决策
         AIBehaviorRequest request = decisionData.request;
         if(request == null)
-        {
             return true;
-        }
         else
         {
             //上一个请求已经执行完成，就更新新请求

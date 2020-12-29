@@ -43,9 +43,7 @@ namespace TsiU
             float distance = (targetPos - ownerPos).magnitude;
 
             if(distance <= attackRange)
-            {
                 return TBTRunningStatus.FINISHED;
-            }
 
             float moveSpeed = source.GetMoveSpeed();
             float detalTime = behaviorData.deltaTime;

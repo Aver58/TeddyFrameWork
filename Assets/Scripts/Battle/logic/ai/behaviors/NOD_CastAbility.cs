@@ -31,18 +31,13 @@ public class NOD_CastAbility : TBTActionLeaf
     protected override int onExecute(TBTWorkingData wData)
     {
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-        float deltaTime = behaviorData.deltaTime;
         BattleEntity source = behaviorData.owner;
-        AIBehaviorRequest request = behaviorData.request;
-        Entity target = request.target;
         Ability ability = source.SelectCastableAbility();
 
-        float castTime = ability.castTime;
-        //BattleLog.Log("【NOD_CastAbility】castTime：{0},duringTime：{1}", castTime, ability.GetCastleDuring());
-        if(castTime >= ability.GetCastleDuring())
-        {
+        BattleLog.Log("【NOD_CastAbility】castTime：{0},duringTime：{1}", ability.castTime, ability.GetCastleDuring());
+        if(ability.castTime >= ability.GetCastleDuring())
             return TBTRunningStatus.FINISHED;
-        }
+
         return TBTRunningStatus.EXECUTING;
     }
 }

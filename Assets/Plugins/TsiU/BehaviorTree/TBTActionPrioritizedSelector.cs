@@ -20,8 +20,10 @@
             TBTActionPrioritizedSelectorContext thisContext = getContext<TBTActionPrioritizedSelectorContext>(wData);
             thisContext.currentSelectedIndex = -1;
             int childCount = GetChildCount();
+            //从左到右遍历自己的子节点
             for(int i = 0; i < childCount; ++i) {
                 TBTAction node = GetChild<TBTAction>(i);
+                //如果子节点的准入条件符合信息的话，就执行该子节点。
                 if (node.Evaluate(wData)) {
                     thisContext.currentSelectedIndex = i;
                     return true;
@@ -34,14 +36,16 @@
         {
             TBTActionPrioritizedSelectorContext thisContext = getContext<TBTActionPrioritizedSelectorContext>(wData);
             int runningState = TBTRunningStatus.FINISHED;
-            if (thisContext.currentSelectedIndex != thisContext.lastSelectedIndex) {
+            // 上下文变化，调用Transition
+            if(thisContext.currentSelectedIndex != thisContext.lastSelectedIndex) {
                 if (IsIndexValid(thisContext.lastSelectedIndex)) {
                     TBTAction node = GetChild<TBTAction>(thisContext.lastSelectedIndex);
                     node.Transition(wData);
                 }
                 thisContext.lastSelectedIndex = thisContext.currentSelectedIndex;
             }
-            if (IsIndexValid(thisContext.lastSelectedIndex)) {
+            // Update
+            if(IsIndexValid(thisContext.lastSelectedIndex)) {
                 TBTAction node = GetChild<TBTAction>(thisContext.lastSelectedIndex);
                 runningState = node.Update(wData);
                 if (TBTRunningStatus.IsFinished(runningState)) {

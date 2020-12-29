@@ -49,9 +49,9 @@ public static class Debug
 
         if(args != null && args.Length > 0)
             message = string.Format(message, args);
-        string str = GetLogTime() + message;
+        string str = Prefix + GetLogTime() + message;
         AddLogToList(1,str);
-        UnityEngine.Debug.Log(Prefix + str, null);
+        UnityEngine.Debug.Log(str, null);
         LogToFile("[I]" + str, false);
     }
 
@@ -69,10 +69,10 @@ public static class Debug
         {
             message = string.Format(message, args);
         }
-        string str = GetLogTime() + message;
+        string str = Prefix + GetLogTime() + message;
         AddLogToList(3, str);
 
-        UnityEngine.Debug.LogError(Prefix + str, null);
+        UnityEngine.Debug.LogError(str, null);
         LogToFile("[E]" + str, true);
     }
 
@@ -82,9 +82,9 @@ public static class Debug
         {
             message = string.Format(message, args);
         }
-        string str = GetLogTime() + message;
+        string str = Prefix + GetLogTime() + message;
         AddLogToList(4, str);
-        UnityEngine.Debug.LogWarning(Prefix + str, null);
+        UnityEngine.Debug.LogWarning(str, null);
         LogToFile("[W]" + str, true);
     }
 
@@ -96,6 +96,10 @@ public static class Debug
         LogToFile("[W]" + str, false);
     }
 
+    #region 战斗
+
+    #endregion
+    
     #region Format
 
     public static void LogFormat(string message, params object[] args)

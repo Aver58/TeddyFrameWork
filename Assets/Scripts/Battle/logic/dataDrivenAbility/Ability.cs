@@ -143,7 +143,7 @@ public class Ability
 
     public void ExecuteEvent(AbilityEvent abilityEvent)
     {
-        BattleLog.Log("【Ability】ExecuteEvent :" + abilityEvent.ToString());
+        //BattleLog.Log("【Ability】ExecuteEvent :" + abilityEvent.ToString());
 
         m_AbilityData.ExecuteEvent(abilityEvent, caster, requestTarget);
     }
@@ -151,7 +151,7 @@ public class Ability
     // 吟唱阶段
     private void OnAbilityPhaseStart()
     {
-        BattleLog.Log("【吟唱阶段】" + m_AbilityData.configFileName);
+        BattleLog.Log("【吟唱阶段】OnAbilityPhaseStart" + m_AbilityData.configFileName);
 
         abilityState = AbilityState.CastPoint;
         ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
@@ -160,7 +160,7 @@ public class Ability
     // 施法阶段
     private void OnSpellStart()
     {
-        BattleLog.Log("【施法阶段】" + m_AbilityData.configFileName);
+        BattleLog.Log("【施法阶段】OnSpellStart" + m_AbilityData.configFileName);
 
         if(m_AbilityData.channelTime > 0)
         {

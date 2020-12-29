@@ -14,12 +14,6 @@ using UnityEngine;
 
 public class NOD_UpdateRequest : TBTActionLeaf
 {
-    private float maxRadius;
-    private float startPointX, startPointZ, endPointX, endPointZ;
-    private double distanceSquare;
-    private DummyEntity dummyEntity = new DummyEntity(-999,0,0);
-    private IdleRequest idleRequest = new IdleRequest();
-    private ChaseRequest chaseRequest = new ChaseRequest(null);
     private AutoCastAbilityRequest autoCastAbilityRequest;
 
     protected override void onEnter(TBTWorkingData wData)
@@ -31,54 +25,7 @@ public class NOD_UpdateRequest : TBTActionLeaf
 
         if(ability == null)
         {
-            //// 没有目标的话，尝试寻找目标
-            //if(caster.target == null)
-            //{
-            //    // todo 这个应该给enemy做个回家的node和回家的request
-            //    caster.GetStartPoint(out startPointX, out startPointZ);
-            //    BattleEntity enemy = TargetSearcher.instance.FindNearestEnemyUnit(caster);
-            //    if(enemy != null)
-            //    {
-            //        enemy.Get2DPosition(out endPointX, out endPointZ);
-            //        distanceSquare = BattleMath.Distance2DMagnitude(startPointX, startPointZ, endPointX, endPointZ);
-            //        maxRadius = enemy.GetViewRange();
-            //        if(distanceSquare > maxRadius * maxRadius)
-            //        {
-            //            Debug.Log("敌人的距离超过出生点太远，就不追了，回家: " + startPointX + startPointZ);
-            //            dummyEntity.Set2DPosition(startPointX, startPointZ);
-            //            chaseRequest.SetTarget(dummyEntity);
-            //            decisionData.request = chaseRequest;
-            //        }
-            //        else
-            //        {
-            //            Debug.Log("追击敌人！");
-            //            chaseRequest.SetTarget(enemy);
-            //            decisionData.request = chaseRequest;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        caster.Get2DPosition(out endPointX, out endPointZ);
-            //        distanceSquare = BattleMath.Distance2DMagnitude(startPointX, startPointZ, endPointX, endPointZ);
-            //        if(distanceSquare > 0)
-            //        {
-            //            Debug.Log("没有对象的时候，回家: " + startPointX + startPointZ);
-            //            dummyEntity.Set2DPosition(startPointX, startPointZ);
-            //            chaseRequest.SetTarget(dummyEntity);
-            //            decisionData.request = chaseRequest;
-            //        }
-            //        else
-            //        {
-            //            Debug.Log("在家");
-            //            decisionData.request = idleRequest;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    Debug.Log("有对象");
-            //    decisionData.request = idleRequest;
-            //}
+
         }
         else
         {
@@ -86,7 +33,7 @@ public class NOD_UpdateRequest : TBTActionLeaf
             BattleEntity target = TargetSearcher.instance.FindTargetUnitByAbility(caster,ability);
             if(target!=null)
             {
-                BattleLog.Log("【自动战斗】ability：{0}，target：{1}", ability.GetConfigName(), target.GetName());
+                BattleLog.Log("【NOD_UpdateRequest】选取到技能ability：{0}，target：{1}", ability.GetConfigName(), target.GetName());
                 autoCastAbilityRequest = new AutoCastAbilityRequest(ability, target);
                 decisionData.request = autoCastAbilityRequest;
             }

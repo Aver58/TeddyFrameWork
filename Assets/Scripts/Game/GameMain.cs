@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameMain : MonoBehaviour
@@ -51,7 +50,6 @@ public class GameMain : MonoBehaviour
         m_moduleMgr.Add<UIModule>();
     }
      
-    // Update is called once per frame
     private void Update()
     {
         m_moduleMgr.Update();
