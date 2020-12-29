@@ -1,58 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace TsiU
 {
     public class TBTTreeNode
     {
-        //-------------------------------------------------------------------
-        private const int defaultChildCount = -1; //TJQ： unlimited count
-        //-------------------------------------------------------------------
-        private List<TBTTreeNode> _children;
-        private int _maxChildCount;
-        //private TBTTreeNode _parent;
-        //-------------------------------------------------------------------
+        private const int defaultChildCount = -1; //TJQ： 无限数量
+        private List<TBTTreeNode> m_children;
+        private int m_maxChildCount;
+
         public TBTTreeNode(int maxChildCount = -1)
         {
-            _children = new List<TBTTreeNode>();
+            m_children = new List<TBTTreeNode>();
             if (maxChildCount >= 0) {
-                _children.Capacity = maxChildCount;
+                m_children.Capacity = maxChildCount;
             }
-            _maxChildCount = maxChildCount;
+            m_maxChildCount = maxChildCount;
         }
-        public TBTTreeNode()
-            : this(defaultChildCount)
-        {}
+
+        public TBTTreeNode(): this(defaultChildCount){}
         ~TBTTreeNode()
         {
-            _children = null;
-            //_parent = null;
+            m_children = null;
         }
-        //-------------------------------------------------------------------
+
         public TBTTreeNode AddChild(TBTTreeNode node)
         {
-            if (_maxChildCount >= 0 && _children.Count >= _maxChildCount) {
-                TLogger.WARNING("**BT** exceeding child count");
+            if (m_maxChildCount >= 0 && m_children.Count >= m_maxChildCount) 
+            {
+                Debug.LogWarning("**BT** exceeding child count");
                 return this;
             }
-            _children.Add(node);
-            //node._parent = this;
+            m_children.Add(node);
             return this;
         }
+
         public int GetChildCount()
         {
-            return _children.Count;
+            return m_children.Count;
         }
+
         public bool IsIndexValid(int index)
         {
-            return index >= 0 && index < _children.Count;
+            return index >= 0 && index < m_children.Count;
         }
+
         public T GetChild<T>(int index) where T : TBTTreeNode 
         {
-            if (index < 0 || index >= _children.Count) {
+            if (index < 0 || index >= m_children.Count) 
                 return null;
-            }
-            return (T)_children[index];
+
+            return (T)m_children[index];
         }
     }
 }

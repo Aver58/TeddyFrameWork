@@ -22,11 +22,6 @@ public class BattleManager : MonoBehaviour
 		m_BattleClient.Init();
 	}
 
-	private void GetBattleData()
-	{
-
-	}
-
 	private void Update()
 	{
 		m_BattleLogic.Update();

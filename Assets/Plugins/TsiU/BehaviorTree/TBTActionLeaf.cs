@@ -38,19 +38,20 @@ namespace TsiU
             TBTActionLeafContext thisContext = getContext<TBTActionLeafContext>(wData);
             if (thisContext.status == ACTION_READY) {
                 onEnter(wData);
-                thisContext.needExit = true;
+                thisContext.needExit = true;//默认有onExit
                 thisContext.status = ACTION_RUNNING;
             }
-            if (thisContext.status == ACTION_RUNNING) {
+            // 从onExecute返回是否结束
+            if(thisContext.status == ACTION_RUNNING) {
                 runningState = onExecute(wData);
-                if (TBTRunningStatus.IsFinished(runningState)) {
+                // 如果结束了，切换状态到结束状态
+                if (TBTRunningStatus.IsFinished(runningState)) 
                     thisContext.status = ACTION_FINISHED;
-                }
             }
+
             if (thisContext.status == ACTION_FINISHED) {
-                if (thisContext.needExit) {
+                if (thisContext.needExit) 
                     onExit(wData, runningState);
-                }
                 thisContext.status = ACTION_READY;
                 thisContext.needExit = false;
             }
