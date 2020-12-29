@@ -8,3 +8,10 @@ Build/
 Assembly-CSharp-firstpass.csproj
 Assembly-CSharp.csproj
 Assembly-CSharp-Editor-firstpass.csproj
+Assets/Plugins/TiTan
+Assets/Standard Assets/LockstepRTSEngine-Master
+Assets/Plugins/TiTan.meta
+Assets/Standard Assets/LockstepRTSEngine-Master.meta
+Assembly-CSharp-Editor.csproj
+Packages/
+Logs
