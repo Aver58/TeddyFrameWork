@@ -22,10 +22,12 @@
             thisContext.currentSelectedIndex = -1;
             int childCount = GetChildCount();
             //从左到右遍历自己的子节点
-            for(int i = 0; i < childCount; ++i) {
+            for(int i = 0; i < childCount; ++i) 
+            {
                 var node = GetChild<TBTAction>(i);
                 //如果子节点的准入条件符合信息的话，就执行该子节点。
-                if (node.Evaluate(wData)) {
+                if (node.Evaluate(wData)) 
+                {
                     thisContext.currentSelectedIndex = i;
                     return true;
                 }
@@ -37,8 +39,9 @@
         {
             var thisContext = getContext<TBTActionPrioritizedSelectorContext>(wData);
             int runningState = TBTRunningStatus.FINISHED;
-            // 上下文变化，调用Transition
-            if(thisContext.currentSelectedIndex != thisContext.lastSelectedIndex) {
+            //action没执行完毕，前提就变了，所以这边需要进行节点的转换来清除上个节点的状态
+            if(thisContext.currentSelectedIndex != thisContext.lastSelectedIndex) 
+            {
                 if (IsIndexValid(thisContext.lastSelectedIndex)) {
                     var node = GetChild<TBTAction>(thisContext.lastSelectedIndex);
                     node.Transition(wData);
@@ -46,12 +49,13 @@
                 thisContext.lastSelectedIndex = thisContext.currentSelectedIndex;
             }
             // Update
-            if(IsIndexValid(thisContext.lastSelectedIndex)) {
+            if(IsIndexValid(thisContext.lastSelectedIndex)) 
+            {
                 var node = GetChild<TBTAction>(thisContext.lastSelectedIndex);
                 runningState = node.Update(wData);
-                if (TBTRunningStatus.IsFinished(runningState)) {
+                //action执行完毕，那么下一次tick不需要进行节点转换
+                if(TBTRunningStatus.IsFinished(runningState)) 
                     thisContext.lastSelectedIndex = -1;
-                }
             }
             return runningState;
         }
@@ -59,9 +63,9 @@
         {
             var thisContext = getContext<TBTActionPrioritizedSelectorContext>(wData);
             var node = GetChild<TBTAction>(thisContext.lastSelectedIndex);
-            if (node != null) {
+            if (node != null) 
                 node.Transition(wData);
-            }
+
             thisContext.lastSelectedIndex = -1;
         }
     }

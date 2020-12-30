@@ -18,9 +18,9 @@ public class NOD_CastAbility : TBTActionLeaf
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
         BattleEntity source = behaviorData.owner;
         Ability ability = source.SelectCastableAbility();
-        source.CastAbility(ability);
-
         BattleLog.Log("【NOD_CastAbility】onEnter {0}", ability.GetConfigName());
+     
+        source.CastAbility(ability);
     }
 
     protected override void onExit(TBTWorkingData wData, int runningStatus)

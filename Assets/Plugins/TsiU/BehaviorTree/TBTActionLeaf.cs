@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TsiU
+﻿namespace TsiU
 {
     public abstract class TBTActionLeaf : TBTAction
     {
@@ -36,20 +33,23 @@ namespace TsiU
         {
             int runningState = TBTRunningStatus.FINISHED;
             TBTActionLeafContext thisContext = getContext<TBTActionLeafContext>(wData);
-            if (thisContext.status == ACTION_READY) {
+            if (thisContext.status == ACTION_READY) 
+            {
                 onEnter(wData);
                 thisContext.needExit = true;//默认有onExit
                 thisContext.status = ACTION_RUNNING;
             }
             // 从onExecute返回是否结束
-            if(thisContext.status == ACTION_RUNNING) {
+            if(thisContext.status == ACTION_RUNNING) 
+            {
                 runningState = onExecute(wData);
                 // 如果结束了，切换状态到结束状态
                 if (TBTRunningStatus.IsFinished(runningState)) 
                     thisContext.status = ACTION_FINISHED;
             }
 
-            if (thisContext.status == ACTION_FINISHED) {
+            if (thisContext.status == ACTION_FINISHED) 
+            {
                 if (thisContext.needExit) 
                     onExit(wData, runningState);
                 thisContext.status = ACTION_READY;
@@ -60,9 +60,9 @@ namespace TsiU
         protected sealed override void onTransition(TBTWorkingData wData)
         {
             TBTActionLeafContext thisContext = getContext<TBTActionLeafContext>(wData);
-            if (thisContext.needExit) {
+            if (thisContext.needExit) 
                 onExit(wData, TBTRunningStatus.TRANSITION);
-            }
+           
             thisContext.status = ACTION_READY;
             thisContext.needExit = false;
         }
@@ -75,11 +75,14 @@ namespace TsiU
         // inherented by children-
         protected virtual void onEnter(/*in*/TBTWorkingData wData)
         {
+
         }
+
         protected virtual int onExecute(TBTWorkingData wData)
         {
             return TBTRunningStatus.FINISHED;
         }
+
         protected virtual void onExit(TBTWorkingData wData, int runningStatus)
         {
 

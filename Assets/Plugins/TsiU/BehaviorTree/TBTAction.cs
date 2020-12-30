@@ -2,9 +2,7 @@
 
 namespace TsiU
 {
-    public class TBTActionContext
-    {
-    }
+    public class TBTActionContext{}
 
     public abstract class TBTAction : TBTTreeNode
     {
@@ -22,23 +20,12 @@ namespace TsiU
         protected int _uniqueKey;
         protected TBTPrecondition _precondition;
 #if DEBUG
-        protected string _name;
-        public string name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
+        public string Name{ get { return GetType().ToString(); } }
 #endif
         //-------------------------------------------------------------
         public TBTAction(int maxChildCount): base(maxChildCount)
         {
-            _uniqueKey = TBTAction.genUniqueKey();
+            _uniqueKey = genUniqueKey();
         }
         ~TBTAction()
         {
@@ -73,12 +60,13 @@ namespace TsiU
         {
             int uniqueKey = GetHashCode();
             T thisContext;
-            if (wData.context.ContainsKey(uniqueKey) == false) {
+            if (wData.context.ContainsKey(uniqueKey) == false) 
+            {
                 thisContext = new T();
                 wData.context.Add(uniqueKey, thisContext);
-            } else {
+            } 
+            else 
                 thisContext = (T)wData.context[uniqueKey];
-            }
             return thisContext;
         }
         //--------------------------------------------------------
@@ -91,8 +79,6 @@ namespace TsiU
         {
             return TBTRunningStatus.FINISHED;
         }
-        protected virtual void onTransition(TBTWorkingData wData)
-        {
-        }
+        protected virtual void onTransition(TBTWorkingData wData){}
     }
 }

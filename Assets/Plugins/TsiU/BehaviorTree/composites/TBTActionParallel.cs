@@ -25,8 +25,7 @@ namespace TsiU
         private ECHILDREN_RELATIONSHIP _evaluationRelationship;
         private ECHILDREN_RELATIONSHIP _runningStatusRelationship;
         //-------------------------------------------------------
-        public TBTActionParallel()
-            : base(-1)
+        public TBTActionParallel(): base(-1)
         {
             _evaluationRelationship = ECHILDREN_RELATIONSHIP.AND;
             _runningStatusRelationship = ECHILDREN_RELATIONSHIP.OR;
@@ -45,19 +44,22 @@ namespace TsiU
         protected override bool onEvaluate(/*in*/TBTWorkingData wData)
         {
             TBTActionParallelContext thisContext = getContext<TBTActionParallelContext>(wData);
-            initListTo<bool>(thisContext.evaluationStatus, false);
+            initListTo(thisContext.evaluationStatus, false);
             bool finalResult = false;
-            for (int i = 0; i < GetChildCount(); ++i) {
+            //让所有子节点同时运行
+            for (int i = 0; i < GetChildCount(); ++i) 
+            {
                 TBTAction node = GetChild<TBTAction>(i);
                 bool ret = node.Evaluate(wData);
                 //early break
-                if (_evaluationRelationship == ECHILDREN_RELATIONSHIP.AND && ret == false) {
+                if (_evaluationRelationship == ECHILDREN_RELATIONSHIP.AND && ret == false) 
+                {
                     finalResult = false;
                     break;
                 }
-                if (ret == true){
+                if (ret == true)
                     finalResult = true;
-                }
+                
                 thisContext.evaluationStatus[i] = ret;
             }
             return finalResult;
@@ -66,29 +68,33 @@ namespace TsiU
         {
             TBTActionParallelContext thisContext = getContext<TBTActionParallelContext>(wData);
             //first time initialization
-            if (thisContext.runningStatus.Count != GetChildCount()) {
+            if (thisContext.runningStatus.Count != GetChildCount()) 
                 initListTo<int>(thisContext.runningStatus, TBTRunningStatus.EXECUTING);
-            }
+            
             bool hasFinished  = false;
             bool hasExecuting = false;
-            for (int i = 0; i < GetChildCount(); ++i) {
-                if (thisContext.evaluationStatus[i] == false) {
+            for (int i = 0; i < GetChildCount(); ++i) 
+            {
+                if (thisContext.evaluationStatus[i] == false) 
                     continue;
-                }
-                if (TBTRunningStatus.IsFinished(thisContext.runningStatus[i])) {
+                
+                if (TBTRunningStatus.IsFinished(thisContext.runningStatus[i])) 
+                {
                     hasFinished = true;
                     continue;
                 }
                 TBTAction node = GetChild<TBTAction>(i);
                 int runningStatus = node.Update(wData);
-                if (TBTRunningStatus.IsFinished(runningStatus)) {
+                if (TBTRunningStatus.IsFinished(runningStatus)) 
                     hasFinished  = true;
-                } else {
+                else 
                     hasExecuting = true;
-                }
+
                 thisContext.runningStatus[i] = runningStatus;
             }
-            if (_runningStatusRelationship == ECHILDREN_RELATIONSHIP.OR && hasFinished || _runningStatusRelationship == ECHILDREN_RELATIONSHIP.AND && hasExecuting == false) {
+            if (_runningStatusRelationship == ECHILDREN_RELATIONSHIP.OR && hasFinished 
+                || _runningStatusRelationship == ECHILDREN_RELATIONSHIP.AND && hasExecuting == false) 
+            {
                 initListTo<int>(thisContext.runningStatus, TBTRunningStatus.EXECUTING);
                 return TBTRunningStatus.FINISHED;
             }
@@ -96,8 +102,9 @@ namespace TsiU
         }
         protected override void onTransition(TBTWorkingData wData)
         {
-            TBTActionParallelContext thisContext = getContext<TBTActionParallelContext>(wData);
-            for (int i = 0; i < GetChildCount(); ++i) {
+            var thisContext = getContext<TBTActionParallelContext>(wData);
+            for (int i = 0; i < GetChildCount(); ++i) 
+            {
                 TBTAction node = GetChild<TBTAction>(i);
                 node.Transition(wData);
             }
@@ -107,15 +114,16 @@ namespace TsiU
         private void initListTo<T>(List<T> list, T value)
         {
             int childCount = GetChildCount();
-            if (list.Count != childCount) {
+            if (list.Count != childCount) 
+            {
                 list.Clear();
-                for (int i = 0; i < childCount; ++i) {
+                for (int i = 0; i < childCount; ++i) 
                     list.Add(value);
-                }
-            } else {
-                for (int i = 0; i < childCount; ++i) {
+            } 
+            else 
+            {
+                for (int i = 0; i < childCount; ++i) 
                     list[i] = value;
-                }
             }
         }
     }

@@ -26,7 +26,7 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 			m_BehaviorTreeNode = new TBTActionPrioritizedSelector();
 
 			/// 通用节点
-
+			
 			// 设置idle节点
 			var setUnitIdleNode = new NOD_SetUnitIdle();
 			// 转向节点

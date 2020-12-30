@@ -14,11 +14,16 @@ using UnityEngine;
 
 public class NOD_TurnTo : TBTActionLeaf
 {
-    protected override void onEnter(TBTWorkingData wData){
+    protected override void onEnter(TBTWorkingData wData)
+    {
         BattleLog.Log("【NOD_TurnTo】onEnter");
+        BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+        BattleEntity owner = behaviorData.owner;
+        owner.SetState(HeroState.TURN);
     }
 
-    protected override void onExit(TBTWorkingData wData, int runningStatus){
+    protected override void onExit(TBTWorkingData wData, int runningStatus)
+    {
         BattleLog.Log("【NOD_TurnTo】onExit");
     }
 
@@ -39,7 +44,8 @@ public class NOD_TurnTo : TBTActionLeaf
         float angle = Vector2.Angle(targetForward, sourceForward);
         float radianToTurn = turnSpeed * deltaTime;
 
-        if(angle <= radianToTurn * Mathf.Rad2Deg)
+        BattleLog.Log("【NOD_TurnTo】angle:{0},{1}", angle, radianToTurn * Mathf.Rad2Deg);
+        if(angle < radianToTurn * Mathf.Rad2Deg)
         {
             source.Set2DForward(targetForward);
             GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo2D, new HeorTurnEventArgs()
@@ -53,9 +59,8 @@ public class NOD_TurnTo : TBTActionLeaf
         // 叉积算出方向 unity是左手坐标系，所以反过来了
         Vector3 cross = Vector3.Cross(targetForward, sourceForward);
         if(cross.z > 0)
-        {
             radianToTurn = -radianToTurn;
-        }
+
         Vector2 newForward = BattleMath.Vector2RotateFromRadian(sourceForward.x, sourceForward.y,radianToTurn);
 
         //BattleLog.Log("【NOD_TurnTo】自己朝向：{0} 目标朝向：{1} 相隔角度：{2} 旋转弧度：{3} 叉乘：{4} 新的朝向：{5}", sourceForward.ToString(),targetForward.ToString(), angle.ToString(),(radianToTurn * Mathf.Rad2Deg).ToString(), cross.ToString(), newForward.ToString());

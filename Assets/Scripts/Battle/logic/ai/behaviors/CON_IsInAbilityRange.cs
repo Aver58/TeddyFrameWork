@@ -23,7 +23,7 @@ public class CON_IsInAbilityRange : TBTPrecondition
         Vector2 ownerPos = owner.Get2DPosition();
         Vector2 targetPos = target.Get2DPosition();
         float distance = (targetPos - ownerPos).magnitude;
-        //BattleLog.Log(string.Format("【CON_IsInAbilityRange】距离：{0}，技能范围：{1}", distance, abilityRange));
+        BattleLog.Log(string.Format("【CON_IsInAbilityRange】距离：{0}，技能范围：{1}", distance, abilityRange));
         return distance <= abilityRange;
     }
 }

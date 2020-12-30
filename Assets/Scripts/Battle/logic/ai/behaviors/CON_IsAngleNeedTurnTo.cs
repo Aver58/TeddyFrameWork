@@ -27,6 +27,7 @@ public class CON_IsAngleNeedTurnTo : TBTPreconditionLeaf
         Vector2 toForward = targetPos - ownerPos;
         Vector2 ownerForward = owner.Get2DForward();
         float angle = Vector2.Angle(toForward, ownerForward);
-        return angle > 0.1;
+        BattleLog.Log("【CON_IsAngleNeedTurnTo】angle:{0}", angle);
+        return angle > 0.1f;
     }
 }

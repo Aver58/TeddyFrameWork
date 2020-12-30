@@ -32,6 +32,7 @@ namespace TsiU
         {
             TBTActionSequenceContext thisContext = getContext<TBTActionSequenceContext>(wData);
             int checkedNodeIndex = -1;
+            //从左到右按顺序执行子节点，并且仅仅在一个子节点执行完成后才执行下一个子节点。
             if (IsIndexValid(thisContext.currentSelectedIndex)) {
                 checkedNodeIndex = thisContext.currentSelectedIndex;
             } else {
