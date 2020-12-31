@@ -16,7 +16,7 @@ public class NOD_TurnTo : TBTActionLeaf
 {
     protected override void onEnter(TBTWorkingData wData)
     {
-        BattleLog.Log("【NOD_TurnTo】onEnter");
+        //BattleLog.Log("【NOD_TurnTo】onEnter");
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
         BattleEntity owner = behaviorData.owner;
         owner.SetState(HeroState.TURN);
@@ -24,7 +24,7 @@ public class NOD_TurnTo : TBTActionLeaf
 
     protected override void onExit(TBTWorkingData wData, int runningStatus)
     {
-        BattleLog.Log("【NOD_TurnTo】onExit");
+        //BattleLog.Log("【NOD_TurnTo】onExit");
     }
 
     protected override int onExecute(TBTWorkingData wData)
@@ -44,7 +44,7 @@ public class NOD_TurnTo : TBTActionLeaf
         float angle = Vector2.Angle(targetForward, sourceForward);
         float radianToTurn = turnSpeed * deltaTime;
 
-        BattleLog.Log("【NOD_TurnTo】angle:{0},{1}", angle, radianToTurn * Mathf.Rad2Deg);
+        //BattleLog.Log("【NOD_TurnTo】angle:{0},{1}", angle, radianToTurn * Mathf.Rad2Deg);
         if(angle < radianToTurn * Mathf.Rad2Deg)
         {
             source.Set2DForward(targetForward);

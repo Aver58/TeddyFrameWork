@@ -27,7 +27,7 @@ public class CON_CanUpdateRequest : TBTPrecondition
         else
         {
             //上一个请求已经执行完成，就更新新请求
-            return request.isRequestCompleted == true;
+            return request.IsRequestCompleted();
         }
     }
 }

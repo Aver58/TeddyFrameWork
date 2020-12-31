@@ -17,7 +17,7 @@ namespace TsiU
     {
         protected override void onEnter(TBTWorkingData wData)
         {
-            BattleLog.Log("【NOD_MoveTo】onEnter");
+            //BattleLog.Log("【NOD_MoveTo】onEnter");
             BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
             BattleEntity source = behaviorData.owner;
             source.SetState(HeroState.MOVE);
@@ -25,7 +25,7 @@ namespace TsiU
 
         protected override void onExit(TBTWorkingData wData, int runningStatus)
         {
-            BattleLog.Log("【NOD_MoveTo】onExit");
+            //BattleLog.Log("【NOD_MoveTo】onExit");
         }
 
         protected override int onExecute(TBTWorkingData wData)

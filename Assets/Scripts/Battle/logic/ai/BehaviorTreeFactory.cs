@@ -25,8 +25,6 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 			// 父节点
 			m_BehaviorTreeNode = new TBTActionPrioritizedSelector();
 
-			/// 通用节点
-			
 			// 设置idle节点
 			var setUnitIdleNode = new NOD_SetUnitIdle();
 			// 转向节点
@@ -37,7 +35,7 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 			// 追逐节点
 			var moveToSelectorNode = new TBTActionPrioritizedSelector();
 			moveToSelectorNode.SetPrecondition(new CON_IsInRange());
-			moveToSelectorNode.AddChild(new NOD_MoveTo());//todo can turn to
+			moveToSelectorNode.AddChild(new NOD_MoveTo());//todo can Move to
 			moveToSelectorNode.AddChild(setUnitIdleNode);
 
 			// ①追逐
@@ -46,19 +44,15 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 			chaseSelectorNode.AddChild(moveToSelectorNode);
 
 			// ②自动战斗节点构建
+			// 转向和追逐并行
+			var abilityTurnMoveToParallelNode = new TBTActionParallel();
 			// 技能转向节点
-			TBTPreconditionAND abilityTurnCondition = new TBTPreconditionAND(new CON_IsAbilityNeedTurnTo(),new CON_IsAngleNeedTurnTo());
-			var abilityTurnToSelectorNode = new TBTActionPrioritizedSelector();
-			abilityTurnToSelectorNode.SetPrecondition(abilityTurnCondition);
-			abilityTurnToSelectorNode.AddChild(new NOD_TurnTo());
-			abilityTurnToSelectorNode.AddChild(setUnitIdleNode);
-
+			TBTPreconditionAND abilityTurnCondition = new TBTPreconditionAND(new CON_IsAbilityNeedTurnTo(), new CON_IsAngleNeedTurnTo());
+			abilityTurnMoveToParallelNode.AddChild(new NOD_TurnTo().SetPrecondition(abilityTurnCondition));
 			// 技能追逐节点
 			TBTPreconditionNOT abilityMoveCondition = new TBTPreconditionNOT(new CON_IsInAbilityRange());
-			var abilityMoveToSelectorNode = new TBTActionPrioritizedSelector();
-			abilityMoveToSelectorNode.SetPrecondition(abilityMoveCondition);
-			abilityMoveToSelectorNode.AddChild(new NOD_MoveTo());
-			abilityMoveToSelectorNode.AddChild(setUnitIdleNode);
+			abilityTurnMoveToParallelNode.AddChild(new NOD_MoveTo().SetPrecondition(abilityMoveCondition));
+			abilityTurnMoveToParallelNode.SetEvaluationRelationship(TBTActionParallel.ECHILDREN_RELATIONSHIP.OR);
 
 			// 技能施法节点
 			var castAbilitySelectorNode = new TBTActionPrioritizedSelector();
@@ -69,8 +63,7 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 			var autoCastAbilityNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsAutoCastAbilityRequest());
 			
 			// 转向、移动、施法
-			autoCastAbilityNode.AddChild(abilityTurnToSelectorNode);
-			autoCastAbilityNode.AddChild(abilityMoveToSelectorNode);
+			autoCastAbilityNode.AddChild(abilityTurnMoveToParallelNode);
 			autoCastAbilityNode.AddChild(castAbilitySelectorNode);
 
 

@@ -10,11 +10,11 @@
 #endregion
 
 using TsiU;
-using UnityEngine;
 
 public class NOD_UpdateRequest : TBTActionLeaf
 {
-    private AutoCastAbilityRequest autoCastAbilityRequest;
+    private ChaseRequest m_chaseRequest;
+    private AutoCastAbilityRequest m_autoCastAbilityRequest;
 
     protected override void onEnter(TBTWorkingData wData)
     {
@@ -25,7 +25,26 @@ public class NOD_UpdateRequest : TBTActionLeaf
 
         if(ability == null)
         {
+            // 没有技能就追逐
+            var request = decisionData.request;
+            if(request == null || (request !=null && request.IsRequestCompleted()))
+            {
+                var chaseTarget = caster.target;
+                if(chaseTarget == null)
+                {
+                    chaseTarget = TargetSearcher.instance.FindNearestEnemyUnit(caster);
+                }
 
+                if(chaseTarget != null)
+                {
+                    m_chaseRequest = new ChaseRequest(chaseTarget);
+                    decisionData.request = m_chaseRequest;
+                }
+                else
+                {
+                    //idle
+                }
+            }
         }
         else
         {
@@ -34,8 +53,8 @@ public class NOD_UpdateRequest : TBTActionLeaf
             if(target!=null)
             {
                 BattleLog.Log("【NOD_UpdateRequest】选取到技能ability：{0}，target：{1}", ability.GetConfigName(), target.GetName());
-                autoCastAbilityRequest = new AutoCastAbilityRequest(ability, target);
-                decisionData.request = autoCastAbilityRequest;
+                m_autoCastAbilityRequest = new AutoCastAbilityRequest(ability, target);
+                decisionData.request = m_autoCastAbilityRequest;
             }
         }
     }

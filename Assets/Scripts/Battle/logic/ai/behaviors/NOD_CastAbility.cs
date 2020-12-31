@@ -34,7 +34,7 @@ public class NOD_CastAbility : TBTActionLeaf
         BattleEntity source = behaviorData.owner;
         Ability ability = source.SelectCastableAbility();
 
-        BattleLog.Log("【NOD_CastAbility】castTime：{0},duringTime：{1}", ability.castTime, ability.GetCastleDuring());
+        //BattleLog.Log("【NOD_CastAbility】castTime：{0},duringTime：{1}", ability.castTime, ability.GetCastleDuring());
         if(ability.castTime >= ability.GetCastleDuring())
             return TBTRunningStatus.FINISHED;
 

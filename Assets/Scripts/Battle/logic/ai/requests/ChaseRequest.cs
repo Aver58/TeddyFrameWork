@@ -15,6 +15,7 @@ public class ChaseRequest : AIBehaviorRequest
     {
         SetTarget(target);
     }
+
     public void SetTarget(Entity target)
     {
         this.target = target;
