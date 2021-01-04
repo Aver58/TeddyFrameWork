@@ -13,21 +13,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HudActorManager
+public class HudActorManager : Singleton<HudActorManager>
 {
     private const string path = "battle/component/HpBar";
-    private Transform parentNode; 
+    public Transform parentNode; 
     private RectTransform canvasTransform;
     private Camera uiCamera;
     private Dictionary<int, HudActor> m_actorMap;
 
-    public HudActorManager()
+    public void Init()
     {
         m_actorMap = new Dictionary<int, HudActor>();
 
-        uiCamera = GameObject.Find("UICamera").GetComponent<Camera>();
+        uiCamera = CameraManager.instance.uiCamera;
         canvasTransform = GameObject.Find("UI").transform as RectTransform;
-        parentNode = GameObject.Find("HPHuds").transform;
 
         GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_Created, this, new EventHandler<EventArgs>(OnHeroActorCreated));
         GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_HP_Updated, this, new EventHandler<EventArgs>(OnHeroHPUpdated));
@@ -36,6 +35,7 @@ public class HudActorManager
     ~HudActorManager()
     {
         GameMsg.instance.RemoveMessage(GameMsgDef.BattleEntity_Created);
+        GameMsg.instance.RemoveMessage(GameMsgDef.BattleEntity_HP_Updated);
     }
 
     public void OnHeroActorCreated(object sender, EventArgs args)

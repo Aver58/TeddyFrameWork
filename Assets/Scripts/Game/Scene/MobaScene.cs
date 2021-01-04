@@ -14,6 +14,7 @@ public class MobaScene : SceneBase
     public override void OnEnter()
     {
         //throw new System.NotImplementedException();
+        UIModule.OpenView(ViewID.MobaMainView);
     }
 
     public override void OnExit()

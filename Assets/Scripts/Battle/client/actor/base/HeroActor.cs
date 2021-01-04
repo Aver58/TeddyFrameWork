@@ -63,10 +63,10 @@ public class HeroActor
         m_AnimController = gameObject.AddComponent<AnimationController>();
         m_HeroStateController = new HeroStateController(battleEntity, m_AnimController);
 
+        InitPosition(m_InitPosition);
+
         if(m_LoadedCallback != null) 
             m_LoadedCallback(gameObject);
-
-        InitPosition(m_InitPosition);
 
         gameObject.name = string.Format("[{0}][{1}][UID:{2}][CID:{3}][Lv:{4}][Speed:{5}]",
             battleEntity.GetName(),camp.ToString(),battleEntity.GetUniqueID(),battleEntity.GetID(),battleEntity.GetLevel(),battleEntity.GetMoveSpeed());

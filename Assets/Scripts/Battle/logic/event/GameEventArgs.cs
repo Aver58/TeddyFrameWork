@@ -12,6 +12,11 @@
 using System;
 using UnityEngine;
 
+public class EventArgs
+{
+    public static readonly EventArgs Empty;
+}
+
 public class GameEventArgs : EventArgs
 {
     public int intParam;

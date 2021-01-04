@@ -55,10 +55,16 @@ public class Entity
         return m_Forward2D;
     }
 
+    public Vector3 Get3DPosition()
+    {
+        m_Position3D.Set(m_PosX, m_PosY, m_PosZ);
+        return m_Position3D;
+    }
+
     #endregion
 
     #region set
-
+    // todo 改成set都是设置3d，get可以取2d或者3d
     public void Set3DPosition(Vector3 pos)
     {
         m_PosX = pos.x;

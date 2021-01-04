@@ -9,9 +9,9 @@
 */
 #endregion
 
-using System;
 using System.Collections.Generic;
-using UnityEngine;
+
+public delegate void EventHandler<TEventArgs>(object sender, TEventArgs e);
 
 // 观察者模式
 public class GameMsg : Singleton<GameMsg>

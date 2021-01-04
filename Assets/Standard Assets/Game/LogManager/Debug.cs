@@ -55,6 +55,11 @@ public static class Debug
         LogToFile("[I]" + str, false);
     }
 
+    public static void RawLog(object message)
+    {
+        UnityEngine.Debug.Log(message);
+    }
+
     public static void LogException(Exception message)
     {
         string str = GetLogTime() + message.Message;

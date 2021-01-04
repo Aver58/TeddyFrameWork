@@ -38,8 +38,9 @@ public struct ViewConfig
 
 public enum ViewID
 {
-    Test = 1,
+    Test,
     Test2,
+    MobaMainView,
 }
 
 public static class ViewDefine
@@ -49,6 +50,7 @@ public static class ViewDefine
     {
         { ViewID.Test,new ViewConfig("TestView","test/TestPanel",typeof(TestView))},
         { ViewID.Test2,new ViewConfig("TestView2","test/TestPanel2",typeof(TestView2))},
+        { ViewID.MobaMainView,new ViewConfig("MobaMainView","battle/MobaMainView",typeof(MobaMainView))},
     };
 }
 

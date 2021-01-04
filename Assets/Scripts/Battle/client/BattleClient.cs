@@ -21,17 +21,11 @@ public class BattleClient : Singleton<BattleClient>
     private List<HeroActor> m_EnemyActors;
     private DebugController m_DrawTool;
     private HudActorManager m_hudActorManager;
+    private CameraManager m_cameraManager;
 
     public BattleClient()
     {
-        m_EntityMgr = BattleEntityManager.instance;
-        m_EnemyActors = new List<HeroActor>();
-
-        m_DrawTool = GameObject.Find("MoveArea").GetComponent<DebugController>();
-        
         RegisterMsg();
-
-        m_hudActorManager = new HudActorManager();
     }
 
     ~BattleClient()
@@ -57,6 +51,13 @@ public class BattleClient : Singleton<BattleClient>
 
     public void Init()
     {
+        m_DrawTool = GameObject.Find("MoveArea").GetComponent<DebugController>();
+        m_EnemyActors = new List<HeroActor>();
+        m_EntityMgr = BattleEntityManager.instance;
+        m_hudActorManager = HudActorManager.instance;
+        m_hudActorManager.Init();
+        m_cameraManager = CameraManager.instance;
+        m_cameraManager.Init();
         //AddPlayer();
         BattleEntity myEntity = m_EntityMgr.GetMyEntity();
         playerActor = new HeroActor(myEntity);
@@ -85,17 +86,6 @@ public class BattleClient : Singleton<BattleClient>
     {
         Transform heroParent = GameObject.Find("HeroNode").transform;
         go.transform.SetParent(heroParent);
-
-        InputController inputController = go.AddComponent<InputController>();
-
-        inputController.anim = go.GetComponent<Animator>();
-        inputController.characterController = go.GetComponent<CharacterController>();
-        inputController.joystick = GameObject.Find("Joystick").GetComponent<ETCJoystick>();
-        inputController.btnAttack = GameObject.Find("BtnAttack").GetComponent<Button>();
-        inputController.btnSkill1 = GameObject.Find("BtnSkill1").GetComponent<Button>();
-        inputController.btnSkill2 = GameObject.Find("BtnSkill2").GetComponent<Button>();
-        inputController.btnSkill3 = GameObject.Find("BtnSkill3").GetComponent<Button>();
-        inputController.Init(playerActor);
     }
 
     #region EventHandler

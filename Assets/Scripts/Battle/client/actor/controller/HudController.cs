@@ -39,7 +39,7 @@ public class HudController : MonoBehaviour
 
     public void Init(RectTransform canvasTransform, Transform targetTransform, Camera uiCamera, float barOffset, bool isFriendly, float barShowDuration = 0f)
     {
-        _worldCamera = Camera.main;// todo camera controller
+        _worldCamera = CameraManager.instance.worldCamera;// todo camera controller
         _uiCamera = uiCamera;
         _barOffset = barOffset;
         _isFriendly = isFriendly;
