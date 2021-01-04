@@ -184,8 +184,8 @@ public abstract class ViewBase
         transform = gameObject.transform;
         UI = HierarchyUtil.GetHierarchyItems(gameObject);
 
-        AddAllListener();
         OnLoaded();
+        AddAllListener();
 
         if(m_loadedCallback != null)
         {

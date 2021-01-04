@@ -16,26 +16,40 @@ public class MobaMainView : MainViewBase
 {
     public float runSpeed = 2f;
 
-    public Transform hudParent;
+    public RectTransform hudParent;
     private ETCJoystick m_joystick;
     private CharacterController m_characterController;
-    private CameraManager m_cameraManager;
     private HeroActor m_PlayerActor;
     private BattleEntity m_PlayerEntity;
     private Vector3 moveDistance = Vector3.zero;
+
+    private CameraManager m_cameraManager;
+    private HudActorManager m_hudActorManager;
 
     protected override void OnLoaded()
     {
         base.OnLoaded();
 
-        hudParent = (Transform)UI["HPHuds"];
+        hudParent = (RectTransform)UI["HPHuds"];
+        m_cameraManager = CameraManager.instance;
+        m_cameraManager.Init();
+
+        m_hudActorManager = HudActorManager.instance;
+        m_hudActorManager.Init(hudParent);
+    }
+
+    protected override void AddAllListener()
+    {
+        base.AddAllListener();
+
         AddListener((Button)UI["BtnMove"], OnBtnMove);
         AddListener((Button)UI["BtnAttack"], delegate { OnCastAbility(AbilityCastType.ATTACK); });
         AddListener((Button)UI["BtnSkill1"], delegate { OnCastAbility(AbilityCastType.SKILL1); });
         AddListener((Button)UI["BtnSkill2"], delegate { OnCastAbility(AbilityCastType.SKILL2); });
         AddListener((Button)UI["BtnSkill3"], delegate { OnCastAbility(AbilityCastType.SKILL3); });
 
-        m_joystick = (ETCJoystick)UI["Joystick"];
+        var JoystickGo = (Image)UI["Joystick"];
+        m_joystick = JoystickGo.GetComponent<ETCJoystick>();
         m_joystick.onMoveEnd.AddListener(() => OnMoveEnd());
         m_joystick.onMoveEnd.AddListener(() => OnMoveEnd());
         //方式一：按键方法注册
@@ -43,25 +57,31 @@ public class MobaMainView : MainViewBase
         m_joystick.OnPressRight.AddListener(() => OnMoving());
         m_joystick.OnPressUp.AddListener(() => OnMoving());
         m_joystick.OnPressDown.AddListener(() => OnMoving());
-
-        m_cameraManager = CameraManager.instance;
     }
 
     protected override void AddAllMessage()
     {
         base.AddAllMessage();
-        GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_Created, this, new EventHandler<EventArgs>(OnHeroActorCreated));
+        GameMsg.instance.AddMessage(GameMsgDef.BattleActor_Created, this, new EventHandler<EventArgs>(OnHeroActorCreated));
+        GameMsg.instance.AddMessage(GameMsgDef.PlayerActor_Created, this, new EventHandler<EventArgs>(OnPlayerActorCreated));
     }
 
-    public void OnHeroActorCreated(object sender, EventArgs args)
+    public void OnPlayerActorCreated(object sender, EventArgs args)
     {
         BattleActorCreateEventArgs arg = args as BattleActorCreateEventArgs;
         HeroActor actor = arg.heroActor;
+        Debug.RawLog(actor);
 
         m_characterController = actor.gameObject.GetComponent<CharacterController>();
         m_cameraManager.SetPosition(actor.gameObject.transform.position);
         m_PlayerActor = actor;
         m_PlayerEntity = actor.battleEntity;
+    }
+
+    public void OnHeroActorCreated(object sender, EventArgs args)
+    {
+        Debug.RawLog(sender);
+        m_hudActorManager.OnHeroActorCreated(sender, args);
     }
 
     private void MovePlayer2Point(Vector3 position)
@@ -133,4 +153,6 @@ public class MobaMainView : MainViewBase
             m_PlayerActor.ChangeState(HeroState.IDLE);
         }
     }
+
+ 
 }

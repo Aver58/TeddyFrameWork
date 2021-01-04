@@ -13,22 +13,20 @@ public class MobaScene : SceneBase
 {
     public override void OnEnter()
     {
-        //throw new System.NotImplementedException();
         UIModule.OpenView(ViewID.MobaMainView);
+
+        MobaBussiness.instance.Init();
     }
 
     public override void OnExit()
     {
-        //throw new System.NotImplementedException();
     }
 
     public override void OnUpdate()
     {
-        //throw new System.NotImplementedException();
     }
 
     protected override void OnLoaded()
     {
-        //throw new System.NotImplementedException();
     }
 }

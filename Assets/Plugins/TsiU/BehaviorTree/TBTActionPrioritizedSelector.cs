@@ -42,7 +42,8 @@
             //action没执行完毕，前提就变了，所以这边需要进行节点的转换来清除上个节点的状态
             if(thisContext.currentSelectedIndex != thisContext.lastSelectedIndex) 
             {
-                if (IsIndexValid(thisContext.lastSelectedIndex)) {
+                if (IsIndexValid(thisContext.lastSelectedIndex)) 
+                {
                     var node = GetChild<TBTAction>(thisContext.lastSelectedIndex);
                     node.Transition(wData);
                 }

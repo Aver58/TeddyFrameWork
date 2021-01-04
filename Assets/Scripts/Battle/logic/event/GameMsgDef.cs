@@ -14,6 +14,7 @@ public enum GameMsgDef
     Hero_MoveTo = 1,    //英雄移动到某个点
     Hero_TurnTo2D,      //英雄旋转到某个点
     Hero_ChangeState,   //英雄状态切换
-    BattleEntity_Created,   //一个角色创建
+    BattleActor_Created,   //一个角色实例创建
+    PlayerActor_Created,   //客户端玩家实例创建
     BattleEntity_HP_Updated,   //一个角色创建
 }

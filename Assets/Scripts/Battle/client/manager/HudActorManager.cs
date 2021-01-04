@@ -21,20 +21,18 @@ public class HudActorManager : Singleton<HudActorManager>
     private Camera uiCamera;
     private Dictionary<int, HudActor> m_actorMap;
 
-    public void Init()
+    public void Init(RectTransform hudParent)
     {
         m_actorMap = new Dictionary<int, HudActor>();
 
         uiCamera = CameraManager.instance.uiCamera;
-        canvasTransform = GameObject.Find("UI").transform as RectTransform;
+        canvasTransform = hudParent;
 
-        GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_Created, this, new EventHandler<EventArgs>(OnHeroActorCreated));
         GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_HP_Updated, this, new EventHandler<EventArgs>(OnHeroHPUpdated));
     }
 
     ~HudActorManager()
     {
-        GameMsg.instance.RemoveMessage(GameMsgDef.BattleEntity_Created);
         GameMsg.instance.RemoveMessage(GameMsgDef.BattleEntity_HP_Updated);
     }
 

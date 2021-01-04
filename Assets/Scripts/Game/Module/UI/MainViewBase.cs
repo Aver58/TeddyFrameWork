@@ -18,26 +18,21 @@ public class MainViewBase : ViewBase
 
     protected override void AddAllListener()
     {
-        throw new System.NotImplementedException();
     }
 
     protected override void AddAllMessage()
     {
-        throw new System.NotImplementedException();
     }
 
     protected override void OnClose()
     {
-        throw new System.NotImplementedException();
     }
 
     protected override void OnLoaded()
     {
-        throw new System.NotImplementedException();
     }
 
     protected override void OnOpen(UIEventArgs args = null)
     {
-        throw new System.NotImplementedException();
     }
 }

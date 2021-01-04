@@ -2,41 +2,24 @@
 /*
 =====================================================
  AverFrameWork v1.0
- Filename:    BattleClient.cs
+ Filename:    MobaBussiness.cs
  Author:      Zeng Zhiwei
- Time:        2020\5\26 星期二 0:07:05
+ Time:        2021\1\4 星期一 23:06:28
 =====================================================
 */
 #endregion
 
-using UnityEngine;
-using System;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using UnityEngine;
 
-public class BattleClient : Singleton<BattleClient>
+public class MobaBussiness:Singleton<MobaBussiness>
 {
     public HeroActor playerActor;
     private BattleEntityManager m_EntityMgr;
     private List<HeroActor> m_EnemyActors;
     private DebugController m_DrawTool;
-    private HudActorManager m_hudActorManager;
-    private CameraManager m_cameraManager;
 
-    public BattleClient()
-    {
-        RegisterMsg();
-    }
-
-    ~BattleClient()
-    {
-        GameMsg instance = GameMsg.instance;
-        instance.RemoveMessage(GameMsgDef.Hero_MoveTo);
-        instance.RemoveMessage(GameMsgDef.Hero_TurnTo2D);
-        instance.RemoveMessage(GameMsgDef.Hero_ChangeState);
-    }
-
-    private void RegisterMsg()
+    public MobaBussiness()
     {
         GameMsg instance = GameMsg.instance;
         instance.AddMessage(GameMsgDef.Hero_MoveTo, this, new EventHandler<EventArgs>(OnHeroMoveTo));
@@ -44,9 +27,12 @@ public class BattleClient : Singleton<BattleClient>
         instance.AddMessage(GameMsgDef.Hero_ChangeState, this, new EventHandler<EventArgs>(OnHeroActorStateChanged));
     }
 
-    public void Update()
+    ~MobaBussiness()
     {
-
+        GameMsg instance = GameMsg.instance;
+        instance.RemoveMessage(GameMsgDef.Hero_MoveTo);
+        instance.RemoveMessage(GameMsgDef.Hero_TurnTo2D);
+        instance.RemoveMessage(GameMsgDef.Hero_ChangeState);
     }
 
     public void Init()
@@ -54,15 +40,12 @@ public class BattleClient : Singleton<BattleClient>
         m_DrawTool = GameObject.Find("MoveArea").GetComponent<DebugController>();
         m_EnemyActors = new List<HeroActor>();
         m_EntityMgr = BattleEntityManager.instance;
-        m_hudActorManager = HudActorManager.instance;
-        m_hudActorManager.Init();
-        m_cameraManager = CameraManager.instance;
-        m_cameraManager.Init();
+
         //AddPlayer();
         BattleEntity myEntity = m_EntityMgr.GetMyEntity();
         playerActor = new HeroActor(myEntity);
         playerActor.LoadAsset(OnLoadPlayer);
-        playerActor.InitPosition(new Vector3(-9,0,-9));
+        playerActor.InitPosition(new Vector3(-9, 0, -9));
 
         //AddEnemy();
         var entyties = m_EntityMgr.GetEntities(BattleCamp.ENEMY);
@@ -72,7 +55,7 @@ public class BattleClient : Singleton<BattleClient>
             actor.LoadAsset(OnLoadGuard);
             m_EnemyActors.Add(actor);
             // 绘制移动区域
-            m_DrawTool.DrawMoveArea(entity.GetStartPoint(),entity.GetViewRange());
+            m_DrawTool.DrawMoveArea(entity.GetStartPoint(), entity.GetViewRange());
         }
     }
 
@@ -131,6 +114,6 @@ public class BattleClient : Singleton<BattleClient>
             }
         }
     }
-    
+
     #endregion
 }
