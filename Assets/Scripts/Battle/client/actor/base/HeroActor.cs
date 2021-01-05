@@ -97,7 +97,8 @@ public class HeroActor
     public void Set3DPosition(Vector3 position)
     {
         battleEntity.Set3DPosition(position);
-        m_PositionController.MoveTo3DPoint(position);
+        float logicDeltaTime = (position - transform.position).magnitude / battleEntity.GetMoveSpeed();
+        m_PositionController.MoveTo3DPoint(logicDeltaTime,position, OnMoveEnd);
     }
 
     public void Set2DForward(Vector2 position)
@@ -109,6 +110,10 @@ public class HeroActor
     {
         battleEntity.Set3DForward(position);
         transform.forward = position;
-        //m_PositionController.SetForward(position);
+    }
+
+    public void OnMoveEnd()
+    {
+        ChangeState(HeroState.IDLE);
     }
 }

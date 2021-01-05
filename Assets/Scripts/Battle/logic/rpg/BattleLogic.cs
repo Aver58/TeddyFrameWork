@@ -44,7 +44,7 @@ public class BattleLogic : Singleton<BattleLogic>
 
     public void Init()
     {
-        AddEnemy();
+        //AddEnemy();
         AddPlayer();
     }
 

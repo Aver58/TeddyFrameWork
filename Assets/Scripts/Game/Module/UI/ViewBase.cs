@@ -147,6 +147,21 @@ public abstract class ViewBase
         OnUpdate();
     }
 
+    public object GenerateOne(Type itemClass, GameObject prefab, Transform parent)
+    {
+        Transform transParent = parent == null ? null : parent.transform;
+        GameObject go = Object.Instantiate(prefab, transParent, false);
+        go.name = prefab.name;
+
+        go.transform.localPosition = Vector3.zero;
+        go.transform.localScale = Vector3.one;
+        go.transform.SetAsLastSibling();
+        go.SetActive(true);
+
+        var itemInstance = Activator.CreateInstance(itemClass);
+        return itemInstance;
+    }
+
     #endregion
 
     #region LifeCycle

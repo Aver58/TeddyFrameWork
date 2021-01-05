@@ -199,7 +199,7 @@ public sealed class LoadModule : ModuleBase
         stringBuilder.Append(path);
 
         path = stringBuilder.ToString();
-        Debug.Log("LoadJson: " + path);
+        //Debug.Log("LoadJson: " + path);
         if(FileHelper.IsFileExist(path))
         {
             using(StreamReader streamReader = new StreamReader(path))

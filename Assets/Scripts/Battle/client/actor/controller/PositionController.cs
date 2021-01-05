@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PositionController : MonoBehaviour, IActor
 {
@@ -15,6 +16,7 @@ public class PositionController : MonoBehaviour, IActor
     private Vector3 _lastForward;
     private Vector3 _currentForward;
     private Vector3 _targetForward;
+    private event Action m_OnMoveEnd;
 
     private void LateUpdate()
     {
@@ -31,7 +33,11 @@ public class PositionController : MonoBehaviour, IActor
             transform.position = _currentPos;
 
             if (_movedTime >= _logicDeltaTime)
+            {
                 _isMoving = false;
+                if(m_OnMoveEnd != null)
+                    m_OnMoveEnd();
+            }
         }
     }
 
@@ -51,15 +57,17 @@ public class PositionController : MonoBehaviour, IActor
         SetForward(forward);
     }
 
-    public void MoveTo3DPoint(Vector3 targetPos)
+    public void MoveTo3DPoint(float deltaTime,Vector3 targetPos, Action callback)
     {
         _isMoving = true;
         _movedTime = 0f;
+        _logicDeltaTime = deltaTime;
         _lastPos = _currentPos;
         _targetPos = targetPos;
 
         var forward = targetPos - _currentPos;
         transform.forward = forward;
+        m_OnMoveEnd = callback;
     }
 
     private void Set3DPosition(Vector3 targetPos)

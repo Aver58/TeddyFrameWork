@@ -9,6 +9,7 @@
 */
 #endregion
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,7 @@ public class MobaMainView : MainViewBase
 
     private CameraManager m_cameraManager;
     private HudActorManager m_hudActorManager;
+    private List<MobaSkillItem> skillItems;
 
     protected override void OnLoaded()
     {
@@ -35,16 +37,29 @@ public class MobaMainView : MainViewBase
 
         m_hudActorManager = HudActorManager.instance;
         m_hudActorManager.Init(hudParent);
+
+        GenerateSkillItems();
     }
 
+    private void GenerateSkillItems()
+    {
+        var prefab = (GameObject)UI["MobaSkillItem"];
+        var nodeAttack = (RectTransform)UI["NodeAttack"];
+        var nodeSkill1 = (RectTransform)UI["NodeSkill1"];
+        var nodeSkill2 = (RectTransform)UI["NodeSkill2"];
+        var nodeSkill3 = (RectTransform)UI["NodeSkill3"];
+        MobaSkillItem attackSkillItem = GenerateOne(typeof(MobaSkillItem), prefab, nodeAttack) as MobaSkillItem;
+        attackSkillItem.Init();
+    }
+    
     protected override void AddAllListener()
     {
         base.AddAllListener();
 
-        AddListener((Button)UI["BtnAttack"], delegate { OnCastAbility(AbilityCastType.ATTACK); });
-        AddListener((Button)UI["BtnSkill1"], delegate { OnCastAbility(AbilityCastType.SKILL1); });
-        AddListener((Button)UI["BtnSkill2"], delegate { OnCastAbility(AbilityCastType.SKILL2); });
-        AddListener((Button)UI["BtnSkill3"], delegate { OnCastAbility(AbilityCastType.SKILL3); });
+        //AddListener((Button)UI["NodeAttack"], delegate { OnCastAbility(AbilityCastType.ATTACK); });
+        //AddListener((Button)UI["NodeSkill1"], delegate { OnCastAbility(AbilityCastType.SKILL1); });
+        //AddListener((Button)UI["NodeSkill2"], delegate { OnCastAbility(AbilityCastType.SKILL2); });
+        //AddListener((Button)UI["NodeSkill3"], delegate { OnCastAbility(AbilityCastType.SKILL3); });
 
         var JoystickGo = (Image)UI["Joystick"];
         m_joystick = JoystickGo.GetComponent<ETCJoystick>();
@@ -135,10 +150,8 @@ public class MobaMainView : MainViewBase
     {
         //左键
         if(Input.GetMouseButton(0))
-        {
+            OnCastAbility(AbilityCastType.ATTACK);
 
-        }
-        
         //按下鼠标右键时
         if(Input.GetMouseButton(1))
         {
@@ -147,16 +160,25 @@ public class MobaMainView : MainViewBase
             Vector3 mousePosOnScreen = Input.mousePosition;
             Ray ray = worldCamera.ScreenPointToRay(mousePosOnScreen);
             UnityEngine.Debug.DrawLine(ray.origin, ray.direction, Color.red, 50f);
-            if(Physics.Raycast(ray, out RaycastHit hitInfo))
+            if(Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, LayerMask.GetMask("Ground")))
             {
-                var hitPos = hitInfo.point;
-                MovePlayerToPoint(hitPos);
+                MovePlayerToPoint(hitInfo.point);
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.Q))
+            OnCastAbility(AbilityCastType.ATTACK);
+
+        if(Input.GetKeyDown(KeyCode.W))
+            OnCastAbility(AbilityCastType.SKILL1);
+
+        if(Input.GetKeyDown(KeyCode.E))
+            OnCastAbility(AbilityCastType.SKILL2);
+
+        if(Input.GetKeyDown(KeyCode.R))
+            OnCastAbility(AbilityCastType.SKILL3);
+
         if(m_cameraManager != null)
-        {
             m_cameraManager.Update();
-        }
     }
 }
