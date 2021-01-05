@@ -26,11 +26,11 @@ public class TestKCP
 
         connection.Connect("127.0.0.1", 8090);
 
-        var stopSend = false;
-        var buffer = new byte[1500];
-        var counter = 0;
-        var sendBytes = 0;
-        var recvBytes = 0;
+        //var stopSend = false;
+        //var buffer = new byte[1500];
+        //var counter = 0;
+        //var sendBytes = 0;
+        //var recvBytes = 0;
 
         //while(true)
         //{

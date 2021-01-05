@@ -14,11 +14,10 @@ using UnityEngine.UI;
 
 public class MobaMainView : MainViewBase
 {
-    public float runSpeed = 2f;
+    public float runSpeed = 0.1f;
 
     public RectTransform hudParent;
     private ETCJoystick m_joystick;
-    private CharacterController m_characterController;
     private HeroActor m_PlayerActor;
     private BattleEntity m_PlayerEntity;
     private Vector3 moveDistance = Vector3.zero;
@@ -70,31 +69,27 @@ public class MobaMainView : MainViewBase
     {
         BattleActorCreateEventArgs arg = args as BattleActorCreateEventArgs;
         HeroActor actor = arg.heroActor;
-        Debug.RawLog(actor);
 
-        m_characterController = actor.gameObject.GetComponent<CharacterController>();
-        m_cameraManager.SetPosition(actor.gameObject.transform.position);
+        m_cameraManager.SetWorldCameraPosition(actor.transform.position);
         m_PlayerActor = actor;
         m_PlayerEntity = actor.battleEntity;
     }
 
     public void OnHeroActorCreated(object sender, EventArgs args)
     {
-        Debug.RawLog(sender);
         m_hudActorManager.OnHeroActorCreated(sender, args);
     }
 
-    private void MovePlayer2Point(Vector3 position)
+    private void MovePlayerToPoint(Vector3 position)
     {
         if(m_PlayerActor!=null)
         {
-            // 旋转
-            transform.LookAt(position);
-            m_characterController.Move(position);
+            var forward = position - m_PlayerActor.transform.position;
+            m_PlayerActor.Set3DForward(forward);
             m_PlayerActor.Set3DPosition(position);
             m_PlayerActor.ChangeState(HeroState.MOVE);
             // 移动相机
-            m_cameraManager.SetPosition(position);
+            m_cameraManager.SetWorldCameraPosition(position);
         }
     }
 
@@ -108,7 +103,7 @@ public class MobaMainView : MainViewBase
         if(Physics.Raycast(ray, out RaycastHit hitInfo, 10000, LayerMask.NameToLayer("Ground")))
         {
             var hitPos = hitInfo.point;
-            MovePlayer2Point(hitPos);
+            MovePlayerToPoint(hitPos);
         }
     }
 
@@ -134,8 +129,8 @@ public class MobaMainView : MainViewBase
         {
             moveDistance.Set(h, 0, v);
             moveDistance *= runSpeed;
-            var newPosition = transform.position + moveDistance;
-            MovePlayer2Point(newPosition);
+            var newPosition = m_PlayerActor.transform.position + moveDistance;
+            MovePlayerToPoint(newPosition);
         }
         else
         {

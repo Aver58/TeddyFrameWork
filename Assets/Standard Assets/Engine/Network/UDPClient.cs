@@ -25,8 +25,8 @@ public class UDPClient : Singleton<UDPClient>
 {
     public ConnectState State => throw new NotImplementedException();
 
-    public event Action OnConnected;
-    public event Action OnDisconnected;
+    //public event Action OnConnected;
+    //public event Action OnDisconnected;
     
     private UdpClient m_udpClient;
     private Thread m_connectThread;

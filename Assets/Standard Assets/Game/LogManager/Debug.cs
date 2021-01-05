@@ -222,7 +222,7 @@ public static class Debug
         sw.WriteLine("显卡版本:  " + SystemInfo.graphicsDeviceVersion);
         sw.WriteLine("显存大小:  " + SystemInfo.graphicsMemorySize);
         sw.WriteLine("显卡着色器级别:  " + SystemInfo.graphicsShaderLevel);
-        sw.WriteLine("是否图像效果:  " + SystemInfo.supportsImageEffects);
+        //sw.WriteLine("是否图像效果:  " + SystemInfo.supportsImageEffects);
         sw.WriteLine("是否支持内置阴影:  " + SystemInfo.supportsShadows);
         sw.WriteLine("*********************************************************************************************************end");
         sw.WriteLine("LogInfo:");

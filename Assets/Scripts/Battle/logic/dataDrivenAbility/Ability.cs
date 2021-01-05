@@ -9,6 +9,8 @@
 */
 #endregion
 
+// 技能图标
+// http://mxd.17173.com/content/2013-02-26/20130226150805219.shtml
 public class Ability
 {
     public int ID { get; }

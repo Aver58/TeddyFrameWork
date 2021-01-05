@@ -19,13 +19,12 @@ public class HeroStateController
 {
     private HeroState lastState = HeroState.IDLE;
     private HeroState currentState = HeroState.IDLE;
-    private BattleEntity m_BattleEntity;
+    //private BattleEntity m_BattleEntity;
     private AnimationController m_AnimController;
-    private static string className = "HeroStateController";
 
     public HeroStateController(BattleEntity source, AnimationController animController)
     {
-        m_BattleEntity = source;
+        //m_BattleEntity = source;
         m_AnimController = animController;
     }
 

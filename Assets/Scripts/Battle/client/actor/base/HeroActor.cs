@@ -24,8 +24,9 @@ public class HeroActor
     public bool isLoadDone;// { get; set; }
     public BattleEntity battleEntity { get; }
     public GameObject gameObject { get; private set; }
+    public Transform transform { get; private set; }
 
-    private PositionController m_Mover;
+    //private PositionController m_PositionController;
     private DebugController m_DrawTool;
     private AnimationController m_AnimController;
     private HeroStateController m_HeroStateController;
@@ -54,7 +55,8 @@ public class HeroActor
         GameObject asset = assetRequest.asset as GameObject;
 
         gameObject = GameObject.Instantiate<GameObject>(asset);
-        m_Mover = gameObject.AddComponent<PositionController>();
+        transform = gameObject.transform;
+        //m_PositionController = gameObject.AddComponent<PositionController>();
         // 绘制可视区域
         m_DrawTool = gameObject.AddComponent<DebugController>();
         m_DrawTool.DrawViewArea(battleEntity.GetViewRange());     //可见范围
@@ -69,7 +71,6 @@ public class HeroActor
             m_LoadedCallback(gameObject);
 
         // todo 找一个区分玩家与友军的标记
-        Debug.RawLog(camp);
         if(camp == BattleCamp.FRIENDLY)
             GameMsg.instance.SendMessage(GameMsgDef.PlayerActor_Created, new BattleActorCreateEventArgs(this, camp == BattleCamp.ENEMY));
 
@@ -101,8 +102,15 @@ public class HeroActor
         gameObject.transform.position = position;
     }
 
-    public void Set2DForward(Vector2 forward)
+    public void Set2DForward(Vector2 position)
     {
-        gameObject.transform.forward = new Vector3(forward.x, 0, forward.y);
+        battleEntity.Set2DForward(position);
+        gameObject.transform.forward = new Vector3(position.x, 0, position.y);
+    }
+
+    public void Set3DForward(Vector3 position)
+    {
+        battleEntity.Set3DForward(position);
+        gameObject.transform.forward = position;
     }
 }

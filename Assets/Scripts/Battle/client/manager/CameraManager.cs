@@ -25,7 +25,7 @@ public class CameraManager : Singleton<CameraManager>
         worldCamera = GameObject.Find("SceneCamera").GetComponent<Camera>();
     }
 
-    public void SetPosition(Vector3 position)
+    public void SetWorldCameraPosition(Vector3 position)
     {
         m_position.Set(position.x + m_xOffset, position.y + m_yOffset, position.z + m_zOffset);
         worldCamera.transform.position = m_position;

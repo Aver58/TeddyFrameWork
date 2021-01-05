@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class InputController : MonoBehaviour {
+public class InputManager : MonoBehaviour {
 
     private ETCInput input;
 

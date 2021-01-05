@@ -9,7 +9,6 @@
 */
 #endregion
 
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +26,7 @@ public class HudActorManager : Singleton<HudActorManager>
 
         uiCamera = CameraManager.instance.uiCamera;
         canvasTransform = hudParent;
+        parentNode = hudParent;
 
         GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_HP_Updated, this, new EventHandler<EventArgs>(OnHeroHPUpdated));
     }
@@ -46,9 +46,10 @@ public class HudActorManager : Singleton<HudActorManager>
         LoadModule.LoadUI(path,delegate(AssetRequest data) {
             GameObject asset = data.asset as GameObject;
 
-            GameObject go = GameObject.Instantiate<GameObject>(asset);
+            GameObject go = Object.Instantiate(asset);
             go.transform.SetParent(parentNode);
             go.transform.localPosition = Vector3.zero;
+            go.transform.localScale = Vector3.one;
 
             GameObject heroGO = actor.gameObject;
             HudController hudController = go.GetComponent<HudController>();

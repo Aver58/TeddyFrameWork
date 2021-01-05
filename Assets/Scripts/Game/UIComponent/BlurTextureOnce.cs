@@ -6,9 +6,6 @@ using UnityEngine.UI;
 /// 
 public class BlurTextureOnce : MonoBehaviour
 {
-    private string m_blurShaderAssetPath = "Assets/Shader/Unlit/BlurShader.shader";
-    private string m_blurShaderName = "Unlit/BlurShader";
-    private Shader m_blurShader;
     private Material m_blurMaterial;
     private RenderTexture m_renderBuffer;
     private RawImage m_rawImage;
@@ -19,11 +16,6 @@ public class BlurTextureOnce : MonoBehaviour
 
     public void Init()
     {
-        //var assetRequest = LoadModule.LoadAsset(m_blurShaderAssetPath,typeof(Shader));
-        //m_blurShader = assetRequest.asset as Shader;
-        //if(m_blurShader == null)
-        //    Debug.LogError("Shader[Unlit/BlurShader] is null...");
-
         m_rawImage = gameObject.GetComponent<RawImage>();
         m_blurMaterial = m_rawImage.material;
         m_camera = GameObject.Find("UICamera").GetComponent<Camera>(); // 就一个相机，可以直接用，多个的话要多个渲染的结果

@@ -36,7 +36,7 @@ public class Download : DownloadHandlerScript, IDisposable, ICloneable
 
     public int id { get; set; }
 
-    public string error { get; private set; }
+    public new string error { get; private set; }
 
     public long len { get; set; }
 
@@ -79,10 +79,6 @@ public class Download : DownloadHandlerScript, IDisposable, ICloneable
     protected override byte[] GetData()
     {
         return null;
-    }
-
-    protected override void ReceiveContentLength(int contentLength)
-    {
     }
 
     protected override bool ReceiveData(byte[] buffer, int dataLength)

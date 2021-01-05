@@ -15,8 +15,8 @@ public class TcpClient
 
     static byte[] buffer = new byte[1024];
 
-    public event Action OnConnected;
-    public event Action OnDisconnected;
+    //public event Action OnConnected;
+    //public event Action OnDisconnected;
 
     // 连接到远程主机
     public void Connect(string host = "127.0.0.1", int port = 8090)

@@ -19,9 +19,8 @@ public class PositionController : MonoBehaviour, IActor
 
     private void LateUpdate()
     {
-        if (_isPause) {
+        if (_isPause) 
             return;
-        }
 
         // 移动Actor，视图的更新应该比逻辑的快，假设逻辑更新为1s一次，移动了多少距离，视图这边需要差值来进行平缓的移动
         if (_isMoving)
@@ -32,9 +31,8 @@ public class PositionController : MonoBehaviour, IActor
             _currentPos = Vector3.Lerp(_lastPos, _targetPos, radio);
             transform.position = _currentPos;
 
-            if (_movedTime >= _logicDeltaTime) {
+            if (_movedTime >= _logicDeltaTime)
                 _isMoving = false;
-            }
         }
 
         //// Actor旋转
@@ -63,16 +61,26 @@ public class PositionController : MonoBehaviour, IActor
         _isPause = true;
     }
 
-    public void InitPosition(float logicDeltaTime, float srcPosX, float srcPosY, float srcPosZ, float forwardX, float forwardY, float forwardZ)
+    public void InitPosition(Vector3 positon, Vector3 forward)
     {
-        _logicDeltaTime = logicDeltaTime;
-        Set3DPosition(srcPosX, srcPosY, srcPosZ);
-        SetForward(forwardX, forwardY, forwardZ);
+        Set3DPosition(positon);
+        SetForward(forward);
     }
 
     public void MoveTo2DPoint(float targetPosX, float targetPosZ, float forwardX, float forwardZ)
     {
         MoveTo3DPoint(targetPosX, transform.position.y, targetPosZ, forwardX, transform.forward.y, forwardZ);
+    }
+
+    public void MoveTo3DPoint(Vector3 targetPos)
+    {
+        _isMoving = true;
+        _movedTime = 0f;
+        _lastPos = _currentPos;
+        _targetPos = targetPos;
+
+        var forward = targetPos - _currentPos;
+        transform.forward = forward;
     }
 
     public void MoveTo3DPoint(float targetPosX, float targetPosY, float targetPosZ, float forwardX, float forwardY, float forwardZ)
@@ -100,13 +108,6 @@ public class PositionController : MonoBehaviour, IActor
     public void TurnTo3DForward(float forwardX, float forwardY, float forwardZ)
     {
         transform.forward = new Vector3(forwardX, forwardY, forwardZ);
-
-        //_isTurning = true;
-        //_turnedTime = 0f;
-        //_lastForward = _currentForward;
-        //_targetForward = new Vector3(forwardX, forwardY, forwardZ);
-    
-        //transform.forward = new Vector3(forwardX, forwardY, forwardZ);
     }
 
     public void BlinkTo2DPoint(float targetPosX, float targetPosZ, float forwardX, float forwardZ)
@@ -121,12 +122,28 @@ public class PositionController : MonoBehaviour, IActor
         Set3DPosition(position.x, posY, position.z);
     }
 
+    private void Set3DPosition(Vector3 targetPos)
+    {
+        _isMoving = false;
+        _lastPos = targetPos;
+        _currentPos = _lastPos;
+        transform.position = _currentPos;
+    }
+
     private void Set3DPosition(float targetPosX, float targetPosY, float targetPosZ)
     {
         _isMoving = false;
         _lastPos = new Vector3(targetPosX, targetPosY, targetPosZ);
         _currentPos = _lastPos;
         transform.position = _currentPos;
+    }
+
+    private void SetForward(Vector3 forward)
+    {
+        _isTurning = false;
+        _lastForward = forward;
+        _currentForward = _lastForward;
+        transform.forward = forward;
     }
 
     private void SetForward(float forwardX, float forwardY, float forwardZ)
