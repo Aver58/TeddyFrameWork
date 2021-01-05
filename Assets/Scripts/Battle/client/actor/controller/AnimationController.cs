@@ -7,7 +7,7 @@ public class AnimationController : MonoBehaviour, IActor
     private Animator m_Animator;
     private string m_LastAnimName;
 
-    private bool m_IsPause = false;
+    //private bool m_IsPause = false;
 
     //private bool m_IsHitStop = false;
     //private float m_HitStopTime = 0.3f;
@@ -42,7 +42,7 @@ public class AnimationController : MonoBehaviour, IActor
 
     public void Continue()
     {
-        m_IsPause = false;
+        //m_IsPause = false;
         m_Animator.speed = 1.0f;
 
         //if(m_DeadSinkTweenId != 0)
@@ -53,7 +53,7 @@ public class AnimationController : MonoBehaviour, IActor
 
     public void Pause()
     {
-        m_IsPause = true;
+        //m_IsPause = true;
         m_Animator.speed = 0.0f;
 
         //if(m_DeadSinkTweenId != 0)

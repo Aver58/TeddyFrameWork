@@ -10,7 +10,6 @@
 #endregion
 
 using System;
-using UnityEngine;
 
 public abstract class SceneBase
 {

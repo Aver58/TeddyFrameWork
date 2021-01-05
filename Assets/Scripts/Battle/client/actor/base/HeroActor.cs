@@ -26,11 +26,10 @@ public class HeroActor
     public GameObject gameObject { get; private set; }
     public Transform transform { get; private set; }
 
-    //private PositionController m_PositionController;
+    private PositionController m_PositionController;
     private DebugController m_DrawTool;
     private AnimationController m_AnimController;
     private HeroStateController m_HeroStateController;
-    private Vector3 m_InitPosition = Vector3.zero;
     protected Action<GameObject> m_LoadedCallback;
 
     public HeroActor(BattleEntity battleEntity)
@@ -56,7 +55,7 @@ public class HeroActor
 
         gameObject = GameObject.Instantiate<GameObject>(asset);
         transform = gameObject.transform;
-        //m_PositionController = gameObject.AddComponent<PositionController>();
+        m_PositionController = gameObject.AddComponent<PositionController>();
         // 绘制可视区域
         m_DrawTool = gameObject.AddComponent<DebugController>();
         m_DrawTool.DrawViewArea(battleEntity.GetViewRange());     //可见范围
@@ -65,7 +64,7 @@ public class HeroActor
         m_AnimController = gameObject.AddComponent<AnimationController>();
         m_HeroStateController = new HeroStateController(battleEntity, m_AnimController);
 
-        InitPosition(m_InitPosition);
+        InitPosition(Vector3.zero);
 
         if(m_LoadedCallback != null) 
             m_LoadedCallback(gameObject);
@@ -90,27 +89,26 @@ public class HeroActor
         if(isLoadDone)
         {
             battleEntity.Set3DPosition(position);
-            gameObject.transform.position = position;
-            battleEntity.Set3DForward(gameObject.transform.forward);
+            battleEntity.Set3DForward(transform.forward);
+            m_PositionController.InitPosition(position, transform.forward);
         }
-        m_InitPosition = position;
     }
 
     public void Set3DPosition(Vector3 position)
     {
         battleEntity.Set3DPosition(position);
-        gameObject.transform.position = position;
+        m_PositionController.MoveTo3DPoint(position);
     }
 
     public void Set2DForward(Vector2 position)
     {
-        battleEntity.Set2DForward(position);
-        gameObject.transform.forward = new Vector3(position.x, 0, position.y);
+        Set3DForward(new Vector3(position.x, transform.position.y, position.y));
     }
 
     public void Set3DForward(Vector3 position)
     {
         battleEntity.Set3DForward(position);
-        gameObject.transform.forward = position;
+        transform.forward = position;
+        //m_PositionController.SetForward(position);
     }
 }

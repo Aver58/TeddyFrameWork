@@ -14,9 +14,9 @@ using UnityEngine.UI;
 
 public class MobaMainView : MainViewBase
 {
-    public float runSpeed = 0.1f;
+    public float runSpeed = 1f;
 
-    public RectTransform hudParent;
+    private RectTransform hudParent;
     private ETCJoystick m_joystick;
     private HeroActor m_PlayerActor;
     private BattleEntity m_PlayerEntity;
@@ -41,7 +41,6 @@ public class MobaMainView : MainViewBase
     {
         base.AddAllListener();
 
-        AddListener((Button)UI["BtnMove"], OnBtnMove);
         AddListener((Button)UI["BtnAttack"], delegate { OnCastAbility(AbilityCastType.ATTACK); });
         AddListener((Button)UI["BtnSkill1"], delegate { OnCastAbility(AbilityCastType.SKILL1); });
         AddListener((Button)UI["BtnSkill2"], delegate { OnCastAbility(AbilityCastType.SKILL2); });
@@ -61,6 +60,7 @@ public class MobaMainView : MainViewBase
     protected override void AddAllMessage()
     {
         base.AddAllMessage();
+
         GameMsg.instance.AddMessage(GameMsgDef.BattleActor_Created, this, new EventHandler<EventArgs>(OnHeroActorCreated));
         GameMsg.instance.AddMessage(GameMsgDef.PlayerActor_Created, this, new EventHandler<EventArgs>(OnPlayerActorCreated));
     }
@@ -71,6 +71,8 @@ public class MobaMainView : MainViewBase
         HeroActor actor = arg.heroActor;
 
         m_cameraManager.SetWorldCameraPosition(actor.transform.position);
+        m_cameraManager.SetWorldCameraTarget(actor.transform);
+
         m_PlayerActor = actor;
         m_PlayerEntity = actor.battleEntity;
     }
@@ -88,22 +90,6 @@ public class MobaMainView : MainViewBase
             m_PlayerActor.Set3DForward(forward);
             m_PlayerActor.Set3DPosition(position);
             m_PlayerActor.ChangeState(HeroState.MOVE);
-            // 移动相机
-            m_cameraManager.SetWorldCameraPosition(position);
-        }
-    }
-
-    private void OnBtnMove()
-    {
-        // 鼠标位置转世界坐标位置：发射线，碰撞到的地板的位置
-        var uiCamera = CameraManager.instance.uiCamera;
-
-        Vector3 mousePosOnScreen = Input.mousePosition;
-        Ray ray = uiCamera.ScreenPointToRay(mousePosOnScreen);
-        if(Physics.Raycast(ray, out RaycastHit hitInfo, 10000, LayerMask.NameToLayer("Ground")))
-        {
-            var hitPos = hitInfo.point;
-            MovePlayerToPoint(hitPos);
         }
     }
 
@@ -121,11 +107,11 @@ public class MobaMainView : MainViewBase
         if(m_joystick.name != "Joystick")
             return;
 
-        //获取虚拟摇杆偏移量  
+        //获取虚拟摇杆偏移量  [-1,1]
         float h = m_joystick.axisX.axisValue;
         float v = m_joystick.axisY.axisValue;
 
-        if(Mathf.Abs(h) > 0.05f || (Mathf.Abs(v) > 0.05f))
+        if(Mathf.Abs(h) > 0f || (Mathf.Abs(v) > 0f))
         {
             moveDistance.Set(h, 0, v);
             moveDistance *= runSpeed;
@@ -135,19 +121,42 @@ public class MobaMainView : MainViewBase
         else
         {
             if(m_PlayerActor!=null)
-            {
                 m_PlayerActor.ChangeState(HeroState.IDLE);
-            }
         }
     }
 
     private void OnMoveEnd()
     {
         if(m_PlayerActor!=null)
-        {
             m_PlayerActor.ChangeState(HeroState.IDLE);
-        }
     }
 
- 
+    protected override void OnUpdate()
+    {
+        //左键
+        if(Input.GetMouseButton(0))
+        {
+
+        }
+        
+        //按下鼠标右键时
+        if(Input.GetMouseButton(1))
+        {
+            // 鼠标位置转世界坐标位置：发射线，碰撞到的地板的位置
+            var worldCamera = CameraManager.instance.worldCamera;
+            Vector3 mousePosOnScreen = Input.mousePosition;
+            Ray ray = worldCamera.ScreenPointToRay(mousePosOnScreen);
+            UnityEngine.Debug.DrawLine(ray.origin, ray.direction, Color.red, 50f);
+            if(Physics.Raycast(ray, out RaycastHit hitInfo))
+            {
+                var hitPos = hitInfo.point;
+                MovePlayerToPoint(hitPos);
+            }
+        }
+
+        if(m_cameraManager != null)
+        {
+            m_cameraManager.Update();
+        }
+    }
 }

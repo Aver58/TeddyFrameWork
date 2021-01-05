@@ -14,7 +14,8 @@ using UnityEngine;
 
 public class MobaBussiness:Singleton<MobaBussiness>
 {
-    public HeroActor playerActor;
+    private HeroActor m_playerActor;
+
     private BattleEntityManager m_EntityMgr;
     private List<HeroActor> m_EnemyActors;
     private DebugController m_DrawTool;
@@ -43,9 +44,8 @@ public class MobaBussiness:Singleton<MobaBussiness>
 
         //AddPlayer();
         BattleEntity myEntity = m_EntityMgr.GetMyEntity();
-        playerActor = new HeroActor(myEntity);
-        playerActor.LoadAsset(OnLoadPlayer);
-        playerActor.InitPosition(new Vector3(-9, 0, -9));
+        m_playerActor = new HeroActor(myEntity);
+        m_playerActor.LoadAsset(OnLoadPlayer);
 
         //AddEnemy();
         var entyties = m_EntityMgr.GetEntities(BattleCamp.ENEMY);
@@ -67,6 +67,7 @@ public class MobaBussiness:Singleton<MobaBussiness>
 
     void OnLoadPlayer(GameObject go)
     {
+        m_playerActor.InitPosition(new Vector3(-9, 0, -9));
         Transform heroParent = GameObject.Find("HeroNode").transform;
         go.transform.SetParent(heroParent);
     }
@@ -101,9 +102,9 @@ public class MobaBussiness:Singleton<MobaBussiness>
         string skillName = arg.skillName;
         bool isSkipCastPoint = arg.isSkipCastPoint;
 
-        if(playerActor.id == heroID)
+        if(m_playerActor.id == heroID)
         {
-            playerActor.ChangeState(heroState, skillName, isSkipCastPoint);
+            m_playerActor.ChangeState(heroState, skillName, isSkipCastPoint);
         }
 
         foreach(HeroActor actor in m_EnemyActors)

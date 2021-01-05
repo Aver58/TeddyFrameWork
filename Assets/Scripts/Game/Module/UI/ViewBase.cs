@@ -142,6 +142,11 @@ public abstract class ViewBase
         openParam = args;
     }
 
+    public void Update()
+    {
+        OnUpdate();
+    }
+
     #endregion
 
     #region LifeCycle

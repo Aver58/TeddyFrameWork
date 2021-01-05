@@ -149,9 +149,12 @@ public class UIModule : ModuleBase
     #endregion
 
     #region Private
-    private void Update()
+    public override void Update(float dt)
     {
         // 已打开界面的update,有需求才做
+        ViewBase curView = UINavigation.GetLastItem();
+        if(curView != null && curView.isOpen)
+            curView.Update();
 
         // 自动回收cache的界面，todo这个是不是可以用个协程做
         var curTime = Time.time;
@@ -160,7 +163,7 @@ public class UIModule : ModuleBase
             foreach(var item in m_viewMap)
             {
                 var view = item.Value;
-                Debug.Log((view.closeTime - curTime > UIPANEL_CACHE_TIME).ToString());
+                //Debug.Log((view.closeTime - curTime > UIPANEL_CACHE_TIME).ToString());
                 if(view.closeTime - curTime > UIPANEL_CACHE_TIME && !view.isOpen)
                 {
                     m_viewMap[view.key] = null;

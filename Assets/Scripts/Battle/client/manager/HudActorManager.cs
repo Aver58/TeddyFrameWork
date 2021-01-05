@@ -36,6 +36,21 @@ public class HudActorManager : Singleton<HudActorManager>
         GameMsg.instance.RemoveMessage(GameMsgDef.BattleEntity_HP_Updated);
     }
 
+    public void OnHeroHPUpdated(object sender, EventArgs args)
+    {
+        HeorHPUpdateEventArgs arg = args as HeorHPUpdateEventArgs;
+        int actorID = arg.id;
+
+        HudActor actor;
+        m_actorMap.TryGetValue(actorID, out actor);
+        if(actor!=null)
+        {
+            float percent = (float)arg.curHp / arg.maxHp;
+
+            actor.SetValue(percent);
+        }
+    }
+
     public void OnHeroActorCreated(object sender, EventArgs args)
     {
         BattleActorCreateEventArgs arg = args as BattleActorCreateEventArgs;
@@ -43,7 +58,7 @@ public class HudActorManager : Singleton<HudActorManager>
         bool isFriend = arg.isFriend;
 
         // 创建一个血条
-        LoadModule.LoadUI(path,delegate(AssetRequest data) {
+        LoadModule.LoadUI(path, delegate (AssetRequest data) {
             GameObject asset = data.asset as GameObject;
 
             GameObject go = Object.Instantiate(asset);
@@ -61,20 +76,5 @@ public class HudActorManager : Singleton<HudActorManager>
 
             m_actorMap.Add(actor.id, hudActor);
         });
-    }
-
-    public void OnHeroHPUpdated(object sender, EventArgs args)
-    {
-        HeorHPUpdateEventArgs arg = args as HeorHPUpdateEventArgs;
-        int actorID = arg.id;
-
-        HudActor actor;
-        m_actorMap.TryGetValue(actorID, out actor);
-        if(actor!=null)
-        {
-            float percent = (float)arg.curHp / arg.maxHp;
-
-            actor.SetValue(percent);
-        }
     }
 }

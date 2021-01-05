@@ -50,7 +50,7 @@ public class GameMain : MonoBehaviour
         m_moduleMgr.Add<UIModule>();
     }
      
-    private void Update()
+    void Update()
     {
         m_moduleMgr.Update();
     }
