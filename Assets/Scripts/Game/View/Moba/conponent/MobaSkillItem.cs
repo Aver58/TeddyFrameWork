@@ -9,6 +9,7 @@
 */
 #endregion
 
+using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,9 @@ public class MobaSkillItem : ViewBase
     private Ability m_ability;
     private System.Action<AbilityCastType> m_action;
     private AbilityCastType m_abilityCastType;
+    private Timer timer;
+    private Text m_txtCD;
+    private Image m_imgCDMask;
 
     public MobaSkillItem(GameObject go,Transform parent):base(go,parent)
     {
@@ -37,8 +41,31 @@ public class MobaSkillItem : ViewBase
         ImageEx ImgIcon = (ImageEx)UI["ImgIcon"];
         ImgIcon.SetSprite(iconName);
 
-        Image ImgCDMask = (Image)UI["ImgCDMask"];
-        ImgCDMask.gameObject.SetActive(false);
+        m_txtCD = (Text)UI["TxtCD"];
+
+        SetCDState();
+    }
+
+    private void SetCDState()
+    {
+        m_imgCDMask = (Image)UI["ImgCDMask"];
+        bool isInCD = m_ability.CD > 0;
+        m_imgCDMask.gameObject.SetActive(isInCD);
+        timer = new Timer();
+        timer.Elapsed += StartCDCountDown;
+        timer.Start();
+    }
+
+    private void StartCDCountDown(object sender, ElapsedEventArgs e)
+    {
+        if(m_ability.CD <= 0)
+        {
+            timer.Stop();
+            m_imgCDMask.gameObject.SetActive(false);
+            return;
+        }
+        m_imgCDMask.fillAmount = m_ability.CD / m_ability.GetTotalCD();
+        m_txtCD.text = m_ability.CD.ToString();
     }
 
     private void OnBtnSkill()

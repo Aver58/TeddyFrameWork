@@ -234,5 +234,9 @@ public class Ability
         return m_AbilityData.castAnimation;
     }
 
+    public float GetTotalCD()
+    {
+        return m_AbilityData.cooldown;
+    }
     #endregion
 }
