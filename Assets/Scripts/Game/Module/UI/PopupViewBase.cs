@@ -66,24 +66,9 @@ public class PopupViewBase : ViewBase
         viewType = ViewType.POPUP;
     }
 
-    protected override void AddAllListener()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void AddAllMessage()
-    {
-        throw new System.NotImplementedException();
-    }
-
     protected override void OnClose()
     {
         HideMask();
-    }
-
-    protected override void OnLoaded()
-    {
-        
     }
 
     protected override void OnOpen(UIEventArgs args = null)

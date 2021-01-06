@@ -14,13 +14,12 @@
 public class Ability
 {
     public int ID { get; }
+    public float CD { get; set; } = 0f;
     public int priority { get; }
     public float castTime { get; set; }
     public BattleEntity caster { get; }
     public AbilityState abilityState { get; set; }
     public RequestTarget requestTarget { get; set; }
-
-    private float m_CurCD = 0f;
     private AbilityData m_AbilityData;
 
     public Ability(int id, int priority,BattleEntity battleEntity,AbilityData abilityData)
@@ -31,18 +30,18 @@ public class Ability
         m_AbilityData = abilityData;
 
         castTime = 0f;
-        m_CurCD = m_AbilityData.cooldown;
+        CD = m_AbilityData.cooldown;
         abilityState = AbilityState.None;
         requestTarget = new RequestTarget();
     }
 
     public void Update(float deltaTime)
     {
-        if(m_CurCD > 0)
+        if(CD > 0)
         {
-            m_CurCD -= deltaTime;
-            if(m_CurCD<0)
-                m_CurCD = 0;
+            CD -= deltaTime;
+            if(CD<0)
+                CD = 0;
             return;
         }
 
@@ -138,7 +137,7 @@ public class Ability
     public void CastAbilityEnd()
     {
         abilityState = AbilityState.None;
-        m_CurCD = m_AbilityData.cooldown;
+        CD = m_AbilityData.cooldown;
     }
 
     #region 技能事件
@@ -181,7 +180,7 @@ public class Ability
     #region get
     public bool IsCastable()
     {
-        return m_CurCD <= 0;
+        return CD <= 0;
         // todo 
         //--被缴械，不能使用物理技能
         //--被沉默，不能使用法术技能

@@ -434,6 +434,7 @@ public sealed class LoadModule : ModuleBase
 #if UNITY_EDITOR
         if(runtimeMode == false)
         {
+            // 编辑器模式
             if(File.Exists(path))
                 return path;
 

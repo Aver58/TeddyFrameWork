@@ -19,22 +19,6 @@ public class TestView : MainViewBase
         AddListener((Button)UI["BtnScene"], ChangeScene);
     }
 
-    protected override void AddAllMessage()
-    {
-    }
-
-    protected override void OnClose()
-    {
-    }
-
-    protected override void OnLoaded()
-    {
-    }
-
-    protected override void OnOpen(UIEventArgs args = null)
-    {
-    }
-
     private void OpenView2()
     {
         UIModule.OpenView(ViewID.Test2);

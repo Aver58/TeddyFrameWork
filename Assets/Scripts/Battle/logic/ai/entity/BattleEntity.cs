@@ -56,7 +56,7 @@ public class BattleEntity : Entity
     #region ability
     public void InitAbilities()
     {
-        List<int> skillList = m_Property.GetSkillList();
+        List<int> skillList = GetSkillList();
         foreach(int skillID in skillList)
         {
             skillItem skillItem = skillTable.Instance.GetTableItem(skillID);
@@ -304,6 +304,12 @@ public class BattleEntity : Entity
     {
         return m_Property.curEnergy;
     }
+
+    public List<int> GetSkillList()
+    {
+        return m_Property.GetSkillList();
+    }
+
     #endregion
 
     #region set interface

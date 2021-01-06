@@ -9,30 +9,13 @@
 */
 #endregion
 
+using UnityEngine;
+
 public class MainViewBase : ViewBase
 {
-    public MainViewBase()
+    public MainViewBase() { }
+    public MainViewBase(GameObject go, Transform parent) : base(go, parent)
     {
         viewType = ViewType.MAIN;
-    }
-
-    protected override void AddAllListener()
-    {
-    }
-
-    protected override void AddAllMessage()
-    {
-    }
-
-    protected override void OnClose()
-    {
-    }
-
-    protected override void OnLoaded()
-    {
-    }
-
-    protected override void OnOpen(UIEventArgs args = null)
-    {
     }
 }

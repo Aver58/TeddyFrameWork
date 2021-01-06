@@ -21,7 +21,7 @@ MonoBehaviour:
   searchPatternScene: '*.unity'
   searchPatternText: '*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt'
   nameByHash: 0
-  version: 9
+  version: 10
   scenesInBuild:
   - {fileID: 102900000, guid: 41515a2b3f98a445e88e746ac77f43d1, type: 3}
   - {fileID: 102900000, guid: 0dc65c6ac185c2c47b08fa37cf3f0c53, type: 3}
@@ -34,13 +34,11 @@ MonoBehaviour:
     searchPattern: '*'
     nameBy: 2
     assetBundleName: 
-  - searchPath: Assets/Art/Atlas
-    searchPattern: '*'
-    nameBy: 1
+  - searchPath: Assets/Data/ui/atlas
+    searchPattern: '*.png'
+    nameBy: 2
     assetBundleName: 
   ruleAssets:
-  - bundle: assets/art/atlas/game.spriteatlas.unity3d
-    path: Assets/Art/Atlas/Game.spriteatlas
   - bundle: assets/art/ui/game.unity3d
     path: Assets/Art/UI/Game/Btn_Tab1_n.png
   - bundle: assets/art/ui/game.unity3d
@@ -59,17 +57,61 @@ MonoBehaviour:
     path: Assets/Art/UI/Game/bg_ItemIntrudction.png
   - bundle: assets/art/ui/game.unity3d
     path: Assets/Art/UI/Game/checkbox_select.png
+  - bundle: assets/data/ui/atlas/common.unity3d
+    path: Assets/Data/ui/atlas/common/progressbar_below_1.png
+  - bundle: assets/data/ui/atlas/common.unity3d
+    path: Assets/Data/ui/atlas/common/progressbar_middle_1.png
+  - bundle: assets/data/ui/atlas/common.unity3d
+    path: Assets/Data/ui/atlas/common/progressbar_middle_4.png
+  - bundle: assets/data/ui/atlas/skill.unity3d
+    path: Assets/Data/ui/atlas/skill/icon_attack_101.png
+  - bundle: assets/data/ui/atlas/skill.unity3d
+    path: Assets/Data/ui/atlas/skill/icon_skill1_101.png
+  - bundle: assets/data/ui/atlas/skill.unity3d
+    path: Assets/Data/ui/atlas/skill/icon_skill2_101.png
+  - bundle: assets/data/ui/atlas/skill.unity3d
+    path: Assets/Data/ui/atlas/skill/icon_skill3_101.png
   - bundle: assets/_scenes/game.unity.unity3d
     path: Assets/_Scenes/Game.unity
+  - bundle: assets/_scenes/gamemain.unity.unity3d
+    path: Assets/_Scenes/GameMain.unity
+  - bundle: assets/_scenes/mobascene.unity.unity3d
+    path: Assets/_Scenes/MobaScene.unity
+  - bundle: assets/_scenes/scenes_test/testgpuinstance.unity.unity3d
+    path: Assets/_Scenes/Scenes_test/testGPUInstance.unity
+  - bundle: assets/_scenes/scenes_test/testmemory.unity.unity3d
+    path: Assets/_Scenes/Scenes_test/testMemory.unity
+  - bundle: assets/_scenes/scenes_test/testmesh.unity.unity3d
+    path: Assets/_Scenes/Scenes_test/testMesh.unity
+  - bundle: assets/_scenes/scenes_test/testscroll.unity.unity3d
+    path: Assets/_Scenes/Scenes_test/testScroll.unity
   - bundle: assets/_scenes/testnet.unity.unity3d
     path: Assets/_Scenes/TestNet.unity
   ruleBundles:
   - name: assets/_scenes/game.unity.unity3d
     assets:
     - Assets/_Scenes/Game.unity
+  - name: assets/_scenes/gamemain.unity.unity3d
+    assets:
+    - Assets/_Scenes/GameMain.unity
+  - name: assets/_scenes/mobascene.unity.unity3d
+    assets:
+    - Assets/_Scenes/MobaScene.unity
   - name: assets/_scenes/testnet.unity.unity3d
     assets:
     - Assets/_Scenes/TestNet.unity
+  - name: assets/_scenes/scenes_test/testgpuinstance.unity.unity3d
+    assets:
+    - Assets/_Scenes/Scenes_test/testGPUInstance.unity
+  - name: assets/_scenes/scenes_test/testmemory.unity.unity3d
+    assets:
+    - Assets/_Scenes/Scenes_test/testMemory.unity
+  - name: assets/_scenes/scenes_test/testmesh.unity.unity3d
+    assets:
+    - Assets/_Scenes/Scenes_test/testMesh.unity
+  - name: assets/_scenes/scenes_test/testscroll.unity.unity3d
+    assets:
+    - Assets/_Scenes/Scenes_test/testScroll.unity
   - name: assets/art/ui/game.unity3d
     assets:
     - Assets/Art/UI/Game/bg_ItemIntrudction.png
@@ -81,6 +123,14 @@ MonoBehaviour:
     - Assets/Art/UI/Game/Dropdown_menu_bg.png
     - Assets/Art/UI/Game/Slider2.png
     - Assets/Art/UI/Game/Slider2_bg.png
-  - name: assets/art/atlas/game.spriteatlas.unity3d
+  - name: assets/data/ui/atlas/common.unity3d
     assets:
-    - Assets/Art/Atlas/Game.spriteatlas
+    - Assets/Data/ui/atlas/common/progressbar_below_1.png
+    - Assets/Data/ui/atlas/common/progressbar_middle_1.png
+    - Assets/Data/ui/atlas/common/progressbar_middle_4.png
+  - name: assets/data/ui/atlas/skill.unity3d
+    assets:
+    - Assets/Data/ui/atlas/skill/icon_attack_101.png
+    - Assets/Data/ui/atlas/skill/icon_skill1_101.png
+    - Assets/Data/ui/atlas/skill/icon_skill2_101.png
+    - Assets/Data/ui/atlas/skill/icon_skill3_101.png

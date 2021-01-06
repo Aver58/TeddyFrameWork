@@ -14,6 +14,7 @@ using UnityEngine;
 
 public static class HierarchyUtil
 {
+    //todo 传入view，直接导出在viewBase上
     public static Dictionary<string, Object> GetHierarchyItems(GameObject go)
     {
         if (go == null)
@@ -46,11 +47,6 @@ public static class HierarchyUtil
             m_ui[itemInfo.name] = itemInfo.item;
         }
         return m_ui;
-    }
-
-    public static void Test()
-    {
-        Debug.Log("Test");
     }
 }
 

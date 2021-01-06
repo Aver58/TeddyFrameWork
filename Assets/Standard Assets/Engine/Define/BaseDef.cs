@@ -11,9 +11,11 @@ public class BaseDef
     public static string CONFIG = "configData";
     public const string AB_SUFFIX = "unity3d";
     public const string ATLAS_NAME = "atlas_tp";
+    public const string ATLAS_SUFFIX = ".png";
     public const string MUSIC_SUFFIX = "ogg";                   // 音乐后缀
     public const string SOUND_SUFFIX = "ogg";                   // 音乐后缀
     public const string FONT_SUFFIX = "ttf";                    // 字体后缀
+    public const string ATLAS_PREFIX = "Assets/Data/ui/atlas/"; // 图集路径前缀
 }
 
 public class ABFileInfo

@@ -11,26 +11,5 @@
 
 public class TestView2 : PopupViewBase
 {
-    protected override void AddAllListener()
-    {
-    }
-
-    protected override void AddAllMessage()
-    {
-    }
-
-    protected override void OnClose()
-    {
-        base.OnClose();
-    }
-
-    protected override void OnLoaded()
-    {
-        base.OnLoaded();
-    }
-
-    protected override void OnOpen(UIEventArgs args = null)
-    {
-        base.OnOpen(args);
-    }
+    
 }

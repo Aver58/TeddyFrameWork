@@ -1,0 +1,95 @@
+{
+    "Name" : "风舞鸣曲(自动施放）：目标敌人造成魔法伤害4204点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 1.1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.3,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX02_02_attack",
+        "heroFX02_02_flyObject"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX02_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "heroFX02_02_flyObject",
+            "MoveSpeed" : 10,
+            "SourceHeight" : 1.2
+        },
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":2021
+        }
+    },
+	
+		
+    "OnProjectileHitUnit" :
+    {
+		"Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[51, 23],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                    "ValueSourceParams":[18900, 0]
+                }
+                ]
+            },
+            "OnSuccess":
+            {
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":99022
+                }
+            }
+        }
+    }
+}

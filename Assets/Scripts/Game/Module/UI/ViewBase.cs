@@ -36,6 +36,8 @@ public abstract class ViewBase
     /// </summary>
     protected bool optimizationVisible = true;
     protected Transform transform;
+    // 这个还要拆装箱，有点烦，
+    // 咨询了一下，还可以代码生成一个展示类，使用的时候逻辑类引用展示类，使用的时候直接点出来
     protected Dictionary<string, Object> UI;
     /// <summary>
     /// 打开传入的参数
@@ -47,6 +49,19 @@ public abstract class ViewBase
     private Action<ViewBase> m_loadedCallback;
     private LoadState m_loadState;// 加载状态
     protected Vector3 FarAwayPosition = new Vector3(10000, 10000, 0);
+
+    protected ViewBase() { }
+    protected ViewBase(GameObject go,Transform parent)
+    {
+        if(go == null)
+        {
+            Debug.LogError("!!构造初始化，没有传入GameObject！");
+            return;
+        }
+        UI = HierarchyUtil.GetHierarchyItems(go);
+        gameObject = go;
+        transform = go.transform;
+    }
 
     #region API
 
@@ -147,7 +162,7 @@ public abstract class ViewBase
         OnUpdate();
     }
 
-    public object GenerateOne(Type itemClass, GameObject prefab, Transform parent)
+    public ViewBase GenerateOne(Type itemClass, GameObject prefab, Transform parent)
     {
         Transform transParent = parent == null ? null : parent.transform;
         GameObject go = Object.Instantiate(prefab, transParent, false);
@@ -158,8 +173,10 @@ public abstract class ViewBase
         go.transform.SetAsLastSibling();
         go.SetActive(true);
 
-        var itemInstance = Activator.CreateInstance(itemClass);
-        return itemInstance;
+        var itemInstance = Activator.CreateInstance(itemClass,new object[] { go , transParent });
+        ViewBase view = itemInstance as ViewBase;
+
+        return view;
     }
 
     #endregion
@@ -169,14 +186,14 @@ public abstract class ViewBase
     /// <summary>
     /// 按钮监听
     /// </summary>
-    protected abstract void AddAllListener();
+    protected virtual void AddAllListener() { }
     /// <summary>
     /// 事件监听
     /// </summary>
-    protected abstract void AddAllMessage();
-    protected abstract void OnLoaded();
-    protected abstract void OnOpen(UIEventArgs args = null);
-    protected abstract void OnClose();
+    protected virtual void AddAllMessage() { }
+    protected virtual void OnLoaded() { }
+    protected virtual void OnOpen(UIEventArgs args = null) { }
+    protected virtual void OnClose() { }
     protected virtual void OnUpdate() { }
 
     #endregion

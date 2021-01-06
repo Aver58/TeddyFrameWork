@@ -68,7 +68,7 @@ public enum AbilityType
 // 技能类型
 public enum AbilityCastType
 {
-    ATTACK = 1,
+    ATTACK,
     SKILL1,
     SKILL2,
     SKILL3,
