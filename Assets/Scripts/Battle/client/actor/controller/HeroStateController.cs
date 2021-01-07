@@ -50,12 +50,12 @@ public class HeroStateController
         currentState = newState;
 
         HeroStateAction lastActionInfo;
-        HeroStateChangeMap.TryGetValue(lastState, out lastActionInfo);
+        m_HeroStateChangeMap.TryGetValue(lastState, out lastActionInfo);
         if(lastActionInfo.Exit != null)
             lastActionInfo.Exit(m_AnimController, skillName, isSkipCastPoint);
 
         HeroStateAction curActionInfo;
-        HeroStateChangeMap.TryGetValue(currentState, out curActionInfo);
+        m_HeroStateChangeMap.TryGetValue(currentState, out curActionInfo);
         if(curActionInfo.Enter != null)
             curActionInfo.Enter(m_AnimController, skillName, isSkipCastPoint);
     }
@@ -78,7 +78,7 @@ public class HeroStateController
         }
     }
 
-    private static Dictionary<HeroState, HeroStateAction> HeroStateChangeMap = new Dictionary<HeroState, HeroStateAction>
+    private Dictionary<HeroState, HeroStateAction> m_HeroStateChangeMap = new Dictionary<HeroState, HeroStateAction>
     {
         {HeroState.IDLE,new HeroStateAction(EnterIdleState) },
         {HeroState.MOVE,new HeroStateAction(EnterMoveState) },
@@ -86,37 +86,30 @@ public class HeroStateController
         {HeroState.CASTING,new HeroStateAction(EnterCastingState) },
     };
 
-    private static void EnterIdleState(AnimationController ani, string skillName = null, bool isSkipCastPoint = false)
+    private static void SetAnimationControllerTrigger(AnimationController ani,string triggerName)
     {
         if(ani != null)
-        {
-            ani.SetTrigger(idle);
-        }
+            ani.SetTrigger(triggerName);
+    }
+
+    private static void EnterIdleState(AnimationController ani, string skillName = null, bool isSkipCastPoint = false)
+    {
+        SetAnimationControllerTrigger(ani, idle);
     }
     private static void EnterMoveState(AnimationController ani, string skillName = null, bool isSkipCastPoint = false)
     {
-        if(ani != null)
-        {
-            ani.SetTrigger(run);
-        }
+        SetAnimationControllerTrigger(ani, run);
     }
 
     private static void EnterDeadState(AnimationController ani, string skillName = null, bool isSkipCastPoint = false)
     {
         // todo 死在空中，需要移到地面来
-
-        if(ani != null)
-        {
-            ani.SetTrigger(dead);
-        }
+        SetAnimationControllerTrigger(ani, dead);
     }
 
     private static void EnterCastingState(AnimationController ani, string skillName = null, bool isSkipCastPoint = false)
     {
-        if(ani != null)
-        {
-            ani.SetTrigger(skillName);
-        }
+        SetAnimationControllerTrigger(ani, skillName);
     }
 
     #endregion

@@ -149,7 +149,9 @@ public class MobaMainView : MainViewBase
         if(m_PlayerActor != null)
         {
             var forward = position - m_PlayerActor.transform.position;
-            m_PlayerActor.Set3DForward(forward);
+            if(forward != Vector3.zero)
+                m_PlayerActor.Set3DForward(forward);
+
             m_PlayerActor.Set3DPosition(position);
             m_PlayerActor.ChangeState(HeroState.MOVE);
         }
