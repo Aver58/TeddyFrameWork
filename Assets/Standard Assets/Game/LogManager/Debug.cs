@@ -22,7 +22,7 @@ public static class Debug
     /// </summary>
     private static readonly int LineCount = 100;
     //日志列表
-    public static List<KeyValuePair<int, string>> ListBugs = new List<KeyValuePair<int, string>>();
+    private static List<KeyValuePair<int, string>> ListBugs = new List<KeyValuePair<int, string>>();
 
     //第一次执行打印log
     private static bool FirstLogTag = true;

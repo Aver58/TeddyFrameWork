@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEditor;
 
 [InitializeOnLoad]
-public class SoarDHierarchy
+public class HierarchyEditor
 {
 	static GameObject[] m_selectionObjs;
 	static Dictionary<GameObject, Rect> m_GO2RectMap = new Dictionary<GameObject, Rect> ();
 
-    static SoarDHierarchy()
+    static HierarchyEditor()
     {
         EditorApplication.hierarchyWindowItemOnGUI += HierarchyWindowItemOnGUI;
 		Selection.selectionChanged += OnSelectionChanged;

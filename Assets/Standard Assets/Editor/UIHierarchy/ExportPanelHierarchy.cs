@@ -20,7 +20,9 @@ public class ExportPanelHierarchy
     {
         typeof(Button),
         typeof(Image),
+        typeof(ImageEx),
         typeof(Text),
+        typeof(TMPro.TextMeshProUGUI),
     };
 
     public static void ExportNested(Object obj)

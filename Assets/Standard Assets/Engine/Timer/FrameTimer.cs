@@ -20,10 +20,9 @@ public class FrameTimer : ITimerBase
     private int m_count = 0;
     private Action m_callback;
     private int m_durationCount; // 间隔次数
-    private bool m_running = false;
     private static ObjectPool<FrameTimer> s_poolTimer = new ObjectPool<FrameTimer>();
 
-    public bool IsRunning { get { return m_running; } }
+    public bool IsRunning { get; private set; } = false;
 
     public static FrameTimer Create(Action callback, int duration = 1, int loop = -1)
     {
@@ -39,7 +38,7 @@ public class FrameTimer : ITimerBase
         m_callback = callback;
         m_durationCount = duration;
         m_loop = loop;
-        m_running = false;
+        IsRunning = false;
         m_count = Time.frameCount + duration;
     }
 
@@ -52,19 +51,19 @@ public class FrameTimer : ITimerBase
     // 启动定时器
     private void Start()
     {
-        m_running = true;
+        IsRunning = true;
         TimerMgr.instance.AddTimer(this);
     }
 
     // 停止定时器
     public void Stop()
     {
-        m_running = false;
+        IsRunning = false;
     }
 
     public void Update()
     {
-        if(!m_running)
+        if(!IsRunning)
             return;
 
         int frameCount = Time.frameCount;
