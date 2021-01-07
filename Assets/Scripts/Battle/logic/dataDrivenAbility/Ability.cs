@@ -84,6 +84,7 @@ public class Ability
     public void CastAbilityBegin(bool isSkipCastPoint = false)
     {
         castTime = 0f;
+        CD = m_AbilityData.cooldown;
         if(isSkipCastPoint)
         {
             castTime = m_AbilityData.castPoint;
@@ -129,6 +130,7 @@ public class Ability
     public void CastAbilityBreak()
     {
         abilityState = AbilityState.None;
+
     }
 
     /// <summary>
@@ -137,7 +139,7 @@ public class Ability
     public void CastAbilityEnd()
     {
         abilityState = AbilityState.None;
-        CD = m_AbilityData.cooldown;
+        caster.CastAbilityEnd();
     }
 
     #region 技能事件

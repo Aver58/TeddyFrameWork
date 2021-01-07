@@ -25,11 +25,7 @@ public class MobaMainView : MainViewBase
 
     private CameraManager m_cameraManager;
     private HudActorManager m_hudActorManager;
-    private List<MobaSkillItem> skillItems;
-    private MobaSkillItem attackSkillItem;
-    private MobaSkillItem skill1SkillItem;
-    private MobaSkillItem skill2SkillItem;
-    private MobaSkillItem skill3SkillItem;
+    private Dictionary<AbilityCastType,MobaSkillItem> m_MobaSkillItemMap;
 
     protected override void OnLoaded()
     {
@@ -66,6 +62,27 @@ public class MobaMainView : MainViewBase
 
         GameMsg.instance.AddMessage(GameMsgDef.BattleActor_Created, this, new EventHandler<EventArgs>(OnHeroActorCreated));
         GameMsg.instance.AddMessage(GameMsgDef.PlayerActor_Created, this, new EventHandler<EventArgs>(OnPlayerActorCreated));
+        GameMsg.instance.AddMessage(GameMsgDef.Hero_ChangeState, this, new EventHandler<EventArgs>(OnHeroActorStateChanged));
+    }
+
+    private void OnHeroActorStateChanged(object sender, EventArgs args)
+    {
+        HeorChangeStateEventArgs arg = args as HeorChangeStateEventArgs;
+        int heroID = arg.id;
+        string skillName = arg.skillName;
+        HeroState heroState = arg.heroState;
+        if(heroState == HeroState.CASTING)
+        {
+            // 施法,todo，区分玩家和其他玩家
+            if(heroID == m_PlayerEntity.id)
+            {
+                var castType = m_PlayerEntity.GetCastType(skillName);
+                MobaSkillItem item;
+                m_MobaSkillItemMap.TryGetValue(castType, out item);
+                if(item!=null)
+                    item.SetCDState();
+            }
+        }
     }
 
     private void OnPlayerActorCreated(object sender, EventArgs args)
@@ -90,36 +107,22 @@ public class MobaMainView : MainViewBase
         var nodeSkill1 = (RectTransform)UI["NodeSkill1"];
         var nodeSkill2 = (RectTransform)UI["NodeSkill2"];
         var nodeSkill3 = (RectTransform)UI["NodeSkill3"];
-        attackSkillItem = GenerateOne(typeof(MobaSkillItem), prefab, nodeAttack) as MobaSkillItem;
-        skill1SkillItem = GenerateOne(typeof(MobaSkillItem), prefab, nodeSkill1) as MobaSkillItem;
-        skill2SkillItem = GenerateOne(typeof(MobaSkillItem), prefab, nodeSkill2) as MobaSkillItem;
-        skill3SkillItem = GenerateOne(typeof(MobaSkillItem), prefab, nodeSkill3) as MobaSkillItem;
 
-        attackSkillItem.Init(AbilityCastType.ATTACK, m_PlayerEntity.GetAbility(AbilityCastType.ATTACK), OnClickSkillItem);
-        skill1SkillItem.Init(AbilityCastType.SKILL1, m_PlayerEntity.GetAbility(AbilityCastType.SKILL1), OnClickSkillItem);
-        skill2SkillItem.Init(AbilityCastType.SKILL2, m_PlayerEntity.GetAbility(AbilityCastType.SKILL2), OnClickSkillItem);
-        skill3SkillItem.Init(AbilityCastType.SKILL3, m_PlayerEntity.GetAbility(AbilityCastType.SKILL3), OnClickSkillItem);
+        m_MobaSkillItemMap = new Dictionary<AbilityCastType, MobaSkillItem>();
+        List<RectTransform> parents = new List<RectTransform> { nodeAttack , nodeSkill1, nodeSkill2, nodeSkill3 };
+        List<AbilityCastType> castTypes = new List<AbilityCastType> { AbilityCastType.ATTACK, AbilityCastType.SKILL1, AbilityCastType.SKILL2, AbilityCastType.SKILL3 };
+        for(int i = 0; i < 4; i++)
+        {
+            var castType = castTypes[i];
+            var item = GenerateOne(typeof(MobaSkillItem), prefab, parents[i]) as MobaSkillItem;
+            item.Init(castType, m_PlayerEntity.GetAbility(castType), OnClickSkillItem);
+            m_MobaSkillItemMap.Add(castType,item);
+        }
     }
 
     private void OnClickSkillItem(AbilityCastType abilityCastType)
     {
         OnCastAbility(abilityCastType);
-    }
-
-    private void OnHeroActorCreated(object sender, EventArgs args)
-    {
-        m_hudActorManager.OnHeroActorCreated(sender, args);
-    }
-
-    private void MovePlayerToPoint(Vector3 position)
-    {
-        if(m_PlayerActor!=null)
-        {
-            var forward = position - m_PlayerActor.transform.position;
-            m_PlayerActor.Set3DForward(forward);
-            m_PlayerActor.Set3DPosition(position);
-            m_PlayerActor.ChangeState(HeroState.MOVE);
-        }
     }
 
     private void OnCastAbility(AbilityCastType castType)
@@ -133,6 +136,22 @@ public class MobaMainView : MainViewBase
                 return;
             }
             m_PlayerEntity.CastAbility(ability);
+        }
+    }
+
+    private void OnHeroActorCreated(object sender, EventArgs args)
+    {
+        m_hudActorManager.OnHeroActorCreated(sender, args);
+    }
+
+    private void MovePlayerToPoint(Vector3 position)
+    {
+        if(m_PlayerActor != null)
+        {
+            var forward = position - m_PlayerActor.transform.position;
+            m_PlayerActor.Set3DForward(forward);
+            m_PlayerActor.Set3DPosition(position);
+            m_PlayerActor.ChangeState(HeroState.MOVE);
         }
     }
 

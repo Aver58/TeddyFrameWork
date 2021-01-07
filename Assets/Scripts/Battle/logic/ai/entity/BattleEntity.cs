@@ -16,25 +16,24 @@ using UnityEngine;
 
 public class BattleEntity : Entity
 {
-    public static Dictionary<string,AbilityCastType> animationName2CastTypeMap = new Dictionary<string, AbilityCastType> {
+    public BattleCamp camp { get; }
+    public BattleCamp enemyCamp { get;set; }
+    public BattleEntity target { get; set; }
+    public List<Ability> abilities;
+
+    private static Dictionary<string, AbilityCastType> m_stringToCastTypeMap = new Dictionary<string, AbilityCastType> {
         { "attack",AbilityCastType.ATTACK},
         { "skill1",AbilityCastType.SKILL1},
         { "skill2",AbilityCastType.SKILL2},
         { "skill3",AbilityCastType.SKILL3},
     };
-
-    public BattleCamp camp { get; }
-    public BattleCamp enemyCamp { get;set; }
-    public BattleEntity target { get; set; }
-    public List<Ability> abilities;
-    private Dictionary<AbilityCastType, Ability> abilityMap;
-
     private HeroState m_HeroState;
     private TBTAction m_BehaviorTree;
     private TBTAction m_DecisionTree;
     private BattleProperty m_Property;
     private BattleDecisionWorkingData m_DecisionWorkData;
     private BattleBehaviorWorkingData m_BehaviorWorkData;
+    private Dictionary<AbilityCastType, Ability> m_abilityMap;
 
     public BattleEntity(int id, BattleCamp battleCamp, BattleProperty property) : base(id)
     {
@@ -42,7 +41,7 @@ public class BattleEntity : Entity
         camp = battleCamp;
         m_Property = property;
         abilities = new List<Ability>();
-        abilityMap = new Dictionary<AbilityCastType, Ability>(4);
+        m_abilityMap = new Dictionary<AbilityCastType, Ability>(4);
         m_HeroState = HeroState.IDLE;
         m_BehaviorTree = GetBehaviorTree();
         m_DecisionTree = GetDecisionTree();
@@ -63,8 +62,8 @@ public class BattleEntity : Entity
             //string skillConfig = skillItem.config;
             Ability ability = AbilityReader.CreateAbility(skillID, this);
             string skillName = ability.GetCastAnimation();
-            var castType = animationName2CastTypeMap[skillName];
-            abilityMap[castType] = ability;
+            var castType = m_stringToCastTypeMap[skillName];
+            m_abilityMap[castType] = ability;
             abilities.Add(ability);
         }
     }
@@ -88,6 +87,11 @@ public class BattleEntity : Entity
         ability.CastAbilityBegin(isSkipCastPoint);
 
         SetState(HeroState.CASTING,ability.GetCastAnimation(), isSkipCastPoint);
+    }
+
+    public void CastAbilityEnd()
+    {
+        SetState(HeroState.IDLE);
     }
 
     #endregion
@@ -183,10 +187,26 @@ public class BattleEntity : Entity
         return null;
     }
 
+    public Ability GetAbility(string skillName)
+    {
+        if(string.IsNullOrEmpty(skillName))
+            return null;
+       
+        var castType = m_stringToCastTypeMap[skillName];
+        return GetAbility(castType);
+    }
+
+    public AbilityCastType GetCastType(string skillName)
+    {
+        //if(string.IsNullOrEmpty(skillName))
+        //    return ;
+        return m_stringToCastTypeMap[skillName];
+    }
+
     public Ability GetAbility(AbilityCastType castType)
     {
         Ability ability;
-        abilityMap.TryGetValue(castType, out ability);
+        m_abilityMap.TryGetValue(castType, out ability);
         if(ability != null)
         {
             return ability;
