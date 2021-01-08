@@ -4,10 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: M_Area
-  m_Shader: {fileID: 4800000, guid: 632405c5f908d35458209369d2370a9e, type: 3}
+  m_Shader: {fileID: 4800000, guid: c820bccc106e60548a4c0327c168f682, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _DISSOLVE_MAINNOISE_OFF _MAINTEX_T_ON _MAIN_R_ON
     _USEBLUR_ON
   m_LightmapFlags: 5
@@ -31,10 +32,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Se:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _ColorMask: 15
     - _Cull: 0
     - _Dissolve_MainNoise: 0
     - _DstBlend: 1
+    - _IsUI: 0
     - _MainTex_T: 1
     - _Main_A: 0
     - _Main_B: 0
@@ -48,10 +55,18 @@ Material:
     - _Noise_Value: 0
     - _Opa_U: 0
     - _Opa_V: 0
+    - _SeU: 0
+    - _SeV: 0
     - _SrcBlend: 5
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _Tex_U: 0
     - _Tex_V: 0
     - _UseBlur: 1
+    - _UseSe: 0
     - _VertexColor_A: 1
     - _VertexColor_L: 2.44
     - _ZTest: 2
@@ -60,3 +75,5 @@ Material:
     - _dissolve: -1
     m_Colors:
     - _Color: {r: 0.88235295, g: 0.7896432, b: 0.40224916, a: 1}
+    - _SeColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

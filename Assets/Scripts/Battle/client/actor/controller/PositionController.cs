@@ -66,7 +66,8 @@ public class PositionController : MonoBehaviour, IActor
         _targetPos = targetPos;
 
         var forward = targetPos - _currentPos;
-        transform.forward = forward;
+        if(forward != Vector3.zero)
+            transform.forward = forward;
         m_OnMoveEnd = callback;
     }
 

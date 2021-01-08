@@ -130,7 +130,6 @@ public class Ability
     public void CastAbilityBreak()
     {
         abilityState = AbilityState.None;
-
     }
 
     /// <summary>

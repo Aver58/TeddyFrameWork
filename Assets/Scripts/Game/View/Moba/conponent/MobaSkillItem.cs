@@ -9,6 +9,7 @@
 */
 #endregion
 
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,9 @@ public class MobaSkillItem : ViewBase
 {
     private int m_skillID;
     private Ability m_ability;
-    private System.Action<AbilityCastType> m_action;
+    private Action<AbilityCastType> m_downAction;
+    private Action<AbilityCastType,Vector2> m_dragAction;
+    private Action<AbilityCastType> m_upAction;
     private AbilityCastType m_abilityCastType;
     private Timer timer;
     private TextMeshProUGUI m_txtCD;
@@ -25,12 +28,18 @@ public class MobaSkillItem : ViewBase
 
     public MobaSkillItem(GameObject go,Transform parent):base(go,parent)
     {
-        AddListener((Button)UI["BtnSkill"], OnBtnSkill);
+        ETCJoystick joystick = (ETCJoystick)UI["Joystick"];
+        joystick.onTouchStart.AddListener(OnPointerDown);
+        joystick.onTouchUp.AddListener(OnPointerUp);
+        joystick.onMove.AddListener(OnDrag);
     }
 
-    public void Init(AbilityCastType castType, Ability ability,System.Action<AbilityCastType> action)
+    public void Init(AbilityCastType castType, Ability ability,Action<AbilityCastType> downAction
+        , Action<AbilityCastType, Vector2> dragAction, Action<AbilityCastType> upAction)
     {
-        m_action = action;
+        m_downAction = downAction;
+        m_dragAction = dragAction;
+        m_upAction = upAction;
         m_ability = ability;
         m_skillID = ability.ID;
         m_abilityCastType = castType;
@@ -66,9 +75,21 @@ public class MobaSkillItem : ViewBase
         m_txtCD.text = m_ability.CD.ToString("f1");
     }
 
-    private void OnBtnSkill()
+    private void OnPointerDown()
     {
-        if(m_action!=null)
-            m_action.Invoke(m_abilityCastType);
+        if(m_downAction != null)
+            m_downAction.Invoke(m_abilityCastType);
+    }
+
+    private void OnPointerUp()
+    {
+        if(m_upAction != null)
+            m_upAction.Invoke(m_abilityCastType);
+    }
+
+    private void OnDrag(Vector2 vector2)
+    {
+        if(m_dragAction != null)
+            m_dragAction.Invoke(m_abilityCastType, vector2);
     }
 }

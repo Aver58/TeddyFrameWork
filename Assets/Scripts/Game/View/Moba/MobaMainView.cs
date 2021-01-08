@@ -47,13 +47,12 @@ public class MobaMainView : MainViewBase
         
         var JoystickGo = (Image)UI["Joystick"];
         m_joystick = JoystickGo.GetComponent<ETCJoystick>();
-        m_joystick.onMoveEnd.AddListener(() => OnMoveEnd());
-        m_joystick.onMoveEnd.AddListener(() => OnMoveEnd());
+        m_joystick.onMoveEnd.AddListener(OnMoveEnd);
         //方式一：按键方法注册
-        m_joystick.OnPressLeft.AddListener(() => OnMoving());
-        m_joystick.OnPressRight.AddListener(() => OnMoving());
-        m_joystick.OnPressUp.AddListener(() => OnMoving());
-        m_joystick.OnPressDown.AddListener(() => OnMoving());
+        m_joystick.OnPressLeft.AddListener(OnMoving);
+        m_joystick.OnPressRight.AddListener(OnMoving);
+        m_joystick.OnPressUp.AddListener(OnMoving);
+        m_joystick.OnPressDown.AddListener(OnMoving);
     }
 
     protected override void AddAllMessage()
@@ -115,27 +114,8 @@ public class MobaMainView : MainViewBase
         {
             var castType = castTypes[i];
             var item = GenerateOne(typeof(MobaSkillItem), prefab, parents[i]) as MobaSkillItem;
-            item.Init(castType, m_PlayerEntity.GetAbility(castType), OnClickSkillItem);
+            item.Init(castType, m_PlayerEntity.GetAbility(castType), OnItemPointerDown, OnItemDrag, OnItemPointerUp);
             m_MobaSkillItemMap.Add(castType,item);
-        }
-    }
-
-    private void OnClickSkillItem(AbilityCastType abilityCastType)
-    {
-        OnCastAbility(abilityCastType);
-    }
-
-    private void OnCastAbility(AbilityCastType castType)
-    {
-        if(m_PlayerEntity!=null)
-        {
-            Ability ability = m_PlayerEntity.GetAbility(castType);
-            if(ability.CD > 0)
-            {
-                Debug.Log("冷却中");
-                return;
-            }
-            m_PlayerEntity.CastAbility(ability);
         }
     }
 
@@ -188,9 +168,10 @@ public class MobaMainView : MainViewBase
 
     private void OnBtnAttack()
     {
-        OnCastAbility(AbilityCastType.ATTACK);
+        //OnCastAbility(AbilityCastType.ATTACK);
+        //按下鼠标左键时
     }
-    
+
     protected override void OnUpdate()
     {
         //按下鼠标右键时
@@ -201,25 +182,83 @@ public class MobaMainView : MainViewBase
             Vector3 mousePosOnScreen = Input.mousePosition;
             Ray ray = worldCamera.ScreenPointToRay(mousePosOnScreen);
             UnityEngine.Debug.DrawLine(ray.origin, ray.direction, Color.red, 50f);
+            // 如果点击到玩家，就攻击
+
             if(Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, LayerMask.GetMask("Ground")))
             {
+                // 点击到地板，就移动
                 MovePlayerToPoint(hitInfo.point);
             }
         }
 
         if(Input.GetKeyDown(KeyCode.Q))
+            ShowAbilityIndicator(AbilityCastType.ATTACK);
+        if(Input.GetKeyUp(KeyCode.Q))
             OnCastAbility(AbilityCastType.ATTACK);
 
+        if(Input.GetKeyDown(KeyCode.W))
+            ShowAbilityIndicator(AbilityCastType.SKILL1);
         if(Input.GetKeyDown(KeyCode.W))
             OnCastAbility(AbilityCastType.SKILL1);
 
         if(Input.GetKeyDown(KeyCode.E))
+            ShowAbilityIndicator(AbilityCastType.SKILL2);
+        if(Input.GetKeyDown(KeyCode.E))
             OnCastAbility(AbilityCastType.SKILL2);
 
+        if(Input.GetKeyDown(KeyCode.R))
+            ShowAbilityIndicator(AbilityCastType.SKILL3);
         if(Input.GetKeyDown(KeyCode.R))
             OnCastAbility(AbilityCastType.SKILL3);
 
         if(m_cameraManager != null)
             m_cameraManager.Update();
+    }
+
+    private void OnItemPointerDown(AbilityCastType abilityCastType)
+    {
+        Debug.Log("OnItemPointerDown");
+        ShowAbilityIndicator(abilityCastType);
+    }
+
+    private void OnItemDrag(AbilityCastType abilityCastType, Vector2 vector2)
+    {
+        Debug.Log("OnItemDrag");
+        Debug.RawLog(vector2);
+    }
+
+    private void OnItemPointerUp(AbilityCastType abilityCastType)
+    {
+        Debug.Log("OnItemPointerUp");
+        OnCastAbility(abilityCastType);
+    }
+
+    private void ShowAbilityIndicator(AbilityCastType castType)
+    {
+        if(m_PlayerEntity != null)
+        {
+            Ability ability = m_PlayerEntity.GetAbility(castType);
+            if(ability.CD > 0)
+            {
+                Debug.Log("冷却中");
+                return;
+            }
+            // 技能指示器
+            m_PlayerActor.ShowAbilityIndicator(ability);
+        }
+    }
+
+    private void OnCastAbility(AbilityCastType castType)
+    {
+        if(m_PlayerEntity != null)
+        {
+            Ability ability = m_PlayerEntity.GetAbility(castType);
+            if(ability.CD > 0)
+            {
+                Debug.Log("冷却中");
+                return;
+            }
+            m_PlayerEntity.CastAbility(ability);
+        }
     }
 }

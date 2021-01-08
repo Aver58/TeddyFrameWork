@@ -98,7 +98,7 @@ public class HeroActor
     {
         battleEntity.Set3DPosition(position);
         float logicDeltaTime = (position - transform.position).magnitude / battleEntity.GetMoveSpeed();
-        m_PositionController.MoveTo3DPoint(logicDeltaTime,position, OnMoveEnd);
+        m_PositionController.MoveTo3DPoint(logicDeltaTime, position, OnMoveEnd);
     }
 
     public void Set2DForward(Vector2 position)
@@ -115,5 +115,10 @@ public class HeroActor
     public void OnMoveEnd()
     {
         ChangeState(HeroState.IDLE);
+    }
+
+    public void ShowAbilityIndicator()
+    {
+
     }
 }

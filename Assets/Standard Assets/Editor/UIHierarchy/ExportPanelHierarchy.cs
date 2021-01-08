@@ -18,6 +18,7 @@ public class ExportPanelHierarchy
 {
     private static System.Type[] ms_componentTypes =
     {
+        typeof(ETCJoystick),
         typeof(Button),
         typeof(Image),
         typeof(ImageEx),
