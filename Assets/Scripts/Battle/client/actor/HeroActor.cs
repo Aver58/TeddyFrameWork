@@ -11,6 +11,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -30,6 +31,8 @@ public class HeroActor
     private DebugController m_DrawTool;
     private AnimationController m_AnimController;
     private HeroStateController m_HeroStateController;
+    private Dictionary<AbilityCastType, AbilityActor> m_abilityActorMap;
+
     protected Action<GameObject> m_LoadedCallback;
 
     public HeroActor(BattleEntity battleEntity)
@@ -117,8 +120,37 @@ public class HeroActor
         ChangeState(HeroState.IDLE);
     }
 
-    public void ShowAbilityIndicator()
-    {
+    #region Ability Indicator
 
+    private AbilityActor GetAbilityActor(AbilityCastType castType)
+    {
+        Ability ability = battleEntity.GetAbility(castType);
+        if(m_abilityActorMap == null)
+        {
+            m_abilityActorMap = new Dictionary<AbilityCastType, AbilityActor>(4);
+        }
+
+        AbilityActor abilityActor;
+        if(m_abilityActorMap.TryGetValue(castType,out abilityActor))
+        {
+            return abilityActor;
+        }
+        abilityActor = new AbilityActor(ability);
+        return abilityActor;
     }
+
+    // 技能范围
+    public void ShowAbilityRange(AbilityCastType castType)
+    {
+        var abilityActor = GetAbilityActor(castType);
+        abilityActor.ShowAbilityRange();
+    }
+
+    public void ShowAbilityIndicator(AbilityCastType castType, Vector3 forward)
+    {
+        var abilityActor = GetAbilityActor(castType);
+        abilityActor.ShowAbilityIndicator(forward);
+    }
+
+    #endregion
 }

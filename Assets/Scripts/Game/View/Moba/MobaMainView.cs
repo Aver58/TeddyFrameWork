@@ -22,6 +22,7 @@ public class MobaMainView : MainViewBase
     private HeroActor m_PlayerActor;
     private BattleEntity m_PlayerEntity;
     private Vector3 moveDistance = Vector3.zero;
+    private Vector3 skillForward = Vector3.zero;
 
     private CameraManager m_cameraManager;
     private HudActorManager m_hudActorManager;
@@ -192,22 +193,22 @@ public class MobaMainView : MainViewBase
         }
 
         if(Input.GetKeyDown(KeyCode.Q))
-            ShowAbilityIndicator(AbilityCastType.ATTACK);
+            ShowAbilityRange(AbilityCastType.ATTACK);
         if(Input.GetKeyUp(KeyCode.Q))
             OnCastAbility(AbilityCastType.ATTACK);
 
         if(Input.GetKeyDown(KeyCode.W))
-            ShowAbilityIndicator(AbilityCastType.SKILL1);
+            ShowAbilityRange(AbilityCastType.SKILL1);
         if(Input.GetKeyDown(KeyCode.W))
             OnCastAbility(AbilityCastType.SKILL1);
 
         if(Input.GetKeyDown(KeyCode.E))
-            ShowAbilityIndicator(AbilityCastType.SKILL2);
+            ShowAbilityRange(AbilityCastType.SKILL2);
         if(Input.GetKeyDown(KeyCode.E))
             OnCastAbility(AbilityCastType.SKILL2);
 
         if(Input.GetKeyDown(KeyCode.R))
-            ShowAbilityIndicator(AbilityCastType.SKILL3);
+            ShowAbilityRange(AbilityCastType.SKILL3);
         if(Input.GetKeyDown(KeyCode.R))
             OnCastAbility(AbilityCastType.SKILL3);
 
@@ -217,34 +218,35 @@ public class MobaMainView : MainViewBase
 
     private void OnItemPointerDown(AbilityCastType abilityCastType)
     {
-        Debug.Log("OnItemPointerDown");
-        ShowAbilityIndicator(abilityCastType);
+        ShowAbilityRange(abilityCastType);
     }
 
-    private void OnItemDrag(AbilityCastType abilityCastType, Vector2 vector2)
+    private void OnItemDrag(AbilityCastType abilityCastType, Vector2 mouseDelta)
     {
-        Debug.Log("OnItemDrag");
-        Debug.RawLog(vector2);
+        Debug.RawLog(mouseDelta);
+        var originPos = m_PlayerActor.transform.position;
+        skillForward.Set(originPos.x + mouseDelta.x, originPos.y, originPos.z + mouseDelta.y);
+        ShowAbilityIndicator(abilityCastType, skillForward);
     }
 
     private void OnItemPointerUp(AbilityCastType abilityCastType)
     {
-        Debug.Log("OnItemPointerUp");
         OnCastAbility(abilityCastType);
     }
 
-    private void ShowAbilityIndicator(AbilityCastType castType)
+    private void ShowAbilityRange(AbilityCastType castType)
     {
         if(m_PlayerEntity != null)
         {
-            Ability ability = m_PlayerEntity.GetAbility(castType);
-            if(ability.CD > 0)
-            {
-                Debug.Log("冷却中");
-                return;
-            }
-            // 技能指示器
-            m_PlayerActor.ShowAbilityIndicator(ability);
+            m_PlayerActor.ShowAbilityRange(castType);
+        }
+    }
+
+    private void ShowAbilityIndicator(AbilityCastType castType, Vector3 forward)
+    {
+        if(m_PlayerEntity != null)
+        {
+            m_PlayerActor.ShowAbilityIndicator(castType, forward);
         }
     }
 
