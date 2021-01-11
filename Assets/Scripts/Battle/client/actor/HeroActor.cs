@@ -126,15 +126,12 @@ public class HeroActor
     {
         Ability ability = battleEntity.GetAbility(castType);
         if(m_abilityActorMap == null)
-        {
             m_abilityActorMap = new Dictionary<AbilityCastType, AbilityActor>(4);
-        }
 
         AbilityActor abilityActor;
         if(m_abilityActorMap.TryGetValue(castType,out abilityActor))
-        {
             return abilityActor;
-        }
+
         abilityActor = new AbilityActor(ability);
         return abilityActor;
     }

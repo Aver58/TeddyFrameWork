@@ -12,24 +12,33 @@
 using UnityEngine;
 
 /// <summary>
-/// 技能展示
+/// 技能Actor【技能指示器、特效】
 /// </summary>
 public class AbilityActor
 {
+    private AbilityInput m_abilityInput;
+
     public AbilityActor(Ability ability)
     {
-
+        // 解析技能指示器
+        //m_abilityInput = new AbilityInput();
     }
 
     public void OnFingerDown()
     {
+        if(m_abilityInput != null)
+            m_abilityInput.OnFingerDown();
     }
 
     public void OnFingerDrag(Vector3 forward)
     {
+        if(m_abilityInput != null)
+            m_abilityInput.OnFingerDrag(forward);
     }
 
     public void OnFingerUp()
     {
+        if(m_abilityInput != null)
+            m_abilityInput.OnFingerUp();
     }
 }

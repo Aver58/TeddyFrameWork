@@ -9,7 +9,7 @@
 */
 #endregion
 
-using UnityEngine.EventSystems;
+using UnityEngine;
 
 public class AbilityInput
 {
@@ -18,7 +18,7 @@ public class AbilityInput
 
     }
 
-    public void OnFingerDrag(PointerEventData pointerEventData)
+    public void OnFingerDrag(Vector3 forward)
     {
 
     }
