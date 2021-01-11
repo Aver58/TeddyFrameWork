@@ -11,17 +11,25 @@
 
 using UnityEngine;
 
+/// <summary>
+/// 技能展示
+/// </summary>
 public class AbilityActor
 {
     public AbilityActor(Ability ability)
     {
+
     }
 
-    public void ShowAbilityRange()
+    public void OnFingerDown()
     {
     }
 
-    public void ShowAbilityIndicator(Vector3 forward)
+    public void OnFingerDrag(Vector3 forward)
+    {
+    }
+
+    public void OnFingerUp()
     {
     }
 }

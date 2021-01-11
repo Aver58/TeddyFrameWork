@@ -140,16 +140,22 @@ public class HeroActor
     }
 
     // 技能范围
-    public void ShowAbilityRange(AbilityCastType castType)
+    public void OnFingerDown(AbilityCastType castType)
     {
         var abilityActor = GetAbilityActor(castType);
-        abilityActor.ShowAbilityRange();
+        abilityActor.OnFingerDown();
     }
 
-    public void ShowAbilityIndicator(AbilityCastType castType, Vector3 forward)
+    public void OnFingerDrag(AbilityCastType castType, Vector3 forward)
     {
         var abilityActor = GetAbilityActor(castType);
-        abilityActor.ShowAbilityIndicator(forward);
+        abilityActor.OnFingerDrag(forward);
+    }
+
+    public void OnFingerUp(AbilityCastType castType)
+    {
+        var abilityActor = GetAbilityActor(castType);
+        abilityActor.OnFingerUp();
     }
 
     #endregion

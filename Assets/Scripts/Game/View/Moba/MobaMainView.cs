@@ -115,7 +115,7 @@ public class MobaMainView : MainViewBase
         {
             var castType = castTypes[i];
             var item = GenerateOne(typeof(MobaSkillItem), prefab, parents[i]) as MobaSkillItem;
-            item.Init(castType, m_PlayerEntity.GetAbility(castType), OnItemPointerDown, OnItemDrag, OnItemPointerUp);
+            item.Init(castType, m_PlayerEntity.GetAbility(castType), OnFingerDown, OnFingerDrag, OnFingerUp);
             m_MobaSkillItemMap.Add(castType,item);
         }
     }
@@ -193,22 +193,22 @@ public class MobaMainView : MainViewBase
         }
 
         if(Input.GetKeyDown(KeyCode.Q))
-            ShowAbilityRange(AbilityCastType.ATTACK);
+            OnFingerDown(AbilityCastType.ATTACK);
         if(Input.GetKeyUp(KeyCode.Q))
             OnCastAbility(AbilityCastType.ATTACK);
 
         if(Input.GetKeyDown(KeyCode.W))
-            ShowAbilityRange(AbilityCastType.SKILL1);
+            OnFingerDown(AbilityCastType.SKILL1);
         if(Input.GetKeyDown(KeyCode.W))
             OnCastAbility(AbilityCastType.SKILL1);
 
         if(Input.GetKeyDown(KeyCode.E))
-            ShowAbilityRange(AbilityCastType.SKILL2);
+            OnFingerDown(AbilityCastType.SKILL2);
         if(Input.GetKeyDown(KeyCode.E))
             OnCastAbility(AbilityCastType.SKILL2);
 
         if(Input.GetKeyDown(KeyCode.R))
-            ShowAbilityRange(AbilityCastType.SKILL3);
+            OnFingerDown(AbilityCastType.SKILL3);
         if(Input.GetKeyDown(KeyCode.R))
             OnCastAbility(AbilityCastType.SKILL3);
 
@@ -216,38 +216,28 @@ public class MobaMainView : MainViewBase
             m_cameraManager.Update();
     }
 
-    private void OnItemPointerDown(AbilityCastType abilityCastType)
+    private void OnFingerDown(AbilityCastType abilityCastType)
     {
-        ShowAbilityRange(abilityCastType);
+        if(m_PlayerActor != null)
+            m_PlayerActor.OnFingerDown(abilityCastType);
     }
 
-    private void OnItemDrag(AbilityCastType abilityCastType, Vector2 mouseDelta)
+    private void OnFingerDrag(AbilityCastType abilityCastType, Vector2 mouseDelta)
     {
         Debug.RawLog(mouseDelta);
         var originPos = m_PlayerActor.transform.position;
         skillForward.Set(originPos.x + mouseDelta.x, originPos.y, originPos.z + mouseDelta.y);
-        ShowAbilityIndicator(abilityCastType, skillForward);
+
+        if(m_PlayerActor != null)
+            m_PlayerActor.OnFingerDrag(abilityCastType, skillForward);
     }
 
-    private void OnItemPointerUp(AbilityCastType abilityCastType)
+    private void OnFingerUp(AbilityCastType abilityCastType)
     {
+        if(m_PlayerActor != null)
+            m_PlayerActor.OnFingerUp(abilityCastType);
+
         OnCastAbility(abilityCastType);
-    }
-
-    private void ShowAbilityRange(AbilityCastType castType)
-    {
-        if(m_PlayerEntity != null)
-        {
-            m_PlayerActor.ShowAbilityRange(castType);
-        }
-    }
-
-    private void ShowAbilityIndicator(AbilityCastType castType, Vector3 forward)
-    {
-        if(m_PlayerEntity != null)
-        {
-            m_PlayerActor.ShowAbilityIndicator(castType, forward);
-        }
     }
 
     private void OnCastAbility(AbilityCastType castType)

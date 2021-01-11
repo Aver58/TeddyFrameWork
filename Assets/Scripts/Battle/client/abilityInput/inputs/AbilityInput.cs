@@ -13,11 +13,6 @@ using UnityEngine.EventSystems;
 
 public class AbilityInput
 {
-    public void TriggerSkill()
-    {
-
-    }
-
     public void OnFingerDown()
     {
 
