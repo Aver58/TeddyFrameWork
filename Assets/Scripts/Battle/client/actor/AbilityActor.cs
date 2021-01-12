@@ -16,10 +16,12 @@ using UnityEngine;
 /// </summary>
 public class AbilityActor
 {
+    private Ability m_ability;
     private AbilityInput m_abilityInput;
 
     public AbilityActor(Ability ability)
     {
+        m_ability = ability;
         // 解析技能指示器
         //m_abilityInput = new AbilityInput();
     }
@@ -41,4 +43,43 @@ public class AbilityActor
         if(m_abilityInput != null)
             m_abilityInput.OnFingerUp();
     }
+
+    #region Private
+
+    private AbilityInput CreateAbilityNoTargetInput()
+    {
+
+    }
+
+    // 点施法类型，例如王昭君的大招
+    private AbilityInput CreateAbilityPointInput()
+    {
+        var abilityInput = new AbilityInputPoint();
+
+    }
+
+    private AbilityInput CreateAbilityTargetInput()
+    {
+
+    }
+
+    //解析技能行为
+    private AbilityInput CreateAbilityInput()
+    {
+        AbilityBehavior abilityBehavior = m_ability.GetAbilityBehavior();
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_NO_TARGET) != 0)
+            return CreateAbilityNoTargetInput();
+
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_UNIT_TARGET) != 0)
+            return CreateAbilityPointInput();
+
+
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_POINT) != 0)
+            return CreateAbilityTargetInput();
+
+        BattleLog.LogError("技能[%s]中有未定义的Input类型", m_ability.GetConfigName());
+        return null;
+    }
+
+    #endregion
 }

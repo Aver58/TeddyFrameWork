@@ -338,6 +338,9 @@ public static class AbilityReader
         return GetEnumValue<T>(resultStr);
     }
 
+    /// <summary>
+    /// 解析技能行为数组
+    /// </summary>
     private static AbilityBehavior ParseAbilityBehaviorArray(JsonData jsonData, string key)
     {
         JsonData behaviorConfigs = GetJsonValue(jsonData, key);
