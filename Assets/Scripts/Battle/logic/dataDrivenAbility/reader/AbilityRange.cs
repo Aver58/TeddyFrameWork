@@ -15,9 +15,9 @@ public class AbilityRange
     public AbilitySingTarget singTarget { get; set; }
     public AbilityUnitTargetTeam targetTeam { get; set; }
     public AbilityAreaDamageType areaDamageType { get; set; }
+    public float Radius { get; set; }
 
     private string m_Center;
-    private float m_Radius;
     private float m_LineLength;
     private float m_LineThickness;
     private float m_SectorRadius;
@@ -43,7 +43,7 @@ public class AbilityRange
         isSingleTarget = false;
         areaDamageType = AbilityAreaDamageType.Radius;
         m_Center = targetCenter;
-        m_Radius = radius;
+        Radius = radius;
     }
 
     public void SetLineAoe(string targetCenter, float lineLength, float lineThickness)

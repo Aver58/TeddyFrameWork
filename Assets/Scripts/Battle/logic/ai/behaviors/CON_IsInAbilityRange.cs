@@ -15,7 +15,7 @@ public class CON_IsInAbilityRange : TBTPrecondition
             return true;
 
         Ability ability = request.ability;
-        float abilityRange = ability.GetCastleRange();
+        float abilityRange = ability.GetCastRange();
         // 全屏技能
         if(abilityRange == -1)
             return true;

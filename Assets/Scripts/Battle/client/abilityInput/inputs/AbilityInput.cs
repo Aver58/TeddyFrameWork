@@ -9,10 +9,17 @@
 */
 #endregion
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityInput
 {
+    private List<AbilityIndicator> m_AbilityIndicators;
+    public void AddAbilityIndicator(AbilityIndicator abilityIndicator)
+    {
+        m_AbilityIndicators.Add(abilityIndicator);
+    }
+
     public void OnFingerDown()
     {
 

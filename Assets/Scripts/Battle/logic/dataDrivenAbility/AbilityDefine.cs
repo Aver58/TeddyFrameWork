@@ -143,6 +143,21 @@ public enum AbilityBehavior
 }
 
 /// <summary>
+/// 技能指示器类型
+/// </summary>
+public enum AbilityIndicatorType
+{
+    CIRCLE_AREA,
+    LINE_AREA,
+    SECTOR60_AREA,
+    SECTOR90_AREA,
+    SECTOR120_AREA,
+    RANGE_AREA,
+    SEGMENT,
+    SEGMENT_AREA
+}
+
+/// <summary>
 /// 技能数值来源
 /// </summary>
 public enum AbilityValueSourceType

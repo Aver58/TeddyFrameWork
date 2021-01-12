@@ -200,7 +200,7 @@ public class Ability
         return m_AbilityData.configFileName;
     }
 
-    public float GetCastleRange()
+    public float GetCastRange()
     {
         return m_AbilityData.castRange;
     }
@@ -218,6 +218,11 @@ public class Ability
     public float GetCastleDuring()
     {
         return m_AbilityData.castDuration;
+    }
+
+    public float GetAbilityAOERadius()
+    {
+        return m_AbilityData.abilityRange.Radius;
     }
 
     public AbilityUnitTargetTeam GetTargetTeam()

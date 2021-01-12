@@ -146,6 +146,7 @@ public sealed class LoadModule : ModuleBase
     public static AssetRequest LoadAssetAsync(string path, Type type, LoadedCallback loadedCallback = null)
     {
         AssetRequest assetRequest = LoadAsset(path, type, true);
+        // todo 这个loadedCallback 是我自己加的，源码里是怎么实现异步加载的
         if(loadedCallback != null)
             assetRequest.completed += loadedCallback;
         return assetRequest;

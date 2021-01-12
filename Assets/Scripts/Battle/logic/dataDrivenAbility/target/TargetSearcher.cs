@@ -176,7 +176,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
         //float castRange = ability.GetCastleRange();
         //float viewRange = source.GetViewRange();
         // 全屏技能
-        if(ability.GetCastleRange() <= 0)
+        if(ability.GetCastRange() <= 0)
             return source;
 
         BattleEntity lastTagget = source.target;
