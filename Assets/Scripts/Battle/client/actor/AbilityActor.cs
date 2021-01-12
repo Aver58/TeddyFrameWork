@@ -18,11 +18,13 @@ using UnityEngine;
 public class AbilityActor
 {
     private Ability m_ability;
+    private Transform m_transform;
     private AbilityInput m_abilityInput;
 
-    public AbilityActor(Ability ability)
+    public AbilityActor(Ability ability, Transform transform)
     {
         m_ability = ability;
+        m_transform = transform;
         // 解析技能指示器
         m_abilityInput = CreateAbilityInput(ability);
     }
@@ -68,19 +70,48 @@ public class AbilityActor
         {
             var request = LoadModule.LoadAsset(path,typeof(GameObject));
             var asset = request.asset as GameObject;
-            var go = Object.Instantiate<GameObject>(asset);
+            var go = Object.Instantiate(asset);
             return go.transform;
         }
         return null;
     }
 
-    private AbilityInput CreateAbilityNoTargetInput()
+    // 非指向性技能输入，妲己一技能
+    private AbilityInput CreateAbilityNoTargetInput(AbilityBehavior abilityBehavior)
     {
         var abilityInput = new AbilityInputPoint();
+        // 直线型
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_LINE_AOE) != 0)
+        {
+            var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
+            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
+            trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
+            //m_ability.GetAbilityAOERadius
+            float lineLength, lineThickness;
+            m_ability.GetLineAoe(out lineLength, out lineThickness);
+            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_transform, lineLength, lineThickness);
+            abilityInput.AddAbilityIndicator(abilityIndicatorRange);
+            abilityInput.AddAbilityIndicator(abilityIndicatorLine);
+            return abilityInput;
+        }
+
+        // 扇形型
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_SECTOR_AOE) != 0)
+        {
+
+        }
+
+        // 范围型
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_RADIUS_AOE) != 0)
+        {
+            var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
+            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
+            abilityInput.AddAbilityIndicator(abilityIndicatorRange);
+        }
         return abilityInput;
     }
 
-    // 点施法类型，例如王昭君的大招
+    // 点施法类型，王昭君大招
     private AbilityInput CreateAbilityPointInput(AbilityBehavior abilityBehavior)
     {
         var abilityInput = new AbilityInputPoint();
@@ -88,8 +119,9 @@ public class AbilityActor
         {
             var radius = m_ability.GetAbilityAOERadius();
             var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
-            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans,m_ability.GetCastRange());
-            AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, radius);
+            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
+            trans = GetIndicatorAsset(AbilityIndicatorType.CIRCLE_AREA);
+            AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_transform, radius);
             abilityInput.AddAbilityIndicator(abilityIndicatorRange);
             abilityInput.AddAbilityIndicator(abilityIndicatorPoint);
         }
@@ -101,7 +133,8 @@ public class AbilityActor
         return abilityInput;
     }
 
-    private AbilityInput CreateAbilityTargetInput()
+    // 指向性技能输入：妲己二技能
+    private AbilityInput CreateAbilityTargetInput(AbilityBehavior abilityBehavior)
     {
         var abilityInput = new AbilityInputPoint();
         return abilityInput;
@@ -112,14 +145,14 @@ public class AbilityActor
     {
         AbilityBehavior abilityBehavior = ability.GetAbilityBehavior();
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_NO_TARGET) != 0)
-            return CreateAbilityNoTargetInput();
+            return CreateAbilityNoTargetInput(abilityBehavior);
 
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_UNIT_TARGET) != 0)
             return CreateAbilityPointInput(abilityBehavior);
 
 
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_POINT) != 0)
-            return CreateAbilityTargetInput();
+            return CreateAbilityTargetInput(abilityBehavior);
 
         BattleLog.LogError("技能[%s]中有未定义的Input类型", ability.GetConfigName());
         return null;

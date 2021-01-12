@@ -132,7 +132,7 @@ public class HeroActor
         if(m_abilityActorMap.TryGetValue(castType,out abilityActor))
             return abilityActor;
 
-        abilityActor = new AbilityActor(ability);
+        abilityActor = new AbilityActor(ability, transform);
         return abilityActor;
     }
 

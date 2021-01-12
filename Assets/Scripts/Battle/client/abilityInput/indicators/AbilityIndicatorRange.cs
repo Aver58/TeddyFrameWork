@@ -11,10 +11,14 @@
 
 using UnityEngine;
 
+/// <summary>
+/// 技能范围指示器
+/// </summary>
 public class AbilityIndicatorRange : AbilityIndicator
 {
     private float m_range;
-    public AbilityIndicatorRange(Transform transform, float range) : base(transform)
+    public AbilityIndicatorRange(Transform indicatorTransform, Transform casterTransform, float range) 
+        : base(indicatorTransform, casterTransform)
     {
         m_range = range;
     }

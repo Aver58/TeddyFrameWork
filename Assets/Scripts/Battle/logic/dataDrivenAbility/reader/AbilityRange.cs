@@ -16,12 +16,11 @@ public class AbilityRange
     public AbilityUnitTargetTeam targetTeam { get; set; }
     public AbilityAreaDamageType areaDamageType { get; set; }
     public float Radius { get; set; }
-
-    private string m_Center;
-    private float m_LineLength;
-    private float m_LineThickness;
-    private float m_SectorRadius;
-    private float m_SectorAngle;
+    public float LineLength { get; set; }
+    public float LineThickness { get; set; }
+    public string Center { get; set; }
+    public float SectorRadius { get; set; }
+    public float SectorAngle { get; set; }
 
     public AbilityRange()
     {
@@ -42,7 +41,7 @@ public class AbilityRange
     {
         isSingleTarget = false;
         areaDamageType = AbilityAreaDamageType.Radius;
-        m_Center = targetCenter;
+        Center = targetCenter;
         Radius = radius;
     }
 
@@ -50,17 +49,17 @@ public class AbilityRange
     {
         isSingleTarget = false;
         areaDamageType = AbilityAreaDamageType.Line;
-        m_Center = targetCenter;
-        m_LineLength = lineLength;
-        m_LineThickness = lineThickness;
+        Center = targetCenter;
+        LineLength = lineLength;
+        LineThickness = lineThickness;
     }
 
     public void SetSectorAoe(string targetCenter, float sectorRadius, float sectorAngle)
     {
         isSingleTarget = false;
         areaDamageType = AbilityAreaDamageType.Sector;
-        m_Center = targetCenter;
-        m_SectorRadius = sectorRadius;
-        m_SectorAngle = sectorAngle;
+        Center = targetCenter;
+        SectorRadius = sectorRadius;
+        SectorAngle = sectorAngle;
     }
 }

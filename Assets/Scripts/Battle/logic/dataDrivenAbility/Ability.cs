@@ -225,6 +225,12 @@ public class Ability
         return m_AbilityData.abilityRange.Radius;
     }
 
+    public void GetLineAoe(out float lineLength, out float lineThickness)
+    {
+        lineLength = m_AbilityData.abilityRange.LineLength;
+        lineThickness = m_AbilityData.abilityRange.LineThickness;
+    }
+
     public AbilityUnitTargetTeam GetTargetTeam()
     {
         return m_AbilityData.abilityRange.targetTeam;

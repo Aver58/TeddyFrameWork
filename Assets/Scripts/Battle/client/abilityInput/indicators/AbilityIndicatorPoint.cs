@@ -11,11 +11,14 @@
 
 using UnityEngine;
 
+/// <summary>
+/// 以指定中心为点的范围指示器：王昭君的大招
+/// </summary>
 public class AbilityIndicatorPoint : AbilityIndicator
 {
     private float m_range;
-    private Vector3 m_position = Vector3.zero;
-    public AbilityIndicatorPoint(Transform transform, float range) : base(transform)
+    public AbilityIndicatorPoint(Transform indicatorTransform, Transform casterTransform, float range) 
+        : base(indicatorTransform, casterTransform)
     {
         m_range = range;
     }

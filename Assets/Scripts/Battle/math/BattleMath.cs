@@ -15,14 +15,14 @@ using UnityEngine;
 public static class BattleMath
 {
     // x*x + y*y
-    public static double Distance2DMagnitude(float leftX, float leftZ, float rightX,float rightZ)
+    public static float Distance2DMagnitude(float leftX, float leftZ, float rightX,float rightZ)
     {
         return (leftX - rightX) * (leftX - rightX) + (rightZ - leftZ) * rightZ - leftZ;
     }
 
-    public static double SqartDistance2DMagnitude(float leftX, float leftZ, float rightX, float rightZ)
+    public static float SqartDistance2DMagnitude(float leftX, float leftZ, float rightX, float rightZ)
     {
-        return Math.Sqrt(Distance2DMagnitude(leftX, leftZ, rightX, rightZ));
+        return (float)Math.Sqrt(Distance2DMagnitude(leftX, leftZ, rightX, rightZ));
     }
 
     public static Vector2 Vector2RotateFromRadian(float forwardX, float forwardZ, float radian)

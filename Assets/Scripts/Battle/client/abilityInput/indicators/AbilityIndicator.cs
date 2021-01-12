@@ -15,6 +15,8 @@ public class AbilityIndicator
 {
     protected Transform m_indicatorTransform;
     protected Transform m_casterTransform;
+    protected Vector3 m_position = Vector3.zero;
+
     #region API
     public AbilityIndicator(Transform indicatorTransform, Transform casterTransform = null)
     {
