@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1957467203}
   - component: {fileID: 2095589231188382019}
   m_Layer: 5
-  m_Name: Joystick
+  m_Name: JoystickLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnregisterAtDisable: 0
-  _anchor: 1
+  _anchor: 0
   _anchorOffet: {x: 30, y: 30}
   _visible: 1
   _activated: 1
@@ -159,7 +159,7 @@ MonoBehaviour:
   isOnDrag: 0
   isSwipeIn: 0
   isSwipeOut: 0
-  showPSInspector: 0
+  showPSInspector: 1
   showSpriteInspector: 0
   showEventInspector: 0
   showBehaviourInspector: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   OnPressRight:
     m_PersistentCalls:
       m_Calls: []
-  joystickType: 1
+  joystickType: 0
   allowJoystickOverTouchPad: 0
   radiusBase: 0
   radiusBaseValue: 0
@@ -599,8 +599,8 @@ MonoBehaviour:
     item: {fileID: 224309540140500876}
   - name: NodeSkill3
     item: {fileID: 224419019664958962}
-  - name: Joystick
-    item: {fileID: 114224475266235886}
+  - name: JoystickLeft
+    item: {fileID: 114292340166391944}
   - name: HPHuds
     item: {fileID: 224962077584263072}
   effects: []

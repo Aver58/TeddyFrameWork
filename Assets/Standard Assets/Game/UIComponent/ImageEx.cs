@@ -12,7 +12,7 @@ public class ImageEx : Image
         else
         {
             var path = Util.GetSpritePath(name);
-            LoadModule.LoadAsset(path, typeof(Sprite), OnLoadComplete);
+            LoadModule.LoadAssetAsync(path, typeof(Sprite), OnLoadComplete);
         }
     }
 

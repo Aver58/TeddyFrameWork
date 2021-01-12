@@ -151,12 +151,9 @@ public sealed class LoadModule : ModuleBase
         return assetRequest;
     }
 
-    public static AssetRequest LoadAsset(string path, Type type, LoadedCallback loadedCallback = null)
+    public static AssetRequest LoadAsset(string path, Type type)
     {
-        AssetRequest assetRequest = LoadAsset(path, type, false);
-        if(loadedCallback != null)
-            assetRequest.completed += loadedCallback;
-        return assetRequest;
+        return LoadAsset(path, type, false);
     }
 
     public static void UnloadAsset(AssetRequest asset)
@@ -177,7 +174,7 @@ public sealed class LoadModule : ModuleBase
         stringBuilder.Clear();
         stringBuilder.Append(ModelPathPrefix);
         stringBuilder.Append(path);
-        return LoadAsset(stringBuilder.ToString(), type, loadedCallback);
+        return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
     }
 
     public static AssetRequest LoadUI(string path, LoadedCallback loadedCallback = null)
@@ -189,7 +186,7 @@ public sealed class LoadModule : ModuleBase
         stringBuilder.Append(path);
         stringBuilder.Append(".");
         stringBuilder.Append(suffix);
-        return LoadAsset(stringBuilder.ToString(), type, loadedCallback);
+        return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
     }
 
     public static JsonData LoadJson(string path)

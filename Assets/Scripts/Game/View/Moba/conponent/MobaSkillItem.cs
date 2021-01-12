@@ -25,18 +25,20 @@ public class MobaSkillItem : ViewBase
     private Timer timer;
     private TextMeshProUGUI m_txtCD;
     private Image m_imgCDMask;
+    private ETCJoystick m_joystick ;
 
     public MobaSkillItem(GameObject go,Transform parent):base(go,parent)
     {
-        ETCJoystick joystick = (ETCJoystick)UI["Joystick"];
-        joystick.onTouchStart.AddListener(OnPointerDown);
-        joystick.onTouchUp.AddListener(OnPointerUp);
-        joystick.onMove.AddListener(OnDrag);
+        m_joystick = (ETCJoystick)UI["Joystick"];
+        m_joystick.onTouchStart.AddListener(OnPointerDown);
+        m_joystick.onTouchUp.AddListener(OnPointerUp);
+        m_joystick.onMove.AddListener(OnDrag);
     }
 
     public void Init(AbilityCastType castType, Ability ability,Action<AbilityCastType> downAction
         , Action<AbilityCastType, Vector2> dragAction, Action<AbilityCastType> upAction)
     {
+        m_joystick.name = "JoystickSkillItem" + castType.ToString();
         m_downAction = downAction;
         m_dragAction = dragAction;
         m_upAction = upAction;

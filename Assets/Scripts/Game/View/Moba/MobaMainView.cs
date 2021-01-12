@@ -45,9 +45,8 @@ public class MobaMainView : MainViewBase
         base.AddAllListener();
 
         AddListener((Button)UI["BtnAttack"], OnBtnAttack);
-        
-        var JoystickGo = (Image)UI["Joystick"];
-        m_joystick = JoystickGo.GetComponent<ETCJoystick>();
+
+        m_joystick = (ETCJoystick)UI["JoystickLeft"];
         m_joystick.onMoveEnd.AddListener(OnMoveEnd);
         //方式一：按键方法注册
         m_joystick.OnPressLeft.AddListener(OnMoving);
@@ -140,7 +139,7 @@ public class MobaMainView : MainViewBase
 
     private void OnMoving()
     {
-        if(m_joystick.name != "Joystick")
+        if(m_joystick.name != "JoystickLeft")
             return;
 
         //获取虚拟摇杆偏移量  [-1,1]

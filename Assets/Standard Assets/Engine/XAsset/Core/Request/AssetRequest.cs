@@ -93,8 +93,10 @@ public class AssetRequest : Reference, IEnumerator
 
     internal virtual void Load()
     {
+        // todo LoadModule.loadDelegate != null为啥能通过，没看到赋值的地方
         if(!LoadModule.runtimeMode && LoadModule.loadDelegate != null)
             asset = LoadModule.loadDelegate(name, assetType);
+
         if(asset == null) 
             error = "error! file not exist:" + name;
 
