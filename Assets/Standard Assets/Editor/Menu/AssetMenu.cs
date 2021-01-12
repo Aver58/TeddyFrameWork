@@ -18,4 +18,10 @@ public class AssetMenu
     //{
     //    EditorHelper.ExportSelection("Export Panel Hierarchy Nested", ExportPanelHierarchy.ExportNested);
     //}
+
+    [MenuItem("Assets/生成选中目录的模型预制，可以选择一个或者多个文件夹", false, 301)]
+    public static void SetSelectHeroModels()
+    {
+        EditorHelper.ExportSelection("SetSelectCharacterModel ", ImporterHeroModel.ImportSelectFolder, SelectionMode.TopLevel);
+    }
 }
