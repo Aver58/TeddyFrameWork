@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<PathConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Export_Folder>D:\MyGit\github\HiProtobuf\Example\Export</Export_Folder>
+  <Excel_Folder>D:\MyGit\github\HiProtobuf\Example\Excel</Excel_Folder>
+  <Compiler_Path>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe</Compiler_Path>
+</PathConfig>
