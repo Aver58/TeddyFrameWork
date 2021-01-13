@@ -12,16 +12,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 技能输入抽象类
+/// 技能指示器 + 施法者控制
+/// </summary>
 public class AbilityInput
 {
     private HeroActor m_casterActor;
+    private Transform m_casterTransform;
     private List<HeroActor> m_targetActors;
     private List<AbilityIndicator> m_AbilityIndicators;
 
-    public AbilityInput()
+    public AbilityInput(HeroActor casterActor)
     {
-        //m_casterActor = casterActor;
-
+        m_casterActor = casterActor;
+        m_casterTransform = m_casterActor.transform;
         m_targetActors = new List<HeroActor>();
         m_AbilityIndicators = new List<AbilityIndicator>();
     }
@@ -39,7 +44,10 @@ public class AbilityInput
 
     public void OnFingerDrag(Vector3 forward)
     {
-
+        var castPos = m_casterTransform.position;
+        float dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ;
+        // todo 技能范围*delta
+        OnFingerDrag(castPos.x, castPos.z, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
     }
 
     public void OnFingerUp()
@@ -51,7 +59,7 @@ public class AbilityInput
 
     #region Private
 
-    private void OnFingerDrag()
+    private void OnFingerDrag(float casterX, float casterZ, float dragWorldPointX, float dragWorldPointZ, float dragForwardX, float dragForwardZ)
     {
 
     }
