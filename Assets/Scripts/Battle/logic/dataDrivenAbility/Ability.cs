@@ -225,6 +225,12 @@ public class Ability
         return m_AbilityData.abilityRange.Radius;
     }
 
+    public void GetSectorAoe(out float sectorRadius, out float sectorAngle)
+    {
+        sectorRadius = m_AbilityData.abilityRange.SectorRadius;
+        sectorAngle = m_AbilityData.abilityRange.SectorAngle;
+    }
+
     public void GetLineAoe(out float lineLength, out float lineThickness)
     {
         lineLength = m_AbilityData.abilityRange.LineLength;

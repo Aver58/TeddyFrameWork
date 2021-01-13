@@ -49,7 +49,7 @@ public class AbilityActor
 
     #region Private
 
-    // todo 移到外面，应该有一个管理器
+    // todo 移到外面，应该有一个管理器,而不是一个actor一份配置
     private static Dictionary<AbilityIndicatorType, string> AbilityIndicatorAssetConfig = new Dictionary<AbilityIndicatorType, string>
     {
         {AbilityIndicatorType.CIRCLE_AREA,"rpgBattle/P_CircleArea" },
@@ -79,14 +79,13 @@ public class AbilityActor
     // 非指向性技能输入，妲己一技能
     private AbilityInput CreateAbilityNoTargetInput(AbilityBehavior abilityBehavior)
     {
-        var abilityInput = new AbilityInputPoint();
+        AbilityInput abilityInput = new AbilityInputPoint();
         // 直线型
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_LINE_AOE) != 0)
         {
             var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
             AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
             trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
-            //m_ability.GetAbilityAOERadius
             float lineLength, lineThickness;
             m_ability.GetLineAoe(out lineLength, out lineThickness);
             AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_transform, lineLength, lineThickness);
@@ -98,7 +97,32 @@ public class AbilityActor
         // 扇形型
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_SECTOR_AOE) != 0)
         {
+            AbilityIndicatorType abilityIndicatorType;
+            float sectorRadius, sectorAngle;
+            m_ability.GetSectorAoe(out sectorRadius, out sectorAngle);
+            if(sectorAngle == 60)
+            {
+                abilityIndicatorType = AbilityIndicatorType.SECTOR60_AREA;
+            }
+            else if(sectorAngle == 90)
+            {
+                abilityIndicatorType = AbilityIndicatorType.SECTOR90_AREA;
+            }
+            else if(sectorAngle == 120)
+            {
+                abilityIndicatorType = AbilityIndicatorType.SECTOR120_AREA;
+            }
+            else
+            {
+                BattleLog.LogError("技能[%s]中有未定义的扇形AOE范围角度[%s]", m_ability.GetConfigName(), sectorAngle);
+            }
 
+            var trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
+            var abilityIndicatorSector = new AbilityIndicatorLine(trans, m_transform, sectorRadius, sectorRadius);
+
+            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_transform, sectorRadius, sectorRadius);
+            abilityInput.AddAbilityIndicator(abilityIndicatorSector);
+            return abilityInput;
         }
 
         // 范围型
@@ -126,9 +150,7 @@ public class AbilityActor
             abilityInput.AddAbilityIndicator(abilityIndicatorPoint);
         }
         else
-        {
             BattleLog.LogError("技能[%s]中有未定义的Point类型技能区域", m_ability.GetConfigName());
-        }
 
         return abilityInput;
     }
@@ -137,6 +159,16 @@ public class AbilityActor
     private AbilityInput CreateAbilityTargetInput(AbilityBehavior abilityBehavior)
     {
         var abilityInput = new AbilityInputPoint();
+        var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
+        AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
+        trans = GetIndicatorAsset(AbilityIndicatorType.SEGMENT);
+        AbilityIndicatorSegment abilityIndicatorSegment = new AbilityIndicatorSegment(trans, m_transform);
+        var radius = m_ability.GetAbilityAOERadius();
+        trans = GetIndicatorAsset(AbilityIndicatorType.SEGMENT_AREA);
+        AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_transform, radius);
+        abilityInput.AddAbilityIndicator(abilityIndicatorRange);
+        abilityInput.AddAbilityIndicator(abilityIndicatorSegment);
+        abilityInput.AddAbilityIndicator(abilityIndicatorPoint);
         return abilityInput;
     }
 
@@ -149,7 +181,6 @@ public class AbilityActor
 
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_UNIT_TARGET) != 0)
             return CreateAbilityPointInput(abilityBehavior);
-
 
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_POINT) != 0)
             return CreateAbilityTargetInput(abilityBehavior);
