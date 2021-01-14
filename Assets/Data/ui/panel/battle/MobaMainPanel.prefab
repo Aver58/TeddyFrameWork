@@ -210,7 +210,7 @@ MonoBehaviour:
   OnPressRight:
     m_PersistentCalls:
       m_Calls: []
-  joystickType: 0
+  joystickType: 1
   allowJoystickOverTouchPad: 0
   radiusBase: 0
   radiusBaseValue: 0
