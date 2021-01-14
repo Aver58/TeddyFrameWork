@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MobaMainView : MainViewBase
+public partial class MobaMainView : MainViewBase
 {
     public float runSpeed = 1f;
 
@@ -28,14 +28,16 @@ public class MobaMainView : MainViewBase
     private HudActorManager m_hudActorManager;
     private Dictionary<AbilityCastType,MobaSkillItem> m_MobaSkillItemMap;
 
+
+
     protected override void OnLoaded()
     {
         base.OnLoaded();
 
-        hudParent = (RectTransform)UI["HPHuds"];
+        hudParent = HPHuds;
         m_cameraManager = CameraManager.instance;
         m_cameraManager.Init();
-
+        
         m_hudActorManager = HudActorManager.instance;
         m_hudActorManager.Init(hudParent);
     }
@@ -44,10 +46,9 @@ public class MobaMainView : MainViewBase
     {
         base.AddAllListener();
 
-        AddListener((Button)UI["BtnAttack"], OnBtnAttack);
-        
-        var JoystickGo = (Image)UI["Joystick"];
-        m_joystick = JoystickGo.GetComponent<ETCJoystick>();
+        AddListener(BtnAttack, OnBtnAttack);
+
+        m_joystick = Joystick.GetComponent<ETCJoystick>();
         m_joystick.onMoveEnd.AddListener(OnMoveEnd);
         //方式一：按键方法注册
         m_joystick.OnPressLeft.AddListener(OnMoving);
@@ -102,22 +103,22 @@ public class MobaMainView : MainViewBase
             return;
         }
 
-        var prefab = (GameObject)UI["MobaSkillItem"];
-        var nodeAttack = (RectTransform)UI["NodeAttack"];
-        var nodeSkill1 = (RectTransform)UI["NodeSkill1"];
-        var nodeSkill2 = (RectTransform)UI["NodeSkill2"];
-        var nodeSkill3 = (RectTransform)UI["NodeSkill3"];
-
-        m_MobaSkillItemMap = new Dictionary<AbilityCastType, MobaSkillItem>();
-        List<RectTransform> parents = new List<RectTransform> { nodeAttack , nodeSkill1, nodeSkill2, nodeSkill3 };
-        List<AbilityCastType> castTypes = new List<AbilityCastType> { AbilityCastType.ATTACK, AbilityCastType.SKILL1, AbilityCastType.SKILL2, AbilityCastType.SKILL3 };
-        for(int i = 0; i < 4; i++)
-        {
-            var castType = castTypes[i];
-            var item = GenerateOne(typeof(MobaSkillItem), prefab, parents[i]) as MobaSkillItem;
-            item.Init(castType, m_PlayerEntity.GetAbility(castType), OnFingerDown, OnFingerDrag, OnFingerUp);
-            m_MobaSkillItemMap.Add(castType,item);
-        }
+        // var prefab = MobaSkillItem;
+        // var nodeAttack = NodeAttack;
+        // var nodeSkill1 = NodeSkill1;
+        // var nodeSkill2 = NodeSkill2;
+        // var nodeSkill3 = NodeSkill3;
+        //
+        // m_MobaSkillItemMap = new Dictionary<AbilityCastType, MobaSkillItem>();
+        // List<RectTransform> parents = new List<RectTransform> { nodeAttack, nodeSkill1, nodeSkill2, nodeSkill3 };
+        // List<AbilityCastType> castTypes = new List<AbilityCastType> { AbilityCastType.ATTACK, AbilityCastType.SKILL1, AbilityCastType.SKILL2, AbilityCastType.SKILL3 };
+        // for (int i = 0; i < 4; i++)
+        // {
+        //     var castType = castTypes[i];
+        //     var item = GenerateOne<MobaSkillItem>(prefab, parents[i]);
+        //     item.Init(castType, m_PlayerEntity.GetAbility(castType), OnFingerDown, OnFingerDrag, OnFingerUp);
+        //     m_MobaSkillItemMap.Add(castType, item);
+        // }
     }
 
     private void OnHeroActorCreated(object sender, EventArgs args)

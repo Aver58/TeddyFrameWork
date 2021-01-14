@@ -76,7 +76,7 @@ public class ModuleManager : Singleton<ModuleManager>
 			m_Modules[i].UnInit();
 	}
 
-	public void Update()
+	public void OnUpdate()
 	{
 		if(!m_bIsInit)
 			return;
@@ -84,7 +84,7 @@ public class ModuleManager : Singleton<ModuleManager>
 		// 初始化完就可以走C#层的模块update
 		for(int i = 0; i < m_Modules.Count; ++i)
 		{
-			m_Modules[i].Update(Time.deltaTime);
+			m_Modules[i].OnUpdate(Time.deltaTime);
 		}
 
 		if(!m_bIsRunning)

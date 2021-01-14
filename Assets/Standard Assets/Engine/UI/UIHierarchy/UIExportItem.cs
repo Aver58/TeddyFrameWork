@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public class UIExportItem : MonoBehaviour
 {
-    public string FieldName;
+    public UIComponentEnum Type = UIComponentEnum.RectTransform;
 }

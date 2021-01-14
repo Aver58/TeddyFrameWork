@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Init.unity
     guid: 41515a2b3f98a445e88e746ac77f43d1
   - enabled: 1
+    path: Assets/_Scenes/TestNet.unity
+    guid: 0dc65c6ac185c2c47b08fa37cf3f0c53
+  - enabled: 1
     path: Assets/_Scenes/Game.unity
     guid: d9f2c870487b3492a97fe55f70b65202
   - enabled: 1
@@ -17,4 +20,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/MobaScene.unity
     guid: 493667a2b867df04c966b43b93fce637
+  - enabled: 1
+    path: Assets/_Scenes/TestNet.unity
+    guid: 0dc65c6ac185c2c47b08fa37cf3f0c53
+  - enabled: 1
+    path: Assets/_Scenes/todoList.unity
+    guid: ea30abf9e7033c943abc440349f19ef6
+  - enabled: 1
+    path: Assets/_Scenes/Scenes_test/testCrossFade.unity
+    guid: dbf080a700b7ec04683731f8551e89fb
+  - enabled: 1
+    path: Assets/_Scenes/Scenes_test/testGPUInstance.unity
+    guid: 39df0669fea9e8140a1e2961f7c1e7ac
+  - enabled: 1
+    path: Assets/_Scenes/Scenes_test/testIndicator.unity
+    guid: ce38979c0ba6b314ebb3e1a07eb790d2
+  - enabled: 1
+    path: Assets/_Scenes/Scenes_test/testMemory.unity
+    guid: 0928965dc661f8a4caf6591f46aefb06
+  - enabled: 1
+    path: Assets/_Scenes/Scenes_test/testMesh.unity
+    guid: f271bb39183f35c46b7dba61ff15ed8b
+  - enabled: 1
+    path: Assets/_Scenes/Scenes_test/testScroll.unity
+    guid: a894952f2e8bbba4897a3eb3afc8e62f
   m_configObjects: {}

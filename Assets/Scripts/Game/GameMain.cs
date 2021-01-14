@@ -52,6 +52,6 @@ public class GameMain : MonoBehaviour
      
     void Update()
     {
-        m_moduleMgr.Update();
+        m_moduleMgr.OnUpdate();
     }
 }

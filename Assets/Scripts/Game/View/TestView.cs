@@ -11,12 +11,12 @@
 
 using UnityEngine.UI;
 
-public class TestView : MainViewBase
+public partial class TestView : MainViewBase
 {
     protected override void AddAllListener()
     {
-        AddListener((Button)UI["BtnView2"], OpenView2);
-        AddListener((Button)UI["BtnScene"], ChangeScene);
+        // AddListener((Button)UI["BtnView2"], OpenView2);
+        // AddListener((Button)UI["BtnScene"], ChangeScene);
     }
 
     private void OpenView2()

@@ -1,4 +1,5 @@
 ﻿#region Copyright © 2020 Aver. All rights reserved.
+
 /*
 =====================================================
  AverFrameWork v1.0
@@ -7,107 +8,151 @@
  Time:        2020/12/14 15:05:29
 =====================================================
 */
+
 #endregion
 
-using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class ExportPanelHierarchy
 {
-    private static System.Type[] ms_componentTypes =
+    public static void ExportNested(GameObject root)
     {
-        typeof(ETCJoystick),
-        typeof(Button),
-        typeof(Image),
-        typeof(ImageEx),
-        typeof(Text),
-        typeof(TMPro.TextMeshProUGUI),
-    };
+        var path = GetPath(root);
+        var name = Path.GetFileNameWithoutExtension(path);
+        var ctx = @"using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-    public static void ExportNested(Object obj)
-    {
-        GameObject root = obj as GameObject;
-        if(root == null) return;
+public partial class {0} : MainViewBase
+{{{1}
+    public GameObject[] Extends;
+}}";
+        var items = root.GetComponentsInChildren<UIExportItem>(true);
 
-        UIHierarchy hierarchy = root.GetComponent<UIHierarchy>();
-        if(hierarchy == null)
+        var field = "";
+        var compEnum = typeof(UIComponentEnum);
+        foreach (var item in items)
         {
-            hierarchy = root.AddComponent<UIHierarchy>();
+            field += $"\n    public {compEnum.GetEnumName(item.Type)} {item.name};";
         }
 
-        //生成根节点层级
-        List<UIHierarchy.EffectItemInfo> fxFields = new List<UIHierarchy.EffectItemInfo>();
-        List<UIHierarchy.ItemInfo> fields = new List<UIHierarchy.ItemInfo>();
-        GetChildComponentUtilHierarchy(root.transform, fxFields, fields);
-        hierarchy.SetEffects(fxFields);
-        hierarchy.SetWidgets(fields);
-
-        //生成子panel层级
-        UIHierarchy[] childHierarchys = root.GetComponentsInChildren<UIHierarchy>(true);
-        for(int i = 1; i < childHierarchys.Length; i++)
+        GameObject[] array = null;
+        if (File.Exists(path))
         {
-            UIHierarchy childHrcy = childHierarchys[i];
-
-            List<UIHierarchy.EffectItemInfo> childFx = new List<UIHierarchy.EffectItemInfo>();
-            List<UIHierarchy.ItemInfo> childUIItem = new List<UIHierarchy.ItemInfo>();
-            GetChildComponentUtilHierarchy(childHrcy.transform, childFx, childUIItem);
-            childHrcy.SetEffects(childFx);
-            childHrcy.SetWidgets(childUIItem);
-        }
-
-
-        EditorUtility.SetDirty(root);
-        AssetDatabase.SaveAssets();
-    }
-
-    //导出传入节点的层级，直到某个子节点挂有UIHierarchy组件
-    private static void GetChildComponentUtilHierarchy(Transform transRoot, List<UIHierarchy.EffectItemInfo> fxFields, List<UIHierarchy.ItemInfo> fields)
-    {
-        for(int i = 0; i < transRoot.childCount; i++)
-        {
-            Transform trans = transRoot.GetChild(i);
-
-            UIHierarchy hrchy = trans.GetComponent<UIHierarchy>();
-            if(hrchy != null)
+            var compType = Assembly.Load("Assembly-CSharp").GetType(name);
+            var oldComp = root.GetComponent(compType);
+            var fieldInfo = compType.GetField("Extends", BindingFlags.Instance | BindingFlags.Public);
+            var extends = fieldInfo.GetValue(oldComp);
+            if (extends != null)
             {
-                fields.Add(new UIHierarchy.ItemInfo(hrchy.name, hrchy));
-                continue;
+                array = (GameObject[])extends;
+                foreach (var go in array)
+                {
+                    field += $"\n    public GameObject {go.name};";
+                }
+            }
+        }
+
+        ctx = string.Format(ctx, name, field).Replace("\r", string.Empty);
+        if (File.Exists(path))
+        {
+            var old = File.ReadAllText(path);
+            if (old == ctx)
+            {
+                return;
             }
 
-            //FxExportItem fxItem = trans.GetComponent<FxExportItem>();
-            //if(fxItem != null)
-            //{
-            //    Object fieldItem = GetChildComponent(fxItem.gameObject) ?? fxItem.transform;
-            //    fxFields.Add(new UIHierarchy.EffectItemInfo(fxItem.name, fieldItem, fxItem.transform.parent));
-            //}
-            //else
-            //{
-                UIExportItem uiItem = trans.GetComponent<UIExportItem>();
-                if(uiItem != null)
-                {
-                    Object fieldItem = GetChildComponent(uiItem.gameObject);
-                    if(fieldItem == null)
-                    {
-                        fieldItem = uiItem.transform;
-                    }
-                    fields.Add(new UIHierarchy.ItemInfo(uiItem.name, fieldItem));
-                }
-            //}
-            GetChildComponentUtilHierarchy(trans, fxFields, fields);
+            var extendsTemp = root.AddComponent<ComponentExtendsTemp>();
+            extendsTemp.Extends = array;
+            ProcessUIPrefab(root);
+        }
+
+        File.WriteAllText(path, ctx);
+
+        EditorPrefs.SetBool("ScriptGenerator", true);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
+    private static string GetPath(GameObject root)
+    {
+        var name = root.name;
+        name = name.Substring(0, name.Length - 5);
+        name = $"{Path.GetDirectoryName(Application.dataPath)}/Assets/Scripts/Game/View/Generate/{name}View.cs";
+        return name;
+    }
+
+    /// <summary>
+    /// 检查如果是UI的prefab进行一些处理
+    /// </summary>
+    static void ProcessUIPrefab(GameObject instance)
+    {
+        string prefabPath = AssetDatabase.GetAssetPath(PrefabUtility.GetCorrespondingObjectFromSource(instance));
+        PrefabUtility.SaveAsPrefabAssetAndConnect(instance, prefabPath, InteractionMode.AutomatedAction);
+    }
+
+    [UnityEditor.Callbacks.DidReloadScripts]
+    private static void OnScriptsReloaded()
+    {
+        if (!EditorPrefs.GetBool("ScriptGenerator"))
+        {
+            return;
+        }
+
+        EditorPrefs.SetBool("ScriptGenerator", false);
+
+        AssetDatabase.Refresh();
+        GameObject root = Selection.activeGameObject as GameObject;
+        if (root)
+        {
+            var path = GetPath(root);
+            var name = Path.GetFileNameWithoutExtension(path);
+            AddScript(root, name);
         }
     }
 
-    static Object GetChildComponent(GameObject go)
+    private static void AddScript(GameObject root, string name)
     {
-        Object component = null;
-        for(int i = 0; i < ms_componentTypes.Length; ++i)
+        var compType = Assembly.Load("Assembly-CSharp").GetType(name);
+        if (compType == null)
         {
-            component = go.GetComponent(ms_componentTypes[i]);
-            if(component != null)
-                break;
+            return;
         }
-        return component;
+
+        var comp = root.GetComponent(compType) ?? root.AddComponent(compType);
+        var items = root.GetComponentsInChildren<UIExportItem>(true);
+        foreach (var item in items)
+        {
+            var itemType = UIComponentType.TypeArray[(int)item.Type];
+            Object fieldItem = item.GetComponent(itemType);
+            if (fieldItem != null)
+            {
+                var fieldInfo = compType.GetField(fieldItem.name, BindingFlags.Instance | BindingFlags.Public);
+                fieldInfo.SetValue(comp, fieldItem);
+            }
+        }
+
+        var temp = root.GetComponent<ComponentExtendsTemp>();
+        if (temp)
+        {
+            var fieldInfo = compType.GetField("Extends", BindingFlags.Instance | BindingFlags.Public);
+            fieldInfo.SetValue(comp, temp.Extends);
+
+            foreach (var go in temp.Extends)
+            {
+                fieldInfo = compType.GetField(go.name, BindingFlags.Instance | BindingFlags.Public);
+                fieldInfo.SetValue(comp, go);
+            }
+
+            Object.DestroyImmediate(temp);
+        }
+
+        ProcessUIPrefab(root);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 }

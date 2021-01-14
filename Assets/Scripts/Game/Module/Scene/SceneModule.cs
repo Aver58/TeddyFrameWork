@@ -49,7 +49,7 @@ public class SceneModule : ModuleBase
     #endregion
 
     #region Private
-    public override void Update(float dt) 
+    public override void OnUpdate(float dt) 
     {
         // curScene Update
     }

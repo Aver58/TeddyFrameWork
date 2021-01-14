@@ -29,6 +29,6 @@ public class ModuleBase
     public virtual void Init() { m_bInit = true; }
     public virtual void UnInit() { m_bInit = false; }
     public virtual void StartGame() { }
-    public virtual void Update(float dt) { }
+    public virtual void OnUpdate(float dt) { }
     public virtual void Dispose() { }
 }

@@ -15,3 +15,5 @@ Assets/Standard Assets/LockstepRTSEngine-Master.meta
 Assembly-CSharp-Editor.csproj
 Packages/
 Logs
+/Library/
+/.vsconfig

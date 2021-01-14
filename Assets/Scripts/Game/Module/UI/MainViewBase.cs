@@ -14,7 +14,7 @@ using UnityEngine;
 public class MainViewBase : ViewBase
 {
     public MainViewBase() { }
-    public MainViewBase(GameObject go, Transform parent) : base(go, parent)
+    public MainViewBase(GameObject go, Transform parent)
     {
         viewType = ViewType.MAIN;
     }

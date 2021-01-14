@@ -149,7 +149,7 @@ public class UIModule : ModuleBase
     #endregion
 
     #region Private
-    public override void Update(float dt)
+    public override void OnUpdate(float dt)
     {
         // 已打开界面的update,有需求才做
         ViewBase curView = UINavigation.GetLastItem();

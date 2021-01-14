@@ -19,7 +19,7 @@ using UnityEngine.Events;
 /// <summary>
 /// 所有界面的抽象类
 /// </summary>
-public abstract class ViewBase
+public abstract class ViewBase: MonoBehaviour
 {
     public ViewID key { get; set; }
     public ViewType viewType { get; set; }
@@ -31,14 +31,12 @@ public abstract class ViewBase
     public string panelName;
     public string assetPath;
 
+
     /// <summary>
     /// 优化显示，隐藏的时候移到很远
     /// </summary>
     protected bool optimizationVisible = true;
     protected Transform transform;
-    // 这个还要拆装箱，有点烦，
-    // 咨询了一下，还可以代码生成一个展示类，使用的时候逻辑类引用展示类，使用的时候直接点出来
-    protected Dictionary<string, Object> UI;
     /// <summary>
     /// 打开传入的参数
     /// </summary>
@@ -50,24 +48,18 @@ public abstract class ViewBase
     private LoadState m_loadState;// 加载状态
     protected Vector3 FarAwayPosition = new Vector3(10000, 10000, 0);
 
-    protected ViewBase() { }
-    protected ViewBase(GameObject go,Transform parent)
-    {
-        if(go == null)
-        {
-            Debug.LogError("!!构造初始化，没有传入GameObject！");
-            return;
-        }
-        UI = HierarchyUtil.GetHierarchyItems(go);
-        gameObject = go;
-        transform = go.transform;
-    }
 
     #region API
 
+
     public virtual bool CanOpen() { return true; }
     public virtual bool CanClose() { return true; }
-    
+
+    public virtual void Init(GameObject go, Transform parent)
+    {
+
+    }
+
     /// <summary>
     /// 界面加载
     /// </summary>
@@ -78,6 +70,8 @@ public abstract class ViewBase
         m_loadState = LoadState.LOADING;
         LoadModule.LoadUI(assetPath, OnLoadCompleted);
     }
+
+
 
     /// <summary>
     /// 界面打开
@@ -130,9 +124,6 @@ public abstract class ViewBase
         if(m_assetRequest != null)
             LoadModule.UnloadAsset(m_assetRequest);
 
-        if(UI != null && UI.Count > 0)
-            UI.Clear();
-
         if(gameObject != null)
             GameObject.Destroy(gameObject);
     }
@@ -162,7 +153,7 @@ public abstract class ViewBase
         OnUpdate();
     }
 
-    public ViewBase GenerateOne(Type itemClass, GameObject prefab, Transform parent)
+    public T GenerateOne<T>(GameObject prefab, Transform parent) where T: ViewBase, new()
     {
         Transform transParent = parent == null ? null : parent.transform;
         GameObject go = Object.Instantiate(prefab, transParent, false);
@@ -173,10 +164,10 @@ public abstract class ViewBase
         go.transform.SetAsLastSibling();
         go.SetActive(true);
 
-        var itemInstance = Activator.CreateInstance(itemClass,new object[] { go , transParent });
-        ViewBase view = itemInstance as ViewBase;
+        var itemInstance = new T();
+        itemInstance.Init(go, transParent);
 
-        return view;
+        return itemInstance;
     }
 
     #endregion
@@ -219,7 +210,7 @@ public abstract class ViewBase
         gameObject.name = request.asset.name;
 
         transform = gameObject.transform;
-        UI = HierarchyUtil.GetHierarchyItems(gameObject);
+       // HierarchyUtil.GetHierarchyItems(gameObject,this);
 
         OnLoaded();
         AddAllListener();

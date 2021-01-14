@@ -155,7 +155,10 @@ public sealed class LoadModule : ModuleBase
     {
         AssetRequest assetRequest = LoadAsset(path, type, false);
         if(loadedCallback != null)
+        {
             assetRequest.completed += loadedCallback;
+        }
+
         return assetRequest;
     }
 
@@ -262,7 +265,7 @@ public sealed class LoadModule : ModuleBase
 
 
     // update 驱动
-    public override void Update(float dt)
+    public override void OnUpdate(float dt)
     {
         UpdateAssets();
         UpdateBundles();

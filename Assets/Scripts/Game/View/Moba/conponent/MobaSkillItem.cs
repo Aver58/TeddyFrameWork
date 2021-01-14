@@ -26,12 +26,12 @@ public class MobaSkillItem : ViewBase
     private TextMeshProUGUI m_txtCD;
     private Image m_imgCDMask;
 
-    public MobaSkillItem(GameObject go,Transform parent):base(go,parent)
+    public MobaSkillItem()
     {
-        ETCJoystick joystick = (ETCJoystick)UI["Joystick"];
-        joystick.onTouchStart.AddListener(OnPointerDown);
-        joystick.onTouchUp.AddListener(OnPointerUp);
-        joystick.onMove.AddListener(OnDrag);
+        // ETCJoystick joystick = (ETCJoystick)UI["Joystick"];
+        // joystick.onTouchStart.AddListener(OnPointerDown);
+        // joystick.onTouchUp.AddListener(OnPointerUp);
+        // joystick.onMove.AddListener(OnDrag);
     }
 
     public void Init(AbilityCastType castType, Ability ability,Action<AbilityCastType> downAction
@@ -43,15 +43,15 @@ public class MobaSkillItem : ViewBase
         m_ability = ability;
         m_skillID = ability.ID;
         m_abilityCastType = castType;
-
-        skillItem skillItem = skillTable.Instance.GetTableItem(m_skillID);
-        string iconName = skillItem.icon;
-        iconName = "skill/" + iconName;//todo 导出动态图片映射表
-        ImageEx ImgIcon = (ImageEx)UI["ImgIcon"];
-        ImgIcon.SetSprite(iconName);
-
-        m_txtCD = (TextMeshProUGUI)UI["TxtCD"];
-        m_imgCDMask = (Image)UI["ImgCDMask"];
+        //
+        // skillItem skillItem = skillTable.Instance.GetTableItem(m_skillID);
+        // string iconName = skillItem.icon;
+        // iconName = "skill/" + iconName;//todo 导出动态图片映射表
+        // ImageEx ImgIcon = (ImageEx)UI["ImgIcon"];
+        // ImgIcon.SetSprite(iconName);
+        //
+        // m_txtCD = (TextMeshProUGUI)UI["TxtCD"];
+        // m_imgCDMask = (Image)UI["ImgCDMask"];
 
         SetCDState();
     }
