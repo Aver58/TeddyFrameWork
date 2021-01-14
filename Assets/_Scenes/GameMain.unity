@@ -171,36 +171,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1338975851923528, guid: 89e59b4d509d3934cb91464caa90ecdd, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114292340166391944, guid: 89e59b4d509d3934cb91464caa90ecdd,
-        type: 3}
-      propertyPath: showAxesInspector
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114292340166391944, guid: 89e59b4d509d3934cb91464caa90ecdd,
-        type: 3}
-      propertyPath: visibleOnStandalone
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114292340166391944, guid: 89e59b4d509d3934cb91464caa90ecdd,
-        type: 3}
-      propertyPath: isTurnAndMove
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114292340166391944, guid: 89e59b4d509d3934cb91464caa90ecdd,
-        type: 3}
-      propertyPath: showPSInspector
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114292340166391944, guid: 89e59b4d509d3934cb91464caa90ecdd,
-        type: 3}
-      propertyPath: _anchor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114292340166391944, guid: 89e59b4d509d3934cb91464caa90ecdd,
-        type: 3}
-      propertyPath: joystickType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224293302793503260, guid: 89e59b4d509d3934cb91464caa90ecdd,
@@ -323,16 +293,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1862747813}
     m_Modifications:
-    - target: {fileID: 1275790163275363685, guid: 8bb8b83ae17c4e54d8298936995b8b06,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -254.30469
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519956255754593916, guid: 8bb8b83ae17c4e54d8298936995b8b06,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 485.85706
-      objectReference: {fileID: 0}
     - target: {fileID: 4632324825680624806, guid: 8bb8b83ae17c4e54d8298936995b8b06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -442,11 +402,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MobaSkillItem
-      objectReference: {fileID: 0}
-    - target: {fileID: 7196814635334221485, guid: 8bb8b83ae17c4e54d8298936995b8b06,
-        type: 3}
-      propertyPath: showSpriteInspector
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bb8b83ae17c4e54d8298936995b8b06, type: 3}
@@ -607,7 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1280, y: 720}

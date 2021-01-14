@@ -53,14 +53,11 @@ public class TargetSearcher : Singleton<TargetSearcher>
     /// </summary>
     /// <param name="sourceList"></param>
     /// <param name="targetList"></param>
-    private void InsertToTargetList(BattleEntity source, List<BattleEntity> sourceList, List<BattleEntity> targetList)
+    private void InsertToTargetList(List<BattleEntity> sourceList, List<BattleEntity> targetList)
     {
         foreach(BattleEntity item in sourceList)
         {
-            if(IsInRange(source.Get2DPosition(),item.Get2DPosition(),source.GetViewRange()))
-            {
-                targetList.Add(item);
-            }
+            targetList.Add(item);
         }
     }
 
@@ -84,14 +81,14 @@ public class TargetSearcher : Singleton<TargetSearcher>
         switch(targetTeam)
         {
             case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY:
-                InsertToTargetList(source, BattleEntityManager.instance.GetEntities(BattleCamp.ENEMY), targets);
+                InsertToTargetList(BattleEntityManager.instance.GetEntities(BattleCamp.ENEMY), targets);
                 break;
             case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY:
-                InsertToTargetList(source, BattleEntityManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
+                InsertToTargetList(BattleEntityManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
             case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_BOTH:
-                InsertToTargetList(source, BattleEntityManager.instance.GetEntities(BattleCamp.ENEMY), targets);
-                InsertToTargetList(source, BattleEntityManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
+                InsertToTargetList(BattleEntityManager.instance.GetEntities(BattleCamp.ENEMY), targets);
+                InsertToTargetList(BattleEntityManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
             default:
                 break;
@@ -171,20 +168,18 @@ public class TargetSearcher : Singleton<TargetSearcher>
 
     #endregion
 
-    public BattleEntity FindTargetUnitByAbility(BattleEntity source,Ability ability)
+    public BattleEntity FindTargetUnitByAbility(BattleEntity source, Ability ability)
     {
-        //float castRange = ability.GetCastleRange();
-        //float viewRange = source.GetViewRange();
         // 全屏技能
         if(ability.GetCastRange() <= 0)
             return source;
 
-        BattleEntity lastTagget = source.target;
+        BattleEntity lastTarget = source.target;
         AbilityUnitTargetTeam targetTeam = ability.GetTargetTeam();
         AbilityAreaDamageType targetDemageType = ability.GetDamageType();
 
         BattleEntity newTarget;
-        if(lastTagget == null || lastTagget.IsUnSelectable())
+        if(lastTarget == null || lastTarget.IsUnSelectable())
         {
             BattleCamp sourceCamp = source.camp;
             List<BattleEntity> targets = FindTargetUnits(source, targetTeam, targetDemageType);
@@ -192,7 +187,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
         }
         else
         {
-            newTarget = lastTagget;
+            newTarget = lastTarget;
         }
         return newTarget;
     }
@@ -209,5 +204,28 @@ public class TargetSearcher : Singleton<TargetSearcher>
 
         }
         return targets;
+    }
+
+    public List<BattleEntity> FindTargetUnitsByManualSelect(BattleEntity source, Ability ability, 
+        float dragWorldPointX = -1, float dragWorldPointZ = -1)
+    {
+        List<BattleEntity> targets = new List<BattleEntity>();
+        var castRange = ability.GetCastRange();
+        if(castRange <= 0)
+        {
+            targets.Add(source);
+            return targets;
+        }
+
+        // 单个敌人
+        var abilityRange = ability.GetAbilityRange();
+        if(abilityRange.isSingleTarget)
+        {
+            var unit = FindNearestEnemyUnit(source);
+            targets.Add(unit);
+            return targets;
+        }
+
+        return null;
     }
 }

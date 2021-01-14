@@ -12,12 +12,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobaBussiness:Singleton<MobaBussiness>
+public class MobaBussiness : Singleton<MobaBussiness>
 {
     private HeroActor m_playerActor;
 
     private BattleEntityManager m_EntityMgr;
-    private List<HeroActor> m_EnemyActors;
+    private BattleActorManager m_ActorMgr;
+    
     private DebugController m_DrawTool;
 
     public MobaBussiness()
@@ -39,9 +40,9 @@ public class MobaBussiness:Singleton<MobaBussiness>
     public void Init()
     {
         m_DrawTool = GameObject.Find("MoveArea").GetComponent<DebugController>();
-        m_EnemyActors = new List<HeroActor>();
         m_EntityMgr = BattleEntityManager.instance;
-
+        m_ActorMgr = BattleActorManager.instance;
+        
         //AddPlayer();
         BattleEntity myEntity = m_EntityMgr.GetMyEntity();
         m_playerActor = new HeroActor(myEntity);
@@ -53,7 +54,7 @@ public class MobaBussiness:Singleton<MobaBussiness>
         {
             HeroActor actor = new HeroActor(entity);
             actor.LoadAsset(OnLoadGuard);
-            m_EnemyActors.Add(actor);
+            m_ActorMgr.AddActor(entity.hash,actor);
             // 绘制移动区域
             m_DrawTool.DrawMoveArea(entity.GetStartPoint(), entity.GetViewRange());
         }
@@ -79,7 +80,7 @@ public class MobaBussiness:Singleton<MobaBussiness>
     private void OnHeroMoveTo(object sender, EventArgs args)
     {
         HeorMoveEventArgs arg = args as HeorMoveEventArgs;
-        foreach(HeroActor render in m_EnemyActors)
+        foreach(HeroActor render in m_ActorMgr.GetEnemyActors())
         {
             render.Set3DPosition(arg.targetPos);
         }
@@ -88,7 +89,7 @@ public class MobaBussiness:Singleton<MobaBussiness>
     private void OnHeroTurnTo(object sender, EventArgs args)
     {
         HeorTurnEventArgs arg = args as HeorTurnEventArgs;
-        foreach(HeroActor render in m_EnemyActors)
+        foreach(HeroActor render in m_ActorMgr.GetEnemyActors())
         {
             render.Set2DForward(arg.forward);
         }
@@ -107,7 +108,7 @@ public class MobaBussiness:Singleton<MobaBussiness>
             m_playerActor.ChangeState(heroState, skillName, isSkipCastPoint);
         }
 
-        foreach(HeroActor actor in m_EnemyActors)
+        foreach(HeroActor actor in m_ActorMgr.GetEnemyActors())
         {
             if(actor.id == heroID)
             {

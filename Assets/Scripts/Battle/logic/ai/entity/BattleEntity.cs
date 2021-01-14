@@ -18,6 +18,7 @@ public class BattleEntity : Entity
 {
     public BattleCamp camp { get; }
     public BattleCamp enemyCamp { get;set; }
+    public int hash { get { return GetHashCode(); } }
     public BattleEntity target { get; set; }
     public List<Ability> abilities;
 

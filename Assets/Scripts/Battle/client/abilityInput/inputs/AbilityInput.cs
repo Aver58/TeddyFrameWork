@@ -14,19 +14,21 @@ using UnityEngine;
 
 /// <summary>
 /// 技能输入抽象类
-/// 技能指示器 + 施法者控制
+/// 更新技能指示器 + 更新施法者朝向
 /// </summary>
-public class AbilityInput
+public abstract class AbilityInput
 {
-    private HeroActor m_casterActor;
+    private float m_radius;
+    protected Ability m_ability;
     private Transform m_casterTransform;
     private List<HeroActor> m_targetActors;
     private List<AbilityIndicator> m_AbilityIndicators;
 
-    public AbilityInput(HeroActor casterActor)
+    public AbilityInput(Transform casterTransform, Ability ability)
     {
-        m_casterActor = casterActor;
-        m_casterTransform = m_casterActor.transform;
+        m_radius = ability.GetCastRange();
+        m_ability = ability;
+        m_casterTransform = casterTransform;
         m_targetActors = new List<HeroActor>();
         m_AbilityIndicators = new List<AbilityIndicator>();
     }
@@ -37,20 +39,28 @@ public class AbilityInput
         m_AbilityIndicators.Add(abilityIndicator);
     }
 
-    public void OnFingerDown()
+    public virtual void OnFingerDown()
     {
         ShowAbilityAllIndicator();
     }
 
-    public void OnFingerDrag(Vector3 forward)
+    public virtual void OnFingerDrag(Vector3 forward)
     {
-        var castPos = m_casterTransform.position;
+        var casterPos = m_casterTransform.position;
         float dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ;
-        // todo 技能范围*delta
-        OnFingerDrag(castPos.x, castPos.z, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
+
+        // z轴正方向为up 技能范围*delta
+        dragWorldPointX = casterPos.x + m_radius * forward.x;
+        dragWorldPointZ = casterPos.z + m_radius * forward.y;
+        dragForwardX = dragWorldPointX - casterPos.x;
+        dragForwardZ = dragWorldPointZ - casterPos.z;
+        //OnFingerDrag(casterPos.x, casterPos.z, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
+
+        for(int i = 0; i < m_AbilityIndicators.Count; i++)
+            m_AbilityIndicators[i].Update();
     }
 
-    public void OnFingerUp()
+    public virtual void OnFingerUp()
     {
         HideAbilityAllIndicator();
         m_targetActors.Clear();
@@ -58,12 +68,6 @@ public class AbilityInput
     #endregion
 
     #region Private
-
-    private void OnFingerDrag(float casterX, float casterZ, float dragWorldPointX, float dragWorldPointZ, float dragForwardX, float dragForwardZ)
-    {
-
-    }
-
     private void ShowAbilityAllIndicator()
     {
         for(int i = 0; i < m_AbilityIndicators.Count; i++)

@@ -11,7 +11,10 @@
 
 using UnityEngine;
 
-public class AbilityIndicator
+/// <summary>
+/// 技能指示器抽象类
+/// </summary>
+public abstract class AbilityIndicator
 {
     protected Transform m_indicatorTransform;
     protected Transform m_casterTransform;

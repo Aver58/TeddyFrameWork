@@ -9,6 +9,9 @@
 */
 #endregion
 
+/// <summary>
+/// 技能目标及范围
+/// </summary>
 public class AbilityRange
 {
     public bool isSingleTarget;

@@ -220,6 +220,11 @@ public class Ability
         return m_AbilityData.castDuration;
     }
 
+    public AbilityRange GetAbilityRange()
+    {
+        return m_AbilityData.abilityRange;
+    }
+
     public float GetAbilityAOERadius()
     {
         return m_AbilityData.abilityRange.Radius;

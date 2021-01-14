@@ -18,13 +18,13 @@ using UnityEngine;
 public class AbilityActor
 {
     private Ability m_ability;
-    private Transform m_transform;
+    private Transform m_casterTransform;
     private AbilityInput m_abilityInput;
 
-    public AbilityActor(Ability ability, Transform transform)
+    public AbilityActor(Ability ability, Transform casterTransform)
     {
         m_ability = ability;
-        m_transform = transform;
+        m_casterTransform = casterTransform;
         // 解析技能指示器
         m_abilityInput = CreateAbilityInput(ability);
     }
@@ -79,16 +79,18 @@ public class AbilityActor
     // 非指向性技能输入，妲己一技能
     private AbilityInput CreateAbilityNoTargetInput(AbilityBehavior abilityBehavior)
     {
-        AbilityInput abilityInput = new AbilityInputPoint();
+        AbilityInput abilityInput;
         // 直线型
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_LINE_AOE) != 0)
         {
+            abilityInput = new AbilityInputDirection(m_casterTransform, m_ability);
             var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
-            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
+            var castRange = m_ability.GetCastRange();
+            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, castRange);
             trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
             float lineLength, lineThickness;
             m_ability.GetLineAoe(out lineLength, out lineThickness);
-            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_transform, lineLength, lineThickness);
+            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_casterTransform, lineLength, lineThickness);
             abilityInput.AddAbilityIndicator(abilityIndicatorRange);
             abilityInput.AddAbilityIndicator(abilityIndicatorLine);
             return abilityInput;
@@ -97,6 +99,7 @@ public class AbilityActor
         // 扇形型
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_SECTOR_AOE) != 0)
         {
+            abilityInput = new AbilityInputDirection(m_casterTransform, m_ability);
             AbilityIndicatorType abilityIndicatorType;
             float sectorRadius, sectorAngle;
             m_ability.GetSectorAoe(out sectorRadius, out sectorAngle);
@@ -118,34 +121,36 @@ public class AbilityActor
             }
 
             var trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
-            var abilityIndicatorSector = new AbilityIndicatorLine(trans, m_transform, sectorRadius, sectorRadius);
+            var abilityIndicatorSector = new AbilityIndicatorLine(trans, m_casterTransform, sectorRadius, sectorRadius);
 
-            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_transform, sectorRadius, sectorRadius);
+            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_casterTransform, sectorRadius, sectorRadius);
             abilityInput.AddAbilityIndicator(abilityIndicatorSector);
             return abilityInput;
         }
 
         // 范围型
+        abilityInput = new AbilityInputDirection(m_casterTransform, m_ability);
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_RADIUS_AOE) != 0)
         {
             var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
-            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
+            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, m_ability.GetCastRange());
             abilityInput.AddAbilityIndicator(abilityIndicatorRange);
         }
+
         return abilityInput;
     }
 
     // 点施法类型，王昭君大招
     private AbilityInput CreateAbilityPointInput(AbilityBehavior abilityBehavior)
     {
-        var abilityInput = new AbilityInputPoint();
+        var abilityInput = new AbilityInputPoint(m_casterTransform, m_ability);
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_RADIUS_AOE) != 0)
         {
             var radius = m_ability.GetAbilityAOERadius();
             var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
-            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
+            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, m_ability.GetCastRange());
             trans = GetIndicatorAsset(AbilityIndicatorType.CIRCLE_AREA);
-            AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_transform, radius);
+            AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_casterTransform, radius);
             abilityInput.AddAbilityIndicator(abilityIndicatorRange);
             abilityInput.AddAbilityIndicator(abilityIndicatorPoint);
         }
@@ -158,14 +163,14 @@ public class AbilityActor
     // 指向性技能输入：妲己二技能
     private AbilityInput CreateAbilityTargetInput(AbilityBehavior abilityBehavior)
     {
-        var abilityInput = new AbilityInputPoint();
+        var abilityInput = new AbilityInputPoint(m_casterTransform, m_ability);
         var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
-        AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_transform, m_ability.GetCastRange());
+        AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, m_ability.GetCastRange());
         trans = GetIndicatorAsset(AbilityIndicatorType.SEGMENT);
-        AbilityIndicatorSegment abilityIndicatorSegment = new AbilityIndicatorSegment(trans, m_transform);
+        AbilityIndicatorSegment abilityIndicatorSegment = new AbilityIndicatorSegment(trans, m_casterTransform);
         var radius = m_ability.GetAbilityAOERadius();
         trans = GetIndicatorAsset(AbilityIndicatorType.SEGMENT_AREA);
-        AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_transform, radius);
+        AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_casterTransform, radius);
         abilityInput.AddAbilityIndicator(abilityIndicatorRange);
         abilityInput.AddAbilityIndicator(abilityIndicatorSegment);
         abilityInput.AddAbilityIndicator(abilityIndicatorPoint);

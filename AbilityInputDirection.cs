@@ -9,11 +9,7 @@
 */
 #endregion
 
-using UnityEngine;
-
 public class AbilityInputDirection : AbilityInput
 {
-    public AbilityInputDirection(Transform casterTransform, Ability m_ability) : base(casterTransform, m_ability)
-    {
-    }
+   
 }
