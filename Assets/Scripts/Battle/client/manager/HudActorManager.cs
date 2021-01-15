@@ -28,35 +28,30 @@ public class HudActorManager : Singleton<HudActorManager>
         canvasTransform = hudParent;
         parentNode = hudParent;
 
-        GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_HP_Updated, this, new EventHandler<EventArgs>(OnHeroHPUpdated));
+        GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_HP_Updated, (Func<HeorHPUpdateEventArgs>)OnHeroHPUpdated);
     }
 
     ~HudActorManager()
     {
-        GameMsg.instance.RemoveMessage(GameMsgDef.BattleEntity_HP_Updated);
+        GameMsg.instance.RemoveMessage(GameMsgDef.BattleEntity_HP_Updated, this);
     }
 
-    public void OnHeroHPUpdated(object sender, EventArgs args)
+    public void OnHeroHPUpdated(HeorHPUpdateEventArgs args)
     {
-        HeorHPUpdateEventArgs arg = args as HeorHPUpdateEventArgs;
-        int actorID = arg.id;
+        int actorID = args.id;
 
         HudActor actor;
         m_actorMap.TryGetValue(actorID, out actor);
         if(actor!=null)
         {
-            float percent = (float)arg.curHp / arg.maxHp;
+            float percent = (float)args.curHp / args.maxHp;
 
             actor.SetValue(percent);
         }
     }
 
-    public void OnHeroActorCreated(object sender, EventArgs args)
+    public void OnHeroActorCreated(HeroActor actor, bool isFriend)
     {
-        BattleActorCreateEventArgs arg = args as BattleActorCreateEventArgs;
-        HeroActor actor = arg.heroActor;
-        bool isFriend = arg.isFriend;
-
         // 创建一个血条
         LoadModule.LoadUI(path, delegate (AssetRequest data) {
             GameObject asset = data.asset as GameObject;

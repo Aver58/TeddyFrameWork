@@ -74,11 +74,11 @@ public class HeroActor
 
         // todo 找一个区分玩家与友军的标记
         if(camp == BattleCamp.FRIENDLY)
-            GameMsg.instance.SendMessage(GameMsgDef.PlayerActor_Created, new BattleActorCreateEventArgs(this, camp == BattleCamp.ENEMY));
+            GameMsg.instance.SendMessage(GameMsgDef.PlayerActor_Created, this, camp == BattleCamp.ENEMY);
 
         gameObject.name = string.Format("[{0}][{1}][UID:{2}][CID:{3}][Lv:{4}][Speed:{5}]",
             battleEntity.GetName(),camp.ToString(),battleEntity.GetUniqueID(),battleEntity.GetID(),battleEntity.GetLevel(),battleEntity.GetMoveSpeed());
-        GameMsg.instance.SendMessage(GameMsgDef.BattleActor_Created, new BattleActorCreateEventArgs(this, camp==BattleCamp.ENEMY));
+        GameMsg.instance.SendMessage(GameMsgDef.BattleActor_Created, this, camp == BattleCamp.ENEMY);
     }
 
     public void ChangeState(HeroState newState, string skillName = null, bool isSkipCastPoint = false)

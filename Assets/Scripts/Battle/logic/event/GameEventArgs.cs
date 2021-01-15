@@ -9,39 +9,32 @@
 */
 #endregion
 
-using System;
 using UnityEngine;
 
+/// <summary>
+/// 消息传递的结构体放这
+/// </summary>
 public class EventArgs
 {
     public static readonly EventArgs Empty;
 }
 
-public class GameEventArgs : EventArgs
-{
-    public int intParam;
-    public float floatParam;
-    public string stringParam;
-    public Vector2 vector2Param;
-    public object objectParam;
-}
-
 #region 业务需要的参数
 
-public class HeorMoveEventArgs : EventArgs
+public struct HeorMoveEventArgs 
 {
     public int id;
     public Vector3 targetPos;
     public Vector3 forward;
 }
 
-public class HeorTurnEventArgs : EventArgs
+public struct HeorTurnEventArgs
 {
     public int id;
     public Vector2 forward;
 }
 
-public class HeorHPUpdateEventArgs : EventArgs
+public struct HeorHPUpdateEventArgs
 {
     public int id;
     public int curHp;
@@ -55,7 +48,7 @@ public class HeorHPUpdateEventArgs : EventArgs
     }
 }
 
-public class HeorChangeStateEventArgs : EventArgs
+public struct HeorChangeStateEventArgs
 {
     public int id;
     public HeroState heroState;
@@ -71,15 +64,4 @@ public class HeorChangeStateEventArgs : EventArgs
     }
 }
 
-public class BattleActorCreateEventArgs : EventArgs
-{
-    public HeroActor heroActor;
-    public bool isFriend;
-
-    public BattleActorCreateEventArgs(HeroActor heroActor, bool isFriend)
-    {
-        this.heroActor = heroActor;
-        this.isFriend = isFriend;
-    }
-}
 #endregion

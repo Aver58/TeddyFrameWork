@@ -24,17 +24,17 @@ public class MobaBussiness : Singleton<MobaBussiness>
     public MobaBussiness()
     {
         GameMsg instance = GameMsg.instance;
-        instance.AddMessage(GameMsgDef.Hero_MoveTo, this, new EventHandler<EventArgs>(OnHeroMoveTo));
-        instance.AddMessage(GameMsgDef.Hero_TurnTo2D, this, new EventHandler<EventArgs>(OnHeroTurnTo));
-        instance.AddMessage(GameMsgDef.Hero_ChangeState, this, new EventHandler<EventArgs>(OnHeroActorStateChanged));
+        instance.AddMessage(GameMsgDef.Hero_MoveTo, (Func<HeorMoveEventArgs>)OnHeroMoveTo);
+        instance.AddMessage(GameMsgDef.Hero_TurnTo2D, (Func<HeorTurnEventArgs>)OnHeroTurnTo);
+        instance.AddMessage(GameMsgDef.Hero_ChangeState, (Func<HeorChangeStateEventArgs>)OnHeroActorStateChanged);
     }
 
     ~MobaBussiness()
     {
         GameMsg instance = GameMsg.instance;
-        instance.RemoveMessage(GameMsgDef.Hero_MoveTo);
-        instance.RemoveMessage(GameMsgDef.Hero_TurnTo2D);
-        instance.RemoveMessage(GameMsgDef.Hero_ChangeState);
+        instance.RemoveMessage(GameMsgDef.Hero_MoveTo, this);
+        instance.RemoveMessage(GameMsgDef.Hero_TurnTo2D, this);
+        instance.RemoveMessage(GameMsgDef.Hero_ChangeState, this);
     }
 
     public void Init()
@@ -77,31 +77,28 @@ public class MobaBussiness : Singleton<MobaBussiness>
 
     //todo 根据id 筛选
     //todo 为啥不能用 HeorMoveEventArgs
-    private void OnHeroMoveTo(object sender, EventArgs args)
+    private void OnHeroMoveTo(HeorMoveEventArgs args)
     {
-        HeorMoveEventArgs arg = args as HeorMoveEventArgs;
         foreach(HeroActor render in m_ActorMgr.GetEnemyActors())
         {
-            render.Set3DPosition(arg.targetPos);
+            render.Set3DPosition(args.targetPos);
         }
     }
 
-    private void OnHeroTurnTo(object sender, EventArgs args)
+    private void OnHeroTurnTo(HeorTurnEventArgs args)
     {
-        HeorTurnEventArgs arg = args as HeorTurnEventArgs;
         foreach(HeroActor render in m_ActorMgr.GetEnemyActors())
         {
-            render.Set2DForward(arg.forward);
+            render.Set2DForward(args.forward);
         }
     }
 
-    private void OnHeroActorStateChanged(object sender, EventArgs args)
+    private void OnHeroActorStateChanged(HeorChangeStateEventArgs args)
     {
-        HeorChangeStateEventArgs arg = args as HeorChangeStateEventArgs;
-        int heroID = arg.id;
-        HeroState heroState = arg.heroState;
-        string skillName = arg.skillName;
-        bool isSkipCastPoint = arg.isSkipCastPoint;
+        int heroID = args.id;
+        HeroState heroState = args.heroState;
+        string skillName = args.skillName;
+        bool isSkipCastPoint = args.isSkipCastPoint;
 
         if(m_playerActor.id == heroID)
         {

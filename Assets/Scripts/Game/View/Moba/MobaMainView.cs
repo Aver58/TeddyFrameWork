@@ -59,17 +59,16 @@ public class MobaMainView : MainViewBase
     {
         base.AddAllMessage();
 
-        GameMsg.instance.AddMessage(GameMsgDef.BattleActor_Created, this, new EventHandler<EventArgs>(OnHeroActorCreated));
-        GameMsg.instance.AddMessage(GameMsgDef.PlayerActor_Created, this, new EventHandler<EventArgs>(OnPlayerActorCreated));
-        GameMsg.instance.AddMessage(GameMsgDef.Hero_ChangeState, this, new EventHandler<EventArgs>(OnHeroActorStateChanged));
+        GameMsg.instance.AddMessage(GameMsgDef.BattleActor_Created, (Func<HeroActor, bool>)OnHeroActorCreated);
+        GameMsg.instance.AddMessage(GameMsgDef.PlayerActor_Created, (Func<HeroActor,bool>)OnPlayerActorCreated);
+        GameMsg.instance.AddMessage(GameMsgDef.Hero_ChangeState, (Func<HeorChangeStateEventArgs>)(OnHeroActorStateChanged));
     }
 
-    private void OnHeroActorStateChanged(object sender, EventArgs args)
+    private void OnHeroActorStateChanged(HeorChangeStateEventArgs args)
     {
-        HeorChangeStateEventArgs arg = args as HeorChangeStateEventArgs;
-        int heroID = arg.id;
-        string skillName = arg.skillName;
-        HeroState heroState = arg.heroState;
+        int heroID = args.id;
+        string skillName = args.skillName;
+        HeroState heroState = args.heroState;
         if(heroState == HeroState.CASTING)
         {
             // 施法,todo，区分玩家和其他玩家
@@ -84,11 +83,8 @@ public class MobaMainView : MainViewBase
         }
     }
 
-    private void OnPlayerActorCreated(object sender, EventArgs args)
+    private void OnPlayerActorCreated(HeroActor actor, bool isFriend)
     {
-        BattleActorCreateEventArgs arg = args as BattleActorCreateEventArgs;
-        HeroActor actor = arg.heroActor;
-
         m_cameraManager.SetWorldCameraPosition(actor.transform.position);
         m_cameraManager.SetWorldCameraTarget(actor.transform);
 
@@ -119,9 +115,9 @@ public class MobaMainView : MainViewBase
         }
     }
 
-    private void OnHeroActorCreated(object sender, EventArgs args)
+    private void OnHeroActorCreated(HeroActor actor, bool isFriend)
     {
-        m_hudActorManager.OnHeroActorCreated(sender, args);
+        m_hudActorManager.OnHeroActorCreated(actor, isFriend);
     }
 
     private void MovePlayerToPoint(Vector3 position)

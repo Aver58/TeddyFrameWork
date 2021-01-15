@@ -9,8 +9,7 @@
 */
 #endregion
 
-using System;
-
+// todo 改成 T
 public class UIEventArgs : EventArgs { }
 
 public class UIEventArgs<T> : UIEventArgs
