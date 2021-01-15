@@ -18,7 +18,6 @@ using UnityEngine;
 /// </summary>
 public abstract class AbilityInput
 {
-    private float m_radius;
     protected Ability m_ability;
     private Transform m_casterTransform;
     private List<HeroActor> m_targetActors;
@@ -26,7 +25,6 @@ public abstract class AbilityInput
 
     public AbilityInput(Transform casterTransform, Ability ability)
     {
-        m_radius = ability.GetCastRange();
         m_ability = ability;
         m_casterTransform = casterTransform;
         m_targetActors = new List<HeroActor>();
@@ -34,6 +32,7 @@ public abstract class AbilityInput
     }
 
     #region API
+
     public void AddAbilityIndicator(AbilityIndicator abilityIndicator)
     {
         m_AbilityIndicators.Add(abilityIndicator);
@@ -44,18 +43,8 @@ public abstract class AbilityInput
         ShowAbilityAllIndicator();
     }
 
-    public virtual void OnFingerDrag(Vector3 forward)
+    public virtual void OnFingerDrag(float casterX, float casterZ, float dragWorldPointX, float dragWorldPointZ, float dragForwardX, float dragForwardZ)
     {
-        var casterPos = m_casterTransform.position;
-        float dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ;
-
-        // z轴正方向为up 技能范围*delta
-        dragWorldPointX = casterPos.x + m_radius * forward.x;
-        dragWorldPointZ = casterPos.z + m_radius * forward.y;
-        dragForwardX = dragWorldPointX - casterPos.x;
-        dragForwardZ = dragWorldPointZ - casterPos.z;
-        //OnFingerDrag(casterPos.x, casterPos.z, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
-
         for(int i = 0; i < m_AbilityIndicators.Count; i++)
             m_AbilityIndicators[i].Update();
     }
@@ -65,6 +54,7 @@ public abstract class AbilityInput
         HideAbilityAllIndicator();
         m_targetActors.Clear();
     }
+
     #endregion
 
     #region Private

@@ -23,13 +23,15 @@ public class HeroActor
     public int id;
     public BattleCamp camp;
     public bool isLoadDone;// { get; set; }
-    public BattleEntity battleEntity { get; }
-    public GameObject gameObject { get; private set; }
-    public Transform transform { get; private set; }
 
-    private PositionController m_PositionController;
+    public BattleEntity battleEntity { get; }
+    public Transform transform { get; private set; }
+    public GameObject gameObject { get; private set; }
+
+    private Vector3 m_position = Vector3.zero;
     private DebugController m_DrawTool;
     private AnimationController m_AnimController;
+    private PositionController m_PositionController;
     private HeroStateController m_HeroStateController;
     private Dictionary<AbilityCastType, AbilityActor> m_abilityActorMap;
 
@@ -106,13 +108,27 @@ public class HeroActor
 
     public void Set2DForward(Vector2 position)
     {
-        Set3DForward(new Vector3(position.x, transform.position.y, position.y));
+        m_position.Set(position.x, transform.position.y, position.y);
+        Set3DForward(m_position);
     }
 
     public void Set3DForward(Vector3 position)
     {
         battleEntity.Set3DForward(position);
         transform.forward = position;
+    }
+
+    public void Set2DForward(float posX, float posZ)
+    {
+        m_position.Set(posX, transform.position.y, posZ);
+        Set3DForward(m_position);
+    }
+
+    public void Set3DForward(float posX, float posY, float posZ)
+    {
+        battleEntity.Set3DForward(posX, posY, posZ);
+        m_position.Set(posX, posY, posZ);
+        transform.forward = m_position;
     }
 
     public void OnMoveEnd()
@@ -153,6 +169,14 @@ public class HeroActor
     {
         var abilityActor = GetAbilityActor(castType);
         abilityActor.OnFingerUp();
+
+        Ability ability = battleEntity.GetAbility(castType);
+        if(ability.CD > 0)
+        {
+            Debug.Log("冷却中");
+            return;
+        }
+        battleEntity.CastAbility(ability);
     }
 
     #endregion

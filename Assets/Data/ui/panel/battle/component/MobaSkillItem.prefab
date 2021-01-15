@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2876319572353481492}
   - component: {fileID: 5048630701292617630}
-  - component: {fileID: 3629500078299461395}
   - component: {fileID: 1993041347163089391}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EasyTouchControlsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2519956255754593916}
+  - {fileID: 7340190527169160220}
   m_Father: {fileID: 4632324825680624806}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60,28 +60,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &3629500078299461395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249083550327620105}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
 --- !u!114 &1993041347163089391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +88,7 @@ GameObject:
   - component: {fileID: 1275790163275363685}
   - component: {fileID: 5606905903691494408}
   - component: {fileID: 4877478775072493588}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Thumb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -254.30469}
+  m_SizeDelta: {x: 0, y: -22.385971}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5606905903691494408
 CanvasRenderer:
@@ -167,6 +145,95 @@ MonoBehaviour:
   m_Sprite: {fileID: 21300000, guid: 23e448bf2a56ba84bb138ed990790edf, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1992057405267737331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7340190527169160220}
+  - component: {fileID: 5269491689564334576}
+  - component: {fileID: 5065800572500439062}
+  - component: {fileID: 2613193199946990927}
+  m_Layer: 0
+  m_Name: Joystick area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7340190527169160220
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992057405267737331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2876319572353481492}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5269491689564334576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992057405267737331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c513711e195288b44ac497df25a51bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  show: 1
+--- !u!222 &5065800572500439062
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992057405267737331}
+  m_CullTransparentMesh: 0
+--- !u!114 &2613193199946990927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992057405267737331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300004, guid: becfdeef1534456438d787466a94d207, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -598,7 +665,7 @@ GameObject:
   - component: {fileID: 8935701305078951173}
   - component: {fileID: 6145277889294284855}
   - component: {fileID: 2140987659529098355}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Joystick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +690,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 485.85706, y: 0}
+  m_SizeDelta: {x: -0.8928604, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7196814635334221485
 MonoBehaviour:
@@ -632,7 +699,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8526038507362861359}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c26c7a0dcd8138d4194e0a4435a4740c, type: 3}
   m_Name: 
@@ -719,7 +786,7 @@ MonoBehaviour:
   OnPressRight:
     m_PersistentCalls:
       m_Calls: []
-  joystickType: 1
+  joystickType: 0
   allowJoystickOverTouchPad: 0
   radiusBase: 0
   radiusBaseValue: 0
@@ -854,8 +921,8 @@ MonoBehaviour:
     showInertiaInspector: 0
     showSimulatinInspector: 0
   thumb: {fileID: 1275790163275363685}
-  joystickArea: 1
-  userArea: {fileID: 0}
+  joystickArea: 0
+  userArea: {fileID: 7340190527169160220}
   isTurnAndMove: 0
   tmSpeed: 10
   tmAdditionnalRotation: 0
@@ -928,7 +995,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: b85408c5f0cb9544ba2564917c8538ed, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

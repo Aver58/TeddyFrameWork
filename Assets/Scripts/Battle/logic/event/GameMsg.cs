@@ -12,8 +12,6 @@
 using System;
 using System.Collections.Generic;
 
-
-
 // 观察者模式
 public class GameMsg : Singleton<GameMsg>
 {

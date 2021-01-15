@@ -17,6 +17,7 @@ using UnityEngine;
 /// </summary>
 public class AbilityActor
 {
+    private float m_radius;
     private Ability m_ability;
     private Transform m_casterTransform;
     private AbilityInput m_abilityInput;
@@ -24,6 +25,7 @@ public class AbilityActor
     public AbilityActor(Ability ability, Transform casterTransform)
     {
         m_ability = ability;
+        m_radius = ability.GetCastRange();
         m_casterTransform = casterTransform;
         // 解析技能指示器
         m_abilityInput = CreateAbilityInput(ability);
@@ -38,7 +40,17 @@ public class AbilityActor
     public void OnFingerDrag(Vector3 forward)
     {
         if(m_abilityInput != null)
-            m_abilityInput.OnFingerDrag(forward);
+        {
+            var casterPos = m_casterTransform.position;
+            float dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ;
+
+            // z轴正方向为up 技能范围*delta
+            dragWorldPointX = casterPos.x + m_radius * forward.x;
+            dragWorldPointZ = casterPos.z + m_radius * forward.y;
+            dragForwardX = dragWorldPointX - casterPos.x;
+            dragForwardZ = dragWorldPointZ - casterPos.z;
+            m_abilityInput.OnFingerDrag(casterPos.x, casterPos.z, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
+        }
     }
 
     public void OnFingerUp()
@@ -151,11 +163,12 @@ public class AbilityActor
             AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, m_ability.GetCastRange());
             trans = GetIndicatorAsset(AbilityIndicatorType.CIRCLE_AREA);
             AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_casterTransform, radius);
+
             abilityInput.AddAbilityIndicator(abilityIndicatorRange);
             abilityInput.AddAbilityIndicator(abilityIndicatorPoint);
         }
         else
-            BattleLog.LogError("技能[%s]中有未定义的Point类型技能区域", m_ability.GetConfigName());
+            BattleLog.LogError("技能[{0}]中有未定义的Point类型技能区域", m_ability.GetConfigName());
 
         return abilityInput;
     }

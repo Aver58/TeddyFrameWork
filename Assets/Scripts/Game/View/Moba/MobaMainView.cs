@@ -187,26 +187,6 @@ public class MobaMainView : MainViewBase
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Q))
-            OnFingerDown(AbilityCastType.ATTACK);
-        if(Input.GetKeyUp(KeyCode.Q))
-            OnCastAbility(AbilityCastType.ATTACK);
-
-        if(Input.GetKeyDown(KeyCode.W))
-            OnFingerDown(AbilityCastType.SKILL1);
-        if(Input.GetKeyDown(KeyCode.W))
-            OnCastAbility(AbilityCastType.SKILL1);
-
-        if(Input.GetKeyDown(KeyCode.E))
-            OnFingerDown(AbilityCastType.SKILL2);
-        if(Input.GetKeyDown(KeyCode.E))
-            OnCastAbility(AbilityCastType.SKILL2);
-
-        if(Input.GetKeyDown(KeyCode.R))
-            OnFingerDown(AbilityCastType.SKILL3);
-        if(Input.GetKeyDown(KeyCode.R))
-            OnCastAbility(AbilityCastType.SKILL3);
-
         if(m_cameraManager != null)
             m_cameraManager.Update();
     }
@@ -231,8 +211,6 @@ public class MobaMainView : MainViewBase
     {
         if(m_PlayerActor != null)
             m_PlayerActor.OnFingerUp(abilityCastType);
-
-        OnCastAbility(abilityCastType);
     }
 
     private void OnCastAbility(AbilityCastType castType)
