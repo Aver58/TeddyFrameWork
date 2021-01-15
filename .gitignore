@@ -1,5 +1,4 @@
-﻿Library
-Temp
+﻿
 .vs
 obj/
 DLC
@@ -15,3 +14,8 @@ Assets/Standard Assets/LockstepRTSEngine-Master.meta
 Assembly-CSharp-Editor.csproj
 Packages/
 Logs
+/Library/
+/.vsconfig
+/Temp/
+/TeddyFrameWork.sln
+/TeddyFrameWork.sln.DotSettings.user

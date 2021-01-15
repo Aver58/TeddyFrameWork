@@ -28,7 +28,7 @@ public class HudActorManager : Singleton<HudActorManager>
         canvasTransform = hudParent;
         parentNode = hudParent;
 
-        GameMsg.instance.AddMessage(GameMsgDef.BattleEntity_HP_Updated, (Func<HeorHPUpdateEventArgs>)OnHeroHPUpdated);
+        GameMsg.instance.AddMessage<HeorHPUpdateEventArgs>(GameMsgDef.BattleEntity_HP_Updated, OnHeroHPUpdated);
     }
 
     ~HudActorManager()

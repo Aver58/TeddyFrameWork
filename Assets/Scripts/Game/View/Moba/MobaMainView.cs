@@ -59,9 +59,9 @@ public class MobaMainView : MainViewBase
     {
         base.AddAllMessage();
 
-        GameMsg.instance.AddMessage(GameMsgDef.BattleActor_Created, (Func<HeroActor, bool>)OnHeroActorCreated);
-        GameMsg.instance.AddMessage(GameMsgDef.PlayerActor_Created, (Func<HeroActor,bool>)OnPlayerActorCreated);
-        GameMsg.instance.AddMessage(GameMsgDef.Hero_ChangeState, (Func<HeorChangeStateEventArgs>)(OnHeroActorStateChanged));
+        GameMsg.instance.AddMessage<HeroActor, bool>(GameMsgDef.BattleActor_Created,OnHeroActorCreated);
+        GameMsg.instance.AddMessage<HeroActor, bool>(GameMsgDef.PlayerActor_Created, OnPlayerActorCreated);
+        GameMsg.instance.AddMessage<HeorChangeStateEventArgs>(GameMsgDef.Hero_ChangeState, (OnHeroActorStateChanged));
     }
 
     private void OnHeroActorStateChanged(HeorChangeStateEventArgs args)

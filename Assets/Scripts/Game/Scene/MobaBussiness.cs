@@ -9,6 +9,7 @@
 */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,9 +25,9 @@ public class MobaBussiness : Singleton<MobaBussiness>
     public MobaBussiness()
     {
         GameMsg instance = GameMsg.instance;
-        instance.AddMessage(GameMsgDef.Hero_MoveTo, (Func<HeorMoveEventArgs>)OnHeroMoveTo);
-        instance.AddMessage(GameMsgDef.Hero_TurnTo2D, (Func<HeorTurnEventArgs>)OnHeroTurnTo);
-        instance.AddMessage(GameMsgDef.Hero_ChangeState, (Func<HeorChangeStateEventArgs>)OnHeroActorStateChanged);
+        instance.AddMessage<HeorMoveEventArgs>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
+        instance.AddMessage<HeorTurnEventArgs>(GameMsgDef.Hero_TurnTo2D, OnHeroTurnTo);
+        instance.AddMessage<HeorChangeStateEventArgs>(GameMsgDef.Hero_ChangeState, OnHeroActorStateChanged);
     }
 
     ~MobaBussiness()
