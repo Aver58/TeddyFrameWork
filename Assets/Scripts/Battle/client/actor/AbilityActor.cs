@@ -74,12 +74,15 @@ public class AbilityActor
         {AbilityIndicatorType.SEGMENT_AREA,"rpgBattle/P_SegmentArea" },
     };
 
+    private static string IndicatorPrefix = "Assets/Data/scene/";
+    private static string Indicatorsuffix = ".prefab";
     private Transform GetIndicatorAsset(AbilityIndicatorType abilityIndicatorType)
     {
         string path = string.Empty;
         AbilityIndicatorAssetConfig.TryGetValue(abilityIndicatorType,out path);
         if(!string.IsNullOrEmpty(path))
         {
+            path = IndicatorPrefix + path + Indicatorsuffix;
             var request = LoadModule.LoadAsset(path,typeof(GameObject));
             var asset = request.asset as GameObject;
             var go = Object.Instantiate(asset);
@@ -92,14 +95,16 @@ public class AbilityActor
     private AbilityInput CreateAbilityNoTargetInput(AbilityBehavior abilityBehavior)
     {
         AbilityInput abilityInput;
+        AbilityIndicatorRange abilityIndicatorRange;
+        var rangeTrans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
+
         // 直线型
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_LINE_AOE) != 0)
         {
             abilityInput = new AbilityInputDirection(m_casterTransform, m_ability);
-            var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
             var castRange = m_ability.GetCastRange();
-            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, castRange);
-            trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
+            abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_casterTransform, castRange);
+            var trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
             float lineLength, lineThickness;
             m_ability.GetLineAoe(out lineLength, out lineThickness);
             AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_casterTransform, lineLength, lineThickness);
@@ -129,10 +134,11 @@ public class AbilityActor
             }
             else
             {
-                BattleLog.LogError("技能[%s]中有未定义的扇形AOE范围角度[%s]", m_ability.GetConfigName(), sectorAngle);
+                BattleLog.LogError("技能[{0}]中有未定义的扇形AOE范围角度[{1}]", m_ability.GetConfigName(), sectorAngle);
             }
 
             var trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
+            //todo abilityIndicatorType解析
             var abilityIndicatorSector = new AbilityIndicatorLine(trans, m_casterTransform, sectorRadius, sectorRadius);
 
             AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_casterTransform, sectorRadius, sectorRadius);
@@ -140,14 +146,10 @@ public class AbilityActor
             return abilityInput;
         }
 
-        // 范围型
+        // 范围型AOE 和 普通攻击，可以原地平A
         abilityInput = new AbilityInputDirection(m_casterTransform, m_ability);
-        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_RADIUS_AOE) != 0)
-        {
-            var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
-            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, m_ability.GetCastRange());
-            abilityInput.AddAbilityIndicator(abilityIndicatorRange);
-        }
+        abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_casterTransform, m_ability.GetCastRange());
+        abilityInput.AddAbilityIndicator(abilityIndicatorRange);
 
         return abilityInput;
     }
@@ -193,13 +195,16 @@ public class AbilityActor
     //解析技能行为
     private AbilityInput CreateAbilityInput(Ability ability)
     {
+        //非指向性技能，妲己一技能
         AbilityBehavior abilityBehavior = ability.GetAbilityBehavior();
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_NO_TARGET) != 0)
             return CreateAbilityNoTargetInput(abilityBehavior);
 
+        // 指向性技能：妲己二技能
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_UNIT_TARGET) != 0)
             return CreateAbilityPointInput(abilityBehavior);
 
+        // 点施法类型，王昭君大招
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_POINT) != 0)
             return CreateAbilityTargetInput(abilityBehavior);
 

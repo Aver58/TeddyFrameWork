@@ -29,7 +29,10 @@ public class D2Action_Damage : D2Action
 
     protected override void ExecuteByUnit(BattleEntity source, BattleEntity target)
     {
-        AbilityFormula.ApplyDamage(source, target, damageType, damageFlag, m_AbilityValueSource, m_AbilityData.configFileName);
+        if(target != null)
+        {
+            AbilityFormula.ApplyDamage(source, target, damageType, damageFlag, m_AbilityValueSource, m_AbilityData.configFileName);
+        }
 
         //有造成伤害（也就是有攻击到目标）, 执行OnSuccess Actions
         for(int i = 0; i < m_SuccessActions.Count; i++)

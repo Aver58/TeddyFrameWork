@@ -149,6 +149,7 @@ public class HeroActor
             return abilityActor;
 
         abilityActor = new AbilityActor(ability, transform);
+        m_abilityActorMap[castType] = abilityActor;
         return abilityActor;
     }
 

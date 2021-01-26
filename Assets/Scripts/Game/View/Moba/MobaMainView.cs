@@ -199,7 +199,7 @@ public class MobaMainView : MainViewBase
 
     private void OnFingerDrag(AbilityCastType abilityCastType, Vector2 mouseDelta)
     {
-        Debug.RawLog(mouseDelta);
+        //Debug.RawLog(mouseDelta);
         var originPos = m_PlayerActor.transform.position;
         skillForward.Set(originPos.x + mouseDelta.x, originPos.y, originPos.z + mouseDelta.y);
 

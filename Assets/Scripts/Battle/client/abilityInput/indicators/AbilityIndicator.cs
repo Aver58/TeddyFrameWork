@@ -26,13 +26,27 @@ public abstract class AbilityIndicator
         m_indicatorTransform = indicatorTransform;
         m_casterTransform = casterTransform;
     }
-    public virtual void Update() { }
-    public virtual void Show() { }
-    public virtual void Hide() { }
+
+    public virtual void Update(float casterX, float casterZ, float targetX, float targetZ, float targetForwardX, float targetForwardZ)
+    {
+        OnUpdate(casterX, casterZ, targetX, targetZ, targetForwardX, targetForwardZ);
+    }
+
+    public virtual void Show() 
+    {
+        OnShow();
+    }
+
+    public virtual void Hide()
+    {
+        OnHide();
+    }
+
     #endregion
 
     #region Private
     protected virtual void OnUpdate(float casterX, float casterZ, float targetX, float targetZ, float targetForwardX, float targetForwardZ) { }
+    
     protected virtual void OnShow() 
     {
         m_indicatorTransform.gameObject.SetActive(true);

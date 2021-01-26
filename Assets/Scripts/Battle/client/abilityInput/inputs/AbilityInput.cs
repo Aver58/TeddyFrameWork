@@ -46,7 +46,7 @@ public abstract class AbilityInput
     public virtual void OnFingerDrag(float casterX, float casterZ, float dragWorldPointX, float dragWorldPointZ, float dragForwardX, float dragForwardZ)
     {
         for(int i = 0; i < m_AbilityIndicators.Count; i++)
-            m_AbilityIndicators[i].Update();
+            m_AbilityIndicators[i].Update(casterX, casterZ, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
     }
 
     public virtual void OnFingerUp()
