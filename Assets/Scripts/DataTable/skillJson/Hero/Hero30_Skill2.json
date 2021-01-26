@@ -1,0 +1,136 @@
+{
+    "Name" : "尾袭 ：鱼尾推出一道水流，对前方长距离路径敌人造成伤害，并给予袭伤状态5S，袭伤使敌人闪避降低",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" : 2,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 4,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX30_02_attack",
+        "heroFX30_02_buff",
+        "heroFX30_02_cast"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":30021
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX30_02_cast",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        }
+    },
+
+    "OnSpellStart" :
+    {    
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX30_02_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectForwardType":"CASTER",
+            "EffectDuration" : 4
+        },
+        
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_LINE",
+                    "Line" :
+                    {
+                        "Length" : 12,
+                        "Thickness" : 3
+                    }                
+                }
+            },
+
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[38, 17],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[15300, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"xishang"
+                        }
+                    }
+                }
+            }
+        },      
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+		
+    },
+
+    "Modifiers":
+    {
+        "xishang":
+        {
+            "Duration":5,
+            "EffectName":"heroFX30_02_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_DODGE" : [-1.4,-1.4]
+            }
+        }
+    }
+}

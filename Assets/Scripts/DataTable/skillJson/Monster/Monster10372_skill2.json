@@ -1,0 +1,93 @@
+{
+    "Name" : "邪灵海蛇技能：嘲讽周围的敌人，持续5s。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 1.1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 18,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType":"NO_COST",
+    "AbilityCostValue":0,
+
+    "Precache":
+    [
+        "monster_012_02_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":111202
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_012_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+            
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 5
+                }
+            },
+            "Action":
+            {
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"xielinghaishe" 
+                        }
+                    }
+                } 
+            }      
+        }          
+    },
+    
+    "Modifiers":
+    {
+        "xielinghaishe":
+        {
+            "Duration":5,
+            "States":
+            {
+                "MODIFIER_STATE_TAUNTED":true
+            }
+        }
+    }
+}

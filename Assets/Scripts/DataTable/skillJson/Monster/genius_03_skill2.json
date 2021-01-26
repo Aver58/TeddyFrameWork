@@ -1,0 +1,106 @@
+{
+    "Name" : "水之精灵技能2：右手前伸蓄力，随后召唤一支水箭攻击最远处的敌人",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.44,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.5,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritWater_skill_02_attack",
+        "SpiritWater_skill_02_Bip001_R_Hand",
+        "SpiritWater_skill_02_Flyobject",
+        "SpiritWater_skill_02_gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritWater_skill_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_NORMAL"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritWater_skill_02_Bip001_R_Hand",
+            "EffectAttachType" : "FOLLOW_BIP_RIGHT_HAND",
+            "EffectDuration" : 2.1,
+            "EffectType":"EFFECT_NORMAL"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "SpiritWater_skill_02_Flyobject",
+            "MoveSpeed" : 35,
+            "SourceHeight" : 3,
+            "SourceX":0
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+    "OnProjectileHitUnit" :
+    {
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                },
+                "AttachEffect":
+                {
+                    "Target":"TARGET",
+                    "EffectName":"SpiritWater_skill_02_gethit",
+                    "EffectAttachType":"NO_FOLLOW_SPINE",
+                    "EffectDuration":2
+                }                
+            }
+        }
+    }
+}

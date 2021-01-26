@@ -1,0 +1,53 @@
+{
+    "Name" : "狂暴食人魔技能：跳起来用大棒打击敌人，并使其被击退",
+    "AbilityBehavior" : [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 1.2,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.8,
+    "AbilityCooldown" : 10,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "OnSpellStart" :
+    {
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[13000, 0]
+               }
+              ]
+            }
+        },    
+        "Knockback":
+        {
+            "Target":"TARGET",
+            "Center":"CASTER",
+            "Duration":0.8,
+            "Distance":2
+           
+        }   
+    }
+}

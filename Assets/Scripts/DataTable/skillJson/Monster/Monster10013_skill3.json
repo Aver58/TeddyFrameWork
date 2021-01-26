@@ -1,0 +1,76 @@
+{
+    "Name" : "查西里叶死士技能3：使自身回避上升，持续8s。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.7,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.7,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "heroFX03_03_attack",
+        "heroFX03_03_Buff"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX03_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.2
+        }
+    },
+
+    "OnSpellStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":8031
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX03_03_Buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.2
+        },
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"sishi3"
+        }
+    },
+
+    "Modifiers":
+    {
+        "sishi3":
+        {
+            "Duration":8,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_DODGE" : [8,8]
+            }
+        }
+    }
+}

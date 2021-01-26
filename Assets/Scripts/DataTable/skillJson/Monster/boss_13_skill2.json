@@ -1,0 +1,118 @@
+{  "Name" : "黑龙技能1：发出龙吼，对前方扇形区域的敌人造成伤害并眩晕1s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.87,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "BossFX13_02_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":121303
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"BossFX13_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.9,
+            "EffectForwardType":"TARGET"
+        },
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_SECTOR",
+                    "Sector" :
+                    {
+                        "Radius" : 5,
+                        "Angle" : 90
+                    }
+                }
+            },
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                },
+                "ChangeEnergy": 
+                {
+                    "Target" : "CASTER",
+                    "EnergyParams" : [100]
+                },
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"heilong2"
+                        }
+                    }
+                }        
+            }
+        },
+        "CameraShake":
+        {
+            "UseDefault":1
+        }
+    },
+    "Modifiers":
+    {
+        "heilong2":
+        {
+            "Duration":1,
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true
+            }
+        }
+    }
+}

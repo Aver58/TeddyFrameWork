@@ -1,0 +1,140 @@
+{
+    "Name" : "地狱火炎蛇：跳起后钻入地面，之后出现在目标身后攻击目标",
+    "AbilityBehavior" : [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",
+
+    "AbilityCastRange" : 20,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,  
+
+    "Precache":
+    [
+        "monster_017_02_attack",
+        "monster_017_02_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":111701
+         }
+    },
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_017_02_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectForwardType":"CASTER"
+        },
+
+
+        "DelayedAction":
+        {
+            "Delay":0.6,
+            "Action":
+            {
+                "Blink":
+                {
+                    "Target":"TARGET"
+                },
+                "DelayedAction":
+                {
+                    "Delay":0.2,
+                    "Action":
+                    {
+                        "AttachEffect" :
+                        {
+                            "Target": "CASTER",
+                            "EffectName" :"monster_017_02_Gethit",
+                            "EffectAttachType" : "FOLLOW_ORIGIN",
+                            "EffectDuration" : 2,
+                            "EffectForwardType":"CASTER"
+                        },
+                        "DelayedAction":
+                        {
+                            "Delay":0.3,
+                            "Action":
+                            {
+                                "Damage": 
+                                {
+                                    "Target" : "TARGET",
+                                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                                    "ValueSource":
+                                    {
+                                      "ValueBasicParams":[0, 0],
+                                      "ValueAdditionParams":
+                                      [
+                                       {
+                                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                        "ValueSourceParams":[12500, 0]
+                                       }
+                                      ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "OnOwnerDied" :
+    {
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"diyuhuoyanshe2"
+        }
+    },
+    "Modifiers":
+    {
+        "diyuhuoyanshe2":
+        {
+            "Duration":3,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target": "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[7500, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

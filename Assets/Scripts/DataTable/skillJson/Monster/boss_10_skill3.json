@@ -1,0 +1,112 @@
+{  "Name" : "麦赫拉江技能2：挥动三叉戟，发出的冲击波对前方扇形区域的敌人造成伤害并击退",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 7,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+ 
+    "Precache":
+    [
+        "bossFX10_03_attack"
+    ],
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":121004
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"bossFX10_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        }, 
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.5,
+            "Frequency":50,
+            "PositionOffset":[0.1,0.1,0]
+        }, 
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_SECTOR",
+                    "Sector" :
+                    {
+                        "Radius" : 8,
+                        "Angle" : 90
+                    }
+                }
+            },
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                },
+                "Knockback":
+                {
+                    "Target":"TARGET",
+                    "Center":"CASTER",
+                    "Duration":0.3,
+                    "Distance":2
+                },
+                "ChangeEnergy": 
+                {
+                    "Target" : "CASTER",
+                    "EnergyParams" : [100]
+                }    
+            }
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }   
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "Name" : "顺风而行：全体队友敏捷上升100点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "shunfengerxing":
+        {
+            "IsPassive" : true,
+            "Aura": "AGILITY_modifier",
+            "Aura_Radius" : -1,
+            "Aura_Teams" :"UNIT_TARGET_TEAM_FRIENDLY",
+            "Aura_Types" :"UNIT_TARGET_HERO"
+        },
+
+        "AGILITY_modifier":
+        {
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" : [3.2,1.52]
+            }
+        }
+    }
+}

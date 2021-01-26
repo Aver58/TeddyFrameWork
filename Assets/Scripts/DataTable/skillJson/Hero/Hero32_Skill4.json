@@ -1,0 +1,20 @@
+{
+    "Name" : "科技改造（被动）：彤丹将科技的伟力归于自身，使自身物理攻击上升402点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "mofaqianggong":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK":[12,6]
+            }
+        }
+    }
+}

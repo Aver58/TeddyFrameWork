@@ -1,0 +1,19 @@
+{
+    "Name" : "高级冰霜精灵被动：免疫控制",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "gaojibing4":
+        {
+            "IsPassive":true,
+            "States":
+            {
+                "MODIFIER_STATE_CONTROLLER_IMMUNE":true
+            }
+        }
+    }
+}

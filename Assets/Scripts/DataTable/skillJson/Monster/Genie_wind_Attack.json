@@ -1,0 +1,55 @@
+{
+    "Name" : "风精灵普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 13,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 3,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritWind_forearm",
+        "SpiritWind_flyObject",
+        "SpiritWind_Gethit"
+    ],
+    
+    "OnSpellStart": 
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg08"
+        },
+        "TrackingProjectile":
+        {
+            "Target":"TARGET",
+            "SourceHeight":1.2,
+            "MoveSpeed":15,
+            "EffectName" :"SpiritWind_flyObject"
+        }
+    },
+
+    "OnProjectileHitUnit":
+    {
+        "AttachEffect":
+        {
+            "Target":"TARGET",
+            "EffectName":"SpiritWind_Gethit",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":1.1
+        }
+    }
+}

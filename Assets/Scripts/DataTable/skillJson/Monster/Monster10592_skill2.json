@@ -1,0 +1,175 @@
+{
+    "Name" : "熔岩火炎蛇：向敌人喷出一团火球，对目标造成伤害并造成眩晕和灼烧状态3s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",
+
+    "AbilityCastRange" : 20,
+    "AbilityCastPoint" : 1.18,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.8,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,    
+
+    "Precache":
+    [
+		"monster_018_02_Bip001Head",
+        "monster_018_02_FlyObject",
+        "monster_018_02_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_018_02_Bip001Head",
+            "EffectAttachType" : "FOLLOW_BIP_HEAD",
+            "EffectDuration" : 2
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":111801
+        }
+    },
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "monster_018_02_FlyObject",
+            "MoveSpeed" : 20,
+            "SourceHeight" : 2,
+            "SourceX":0.7
+
+        }
+
+    },
+	
+    "OnProjectileHitUnit" :
+    {
+        "FireSound@1":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99052
+        },
+        "FireSound@2":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99122
+        },
+        
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[10000, 0]
+               }
+              ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"rongyanshe"
+                }
+            }
+        }
+    },
+    "OnOwnerDied" :
+    {
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"rongyanhuoyanshe2"
+        }
+    },
+    "Modifiers":
+    {
+        "rongyanshe":
+        {
+            "EffectName" :"monster_018_02_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration":3,
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true
+            },
+            "ThinkInterval":0.5,
+    
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                   "Target": "TARGET",
+                   "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                   "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                   "ValueSource":
+                   {
+                     "ValueBasicParams":[0, 0],
+                     "ValueAdditionParams":
+                     [
+                      {
+                       "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                       "ValueSourceParams":[6000, 0]
+                      }
+                     ]
+                   }
+                }
+            }
+        },
+        "rongyanhuoyanshe2":
+        {
+            "Duration":3,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target": "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[7500, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }       
+}

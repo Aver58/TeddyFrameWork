@@ -1,0 +1,100 @@
+{
+    "Name" : "羽翼女妖技能：对地方释放一个爱心之吻，对目标造成魅惑状态5s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 8,
+    "AbilityCastPoint" : 0.6,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.8,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"monster_023_02_FlyObject",
+        "monster_023_02_buff"
+    ],
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":112301
+         }
+    },
+    
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "monster_023_02_FlyObject",
+            "MoveSpeed" : 10,
+            "SourceHeight" : 1.2
+        }
+
+    },
+
+    "OnProjectileHitUnit" :
+    {    
+		"Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[12500, 0]
+               }
+              ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"yuyinvyao"
+                }
+            }
+        }             
+    } ,  
+    "Modifiers":
+    {
+        "yuyinvyao":
+        {
+            "EffectName" :"monster_023_02_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration":5,
+            "States":
+            {            
+               
+             "MODIFIER_STATE_CHARM" : true
+                    
+            }    
+        }
+    }
+}

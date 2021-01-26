@@ -1,0 +1,136 @@
+{
+    "Name" : "吉尔吉利斯大招：召唤持续3s的流星雨，造成多次伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityChannelTime" : 3.3,
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 0.3,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 3,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeRadius" : 8,
+
+    "Precache":
+    [
+        "boss_world_01_attack",
+        "boss_world_01_Body"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"boss_world_01_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"boss_world_01_Body",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        }
+    },
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":122002
+        },
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":2,
+            "Frequency":150,
+            "PositionOffset":[0.1,0.1,0]
+        },
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center" : "TARGET",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 8
+                }
+            },
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[8000, 0]
+                       }
+                      ]
+                    }
+                },
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"huoyanyu"
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "huoyanyu":
+        {
+            "Duration":2,
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[8000, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

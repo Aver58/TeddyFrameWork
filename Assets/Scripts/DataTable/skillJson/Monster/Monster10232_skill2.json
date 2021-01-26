@@ -1,0 +1,69 @@
+{
+    "Name" : "半人马弓手：回复己方最虚弱目标的生命值",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_PERCENT_MIN",
+    
+    "AbilityCastRange" :8,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.6,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":110701
+         }
+    },
+
+    "Precache":
+    [
+        "monster_007_02_buff"
+    ],
+
+    "OnSpellStart" :
+    {
+        "Heal": 
+        {
+            "Target":"TARGET",
+            
+            "HealFlags":["HEAL_FLAG_CRIT"],
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[17500, 0]
+               }
+              ]
+            }
+        },
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"monster_007_02_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        }      
+    }
+
+}

@@ -1,0 +1,147 @@
+{
+    "Name" : "奈斯尔大招：召唤鸟群攻击全体敌人，造成多次伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.5,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 3,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "boss_12_01_attack",
+        "heroFX_Current"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":121202
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":2,
+            "Frequency":60,
+            "PositionOffset":[0.2,0.2,0]
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"boss_12_01_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 4,
+            "EffectForwardType":"CASTER"
+        },
+
+        "DelayedAction":
+        {
+            "Delay":1.7,
+            "Action":
+            {
+                "CameraShake":
+                {
+                    "UseDefault":3
+                },
+                
+                "ApplyModifier":
+                {
+                    "Target":
+                    {
+                        "Center":"CASTER",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":100
+                        }
+                    },
+
+                    "ModifierName":"naisierdazhao"
+                }
+            }
+        }
+    },    
+
+    "Modifiers":
+    {
+        "naisierdazhao":
+        {
+            "Duration":0.5,
+            "ThinkInterval":0.2,
+            "OnCreated":
+            {
+                "Damage":
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[18000, 0]
+                       }
+                      ]
+                    }
+                }
+            },
+            
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[18000, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

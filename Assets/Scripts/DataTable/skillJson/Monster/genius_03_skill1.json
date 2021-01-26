@@ -1,0 +1,144 @@
+{
+    "Name" : "水之精灵大招：对所有敌人造出魔法伤害并冰冻3秒",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 3.85,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5.33,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "SpiritWater_Skill_01_attack",
+        "SpiritWater_Skill_01_Cast",
+        "boss_06_01&02_Buff"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg16"
+        },
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 4,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritWater_Skill_01_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 6.6,
+            "EffectType":"EFFECT_NORMAL",
+            "EffectForwardType":"CASTER"
+        },
+        "AttachEffect@3" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritWater_Skill_01_Cast",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4.5,
+            "EffectType":"EFFECT_NORMAL",
+            "EffectForwardType":"CASTER"
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.5,
+            "Frequency":45,
+            "PositionOffset":[0.2,0.2,0]
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 100
+                }
+            },
+
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[50000, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"shuizhijinglingdazhao"
+                        }
+                    }
+                } 
+            }
+        }   
+    },
+
+    "Modifiers":
+    {
+        "shuizhijinglingdazhao":
+        {
+            "EffectName" :"boss_06_01&02_Buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration" : 3,
+            "States" :
+            {
+                "MODIFIER_STATE_FROZEN" : true
+            }
+        }
+    }
+}

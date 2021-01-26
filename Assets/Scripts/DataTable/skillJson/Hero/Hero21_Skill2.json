@@ -1,0 +1,94 @@
+{
+    "Name" : "杜姆康（愤怒射手）暴风切（自动施放）：发射数把箭矢，对前方长距离扇形内的敌人造成物理伤害3328点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 1.1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.4,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "heroFX21_02_attack"
+    ],
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":18021
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX21_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        },   
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_SECTOR",
+                    "Sector" :
+                    {
+                        "Radius" : 10,
+                        "Angle" : 60
+                    }
+                }
+            },
+
+            "Action":
+            {  
+                "Damage": 
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[29, 13],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[12900, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,105 @@
+{
+    "Name" : "狂暴食人魔普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 0.64,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 3,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":120501
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "HitStop":
+                {
+                    "Duration":0.18
+                },
+                "CameraShake":
+                {
+                    "UseDefault":2
+                },
+                
+                "ActOnTargets":
+                {
+                    "Target":
+                    {
+                        "Center":"TARGET",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+                        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 2
+                        }
+                    },
+
+                    "Action":
+                    {
+                        "Damage": 
+                        {
+                            "Target" : "TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                                "ValueBasicParams":[0, 0],
+                                "ValueAdditionParams":
+                                [
+                                {
+                                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                    "ValueSourceParams":[10000, 0]
+                                }
+                                ]
+                            },
+                            "OnSuccess":
+                            {
+                                "FireSound":
+                                {
+                                    "SoundType":"SOUND_NORMAL",
+                                    "SoundName":99102
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+
+
+    }
+}

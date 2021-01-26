@@ -1,0 +1,97 @@
+{
+    "Name" : "利爪狮鹫技能2：缓慢回复自身的生命值同时提升自己的物理防御力，持续5s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.7,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.7,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "monster_024_03_attack"
+    ],
+
+    "OnSpellStart":
+    {
+        "ApplyModifier@1":
+        {
+            "Target":"CASTER",
+            "ModifierName":"lizhuashijiu2"
+        },
+        "ApplyModifier@2":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 5                
+                }
+            },
+            "ModifierName":"lizhuashijiu3"
+        }
+
+    },
+
+    "Modifiers":
+    {
+        "lizhuashijiu2":
+        {
+            "EffectName" :"monster_024_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration":5,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Heal": 
+                {
+                    "Target":"CASTER",
+                    
+                    "HealFlags":["HEAL_FLAG_CRIT"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[6250, 0]
+                       }
+                      ]
+                    }
+                }   
+            }      
+        },
+        "lizhuashijiu3":
+        {
+            "Duration":5,
+            "States":
+            {
+                "MODIFIER_STATE_TAUNTED":true
+            }     
+        }
+    }
+}

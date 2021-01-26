@@ -1,0 +1,20 @@
+{
+    "Name" : "厚皮（被动）：自身受到的伤害降低20%",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "PHYSICAL_DAMAGE":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_INCOMING_TAKE_ALL_DAMAGE_PERCENTAGE" : [-33,-33]
+            }
+        }
+    }
+}

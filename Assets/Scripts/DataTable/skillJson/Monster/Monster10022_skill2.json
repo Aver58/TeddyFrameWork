@@ -1,0 +1,57 @@
+{
+    "Name" : "查西里叶禁卫技能1：使自身物理攻击力上升25点，持续8s。",
+    "AbilityBehavior" : [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.7,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    "Precache":
+    [
+		"monster_c_inf_002_skill2_attack"
+    ],
+
+    "OnSpellStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"xg1101"
+        },
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"chaxiliyejinwei"
+        }
+
+    },
+
+    "Modifiers":
+    {
+        "chaxiliyejinwei":
+        {
+            "Duration":8,
+            "EffectName" :"monster_c_inf_002_skill2_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK" : [8,8]
+            }
+        }
+    }
+}

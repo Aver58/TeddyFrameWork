@@ -1,0 +1,124 @@
+{
+    "Name" : "三头犬技能：三只头的眼睛发出红色的光注视目标，造成伤害并使目标3s内进入昏睡状态",
+    "AbilityBehavior" : [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 7,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" :3,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "monster_016_02_attack",
+        "monster_016_02_Bip001Head"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":111601
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_016_02_Bip001Head",
+            "EffectAttachType" : "FOLLOW_BIP_HEAD",
+            "EffectDuration" : 2,
+            "EffectForwardType":"CASTER"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_016_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectForwardType":"CASTER"
+        },
+
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+            
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_SECTOR",
+                    "Sector" :
+                    {
+                        "Radius" : 3,
+                        "Angle" : 75
+                    }
+                }
+            },
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[15000, 0]
+                       }
+                      ]
+                    }
+                },
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"santouquan"
+                        }
+                    }
+                }    
+             }
+        }              
+    },
+
+    "Modifiers":
+    {
+        "santouquan":
+        {
+            "Duration":3,
+            "States":
+            {
+                "MODIFIER_STATE_NIGHTMARED": true
+            }
+        }
+    }
+}

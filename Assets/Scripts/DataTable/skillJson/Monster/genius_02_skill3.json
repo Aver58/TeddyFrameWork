@@ -1,0 +1,87 @@
+{
+    "Name" : "沙之精灵技能3：短暂吟唱后由地面获取能量，毎s回复一定数值血量",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.93,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 5,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritSand_Skill3"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritSand_Skill3",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 6,
+            "EffectType":"EFFECT_NORMAL"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"shazhijinglingjineng3"
+        }
+    },
+    "Modifiers":
+    {
+        "shazhijinglingjineng3":
+        {
+            "Duration" : 3,
+
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Heal":
+                {
+                    "Target" : "CASTER",
+                    
+                    "HealFlags":["HEAL_FLAG_NONE"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[55000, 0]
+                       }
+                      ]
+                    }
+                }                
+            }
+        }
+    }  
+}

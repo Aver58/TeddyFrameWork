@@ -1,0 +1,20 @@
+{
+    "Name" : "魔法强攻（被动）：自身魔法强度上升402点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "mofaqianggong":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAGIC_ATTACK":[12,6]
+            }
+        }
+    }
+}

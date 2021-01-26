@@ -1,0 +1,51 @@
+{
+    "Name" : "火精灵技能攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" :0.8,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 6,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius":100,
+
+    "Precache":
+    [
+        "SpiritFire_skill01"
+    ],
+
+    "OnSpellStart": 
+    {    
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg14"
+        },    
+        "SLGDamage":
+        {
+            "Target":"SLGFULL",
+            "DamageType":"DAMAGE_TYPE_PHYSICAL"
+        },
+
+        "AttachEffect":
+        {
+            "Target":"CASTER",
+            "EffectName":"SpiritFire_skill01",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":4.5
+        }
+    }
+}

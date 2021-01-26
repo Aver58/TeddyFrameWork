@@ -1,0 +1,21 @@
+{
+    "Name" : "阿卜杜拉（埃里布）（光明之子）近战普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.4,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0
+}

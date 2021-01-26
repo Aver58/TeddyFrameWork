@@ -1,0 +1,95 @@
+{
+    "Name" : "战斧勇士：以自身为中心挥舞战斧",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "AbilityAoeRadius": 3,
+
+    "Precache":
+    [
+        "soldier_h_inf_02_attack"
+    ],
+    
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"soldier_h_inf_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.3
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"xg0501"
+        },
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius": 3
+                }
+            },
+
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT"],
+                    "DamageType":"DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[0, 0],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[12000, 0]
+                        }
+                        ]
+                    },
+                    "OnSuccess":
+                    {
+                        "FireSound":
+                        {
+                            "SoundType":"SOUND_NORMAL",
+                            "SoundName":99072
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

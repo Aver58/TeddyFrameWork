@@ -1,0 +1,135 @@
+{  "Name" : "食人魔技能2：跳起来用棒子狠狠地砸向地面，对前方扇形区域内的敌人造成伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 0.75,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":4,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "Boss_05_03_attack",
+        "Boss_05_03_gethit"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":120504
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+        
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"Boss_05_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.1
+        },
+
+        "DelayedAction":
+        {
+            "Delay":0.05,
+            "Action":
+            {
+                "CameraShake":
+                {
+                    "Type":"PERIODIC",
+                    "Duration":0.4,
+                    "Frequency":45,
+                    "PositionOffset":[0,0.5,0]
+                },
+                
+                "AttachEffect" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"Boss_05_03_gethit",
+                    "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+                    "EffectDuration" : 2.1
+                },
+                "FireSound@1":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":99052
+                },
+                "FireSound@2":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":99122
+                },
+
+                "ActOnTargets":
+                {
+                    "Target" : 
+                    {
+                        "Center" : "TARGET",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 3
+                        }
+                    },
+                    
+                    "Action":
+                    {
+                        "Damage":
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[0, 0],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[13000, 0]
+                               }
+                              ]
+                            }
+                        },
+
+                        "Knockback":
+                        {
+                            "Target":"TARGET",
+                            "Center":"CASTER",
+                            "Duration":0.5,
+                            "Height":2
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

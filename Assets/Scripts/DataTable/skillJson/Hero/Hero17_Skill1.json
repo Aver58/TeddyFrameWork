@@ -1,0 +1,176 @@
+{
+    "Name" : "埃杜班（欺诈师）胡言乱语：岁前方长距离扇形范围内的敌人造成物理伤害5206点，并给予失神状态5S，失神会使敌人无法获得怒气",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_SECTOR_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 1.6,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 1.91,
+    "AbilityCooldown" : 3,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "AbilityAoeSector":
+    {
+        "Radius" : 12,
+        "Angle" : 60
+    },
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX17_01_Gethit",
+        "heroFX17_01_hitobject",
+        "heroFX17_01_loop_Spine"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":21011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX17_01_loop_Spine",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        
+        
+        "AttachEffect":
+        {
+            "Target":"CASTER",
+            "EffectType":"EFFECT_NORMAL",   
+            "EffectName":"heroFX17_01_hitobject",
+            "EffectAttachType":"NO_FOLLOW_ORIGIN",
+            "EffectDuration":1.5,
+            "EffectForwardType":"CASTER"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":21012
+        },
+	
+        "DelayedAction":
+        {
+            "Delay":0.1,
+            "Action":
+            {
+                "CameraShake":
+                {
+                    "UseDefault":3
+                },
+                
+                "ActOnTargets":
+                {
+                    "Target":
+                    {
+                        "Center":"CASTER",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_SECTOR",
+                            "Sector":
+                            {
+                                "Radius":12,
+                                "Angle":60
+                            }
+                        }
+                    },
+
+                    "Action":
+                    {
+                        "AttachEffect":
+                        {
+                            "Target":"TARGET",
+                            "EffectType":"EFFECT_NORMAL",   
+                            "EffectName":"heroFX17_01_Gethit",
+                            "EffectAttachType":"NO_FOLLOW_ORIGIN",
+                            "EffectDuration":1.5
+                        },
+                        
+                        "Damage": 
+                        {
+                            "Target" : "TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[40, 17],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[15700, 0]
+                               }
+                              ]
+                            }
+                        },
+
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"huyanluanyu"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+        
+
+    "Modifiers":
+    {
+        "huyanluanyu":
+        {
+            "Duration":5,
+            "States":
+            {
+                "MODIFIER_STATE_ENERGY_RECOVERY_DISABLED":true
+            }
+        }            
+    }
+}

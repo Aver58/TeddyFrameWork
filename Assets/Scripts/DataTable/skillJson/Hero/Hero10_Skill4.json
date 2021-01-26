@@ -1,0 +1,20 @@
+{
+    "Name" : "冰霜之躯（被动）：自身力量上升240点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "bingshuangzhiqu":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS":[8,3.8]
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "Name" : "魔法纹身（被动）：自身魔法抗性上升300点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "mofawenshen":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAGIC_DEFENCE" : [4,2]
+            }
+        }        
+    }
+}

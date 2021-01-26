@@ -1,0 +1,64 @@
+{
+    "Name" : "双头犬技能2：赋予自身一个吸收伤害的护盾",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.7,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.7,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "monster_015_03_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":111503
+         }
+    },
+
+    "OnSpellStart":
+    {
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"shuangtouquan2"
+        }
+
+    },
+
+    "Modifiers":
+    {
+        "shuangtouquan2":
+        {
+            "EffectName" :"monster_015_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration":8,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_SHIELD" : [1500,20]
+            }
+        }
+    }
+}

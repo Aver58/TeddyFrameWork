@@ -1,0 +1,21 @@
+{
+    "Name" : "埃杜班（欺诈师）灵敏（被动）：自身敏捷上升240点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "lingmin":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" : [3.2,1.52]
+            }
+        }
+    }
+}

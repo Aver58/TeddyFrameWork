@@ -1,0 +1,89 @@
+{
+    "Name" : "清盈之风（自动施放）：使自身附近中范围的队友获得凤舞状态8S,闪避上升90点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.2,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX03_03_attack",
+        "heroFX03_03_Buff"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX03_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.2
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":8031
+        }
+    },
+
+    "OnSpellStart":
+    {
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_FRIENDLY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":3
+                }
+            },
+
+            "ModifierName":"qingyingzhifeng"
+        },
+
+
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "qingyingzhifeng":
+        {
+            "Duration":8,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_DODGE" : [2.8,2.8]
+            },
+
+            "EffectName":"heroFX03_03_Buff",
+            "EffectAttachType":"FOLLOW_ORIGIN"
+        }
+    }
+}

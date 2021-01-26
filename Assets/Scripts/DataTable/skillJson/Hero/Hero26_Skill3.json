@@ -1,0 +1,72 @@
+{
+    "Name" : "胡达技能3",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 12,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "heroFX026_03_attack",
+        "heroFX026_03_buff"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":26031
+        },
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX026_03_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 3
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"xianxuekuangre"
+        }
+    },
+
+    "Modifiers":
+    {
+        "xianxuekuangre":
+        {
+            "Duration":8,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_LIFELINK_LEVEL": [8,6]
+            },
+
+            "EffectName":"heroFX026_03_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN"
+        }
+    }
+}

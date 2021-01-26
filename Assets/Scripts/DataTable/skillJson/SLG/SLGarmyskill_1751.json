@@ -1,0 +1,45 @@
+{
+    "Name" : "埃杜班（欺诈师）胡言乱语：岁前方长距离扇形范围内的敌人造成物理伤害5206点，并给予失神状态5S，失神会使敌人无法获得怒气",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 2,
+    "AbilityCastAnimation" : "skill1_full",
+    "AbilityCastDuration" : 1.91,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX17_01_Gethit",
+        "heroFX17_01_hitobject"
+    ],
+
+    "OnSpellStart" :
+    {
+        "AttachEffect":
+        {
+            "Target":"CASTER",
+            "EffectType":"EFFECT_NORMAL",   
+            "EffectName":"heroFX17_01_hitobject",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":1.5
+        },
+
+        "SLGDamage": 
+        {
+            "Target":"TARGET",
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL"
+        }
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "Name" : "贝斯蒂slg技能",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+    
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 2,
+    "AbilityCastAnimation" : "skill1_full",
+    "AbilityCastDuration" : 2.5,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX37_01_attack_Bone018",
+        "heroFX37_01_attack_Bone026"
+    ],
+
+    "OnSpellStart" :
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_01_attack_Bone018",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON1",
+            "EffectDuration" : 3
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_01_attack_Bone026",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON2",
+            "EffectDuration" : 3
+        },
+
+        "SLGDamage": 
+        {
+            "Target": "TARGET",
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL"
+        }
+    }
+}

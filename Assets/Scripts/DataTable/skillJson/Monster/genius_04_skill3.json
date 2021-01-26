@@ -1,0 +1,158 @@
+{
+    "Name" : "风之精灵技能3：召唤旋风护体，不断地对自身附近敌人造成伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 4,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.87,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritWind_skill03_attack01",
+        "SpiritWind_skill03_attack02"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritWind_skill03_attack01",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 1.5,
+            "EffectType":"EFFECT_NORMAL"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritWind_skill03_attack02",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 5.5,
+            "EffectType":"EFFECT_NORMAL"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"fengzhijinglingjineng3"
+        },
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 4
+                }
+            },
+
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[5000, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        },
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.5,
+            "Frequency":40,
+            "PositionOffset":[0.1,0.2,0]
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+    "Modifiers":
+    {
+        "fengzhijinglingjineng3":
+        {
+            "Duration":4,
+            "ThinkInterval":0.5,
+
+            "OnIntervalThink":
+            {
+                "ActOnTargets":
+                {
+                    "Target":
+                    {
+                        "Center":"CASTER",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":4
+                        }
+                    },
+
+                    "Action":
+                    {
+                        "Damage":
+                        {
+                            "Target":"TARGET",
+
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                            "ValueSource":
+                            {
+                                "ValueBasicParams":[0, 0],
+                                "ValueAdditionParams":
+                                [
+                                {
+                                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                    "ValueSourceParams":[5000, 0]
+                                }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } 
+}

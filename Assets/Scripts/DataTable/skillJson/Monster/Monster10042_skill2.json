@@ -1,0 +1,98 @@
+{
+    "Name" : "查希里叶蝠鱼射手技能：对目标射出一支穿透力强的箭，造成伤害并使其物理防御下降30，持续5s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",
+
+    "AbilityCastRange" : 30,
+    "AbilityCastPoint" : 1.83,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.17,
+    "AbilityCooldown" : 10,
+    "AbilityInitialCooldown":8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"monster_c_cava_001_skill2_Flyobject",
+        "monster_c_cava_001_skill2_Gethit"
+    ],
+
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "monster_c_cava_001_skill2_Flyobject",
+            "MoveSpeed" : 20,
+            "SourceHeight" : 2.8
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99011
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"xg0902"
+        },
+        "AttachEffect":
+        {
+            "Target": "TARGET",
+            "EffectName" :"monster_c_cava_001_skill2_Gethit",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2.2            
+        },
+		"Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[12000, 0]
+               }
+              ]
+            }
+        },
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"fuyusheshou1"
+        }                 
+    } ,  
+    "Modifiers":
+    {
+        "fuyusheshou1":
+        {
+            "Duration":5,
+             "Properties":
+            {            
+               
+             "MODIFIER_PROPERTY_PHYSICAL_DEFENCE" : [-10,-1]
+                    
+            }           
+        }
+    }
+}

@@ -1,0 +1,154 @@
+{
+    "Name" : "毒气弹：朝着敌人丢出毒气炸弹，对目标附近中范围的敌人造成物理伤害558点，并给予毒气状态3S，毒气每秒造成物理伤害1095点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 0.55,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.7,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius":3,
+
+    "Precache":
+    [
+        "heroFX07_02_attack",
+        "heroFX07_02_flyObject",
+        "heroFX07_02_Gethit",
+        "heroFX07_02_buff"
+    ],
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":3021
+        },
+        "AttachEffect" :
+        {
+            "Target" : "CASTER",
+            "EffectName" : "heroFX07_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        
+        "ParabolaProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "heroFX07_02_flyObject",
+            "HorizontalVelocity" : 15,
+            "MaxHeight":1,
+            "SourceHeight" : 1.2
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "OnProjectileHitUnit" :
+    {
+
+        "AttachEffect":
+        {
+            "Target":"TARGET",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectName":"heroFX07_02_Gethit",
+            "EffectAttachType":"NO_FOLLOW_ORIGIN",
+            "EffectDuration":3
+        },
+
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"TARGET",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":3
+                }
+            },
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[10.75, 4.25],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[4125, 0]
+                       }
+                      ]
+                    },
+                    "DamageType":"DAMAGE_TYPE_PHYSICAL"
+                },
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"duqidan"
+                }
+
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "duqidan":
+        {
+            "EffectName" : "heroFX07_02_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration":3,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType":"DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[10.75, 4.25],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[4125, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

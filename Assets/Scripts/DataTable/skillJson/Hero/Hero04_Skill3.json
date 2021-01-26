@@ -1,0 +1,77 @@
+{
+    "Name" : "寒冰护甲（自动施放）：保护一个最虚弱的队友，使队友物理护甲上升400点，持续8秒",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_PERCENT_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 0.5,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.2,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 12,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX04_03_cast",
+        "heroFX04_03_Buff"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX04_03_cast",
+            "EffectDuration" : 2.2,
+            "EffectType":"EFFECT_NORMAL"
+        },
+                "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":9031
+        }
+    },
+
+    "OnSpellStart":
+    {       
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"hanbinghujia"
+        },
+
+
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "hanbinghujia":
+        {
+            "Duration":8,
+
+            "EffectName":"heroFX04_03_Buff",
+            "EffectAttachType":"FOLLOW_BIP_FOOT",
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_DEFENCE" : [6,3]
+            }
+        }
+    }
+}

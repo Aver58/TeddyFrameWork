@@ -1,0 +1,19 @@
+{
+    "Name" : "木之精灵被动：免疫控制",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "muzhijinglingbeidong":
+        {
+            "IsPassive":true,
+            "States":
+            {
+                "MODIFIER_STATE_CONTROLLER_IMMUNE":true
+            }
+        }
+    }
+}

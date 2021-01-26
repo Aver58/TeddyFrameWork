@@ -1,0 +1,21 @@
+{
+    "Name" : "鲜血狩猎:泽卜莱康渴望鲜血的洗礼，当沐浴鲜血时，自身吸血等级上升",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "xianxueshoulie":
+        {
+            "IsPassive":true,
+            "IsHidden":true,
+
+            "Properties" : 
+            {
+                "MODIFIER_PROPERTY_LIFELINK_LEVEL" : [4,3.5]
+            }
+        }
+    }
+}

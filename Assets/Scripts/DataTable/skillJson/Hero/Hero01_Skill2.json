@@ -1,0 +1,78 @@
+{
+    "Name" : "神圣庇护（自动施放）：护盾持续4S，护盾最多可吸收任何伤害3923点【暂缺buff】",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.6,
+    "AbilityInitialCooldown":1,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX01_02_buff"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":1021
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"shenshengbihu"
+        }
+    },
+
+    "Modifiers":
+    {
+        "shenshengbihu":
+        {
+            "Duration":4,
+            "EffectName":"heroFX01_02_buff",
+            "EffectAttachType":"FOLLOW_BIP_FOOT",
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_SHIELD" : 
+                {
+                    "ValueSource" : 
+                    {
+                        "ValueBasicParams":[49, 22],
+                        "ValueAdditionParams":
+                        [
+                            {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[18200, 0]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

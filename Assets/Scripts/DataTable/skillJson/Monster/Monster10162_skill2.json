@@ -1,0 +1,77 @@
+{
+    "Name" : "沙漠步兵：赋予自身一个吸收物理伤害的护盾，护盾最多持续8s。",
+    "AbilityBehavior" : [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.7,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "soldier_s_inf_01_02_attack",
+        "soldier_s_inf_01_02_buff"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"soldier_s_inf_01_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.3
+        },
+        "DelayedAction":
+        {
+            "Delay":0.27,
+            "Action":
+            {
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":"xg1901"
+                }
+            }
+        }
+    },
+
+    "OnSpellStart":
+    {
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"shamobubing"
+        }
+
+    },
+
+    "Modifiers":
+    {
+        "shamobubing":
+        {
+            "Duration":8,
+            "EffectName" :"soldier_s_inf_01_02_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_SHIELD" : [1000,25]
+            }
+        }
+    }
+}

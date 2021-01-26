@@ -1,0 +1,102 @@
+{
+    "Name" : "努兹蔓（阴影守护者）远程普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 0.65,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.1,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"heroFX_Current_magic_flyobject_b",
+        "heroFX_Current_magic_Gethit_b"
+    ],
+
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "heroFX_Current_magic_flyobject_b",
+            "MoveSpeed" : 20,
+            "SourceHeight" : 1.2
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99031
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+
+    },
+	
+    "OnProjectileHitUnit" :
+    {
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":99032
+                },
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[10000, 0]
+                       }
+                      ]
+                    }
+                },
+                "AttachEffect":
+                {
+                    "Target":"TARGET",
+                    "EffectName":"heroFX_Current_magic_Gethit_b",
+                    "EffectAttachType":"NO_FOLLOW_SPINE",
+                    "EffectDuration":1
+                }
+            }
+        }
+    },
+    "OnOwnerDied":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"Slide15_Dead"
+        }
+    }
+}

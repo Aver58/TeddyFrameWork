@@ -1,0 +1,142 @@
+{
+    "Name" : "大地震击：对长距离路径上的敌人造成魔法伤害5215点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_LINE_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityChannelTime" : 7,
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 2,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeLine":
+    {
+        "Length" : 10,
+        "Thickness" : 3
+    },
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX18_01_loop",
+        "heroFX18_01_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 4,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":22011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX18_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":22012
+        },
+        "DelayedAction":
+        {
+            "Delay":0.4,
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"heroFX18_01_attack",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 5
+                },
+                "DelayedAction":
+                {
+                    "Delay":0.4,
+                    "Action":
+                    {
+                        "CameraShake":
+                        {
+                            "UseDefault":3
+                        },
+                        "ActOnTargets":
+                        {
+                            "Target":
+                            {
+                                "Center":"CASTER",
+                                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                                "Types":"UNIT_TARGET_HERO",
+        
+                                "AoeArea":
+                                {
+                                    "AreaType":"DAMAGE_AREA_TYPE_LINE",
+                                    "Line":
+                                    {
+                                        "Length":10,
+                                        "Thickness":3
+                                    }
+                                }
+                            },
+        
+                            "Action":
+                            {
+                                "Damage":
+                                {
+                                    "Target":"TARGET",
+                                    "DamageFlags":["DAMAGE_FLAG_CRIT"],
+                                    "DamageType":"DAMAGE_TYPE_MAGICAL",
+                                    "ValueSource":
+                                    {
+                                      "ValueBasicParams":[74, 33],
+                                      "ValueAdditionParams":
+                                      [
+                                       {
+                                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                        "ValueSourceParams":[25000, 0]
+                                       }
+                                      ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

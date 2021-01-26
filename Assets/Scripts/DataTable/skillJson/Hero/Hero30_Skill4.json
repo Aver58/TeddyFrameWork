@@ -1,0 +1,20 @@
+{
+    "Name" : "鱼人之歌（被动）：朱海莱声音甜美，吟唱人鱼之歌即可迷惑目标，提高自身命中",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "mifaguanghui":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_HIT_RATE":[3,3]
+            }
+        }
+    }
+}

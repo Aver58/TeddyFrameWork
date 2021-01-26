@@ -1,0 +1,64 @@
+{
+    "Name" : "山鲁佐德军团技能",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 2,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.3,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX30_01_attack",
+        "heroFX30_01_cast"
+    ],
+
+    "OnSpellStart" :
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX30_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 5
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX30_01_cast",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 5
+        },
+        
+        "Ballistic":
+        {
+            "Target":"TARGET",
+            "StartHeight":0.8,
+            "MoveSpeed":10,
+            "EffectName" :"heroFX02_02_flyObject",
+            "BallisticType":2                
+        }
+    },
+	
+		
+    "OnProjectileHitUnit" :
+    {
+		"SLGDamage": 
+        {
+            "Target" : "TARGET",
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL"
+        }
+    }
+}

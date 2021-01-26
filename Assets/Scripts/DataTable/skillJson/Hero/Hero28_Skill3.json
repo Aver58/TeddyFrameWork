@@ -1,0 +1,52 @@
+{
+    "Name" : "万夫莫敌：在战场上无人能敌，每隔一段时间会陷入狂暴，暂时获得狂暴状态5S，狂暴会使自身物理攻击上升600点；",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "kuangbao1":
+        {
+            "IsPassive" : true,
+            "ThinkInterval": 12,
+            "OnCreated":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"CASTER",
+                    "ModifierName":"kuangbao2"
+                },
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":28031
+                }
+            },
+            "OnIntervalThink" :
+            {
+                "ApplyModifier":
+                {
+                    "Target":"CASTER",
+                    "ModifierName":"kuangbao2"
+                },
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":28031
+                }
+            }
+        },
+        "kuangbao2":
+        {
+            "Duration":5,
+            "EffectName":"heroFX28_03_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK" : [24,12]
+            }
+        }
+    }
+}

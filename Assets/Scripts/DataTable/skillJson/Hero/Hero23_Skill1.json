@@ -1,0 +1,155 @@
+{
+    "Name" : "安眠曲：开心地唱着自己改编的安眠曲，对全体敌人造成伤害并给予晕眩状态5S，造成魔法伤害3431点；状态命中率随等级提升，对60级以下的敌人必定命中；",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.1,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 2.5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX23_01_attack",
+        "heroFX23_01_Gethit",
+        "heroFX23_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":23011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX23_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "CameraShake":
+        {
+            "UseDefault":3
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":23012
+        },
+        
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX23_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_NORMAL"
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 100
+                }
+            },
+
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[28, 12],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[12500, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "AttachEffect" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"heroFX23_01_Gethit",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 7,
+                    "EffectType":"EFFECT_NORMAL"
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"anmianqu"
+                        }
+                    }
+                }                
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "anmianqu":
+        {
+            "Duration":5,
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true
+            }
+        }
+    }
+}

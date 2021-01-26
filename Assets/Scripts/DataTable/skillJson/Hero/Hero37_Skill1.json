@@ -1,0 +1,244 @@
+{
+    "Name" : "收割回旋:回旋的匕首是收割生命的利刃，可对长距离路径上的敌人造成伤害并给予额外的瞬间斩杀。出去2次伤害，回来一次伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_LINE_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 7,
+    "AbilityCastPoint" : 0.63,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 4.5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "AbilityAoeLine":
+    {
+        "Length" : 7,
+        "Thickness" : 8
+    },
+    
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX37_01_attack",
+        "heroFX37_01_attack_Bone018",
+        "heroFX37_01_attack_Bone026",
+        "heroFX37_01_Gethit",
+        "heroFX37_01_loop",
+        "heroFX37_01_loop_Bone018&026"
+        
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":37011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        },
+
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_01_loop_Bone018&026",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON1",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        },
+
+        "AttachEffect@3" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_01_loop_Bone018&026",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON2",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":37012
+        },
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_01_attack_Bone018",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON2",
+            "EffectDuration" : 3
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_01_attack_Bone026",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON1",
+            "EffectDuration" : 3
+        },
+        "AttachEffect@3" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3
+        },
+        "LinearProjectile":
+        {
+            "Target":"POINT",
+            "MoveSpeed":10,
+            "FixedDistance":7,
+            "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+            "TargetTypes":"UNIT_TARGET_HERO",
+            "AoeArea" :
+            {
+                "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                "Line" :
+                {
+                    "Length" : 1,
+                    "Thickness" : 8
+                }
+            }
+        },
+        "DelayedAction@1":
+        {
+            "Delay":0.8,
+            "Action":
+            {
+                "LinearProjectile":
+                {
+                    "Target":"POINT",
+                    "MoveSpeed":10,
+                    "FixedDistance":7,
+                    "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+                    "TargetTypes":"UNIT_TARGET_HERO",
+                    "AoeArea" :
+                    {
+                        "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                        "Line" :
+                        {
+                            "Length" : 1,
+                            "Thickness" : 8
+                        }
+                    }
+                }
+            }
+        },
+        "DelayedAction":
+        {
+            "Delay":2.1,
+            "Action":
+            {
+                "LinearProjectile":
+                {
+                    "Target":"CASTER",
+                    "MoveSpeed":18,
+                    "FixedDistance":7,
+                    "SourceX":7,
+                    "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+                    "TargetTypes":"UNIT_TARGET_HERO",
+                    "AoeArea" :
+                    {
+                        "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                        "Line" :
+                        {
+                            "Length" : 1,
+                            "Thickness" : 8
+                        }
+                    },
+                    "OnHitUnit":
+                    {
+                        "AttachEffect" :
+                        {
+                            "Target": "TARGET",
+                            "EffectName" :"heroFX37_01_Gethit",
+                            "EffectAttachType" : "NO_FOLLOW_SPINE",
+                            "EffectDuration" : 3
+                        },
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                                "ValueBasicParams":[0, 0],
+                                "ValueAdditionParams":
+                                [
+                                {
+                                    "ValueSourceType":"SOURCE_TYPE_TARGET_LOST_HP",
+                                    "ValueSourceParams":[1200,0,4000,0]
+                                }
+                                ]
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99112
+        },
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX37_01_Gethit",
+            "EffectAttachType" : "NO_FOLLOW_SPINE",
+            "EffectDuration" : 3
+        },
+        "Damage": 
+        {
+            "Target":"TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[29, 13],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams":[9650, 0]
+                }
+                ]
+            }
+        }
+    }
+}

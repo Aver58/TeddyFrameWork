@@ -1,0 +1,142 @@
+{
+    "Name" : "毒蛇祭祀：在目标区域引导一个法阵，3.5秒后法阵爆炸，对区域内的敌人造成伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_POINT",
+        "ABILITY_BEHAVIOR_RADIUS_AOE",
+        "ABILITY_BEHAVIOR_CHANNELLED"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityChannelTime" : 3.5,
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" : 0.5,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeRadius" : 5,
+
+    "Precache":
+    [
+        "heroFX36_01_attack",
+        "heroFX36_01_loop",
+        "heroFX36_01_loop_Bip001 R Hand",
+        "heroFX36_01_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" :5,
+            "EffectType":"EFFECT_ULT_START"
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX36_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX36_01_loop_Bip001 R Hand",
+            "EffectAttachType" : "FOLLOW_BIP_RIGHT_HAND",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "CreateThinker":
+        {
+            "Target":"POINT",
+            "ModifierName":"dushejisi"
+        },
+        
+        "AttachEffect@3" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX36_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 5.5
+        },
+
+        "AttachEffect@4" :
+        {
+            "Target": "POINT",
+            "EffectName" :"heroFX36_01_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 5.5
+        }
+    },
+
+    "OnChannelInterrupted":
+    {
+        "DestroyThinker":
+        {
+            "Target":"POINT",
+            "ModifierName":"dushejisi"
+        }
+    },
+    "OnChannelSucceeded":
+    {
+        "Damage":
+        {
+            "Target" : 
+            {
+                "Center" : "POINT",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 5
+                }
+            },
+
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[85, 37],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                    "ValueSourceParams":[28900, 0]
+                }
+                ]
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "dushejisi":
+        {
+            "Duration":3.5
+        }
+    }
+}

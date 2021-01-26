@@ -1,0 +1,132 @@
+{
+    "Name" : "半人马枪兵技能：用长枪对目标进行三连突刺并击退目标",
+    "AbilityBehavior" : [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 3,
+    "AbilityCastPoint" : 0.65,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.8,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "monster_006_02_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":110602
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_006_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[0, 0],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams":[8000, 0]
+                }
+                ]
+            },
+            "OnSuccess":
+            {
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":99102
+                }
+            }
+        },
+        "DelayedAction":
+        {
+            "Delay": 0.2,
+            "Action":
+            {
+                "Knockback":
+                {
+                    "Target":"TARGET",
+                    "Center":"CASTER",
+                    "Duration":0.3,
+                    "Distance":2
+                } 
+            }     
+        },   
+          
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"renma"
+        }
+    },     
+    "Modifiers":
+    {
+        "renma":
+        {
+            "Duration":0.41,
+            "ThinkInterval":0.2,
+    
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target": "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[0, 0],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[5000, 0]
+                        }
+                        ]
+                    },
+                    "OnSuccess":
+                    {
+                        "FireSound":
+                        {
+                            "SoundType":"SOUND_NORMAL",
+                            "SoundName":99102
+                        }
+                    }
+                }
+            }
+        }
+    }    
+}

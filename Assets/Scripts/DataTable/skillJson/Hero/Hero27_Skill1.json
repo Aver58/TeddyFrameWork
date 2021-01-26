@@ -1,0 +1,189 @@
+{
+    "Name" : "朝敌人丢出回旋刀刃后收回，对中距离路径上的敌人造成2次伤害，同时给予缴械状态5S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_LINE_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 0.63,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "AbilityAoeLine":
+    {
+        "Length" : 10,
+        "Thickness" : 8
+    },
+    
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX27_01&02_Gethit",
+        "heroFX27_01_attack",
+        "heroFX27_01_Bip001Prop1&2",
+        "heroFX27_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":24011
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX27_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":27012
+        },
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX27_01_Bip001Prop1&2",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON1",
+            "EffectDuration" : 3
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX27_01_Bip001Prop1&2",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON2",
+            "EffectDuration" : 3
+        },
+        "LinearProjectile":
+        {
+            "Target":"POINT",
+            "MoveSpeed":20,
+            "FixedDistance":10,
+            "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+            "TargetTypes":"UNIT_TARGET_HERO",
+            "AoeArea" :
+            {
+                "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                "Line" :
+                {
+                    "Length" : 1,
+                    "Thickness" : 8
+                }
+            }
+        },
+        "DelayedAction":
+        {
+            "Delay":0.8,
+            "Action":
+            {
+                "LinearProjectile":
+                {
+                    "Target":"CASTER",
+                    "MoveSpeed":20,
+                    "FixedDistance":10,
+                    "SourceX":10,
+                    "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+                    "TargetTypes":"UNIT_TARGET_HERO",
+                    "AoeArea" :
+                    {
+                        "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                        "Line" :
+                        {
+                            "Length" : 1,
+                            "Thickness" : 8
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99112
+        },
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX27_01&02_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3
+        },
+        "Damage": 
+        {
+            "Target":"TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[24, 10.5],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams":[8950, 0]
+                }
+                ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"jiaoxie"
+                }
+            }
+        }
+    },
+    "Modifiers":
+    {
+        "jiaoxie":
+        {
+            "Duration":5,
+            "States":
+            {
+                "MODIFIER_STATE_DISARMED":true
+            }
+        }
+    }
+}

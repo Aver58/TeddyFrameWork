@@ -1,0 +1,38 @@
+{  "Name" : "黑龙技能1：发出龙吼，对前方扇形区域的敌人造成伤害并眩晕1s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.87,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":1,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "BossFX13_02_attack"
+    ],
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"BossFX13_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.9,
+            "EffectForwardType":"TARGET"
+        }
+    }
+}

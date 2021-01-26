@@ -1,0 +1,99 @@
+{
+    "Name" : "月光恩宠：人鱼公主朱海莱独得月之恩宠，拨动琴弦即可召唤月光，并治疗自身提升自身魔法强度5S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1.7,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 3,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 12,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX30_03_attack",
+        "heroFX30_03_Buff"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":30031
+        },
+        "AttachEffect" :
+        {
+            "Target":"CASTER",
+            "EffectName" :"heroFX30_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        }
+    },
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+        
+        "AttachEffect" :
+        {
+            "Target":"CASTER",
+            "EffectName" :"heroFX30_03_Buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3
+        },
+
+        "Heal":
+        {
+            "Target":"CASTER",
+            
+            "HealFlags":["HEAL_FLAG_CRIT"],
+            "ValueSource":
+            {
+              "ValueBasicParams":[97, 43],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                "ValueSourceParams":[30900, 0]
+               }
+              ]
+            }
+        },
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"yueguangenchong"
+        }
+        	
+    },
+    "Modifiers":
+    {
+        "yueguangenchong":
+        {
+            "Duration":5,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAGIC_ATTACK":[18,9]
+            }
+        }
+    }
+}

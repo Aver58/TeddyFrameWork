@@ -1,0 +1,96 @@
+{
+    "Name" : "巨角犀：使自身受到的物理伤害降低百分80同时持续回复自身的hp，持续5s。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_CHANNELLED"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityChannelTime" : 5,
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1.4,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" :5,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+   
+    "Precache":
+    [
+        "monster_003_02_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":110302
+         }
+    },
+
+    "OnSpellStart":
+    {
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"xiniu"
+        }
+
+    },
+    "OnChannelFinish":
+    {
+        "DestroyThinker":
+        {
+            "Target":"CASTER",
+            "ModifierName":"xiniu"
+        }
+    },
+
+    "Modifiers":
+    {
+        "xiniu":
+        {
+            "EffectName":"monster_003_02_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "Duration":5,
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "Heal":
+                {
+                   "Target":"CASTER",
+                   
+                   "HealFlags":["HEAL_FLAG_CRIT"],
+                   "ValueSource":
+                   {
+                     "ValueBasicParams":[0, 0],
+                     "ValueAdditionParams":
+                     [
+                      {
+                       "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                       "ValueSourceParams":[12500, 0]
+                      }
+                     ]
+                   }
+                }
+            },
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_INCOMING_TAKE_PHYSICAL_DAMAGE_PERCENTAGE" : [-0.4,-0.005]
+            }
+        }
+    }
+}

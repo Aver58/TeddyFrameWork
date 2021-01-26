@@ -1,0 +1,95 @@
+{
+    "Name" : "高等冰霜精灵技能2：以自身为中心召唤一道冰环，对范围内的敌人造成伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.5,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "boss_06_03_attack"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":120604
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"boss_06_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3,
+            "EffectType":"EFFECT_NORMAL"
+        },
+        
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius": 5
+                }
+            },
+
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT"],
+                    "DamageType":"DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                }
+            },
+            
+            "ChangeEnergy": 
+            {
+                "Target" : "CASTER",
+                "EnergyParams" : [100]
+            }
+        }
+    }
+}

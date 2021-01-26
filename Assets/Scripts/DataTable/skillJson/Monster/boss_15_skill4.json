@@ -1,0 +1,19 @@
+{
+    "Name" : "熔岩巨兽被动：免疫控制",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "rongyanjushou4":
+        {
+            "IsPassive":true,
+            "States":
+            {
+                "MODIFIER_STATE_CONTROLLER_IMMUNE":true
+            }
+        }
+    }
+}

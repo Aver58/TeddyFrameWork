@@ -1,0 +1,132 @@
+{
+    "Name" : "三头犬技能：三颗头都朝着目标射出一团火球，火球击中目标爆炸造成伤害并对目标造成灼烧状态3s。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",  
+
+    "AbilityCastRange" : 20,
+    "AbilityCastPoint" : 1.4,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":4,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"monster_016_03_Bip001Head",
+        "monster_016_03_FlyObject",
+        "monster_016_03_Gethit"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_016_03_Bip001Head",
+            "EffectAttachType" : "FOLLOW_BIP_HEAD",
+            "EffectDuration" : 2,
+            "EffectForwardType":"CASTER"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":111602
+        }
+    },
+
+    "OnSpellStart" :
+    {
+		
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "monster_016_03_FlyObject",
+            "MoveSpeed" : 20,
+            "SourceHeight" : 1.2
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"monster_016_03_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.3
+        },
+        "FireSound@1":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99052
+        },
+        "FireSound@2":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99122
+        },
+		"Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[12500, 0]
+               }
+              ]
+            }
+        },
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"santouquan2"
+        }                 
+    } ,  
+    "Modifiers":
+    {
+        "santouquan2":
+        {
+            "Duration":3,
+            "ThinkInterval":1,
+             "OnIntervalThink":
+            {            
+               
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[7000, 0]
+                       }
+                      ]
+                    }
+                }      
+            }           
+        }
+    }
+}

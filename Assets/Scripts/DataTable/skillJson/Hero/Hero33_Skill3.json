@@ -1,0 +1,123 @@
+{
+    "Name" : "挥舞长枪释放黑焰的力量，击退自身附近大范围的敌人造成伤害并给予破甲状态5S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 1.45,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" :9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius" : 5,
+    
+    "Precache":
+    [
+        "heroFX33_03_attack"
+    ],
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":33031
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX33_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" :5
+                }
+            },
+
+            "Action":
+            {  
+                "Damage": 
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[30, 13],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[13200, 0]
+                        }
+                        ]
+                    }
+                },
+                "Knockback":
+                {
+                    "Target":"TARGET",
+                    "Center":"CASTER",
+                    "Duration":0.5,
+                    "Distance":2
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"pojiahengsao"
+                        }
+                    }
+                }
+            }
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "pojiahengsao":
+        {
+            "Duration":5,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_DEFENCE" : [-2.1,-1.05]
+            }
+        }
+    }
+}

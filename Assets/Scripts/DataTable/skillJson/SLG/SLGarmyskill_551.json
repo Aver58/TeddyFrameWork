@@ -1,0 +1,60 @@
+{
+    "Name" : "分裂箭矢：独特的箭矢，射出之后可以分裂为多支，对目标附近中范围内的敌人造成3次伤害  ",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+    
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" : 2,
+    "AbilityCastAnimation" : "skill1_full",
+    "AbilityCastDuration" : 4,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX05_01_attack_prop1",
+        "heroFX05_01_hitObject"
+    ],
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX05_01_attack_prop1",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        
+        "DelayedAction":
+        {
+            "Delay":2,
+            "Action":
+            {
+                "AttachEffect":
+                {
+                    "Target":"POINT",
+                    "EffectType":"EFFECT_NORMAL",
+                    "EffectName":"heroFX05_01_hitObject",
+                    "EffectAttachType":"FOLLOW_ORIGIN",
+                    "EffectDuration":3
+                },
+
+                "SLGDamage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL"
+                }
+            }
+        }        
+    }
+}

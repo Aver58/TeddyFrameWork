@@ -1,0 +1,107 @@
+{
+    "Name" : "蜘蛛女王技能2：朝敌人喷出一道白色液体，造成伤害并使目标禁锢2s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.63,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":6,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "boss_16_03_flyObject",
+        "boss_16_03_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":121604
+         }
+    },
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "boss_16_03_flyObject",
+            "MoveSpeed" : 20,
+            "SourceHeight" : 1.2
+        }             
+    },
+
+    "OnProjectileHitUnit" :
+    {
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                "ValueSourceParams":[35000, 0]
+               }
+              ]
+            }
+        },
+        "AttachEffect":
+        {
+            "Target":"TARGET",
+            "EffectName": "boss_16_03_Gethit",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":2.5
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"zhizhunvwang3"
+                }
+            }
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+    "Modifiers":
+    {
+        "zhizhunvwang3":
+        {
+            "Duration":2,
+            "States":
+            {
+                "MODIFIER_STATE_ROOTED":true
+            }
+        }       
+    }
+}

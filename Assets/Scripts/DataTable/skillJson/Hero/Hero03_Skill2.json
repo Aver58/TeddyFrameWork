@@ -1,0 +1,102 @@
+{
+    "Name" : "天雷（自动施放）：对目标附近中范围的敌人造成魔法伤害3245点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 8,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.1,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX03_02_hitObject"
+    ],
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":8021
+        },
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"TARGET",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":3
+                }
+            },            
+            
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"heroFX03_02_hitObject",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 2.3
+                },
+
+                "ChangeEnergy": 
+                {
+                    "Target" : "CASTER",
+                    "EnergyParams" : [100]
+                },
+
+                "DelayedAction":
+                {
+                    "Delay":0.1,
+                    "Action":
+                    {
+                        "CameraShake":
+                        {
+                            "UseDefault":2
+                        },
+                        
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[36, 16],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                "ValueSourceParams":[14700, 0]
+                               }
+                              ]
+                            }
+                        }
+                    }
+                }
+            }
+        }        
+    }
+}

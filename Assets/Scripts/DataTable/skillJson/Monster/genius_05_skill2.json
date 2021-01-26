@@ -1,0 +1,117 @@
+{
+    "Name" : "火之精灵技能2：生成火焰护盾，护盾持续8秒，护盾结束时向外爆发火焰之环，造成伤害（半径5的圆形）",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1.5,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.47,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritFire_skill02",
+        "SpiritFire_skill02_buff"
+    ],
+    
+
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"huojinglingjineng2"
+        }
+    },
+
+    "Modifiers":
+    {
+        "huojinglingjineng2":
+        {
+            "Duration":8,
+            "EffectName":"SpiritFire_skill02_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_SHIELD":
+                {
+                    "ValueSource" : 
+                    {
+                        "ValueBasicParams":[0, 0],
+                        "ValueAdditionParams":
+                        [
+                            {
+                                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                "ValueSourceParams":[25000, 0]
+                            }
+                        ]
+                    }
+                }
+            },
+
+            "OnDestroy":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"SpiritFire_skill02",
+                    "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+                    "EffectDuration" : 1.8
+                },
+                "Damage": 
+                {
+                    "Target" : 
+                    {
+                        "Center" : "TARGET",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 6
+                        }
+                    },  
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                } 
+            }
+        }
+    }  
+}

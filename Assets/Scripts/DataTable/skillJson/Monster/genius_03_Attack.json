@@ -1,0 +1,92 @@
+{
+    "Name" : "水之精灵普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 0.67,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.47,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritWater_Skill_attack",
+        "SpiritWater_Skill_gethit"
+    ],
+    
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg11"
+        },
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "SpiritWater_Skill_attack",
+            "MoveSpeed" : 12,
+            "SourceHeight" : 3,
+            "SourceX":1.2
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+
+    },
+	
+    "OnProjectileHitUnit" :
+    {
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[10000, 0]
+                       }
+                      ]
+                    }
+                },
+                "AttachEffect":
+                {
+                    "Target":"TARGET",
+                    "EffectName":"SpiritWater_Skill_gethit",
+                    "EffectAttachType":"NO_FOLLOW_SPINE",
+                    "EffectDuration":1
+                }                
+            }
+        }
+    }
+}

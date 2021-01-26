@@ -1,0 +1,124 @@
+{
+    "Name" : "着魔的王子技能2：重重的锤击地面，在全体英雄的脚下生成石柱，造成伤害并击飞敌人",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.1,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"boss_02_03_attack",
+        "boss_02_03_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":120204
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"boss_02_03_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2.07,
+            "EffectForwardType":"CASTER"
+        },
+
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.4,
+            "Frequency":45,
+            "PositionOffset":[0,0.2,0]
+        },
+        
+        "ActOnTargets":
+        {
+           "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                    "Line" :
+                    {
+                        "Length" : 12,
+                        "Thickness" : 3
+                    }
+                }
+            },
+
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT"],
+                    "DamageType":"DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "AttachEffect" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"boss_02_03_Gethit",
+                    "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+                    "EffectDuration" : 2
+                },
+
+                "Knockback":
+                {
+                    "Target": "TARGET",
+                    "Center":"CASTER",
+                    "Duration":0.5,
+                    "Height": 2
+                }
+            }
+        },
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        } 
+    }
+}

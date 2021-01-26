@@ -1,0 +1,179 @@
+{
+    "Name" : "风之精灵技能2：在最远的目标区域（半径3）召唤雷电，一共造成3波伤害，最后一波附带晕眩1.5秒；",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",
+
+    "AbilityCastRange" : 7,
+    "AbilityCastPoint" : 1.8,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 4.24,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritWind_skill02_attack",
+        "SpiritWind_skill02_gethit"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "DelayedAction":
+        {
+            "Delay":0.33,
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"SpiritWind_skill02_attack",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 5
+                }
+            }
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"SpiritWind_skill02_gethit",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"TARGET",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":3
+                }
+            },
+            
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[12000, 0]
+                       }
+                      ]
+                    }
+                },
+                
+                "DelayedAction@1":
+                {
+                    "Delay":0.48,
+                    "Action":
+                    {                     
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[0, 0],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                "ValueSourceParams":[12000, 0]
+                               }
+                              ]
+                            }
+                        }
+                    }
+                },
+                "DelayedAction@2":
+                {
+                    "Delay":1.18,
+                    "Action":
+                    {    
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"fengzhijinglingjineng2"
+                                }
+                            }
+                        },                   
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[0, 0],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                "ValueSourceParams":[15000, 0]
+                               }
+                              ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "fengzhijinglingjineng2":
+        {
+            "Duration":1.5,
+
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true
+            }
+        }
+    }
+}

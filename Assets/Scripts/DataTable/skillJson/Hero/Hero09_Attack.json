@@ -1,0 +1,153 @@
+{
+    "Name" : "麦尔加娜近战普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 1.6,
+    "AbilityCastPoint" : 0.49,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    "Precache":
+    [
+        "heroFX_Current_Melee_Gethit"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":5001
+        }
+    },
+    "OnSpellStart" :
+    {
+
+        "IsHit@1":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "HitStop":
+                {
+                    "Duration":0.13
+                },
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[0, 0],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[5000, 0]
+                        }
+                        ]
+                    },
+                    "OnSuccess":
+                    {
+                        "FireSound":
+                        {
+                            "SoundType":"SOUND_NORMAL",
+                            "SoundName":99092
+                        }
+                    }
+                },
+                "AttachEffect":
+                {
+                    "Target":"TARGET",
+                    "EffectType":"EffectType",
+                    "EffectName":"heroFX_Current_Melee_Gethit",
+                    "EffectAttachType":"FOLLOW_BIP_SPINE",
+                    "EffectDuration":0.5
+                }
+            }
+        },
+        "IsHit@2":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "DelayedAction":
+                {
+                    "Delay":0.4,
+                    "Action":
+                    {
+                        "Damage": 
+                        {
+                            "Target" : "TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                                "ValueBasicParams":[0, 0],
+                                "ValueAdditionParams":
+                                [
+                                {
+                                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                    "ValueSourceParams":[5000, 0]
+                                }
+                                ]
+                            },
+                            "OnSuccess":
+                            {
+                                "FireSound":
+                                {
+                                    "SoundType":"SOUND_NORMAL",
+                                    "SoundName":99092
+                                }
+                            }
+                        },
+                        "HitStop":
+                        {
+                            "Duration":0.13
+                        },
+                
+                        "AttachEffect":
+                        {
+                            "Target":"TARGET",
+                            "EffectType":"EffectType",
+                            "EffectName":"heroFX_Current_Melee_Gethit",
+                            "EffectAttachType":"FOLLOW_BIP_SPINE",
+                            "EffectDuration":0.5
+                        }
+                    }
+                }                 
+            }
+        },
+
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+
+    },
+    "OnOwnerDied":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"Slide5_Dead"
+        }
+    }
+}

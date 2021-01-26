@@ -1,0 +1,159 @@
+{
+    "Name" : "光能激荡：彤丹使用肩上的光能炮对长距离路径上的敌人造成魔法伤害2675点，并给与晕眩状态2S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_LINE_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" :1.17,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 3.33,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeLine":
+    {
+        "Length" : 12,
+        "Thickness" : 3
+    },
+
+
+    "Precache":
+    [
+        "heroFX32_01_attack",
+        "heroFX32_01_loop",
+        "heroFX32_01_Loop_Bone055",
+        "heroFX32_01_attack_Gethit",
+        "heroFX_Current"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 4,
+            "EffectType":"EFFECT_ULT_START"
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX32_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX32_01_Loop_Bone055",
+            "EffectAttachType" : "Bone055",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX32_01_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectDuration":2.1,
+            "EffectForwardType":"CASTER"
+        },
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_LINE",
+                    "Line":
+                    {
+                        "Length":12,
+                        "Thickness":3
+                    }
+                }
+            },
+
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"heroFX32_01_attack_Gethit",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectType":"EFFECT_NORMAL",
+                    "EffectDuration":0.5
+                },
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT"],
+                    "DamageType":"DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[64,28],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[22200, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"guangnengjidang",
+                            "TargetFlags":["UNIT_TARGET_FLAG_NOT_CONTROLLER_IMMUNE"]
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "guangnengjidang":
+        {
+            "Duration":2,
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true
+            }
+        }
+    }
+}

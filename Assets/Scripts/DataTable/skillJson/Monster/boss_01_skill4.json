@@ -1,0 +1,19 @@
+{
+    "Name" : "妖魔与箱中少女被动：免疫控制",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "yaomo4":
+        {
+            "IsPassive":true,
+            "States":
+            {
+                "MODIFIER_STATE_CONTROLLER_IMMUNE":true
+            }
+        }
+    }
+}

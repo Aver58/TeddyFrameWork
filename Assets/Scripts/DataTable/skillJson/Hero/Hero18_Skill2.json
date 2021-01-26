@@ -1,0 +1,111 @@
+{
+    "Name" : "霜火箭（自动施放）：对目标小范围的敌人造成魔法伤害4022点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius":2,
+
+    "Precache":
+    [
+        "heroFX18_02_Gethit",
+        "heroFX18_02_L_Hand"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":22021
+        }   
+    },
+    "OnSpellStart" :
+    {
+		"AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX18_02_L_Hand",
+            "EffectAttachType" : "FOLLOW_BIP_LEFT_HAND",
+            "EffectDuration" : 2.3
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "AttachEffect@2" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX18_02_Gethit",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2.3
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center":"TARGET",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":3
+                }
+            },
+
+            "Action":
+            {
+                "DelayedAction":
+                {
+                    "Delay":1,
+                    "Action":
+                    {
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[41, 18],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                "ValueSourceParams":[16100, 0]
+                               }
+                              ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

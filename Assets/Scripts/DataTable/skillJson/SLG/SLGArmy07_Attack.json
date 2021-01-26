@@ -1,0 +1,42 @@
+{
+    "Name" : "箭塔SLG攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FIRSTArcher",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 0.3,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.1,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "OnSpellStart": 
+    {
+        "Ballistic":
+        {
+            "Target":"TARGET",
+            "StartHeight":3.7,
+            "MoveSpeed":10,
+            "EffectName":"fx_wall_crystal_flyobject",
+            "BallisticType":1  
+        }
+    },
+
+    "OnProjectileHitUnit":
+    {
+        "SLGDamage": 
+        {
+            "Target":"TARGET",
+            "DamageType":"DAMAGE_TYPE_PHYSICAL"
+        }
+    }
+}

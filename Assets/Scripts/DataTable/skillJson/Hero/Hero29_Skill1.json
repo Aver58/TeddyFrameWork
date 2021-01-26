@@ -1,0 +1,150 @@
+{
+    "Name" : "弹奏华美的乌德琴乐章，对目标附近大范围的队友产生治疗效果并赋予陶醉状态",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_POINT",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_PERCENT_MIN",
+    
+    "AbilityChannelTime" : 5,
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeRadius" : 5,
+
+    "Precache":
+    [
+        "heroFX29_01_attack",
+        "heroFX29_01_buff",
+        "heroFX29_01_Gethit",
+        "heroFX29_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" :5,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":24011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX29_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":29011
+        }
+    },
+
+    "OnSpellStart" :
+    {
+
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":29012
+        },
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "POINT",
+                "Teams" : "UNIT_TARGET_TEAM_FRIENDLY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 5
+                }
+            },
+            "Action":
+            {
+                "Heal":
+                {
+                    "Target" : "TARGET",
+                    "HealFlags" : ["HEAL_FLAG_CRIT"],
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[89, 39],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                            "ValueSourceParams":[28800, 0]
+                        }
+                        ]
+                    }
+                },
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"taozui"
+                }
+            }
+        },
+
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX29_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "POINT",
+            "EffectName" :"heroFX29_01_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        }
+    },
+
+
+    "Modifiers":
+    {
+        "taozui":
+        {
+            "EffectName" :"heroFX29_01_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+
+            "Duration":5,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_INCOMING_TAKE_ALL_DAMAGE_PERCENTAGE":[-1000,-29]  
+            }      
+        }
+    }
+}

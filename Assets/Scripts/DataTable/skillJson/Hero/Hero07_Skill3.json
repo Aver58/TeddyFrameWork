@@ -1,0 +1,48 @@
+{
+    "Name" : "鼓舞：每当战场上有人死亡就会获得鼓舞的状态5S，会使自身物理攻击上升480点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    
+    "OnHeroDied" :
+    {
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"guwu"
+        }
+    },
+
+    "Modifiers":
+    {
+        "guwu":
+        {
+            "IsPassive":true,
+            "OnHeroDied":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"CASTER",
+                    "ModifierName":"guwu1"
+                },
+
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":3031
+                }
+            }  
+        },
+        
+        "guwu1":
+        {
+            "Duration":5,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK":[18,9]
+            }
+        }
+    }
+}

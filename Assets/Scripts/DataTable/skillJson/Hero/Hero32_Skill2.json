@@ -1,0 +1,99 @@
+{
+    "Name" : "守护屏障（自动释放）：彤丹提供光能护盾保护全体队友，所有人获得吸收伤害的护盾7S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.5,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.67,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX32_02_attack",
+        "heroFX32_02_attack_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX32_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.36
+        },
+                "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":16031
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_FRIENDLY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 5
+                }
+            },
+
+            "ModifierName":"shouhupingzhang"
+        }
+    },
+
+    "Modifiers":
+    {
+        "shouhupingzhang":
+        {
+            "Duration":7.1,
+            "EffectName":"heroFX32_02_attack_Gethit",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_SHIELD":
+                {
+                    "ValueSource" : 
+                    {
+                        "ValueBasicParams":[64, 28],
+                        "ValueAdditionParams":
+                        [
+                            {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[23300, 0]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

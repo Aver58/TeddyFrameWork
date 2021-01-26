@@ -1,0 +1,79 @@
+{
+    "Name" : "恶魔蛇怪技能：演奏神秘的乐章，为自身附近大范围的友军赋予增加攻击力的状态，持续10s。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.8,
+    "AbilityCooldown" : 20,
+    "AbilityInitialCooldown":10,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "monster_013_02_attack"
+    ],
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":111301
+         }
+    },
+
+    "OnSpellStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_013_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_FRIENDLY",
+                "Types":"UNIT_TARGET_HERO",
+            
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 7
+                }
+            },          
+            "ModifierName":"emosheguai"
+        }
+    },
+
+    "Modifiers":
+    {
+        "emosheguai":
+        {
+            "Duration":10,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK" : [20,5]
+            }
+        }
+    }
+}

@@ -1,0 +1,76 @@
+{
+    "Name" : "查西里叶蝎骑兵：缓慢回复自身的生命值，持续5s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 2.5,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 3.2,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":4,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    "Precache":
+    [
+        "monster_c_cava_003_skill3_attack"
+    ],
+
+    "OnSpellStart":
+    {
+        "AttachEffect":
+        {
+            "Target":"CASTER",
+            "EffectName":"monster_c_cava_003_skill3_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":2
+        },
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"chaxiliyexiezi"
+        }
+    },
+
+    "Modifiers":
+    {
+        "chaxiliyexiezi":
+        {
+            "Duration":5,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Heal": 
+                {
+                    "Target":"CASTER",
+                    
+                    "HealFlags":["HEAL_FLAG_CRIT"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[12000, 0]
+                       }
+                      ]
+                    }
+                }   
+            }       
+        }
+    }
+}

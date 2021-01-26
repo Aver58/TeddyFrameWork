@@ -1,0 +1,207 @@
+{
+    "Name" : "心灵震撼：对目标附近中范围的敌人造成伤害并给予晕眩状态1S，造成魔法伤害5118点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_POINT",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 1.56,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeRadius" : 3,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX16_01_attack",
+        "heroFX16_01_buff",
+        "heroFX16_01_Gethit",
+        "heroFX16_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":13011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX16_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX16_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectDuration":2
+        },
+        "FireSound@1":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99052
+        },
+        "FireSound@2":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99122
+        },
+
+        "FireSound@3":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":13012
+        },
+
+        "DelayedAction":
+        {
+            "Delay":0.2,
+            "Action":
+            {
+                "FireSound@1":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":99052
+                },
+                "FireSound@2":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":99122
+                },
+        
+                
+                
+                "AttachEffect" :
+                {
+                    "Target": "POINT",
+                    "EffectName" :"heroFX16_01_Gethit",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectType":"EFFECT_NORMAL",
+                    "EffectDuration":2
+                },
+
+                "ActOnTargets":
+                {
+                    "Target": 
+                    {
+                        "Center":"POINT",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":3
+                        }
+                    },
+
+                    "Action":
+                    {
+                        "AttachEffect" :
+                        {
+                            "Target":"TARGET",
+                            "EffectName" :"heroFX16_01_buff",
+                            "EffectAttachType" : "FOLLOW_ORIGIN",
+                            "EffectDuration" : 2
+                        },
+
+                        "Damage":
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                            "DamageType":"DAMAGE_TYPE_MAGICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[64, 28],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                "ValueSourceParams":[22100, 0]
+                               }
+                              ]
+                            }
+                        },
+
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"xinlingzhenhan"
+                                }            
+                            }
+                        }
+                    }
+                },
+
+                "DelayedAction":
+                {
+                    "Delay":0.3,
+                    "Action":
+                    {
+                        "CameraShake":
+                        {
+                            "Type":"PERIODIC",
+                            "Duration":0.4,
+                            "Frequency":45,
+                            "PositionOffset":[0,0.5,0]
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "xinlingzhenhan":
+        {
+            "Duration":1,
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true
+            }
+        }
+    }
+}

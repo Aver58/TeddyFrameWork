@@ -1,0 +1,148 @@
+{
+    "Name" : "炼金毒雾：朝着敌人丢出毒瓶，对目标附近中范围的敌人造成伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.24,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius":3,
+
+    "Precache":
+    [
+        "heroFX36_03_flyObject",
+        "heroFX36_03_Gethit"
+    ],
+    "OnSpellStart" :
+    {
+        
+        "ParabolaProjectile":
+        {
+            "Target" : "POINT",
+            "EffectName" : "heroFX36_03_flyObject",
+            "HorizontalVelocity" : 15,
+            "MaxHeight":1,
+            "SourceHeight" : 1.3
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "OnProjectileHitUnit" :
+    {
+
+        "AttachEffect":
+        {
+            "Target":"POINT",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectName":"heroFX36_03_Gethit",
+            "EffectAttachType":"NO_FOLLOW_ORIGIN",
+            "EffectDuration":6
+        },
+        "CreateThinker":
+        {
+            "Target":"POINT",
+            "ModifierName":"lianjinduwu"
+        },
+
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"POINT",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":3
+                }
+            },
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[15.8, 7],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[5480, 0]
+                       }
+                      ]
+                    },
+                    "DamageType":"DAMAGE_TYPE_MAGICAL"
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "lianjinduwu":
+        {
+            "Duration":3.9,
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target" : 
+                    {
+                        "Center" : "TARGET",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 3
+                        }
+                    },
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[15.8, 7],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                            "ValueSourceParams":[5480, 0]
+                        }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,128 @@
+{
+    "Name" : "水之精灵技能3：在自身周围半径5的范围召唤雨水，治疗范围内的友军",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 0.5,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 5.2,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritWater_skill_03_attack",
+        "SpiritWater_skill_03_buff"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritWater_skill_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 7.5,
+            "EffectType":"EFFECT_NORMAL"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_FRIENDLY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 5
+                }
+            },
+
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target":"TARGET",
+                    "EffectName" :"SpiritWater_skill_03_buff",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 4
+                },
+
+                "Heal": 
+                {
+                    "Target" : "TARGET",
+                    
+                    "HealFlags":["HEAL_FLAG_CRIT"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"shuizhijinglingjineng3"
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "shuizhijinglingjineng3":
+        {
+            "Duration":3,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Heal":
+                {
+                    "Target":"TARGET",
+                    
+                    "HealFlags":["HEAL_FLAG_CRIT"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0,0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

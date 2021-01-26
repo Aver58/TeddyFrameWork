@@ -1,0 +1,36 @@
+{
+    "Name" : "冰霜结晶（被动）：全体队友战斗中每秒怒气恢复6点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "bingshuangjiejing":
+        {
+            "IsPassive" : true,
+            
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "ChangeEnergy":
+                {
+                    "Target":
+                    {
+                        "Center":"CASTER",
+                        "Teams" : "UNIT_TARGET_TEAM_FRIENDLY",
+                        "Types" : "UNIT_TARGET_HERO",
+
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 100
+                        }
+                    },
+                    "EnergyParams" : [1.1,0.1]
+                }
+            }
+        }
+    }
+}

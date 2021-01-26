@@ -1,0 +1,118 @@
+{
+    "Name" : "封喉（自动施放）：对目标造成物理伤害4367点，并给予封喉状态5S，封喉期间无法使用魔法技能",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_ENERGY_MAX",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.8,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX09_03_attack",
+        "heroFX09_03_FlyObject",
+        "heroFX09_03_hit"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":5031
+        }
+    },
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX09_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 1.8
+        },
+        
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "heroFX09_03_FlyObject",
+            "MoveSpeed" : 20,
+            "SourceHeight" : 1.2
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "OnProjectileHitUnit" :
+    {
+        "Damage": 
+        {
+            "Target": "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[41, 18],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[16500, 0]
+               }
+              ]
+            }
+        },
+
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX09_03_hit",
+            "EffectAttachType" : "NO_FOLLOW_SPINE",
+            "EffectDuration" : 1.8
+        },
+        
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"fenghou"
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "fenghou":
+        {
+            "Duration":5,
+            "States":
+            {
+                "MODIFIER_STATE_SILENCED":true
+            }
+        }
+    }
+}

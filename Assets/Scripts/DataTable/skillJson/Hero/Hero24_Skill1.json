@@ -1,0 +1,158 @@
+{
+    "Name" : "狂野绽放：对自身附近大范围的敌人造成真实伤害2316点，并给予藤蔓状态5S，藤蔓会使敌人无法移动",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 4,
+    "AbilityCastPoint" : 0.63,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 4,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "AbilityAoeRadius" : 4,
+    
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX24_01_attack",
+        "heroFX24_01_Gethit",
+        "heroFX24_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":24011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX24_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "DelayedAction":
+        {
+            "Delay":0.24,
+            "Action":
+            {
+                "CameraShake":
+                {
+                    "Type":"PERIODIC",
+                    "Duration":0.5,
+                    "Frequency":45,
+                    "PositionOffset":[0,1,0]
+                },
+
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"heroFX24_01_attack",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 2
+                },
+
+                "ActOnTargets":
+                {
+                    "Target" : 
+                    {
+                        "Center" : "CASTER",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" :4
+                        }
+                    },
+
+                    "Action":
+                    {  
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                            "DamageType" : "DAMAGE_TYPE_PURE",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[24, 11],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[12200, 0]
+                               }
+                              ]
+                            }
+                        },
+
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"tengwan"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":24012
+        }
+    },
+
+    "Modifiers":
+    {
+        "tengwan":
+        {
+            "Duration":5,
+            "EffectName":"heroFX24_01_Gethit",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "States":
+            {
+                "MODIFIER_STATE_ROOTED":true
+            }
+        }
+    }
+}

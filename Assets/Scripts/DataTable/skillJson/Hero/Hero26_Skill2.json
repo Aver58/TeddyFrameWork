@@ -1,0 +1,158 @@
+{
+    "Name" : "胡达技能2",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RECORD"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_MIN",
+
+    "AbilityCastRange" : 15,
+    "AbilityCastPoint" : 0.45,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.9,
+    "AbilityInitialCooldown":6,
+    "AbilityCooldown" : 10,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "heroFX_FlashMove",
+        "heroFX026_02_attack",
+        "heroFX_Current_agile_Gethit"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":26021
+        },
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_FlashMove",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        }
+    },
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "Blink":
+        {
+            "Target":"TARGET"
+        },
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_FlashMove",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX026_02_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_NORMAL",
+            "EffectForwardType":"CASTER"
+        },
+
+        "DelayedAction":
+        {
+            "Delay":1,
+            "Action":
+            {
+                "ActOnTargets":
+                {
+                    "Target":
+                    {
+                        "Center":"CASTER",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":3
+                        }
+                    },
+                    "Action":
+                    {
+                        "AttachEffect" :
+                        {
+                            "Target": "TARGET",
+                            "EffectName" :"heroFX_Current_agile_Gethit",
+                            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+                            "EffectDuration" : 5
+                        },
+                        "Damage":
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                                "ValueBasicParams":[35, 16],
+                                "ValueAdditionParams":
+                                [
+                                {
+                                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                    "ValueSourceParams":[15200, 0]
+                                }
+                                ]
+                            },
+                            "OnSuccess":
+                            {
+                                "FireSound":
+                                {
+                                    "SoundType":"SOUND_NORMAL",
+                                    "SoundName":99042
+                                }
+                            }
+                        },
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"shanyingzhiwu"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }        
+    },
+    "Modifiers":
+    {
+        "shanyingzhiwu":
+        {
+            "Duration":5,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_DEFENCE" : [-2.1,-1.05]
+            }
+        }
+    }
+}

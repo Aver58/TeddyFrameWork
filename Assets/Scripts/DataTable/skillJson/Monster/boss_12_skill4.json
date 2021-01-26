@@ -1,0 +1,19 @@
+{
+    "Name" : "奈斯尔被动：免疫控制，物理免伤50%",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "naisier4":
+        {
+            "IsPassive":true,
+            "States":
+            {
+                "MODIFIER_STATE_CONTROLLER_IMMUNE":true
+            }
+        }
+    }
+}

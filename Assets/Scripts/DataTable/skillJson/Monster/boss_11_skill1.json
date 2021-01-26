@@ -1,0 +1,137 @@
+{
+    "Name" : "树妖王大招：从地面伸出藤蔓缠绕全体敌人，造成伤害并使敌人进入缠绕状态2s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 7,
+    "AbilityCastPoint" : 0.76,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 2.4,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "boss_11_01_attack",
+        "boss_11_01_Gethit",
+		"heroFX_Current"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectForwardType":"TARGET",
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":121102
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"boss_11_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.4,
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }, 
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 100
+                }
+            },
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[50000, 0]
+                       }
+                      ]
+                    }
+                },
+             
+                "AttachEffect@2" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"boss_11_01_Gethit",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 3
+                }, 
+                "CameraShake":
+                {
+                    "Type":"PERIODIC",
+                    "Duration":1,
+                    "Frequency":50,
+                    "PositionOffset":[0.2,0.2,0]
+                },
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"shuyaowang"
+                        }
+                    }
+                    
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "shuyaowang":
+        {
+            "Duration":2,
+            "States":
+            {
+                "MODIFIER_STATE_ROOTED":true
+            }
+        }
+    }
+}

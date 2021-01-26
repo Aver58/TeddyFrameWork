@@ -1,0 +1,112 @@
+{
+    "Name" : "妖魔与箱中少女：左臂在身体侧面旋转两圈后重重拍向身前地面，身前的地面产生裂纹并有尘土飞起对身前的扇形范围的敌人造成伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.2,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.4,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "boss_01_02_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":120103
+         }
+    },
+    
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"boss_01_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4,
+            "EffectType":"EFFECT_NORMAL"
+        },
+        
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_SECTOR",
+                    "Sector" :
+                    {
+                        "Radius" : 5,
+                        "Angle" : 60
+                    }
+                }
+            },
+            "Action":
+            {
+                "DelayedAction":
+                {
+                    "Delay":1.68,
+                    "Action":
+                    {
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[0, 0],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[30000, 0]
+                               }
+                              ]
+                            }
+                        },
+                        "CameraShake":
+                        {
+                            "Type":"PERIODIC",
+                            "Duration":0.5,
+                            "Frequency":40,
+                            "PositionOffset":[0.1,0.2,0]
+                        }                        
+                    }
+                }
+            }
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    }  
+}

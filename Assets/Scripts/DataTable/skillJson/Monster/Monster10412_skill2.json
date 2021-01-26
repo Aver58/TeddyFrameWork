@@ -1,0 +1,93 @@
+{
+    "Name" : "精巧铜人：双手十指紧扣合拢，跳起来然后双手重重的砸击地面，对自身附近区域的敌人造成伤害并击退",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 3,
+    "AbilityCastPoint" : 0.7,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.8,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"monster_h_pup_01_03_attack"
+    ],
+
+    "OnSpellStart" :
+    {
+        "FireSound@1":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99052
+        },
+        "FireSound@2":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99122
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_h_pup_01_03_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectForwardType":"CASTER"
+        },
+        
+        "Damage": 
+        {
+            "Target" :
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius": 5
+                }
+            },
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[15000, 0]
+               }
+              ]
+            }
+        },
+        "CameraShake":
+        {
+            "UseDefault":2
+        },  
+        "Knockback":
+        {
+            "Target":"TARGET",
+            "Center":"CASTER",
+            "Duration":0.8,
+            "Distance":2
+        }
+    }     
+}

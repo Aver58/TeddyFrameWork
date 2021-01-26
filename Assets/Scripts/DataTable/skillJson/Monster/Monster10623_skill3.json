@@ -1,0 +1,85 @@
+{
+    "Name" : "暗黑蛇女技能2：施展魔法提升自身附近大范围友军的物理攻击力，持续8s。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX03_03_attack",
+        "heroFX03_03_Buff"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX03_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.2
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":112202
+        }
+    },
+
+    "OnSpellStart":
+    {
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_FRIENDLY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":5
+                }
+            },
+
+            "ModifierName":"anheishenv2"
+        }
+    },
+
+    "Modifiers":
+    {
+        "anheishenv2":
+        {
+            "Duration":8,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK" : [20,3]
+            },
+
+            "EffectName":"heroFX03_03_Buff",
+            "EffectAttachType":"FOLLOW_ORIGIN"
+        }
+    }
+}

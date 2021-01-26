@@ -1,0 +1,153 @@
+{
+    "Name" : "永冻坟地：击退自身附近大范围的敌人并给与冰冻状态3S，造成物理伤害2424点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 1.3,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 3.5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "AbilityAoeRadius" : 3,
+    
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX10_01_attack",
+        "heroFX10_01_buff",
+        "heroFX10_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX10_01_loop",
+            "EffectAttachType" : "FOLLOW_BIP_RIGHT_HAND",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "CameraShake":
+        {
+            "UseDefault":3
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":6012
+        },
+        
+        
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX10_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" :3
+                }
+            },
+
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[37, 16],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[15000, 0]
+                       }
+                      ]
+                    }
+                },
+                
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "Knockback":
+                        {
+                            "Target":"TARGET",
+                            "Center":"CASTER",
+                            "Duration":0.3,
+                            "Distance":2
+                        },
+
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"bingdong"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "bingdong":
+        {
+            "Duration":3,
+            "States":
+            {
+                "MODIFIER_STATE_FROZEN":true
+            },
+            "EffectName":"heroFX10_01_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN"
+        }
+    }
+}

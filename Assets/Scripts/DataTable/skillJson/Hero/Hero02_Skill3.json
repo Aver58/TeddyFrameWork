@@ -1,0 +1,88 @@
+{
+    "Name" : "英勇乐章（自动施放）：自身附近中范围队友，魔法强度上升240点，状态8S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1.9,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.8,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX02_03_attack",
+        "heroFX02_03_Buff"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX02_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":2031
+        }
+
+    },
+
+    "OnSpellStart":
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_FRIENDLY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":3
+                }
+            },
+
+            "ModifierName":"yingyongyuezhang"
+        }
+    },
+
+    "Modifiers":
+    {
+        "yingyongyuezhang":
+        {
+            "Duration":8,
+
+            "EffectName":"heroFX02_03_Buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAGIC_ATTACK": [8.4,4.2]
+            }
+        }
+    }
+}

@@ -1,0 +1,142 @@
+{  "Name" : "食人魔大招：跳起来用棒子狠狠地砸向地面，对前方扇形区域内的敌人造成伤害并眩晕2s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 1.06,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 2.1,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "Boss_05_01_attack"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":120502
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"Boss_05_01_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2.1,
+            "EffectType":"EFFECT_NORMAL",
+            "EffectForwardType":"CASTER"
+        },
+
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.6,
+            "Frequency":45,
+            "PositionOffset":[0,1,0]
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                    "Line" :
+                    {
+                        "Length" : 10,
+                        "Thickness" : 3
+                    }
+                }
+            },
+
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[10, 10],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[47500, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "Knockback":
+                        {
+                            "Target":"TARGET",
+                            "Center":"CASTER",
+                            "Duration":0.3,
+                            "Distance":2
+                        },
+                        
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"shirenmo_1"
+                        }
+                    }
+                } 
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "shirenmo_1":
+        {
+            "Duration" : 5,
+            "States" :
+            {
+                "MODIFIER_STATE_STUNNED" : true
+            }
+        }
+    }
+}

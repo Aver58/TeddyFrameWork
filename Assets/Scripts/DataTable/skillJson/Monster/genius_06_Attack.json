@@ -1,0 +1,92 @@
+{
+    "Name" : "岩石精灵普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 2.1,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritSand_Attack_flyObject",
+        "monster_028_Gethit"
+    ],
+    
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg10"
+        },
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "SpiritSand_Attack_flyObject",
+            "MoveSpeed" : 15,
+            "SourceHeight" : 2,
+            "SourceX":3
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+
+    },
+	
+    "OnProjectileHitUnit" :
+    {
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[10000, 0]
+                       }
+                      ]
+                    }
+                },
+                "AttachEffect":
+                {
+                    "Target":"TARGET",
+                    "EffectName":"monster_028_Gethit",
+                    "EffectAttachType":"NO_FOLLOW_ORIGIN",
+                    "EffectDuration":1.7
+                }                
+            }
+        }
+    }
+}

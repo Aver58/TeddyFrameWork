@@ -1,0 +1,38 @@
+{
+    "Name" : "黑龙远程普通攻击：对距离最近目标造成伤害，喷出小型火焰",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.97,
+    "AbilityCooldown" : 2.5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"BossFX13_attack_bip001_head"
+    ],
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"BossFX13_attack_bip001_head",
+            "EffectAttachType" : "FOLLOW_BIP_HEAD",
+            "EffectDuration" : 2,
+            "EffectForwardType":"TARGET"
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "Name" : "灵巧身躯（被动）：自身敏捷上升240点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+    
+    "Modifiers":
+    {
+        "lingqiaoshenqu":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" : [8,3.8]
+            }
+        }
+    }
+}

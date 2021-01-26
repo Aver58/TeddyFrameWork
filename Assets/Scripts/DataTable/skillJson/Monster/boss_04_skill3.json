@@ -1,0 +1,128 @@
+{
+    "Name" : "高等水元素技能2：召唤一个巨大水球将自己包裹在其中，期间收到物理伤害减少。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1.2,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":3,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+
+    "Precache":
+    [
+        "Boss04_03_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":120404
+         }
+    },
+    
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"Boss04_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_NORMAL"
+        } ,
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.4,
+            "Frequency":40,
+            "PositionOffset":[0.2,0.1,0]
+        },
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_SECTOR",
+                    "Sector" :
+                    {
+                        "Radius" : 5,
+                        "Angle" : 120
+                    }
+                }
+            },
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[30000, 0]
+                       }
+                      ]
+                    }
+                },
+                "Knockback":
+                {
+                    "Target": "TARGET",
+                    "Center":"CASTER",
+                    "Duration":1,
+                    "Distance": 1.5
+                },
+                "ApplyModifier":
+                {
+                    "Target" : "CASTER",
+                    "ModifierName":"gaodengshui3"
+                }
+            }
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }           
+    },
+    "Modifiers":
+    {
+
+        "gaodengshui3":
+        {
+            "Duration": 5,
+            "Properties" :
+            {
+                "MODIFIER_PROPERTY_SHIELD" : [1000,30]
+            }
+        }
+    }
+}

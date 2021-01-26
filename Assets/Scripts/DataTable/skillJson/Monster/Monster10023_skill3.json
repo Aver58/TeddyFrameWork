@@ -1,0 +1,101 @@
+{  "Name" : "查西里叶禁卫技能2：用战斧重重的锤击地面，发出冲击波击飞目标附近小范围的敌人并造成伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 3,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "monster_c_inf_002_skill3_attack",
+        "monster_c_inf_002_skill3_Gethit"
+    ],
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"xg1201"
+        },
+        "AttachEffect":
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_c_inf_002_skill3_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.2            
+        },
+        "DelayedAction":
+        {
+            "Delay":0.23,
+            "Action":
+            {
+                "AttachEffect":
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"monster_c_inf_002_skill3_Gethit",
+                    "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+                    "EffectDuration" : 2.2            
+                },
+                "Damage": 
+                {
+                    "Target" : 
+                    {
+                        "Center" : "TARGET",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 2
+                        }
+                    },
+        
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[15000, 0]
+                       }
+                      ]
+                    }
+                },
+                "CameraShake":
+                {
+                    "UseDefault":2
+                },
+                "Knockback":
+                {
+                    "Target":"TARGET",
+                    "Center":"CASTER",
+                    "Duration":0.5,
+                    "Height":2
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,284 @@
+{
+    "Name" : "死亡凋零：对自身附近大范围的敌人造成2次伤害，并给予凋零状态6S，每次造成物理伤害2697点，凋零会使敌人魔法暴击下降130点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 0.3,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 3,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,    
+    "AbilityAoeRadius" : 5,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX22_01_loop",
+        "heroFX22_01_attack",
+        "heroFX22_01_gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":19011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX22_01_loop",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON1",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX22_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":19012
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 5
+                }
+            },
+
+            "Action":
+            {
+                "DelayedAction":
+                {
+                    "Delay":0.12,
+                    "Action":
+                    {
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                                "ValueBasicParams":[13, 6],
+                                "ValueAdditionParams":
+                                [
+                                {
+                                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                    "ValueSourceParams":[4700, 0]
+                                }
+                                ]
+                            },
+                            "OnSuccess":
+                            {
+                                "FireSound":
+                                {
+                                    "SoundType":"SOUND_NORMAL",
+                                    "SoundName":99112
+                                }
+                            }
+                        },
+
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"siwangdaioling"
+                                }
+                            }
+                        },
+
+                        "DelayedAction":
+                        {
+                            "Delay":0.12,
+                            "Action":
+                            {
+                                "Damage": 
+                                {
+                                    "Target":"TARGET",
+                                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                                    "ValueSource":
+                                    {
+                                        "ValueBasicParams":[13, 6],
+                                        "ValueAdditionParams":
+                                        [
+                                        {
+                                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                            "ValueSourceParams":[4700, 0]
+                                        }
+                                        ]
+                                    },
+                                    "OnSuccess":
+                                    {
+                                        "FireSound":
+                                        {
+                                            "SoundType":"SOUND_NORMAL",
+                                            "SoundName":99112
+                                        }
+                                    }
+                                },
+
+                                "DelayedAction":
+                                {
+                                    "Delay":0.12,
+                                    "Action":
+                                    {
+                                        "Damage": 
+                                        {
+                                            "Target":"TARGET",
+                                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                                            "ValueSource":
+                                            {
+                                                "ValueBasicParams":[13, 6],
+                                                "ValueAdditionParams":
+                                                [
+                                                {
+                                                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                                    "ValueSourceParams":[4700, 0]
+                                                }
+                                                ]
+                                            },
+                                            "OnSuccess":
+                                            {
+                                                "FireSound":
+                                                {
+                                                    "SoundType":"SOUND_NORMAL",
+                                                    "SoundName":99112
+                                                }
+                                            }
+                                        },
+
+                                        "DelayedAction":
+                                        {
+                                            "Delay":0.1,
+                                            "Action":
+                                            {
+                                                "CameraShake":
+                                                {
+                                                    "Type":"PERIODIC",
+                                                    "Duration":0.4,
+                                                    "Frequency":45,
+                                                    "PositionOffset":[0,0.5,0]
+                                                },
+                                                
+
+                                                "LevelCondition":
+                                                {
+                                                    "Target":"TARGET",
+                                                    "OnSuccess":
+                                                    {
+                                                        "ApplyModifier":
+                                                        {
+                                                            "Target":"TARGET",
+                                                            "ModifierName":"siwangdaioling"
+                                                        }
+                                                    }
+                                                },
+
+                                                "AttachEffect":
+                                                {
+                                                    "Target":"CASTER",
+                                                    "EffectType":"EFFECT_NORMAL",
+                                                    "EffectDuration":1.5,
+                                                    "EffectName":"heroFX22_01_gethit",
+                                                    "EffectAttachType":"NO_FOLLOW_ORIGIN"
+                                                },
+                                                "DelayedAction":
+                                                {
+                                                    "Delay":0.1,
+                                                    "Action":
+                                                    {
+                                                        "Damage": 
+                                                        {
+                                                            "Target":"TARGET",
+                                                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                                                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                                                            "ValueSource":
+                                                            {
+                                                              "ValueBasicParams":[13, 6],
+                                                              "ValueAdditionParams":
+                                                              [
+                                                               {
+                                                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                                                "ValueSourceParams":[4700, 0]
+                                                               }
+                                                              ]
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "siwangdaioling":
+        {
+            "Duration" : 6,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_CRIT":[-2.15,-2.15]
+            }
+        }
+    }
+}

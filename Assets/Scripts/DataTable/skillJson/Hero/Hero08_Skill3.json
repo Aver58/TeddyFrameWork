@@ -1,0 +1,130 @@
+{
+    "Name" : "震地击（自动施放）：对自身附近中范围的敌人物理伤害2721{1}点+晕眩状态1{2}S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 1.16,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.4,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX08_03_attack"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "DelayedAction":
+        {
+            "Delay":0.2,
+            "Action":
+            {
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":4031
+                }
+            }
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "CameraShake":
+        {
+            "UseDefault":2
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX08_03_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2.4,
+            "EffectForwardType":"CASTER"
+        },
+        
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 3
+                }
+            },
+
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[31, 13],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[12800, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target" : "TARGET",
+
+                            "ModifierName":"zhendiji"
+                        }
+                    }
+                }
+            }
+        },      
+        
+        "ChangeEnergy": 
+        {
+            "Target" :"CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "zhendiji":
+        {
+            "Duration" : 1,
+            "States" :
+            {
+                "MODIFIER_STATE_STUNNED" : true
+            }
+        }
+    }
+}

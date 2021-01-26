@@ -1,0 +1,21 @@
+{
+    "Name" : "自然之力（被动）：自身最大生命力上升4800点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "ziranzhili":
+        {
+            "IsPassive":true,
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAX_HP":[200,100]
+            }
+        }
+    }
+}

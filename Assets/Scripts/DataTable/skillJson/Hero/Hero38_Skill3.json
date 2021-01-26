@@ -1,0 +1,132 @@
+{
+    "Name" : "火纹冲击：荷鲁斯对长距离路径上的敌人造成魔法伤害，并给予炙烤状态5S，炙烤会使敌人物理攻击力下降",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 0.5,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 4.27,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,    
+
+    "Precache":
+    [
+        "heroFX38_03_attack",
+        "heroFX38_03_Bone029"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":38031
+        }
+    },
+    "OnSpellStart" :
+    {       
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX38_03_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 3.5,
+            "EffectForwardType":"CASTER"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX38_03_Bone029",
+            "EffectAttachType" : "Bone029",
+            "EffectDuration" : 1.1
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",          
+            "EnergyParams" : [100]
+        },
+        "DelayedAction":
+        {
+            "Delay":2.12,
+            "Action":
+            {
+                "LinearProjectile":
+                {
+                    "Target":"POINT",
+                    "MoveSpeed":22,
+                    "FixedDistance":10,
+                    "EffectName" :"heroFX38_flyObject",
+                    "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+                    "TargetTypes":"UNIT_TARGET_HERO",
+                    "AoeArea" :
+                    {
+                        "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                        "Line" :
+                        {
+                            "Length" : 1,
+                            "Thickness" : 3
+                        }
+                    }
+                }
+            }
+        }                 
+    },
+    "OnProjectileHitUnit":
+    {
+        "Damage": 
+        {
+            "Target":"TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[41,18],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                    "ValueSourceParams":[16100, 0]
+                }
+                ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"zhikao"
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "zhikao":
+        {
+            "Duration" : 5,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK":[-8.4,-4.2]
+            }
+        }
+    }
+}

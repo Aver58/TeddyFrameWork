@@ -1,0 +1,58 @@
+{  "Name" : "黑龙大招：朝着前方扇形区域的敌人喷吐出龙息，龙息缓缓移动",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 7,
+    "AbilityCastPoint" : 0.87,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 2.87,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "BossFX13_01_attack_bip001_head",
+        "BossFX13_01_cast_bip001_head",
+		"heroFX_Current"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"BossFX13_01_attack_bip001_head",
+            "EffectAttachType" : "FOLLOW_BIP_HEAD",
+            "EffectDuration" : 2.9,
+            "EffectType":"EFFECT_ULT_CHARGE"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"BossFX13_01_cast_bip001_head",
+            "EffectAttachType" : "FOLLOW_BIP_HEAD",
+            "EffectDuration" : 2.9
+        }
+    }
+}

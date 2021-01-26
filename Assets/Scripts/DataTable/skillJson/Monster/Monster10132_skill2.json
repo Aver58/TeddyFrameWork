@@ -1,0 +1,163 @@
+{
+    "Name" : "剧毒蜘蛛技能2：朝敌人喷出蛛网，造成伤害并使目标禁锢2s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 8,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.4,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"heroFX_Current_agile_flyobject",
+        "monster_002&004_02_Gethit",
+        "monster_001&002_dead"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":110202
+         }
+    },
+    
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "heroFX_Current_agile_flyobject",
+            "MoveSpeed" : 20,
+            "SourceHeight" :1.2
+        }
+    },
+	
+    "OnProjectileHitUnit" :
+    {
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"juduzhizhu2"
+        },
+        
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[15000, 0]
+               }
+              ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"juduzhizhu2"
+                }
+            }
+        }
+    },
+    "OnOwnerDied" :
+    {
+        "AttachEffect":
+        {
+            "Target":"CASTER",
+            "EffectName":"monster_001&002_dead",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":3
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":110103
+        },
+        "DelayedAction":
+        {
+            "Delay":0.95,
+            "Action":
+            {
+                "ActOnTargets":
+                {
+                    "Target" : 
+                    {
+                        "Center" : "CASTER",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" :3
+                        }
+                    },
+        
+                    "Action":
+                    {
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[0, 0],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[12000, 0]
+                               }
+                              ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Modifiers":
+    {
+        "juduzhizhu2":
+        {
+            "EffectName":"monster_002&004_02_Gethit",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "Duration":3,
+            "States":
+            {
+                "MODIFIER_STATE_ROOTED":true
+            }
+        }
+    }
+}

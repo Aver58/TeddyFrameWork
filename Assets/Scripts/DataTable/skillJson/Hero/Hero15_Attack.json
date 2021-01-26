@@ -1,0 +1,109 @@
+{
+    "Name" : "麦纳尔·西娜近战普通攻击，小范围扇形区域",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" :5,
+    "AbilityCastPoint" : 0.55,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX15_03_FlyObject",
+        "heroFX_Current_magic_Gethit_w"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":12001
+        }
+    },
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+        
+        "TrackingProjectile":
+        {
+            "Target":"TARGET",
+            "MoveSpeed":20,
+            "SourceHeight":0.8,
+            "SourceX":1,
+            "EffectName":"heroFX15_03_FlyObject"
+        }
+    },
+    
+    "OnProjectileHitUnit":
+    {
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[0, 0],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[10000, 0]
+                        }
+                        ]
+                    },
+                    "OnSuccess":
+                    {
+                        "FireSound":
+                        {
+                            "SoundType":"SOUND_NORMAL",
+                            "SoundName":99102
+                        }
+                    }
+                },
+                "AttachEffect":
+                {
+                    "Target":"TARGET",
+                    "EffectType":"EffectType",
+                    "EffectName":"heroFX_Current_magic_Gethit_w",
+                    "EffectAttachType":"FOLLOW_BIP_SPINE",
+                    "EffectDuration":1
+                }
+            }
+        }
+    },
+    "OnOwnerDied":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"Slide12_Dead"
+        }
+    }
+}

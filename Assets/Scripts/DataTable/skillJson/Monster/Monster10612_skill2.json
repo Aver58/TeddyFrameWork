@@ -1,0 +1,98 @@
+{
+    "Name" : "毒尾蝠鱼技能：翻滚一圈朝着目标吐出一颗水泡，对目标造成放逐状态3s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" : 1.2,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"monster_025_02_FlyObject",
+        "monster_025_02_buff"
+    ],
+
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "monster_025_02_FlyObject",
+            "MoveSpeed" : 20,
+            "SourceHeight" : 1.2
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "FireSound@1":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":122503
+        },
+        "FireSound@2":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99032
+        },
+		"Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[12500, 0]
+               }
+              ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"duweifuyu"
+                }
+            }
+        }                
+    } ,  
+    "Modifiers":
+    {
+        "duweifuyu":
+        {
+            "EffectName" :"monster_025_02_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration":3,
+            "States":
+            {
+                "MODIFIER_STATE_BANISH":true
+            }          
+        }
+    }
+}

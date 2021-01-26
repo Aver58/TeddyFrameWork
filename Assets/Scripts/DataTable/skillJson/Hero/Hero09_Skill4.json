@@ -1,0 +1,20 @@
+{
+    "Name" : "刺客教条（被动）：自身物理暴击上升198点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "cikejiaotiao":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_CRIT" : [5,2.5]
+            }
+        }
+    }
+}

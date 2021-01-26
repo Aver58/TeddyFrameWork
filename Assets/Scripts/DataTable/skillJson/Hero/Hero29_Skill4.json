@@ -1,0 +1,99 @@
+{
+    "Name" : "意外炸裂（被动触发）：死亡后回复全体队友生命",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.5,
+    "AbilityCastAnimation" : "skill4",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "heroFX29_dead",
+        "heroFX29_03_Gethit"
+    ],
+    
+    "OnOwnerDied":
+    {
+        "DelayedAction@1":
+        {
+            "Delay":1.5,
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"heroFX29_dead",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 4
+                }
+            }
+        },
+        
+        "DelayedAction@2":
+        {
+            "Delay":3.03,
+            "Action":
+            {
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":29041
+                },
+                "ActOnTargets":
+                {
+                    "Target" : 
+                    {
+                        "Center" : "POINT",
+                        "Teams" : "UNIT_TARGET_TEAM_FRIENDLY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 100
+                        }
+                    },
+                    "Action":
+                    {
+                        "Heal":
+                        {
+                            "Target" : "TARGET",
+                            "HealFlags" : ["HEAL_FLAG_CRIT"],
+                            "ValueSource":
+                            {
+                                "ValueBasicParams":[97, 43],
+                                "ValueAdditionParams":
+                                [
+                                {
+                                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                    "ValueSourceParams":[30900, 0]
+                                }
+                                ]
+                            }
+                        },
+                        "AttachEffect" :
+                        {
+                            "Target": "TARGET",
+                            "EffectName" :"heroFX29_03_Gethit",
+                            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+                            "EffectDuration" : 4
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

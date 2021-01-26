@@ -1,0 +1,21 @@
+{
+    "Name" : "神秘符咒（被动）：对自身施法使得自身魔法强度上升",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "shenmifuzhou":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAGIC_ATTACK" : [12,6]
+            }
+        }
+    }
+}

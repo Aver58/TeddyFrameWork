@@ -1,0 +1,137 @@
+{  "Name" : "地狱大蛇技能2：从嘴里喷出剧毒的液体，对前方扇形范围内的敌人造成伤害并中毒3s。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 7,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "boss_09_buff",
+        "boss_09_03_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":120904
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":1,
+            "Frequency":70,
+            "PositionOffset":[0.1,0.1,0]
+        }, 
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+    
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_SECTOR",
+                    "Sector" :
+                    {
+                        "Radius" : 8,
+                        "Angle" : 90
+                    }
+                }
+            },
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[20000, 0]
+                       }
+                      ]
+                    }
+                },
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"dashe3"
+                }
+            }
+        }, 
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"boss_09_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.5
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+    "Modifiers":
+    {
+        "dashe3":
+        {
+            "EffectName" :"boss_09_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration" : 3,
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[6500, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,144 @@
+{
+    "Name" : "魔法羽刃：如雨点般洒下的不是羽毛，是血色杀戮，对全体敌人造成魔法伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.1,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 3,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX15_01_attack",
+        "heroFX15_01_Gethit",
+        "heroFX15_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":12011
+        }   
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX15_01_loop",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+ 
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":12012
+        },
+        
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX15_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3,
+            "EffectType":"EFFECT_NORMAL"
+        },
+
+        "AttachEffect@2" :
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 100
+                }
+            },
+            "EffectName" :"heroFX15_01_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3,
+            "EffectType":"EFFECT_NORMAL"
+        },
+        
+        "DelayedAction":
+        {
+            "Delay":0.2,
+            "Action":
+            {
+                "CameraShake":
+                {
+                    "Type":"PERIODIC",
+                    "Duration":0.4,
+                    "Frequency":45,
+                    "PositionOffset":[0,0.5,0]
+                },
+                "Damage": 
+                {
+                    "Target" : 
+                    {
+                        "Center" : "CASTER",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 100
+                        }
+                    },
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType":"DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[51, 22],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[18700, 0]
+                       }
+                      ]
+                    }
+                }
+            }           
+        }
+    }
+}

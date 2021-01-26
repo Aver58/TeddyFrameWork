@@ -1,0 +1,98 @@
+{
+    "Name" : "泽卜莱康近战普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH",
+        "UNIT_AI_TARGET_RECORD"
+    
+        
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 1.5,
+    "AbilityCastPoint" : 0.76,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.44,
+    "AbilityCooldown" :2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    "Precache":
+    [
+        "heroFX_Current_Melee_Gethit"
+    ],
+    
+    "OnSpellStart" :
+    {        
+
+        
+
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "HitStop":
+                {
+                    "Duration":0.18
+                },
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[10000, 0]
+                       }
+                      ]
+                    },
+                    "OnSuccess":
+                    {
+                        "FireSound":
+                        {
+                            "SoundType":"SOUND_NORMAL",
+                            "SoundName":99102
+                        }
+                    }
+                },
+                "AttachEffect":
+                {
+                    "Target":"TARGET",
+                    "EffectName":"heroFX_Current_Melee_Gethit",
+                    "EffectAttachType":"FOLLOW_BIP_SPINE",
+                    "EffectDuration":0.5
+                }
+            }
+
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+    "OnOwnerDied":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"Slide31_Dead"
+        }
+    }
+}

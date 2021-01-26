@@ -1,0 +1,141 @@
+{
+    "Name" : "木之精灵大招：召唤蔓藤群向前滚动，对击中的目标造出魔法伤害并缠绕3秒",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.46,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5.33,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "SpiritWood_skill1",
+        "boss_11_01_Gethit"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 4,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritWood_skill1",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectDuration":7,
+            "EffectForwardType":"CASTER"
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg17"
+        },
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.5,
+            "Frequency":30,
+            "PositionOffset":[0.3,0.3,0]
+        },
+        "DelayedAction":
+        {
+            "Delay":0.4,
+            "Action":
+            {
+                "LinearProjectile":
+                {
+                    "Target":"POINT",
+                    "MoveSpeed":12,
+                    "FixedDistance":15,
+                    "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+                    "TargetTypes":"UNIT_TARGET_HERO",
+                    "AoeArea" :
+                    {
+                        "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                        "Line" :
+                        {
+                            "Length" : 1,
+                            "Thickness" :12
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "Damage": 
+        {
+            "Target":"TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[0,0],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                    "ValueSourceParams":[50000, 0]
+                }
+                ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"mujinglingdazhao",
+                    "TargetFlags":["UNIT_TARGET_FLAG_NOT_CONTROLLER_IMMUNE"]
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "mujinglingdazhao":
+        {
+            "EffectName" :"boss_11_01_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration":3,
+            "States":
+            {
+                "MODIFIER_STATE_ROOTED":true
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+{
+    "Name" : "意外炸裂（被动触发）：死亡后引爆较低的炸弹，对全体敌人造成魔法伤害4825点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 0.7,
+    "AbilityCastAnimation" : "skill4",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "heroFX20_03_Gethit"
+    ],
+    
+    "OnOwnerDied":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX20_03_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN"
+        },
+        
+        "Damage":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":100
+                }
+            },
+
+            "DamageFlags":["DAMAGE_FLAG_CRIT"],
+            "DamageType":"DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[60, 27],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                "ValueSourceParams":[21300, 0]
+               }
+              ]
+            }
+        }
+    }
+}

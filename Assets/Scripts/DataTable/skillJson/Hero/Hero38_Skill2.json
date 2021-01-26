@@ -1,0 +1,145 @@
+{
+    "Name" : "炙阳庇护：荷鲁斯为队友施加持续8秒的炙阳护盾，炙阳护盾可以抵挡物理伤害，当护盾结束或破裂时会对其周围的敌人造成魔法伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.25,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 16,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX38_02_attack",
+        "heroFX38_02_Buff",
+        "heroFX38_02_Buff_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":38021
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX38_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_FRIENDLY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 4
+                }
+            },
+
+            "ModifierName":"zhiyangbihu"
+        }
+    },
+
+    "Modifiers":
+    {
+        "zhiyangbihu":
+        {
+            "Duration":8,
+            "EffectName":"heroFX38_02_Buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_SHIELD":
+                {
+                    "ValueSource" : 
+                    {
+                        "ValueBasicParams":[51.8, 23.1],
+                        "ValueAdditionParams":
+                        [
+                            {
+                                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                "ValueSourceParams":[17400, 0]
+                            }
+                        ]
+                    }
+                }
+            },
+
+            "OnDestroy":
+            {
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":38022
+                },
+                "AttachEffect" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"heroFX38_02_Buff_Gethit",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 1.6
+                },
+                "Damage": 
+                {
+                    "Target" : 
+                    {
+                        "Center" : "TARGET",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 2
+                        }
+                    },  
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[47.6, 21],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[16300, 0]
+                       }
+                      ]
+                    }
+                } 
+            }
+        }
+    }
+}

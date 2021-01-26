@@ -1,0 +1,124 @@
+{
+    "Name" : "猛虎碎心：泽卜莱康奋力冲向敌人，对目标附近小范围内的敌人造成伤害，",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_POINT",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",
+	
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" : 0.93,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 2.4,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    "AbilityAoeRadius" : 2,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX31_01_attack",
+        "heroFX31_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":31011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX31_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":31012
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX31_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.5
+        },
+        "Dash":
+        {
+            "Target":"POINT",
+            "Duration":0.2,
+            "OnReach":
+                {
+                    "ActOnTargets":
+                    {
+                        "Target" : 
+                        {
+                            "Center" : "POINT",
+                            "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                            "Types" : "UNIT_TARGET_HERO",
+            
+                            "AoeArea" :
+                            {
+                                "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                                "Radius" : 2
+                            }
+                        },
+            
+                        "Action":
+                        {
+                            "Damage": 
+                            {
+                                "Target":"TARGET",
+            
+                                "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                                "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                                "ValueSource":
+                                {
+                                  "ValueBasicParams":[77, 34],
+                                  "ValueAdditionParams":
+                                  [
+                                   {
+                                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                    "ValueSourceParams":[25700, 0]
+                                   }
+                                  ]
+                                }
+                            }
+                        } 
+                    } 
+                }
+        }  
+    }
+}

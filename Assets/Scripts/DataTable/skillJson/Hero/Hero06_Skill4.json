@@ -1,0 +1,20 @@
+{
+    "Name" : "潮汐之声（被动）：自身智力上升240点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "chaoxizhisheng":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS":[8,3.8]
+            }
+        }
+    }
+}

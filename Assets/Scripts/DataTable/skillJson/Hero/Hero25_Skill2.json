@@ -1,0 +1,132 @@
+{
+    "Name" : "用光明力量祝福最虚弱的队友，队友恢复生命7828点，治疗目标附近中范围的队友并给予光之回响5秒，使队友物理攻击上升345点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_PERCENT_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 2.2,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 3,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":6,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius":3,
+
+    "Precache":
+    [
+        "heroFX25_02_attack",
+        "heroFX25_02_buff",
+        "heroFX25_02_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "DelayedAction":
+        {
+            "Delay":0.4,
+            "Action":
+            {
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":25021
+                },
+                "AttachEffect@1" :
+                {
+                    "Target": "CASTER",
+                    "EffectType":"EFFECT_NORMAL",
+                    "EffectName" :"heroFX25_02_attack",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 5
+                },
+                "AttachEffect@2" :
+                {
+                    "Target": "TARGET",
+                    "EffectType":"EFFECT_NORMAL",
+                    "EffectName" :"heroFX25_02_Gethit",
+                    "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+                    "EffectDuration" : 5
+                }
+            }
+        }
+    },
+
+    "OnSpellStart":
+    {
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "TARGET",
+                "Teams" : "UNIT_TARGET_TEAM_FRIENDLY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 3
+                }
+            },
+            "Action":
+            {
+                "Heal":
+                {
+                    "Target":"TARGET",
+                    
+                    "HealFlags":["HEAL_FLAG_NONE"],
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[80, 35],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                            "ValueSourceParams":[26600, 0]
+                        }
+                        ]
+                    }
+                },
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"guangzhihuixiang"
+                }
+            }
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "guangzhihuixiang":
+        {
+            "Duration":5,
+            "EffectName":"heroFX25_02_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK" : [8.4,4.2]
+            }
+        }
+    }
+}

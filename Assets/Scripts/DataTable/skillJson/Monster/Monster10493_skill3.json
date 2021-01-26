@@ -1,0 +1,85 @@
+{
+    "Name" : "奇行飞毯军技能2：施展魔法提升自身附近中范围友军的闪避值，持续5s。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 15,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "soldier_k_spe_02_02_attack",
+        "soldier_k_spe_02_Bip001_R&L_Hand"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"soldier_k_spe_02_Bip001_R&L_Hand",
+            "EffectAttachType" : "FOLLOW_BIP_LEFT_HAND",
+            "EffectDuration" : 2.2
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"xg0602"
+        }
+    },
+
+    "OnSpellStart":
+    {
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_FRIENDLY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":5
+                }
+            },
+
+            "ModifierName":"qixingfeitanjun2"
+        }
+    },
+
+    "Modifiers":
+    {
+        "qixingfeitanjun2":
+        {
+            "Duration":5,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_DODGE" : [2,1.5]
+            },
+
+            "EffectName":"soldier_k_spe_02_02_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN"
+        }
+    }
+}

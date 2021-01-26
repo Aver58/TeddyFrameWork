@@ -1,0 +1,131 @@
+{
+    "Name" : "爆裂一击（自动释放）：对长距离路径上的敌人造成物理伤害1536点，并给予麻痹状态5S，麻痹会使敌人物理攻击力下降210点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 1.1,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.5,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,    
+
+    "Precache":
+    [
+        "heroFX14_03_attack"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":11031
+        }
+    },
+    "OnSpellStart" :
+    {
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.4,
+            "Frequency":45,
+            "PositionOffset":[0,0.5,0]
+        },
+        
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX14_03_attack",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2.4,
+            "EffectForwardType":"CASTER"
+        },
+        
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                    "Line" :
+                    {
+                        "Length" : 4,
+                        "Thickness" : 2
+                    }
+                }
+            },
+
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target":"TARGET",
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[33, 14],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[14000, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target":"TARGET",
+                            "ModifierName":"mabi"
+                        }
+                    }
+                }
+            }
+        },       
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",          
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "mabi":
+        {
+            "Duration" : 5,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK":[-8.4,-4.2]
+            }
+        }
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "Name" : "石化蛇女技能2：施展魔法回复自身附近中范围友军的生命值",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 1.06,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 20,
+    "AbilityInitialCooldown":7,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "monster_021_03_buff"
+    ],
+
+    "OnSpellStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_021_03_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.2
+        },
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_FRIENDLY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":5
+                }
+            },
+
+            "ModifierName":"shihuashenv2"
+        }
+    },
+
+    "Modifiers":
+    {
+        "shihuashenv2":
+        {
+            "Heal": 
+            {
+                "Target":"TARGET",
+                
+                "HealFlags":["HEAL_FLAG_CRIT"],
+                "ValueSource":
+                {
+                  "ValueBasicParams":[10, 10],
+                  "ValueAdditionParams":
+                  [
+                   {
+                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams":[10000, 0]
+                   }
+                  ]
+                }
+            }
+        }
+    }
+}

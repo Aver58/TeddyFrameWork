@@ -1,0 +1,20 @@
+{
+    "Name" : "黑焰狂龙潜藏的力量被黑焰侵蚀后释放出来，大量提升自己的作战能力，自身敏捷上升240点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+    
+    "Modifiers":
+    {
+        "lingqiaoshenqu":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" : [8,3.8]
+            }
+        }
+    }
+}

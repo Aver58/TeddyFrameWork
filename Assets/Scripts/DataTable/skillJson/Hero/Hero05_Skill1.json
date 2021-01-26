@@ -1,0 +1,162 @@
+{
+    "Name" : "分裂箭矢：独特的箭矢，射出之后可以分裂为多支，对目标附近中范围内的敌人造成3次伤害  ",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_POINT",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" : 1.5,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 4,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeRadius" : 3,
+
+    "Precache":
+    [
+        "heroFX05_01_attack_prop1",
+        "heroFX05_01_loop_prop1",
+        "heroFX05_01_hitObject",
+        "heroFX_Current"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },       
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":14011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX05_01_loop_prop1",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON1",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX05_01_attack_prop1",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_CHARGE"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":14012
+        },
+        
+        "DelayedAction":
+        {
+            "Delay":0.7,
+            "Action":
+            {
+                "CreateThinker":
+                {
+                    "Target":"POINT",
+                    "ModifierName":"fenliejianshi"
+                },
+
+                "AttachEffect":
+                {
+                    "Target":"POINT",
+                    "EffectType":"EFFECT_NORMAL",
+                    "EffectName":"heroFX05_01_hitObject",
+                    "EffectAttachType":"FOLLOW_ORIGIN",
+                    "EffectDuration":3
+                },
+
+                
+                "DelayedAction":
+                {
+                    "Delay":0.2,
+                    "Action":
+                    {
+                        "CameraShake":
+                        {
+                            "Type":"PERIODIC",
+                            "Duration":1,
+                            "Frequency":45,
+                            "PositionOffset":[0.1,0.2,0]
+                        }
+                    }
+                }  
+            }
+        }        
+    },
+
+    "Modifiers":
+    {
+        "fenliejianshi":
+        {
+            "Duration":1,
+            "ThinkInterval":0.3,
+            
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target":
+                    {
+                        "Center":"POINT",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":3
+                        }
+                    },
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[20.67, 9],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[7200, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

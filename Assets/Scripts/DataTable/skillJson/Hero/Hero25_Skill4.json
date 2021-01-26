@@ -1,0 +1,29 @@
+{
+    "Name" : "光明壁垒：减少全体队友受到的魔法伤害，全体队友魔法抗性上升150点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "fuchounuhuo":
+        {
+            "IsPassive" : true,
+            "Aura": "fuchounuhuo1",
+            "Aura_Radius" : -1,
+            "Aura_Teams" :"UNIT_TARGET_TEAM_FRIENDLY",
+            "Aura_Types" :"UNIT_TARGET_HERO"
+        },
+
+        "fuchounuhuo1":
+        {
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAGIC_DEFENCE" : [1.6,0.8]
+            }
+        }
+    }
+}

@@ -1,0 +1,97 @@
+{
+    "Name" : " 复仇之眼：猫的复仇已经开启，贝斯蒂为全体队友附加仇恨状态8S,仇恨状态会使队友护甲穿透上升%s点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 4,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 12,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX37_03_attack",
+        "heroFX37_03_Bone018&026"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 5,
+            "EffectForwardType":"WORLD_FORWARD"
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX37_03_Bone018&026",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON1",
+            "EffectDuration" : 5
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":37031
+        }
+    },
+
+    "OnSpellStart":
+    {
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_FRIENDLY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":100
+                }
+            },
+
+            "ModifierName":"fuchouzhiyan"
+        },
+
+
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "fuchouzhiyan":
+        {
+            "Duration":8,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_PENETRATION" : [4.2,2.1]
+            },
+
+            "EffectName":"heroFX03_03_Buff",
+            "EffectAttachType":"FOLLOW_ORIGIN"
+        }
+    }
+}

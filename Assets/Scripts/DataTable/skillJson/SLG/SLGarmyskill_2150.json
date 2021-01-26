@@ -1,0 +1,38 @@
+{
+    "Name" : "杜木康（愤怒射手）SLG普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.7,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"heroFX_Current_agile_flyobject"
+    ],
+
+    "OnSpellStart" :
+    {
+        "Ballistic":
+        {
+            "Target":"TARGET",
+            "StartHeight":0.3,
+            "MoveSpeed":10,
+            "EffectName":"herofx_current_agile_flyobject",
+            "BallisticType":2
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "Name" : "木精灵普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_RANDOM",
+
+    "AbilityCastRange" : 8,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 3,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritWood_attack"
+    ],
+    
+    "OnAbilityPhaseStart": 
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg12"
+        },
+        "AttachEffect":
+        {
+            "Target":"CASTER",
+            "EffectName":"SpiritWood_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":1.1
+        }
+    }
+}

@@ -1,0 +1,135 @@
+{
+    "Name" : "沉重打击：挥舞巨斧敲击地面，对前方短距离扇形范围内的敌人造成伤害并给予晕眩状态1S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_SECTOR_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 3,
+    "AbilityCastPoint" : 0.3,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 9,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX28_02_cast"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":28021
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX28_02_cast",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 2,
+            "EffectForwardType":"CASTER"
+        },
+        "DelayedAction":
+        {
+            "Delay":0.75,
+            "Action":
+            {
+                "ActOnTargets":
+                {
+                    "Target":
+                    {
+                        "Center":"CASTER",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+        
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_SECTOR",
+                            "Sector" :
+                            {
+                                "Radius" : 6,
+                                "Angle" : 90
+                            }                
+                        }
+                    },
+        
+                    "Action":
+                    {
+                        "Damage": 
+                        {
+                            "Target" : "TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[31, 11],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[12800, 0]
+                               }
+                              ]
+                            }
+                        },
+        
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"xuanyun"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+    
+        "CameraShake":
+        {
+            "UseDefault":2             
+        }
+    },
+          
+    "Modifiers":
+    {
+        "xuanyun":
+        {
+            "Duration":1,
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true
+            }
+        }
+    }   
+}

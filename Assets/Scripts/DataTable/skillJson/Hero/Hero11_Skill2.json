@@ -1,0 +1,93 @@
+{
+    "Name" : "日阳守护（自动施放）：施展魔法保护最虚弱的队友，使目标受到日阳守护4S，最多可吸收任何伤害3716点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_PERCENT_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 0.2,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.2,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX11_02_attack",
+        "heroFX11_02_buff"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect":
+        {
+            "Target":"CASTER",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectName":"heroFX11_02_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":2
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":7021
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"riyangshouhu"
+        }
+    },
+
+    "Modifiers":
+    {
+        "riyangshouhu":
+        {
+            "Duration":4,
+            "EffectName":"heroFX11_02_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_SHIELD":
+                {
+                    "ValueSource" : 
+                    {
+                        "ValueBasicParams":[64, 28],
+                        "ValueAdditionParams":
+                        [
+                            {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[22200, 0]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

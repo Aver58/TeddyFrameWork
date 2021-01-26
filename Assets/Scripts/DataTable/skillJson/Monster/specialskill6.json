@@ -1,0 +1,22 @@
+{
+    "Name" : "1-18白德尔",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "ROOTED":
+        {
+            "IsPassive":true,
+            "EffectName":"monster_015_03_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "States" :
+        {
+            "MODIFIER_STATE_BANISH" : true,
+            "MODIFIER_STATE_STUNNED":true
+        }
+        }
+    }
+}

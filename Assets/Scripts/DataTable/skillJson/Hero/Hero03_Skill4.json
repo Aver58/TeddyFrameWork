@@ -1,0 +1,29 @@
+{
+    "Name" : "雷霆（被动）：全体敌人魔法抗性下降120点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "leiting":
+        {
+            "IsPassive" : true,
+            "Aura": "leiting_modifier",
+            "Aura_Radius" : -1,
+            "Aura_Teams" :"UNIT_TARGET_TEAM_ENEMY",
+            "Aura_Types" :"UNIT_TARGET_HERO"
+        },
+
+        "leiting_modifier":
+        {
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAGIC_DEFENCE" : [-1.2,-0.6]
+            }
+        }
+    }
+}

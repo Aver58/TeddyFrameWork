@@ -1,0 +1,133 @@
+{
+    "Name" : "水漾浪花（自动施放）：：对最虚弱的队友布下大范围魔法阵，魔法阵中的队友会持续恢复血量，法术最多持续5S，每秒恢复生命1508点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_POINT",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_PERCENT_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.3,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius":3,
+
+    "Precache":
+    [
+        "heroFX06_03_attack",
+        "heroFX06_03_buff",
+        "heroFX06_03_cast"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectName" :"heroFX06_03_cast",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.2
+        },
+                "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":15031
+        }
+    },
+
+    "OnSpellStart":
+    {
+        "CreateThinker":
+        {
+            "Target":"POINT",
+            "ModifierName":"shuiyanglanghua"
+        },
+
+        "AttachEffect":
+        {
+            "Target":"POINT",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectName":"heroFX06_03_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":5
+        },
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "shuiyanglanghua":
+        {
+            "Duration":5,
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "ActOnTargets":
+                {
+                    "Target":
+                    {
+                        "Center":"POINT",
+                        "Teams":"UNIT_TARGET_TEAM_FRIENDLY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":3
+                        }
+                    },
+
+                    "Action":
+                    {
+                        "Heal":
+                        {
+                            "Target":"TARGET",
+                            
+                            "HealFlags":["HEAL_FLAG_NONE"],
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[14.8, 6.6],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                                "ValueSourceParams":[5000, 0]
+                               }
+                              ]
+                            }
+                        },
+
+                        "AttachEffect":
+                        {
+                            "Target":"TARGET",
+                            "EffectType":"EFFECT_NORMAL",
+                            "EffectName":"heroFX06_03_buff",
+                            "EffectAttachType":"FOLLOW_ORIGIN",
+                            "EffectDuration":1
+                        }
+                    }                   
+                }
+            }
+        }
+    }
+}

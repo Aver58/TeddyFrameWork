@@ -1,0 +1,112 @@
+{
+    "Name" : "点燃（自动施放）：使目标受到魔法伤害2660点，并给予点燃状态4S，点燃每秒造成魔法伤害1625点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 9,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX13_03_Gethit",
+        "heroFX13_03_Prop2"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX13_03_Prop2",
+            "EffectAttachType" : "FOLLOW_BIP_LEFT_HAND",
+            "EffectDuration" : 2.2
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":10031
+        }        
+    },
+
+    "OnSpellStart":
+    {
+        "Damage":
+        {
+            "Target":"TARGET",
+            "DamageFlags":["DAMAGE_FLAG_CRIT"],
+            "DamageType":"DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[14.4, 6.4],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                "ValueSourceParams":[4880, 0]
+               }
+              ]
+            }
+        },
+        
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"dianran"
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+
+    },
+
+    "Modifiers":
+    {
+        "dianran":
+        {
+            "Duration":4,
+            "EffectName":"heroFX13_03_Gethit",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT"],
+                    "DamageType":"DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[14.4, 6.4],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[4880, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

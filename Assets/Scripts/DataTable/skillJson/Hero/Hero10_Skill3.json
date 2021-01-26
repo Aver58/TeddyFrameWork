@@ -1,0 +1,81 @@
+{
+    "Name" : "不朽（被动触发）：死亡后5S复活，恢复最大生命60%血量，每次战斗只能复活1次，战意使自身物理攻击力上升600点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Precache":
+    [
+        "heroFX10_03_attack"
+    ],
+
+    "OnOwnerDied" :
+    {
+        "DelayedAction":
+        {
+            "Delay":2,
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"heroFX10_03_attack",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 5
+                },
+                "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":6031
+                }
+            }
+        },
+
+        "Reincarnation":
+        {
+            "ReincarnateCount":1,
+            "ReincarnateDelay":2,
+            "ReincarnateTime":3.4,
+            "ReincarnateCastAnimation":"skill3",
+            "OnSuccess":
+            {
+                "Heal":
+                {
+                    "Target":"CASTER",
+                    
+                    "HealFlags":["HEAL_FLAG_NONE"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_CASTER_MAX_HP",
+                        "ValueSourceParams":[3050, 50]
+                       }
+                      ]
+                    }
+                },
+                
+                "ApplyModifier":
+                {
+                    "Target":"CASTER",
+                    "ModifierName":"zhanyi"
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "zhanyi":
+        {
+            "Duration":10,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_ATTACK":[18,9]
+            }
+        }
+    }
+}

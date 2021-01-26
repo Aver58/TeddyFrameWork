@@ -1,0 +1,20 @@
+{
+    "Name" : "魔法秘药（被动）：自身魔法强度上升",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "mofamiyao":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_MAGIC_ATTACK":[12,6]
+            }
+        }
+    }
+}

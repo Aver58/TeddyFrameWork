@@ -1,0 +1,134 @@
+{
+    "Name" : "四色鱼少女大招：召唤两条鱼儿在战场上游动，对全体敌人造成多次伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",
+    
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 1.6,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "Boss03_01_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" :2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":120302
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"Boss03_01_Gethit",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "EffectDuration" : 6,
+            "EffectType":"EFFECT_NORMAL"
+        },
+        
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "TARGET",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+        
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 3
+                }
+            },
+
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[15000, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"siseyushaonv_1"
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "siseyushaonv_1":
+        {
+            "Duration":3,
+            "ThinkInterval":0.7,
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target" : "TARGET",
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[15000, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

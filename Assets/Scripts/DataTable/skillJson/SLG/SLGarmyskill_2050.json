@@ -1,0 +1,38 @@
+{
+    "Name" : "舒尔康（炸弹小子）远程普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"  
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.2,
+    "AbilityCooldown" : 2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX20_flyObject"
+    ],
+
+    "OnSpellStart" :
+    {
+        "Ballistic":
+        {
+            "Target":"TARGET",
+            "StartHeight":0.8,
+            "MoveSpeed":10,
+            "EffectName":"heroFX20_flyObject",
+            "BallisticType":2
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "Name" : "热血沸腾（被动）：自身战斗中每秒生命恢复上升n点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "HOT":
+        {
+            "IsPassive":true,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Heal":
+                {
+                    "Target" : "CASTER",
+                    
+                    "HealFlags":["HEAL_FLAG_NONE"],
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[8, 4],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[0, 0]
+                       }
+                      ]
+                    }
+                }                
+            }
+        }
+    }
+}

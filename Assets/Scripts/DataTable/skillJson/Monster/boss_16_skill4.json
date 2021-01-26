@@ -1,0 +1,21 @@
+{
+    "Name" : "蜘蛛女王被动：免疫控制",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        
+        "zhizhunvwang4":
+        {
+            "IsPassive" : true,
+            
+            "States":
+            {
+                "MODIFIER_STATE_CONTROLLER_IMMUNE":true
+            }
+        }
+    }
+}

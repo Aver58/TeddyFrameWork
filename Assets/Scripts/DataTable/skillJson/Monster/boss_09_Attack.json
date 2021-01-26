@@ -1,0 +1,120 @@
+{
+    "Name" : "地狱大蛇普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 3,
+    "AbilityCastPoint" : 1.2,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 1.2,
+    "AbilityCooldown" : 3,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":120901
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "HitStop":
+                {
+                    "Duration":0.14
+                },
+                "Damage": 
+                {
+                    "Target" : "TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[0, 0],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[10000, 0]
+                        }
+                        ]
+                    },
+                    "OnSuccess":
+                    {
+                        "FireSound":
+                        {
+                            "SoundType":"SOUND_NORMAL",
+                            "SoundName":99112
+                        }
+                    }
+                }
+            }
+        },
+
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+    "Modifiers":
+    {
+        "falaige":
+        {
+            "IsPassive":true,
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target" : 
+                    { 
+                        "Center" : "CASTER",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+
+                        "AoeArea" :
+                        {
+                           "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                           "Radius" : 5
+                        }
+                    },
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[0, 0],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[2500, 0]
+                        }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,99 @@
+{
+    "Name" : "正义守护（自动释放）：在战斗开始时施展魔法保护全体队友，所有人获得吸收伤害的护盾8S，护盾最多可吸收任何伤害6090点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 1000,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX19_03_attack",
+        "heroFX19_03_Buff"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX19_03_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3
+        },
+                "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":16031
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+
+        "ApplyModifier":
+        {
+            "Target":
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_FRIENDLY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 100
+                }
+            },
+
+            "ModifierName":"zhengyishouhu"
+        }
+    },
+
+    "Modifiers":
+    {
+        "zhengyishouhu":
+        {
+            "Duration":8,
+            "EffectName":"heroFX19_03_Buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_SHIELD":
+                {
+                    "ValueSource" : 
+                    {
+                        "ValueBasicParams":[79, 35],
+                        "ValueAdditionParams":
+                        [
+                            {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[26100, 0]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

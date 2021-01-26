@@ -1,0 +1,29 @@
+{
+    "Name" : "不详氛围：全体敌人物理护甲下降120点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "buxiangfenwei":
+        {
+            "IsPassive" : true,
+            "Aura": "buxiangfenwei_1",
+            "Aura_Radius" : -1,
+            "Aura_Teams" :"UNIT_TARGET_TEAM_ENEMY",
+            "Aura_Types" :"UNIT_TARGET_HERO"
+        },
+
+        "buxiangfenwei_1":
+        {
+            "IsHidden":true,    
+                
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_DEFENCE" : [-1.2,-0.6]
+            }
+        }        
+    }
+}

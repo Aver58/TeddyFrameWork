@@ -1,0 +1,127 @@
+{
+    "Name" : "远古海蛇技能：射出一支寒冰剑，对目标造成伤害并冰冻两秒",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_CHANNELLED"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 7,
+    "AbilityCastPoint" : 2.1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.5,
+    "AbilityChannelTime" : 1.2,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "monster_014_02_attack",
+        "hero_04_01_Buff"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+         "FireSound":
+         {
+             "SoundType":"SOUND_NORMAL",
+             "SoundName":111401
+         },
+         "DelayedAction":
+         {
+             "Delay":0.7,
+             "Action":
+             {
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"monster_014_02_attack",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 2
+                }
+             }
+         }
+    },
+
+    "OnSpellStart" :
+    {
+        "LinearProjectile":
+        {
+            "Target":"TARGET",
+            "MoveSpeed":20,
+            "FixedDistance":7,
+            "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+            "TargetTypes":"UNIT_TARGET_HERO",
+            "AoeArea":
+            {
+                "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                "Radius" : 1
+            }
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "Damage": 
+        {
+            "Target":"TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[0, 0],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams":[12000, 0]
+                }
+                ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"yuanguhaishe"
+                }
+            }
+        }
+    },
+
+    "Modifiers":
+    {
+        "yuanguhaishe":
+        {
+            "EffectName" :"hero_04_01_Buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "Duration":2,
+
+            "States":
+            {
+                "MODIFIER_STATE_FROZEN":true
+            }
+        }
+    }
+}
+
+
+
+
+
+

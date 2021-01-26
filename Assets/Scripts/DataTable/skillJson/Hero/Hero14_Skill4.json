@@ -1,0 +1,21 @@
+{
+    "Name" : "钢铁身躯（被动）：自身物理护甲上升300点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "PHYSICAL_DAMAGE":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_DEFENCE" : [4,2]
+            }
+        }
+    }
+}

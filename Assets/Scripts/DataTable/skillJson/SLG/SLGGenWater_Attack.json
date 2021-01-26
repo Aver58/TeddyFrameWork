@@ -1,0 +1,44 @@
+{
+    "Name" : "水精灵普通攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_RANDOM",
+
+    "AbilityCastRange" : 8,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "attack",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" : 3,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritWater_Skill_attack"
+    ],
+    
+    "OnSpellStart": 
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg11"
+        },
+        "Ballistic":
+        {
+            "Target":"TARGET",
+            "StartHeight":2,
+            "MoveSpeed":10,
+            "EffectName" :"SpiritWater_Skill_attack",
+            "BallisticType":2,
+            "DamageType":1
+        }
+    }
+}

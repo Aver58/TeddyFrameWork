@@ -1,0 +1,139 @@
+{
+    "Name" : "怒吼（自动释放）：对自身附近大范围的敌人造成真实伤害362点，并给予恐惧颤栗状态5S，恐惧颤栗每秒造成真实伤害362点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 0.57,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" :9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius" : 3,
+    
+    "Precache":
+    [
+        "heroFX24_02_attack"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":24021
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.8,
+            "Frequency":45,
+            "PositionOffset":[0.2,0.3,0]
+        },
+        
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX24_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        },
+
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "CASTER",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" :3
+                }
+            },
+
+            "Action":
+            {  
+                "Damage": 
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_PURE",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[5, 2],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[2250, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"zhanli"
+                }
+            }
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "Modifiers":
+    {
+        "zhanli":
+        {
+            "Duration":5.1,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_PURE",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[5, 2],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[2250, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

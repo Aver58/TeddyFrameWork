@@ -1,0 +1,109 @@
+{
+    "Name" : "终结：朝着敌人的弱点给予重击，对目标造成真实伤害2242点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 0.7,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "heroFX12_03_attack",
+        "heroFX12_0203_Gethit"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "DelayedAction":
+        {
+            "Delay":0.6,
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"heroFX12_03_attack",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 2
+                }
+            }
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":20021
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX12_0203_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        "IsHit":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "HitStop":
+                {
+                    "Duration":0.18
+                }
+            }
+        },
+
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "Damage":
+        {
+            "Target":"TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+            "DamageType" : "DAMAGE_TYPE_PURE",
+            "ValueSource":
+            {
+                "ValueBasicParams":[37, 16],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams":[15200, 0]
+                }
+                ]
+            },
+            "OnSuccess":
+            {
+            "FireSound":
+                {
+                    "SoundType":"SOUND_NORMAL",
+                    "SoundName":99052
+                }
+            }
+        }
+    }
+}

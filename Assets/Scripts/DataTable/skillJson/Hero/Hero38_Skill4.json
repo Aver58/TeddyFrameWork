@@ -1,0 +1,29 @@
+{
+    "Name" : "神之威严：荷鲁斯神性的威严让人畏惧，全体敌人暴击下降",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "shenzhiweiyan":
+        {
+            "IsPassive" : true,
+            "Aura": "shenzhiweiyan_1",
+            "Aura_Radius" : -1,
+            "Aura_Teams" :"UNIT_TARGET_TEAM_ENEMY",
+            "Aura_Types" :"UNIT_TARGET_HERO"
+        },
+
+        "shenzhiweiyan_1":
+        {
+            "IsHidden":true,    
+                
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_CRIT" : [-2,-1]
+            }
+        }        
+    }
+}

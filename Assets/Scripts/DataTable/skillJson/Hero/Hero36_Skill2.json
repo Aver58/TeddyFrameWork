@@ -1,0 +1,118 @@
+{
+    "Name" : "腐蚀毒液：使目标受到伤害，并给予腐液状态3S，破甲会使敌人受到伤害提高",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 8,
+    "AbilityCastPoint" : 1.6,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.67,
+    "AbilityInitialCooldown":2,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX36_02_attack",        
+        "heroFX36_02_buff",
+        "heroFX36_02_flyObject",
+        "heroFX36_02_Gethit"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX36_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" :3
+        }
+    },
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "heroFX36_02_flyObject",
+            "MoveSpeed" : 16,
+            "SourceHeight" : 0.85,
+            "SourceX":0.8
+        },
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+
+    },
+	
+    "OnProjectileHitUnit" :
+    {
+        "AttachEffect":
+        {
+            "Target":"TARGET",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectName":"heroFX36_02_Gethit",
+            "EffectAttachType":"NO_FOLLOW_ORIGIN"
+        },
+        
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[48, 21],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                "ValueSourceParams":[17900, 0]
+               }
+              ]
+            }
+        },
+
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"fushiduye"
+                }
+            }
+        }   
+    },
+
+    "Modifiers":
+    {
+        "fushiduye":
+        {
+            "Duration":3,
+            "EffectName" :"heroFX36_02_buff",
+            "EffectAttachType" : "FOLLOW_ORIGIN",            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_INCOMING_TAKE_ALL_DAMAGE_PERCENTAGE":[5000,0]  
+            }   
+        }
+    }
+}

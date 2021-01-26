@@ -1,0 +1,164 @@
+{
+    "Name" : "闪现打击：使用电光般的速度来到敌人身后，对目标附近小范围的敌人造成物理伤害6062点，并给予破甲状态5S，破甲会使敌人物理护甲下降394点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RECORD"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_MIN",
+
+    "AbilityCastRange" : 15,
+    "AbilityCastPoint" : 1.1,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 2.6,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX12_01_attack",
+        "heroFX12_01_Gethit",
+        "heroFX12_01_Loop_prop1"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":20011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX12_01_Loop_prop1",
+            "EffectAttachType" : "FOLLOW_BIP_WEAPON1",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "Blink":
+        {
+            "Target":"TARGET"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":20012
+        },
+
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":0.4,
+            "Frequency":45,
+            "PositionOffset":[0,0.5,0]
+        },
+
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX12_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+
+        "AttachEffect@2" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX12_01_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+        
+        "ActOnTargets":
+        {
+            "Target" : 
+            {
+                "Center" : "TARGET",
+                "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                "Types" : "UNIT_TARGET_HERO",
+
+                "AoeArea" :
+                {
+                    "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius" : 2
+                }
+            },
+
+            "Action":
+            {
+                "Damage": 
+                {
+                    "Target":"TARGET",
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[60, 31],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[23200, 0]
+                       }
+                      ]
+                    }
+                },
+
+                "LevelCondition":
+                {
+                    "Target":"TARGET",
+                    "OnSuccess":
+                    {
+                        "ApplyModifier":
+                        {
+                            "Target" :"TARGET",
+
+                            "ModifierName":"shanxiandaji"
+                        }
+                    }
+                }
+            } 
+        }   
+    },
+
+
+    "Modifiers":
+    {
+        "shanxiandaji":
+        {
+            "Duration" : 5,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_DEFENCE":[-2.1,-1.05]
+            }
+        }
+    }
+}

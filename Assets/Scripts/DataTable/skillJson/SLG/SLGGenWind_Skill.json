@@ -1,0 +1,63 @@
+{
+    "Name" : "风精灵技能攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 4,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 6,
+    "AbilityCooldown" : 15,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius":100,
+
+    "Precache":
+    [
+        "SpiritWind_skill",
+        "SpiritWind_skill_cast"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"slg13"
+        },
+        "AttachEffect@1":
+        {
+            "Target":"CASTER",
+            "EffectName":"SpiritWind_skill",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":6
+        },
+        
+        "AttachEffect@2":
+        {
+            "Target":"CASTER",
+            "EffectName":"SpiritWind_skill_cast",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":6
+        }
+    },
+    
+    "OnSpellStart": 
+    {
+        "SLGDamage":
+        {
+            "Target":"SLGFULL",
+            "DamageType":"DAMAGE_TYPE_PHYSICAL"
+        }
+    }
+}

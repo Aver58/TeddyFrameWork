@@ -1,0 +1,99 @@
+{
+    "Name" : "炸弹投掷（自动施放）：对目标附近小范围内的敌人造成魔法伤害3051点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 0.42,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 6,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX20_03_Gethit",
+        "heroFX20_03_flyObject"
+    ],
+
+    "OnSpellStart" :
+    {		
+        "ParabolaProjectile":
+        {
+            "Target":"TARGET",
+            "SourceHeight":1.2,
+            "HorizontalVelocity":15,
+            "MaxHeight":0.75,
+            "EffectName":"heroFX20_03_flyObject"
+        },
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+    
+    "OnProjectileHitUnit":
+    {
+        "CameraShake":
+        {
+            "UseDefault":1
+        },
+        
+        "Damage": 
+        {
+            "Target" :
+            {
+                "Center":"TARGET",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                    "Radius":2
+                }
+            },
+
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[33, 14],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                "ValueSourceParams":[13900, 0]
+               }
+              ]
+            }
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":17021
+        },
+
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX20_03_Gethit",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN"
+        }
+    }
+}

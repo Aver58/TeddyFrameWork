@@ -1,0 +1,121 @@
+{
+    "Name" : "弹射利刃：丢出会在敌人之间弹跳的利刃,崩刃会使敌人物理暴击伤害下降125点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 8,
+    "AbilityCastPoint" : 0.96,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2,
+    "AbilityCooldown" :9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "AbilityAoeRadius" : 3,
+    
+    "Precache":
+    [
+        "heroFX27_02_attack",
+        "heroFX27_02_FlyObject"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":27021
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX27_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        }
+    },
+    "OnSpellStart" :
+    {
+
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+        "BouncingProjectile":
+        {
+            "Target":"TARGET",
+            "Bounces":6,
+            "BounceRange":8,
+            "MoveSpeed":15,
+            "SourceHeight":1.2,
+            "EffectName":"heroFX27_02_FlyObject"
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX27_01&02_Gethit",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99112
+        },
+        "Damage": 
+        {
+            "Target":"TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[27, 12],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams":[12300, 0]
+                }
+                ]
+            }
+        },
+        "LevelCondition":
+        {
+            "Target":"TARGET",
+            "OnSuccess":
+            {
+                "ApplyModifier":
+                {
+                    "Target":"TARGET",
+                    "ModifierName":"bengren"
+                }
+            }
+        }
+    },
+    "Modifiers":
+    {
+        "bengren":
+        {
+            "Duration":5,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_CRIT" : [-3.5,-1.75]
+            }
+        }
+    }
+}

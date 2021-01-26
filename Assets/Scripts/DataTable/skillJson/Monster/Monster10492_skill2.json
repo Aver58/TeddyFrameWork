@@ -1,0 +1,106 @@
+{  "Name" : "奇行飞毯军：向目标区域发射出许多魔法飞箭，对前方扇形区域的敌人造成魔法伤害",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.32,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "soldier_k_spe_02_01_attack_1",
+        "soldier_k_spe_02_01_attack_2",
+        "soldier_k_spe_02_01_attack_3"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"soldier_k_spe_02_01_attack_1",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.3
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"xg0601"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"soldier_k_spe_02_01_attack_2",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.3
+        },
+
+        "DelayedAction":
+        {
+            "Delay":0.13,
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"soldier_k_spe_02_01_attack_3",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 2.3
+                },
+                "Damage": 
+                {
+                    "Target" : 
+                    {
+                        "Center" : "CASTER",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_SECTOR",
+                            "Sector" :
+                            {
+                                "Radius" : 7,
+                                "Angle" : 60
+                            }
+                        }
+                    },
+        
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[15000, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

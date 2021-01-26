@@ -1,0 +1,128 @@
+{
+    "Name" : "夜蚀之箭（自动施放）：瞄准敌人的弱点进行攻击，使敌人受到物理伤害2851点，并给予留血状态3S，每秒造成物理伤害2094点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ATTACK",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" : 2.35,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 3.3,
+    "AbilityInitialCooldown":4,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+		"heroFX05_02_fly",        
+        "heroFX05_02_Gethit"
+    ],
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":14021
+        }
+    },
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "heroFX05_02_fly",
+            "MoveSpeed" : 30,
+            "SourceHeight" : 1.2
+        },
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+
+    },
+	
+    "OnProjectileHitUnit" :
+    {
+        "AttachEffect":
+        {
+            "Target":"TARGET",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectName":"heroFX05_02_Gethit",
+            "EffectAttachType":"NO_FOLLOW_SPINE"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99012
+        },
+
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[17.25, 7.5],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[5875, 0]
+               }
+              ]
+            }
+        },
+
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"yeshizhijian"
+        }
+    },
+
+    "Modifiers":
+    {
+        "yeshizhijian":
+        {
+            "Duration":3.1,
+            "ThinkInterval":1,
+
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[17.25, 7.5],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[5875, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

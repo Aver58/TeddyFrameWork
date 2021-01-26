@@ -1,0 +1,64 @@
+{
+    "Name" : "残影（自动施放）：施展法术让自己的动作更加灵敏，自身获得残影形态8S，残影会使自身闪避上升240点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 12,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+    
+    "Precache":
+    [
+        "heroFX09_02_buff"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":5021
+        }
+    },
+    "OnSpellStart" :
+    {
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        },
+
+        "ApplyModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"canying"
+        }
+    },
+
+    "Modifiers":
+    {
+        "canying":
+        {
+            "Duration":8,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_DODGE": [4,4]
+            },
+
+            "EffectName":"heroFX09_02_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN"
+        }
+    }
+}

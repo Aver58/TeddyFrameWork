@@ -1,0 +1,163 @@
+{
+    "Name" : "漫游毒蛛技能2：撕咬目标。将毒液注入目标体内，造成伤害并给予3s中毒状态。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 1.7,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.8,
+    "AbilityCooldown" : 12,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "monster_001&002_dead",
+        "monster_001_02_buff",
+        "monster_001_02_Bip001_Spine1"
+    ],
+
+   "OnAbilityPhaseStart":
+   {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":110102
+        }
+   },
+    "OnSpellStart" :
+    {
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[11500, 0]
+               }
+              ]
+            }
+        },        
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"manyouduzhu"
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_001_02_Bip001_Spine1",
+            "EffectAttachType" : "FOLLOW_BIP_HEAD",
+            "EffectDuration" : 3.3,
+            "EffectType":"EFFECT_NORMAL"
+        }
+    },
+    "OnOwnerDied" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"monster_001&002_dead",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 3,
+            "EffectType":"EFFECT_NORMAL"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":110103
+        },
+        "DelayedAction":
+        {
+            "Delay":0.95,
+            "Action":
+            {
+                "ActOnTargets":
+                {
+                    "Target" : 
+                    {
+                        "Center" : "CASTER",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" :3
+                        }
+                    },
+                    "Action":
+                    {
+                        "Damage": 
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[0, 0],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[12000, 0]
+                               }
+                              ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Modifiers":
+    {
+        "manyouduzhu":
+        {
+            "EffectName" :"monster_001_02_buff",
+            "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+            "Duration":3,
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "Damage":
+                {            
+                    "Target":"TARGET",
+                    "DamageFlags" : ["DAMAGE_FLAG_NONE"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[5000, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

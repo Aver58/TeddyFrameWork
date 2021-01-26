@@ -1,0 +1,132 @@
+{
+    "Name" : "音波冲击：对目标造成伤害并眩晕3s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 1.5,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.3,
+    "AbilityInitialCooldown":2,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX29_02_attack",
+        "heroFX29_02_Bip001",
+        "heroFX29_02_flyobject",
+        "heroFX29_02_Gethit"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":29021
+        },
+        "DelayedAction":
+        {
+            "Delay":0.5,
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "CASTER",
+                    "EffectName" :"heroFX29_02_attack",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 3
+                }
+            }
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX29_02_Bip001",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 3
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "TrackingProjectile":
+        {
+            "Target" : "TARGET",
+            "EffectName" : "heroFX29_02_flyobject",
+            "MoveSpeed" : 10,
+            "SourceHeight" : 1.35
+        },
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+	
+		
+    "OnProjectileHitUnit" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":99032
+        },
+		"Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[47, 20],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                    "ValueSourceParams":[17500, 0]
+                }
+                ]
+            }
+        },
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFX29_02_Gethit",
+            "EffectAttachType" : "NO_FOLLOW_SPINE",
+            "EffectDuration" : 3
+        },
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"yinbochongji"
+        }
+    },
+    "Modifiers":
+    {
+        "yinbochongji":
+        {
+
+            "Duration":3,
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true 
+            }      
+        }
+    }
+}

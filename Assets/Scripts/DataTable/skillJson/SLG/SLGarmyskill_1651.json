@@ -1,0 +1,61 @@
+{
+    "Name" : "心灵震撼：对目标附近中范围的敌人造成伤害并给予晕眩状态1S，造成魔法伤害5118点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+    
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 2,
+    "AbilityCastAnimation" : "skill1_full",
+    "AbilityCastDuration" : 5,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX16_01_attack",
+        "heroFX16_01_Gethit"
+    ],
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX16_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_NORMAL",
+            "EffectDuration":2
+        },
+
+        "DelayedAction":
+        {
+            "Delay":1,
+            "Action":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "POINT",
+                    "EffectName" :"heroFX16_01_Gethit",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectType":"EFFECT_NORMAL",
+                    "EffectDuration":2
+                },
+
+                "SLGDamage": 
+                {
+                    "Target":"TARGET",
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL"
+                }
+            }
+        }
+    }
+}

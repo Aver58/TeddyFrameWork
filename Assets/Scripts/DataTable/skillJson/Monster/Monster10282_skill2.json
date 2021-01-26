@@ -1,0 +1,65 @@
+{
+    "Name" : "中等水元素技能：回复己方最虚弱的目标大量生命值",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_FRIENDLY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_HP_PERCENT_MIN",
+
+    "AbilityCastRange" : 10,
+    "AbilityCastPoint" : 0.8,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 1.5,
+    "AbilityCooldown" : 18,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType":"NO_COST",
+    "AbilityCostValue":0,
+
+    "Precache":
+    [
+        "monster_c_arc_002_skill2_attack"
+    ],
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":"xg0801"
+        },
+        "AttachEffect":
+        {
+            "Target":"TARGET",
+            "EffectName": "monster_c_arc_002_skill2_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":2.5
+        },
+        
+        "Heal": 
+        {
+            "Target":"TARGET",
+            
+            "HealFlags":["HEAL_FLAG_CRIT"],
+            "ValueSource":
+            {
+              "ValueBasicParams":[0, 0],
+              "ValueAdditionParams":
+              [
+               {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[25000, 0]
+               }
+              ]
+            }
+        }       
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "Name" : "精神祷言：全体队友智力上升120点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "jingshendaoyan":
+        {
+            "IsPassive" : true,
+            "Aura": "jingshendaoyan_modifier",
+            "Aura_Radius" : -1,
+            "Aura_Teams" :"UNIT_TARGET_TEAM_FRIENDLY",
+            "Aura_Types" :"UNIT_TARGET_HERO"
+        },
+
+        "jingshendaoyan_modifier":
+        {
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" : [3.2,1.52]
+            }
+        }
+    }
+}

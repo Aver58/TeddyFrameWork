@@ -1,0 +1,201 @@
+{
+    "Name" : "音浪惩戒：海洋的侵略者，接受贝壳竖琴的惩戒吧！快速拨动琴弦，对前方长距离路径敌人产生4次魔法音波攻击",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_LINE_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 12,
+    "AbilityCastPoint" :2.2,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5.5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeLine":
+    {
+        "Length" : 12,
+        "Thickness" : 3
+    },
+
+
+    "Precache":
+    [
+        "heroFX30_01_attack",
+        "heroFX30_01_loop",
+        "heroFX30_01_cast"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":30011
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 4,
+            "EffectType":"EFFECT_ULT_START"
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX30_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":30012
+        },
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX30_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectForwardType":"CASTER",
+            "EffectDuration" : 4
+        },
+        "AttachEffect@2" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX30_01_cast",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 4
+        },
+        "LinearProjectile":
+        {
+            "Target":"POINT",
+            "MoveSpeed":24,
+            "FixedDistance":12,
+            "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+            "TargetTypes":"UNIT_TARGET_HERO",
+            "AoeArea" :
+            {
+                "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                "Line" :
+                {
+                    "Length" : 1,
+                    "Thickness" : 3
+                }
+            }
+        },
+        "DelayedAction@1":
+        {
+            "Delay":0.5,
+            "Action":
+            {
+                "LinearProjectile":
+                {
+                    "Target":"POINT",
+                    "MoveSpeed":24,
+                    "FixedDistance":12,
+                    "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+                    "TargetTypes":"UNIT_TARGET_HERO",
+                    "AoeArea" :
+                    {
+                        "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                        "Line" :
+                        {
+                            "Length" : 1,
+                            "Thickness" : 3
+                        }
+                    }
+                }
+            }
+        },
+        "DelayedAction@2":
+        {
+            "Delay":1,
+            "Action":
+            {
+                "LinearProjectile":
+                {
+                    "Target":"POINT",
+                    "MoveSpeed":24,
+                    "FixedDistance":12,
+                    "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+                    "TargetTypes":"UNIT_TARGET_HERO",
+                    "AoeArea" :
+                    {
+                        "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                        "Line" :
+                        {
+                            "Length" : 1,
+                            "Thickness" : 3
+                        }
+                    }
+                }
+            }
+        },
+        "DelayedAction@3":
+        {
+            "Delay":1.5,
+            "Action":
+            {
+                "LinearProjectile":
+                {
+                    "Target":"POINT",
+                    "MoveSpeed":24,
+                    "FixedDistance":12,
+                    "TargetTeams":"UNIT_TARGET_TEAM_ENEMY",
+                    "TargetTypes":"UNIT_TARGET_HERO",
+                    "AoeArea" :
+                    {
+                        "AreaType" : "DAMAGE_AREA_TYPE_LINE",
+                        "Line" :
+                        {
+                            "Length" : 1,
+                            "Thickness" : 3
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "OnProjectileHitUnit":
+    {
+        "Damage": 
+        {
+            "Target":"TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[20, 9],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                    "ValueSourceParams":[6700, 0]
+                }
+                ]
+            }
+        }
+    }
+}

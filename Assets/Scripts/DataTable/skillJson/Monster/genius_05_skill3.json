@@ -1,0 +1,106 @@
+{
+    "Name" : "火之精灵技能3：点燃最远的目标，3s后在目标位置爆炸开来(半径3的圆形）",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MAX",
+
+    "AbilityCastRange" : -1,
+    "AbilityCastPoint" : 0.9,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.34,
+    "AbilityCooldown" : 8,
+    "AbilityInitialCooldown":2,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "SpiritFire_skill03_gethit",
+        "SpiritFire_skill03_gethitfire",
+        "SpiritFire_skill03_SpiritFire_Hand"
+    ],
+
+
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"SpiritFire_skill03_SpiritFire_Hand",
+            "EffectAttachType" : "FOLLOW_BIP_RIGHT_HAND",
+            "EffectDuration" : 1.5,
+            "EffectType":"EFFECT_NORMAL"
+        },
+        "ApplyModifier":
+        {
+            "Target":"TARGET",
+            "ModifierName":"huozhijinglingjineng3"
+        },
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+    "Modifiers":
+    {
+        "huozhijinglingjineng3":
+        {
+            "Duration":3.1,
+            "EffectName":"SpiritFire_skill03_gethitfire",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectForwardType":"WORLD_FORWARD",
+
+            "OnDestroy":
+            {
+                "AttachEffect" :
+                {
+                    "Target": "TARGET",
+                    "EffectName" :"SpiritFire_skill03_gethit",
+                    "EffectAttachType" : "NO_FOLLOW_ORIGIN",
+                    "EffectDuration" : 2.1
+                },
+                "Damage": 
+                {
+                    "Target" : 
+                    {
+                        "Center" : "TARGET",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 3
+                        }
+                    },  
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                    "DamageType" : "DAMAGE_TYPE_MAGICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                        "ValueSourceParams":[27500, 0]
+                       }
+                      ]
+                    }
+                } 
+            }
+        }
+    }   
+}

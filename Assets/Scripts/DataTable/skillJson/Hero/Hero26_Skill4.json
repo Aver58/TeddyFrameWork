@@ -1,0 +1,21 @@
+{
+    "Name" : "胡达被动自身穿透护甲",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "lirenchuanci":
+        {
+            "IsPassive":true,
+            "IsHidden":true,
+
+            "Properties" : 
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_PENETRATION" : [3,1.5]
+            }
+        }
+    }
+}

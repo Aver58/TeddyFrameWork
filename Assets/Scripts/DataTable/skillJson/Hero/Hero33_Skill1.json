@@ -1,0 +1,179 @@
+{
+    "Name" : "全力投掷焚烧着黑焰的长枪，使目标中范围内的敌人受到伤害并给予黑焰状态3S；造成物理伤害793点 ，黑焰每1S造成物理伤害1500点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_POINT",
+        "ABILITY_BEHAVIOR_RADIUS_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 9,
+    "AbilityCastPoint" : 2.2,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+    
+    "AbilityAoeRadius" : 3,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX33_01_attack",
+        "heroFX33_01_loop",
+        "heroFX33_01_gethit",
+        "heroFX33_01_buff"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":33011
+        },
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX33_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":33012
+        },
+        "AttachEffect@1" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX33_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 5
+        },
+
+        "DelayedAction":
+        {
+            "Delay":0.3,
+            "Action":
+            {
+                "AttachEffect@2" :
+                {
+                    "Target": "POINT",
+                    "EffectName" :"heroFX33_01_gethit",
+                    "EffectAttachType" : "FOLLOW_ORIGIN",
+                    "EffectDuration" : 5
+                },
+                "ActOnTargets":
+                {
+                    "Target":
+                    {
+                        "Center":"POINT",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+        
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":3
+                        }
+                    },
+        
+                    "Action":
+                    {
+                        "Damage":
+                        {
+                            "Target":"TARGET",
+        
+                            "DamageFlags":["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType":"DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[50, 22],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[16000, 0]
+                               }
+                              ]
+                            }
+                        },
+        
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"heiyan",
+                                    "TargetFlags":["UNIT_TARGET_FLAG_NOT_CONTROLLER_IMMUNE"]
+                                }
+                            }
+                        }
+                    }
+                } 
+
+            }
+        }    
+    },
+    
+    "Modifiers":
+    {
+        "heiyan":
+        {
+            "Duration":3,
+            "EffectName":"heroFX33_01_buff",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "ThinkInterval":1,
+            "OnIntervalThink":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT"],
+                    "DamageType":"DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[17, 7.3],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[5400, 0]
+                        }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

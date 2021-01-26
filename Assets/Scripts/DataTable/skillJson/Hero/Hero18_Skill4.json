@@ -1,0 +1,20 @@
+{
+    "Name" : "秘法光辉（被动）：自身魔法暴击上升198点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "mifaguanghui":
+        {
+            "IsPassive" : true,
+            "IsHidden":true,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_CRIT":[5,2.5]
+            }
+        }
+    }
+}

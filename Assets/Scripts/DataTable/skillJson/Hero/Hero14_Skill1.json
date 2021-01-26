@@ -1,0 +1,225 @@
+{
+    "Name" : "旋风斩：对自身附近大范围的敌人造成物理伤害1513点，并给予破甲状态3S，破甲会使敌人物理护甲下降246点，旋风斩最多持续5S",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_NO_TARGET",
+        "ABILITY_BEHAVIOR_RADIUS_AOE",
+        "ABILITY_BEHAVIOR_CHANNELLED"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+	
+    "AbilityChannelTime" : 5,
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" : 5.7,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "AbilityAoeRadius":5,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "heroFX14_01_attack",
+        "heroFX14_01_loop"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_ULT_CHARGE",
+            "SoundName":11011
+        }
+    },
+
+    "OnAbilityPhaseCharge":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX14_01_loop",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectType":"EFFECT_ULT_CHARGE"
+        }
+    },
+
+    "OnSpellStart" :
+    {
+        "ApplyModifier@1":
+        {
+            "Target":"CASTER",
+            "ModifierName":"xuanfengzhan"
+        },
+        "ApplyModifier@2":
+        {
+            "Target":"CASTER",
+            "ModifierName":"musajianshang"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":11012
+        }
+    },
+
+    "OnChannelFinish":
+    {
+        "RemoveModifier":
+        {
+            "Target":"CASTER",
+            "ModifierName":"xuanfengzhan"
+        }
+    },
+
+    "Modifiers":
+    {
+        "xuanfengzhan":
+        {
+            "Duration":5,
+            "EffectName" :"heroFX14_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "ThinkInterval":1,
+
+            "OnCreated":
+            {
+                "Damage":
+                {
+                    "Target":
+                    {
+                        "Center":"CASTER",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":3
+                        }
+                    },
+
+                    "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                    "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                        "ValueBasicParams":[12.6, 5.6],
+                        "ValueAdditionParams":
+                        [
+                        {
+                            "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                            "ValueSourceParams":[4400, 0]
+                        }
+                        ]
+                    },
+                    "OnSuccess":
+                    {
+                        "FireSound":
+                        {
+                            "SoundType":"SOUND_NORMAL",
+                            "SoundName":99052
+                        }
+                    }
+                }
+            },
+            
+            "OnIntervalThink":
+            {
+                "ActOnTargets":
+                {
+                    "Target":
+                    {
+                        "Center":"CASTER",
+                        "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                        "Types":"UNIT_TARGET_HERO",
+
+                        "AoeArea":
+                        {
+                            "AreaType":"DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius":5
+                        }
+                    },
+
+                    "Action":
+                    {
+                        "Damage":
+                        {
+                            "Target":"TARGET",
+
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                                "ValueBasicParams":[12.6, 5.6],
+                                "ValueAdditionParams":
+                                [
+                                {
+                                    "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                    "ValueSourceParams":[4400, 0]
+                                }
+                                ]
+                            },
+                            "OnSuccess":
+                            {
+                                "FireSound":
+                                {
+                                    "SoundType":"SOUND_NORMAL",
+                                    "SoundName":99052
+                                }
+                            }
+                        },
+
+                        "LevelCondition":
+                        {
+                            "Target":"TARGET",
+                            "OnSuccess":
+                            {
+                                "ApplyModifier":
+                                {
+                                    "Target":"TARGET",
+                                    "ModifierName":"pojia"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "pojia":
+        {
+            "Duration":3,
+
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_PHYSICAL_DEFENCE":[-2.1,-1.05]
+            }
+        },
+        "musajianshang":
+        {
+            "Duration":5,
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_INCOMING_TAKE_ALL_DAMAGE_PERCENTAGE":[-3000,0]
+            }
+        }
+    }
+}

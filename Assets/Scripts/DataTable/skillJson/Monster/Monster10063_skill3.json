@@ -1,0 +1,83 @@
+{
+    "Name" : "查西里叶蜘蛛骑士技能2：朝着前方扇形区域喷出毒液，对敌人造成伤害。",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET",
+        "ABILITY_BEHAVIOR_SECTOR_AOE"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 0,
+    "AbilityCastPoint" : 1.5,
+    "AbilityCastAnimation" : "skill3",
+    "AbilityCastDuration" : 2.53,
+    "AbilityCooldown" : 0,
+    "AbilityInitialCooldown":5,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "monster_c_cava_002_skill3_attack"
+    ],
+
+    "OnSpellStart" :
+    {
+        "AttachEffect":
+        {
+            "Target":"CASTER",
+            "EffectName":"monster_c_cava_002_skill3_attack",
+            "EffectAttachType":"FOLLOW_ORIGIN",
+            "EffectDuration":2
+        },
+        "ActOnTargets":
+        {
+            "Target":
+            {
+                "Center":"CASTER",
+                "Teams":"UNIT_TARGET_TEAM_ENEMY",
+                "Types":"UNIT_TARGET_HERO",
+
+                "AoeArea":
+                {
+                    "AreaType":"DAMAGE_AREA_TYPE_SECTOR",
+                    "Sector": 
+                    {
+                        "Radius":5,
+                        "Angle":60
+                    }
+                }
+            },
+
+            "Action":
+            {
+                "Damage":
+                {
+                    "Target":"TARGET",
+                    "DamageFlags":["DAMAGE_FLAG_CRIT"],
+                    "DamageType":"DAMAGE_TYPE_PHYSICAL",
+                    "ValueSource":
+                    {
+                      "ValueBasicParams":[0, 0],
+                      "ValueAdditionParams":
+                      [
+                       {
+                        "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                        "ValueSourceParams":[15000, 0]
+                       }
+                      ]
+                    }
+                }
+            }
+        }
+    }
+}

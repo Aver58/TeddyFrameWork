@@ -1,0 +1,29 @@
+{
+    "Name" : "灵猫足迹（被动光环）：全体队友敏捷上升",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "lingmaozuji":
+        {
+            "IsPassive" : true,
+            "Aura": "AGILITY_modifier",
+            "Aura_Radius" : -1,
+            "Aura_Teams" :"UNIT_TARGET_TEAM_FRIENDLY",
+            "Aura_Types" :"UNIT_TARGET_HERO"
+        },
+
+        "AGILITY_modifier":
+        {
+            "IsHidden":true,
+            
+            "Properties":
+            {
+                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" : [3.2,1.6]
+            }
+        }
+    }
+}

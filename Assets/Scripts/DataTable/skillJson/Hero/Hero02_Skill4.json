@@ -1,0 +1,21 @@
+{
+    "Name" : "祝福花粉（被动）：自身治疗技能效果上升40%",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_PASSIVE"
+    ],
+
+    "Modifiers":
+    {
+        "HealingSkilImprovement":
+        {
+            "IsPassive":true,
+            "IsHidden":true,
+
+            "Properties" : 
+            {
+                "MODIFIER_PROPERTY_INCOMING_DEAL_HEAL_VALUE_PERCENTAGE" : [65,65]
+            }
+        }
+    }
+}

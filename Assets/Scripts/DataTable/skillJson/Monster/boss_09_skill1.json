@@ -1,0 +1,143 @@
+{
+    "Name" : "地狱大蛇大招：喷出一颗火球炸开召唤流星雨，对全体敌人造成伤害并眩晕2s",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+    
+    "AbilityCastRange" : 5,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill1",
+    "AbilityCastDuration" :2,
+    "AbilityCooldown" : 0,
+    "AbilityCostType" : "ENERGY",
+    "AbilityCostValue" : 1000,
+
+    "Precache":
+    [
+        "heroFX_Current",
+        "boss_09_01_attack"
+    ],
+    
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX_Current",
+            "EffectAttachType" : "FOLLOW_BIP_SPINE",
+            "EffectDuration" : 2,
+            "EffectType":"EFFECT_ULT_START"
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":120902
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"boss_09_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.5
+        },
+        "CameraShake":
+        {
+            "Type":"PERIODIC",
+            "Duration":1.2,
+            "Frequency":50,
+            "PositionOffset":[0.2,0.2,0]
+        },
+
+
+        "DelayedAction":
+        {
+            "Delay":1.6,
+            "Action":
+            {
+                "ActOnTargets":
+                {
+                    "Target" : 
+                    {
+                        "Center" : "TARGET",
+                        "Teams" : "UNIT_TARGET_TEAM_ENEMY",
+                        "Types" : "UNIT_TARGET_HERO",
+        
+                        "AoeArea" :
+                        {
+                            "AreaType" : "DAMAGE_AREA_TYPE_RADIUS",
+                            "Radius" : 100
+                        }
+                    },
+        
+                    "Action":
+                    {
+                        "Damage":
+                        {
+                            "Target":"TARGET",
+                            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+                            "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+                            "ValueSource":
+                            {
+                              "ValueBasicParams":[0, 0],
+                              "ValueAdditionParams":
+                              [
+                               {
+                                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                                "ValueSourceParams":[47500, 0]
+                               }
+                              ]
+                            }
+                        },
+                        "CameraShake":
+                        {
+                            "Type":"PERIODIC",
+                            "Duration":0.5,
+                            "Frequency":50,
+                            "PositionOffset":[0.1,0.1,0]          
+                        },
+                        "LevelCondition":
+                        {
+                           "Target":"TARGET",
+                           "OnSuccess":
+                           {
+                                "ApplyModifier":
+                                {
+                                   "Target":"TARGET",
+                                   "ModifierName":"dashe"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    },
+
+    "Modifiers":
+    {
+        "dashe":
+        {
+            "Duration":2,
+            "States":
+            {
+                "MODIFIER_STATE_STUNNED":true
+            }
+        }
+    }
+}

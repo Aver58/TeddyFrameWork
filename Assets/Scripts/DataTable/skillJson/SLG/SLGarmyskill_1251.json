@@ -1,0 +1,43 @@
+{
+    "Name" : "闪现打击：使用电光般的速度来到敌人身后，对目标附近小范围的敌人造成物理伤害6062点，并给予破甲状态5S，破甲会使敌人物理护甲下降394点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_ULTIMATE",
+    "AbilityBranch" : "ABILITY_BRANCH_PHYSICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_SLG_FORMATION",
+
+    "AbilityCastRange" : 2,
+    "AbilityCastPoint" : 1,
+    "AbilityCastAnimation" : "skill1_full",
+    "AbilityCastDuration" : 2.6,
+    "AbilityCooldown" : 8,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFX12_01_attack"
+    ],
+
+    "OnSpellStart" :
+    {
+       "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFX12_01_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2
+        },
+
+        "SLGDamage": 
+        {
+            "Target":"TARGET",
+            "DamageType" : "DAMAGE_TYPE_PHYSICAL"
+        }   
+    }
+}

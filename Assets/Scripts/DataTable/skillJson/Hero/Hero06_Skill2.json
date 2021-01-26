@@ -1,0 +1,103 @@
+{
+    "Name" : "跳跃水柱（自动施放）：水柱会在敌人之间弹跳，最多可造成6次伤害，每次造成魔法伤害2016点",
+    "AbilityBehavior" : 
+    [
+        "ABILITY_BEHAVIOR_UNIT_TARGET"
+    ],
+    "AbilityUnitAiTargetFlag":
+    [
+        "UNIT_AI_TARGET_RESEARCH"
+    ],
+
+    "AbilityType" : "ABILITY_TYPE_BASIC",
+    "AbilityBranch" : "ABILITY_BRANCH_MAGICAL",
+    "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+    "AbilityUnitTargetType" : "UNIT_TARGET_HERO",
+    "AbilityUnitAiTargetCondition" : "UNIT_TARGET_RANGE_MIN",
+
+    "AbilityCastRange" : 6,
+    "AbilityCastPoint" : 1.4,
+    "AbilityCastAnimation" : "skill2",
+    "AbilityCastDuration" : 2.2,
+    "AbilityCooldown" : 9,
+    "AbilityCostType" : "NO_COST",
+    "AbilityCostValue" : 0,
+
+    "Precache":
+    [
+        "heroFx06_02_attack",
+        "heroFx06_02_flyObject",
+        "heroFx06_02_handTrail"
+    ],
+
+    "OnAbilityPhaseStart":
+    {
+        "AttachEffect" :
+        {
+            "Target": "CASTER",
+            "EffectName" :"heroFx06_02_handTrail",
+            "EffectAttachType" : "FOLLOW_BIP_RIGHT_HAND",
+            "EffectDuration" : 2.3
+        },
+                "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":15021
+        }
+    },
+    
+    "OnSpellStart" :
+    {
+
+		
+        "BouncingProjectile":
+        {
+            "Target":"TARGET",
+            "Bounces":6,
+            "BounceRange":-1,
+            "BounceDelay":0.1,
+            "MoveSpeed":10,
+            "SourceHeight":1.2,
+            "EffectName":"heroFx06_02_flyObject"
+        },
+        
+        "ChangeEnergy": 
+        {
+            "Target" : "CASTER",
+            "EnergyParams" : [100]
+        }
+    },
+
+    "OnProjectileHitUnit":
+    {
+        "Damage": 
+        {
+            "Target" : "TARGET",
+            "DamageFlags" : ["DAMAGE_FLAG_CRIT"],
+            "DamageType" : "DAMAGE_TYPE_MAGICAL",
+            "ValueSource":
+            {
+                "ValueBasicParams":[31, 13],
+                "ValueAdditionParams":
+                [
+                {
+                    "ValueSourceType":"SOURCE_TYPE_MAGICAL_ATTACK",
+                    "ValueSourceParams":[13300, 0]
+                }
+                ]
+            }
+        },
+        "AttachEffect" :
+        {
+            "Target": "TARGET",
+            "EffectName" :"heroFx06_02_attack",
+            "EffectAttachType" : "FOLLOW_ORIGIN",
+            "EffectDuration" : 2.3
+        },
+        "FireSound":
+        {
+            "SoundType":"SOUND_NORMAL",
+            "SoundName":15022
+        }
+    }
+}
