@@ -1,0 +1,477 @@
+Internal Name, Readable Name,String
+npc_dota_hero_antimage,Anti-Mage,尽管<hc>敌法师</hc>到了后期时一般会变成怪物，但是前期压制住他可以延缓他的发力。
+npc_dota_hero_antimage,Anti-Mage,<hc>敌法师</hc>在面对魔法输出为主的阵容时非常厉害，因为他自身所受的魔法伤害较低，而攻击时还能燃烧魔法。
+npc_dota_hero_antimage,Anti-Mage,由于机动性很高，<hc>敌法师</hc>可以在兵线中快速穿梭，打钱效率很高。
+npc_dota_hero_antimage,Anti-Mage,<hc>敌法师</hc>很惧怕物理伤害和纯粹伤害，还有眩晕、沉默和缠绕类控制技能。
+npc_dota_hero_axe,Axe,成功使用<ac>淘汰之刃</ac>对<hc>斧王</hc>非常重要，因为能秒杀敌人并且队友都将获得速度加成。
+npc_dota_hero_axe,Axe,<hc>斧王</hc>的先手能力非常突出，因为他的<ac>狂战士之吼</ac>可以强迫敌人攻击他。
+npc_dota_hero_axe,Axe,<hc>斧王</hc>非常依赖<ic>闪烁匕首</ic>，方便自己施放技能时，也能更好地压制对面。
+npc_dota_hero_axe,Axe,<hc>斧王</hc>与近战英雄对线时优势很大，因为<ac>反击螺旋</ac>可以轻松地对他们造成伤害。
+npc_dota_hero_bane,Bane,<hc>祸乱之源</hc>善于长时间控制英雄。
+npc_dota_hero_bane,Bane,<hc>祸乱之源</hc>的魔爪持续时间较长，但眩晕或沉默就能轻松打断。
+npc_dota_hero_bane,Bane,<hc>祸乱之源</hc>的击杀难度较高，因为<ac>蚀脑</ac>造成伤害的同时还能回复等额生命。
+npc_dota_hero_bane,Bane,<hc>祸乱之源</hc>只拥有单体类技能，所以他在清兵和消灭召唤物时非常吃力。
+npc_dota_hero_bloodseeker,Bloodseeker,像<ic>黑皇杖</ic>这样的物品可以帮助<hc>嗜血狂魔</hc>追击残血目标时不受控制技能影响。
+npc_dota_hero_bloodseeker,Bloodseeker,<hc>嗜血狂魔</hc>无法阻止敌人在<ac>割裂</ac>下传送，所以最好配合可以打断的队友。
+npc_dota_hero_bloodseeker,Bloodseeker,<hc>嗜血狂魔</hc>可以利用<ac>割裂</ac>发起战斗的先手，阻止敌人逃走。
+npc_dota_hero_bloodseeker,Bloodseeker,<hc>嗜血狂魔</hc>在对面时需要使自己的血量维持在健康状态，因为<ac>嗜血渴望</ac>会使他获得攻击力和移动速度加成。
+npc_dota_hero_crystal_maiden,Crystal Maiden,<hc>水晶室女</hc>的<ac>奥术光环</ac>为地图上所有队友提供魔法恢复加成，使他们可以更频繁地施放技能。
+npc_dota_hero_crystal_maiden,Crystal Maiden,<hc>水晶室女</hc>的<ac>冰封禁制</ac>非常克制机动性强的英雄，因为技能具有缠绕效果。
+npc_dota_hero_crystal_maiden,Crystal Maiden,<hc>水晶室女</hc>依赖位移类物品来弥补她极低的移动速度和较低的血量。
+npc_dota_hero_crystal_maiden,Crystal Maiden,<hc>水晶室女</hc>一般在队友急需魔法恢复时上场。
+npc_dota_hero_drow_ranger,Drow Ranger,<hc>卓尔游侠</hc>的<ac>精准光环</ac>为所有远程队友提供额外攻击力，而开启后对远程小兵同样生效。
+npc_dota_hero_drow_ranger,Drow Ranger,<hc>卓尔游侠</hc>唯一的保命技能就是具有沉默和击退效果的<ac>狂风</ac>。
+npc_dota_hero_drow_ranger,Drow Ranger,<hc>卓尔游侠</hc>的远距离射程和高攻击力使她可以在相对安全的位置攻击防御塔。
+npc_dota_hero_drow_ranger,Drow Ranger,<hc>卓尔游侠</hc>惧怕可以快速近身的英雄。
+npc_dota_hero_earthshaker,Earthshaker,<hc>撼地者</hc>的眩晕技能很多，可以连续施放使敌人动弹不得。
+npc_dota_hero_earthshaker,Earthshaker,<hc>撼地者</hc>的<ac>沟壑</ac>可以暂时创造障碍，封住敌人逃跑的路线，或者使己方可以从容撤退。
+npc_dota_hero_earthshaker,Earthshaker,<hc>撼地者</hc>的<ac>沟壑</ac>在远距离对排成直线的敌人造成眩晕和伤害非常有用。
+npc_dota_hero_earthshaker,Earthshaker,<hc>撼地者</hc>有了<ic>闪烁匕首</ic>后时机得当的<ac>回音击</ac>会使扎堆的敌人付出惨痛的代价。
+npc_dota_hero_juggernaut,Juggernaut,<hc>主宰</hc>可以使用<ac>剑刃风暴</ac>造成伤害，同时自身不受技能影响。
+npc_dota_hero_juggernaut,Juggernaut,<hc>主宰</hc>的上场价值在于他的<ac>治疗守卫</ac>，这可以帮助团队在推进时保持满血。
+npc_dota_hero_juggernaut,Juggernaut,<hc>主宰</hc>的<ac>无敌斩</ac>最好用在落单或数量较少的英雄身上。
+npc_dota_hero_juggernaut,Juggernaut,<hc>主宰</hc>可以使用<ac>剑刃风暴</ac>再使用<ic>回城卷轴</ic>，保证自己安全传送。
+npc_dota_hero_mirana,Mirana,<hc>米拉娜</hc>的团战压制力很强，因为她具有高额爆发伤害，而且<ac>月之暗面</ac>技能可以使队友选择较为安全的时机发起战斗。
+npc_dota_hero_mirana,Mirana,<ac>跳跃</ac>可以帮助<hc>米拉娜</hc>应对各种情况，不论是逃离险境还是爆发输出。
+npc_dota_hero_mirana,Mirana,<hc>米拉娜</hc>的招牌技能<ac>月神之箭</ac>命中难度颇高，而神箭飞得越远，眩晕时间越长。
+npc_dota_hero_mirana,Mirana,<hc>米拉娜</hc>的远距离技能<ac>月神之箭</ac>若能命中敌人，将造成长时间的眩晕。
+npc_dota_hero_mirana,Mirana,<hc>米拉娜</hc>的技能和天赋使她有潜力往物理输出或魔法输出的路线发展，可以根据局势进行选择。
+npc_dota_hero_nevermore,Shadow Fiend,<hc>影魔</hc>的毁灭阴影每次命中时会施加一个连中效果，下次命中敌人时他将受到额外伤害。
+npc_dota_hero_nevermore,Shadow Fiend,<hc>影魔</hc>正反补都能收集灵魂，并且通过<ac>支配死灵</ac>获得额外攻击力，直至阵亡。
+npc_dota_hero_nevermore,Shadow Fiend,<hc>影魔</hc>一般会购买<ic>黑皇杖</ic>来保证自己成功施放<ac>魂之挽歌</ac>。
+npc_dota_hero_nevermore,Shadow Fiend,<hc>影魔</hc>的输出很高，但他惧怕控制技能，也怕被抓。
+npc_dota_hero_morphling,Morphling,<hc>变体精灵</hc>的技能<ac>波浪形态</ac>非常强大，可以帮助他脱离危险或接近目标。
+npc_dota_hero_morphling,Morphling,与大多数英雄不同，<hc>变体精灵</hc>的技能可以造成大量魔法伤害，同时他的普通攻击可以造成大量物理伤害。
+npc_dota_hero_morphling,Morphling,<hc>变体精灵</hc>的击杀难度较高，但如果在他用出<ac>属性转换</ac>前将他沉默或眩晕可以将他轻松击杀。
+npc_dota_hero_morphling,Morphling,<hc>变体精灵</hc>的大招<ac>变形</ac>使自己的形态改为目标英雄，获得他们的基础技能，他的打法也因此更加多变。
+npc_dota_hero_phantom_lancer,Phantom Lancer,<hc>幻影长矛手</hc>的幻象与本体外观相同，与他作战将非常头疼。
+npc_dota_hero_phantom_lancer,Phantom Lancer,与大多数幻象系英雄一样，<hc>幻影长矛手</hc>从提升主属性的物品中获得的收益最大，也就是敏捷属性。
+npc_dota_hero_phantom_lancer,Phantom Lancer,<ic>净魂之刃</ic>能极大地提升<hc>幻影长矛手</hc>，因为除了本体外，幻象每次攻击也会燃烧敌人的魔法。
+npc_dota_hero_phantom_lancer,Phantom Lancer,由于幻象承受的伤害远远高于英雄本体，所以范围型伤害可以帮助找到<hc>幻影长矛手</hc>的真身。
+npc_dota_hero_puck,Puck,<hc>帕克</hc>在游戏中后期有了<ic>闪烁匕首</ic>和Eul的神圣法杖后击杀和追击的难度都非常大。
+npc_dota_hero_puck,Puck,<hc>帕克</hc>的<ac>幻象法球</ac>和<ac>新月之痕</ac>可以瞬间对附近多个敌人造成伤害。
+npc_dota_hero_puck,Puck,<hc>帕克</hc>可以使用<ac>梦境缠绕</ac>限制住敌人的走位，他们只能留在原地挨打，或者强行脱离并被眩晕。
+npc_dota_hero_puck,Puck,<hc>帕克</hc>的机动性很强。他可以轻松快速地穿越复杂的地形，也能追击并赶上撤退的敌人。
+npc_dota_hero_puck,Puck,游戏进入后期后，<hc>帕克</hc>的天赋使他可以快速输出，或者大幅提升金钱收入。
+npc_dota_hero_pudge,Pudge,一旦被<hc>帕吉</hc>抓住就很难逃脱，因为他有<ac>腐烂</ac>和<ac>肢解</ac>。
+npc_dota_hero_pudge,Pudge,<hc>帕吉</hc>的技能<ac>肉钩</ac>会将首个碰到的单位钩回<hc>帕吉</hc>出钩的位置。
+npc_dota_hero_pudge,Pudge,<hc>帕吉</hc>的<ac>肉钩</ac>对敌人颇具威慑力。
+npc_dota_hero_pudge,Pudge,<hc>帕吉</hc>可以将队友钩来，把他们从困境中救出。
+npc_dota_hero_razor,Razor,<hc>剃刀</hc>在经济落后时很难赶上对手，所以前期多击杀他几次可以使他后续乏力。
+npc_dota_hero_razor,Razor,移速类或位移类物品如<ic>原力法杖</ic>可以帮助逃脱<hc>剃刀</hc>的<ac>静电连接</ac>。
+npc_dota_hero_razor,Razor,<hc>剃刀</hc>最著名的就是他的技能<ac>静电连接</ac>，可以偷去敌人的攻击力，使他在对线和团战时取得优势。
+npc_dota_hero_razor,Razor,<ic>阿哈利姆神杖</ic>可以提升<hc>剃刀</hc>的大招，<ac>风暴之眼</ac>，对英雄和防御塔造成大量伤害。
+npc_dota_hero_sand_king,Sand King,<hc>沙王</hc>的多个范围型技能使他可以快速清兵。
+npc_dota_hero_sand_king,Sand King,<hc>沙王</hc>非常擅长在战场中穿梭。这使他压制敌人时无需担心阵亡。
+npc_dota_hero_sand_king,Sand King,<hc>沙王</hc>的先手能力非常强大，因为他能立刻使用<ic>闪烁匕首</ic>和<ac>掘地穿刺</ac>来眩晕扎堆的英雄。
+npc_dota_hero_sand_king,Sand King,<hc>沙王</hc>在对线期非常克制近战英雄，这多亏了他的技能<ac>腐尸毒</ac>。
+npc_dota_hero_storm_spirit,Storm Spirit,<hc>风暴之灵</hc>非常依赖魔法，所以合理利用技能非常重要。
+npc_dota_hero_storm_spirit,Storm Spirit,<hc>风暴之灵</hc>为了使<ac>超负荷</ac>伤害最大化，他在施放两次技能之间要夹杂普通攻击。
+npc_dota_hero_storm_spirit,Storm Spirit,由于<hc>风暴之灵</hc>在缺乏控制技能的情况下很难击杀，所以在选人时后手选出非常厉害。
+npc_dota_hero_storm_spirit,Storm Spirit,出于超高的机动性，<hc>风暴之灵</hc>可以在超远距离外对落单的敌人发起攻击。
+npc_dota_hero_sven,Sven,由于<hc>斯温</hc>拥有<ac>巨力挥舞</ac>，他比大多数英雄购买狂战斧后的清兵速度都要快。
+npc_dota_hero_sven,Sven,<hc>斯温</hc>非常克制物理输出英雄，因为他的<ac>战吼</ac>能使全队护甲大幅增加。
+npc_dota_hero_sven,Sven,<hc>斯温</hc>尽管输出很高，但他不容易近身，粘住敌人。
+npc_dota_hero_sven,Sven,<hc>斯温</hc>的<ac>神之力量</ac>可以使他原本颇高的攻击力大幅提升，这样他就能两三下击杀一个敌人。
+npc_dota_hero_sven,Sven,<hc>斯温</hc>一般会购买<ic>闪烁匕首</ic>，这能确保战斗爆发时他能到达最合适的位置。
+npc_dota_hero_tiny,Tiny,<hc>小小</hc>的技能组合可以使他秒杀附近的残血英雄。
+npc_dota_hero_tiny,Tiny,<hc>小小</hc>使用<ac>抓树</ac>技能后拿起一棵树作为武器，攻击时攻击距离增加，对建筑的伤害也会增加。
+npc_dota_hero_tiny,Tiny,<hc>小小</hc>可以使用<ac>投掷</ac>技能扔出拥有先手能力的队友，或者把敌人扔回己方的人堆中。
+npc_dota_hero_tiny,Tiny,<hc>小小</hc>非常喜欢提供大量攻击速度加成的队友，因为他自身的攻速很慢。
+npc_dota_hero_vengefulspirit,Vengeful Spirit,<hc>复仇之魂</hc>的<ac>恐怖波动</ac>可以提供远处或树林中的视野。
+npc_dota_hero_vengefulspirit,Vengeful Spirit,<hc>复仇之魂</hc>的<ac>移形换位</ac>可以用来拿自己的命换价值更大的队友。
+npc_dota_hero_vengefulspirit,Vengeful Spirit,<hc>复仇之魂</hc>的大招<ac>移形换位</ac>可以救出被敌人控制并集火的队友。
+npc_dota_hero_vengefulspirit,Vengeful Spirit,<hc>复仇之魂</hc>拥有多个<ic>阿哈利姆神杖</ic>的加成效果，包括<ac>移形换位</ac>的冷却时间大幅降低，而且死亡后会产生幻象。
+npc_dota_hero_windrunner,Windranger,<hc>风行者</hc>一般购买<ic>闪烁匕首</ic>找好<ac>束缚击</ac>的出手角度。
+npc_dota_hero_windrunner,Windranger,<hc>风行者</hc>的<ac>风行</ac>技能可以帮助她逃脱或躲避物理攻击，但惧怕魔法伤害和眩晕类技能。
+npc_dota_hero_windrunner,Windranger,<hc>风行者</hc>的<ac>强力击</ac>使她可以安全地清兵推线，或远距离终结敌人。
+npc_dota_hero_windrunner,Windranger,<hc>风行者</hc>的<ac>集中火力</ac>技能可以帮助她击杀对手，或更快地摧毁防御塔。
+npc_dota_hero_zuus,Zeus,<hc>宙斯</hc>可以瞬间造成大量魔法伤害，但他受到攻击时很难保护好自己。
+npc_dota_hero_zuus,Zeus,<hc>宙斯</hc>可以使用<ac>雷击</ac>找出隐身英雄，或为敌人提供视野的假眼。
+npc_dota_hero_zuus,Zeus,<hc>宙斯</hc>的全图大招<ac>雷神之怒</ac>可以帮助终结残血的敌方英雄，或者显示出英雄在地图中的位置。
+npc_dota_hero_zuus,Zeus,<hc>宙斯</hc>的技能都是魔法伤害，因此魔法抗性和技能免疫可以有效进行克制。
+npc_dota_hero_kunkka,Kunkka,<hc>昆卡</hc>的<ac>X标记</ac>和<ac>洪流</ac>非常适合与队友配合施放连招。
+npc_dota_hero_kunkka,Kunkka,<hc>昆卡</hc>在团战中非常强大，因为他能造成大量范围性伤害，而且对手很难逃脱。
+npc_dota_hero_kunkka,Kunkka,<hc>昆卡</hc>的大招<ac>幽灵船</ac>可以使附近队友延迟受到伤害，给他们时间放出关键技能。
+npc_dota_hero_kunkka,Kunkka,<hc>昆卡</hc>的技能都是延迟生效，所以放准技能连招需要通过练习掌握时机。
+npc_dota_hero_kunkka,Kunkka,比赛后期时<hc>昆卡</hc>的技能<ac>潮汐使者</ac>在合理的出装下可以造成大量分裂伤害。
+npc_dota_hero_lina,Lina,<hc>莉娜</hc>的范围型技能冷却时间很短，可以用于快速清兵。
+npc_dota_hero_lina,Lina,<hc>莉娜</hc>的被动技能<ac>炽魂</ac>在她不断施放技能时可以造成惊人的物理伤害。
+npc_dota_hero_lina,Lina,<hc>莉娜</hc>的眩晕技能<ac>光击阵</ac>生效需一定延迟，所以购买Eul的神圣法杖可以提高技能的命中。
+npc_dota_hero_lina,Lina,<hc>莉娜</hc>集多个魔法伤害类技能于一身，可以快速击杀敌方英雄。
+npc_dota_hero_lich,Lich,<hc>巫妖</hc>最厉害的就是<ac>连环霜冻</ac>技能，可以在附近敌人之间弹跳，每次弹跳都将造成大量伤害。
+npc_dota_hero_lich,Lich,<hc>巫妖</hc>在对线期非常厉害，因为他的技能可以<ac>献祭</ac>友方小兵，使敌人无法得到经验和金钱。
+npc_dota_hero_lich,Lich,<hc>巫妖</hc>没有任何控制技能，只有减速技能，所以他很难抓住比较飘逸或移速较快的英雄。
+npc_dota_hero_lich,Lich,<hc>巫妖</hc>的<ac>霜冻护甲</ac>可以对建筑使用，任何攻击建筑的敌人都会被减速。
+npc_dota_hero_lion,Lion,<hc>莱恩</hc>拥有多个控制技能，可以配合队友在敌人做出反击前将其击杀。
+npc_dota_hero_lion,Lion,<hc>莱恩</hc>的<ic>闪烁匕首</ic>出得很早可以使他出其不意地对敌人发起先手。
+npc_dota_hero_lion,Lion,<hc>莱恩</hc>非常克制极度依赖技能的英雄。
+npc_dota_hero_lion,Lion,<hc>莱恩</hc>在大招<ac>死亡之指</ac>不处于冷却时魔法爆发相当高。
+npc_dota_hero_shadow_shaman,Shadow Shaman,<hc>暗影萨满</hc>的<ac>枷锁</ac>技能拥有相当长的控制时间，但由于是持续施法，期间他非常脆弱。
+npc_dota_hero_shadow_shaman,Shadow Shaman,<hc>暗影萨满</hc>的推进能力非常游戏，因为他能快速清兵，再在防御塔附近放下<ac>群蛇守卫</ac>。
+npc_dota_hero_shadow_shaman,Shadow Shaman,<hc>暗影萨满</hc>一般购买<ic>闪烁匕首</ic>，这样他就能快速拉近和目标的距离，再使用他距离较近的控制技能。
+npc_dota_hero_shadow_shaman,Shadow Shaman,<hc>暗影萨满</hc>的基础攻击力很高，使他能在对线期轻松压制对手。
+npc_dota_hero_slardar,Slardar,<hc>斯拉达</hc>在团队攻击Roshan时可以使用<ac>侵蚀雾霭</ac>大幅削弱Roshan的护甲，加快击杀的速度。
+npc_dota_hero_slardar,Slardar,<hc>斯拉达</hc>的<ac>守卫冲刺</ac>达到满级后在河道中的移动速度非常夸张。
+npc_dota_hero_slardar,Slardar,<hc>斯拉达</hc>的大招<ac>侵蚀雾霭</ac>可以大幅降低目标护甲，加深他们受到的物理伤害。
+npc_dota_hero_slardar,Slardar,<hc>斯拉达</hc>可以使用<ic>闪烁匕首</ic>和<ac>鱼人碎击</ac>在战斗中控制多名敌人。
+npc_dota_hero_tidehunter,Tidehunter,<hc>潮汐猎人</hc>在对线期非常难击杀，因此他很适合危险的劣势路。
+npc_dota_hero_tidehunter,Tidehunter,<hc>潮汐猎人</hc>非常克制物理输出英雄，因为<ac>锚击</ac>可以降低英雄的攻击力。
+npc_dota_hero_tidehunter,Tidehunter,<hc>潮汐猎人</hc>很少被长时间控制，这多亏了<ac>海妖外壳</ac>。
+npc_dota_hero_tidehunter,Tidehunter,<hc>潮汐猎人</hc>手捏大招<ac>毁灭</ac>不放时的威胁有时比毁灭这个技能本身还大。
+npc_dota_hero_witch_doctor,Witch Doctor,<hc>巫医</hc>在推进和团战时擅长治疗队友，因为<ac>巫毒疗法</ac>可以治疗附近所有人。
+npc_dota_hero_witch_doctor,Witch Doctor,<hc>巫医</hc>可以通过<ac>死亡守卫</ac>对敌人造成巨额伤害，但技能很容易被控制技能打断。
+npc_dota_hero_witch_doctor,Witch Doctor,<hc>巫医</hc>比较克制肉盾型英雄，因为<ac>巫蛊咒术</ac>可以增加全队的伤害。
+npc_dota_hero_witch_doctor,Witch Doctor,<hc>巫医</hc>非常克制扎堆的敌人，因为<ac>麻痹药剂</ac>可以来回弹跳，多次眩晕敌人。
+npc_dota_hero_riki,Riki,<hc>力丸</hc>是少数几个游戏开始时就能隐身的英雄，使他的动向难以预知。
+npc_dota_hero_riki,Riki,<hc>力丸</hc>由于<ac>烟幕</ac>的缘故非常克制惧怕沉默技能的英雄。
+npc_dota_hero_riki,Riki,<hc>力丸</hc>从比赛一开始就处于隐身状态，但好好利用真眼或<ic>显影之尘</ic>可以使他显形。
+npc_dota_hero_riki,Riki,<hc>力丸</hc>从提升敏捷的物品中获益最大，因为能提升他的主要伤害来源，<ac>刀光谍影</ac>。
+npc_dota_hero_enigma,Enigma,<hc>谜团</hc>的黑洞是游戏中最强大的大招之一，因为技能可以控制整个敌方队伍达到数秒。
+npc_dota_hero_enigma,Enigma,克制<hc>谜团</hc>的英雄一般都有方法远距离打断他的大招。
+npc_dota_hero_enigma,Enigma,由于大招非常重要，所以<hc>谜团</hc>一般购买<ic>闪烁匕首</ic>来发起先手，而<ic>黑皇杖</ic>能保证施放时不被打断。
+npc_dota_hero_enigma,Enigma,<hc>谜团</hc>利用<ac>恶魔转化</ac>可以非常轻松地推塔和清兵。
+npc_dota_hero_tinker,Tinker,<hc>修补匠</hc>可以使用<ac>再装填</ac>移除技能和物品的冷却时间，从而实现快速传送，对小兵和英雄在短时间内造成大量伤害。
+npc_dota_hero_tinker,Tinker,<hc>修补匠</hc>最重要的道具是<ic>远行鞋</ic>，因为有了<ac>再装填</ac>他可以根据需要随时传送至地图任意地点。
+npc_dota_hero_tinker,Tinker,<hc>修补匠</hc>非常克制物理输出类英雄，因为他的<ac>激光</ac>可以致盲，使他们攻击落空。
+npc_dota_hero_tinker,Tinker,<hc>修补匠</hc>到了游戏后期是非常可怕的对手，因为他可以利用<ac>再装填</ac>刷新他强力的物品去击杀较弱的英雄。
+npc_dota_hero_tinker,Tinker,<hc>修补匠</hc>在防守高地时可以多次使用<ac>进击的机械</ac>来伤害推塔的英雄，使高地非常难上。
+npc_dota_hero_sniper,Sniper,<hc>狙击手</hc>可以利用他的超远射程在安全的位置射击敌人。
+npc_dota_hero_sniper,Sniper,<hc>狙击手</hc>的<ac>暗杀</ac>可以打断持续施法，即使敌人处于技能免疫状态。
+npc_dota_hero_sniper,Sniper,<hc>狙击手</hc>在那些可以快速越过前排接近他的英雄面前非常脆弱。
+npc_dota_hero_sniper,Sniper,<ic>影刃</ic>或<ic>飓风长戟</ic>对<hc>狙击手</hc>的帮助很大，可以使他逃离险境。
+npc_dota_hero_necrolyte,Necrophos,<hc>瘟疫法师</hc>使用<ac>死神镰刀</ac>来保证对残血敌人的击杀。
+npc_dota_hero_necrolyte,Necrophos,<hc>瘟疫法师</hc>可以治疗附近队友，同时伤害敌人，有助于扭转战局。
+npc_dota_hero_necrolyte,Necrophos,<hc>瘟疫法师</hc>可以使用<ac>幽魂护罩</ac>技能阻挡任何物理伤害，同时自身的治疗效果得到提升。
+npc_dota_hero_necrolyte,Necrophos,<hc>瘟疫法师</hc>通过<ac>竭心光环</ac>可以在长时间的拉锯战中对周围的敌方英雄持续造成大量伤害。
+npc_dota_hero_warlock,Warlock,<hc>术士</hc>的大招<ac>混乱之祭</ac>是战斗中干扰敌人的绝佳技能。
+npc_dota_hero_warlock,Warlock,<hc>术士</hc>的大招可以眩晕技能免疫状态下的敌人，所以可以用来打断传送，或重要的团战大招。
+npc_dota_hero_warlock,Warlock,<hc>术士</hc>在前期非常强大，因为他的<ac>暗言术</ac>技能可以对敌人造成大量伤害，也能治疗队友。
+npc_dota_hero_warlock,Warlock,<hc>术士</hc>的技能在团战中非常强大，但他很难在敌人近身时保护好自己。
+npc_dota_hero_beastmaster,Beastmaster,<hc>兽王</hc>在清兵和推塔方面效率很高，因为<ac>野性之心</ac>光环可以对周围的队友生效。
+npc_dota_hero_beastmaster,Beastmaster,<hc>兽王</hc>的大招<ac>原始咆哮</ac>非常适合用来击杀敌人，因为可以眩晕敌人，即使他们处于技能免疫状态。
+npc_dota_hero_beastmaster,Beastmaster,<hc>兽王</hc>一般会购买<ic>死灵书</ic>，召唤出死灵单位帮他击杀敌人或推塔。
+npc_dota_hero_beastmaster,Beastmaster,<hc>兽王</hc>召唤的动物伙伴可以帮助他获得视野或减速敌人。
+npc_dota_hero_queenofpain,Queen of Pain,<hc>痛苦女王</hc>可以造成大量范围型伤害。
+npc_dota_hero_queenofpain,Queen of Pain,<hc>痛苦女王</hc>由于超短冷却的<ac>闪烁</ac>技能，机动性相当高，非常难被抓住。
+npc_dota_hero_queenofpain,Queen of Pain,<hc>痛苦女王</hc>上场的原因是她在对线期较为强势，而且可以碾压脆弱的敌人，也容易获得击杀。
+npc_dota_hero_queenofpain,Queen of Pain,尽管<hc>痛苦女王</hc>的输出很足，但她缺少控制技能，需要利用物品来弥补。
+npc_dota_hero_venomancer,Venomancer,<hc>剧毒术士</hc>的技能都是造成持续性伤害，而不是瞬时伤害。
+npc_dota_hero_venomancer,Venomancer,<hc>剧毒术士</hc>利用他的<ac>瘟疫守卫</ac>可以较为安全的推线和守塔。
+npc_dota_hero_venomancer,Venomancer,<hc>剧毒术士</hc>的控制类不足，但他的减速和击杀能力并不弱。
+npc_dota_hero_venomancer,Venomancer,<hc>剧毒术士</hc>的瘟疫守卫对小兵的伤害远高于对英雄和防御塔。
+npc_dota_hero_faceless_void,Faceless Void,<hc>虚空假面</hc>的大招<ac>时间结界</ac>可以把所有单位定在一个大泡罩中，包括队友。
+npc_dota_hero_faceless_void,Faceless Void,<hc>虚空假面</hc>可以使用<ac>时间漫游</ac>使自己的血量回到短时间之前。
+npc_dota_hero_faceless_void,Faceless Void,<hc>虚空假面</hc>最受重视的是他的团战能力。他会等待完美的时机跳入敌阵发起先手。
+npc_dota_hero_faceless_void,Faceless Void,<hc>虚空假面</hc>需要解除沉默和眩晕的物品，这样他就能放出他强大的技能。
+npc_dota_hero_skeleton_king,Wraith King,<hc>冥魂大帝</hc>的大招<ac>重生</ac>在他魔法充足时可以复活一次。
+npc_dota_hero_skeleton_king,Wraith King,<hc>冥魂大帝</hc>的普通攻击可以造成大量伤害，但他很难粘住敌人。
+npc_dota_hero_skeleton_king,Wraith King,<hc>冥魂大帝</hc>的眩晕技能<ac>冥火爆击</ac>可以对敌人造成眩晕和减速，确保能击杀敌人。
+npc_dota_hero_skeleton_king,Wraith King,<hc>冥魂大帝</hc>一般会购买<ic>莫尔迪基安的臂章</ic>，以持续掉血为代价提升自己的输出。
+npc_dota_hero_death_prophet,Death Prophet,<hc>死亡先知</hc>在推塔方面非常强大，因为她的大招<ac>驱使恶灵</ac>不仅可以对敌人造成伤害，也能对防御塔造成伤害。
+npc_dota_hero_death_prophet,Death Prophet,<hc>死亡先知</hc>较难被击杀，因为她被集火时可以使用<ac>吸魂巫术</ac>保持存活。
+npc_dota_hero_death_prophet,Death Prophet,<hc>死亡先知</hc>的技能可以对附近敌人造成大量伤害，所以需要先出保命装保证自己的存活。
+npc_dota_hero_death_prophet,Death Prophet,<hc>死亡先知</hc>因大招<ac>驱使恶灵</ac>的超长冷却时间而受到限制。合理使用技能非常重要。
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>幻影刺客</hc>在输出装和自身的大招支持下可以段时间内造成巨额物理伤害。
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>幻影刺客</hc>较难被击中，因为她的<ac>魅影无形</ac>闪避效果。
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>幻影刺客</hc>惧怕眩晕和魔法伤害类技能。
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>幻影刺客</hc>可以使用<ac>幻影突袭</ac>迅速近身，所以想摆脱她比较困难。
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>幻影刺客</hc>可以对队友使用<ac>幻影突袭</ac>，从而脱离险境。
+npc_dota_hero_pugna,Pugna,<hc>帕格纳</hc>以魔法伤害为主，而率先使用<ac>衰老</ac>可以提升他的输出。
+npc_dota_hero_pugna,Pugna,<hc>帕格纳</hc>的控制能力不足，血量也偏低，但他强大的团战能力和高额魔法输出弥补了他的缺点。
+npc_dota_hero_pugna,Pugna,<hc>帕格纳</hc>主要的爆发技能<ac>幽冥爆轰</ac>是少数可以对建筑造成伤害的技能，这让<hc>帕格纳</hc>的推塔能力非常突出。
+npc_dota_hero_pugna,Pugna,<hc>帕格纳</hc>在前期和中期最为强大，之后敌人会选择克制<hc>帕格纳</hc>的装备。
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>圣堂刺客</hc>配合她的减甲技能<ac>隐匿</ac>可以造成很高的物理输出。
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>圣堂刺客</hc>只要有了<ic>黯灭</ic>就能独自击杀强大的Roshan。
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>圣堂刺客</hc>较难击杀是由于她的<ac>折光技能</ac>，除非拥有持续伤害类技能。
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>圣堂刺客</hc>利用线形的<ac>灵能之刃</ac>可以快速清兵和打野。
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>圣堂刺客</hc>在中期可以从堆野中获得很高的收益，因为她可以快速安全地清野。
+npc_dota_hero_viper,Viper,<hc>冥界亚龙</hc>可以在战斗中使敌方英雄大幅减速，而他们的血量变低后受到的伤害还会变高。
+npc_dota_hero_viper,Viper,<hc>冥界亚龙</hc>最出名的就是他在中路的强势，可以压制很多对线不强的英雄。
+npc_dota_hero_viper,Viper,<hc>冥界亚龙</hc>非常难击杀，因为他的血量很高，而且拥有<ac>腐蚀皮肤</ac>。
+npc_dota_hero_viper,Viper,<hc>冥界亚龙</hc>更喜欢待在战场前排吃伤害，这样队友就能轻松做出反击。
+npc_dota_hero_luna,Luna,<hc>露娜</hc>有了大招<ac>月蚀</ac>后团战能力异常强大，大招可以随机向附近的敌人降下<ac>月光</ac>。
+npc_dota_hero_luna,Luna,<hc>露娜</hc>由于<ac>月之祝福</ac>光环，在夜间的视野超过大多数英雄。
+npc_dota_hero_luna,Luna,<hc>露娜</hc>可以快速清兵和打野，因为<ac>月刃</ac>使她的攻击可以在敌人之间弹射。
+npc_dota_hero_luna,Luna,有<ic>阿哈利姆神杖</ic>后，<hc>露娜</hc>可以对友方单位或自身施放<ac>月蚀</ac>，技能效果会跟随英雄，也可以对一片区域施放。
+npc_dota_hero_dragon_knight,Dragon Knight,<hc>龙骑士</hc>使用大招<ac>古龙形态</ac>后推塔非常强力。
+npc_dota_hero_dragon_knight,Dragon Knight,<hc>龙骑士</hc>在对线期异常难击杀，因为他的<ac>龙族血统</ac>可以提升护甲和生命恢复。
+npc_dota_hero_dragon_knight,Dragon Knight,<hc>龙骑士</hc>擅长通过<ic>闪烁匕首</ic>和长时间的眩晕技能<ac>神龙摆尾</ac>发起先手。
+npc_dota_hero_dragon_knight,Dragon Knight,<hc>龙骑士</hc>的<ac>火焰气息</ac>技能可以在对线期用于打钱，也能伤害敌方英雄，并降低他们的攻击力。
+npc_dota_hero_dazzle,Dazzle,<hc>戴泽</hc>的<ac>薄葬</ac>可以阻止队友在数秒内死亡。
+npc_dota_hero_dazzle,Dazzle,<hc>戴泽</hc>在对线期非常强大，因为他的治疗技能<ac>暗影波</ac>也会对附近英雄造成伤害。
+npc_dota_hero_dazzle,Dazzle,<hc>戴泽</hc>救助队友非常强力，但他被眩晕或沉默后很难自救。
+npc_dota_hero_dazzle,Dazzle,<hc>戴泽</hc>需待在友军后排进行辅助，不然会被敌人首先集火。
+npc_dota_hero_rattletrap,Clockwerk,<hc>发条技师</hc>是机动性非常强的先手英雄，他可以利用<ac>照明火箭</ac>先行侦查，再使用<ac>发射钩爪</ac>马上发起先手。
+npc_dota_hero_rattletrap,Clockwerk,<hc>发条技师</hc>将自己和敌方英雄都困在<ac>能量齿轮中</ac>取得的效果最好。
+npc_dota_hero_rattletrap,Clockwerk,<hc>发条技师</hc>的走位和时机把握非常重要，因为他能挡住逃跑的必经之路，或分割敌方英雄的阵型。
+npc_dota_hero_rattletrap,Clockwerk,<hc>发条技师</hc>最怕敌人的<ic>原力法杖</ic>，因为敌人可以被推出<hc>发条技师</hc>的<ac>能量齿轮</ac>。
+npc_dota_hero_leshrac,Leshrac,<hc>拉席克</hc>拥有多个范围型伤害类技能，若靠近敌人可以造成恐怖的伤害。
+npc_dota_hero_leshrac,Leshrac,<hc>拉席克</hc>必须靠近敌人才能产生大量输出，但没有装备支撑非常脆弱。
+npc_dota_hero_leshrac,Leshrac,<hc>拉席克</hc>需要很高的魔法恢复，这样才能不断施放技能。
+npc_dota_hero_leshrac,Leshrac,<hc>拉席克</hc>的<ac>恶魔敕令</ac>可以攻击防御塔，所以<hc>拉席克</hc>在推塔方面也是一把好手。
+npc_dota_hero_leshrac,Leshrac,<hc>拉席克</hc>的技能可以造成大量范围伤害，所以他非常克制幻象系英雄。
+npc_dota_hero_furion,Nature's Prophet,<hc>先知</hc>使用<ac>传送</ac>就能在抓人时轻松地提供一臂之力。
+npc_dota_hero_furion,Nature's Prophet,<hc>先知</hc>可以遵循多种打法，不过最出名的还是推塔流。
+npc_dota_hero_furion,Nature's Prophet,<hc>先知</hc>最好是使用<ac>传送</ac>前往无人防守的防御塔，强迫他的敌人回防。
+npc_dota_hero_furion,Nature's Prophet,<hc>先知</hc>的很多时间都用在打钱上，这样他在抓人和团战时就能用上强力的物品。
+npc_dota_hero_life_stealer,Lifestealer,<hc>噬魂鬼</hc>的输出很高，而且较难击杀，因为他的所有技能都具有一定的保命能力。
+npc_dota_hero_life_stealer,Lifestealer,<hc>噬魂鬼</hc>的机动性较差，但他的大招<ac>感染</ac>可以使他搭上队友的便车，从而解决这个问题。
+npc_dota_hero_life_stealer,Lifestealer,<hc>噬魂鬼</hc>非常克制控制类技能，因为他的<ac>狂暴</ac>技能可以使他短时间内技能免疫。
+npc_dota_hero_life_stealer,Lifestealer,<hc>噬魂鬼</hc>比较适合降低敌人护甲，或提升自身攻击速度、攻击力或移动速度的装备。
+npc_dota_hero_dark_seer,Dark Seer,<hc>黑暗贤者</hc>的<ac>离子外壳</ac>可以对所有单位使用，对周围的敌人造成伤害。
+npc_dota_hero_dark_seer,Dark Seer,<hc>黑暗贤者</hc>因强大的团战能力而闻名，因为<ac>真空</ac>可以使敌方英雄聚集到一起。
+npc_dota_hero_dark_seer,Dark Seer,<hc>黑暗贤者</hc>一般会购买<ic>卫士胫甲</ic>和<ic>洞察烟斗</ic>等团战类物品保证队友的存活。
+npc_dota_hero_dark_seer,Dark Seer,<hc>黑暗贤者</hc>一般走比较危险的劣势路，因为他可以对小兵使用<ac>离子外壳</ac>，保证自己的金钱和经验。
+npc_dota_hero_clinkz,Clinkz,<hc>克林克兹</hc>利用<ac>灼热之箭</ac>可以对敌人和防御塔造成大量物理伤害。
+npc_dota_hero_clinkz,Clinkz,<hc>克林克兹</hc>的<ac>骨隐步</ac>可以让他隐身在地图上穿梭，但想要成功抓人还是需要输出装。
+npc_dota_hero_clinkz,Clinkz,<hc>克林克兹</hc>一般会购买<ic>黯灭</ic>等减甲类物品，这样他就能快速消灭英雄和防御塔。
+npc_dota_hero_clinkz,Clinkz,<hc>克林克兹</hc>一旦被敌人抓住就很难逃生，尤其当他们拥有<ic>显影之尘</ic>等反隐道具。
+npc_dota_hero_clinkz,Clinkz,有了<ac>扫射</ac>技能，<hc>克林克兹</hc>可以向英雄或防御塔倾泻大量物理伤害，同时自动躲避弹道。
+npc_dota_hero_omniknight,Omniknight,<hc>全能骑士</hc>的技能可以帮助他和他的队友躲过死亡和控制类技能。
+npc_dota_hero_omniknight,Omniknight,<hc>全能骑士</hc>的<ac>驱逐</ac>可以为队友提供技能免疫状态，使他们在短时间内可以肆无忌惮地攻击，或逃离险境。
+npc_dota_hero_omniknight,Omniknight,<hc>全能骑士</hc>对受伤的近战英雄使用<ac>洗礼</ac>可以轻松地扭转战局，因为在治疗的同时也会造成范围伤害。
+npc_dota_hero_omniknight,Omniknight,<hc>全能骑士</hc>的<ac>守护天使</ac>可以暂时阻止周围的队友受到任何物理伤害。
+npc_dota_hero_omniknight,Omniknight,走位对于<hc>全能骑士</hc>极为重要，所以<ic>韧鼓</ic>或<ic>闪烁匕首</ic>都是不错的选择。
+npc_dota_hero_enchantress,Enchantress,<hc>魅惑魔女</hc>可以<ac>魅惑</ac>强大的中立生物，利用他们在整场比赛中伏击敌人。
+npc_dota_hero_enchantress,Enchantress,<hc>魅惑魔女</hc>的血量很低，但由于她的技能和魅惑的伙伴并不容易被击杀。
+npc_dota_hero_enchantress,Enchantress,针对<hc>魅惑魔女</hc>可以通过无视<ac>不可侵犯</ac>的高爆发伤害技能在她放出治疗技能前击杀。
+npc_dota_hero_enchantress,Enchantress,<hc>魅惑魔女</hc>的<ac>推进</ac>根据到达敌人前飞行的距离造成纯粹伤害。
+npc_dota_hero_enchantress,Enchantress,<ic>飓风长戟</ic>是<hc>魅惑魔女</hc>的流行出装，因为它可以为<ac>推进</ac>技能拉开敌我之间的距离，也方便追击敌人。
+npc_dota_hero_huskar,Huskar,<hc>哈斯卡</hc>每次攻击附带的<ac>沸血之矛</ac>都可以叠加，敌人会以惊人的速度掉血。
+npc_dota_hero_huskar,Huskar,<hc>哈斯卡</hc>的血量越低，他的战斗力越高，所以在战斗中必须很快地秒掉他。
+npc_dota_hero_huskar,Huskar,<hc>哈斯卡</hc>与臂章完美契合，因为它能提升输出，而持续掉血只会让他更加强大。
+npc_dota_hero_huskar,Huskar,<hc>哈斯卡</hc>在残血时可以轻松击杀多名低估他的英雄。
+npc_dota_hero_huskar,Huskar,<hc>哈斯卡</hc>搭配一个治疗型辅助可以使他尽情地攻击敌人。
+npc_dota_hero_night_stalker,Night Stalker,<hc>暗夜魔王</hc>的所有技能在夜晚的效果都会变强，甚至还有他的移动速度和视野范围。
+npc_dota_hero_night_stalker,Night Stalker,<hc>暗夜魔王</hc>非常擅长在夜晚时间猎杀敌方英雄。
+npc_dota_hero_night_stalker,Night Stalker,<hc>暗夜魔王</hc>可以极大地限制敌人的视野，因为他的<ac>黑暗时间</ac>可以暂时变出漆黑的夜晚。
+npc_dota_hero_night_stalker,Night Stalker,<hc>暗夜魔王</hc>的技能<ac>暗夜猎影</ac>使他在夜晚能获得2秒的飞行能力，方便快速开战或逃跑。
+npc_dota_hero_broodmother,Broodmother,<hc>育母蜘蛛</hc>在对线期非常强大，因为她的<ac>织网</ac>技能可以提供移动速度和生命恢复加成。
+npc_dota_hero_broodmother,Broodmother,<hc>育母蜘蛛</hc>非常克制没有控制或范围型伤害类技能的英雄。
+npc_dota_hero_broodmother,Broodmother,<hc>育母蜘蛛</hc>在对线期非常强势，但她的加点和出装没有良好过渡会使之后略显乏力。
+npc_dota_hero_broodmother,Broodmother,<hc>育母蜘蛛</hc>在选人阶段后期一般作为伏兵出现，可以让没做出应对的队伍措手不及。
+npc_dota_hero_bounty_hunter,Bounty Hunter,<hc>赏金猎人</hc>使用<ac>暗影步</ac>可以进入隐身，方便他发现目标后伏击或抓到英雄。
+npc_dota_hero_bounty_hunter,Bounty Hunter,<hc>赏金猎人</hc>在敌人阵亡前放好<ac>追踪术</ac>可以让团队获得金钱的数额大大增加。
+npc_dota_hero_bounty_hunter,Bounty Hunter,<hc>赏金猎人</hc>在前期可以给对面造成很多压力，但是若没有装备支持，到了团战时就比较吃力。
+npc_dota_hero_bounty_hunter,Bounty Hunter,<hc>赏金猎人</hc>可以使用<ac>暗影步</ac>和<ac>追踪术</ac>来侦查重要信息，在策略上碾压敌人。
+npc_dota_hero_weaver,Weaver,<hc>编织者</hc>特别适合边跑边配合<ac>缩地</ac>边攻击敌人，但是他若连中数个控制技能就很容易阵亡。
+npc_dota_hero_weaver,Weaver,<hc>编织者</hc>出攻击装的收益很高，因为<ac>连击</ac>可以让他每隔几秒额外攻击一次。
+npc_dota_hero_weaver,Weaver,<hc>编织者</hc>被集火后若首轮伤害没有杀死他，他可以使用<ac>时光倒流</ac>使自己的生命和魔法回到原来的状态，重获战斗力。
+npc_dota_hero_weaver,Weaver,<hc>编织者</hc>最喜欢远离防御塔的开阔区域，这样他就能随便使用隐身技能，利用超高移动速度追击敌人。
+npc_dota_hero_jakiro,Jakiro,<hc>杰奇洛</hc>的特点是比较笨重，输出都是持续伤害，对扎堆的敌人能造成不俗的伤害和控制效果。
+npc_dota_hero_jakiro,Jakiro,<hc>杰奇洛</hc>在狭窄的斜坡和小路上的战斗中特别强大，因为他的敌人就无法躲开他的技能。
+npc_dota_hero_jakiro,Jakiro,<hc>杰奇洛</hc>有着清兵技能<ac>冰火交加</ac>和对塔生效的<ac>液态火</ac>，所以在推塔时非常轻松。
+npc_dota_hero_jakiro,Jakiro,<hc>杰奇洛</hc>非常克制机动性较差的近战英雄，因为<hc>杰奇洛</hc>可以造成减速，预知他们的动向。
+npc_dota_hero_batrider,Batrider,<hc>蝙蝠骑士</hc>可以对敌人使用<ac>粘性燃油</ac>，使蝙蝠骑士的攻击和技能对他们造成额外伤害。
+npc_dota_hero_batrider,Batrider,<hc>蝙蝠骑士</hc>可以帮助队友找到敌方英雄，再使用<ac>燃烧枷锁</ac>将目标往队友拉去。
+npc_dota_hero_batrider,Batrider,<hc>蝙蝠骑士</hc>一般会把他的目标拉到高台，这样他们之后就不容易回到安全的地方。
+npc_dota_hero_batrider,Batrider,<hc>蝙蝠骑士</hc>的大招<ac>燃烧枷锁</ac>可以对技能免疫状态下敌人使用。
+npc_dota_hero_batrider,Batrider,<hc>蝙蝠骑士</hc>通常需要<ic>闪烁匕首</ic>和<ic>原力法杖</ic>组合，使他的<ac>燃烧枷锁</ac>能获得最大的机动性。
+npc_dota_hero_chen,Chen,<hc>陈</hc>可以使用<ac>神圣劝化</ac>控制中立生物来抓人和推塔，直至生物死亡。
+npc_dota_hero_chen,Chen,<hc>陈</hc>的<ac>神圣劝化</ac>可以通过<ic>阿哈利姆神杖</ic>升级，使技能可以对远古生物使用。
+npc_dota_hero_chen,Chen,<hc>陈</hc>可以使用大招<ac>上帝之手</ac>治疗他控制的单位和友方英雄，所以在应对高爆发阵容时比较实用。
+npc_dota_hero_chen,Chen,<hc>陈</hc>也可以使用<ac>神圣劝化</ac>经过短暂延迟后把队友送回泉水，这样可以救下本会阵亡的队友。
+npc_dota_hero_spectre,Spectre,<hc>幽鬼</hc>在后期是非常可怕的核心，因为她的大招<ac>鬼影重重</ac>赋予了强大的团战能力和机动性。
+npc_dota_hero_spectre,Spectre,<hc>幽鬼</hc>使用大招<ac>鬼影重重</ac>后会在所有敌人身后产生幻象，方便她加入地图中任意地点发生的战斗。
+npc_dota_hero_spectre,Spectre,<hc>幽鬼</hc>在前期很弱，若对方英雄很强势将很难反击。
+npc_dota_hero_spectre,Spectre,<hc>幽鬼</hc>可以轻松地减速并追击敌方英雄，对偏脆的英雄造成威胁。
+npc_dota_hero_doom_bringer,Doom,<hc>末日使者</hc>的成名绝技就是他的大招<hc>末日</hc>，可以使敌人无法使用技能和物品。
+npc_dota_hero_doom_bringer,Doom,<hc>末日使者</hc>在<ac>吞噬</ac>单位后可以获得他们的技能。
+npc_dota_hero_doom_bringer,Doom,<hc>末日使者</hc>最出名的就是追杀他无助的对手，直到他的持续伤害类技能造成最后一丝伤害。
+npc_dota_hero_doom_bringer,Doom,<hc>末日使者</hc>可以根据敌人的英雄阵容调整自己的技能加点和出装。
+npc_dota_hero_ancient_apparition,Ancient Apparition,<hc>远古冰魄</hc>的大招可以全地图施放，在抓人和团战时提供助力。
+npc_dota_hero_ancient_apparition,Ancient Apparition,<hc>远古冰魄</hc>的大招使敌人无法恢复生命，降低了击杀他们的难度。
+npc_dota_hero_ancient_apparition,Ancient Apparition,<hc>远古冰魄</hc>在敌人的集火下非常脆弱，所以他最好是站在战场的边缘。
+npc_dota_hero_ancient_apparition,Ancient Apparition,<hc>远古冰魄</hc>的技能最好是能与队友形成配合，这样就能相互提升效果。
+npc_dota_hero_ursa,Ursa,<hc>熊战士</hc>每次攻击都会使后续的伤害增加，所以长时间与<hc>熊战士</hc>缠斗非常危险。
+npc_dota_hero_ursa,Ursa,<hc>熊战士</hc>是比赛中击杀Roshan的最佳英雄，因为他从比赛前期开始就能单挑Roshan。
+npc_dota_hero_ursa,Ursa,<hc>熊战士</hc>可以对英雄发动突袭，造成超高的爆发伤害，但如果他们逃脱，就很难再追上。
+npc_dota_hero_ursa,Ursa,<hc>熊战士</hc>缺少控制技能，所以他需要在对手反应过来或逃脱之前击杀他们。
+npc_dota_hero_spirit_breaker,Spirit Breaker,<hc>裂魂人</hc>拥有多种眩晕技能，可以快速接近移动的英雄，或者锁定颇具威胁的敌人。
+npc_dota_hero_spirit_breaker,Spirit Breaker,<hc>裂魂人</hc>依赖技能<ac>巨力重击</ac>将敌人击退。
+npc_dota_hero_spirit_breaker,Spirit Breaker,<hc>裂魂人</hc>使用<ac>暗影冲刺</ac>后将向目标冲去，并持续拥有其视野，直到他被打断或到达目标。
+npc_dota_hero_spirit_breaker,Spirit Breaker,<hc>裂魂人</hc>可以轻松追踪隐身敌人，只要他能在短时间内发现他们，并且带好<ic>显影之尘</ic>。
+npc_dota_hero_gyrocopter,Gyrocopter,<hc>矮人直升机</hc>拥有不俗的范围和单体伤害，用在敌方英雄和小兵身上可以快速积累金钱。
+npc_dota_hero_gyrocopter,Gyrocopter,<hc>矮人直升机</hc>从攻击力类物品中获益较大，因为<ac>高射火炮</ac>可以攻击周围所有敌人最多6次。
+npc_dota_hero_gyrocopter,Gyrocopter,<hc>矮人直升机</hc>围绕着血量、攻击力、移动速度和技能免疫状态等提升团战威力的物品来出装。
+npc_dota_hero_gyrocopter,Gyrocopter,有了<ic>阿哈利姆神杖</ic>后，<hc>矮人直升机</hc>的侧面机枪开启，会随机自动攻击600范围内的敌方单位，从而提升他的伤害输出。
+npc_dota_hero_alchemist,Alchemist,<hc>炼金术士</hc>由于他的被动技能贪魔的贪婪，每次杀死一个敌人都能获得额外金钱。因此他打钱和出装的速度也远远快过游戏里其他英雄。
+npc_dota_hero_alchemist,Alchemist,<hc>炼金术士</hc>在<ac>化学狂暴</ac>开启时非常难击杀，因为他有着超高移动速度和生命恢复。
+npc_dota_hero_alchemist,Alchemist,<hc>炼金术士</hc>摇制<ac>不稳定化合物</ac>需要数秒时间，所以在摇制快结束时控制住<hc>炼金术士</hc>，他自己会被晕在原地。
+npc_dota_hero_alchemist,Alchemist,<hc>炼金术士</hc>需要在金钱和物品上领先于对手，否则比赛中很难有所作为。
+npc_dota_hero_invoker,Invoker,<hc>祈求者</hc>改变<ac>冰</ac>、<ac>雷</ac>和<ac>火</ac>元素的组合再使用元素祈唤可以得到10个有着不同用途的技能。
+npc_dota_hero_invoker,Invoker,尽管<hc>祈求者</hc>的每个技能都比较简单，但他们的连招可以碾压对面。
+npc_dota_hero_invoker,Invoker,<hc>祈求者</hc>的团战威力无穷。他可以完成控制、眩晕、缴械和减速，并且还能造成超高的伤害。
+npc_dota_hero_invoker,Invoker,<hc>祈求者</hc>每次施放一个技能都需要按5次键盘的快捷键。顶尖的祈求者玩家可以在后期战斗时将10个技能基本全部放出。
+npc_dota_hero_silencer,Silencer,<hc>沉默术士</hc>得名于他的大招<ac>全领域静默</ac>，可以使地图上所有敌方单位被沉默数秒。技能的最佳使用时机是敌人全力迎战之时。
+npc_dota_hero_silencer,Silencer,<hc>沉默术士</hc>在附近有敌人阵亡时会窃取他们的智力，从而提升自己的攻击力、魔法值、技能增强和<ac>智慧之刃</ac>的伤害。
+npc_dota_hero_silencer,Silencer,<ac>沉默</ac>可以阻止敌人施放技能，不过他们仍然可以攻击。所以<hc>沉默术士</hc>被物理输出类英雄追击时很难脱身。
+npc_dota_hero_silencer,Silencer,<hc>沉默术士</hc>的<ac>全领域静默</ac>甚至可以沉默技能免疫状态下的英雄，不过在沉默生效后部分物品可以驱散沉默效果。
+npc_dota_hero_obsidian_destroyer,Outworld Devourer,<hc>殁境神蚀者</hc>根据当前魔法值在攻击中附加纯粹伤害，这让它的输出大幅提升，尤其是应对高甲英雄时。
+npc_dota_hero_obsidian_destroyer,Outworld Devourer,<hc>殁境神蚀者</hc>的<ac>星体禁锢</ac>可以放逐自身，或其他单位，被放逐时无法移动且处于无敌状态，持续数秒。
+npc_dota_hero_obsidian_destroyer,Outworld Devourer,<hc>殁境神蚀者</hc>在不被针对时可以造成巨额伤害，但它惧怕眩晕、沉默和其他控制类技能，因此<ic>黑皇杖</ic>对它而言非常重要。
+npc_dota_hero_obsidian_destroyer,Outworld Devourer,<hc>殁境神蚀者</hc>的<ac>奥术天球</ac>和<ac>神智之蚀</ac>伤害随着他的智力值提升而变高，不论是来自物品，英雄升级或是<ac>奥术天球</ac>窃取的智力。
+npc_dota_hero_lycan,Lycan,<hc>狼人</hc>是非常强大的物理输出，而且他可以提升队友和召唤单位的攻击力，在推塔时非常厉害。
+npc_dota_hero_lycan,Lycan,<hc>狼人</hc>使用<ac>变身</ac>后将变成巨狼形态，自身和控制的单位获得致命一击和移动速度加成。
+npc_dota_hero_lycan,Lycan,<hc>狼人</hc>在<ac>变身</ac>期间不受减速类技能影响，所以眩晕和缠绕类技能将非常管用。
+npc_dota_hero_lycan,Lycan,<hc>狼人</hc>最知名的就是他的快速拆塔能力，还有趁敌人无暇顾及时快速带线的能力。
+npc_dota_hero_brewmaster,Brewmaster,<hc>酒仙</hc>在团战中骚扰能力非常强，他可以使敌人减速，降低他们的命中率，还能将棘手的英雄吹到半空中。
+npc_dota_hero_brewmaster,Brewmaster,<hc>酒仙</hc>在濒死时可以使用<ac>元素分离</ac>分成3个元素战士，之后可以继续战斗或者逃出生天。
+npc_dota_hero_brewmaster,Brewmaster,<hc>酒仙</hc>因大招的缘故相当难击杀，所以通过眩晕或<ac>沉默</ac>类技能阻止他使用大招非常有帮助。
+npc_dota_hero_brewmaster,Brewmaster,<ic>闪烁匕首</ic>是<hc>酒仙</hc>的明智选择，可以让他在团战时走位更加有利。
+npc_dota_hero_shadow_demon,Shadow Demon,<hc>暗影恶魔</hc>的<ac>崩裂禁锢</ac>可以对敌人使用，方便队友接上后续技能，也可以对队友使用，暂时放逐他们，使他们脱离险境或控制。
+npc_dota_hero_shadow_demon,Shadow Demon,<ac>崩裂禁锢</ac>产生的幻象是基于被放逐的英雄，所以在后期时更加强大。
+npc_dota_hero_shadow_demon,Shadow Demon,<hc>暗影恶魔</hc>可以使用<ac>邪恶净化</ac>减速敌人，即使敌人处于技能免疫状态，因此在对付移速较慢的近战英雄时非常实用。
+npc_dota_hero_shadow_demon,Shadow Demon,<hc>暗影恶魔</hc>在前期的伤害偏弱，但<ac>崩裂禁锢</ac>只要施放得当可以躲过强力的技能或大招。
+npc_dota_hero_lone_druid,Lone Druid,<hc>德鲁伊</hc>与<ac>召唤熊灵</ac>并肩作战，熊灵可以像英雄一样装备物品。
+npc_dota_hero_lone_druid,Lone Druid,<hc>德鲁伊</hc>的熊灵必须在德鲁伊附近才能攻击，不过拥有了<ic>辉耀</ic>、<ic>雷神之锤</ic>或<ic>阿哈利姆神杖</ic>后熊灵即使远离德鲁伊也具有战斗能力。
+npc_dota_hero_lone_druid,Lone Druid,<hc>德鲁伊</hc>可以在熊灵死亡后重新召唤熊灵，但是英雄阵亡时熊灵也会死亡。
+npc_dota_hero_lone_druid,Lone Druid,<hc>德鲁伊</hc>通常利用熊灵作为与敌人之间的缓冲，但<hc>德鲁伊</hc>一旦被近身，将很难逃生。
+npc_dota_hero_chaos_knight,Chaos Knight,<hc>混沌骑士</hc>可以瞬间接近敌人，并造成眩晕，但在<ac>混沌之军</ac>冷却时有可能输出不足。
+npc_dota_hero_chaos_knight,Chaos Knight,<hc>混沌骑士</hc>的大招<ac>混沌之军</ac>产生的幻象非常特别，因为他们造成的伤害与本体相同，所以具有力量加成的物品都相当有用。
+npc_dota_hero_chaos_knight,Chaos Knight,<hc>混沌骑士</hc>非常克制单体爆发类英雄，因为他的技能和大量幻象可以轻松将他们碾压。
+npc_dota_hero_chaos_knight,Chaos Knight,<ic>白银之锋</ic>可以帮助<hc>混沌骑士</hc>出其不意地接近敌人，而且提供了不俗的属性和攻击力加成。
+npc_dota_hero_meepo,Meepo,<hc>米波</hc>每升一级<ac>分则能成</ac>都会产生一只可以独立控制的克隆体。只要任何一只<hc>米波</hc>死亡，所有米波都将阵亡。
+npc_dota_hero_meepo,Meepo,<hc>米波</hc>的技能单独来看很弱，但是控制的所有<hc>米波</hc>相互配合可以使威力成倍增加。
+npc_dota_hero_meepo,Meepo,每只<hc>米波</hc>都能使用<ac>忽悠</ac>传送到其他米波处，他们可以借此组队。
+npc_dota_hero_meepo,Meepo,<hc>米波</hc>本体拥有正常的物品栏，而<hc>米波</hc>克隆体只有鞋类物品，并且继承本体的所有属性。
+npc_dota_hero_treant,Treant Protector,<hc>树精卫士</hc>的<ac>自然蔽护</ac>可以使他在靠近树木时隐身。利用这点可以侦查敌人、发动先手或脱离险境。
+npc_dota_hero_treant,Treant Protector,<hc>树精卫士</hc>的范围型治疗技能<ac>寄生种子</ac>和全地图的格挡和恢复技能<ac>活体护甲</ac>使队友的生存能力大幅提升。
+npc_dota_hero_treant,Treant Protector,<hc>树精卫士</hc>的输出很低，但他抓人和团战时给力的控制也算是弥补了这点。
+npc_dota_hero_treant,Treant Protector,<hc>树精卫士</hc>的<ac>活体护甲</ac>可以保护己方防御塔，并持续治疗，减慢敌人推塔的速度。
+npc_dota_hero_treant,Treant Protector,有了<ic>阿哈利姆神杖</ic>后<hc>树精卫士</hc>获得<ac>丛林之眼</ac>，可以对树木灌注魔力，为他提供该地点的顺畅视野。
+npc_dota_hero_ogre_magi,Ogre Magi,<hc>食人魔魔法师</hc>的<ac>嗜血术</ac>可以提升友军的移动和攻击速度，使他们打钱速度加快，团战中更是如虎添翼。
+npc_dota_hero_ogre_magi,Ogre Magi,<hc>食人魔魔法师</hc>的大招<ac>多重施法</ac>使他有机会多次施放基础技能，有时可以对敌人产生毁灭性的打击。
+npc_dota_hero_ogre_magi,Ogre Magi,<hc>食人魔魔法师</hc>在前期相当难击杀，因为他的血量、基础护甲和生命恢复都相当高。
+npc_dota_hero_ogre_magi,Ogre Magi,很难想到<hc>食人魔魔法师</hc>的智力成长低于平均水平，而他又很依赖技能和魔法。
+npc_dota_hero_undying,Undying,<hc>不朽尸王</hc>在团战中很难击杀，他的技能可以不断治疗他的队友，和他自己。
+npc_dota_hero_undying,Undying,<hc>不朽尸王</hc>使用<ac>腐朽</ac>后敌人的力量会转移到自己身上，这是前期非常霸道的技能。
+npc_dota_hero_undying,Undying,<hc>不朽尸王</hc>最钟爱混战，因为他的<ac>墓碑</ac>只要保护得当，僵尸大军就能碾压敌人。
+npc_dota_hero_undying,Undying,<hc>不朽尸王</hc>的强势在于团战和对线期，但比赛进入观望状态或分路带线时他很快就会感到力不从心。
+npc_dota_hero_rubick,Rubick,<hc>拉比克</hc>可以好好利用<ac>技能窃取</ac>获得的技能，所以在应对团战型大招时具有奇效。
+npc_dota_hero_rubick,Rubick,<hc>拉比克</hc>的有点之一是他完成施法无需技能动作，所以他可以瞬间完成先手或反击。
+npc_dota_hero_rubick,Rubick,<hc>拉比克</hc>的<ac>技能窃取</ac>偷取的是敌人最后施放的技能。所以<hc>拉比克</hc>需要把握好窃取的时机，否则可能会偷到一个较弱的不同技能。
+npc_dota_hero_rubick,Rubick,<hc>拉比克</hc>非常脆弱，不过他可以利用队友和窃取的技能增加控制敌人的时间，弥补这样的缺点。
+npc_dota_hero_rubick,Rubick,<hc>拉比克</hc>的<ac>失效力场</ac>可以开关，进攻形态可以降低敌人的魔法抗性，防守形态可以提升友军的魔法抗性。
+npc_dota_hero_disruptor,Disruptor,<hc>干扰者</hc>的远距离技能<ac>恶念瞥视</ac>非常擅于抓住拥有逃生技能的英雄。
+npc_dota_hero_disruptor,Disruptor,<hc>干扰者</hc>缺少硬控，不过同时使用<ac>动能力场</ac>和大招<ac>静态风暴</ac>可以把敌人困住敌人，并造成伤害和沉默。
+npc_dota_hero_disruptor,Disruptor,若<hc>干扰者</hc>能做出<ic>阿哈利姆神杖</ic>，他的<ac>静态风暴</ac>还将使敌人无法使用物品。
+npc_dota_hero_disruptor,Disruptor,<hc>干扰者</hc>的技能非常强大，但很难保护自己，尤其是敌人有了<ic>黑皇杖</ic>。
+npc_dota_hero_nyx_assassin,Nyx Assassin,<hc>司夜刺客</hc>集伤害和控制技能于一身，他在抓人和团战方面非常强大。
+npc_dota_hero_nyx_assassin,Nyx Assassin,<hc>司夜刺客</hc>可以在被攻击时开启<ac>尖刺外壳</ac>，确保敌人被眩晕，再接上原本较难命中的<ac>穿刺</ac>。
+npc_dota_hero_nyx_assassin,Nyx Assassin,<hc>司夜刺客</hc>的<ac>复仇</ac>提供隐身状态，方便他搜寻敌人。破隐攻击将造成额外伤害，并且马上接<ac>穿刺</ac>还能眩晕敌人。
+npc_dota_hero_nyx_assassin,Nyx Assassin,<hc>司夜刺客</hc>非常针对法师，<ac>尖刺外壳</ac>可以反弹伤害，然后轻松地将他们击杀。
+npc_dota_hero_naga_siren,Naga Siren,<hc>娜迦海妖</hc>属于幻象系英雄，拥有非常实用的控制技能，后期可以变成控场类核心。
+npc_dota_hero_naga_siren,Naga Siren,<hc>娜迦海妖</hc>最有名的就是她的大招<ac>海妖之歌</ac>，使敌人陷入无敌的睡眠中，她就能从从容撤退，或与队友完成技能的连招。
+npc_dota_hero_naga_siren,Naga Siren,<hc>娜迦海妖</hc>被抓时只要放出<ac>海妖之歌</ac>就能从容逃脱，所以一定要充分利用沉默和眩晕技能阻止她放出技能。
+npc_dota_hero_naga_siren,Naga Siren,<hc>娜迦海妖</hc>非常适合<ic>洞察烟斗</ic>和<ic>魂之灵瓮</ic>等团队装。
+npc_dota_hero_keeper_of_the_light,Keeper of the Light,<hc>光之守卫</hc>可以使用<ac>冲击波</ac>对敌方小兵造成高额伤害，因此他很善于推线，也精于防守。
+npc_dota_hero_keeper_of_the_light,Keeper of the Light,<hc>光之守卫</hc>一旦被抓就会送命，因为他的控制技能很弱，并且缺乏逃生技能。
+npc_dota_hero_keeper_of_the_light,Keeper of the Light,<hc>光之守卫</hc>依赖远距离的<ac>冲击波</ac>和细致的走位，弥补较长的施法时间和较低的血量。
+npc_dota_hero_keeper_of_the_light,Keeper of the Light,<hc>光之守卫</hc>使用大招后可以暂时获得两个技能，其中召回可以将全地图中处于任意地点的友方英雄召回至他身边。
+npc_dota_hero_wisp,Io,<hc>艾欧</hc>的<ac>羁绊</ac>可以使自身与一个队友连接，队友可以享受其他技能的加成效果，并且<hc>艾欧</hc>本身的治疗和恢复效果在队友身上加倍生效。
+npc_dota_hero_wisp,Io,<hc>艾欧</hc>的<ac>降临</ac>在持续施法后可以将自身和队友带到地图任意地点，不论是逃离险境或是发动突袭。<hc>艾欧</hc>自身经过一段时间后将会返回至出发地点。
+npc_dota_hero_wisp,Io,<hc>艾欧</hc>必须要小心自己的走位，帮助队友的同时自己不会身处危险。<hc>艾欧</hc>的<ac>羁绊</ac>连接的队友击杀难度大大增加。
+npc_dota_hero_wisp,Io,<hc>艾欧</hc>的<ac>降临</ac>必须经过持续施法才能带走队友，施法完成前<hc>艾欧</hc>被眩晕将导致<ac>降临</ac>被打断，两个英雄都可能会有性命之虞。
+npc_dota_hero_visage,Visage,<hc>维萨吉</hc>在前期不强，但是有了大招<ac>召唤佣兽</ac>后战斗力大幅提升。佣兽可以帮助他推线、打野而且团战作用也很大。
+npc_dota_hero_visage,Visage,<hc>维萨吉</hc>本身不强，但是拥有控制技能的佣兽使他在团战中能发挥不小的作用。
+npc_dota_hero_visage,Visage,<hc>维萨吉</hc>可以短时间内通过自身和佣兽造成大量物理伤害，所以有需要时会购买<ic>炎阳纹章</ic>提升输出效果。
+npc_dota_hero_visage,Visage,<ic>阿哈利姆神杖</ic>是<hc>维萨吉</hc>的常见出装，可以使他额外召唤一只佣兽。
+npc_dota_hero_slark,Slark,<hc>斯拉克</hc>非常适合抓带晕技的英雄，因为<ac>突袭</ac>抓住英雄后马上使用<ac>黑暗契约</ac>可以解除敌人应对而来的眩晕技能效果。
+npc_dota_hero_slark,Slark,长时间与<hc>斯拉克</hc>交战非常危险，因为他每次攻击都能窃取属性，提升自己的攻击速度、攻击力和护甲。
+npc_dota_hero_slark,Slark,<hc>斯拉克</hc>非常难击杀的原因是技能衔接不到位时<ac>黑暗契约</ac>可以帮助他解除负面效果，而<ac>暗影之舞</ac>使他数秒内不会成为攻击的目标，而且还有回复效果。
+npc_dota_hero_slark,Slark,由于<hc>斯拉克</hc>非常依赖技能，在他用出<ac>黑暗契约</ac>前将他控制能保证击杀。
+npc_dota_hero_medusa,Medusa,<hc>美杜莎</hc>可以同时对多个敌人造成可观的伤害，但她对单个英雄的伤害并不是很高。
+npc_dota_hero_medusa,Medusa,<hc>美杜莎</hc>的击杀难度较大，因为她的<ac>魔法盾</ac>可以抵挡相当多的伤害。但是，如果使用技能或物品抽干她的魔法，她的存活能力大大下降。
+npc_dota_hero_medusa,Medusa,<hc>美杜莎</hc>需要大量金钱和物品支撑才能成型，不过她的<ac>石化凝视</ac>让她整场的团战能力都不容小觑。
+npc_dota_hero_medusa,Medusa,<hc>美杜莎</hc>购买<ic>斯嘉蒂之眼</ic>能获得很大的提升，因为全属性大幅提升增加了她的存活能力，而减速效果可以被<ac>分裂箭</ac>继承。
+npc_dota_hero_troll_warlord,Troll Warlord,<hc>巨魔战将</hc>的攻击速度非常夸张，近战形态还能击晕敌人，如果缺少控制技能就很难针对他。
+npc_dota_hero_troll_warlord,Troll Warlord,<hc>巨魔战将</hc>围绕属性、吸血和移速来购买装备，方便他在团战中追击敌人和走位。
+npc_dota_hero_troll_warlord,Troll Warlord,<hc>巨魔战将</hc>能击败大多数物理伤害型英雄，因为他的<ac>旋风飞斧</ac>可以使攻击落空。
+npc_dota_hero_troll_warlord,Troll Warlord,<hc>巨魔战将</hc>可以提升全队的攻击速度，团战获胜后拆掉防御塔和兵营的速度大大加快。
+npc_dota_hero_centaur,Centaur Warrunner,<hc>半人马战行者</hc>非常适合做团战的先手，<ac>奔袭冲撞</ac>可以帮助队友冲进敌阵，而<ic>闪烁匕首</ic>可以出其不意地发起进攻。
+npc_dota_hero_centaur,Centaur Warrunner,<hc>半人马战行者</hc>的<ac>双刃剑</ac>可以快速清兵，也能重创扎堆的英雄。
+npc_dota_hero_centaur,Centaur Warrunner,<hc>半人马战行者</hc>的<ac>马蹄践踏</ac>最好能眩晕多名英雄，方便队友跟上技能。
+npc_dota_hero_centaur,Centaur Warrunner,<hc>半人马战行者</hc>非常适合危险的劣势路，因为他的<ac>反击</ac>能回击线上的骚扰，而线上太危险时又能靠这个技能打野。
+npc_dota_hero_magnataur,Magnus,<hc>马格纳斯</hc>的大招<ac>两极反转</ac>能使敌方英雄聚集并且造成眩晕。<hc>马格纳斯</hc>若能大中5名英雄，他就能和队友轻松团灭敌人。
+npc_dota_hero_magnataur,Magnus,<hc>马格纳斯</hc>一般会购买<ic>闪烁匕首</ic>，因为这能帮助他瞬间抓住敌人的走位失误。
+npc_dota_hero_magnataur,Magnus,<hc>马格纳斯</hc>的<ac>授予力量</ac>可以使友方近战英雄攻击时附带分裂伤害，提高打钱效率，并且<ac>两极反转</ac>后输出也能提升。
+npc_dota_hero_magnataur,Magnus,<hc>马格纳斯</hc>可以使用<ac>巨角冲撞</ac>脱离险境，也能将敌人顶回来击杀。
+npc_dota_hero_shredder,Timbersaw,<hc>伐木机</hc>造成的都是纯粹伤害，但施放时需要魔法和个人技巧。
+npc_dota_hero_shredder,Timbersaw,<hc>伐木机</hc>使用<ac>伐木锯链</ac>在团战中快速移动，找准位置施放技能。
+npc_dota_hero_shredder,Timbersaw,<hc>伐木机</hc>受到物理攻击时他的护甲和生命恢复都会提升，所以很难通过物理攻击将他击杀。
+npc_dota_hero_shredder,Timbersaw,<hc>伐木机</hc>非常克制力量型英雄，因为<ac>死亡旋风</ac>会暂时降低主属性，力量提供的生命值也随之减少。
+npc_dota_hero_bristleback,Bristleback,<hc>钢背兽</hc>在背朝敌人时受到的伤害减少，并且累计受到一定的伤害将释放刺针。
+npc_dota_hero_bristleback,Bristleback,<hc>钢背兽</hc>依赖提升存活能力的物品，如<ic>赤红甲</ic>或<ic>洞察烟斗</ic>。
+npc_dota_hero_bristleback,Bristleback,<hc>钢背兽</hc>很乐意被敌人集火，因为他所受的伤害相比他队友会低很多。
+npc_dota_hero_bristleback,Bristleback,<hc>钢背兽</hc>在战斗中存活越久，造成的伤害越高，因为<ac>刺针扫射</ac>经过叠加后伤害很高，而<ac>战意</ac>提供了攻击力加成。
+npc_dota_hero_tusk,Tusk,<hc>巨牙海民</hc>的追击能力非常突出，他的<ac>寒冰碎片</ac>可以封住敌人的去路，而<ac>雪球</ac>可以让他和队友追上敌人。
+npc_dota_hero_tusk,Tusk,<hc>巨牙海民</hc>可以利用<ac>雪球</ac>让自己和队友获得数秒的无敌时间，当然在他施放<ac>雪球</ac>时队友需要在<hc>巨牙海民</hc>附近。
+npc_dota_hero_tusk,Tusk,<hc>巨牙海民</hc>可以使用<ac>冰封魔印</ac>侦查敌人的动向，或在战斗中降低敌人的攻击和移动速度。
+npc_dota_hero_tusk,Tusk,<hc>巨牙海民</hc>在开打后会封住敌人的去路，并先手眩晕和伤害他们。
+npc_dota_hero_skywrath_mage,Skywrath Mage,<hc>天怒法师</hc>非常脆弱，但他的魔法爆发能力十分突出，跟队友往往能形成良好的配合。
+npc_dota_hero_skywrath_mage,Skywrath Mage,<hc>天怒法师</hc>可以有效克制拥有逃生技能的英雄，因为<ac>上古封印</ac>具有沉默效果，并且降低魔法抗性。
+npc_dota_hero_skywrath_mage,Skywrath Mage,<hc>天怒法师</hc>被<ic>黑皇杖</ic>完全克制，因为他所有技能在该物品提供的技能免疫状态下都没有效果。
+npc_dota_hero_skywrath_mage,Skywrath Mage,<hc>天怒法师</hc>可以和拥有眩晕或缠绕技能的队友形成良好的配合，因为这样<hc>天怒法师</hc>的<ac>神秘之耀</ac>伤害可以达到最大化。
+npc_dota_hero_abaddon,Abaddon,<hc>亚巴顿</hc>可以使用<ac>无光之盾</ac>驱散队友身上大多数负面效果，如眩晕、沉默或减速。
+npc_dota_hero_abaddon,Abaddon,因为有<ac>无光之盾</ac>和<ac>迷雾缠绕</ac>，所以<hc>亚巴顿</hc>可以在队友被集火或控制时救下他们。
+npc_dota_hero_abaddon,Abaddon,<hc>亚巴顿</hc>很难阵亡是因为<ac>回光返照</ac>。技能在英雄血量很低时自动触发，所受的所有伤害都会变成治疗效果。
+npc_dota_hero_abaddon,Abaddon,<hc>亚巴顿</hc>在战场上令敌人头疼不已。他本身很难阵亡，而且他还可以治疗队友，并且驱散队友身上的负面效果。
+npc_dota_hero_elder_titan,Elder Titan,<hc>上古巨神</hc>在配合队友打出连招，或拦截敌人攻击时具有奇效。
+npc_dota_hero_elder_titan,Elder Titan,<hc>上古巨神</hc>拥有的<ac>自然秩序</ac>可以大幅降低敌人的基础护甲和魔法抗性。
+npc_dota_hero_elder_titan,Elder Titan,<hc>上古巨神</hc>的技能施放起来颇具难度，不过成功的连招可以在团战中造成超高伤害。
+npc_dota_hero_elder_titan,Elder Titan,<hc>上古巨神</hc>的<ac>星体游魂</ac>可以相对地独立移动，而且会与本体一同施放<ac>回音重踏</ac>。
+npc_dota_hero_legion_commander,Legion Commander,<hc>军团指挥官</hc>最具名气的就是<ac>决斗</ac>技能，强制敌人与她战斗，获胜一方将永久获得攻击力加成。这个技能非常克制一些原本较难击杀的英雄。
+npc_dota_hero_legion_commander,Legion Commander,<hc>军团指挥官</hc>一般先打钱买出<ic>闪烁匕首</ic>，这样就能轻松<ac>决斗</ac>正常距离外的英雄。
+npc_dota_hero_legion_commander,Legion Commander,<hc>军团指挥官</hc>可以使用<ac>强攻</ac>驱散自己或队友身上大多数的负面效果，也可以在<ac>决斗</ac>前大幅提升自己的攻击速度。
+npc_dota_hero_legion_commander,Legion Commander,<hc>军团指挥官</hc>由于她的<ac>压倒性优势</ac>技能，应对幻想系英雄时非常优秀。
+npc_dota_hero_ember_spirit,Ember Spirit,<hc>灰烬之灵</hc>具有超高机动性，操作上限非常高。他的技能可以在缠绕、追击和终结后撤的敌人时抵挡或躲避伤害。
+npc_dota_hero_ember_spirit,Ember Spirit,<hc>灰烬之灵</hc>使用<ac>无影拳</ac>就可以攻击距离较远的敌人，此时还能安全地施放<ac>炎阳索</ac>作为先手。
+npc_dota_hero_ember_spirit,Ember Spirit,<hc>灰烬之灵</hc>的带线能力非常突出，因为他可以放一个<ac>残焰</ac>，再传送到另一条分路进行推线，然后返回至原来的<ac>残焰</ac>。
+npc_dota_hero_ember_spirit,Ember Spirit,<hc>灰烬之灵</hc>惧怕沉默和眩晕类效果，因为在这些效果下将无法使用技能逃离战场。
+npc_dota_hero_earth_spirit,Earth Spirit,<hc>大地之灵</hc>拥有范围型眩晕和沉默技能，凭此他在抓人和团战时都非常强大。
+npc_dota_hero_earth_spirit,Earth Spirit,<hc>大地之灵</hc>可以使用<ac>巨石翻滚</ac>远距离向敌人发动先手。
+npc_dota_hero_earth_spirit,Earth Spirit,<hc>大地之灵</hc>的<ac>磁化</ac>可以在团战中造成大量伤害，不过需要<ac>残岩</ac>刷新技能的持续时间。
+npc_dota_hero_earth_spirit,Earth Spirit,<hc>大地之灵</hc>的<ac>残岩</ac>可以提升他其他技能的威力，但使用太频繁后就会用光使用次数。
+npc_dota_hero_terrorblade,Terrorblade,<hc>恐怖利刃</hc>使用<ac>惑幻</ac>来制造幻象，帮他清兵和战斗。
+npc_dota_hero_terrorblade,Terrorblade,<hc>恐怖利刃</hc>使用<ac>魔化</ac>后将获得高额攻击力和远程攻击能力，在团战和推进时如虎添翼。
+npc_dota_hero_terrorblade,Terrorblade,<hc>恐怖利刃</hc>在残血时也不好对付，他可以对敌人使用<ac>魂断</ac>，将双方的血量互换，再从容地击杀敌人。
+npc_dota_hero_terrorblade,Terrorblade,<hc>恐怖利刃</hc>惧怕的有眩晕类、沉默类和魔法伤害类技能。
+npc_dota_hero_phoenix,Phoenix,<hc>凤凰</hc>的持续伤害非常高，不过每个技能施放时都会消耗一定生命值。
+npc_dota_hero_phoenix,Phoenix,<hc>凤凰</hc>的机动性很高，擅长远距离造成伤害，不过惧怕沉默类技能。
+npc_dota_hero_phoenix,Phoenix,<hc>凤凰</hc>的<ac>超新星</ac>可以改变团战的走向，如果敌人攻击凤凰蛋的次数不足，那凤凰将成功涅槃。
+npc_dota_hero_phoenix,Phoenix,<hc>凤凰</hc>的<ac>超新星</ac>施放时要把握好位置。如果离敌人太远，就无法构成威胁。如果太近容易被集火，导致涅槃失败。
+npc_dota_hero_oracle,Oracle,<hc>神谕者</hc>在队友被集火时使用<ac>虚妄之诺</ac>驱散队友身上的眩晕或控制效果，并且提升获得的治疗效果。
+npc_dota_hero_oracle,Oracle,<hc>神谕者</hc>的<ac>涤罪之焰</ac>造成的魔法伤害偏高，不过后续有治疗效果。
+npc_dota_hero_oracle,Oracle,<hc>神谕者</hc>在团战中站位靠后，方便在保护队友的同时自己不被敌人集火。
+npc_dota_hero_oracle,Oracle,<hc>神谕者</hc>可以使用<ac>命运敕令</ac>技能阻止敌人发动攻击，或使队友免受魔法伤害。
+npc_dota_hero_techies,Techies,<hc>工程师</hc>的感应地雷不会被真实视域发现，不过地雷附近有敌人靠近时将会显形。
+npc_dota_hero_techies,Techies,<hc>工程师</hc>可以在树林中埋布<ac>感应地雷</ac>，给经过的敌人一个惊喜。
+npc_dota_hero_techies,Techies,<hc>工程师</hc>的战斗力主要来自他埋下的各种地雷和炸弹，而他自身的攻击力和移动速度都非常低。
+npc_dota_hero_techies,Techies,<hc>工程师</hc>可以将隐形的<ac>遥控炸弹</ac>埋成一堆，再等待没有疑心的英雄路过。
+npc_dota_hero_winter_wyvern,Winter Wyvern,<hc>寒冬飞龙</hc>在关键时刻可以通过<ac>极寒之拥</ac>轻松救下被集火的队友。
+npc_dota_hero_winter_wyvern,Winter Wyvern,<hc>寒冬飞龙</hc>无法直接对单个英雄造成大量伤害，不过使用<ac>寒冬诅咒</ac>可以轻松影响团战。
+npc_dota_hero_winter_wyvern,Winter Wyvern,<hc>寒冬飞龙</hc>可以频繁施放冷却时间较短的<ac>碎裂冲击</ac>，从而阻止敌人的推进。
+npc_dota_hero_winter_wyvern,Winter Wyvern,<hc>寒冬飞龙</hc>可以通过<ac>严寒烧灼</ac>飞越悬崖和树木，从而脱离险境。
+npc_dota_hero_arc_warden,Arc Warden,<hc>天穹守望者</hc>的出装往往有翻倍收益，如<ic>迈达斯之手</ic>，因为<ac>风暴双雄</ac>也可以使用物品。
+npc_dota_hero_arc_warden,Arc Warden,<hc>天穹守望者</hc>可以在安全的地方操控<ac>风暴双雄</ac>去推线，给敌人施压。
+npc_dota_hero_arc_warden,Arc Warden,<hc>天穹守望者</hc>的技能在追击和减速时非常好用， 但是面对扎堆的敌人就无法发挥威力。
+npc_dota_hero_arc_warden,Arc Warden,<hc>天穹守望者</hc>的技能<ac>磁场</ac>可以在紧要关头使用，赢下团战或救下建筑。
+npc_dota_hero_abyssal_underlord,Underlord,<hc>孽主</hc>的<ac>火焰风暴</ac>可以快速消灭推塔的小兵。
+npc_dota_hero_abyssal_underlord,Underlord,<hc>孽主</hc>积累金钱的速度很快，通常购买<ic>赤红甲</ic>或<ic>洞察烟斗</ic>等增强团战能力的物品。
+npc_dota_hero_abyssal_underlord,Underlord,<hc>孽主</hc>可以很好地针对移速较慢的近战英雄，尤其是惧怕范围型控制和伤害技能的英雄。
+npc_dota_hero_abyssal_underlord,Underlord,<hc>孽主</hc>的技能<ac>黑暗之门</ac>如果施放得当，可以帮助队友在团战或推进后安全撤离。
+npc_dota_hero_monkey_king,Monkey King,与<hc>齐天大圣</hc>对拼太久非常危险，尤其是<ac>如意棒法</ac>触发以后。
+npc_dota_hero_monkey_king,Monkey King,<hc>齐天大圣</hc>有很多花招可以帮助他逃离危险，或者隐藏在众目睽睽之下。
+npc_dota_hero_monkey_king,Monkey King,<hc>齐天大圣</hc>最好是在地图中穿梭，寻找没人的分路来施加压力，或者把握抓人的机会。
+npc_dota_hero_monkey_king,Monkey King,<hc>齐天大圣</hc>可以在树上跳跃，侦查敌人的动向，但遇到开树技能时很容易被针对。
+npc_dota_hero_monkey_king,Monkey King,<hc>齐天大圣</hc>可以对<ac>猴子猴孙</ac>范围内的敌人造成毁灭性打击。
+npc_dota_hero_dark_willow,Dark Willow,<hc>邪影芳灵</hc>是远程智力英雄，拥有强大的控制和爆发能力。
+npc_dota_hero_dark_willow,Dark Willow,<hc>邪影芳灵</hc>的技能<ac>暗影之境</ac>可以使她无法成为目标，逃脱敌人的攻击。
+npc_dota_hero_dark_willow,Dark Willow,<hc>邪影芳灵</hc>的<ac>诅咒王冠</ac>具有范围性眩晕效果，可以强迫站位密集的敌人分散开来。
+npc_dota_hero_dark_willow,Dark Willow,<hc>邪影芳灵</hc>的<ac>恐吓</ac>技能可以扰乱敌人的站位，帮助己方寻找突破口。
+npc_dota_hero_pangolier,Pangolier,<hc>石鳞剑士</hc>的进攻性非常强，并且擅长打架，在队伍中比较适合能快速积累装备优势的位置。
+npc_dota_hero_pangolier,Pangolier,<hc>石鳞剑士</hc>的技能<ac>虚张声势</ac>配合<ac>一剑穿心</ac>可以造成不俗的伤害，并且将对手的护甲降低至0。
+npc_dota_hero_pangolier,Pangolier,<hc>石鳞剑士</hc>使用终极技能<ac>地雷滚滚</ac>后将获得技能免疫状态，并且大幅限制敌人，但必须注意墙壁或悬崖。
+npc_dota_hero_pangolier,Pangolier,<hc>石鳞剑士</hc>的<ac>甲盾冲击</ac>若能作用到多个英雄，那接下来他所受的伤害将大幅减少。

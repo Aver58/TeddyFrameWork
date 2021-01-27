@@ -1,0 +1,68 @@
+Key,Readable,String
+gen_deny,Denying,"Getting the final blow on your own creep, or <ac>Denying</ac>, prevents the enemy from getting gold and a small portion of experience."
+gen_creeps,Creeps,<hc>Creeps</hc> are AI-controlled units that push the three <ac>lanes</ac> of the game. Heroes kill <hc>creeps</hc> to receive gold and experience.
+gen_aegis,Aegis (items),<ic>Aegis of the Immortal</ic> is a rare item that drops when <hc>Roshan</hc> is killed. It allows the carrier to come back to life once after dying.
+gen_cheese,Cheese (items),<ic>Cheese</ic> replenishes all of your health and mana immediately on-use. It drops after the second <hc>Roshan</hc> kill in a match.
+gen_buyback,Buyback,"When a player dies, he may have the option to spend his gold to respawn earlier, or <ic>buyback</ic> into the game. If you <ic>buyback</ic>, your respawn timer will be signicantly longer after your next death."
+gen_buyback,Buyback,Knowing the right time to use your <ic>buyback</ic> is a critical skill for players. It is often used to defend an important structure or to take advantage of the enemy teams mistakes.
+gen_dieback,Dieback,"To <ic>dieback</ic> is when a user dies after buying-back into the game.  They died, revived and died immediately again."
+gen_lasthitting,Last-hitting,"Players will try to get the killing blow, or <ac>last-hit</ac>, on creeps.  <ac>Last hitting</ac> gives gold and experience to the player."
+gen_jungling,Jungling,"Players will often go into the <ic>jungle</ic>, the forested area between lanes, to kill neutral creeps for extra gold and experience.  This is called <ac>jungling</ac>."
+gen_laning,Laning,The <ic>safe lane</ic> is the longest lane on each teams side of the map.  Creeps in these lanes will naturally be in a more defendable position for the <ic>safe lane</ic> team at the start of the game.
+gen_laning,Laning,"The game has 3 <ic>lanes</ic>. <ic>Mid</ic>, or the middle lane, is in the center of the map running diagonally from bottom left to top right."
+gen_laning,Laning,The <ic>offlane</ic> is the shortest lane on each teams side of the map and opposes the enemies <ic>safe lane</ic>.
+gen_roshan,Roshan,"<hc>Roshan</hc> is a monstrous creature that lives in the river. When he dies, he drops the <ic>Aegis of the Immortal</ic> which allows the carrier to come back to life once after dying."
+gen_creep_badguys_ranged,Ranged Creep,<hc>Ranged creeps</hc> do more damage than <hc>melee creeps</hc> and are worth more gold. There are always less <hc>ranged creeps</hc> than <hc>melee creeps</hc> in each wave.
+gen_creep_badguys_melee,Melee Creep,"<hc>Melee creeps</hc> do less damage than <hc>ranged creeps</hc>. However, there are many more <hc>melee creeps</hc> in each wave than there are<hc> ranged creeps<h/c>."
+gen_creep_badguys_ranged_upgraded,Upgraded Creep,"At the end of each lane, in each team's base, are <ic>barracks (racks)</ic>, one for melee and one for ranged creeps.  When the racks for a creep type is destroyed, that creep type gets stronger."
+gen_creep_badguys_ranged_upgraded_mega,Mega Creep,"When all of an enemy team's <ic>barracks</ic> are destroyed, <hc>Mega Creeps</hc> (Megas) will spawn.  Megas are substantially stronger than their normal counterparts. "
+,,
+gen_silence,Silence,<ac>Silence</ac> prevents all targeted enemies from being able to cast any of their abilities. It typically does not affect their active item ability and can be broken by <ic>Black King Bar</ic>.
+gen_gank,Gank,<ac>Ganking</ac> is the act of actively moving around the map in order to kill an enemy hero. It's done throughout the game to give your laning allies an advantage or to capitalize on enemy mistakes.
+gen_shrine,Shrine,Two <ic>shrines</ac> are found on opposite sides of the map for each team. <ac>Shrines</ac> regenerate health and mana of teammates within its AOE when used.
+gen_fortification,Fortification,<ic>Glyph of Fortification</ic> is a team ability that can protect all team structures for a brief period of time. A gold glow indicates the structure is immune to damage.
+gen_highground,High Ground,<ic>High Ground</ic> areas are elevated sections of the map indicated by a ramp or staircase. Units on a <ic>low ground</ic> cannot see units on <ic>high ground</ic> and have an increased chance of missing when attacking.
+gen_runes,Runes,"Every two minutes, <ic>runes</ic> will spawn throughout the map for players to grab and use. Some <ic>runes</ic> provide gold and experience, increased damage, movement speed or invisibility."
+gen_talents,Talents,"<ic>Talents</ic> are enhances to a hero's stats or abilities. As heroes gain levels, they will earn the ability to select a <ic>talent</ic>."
+gen_pulling,Pulling,"<ac>Pulling</ac>  creeps away from the enemy team, in order to have them fight either neutral creeps or pull them away from the lane, deprives the enemy player experience and gold."
+gen_stacking,Stacking,<ac>Stacking</ac> is the act of pulling creeps out of their jungle just before their respawn time.  This allows another <ic>stack</ic> of creeps to respawn and allows players to farm quickly.
+gen_ancients,Ancients,"<hc>Ancients</hc> or <hc>Ancient Creeps</hc> are stronger forms of neutral creeps that are much more difficult to kill, but provide larger bounties of gold and experience for whoever slays them."
+gen_position,Position,"<ac>Position 1</ac> heroes have the highest priority for levels or gold. Also known as the ""Hard Carry"", they are typically the biggest damage dealer on a team."
+gen_position,Position,"<ac>Position 2</ac> heroes have second highest priority for levels or gold. These heroes are also damage-dealers, but often are used to initiate."
+gen_position,Position,"<ac>Position 3</ac> is a team-fighting hero that builds team-support items like <ic>Blink Dagger</ic>, <ic>Drum of Endurance</ic> or similar items that will help them initiate and team-fight."
+gen_position,Position,"<ac>Position 4</ac> are secondary supports that are item dependent. They will often help the team by buying utility items like <ic>Observer Wards</ic>, <ic>Dust of Appearance</ic> or <ic>Smoke of Deceit</ic>."
+gen_position,Position,<ac>Position 5</ac> is a hard support and typically has very little gold.  They mostly aim to support the team with <ic>Observer Wards</ic> and other pure support items.
+,,
+gen_intro,Intro,"In Dota, two teams of 5 heroes fight with armies of AI-controlled <ac>Creeps</ac> to destroy the enemy team's base, winning when they destroy the opposing team's <ac>Ancient</ac> building."
+gen_intro,Intro,"Before each game, there is a <ac>Draft Phase</ac> where each player selects a hero to play from a pool of over 100 heroes. Each team can also ban heroes from being chosen."
+gen_intro,Intro,"Like basketball, each hero plays a different position. <ac>Cores</ac> are best at killing enemy heroes and buildings. <ac>Supports</ac> try to help the <ac>Cores</ac> stay alive, gain power, or disrupt enemy heroes."
+gen_intro,Intro,"To destroy enemy bases, each team marches down three pathways called <ac>Lanes</ac>, destroying enemy <ac>Towers</ac> which guard the path by shooting damaging fireballs."
+gen_intro,Intro,"During the game, each hero gains gold (also known as <ac>Farm</ac>) by dealing the killing blow to an enemy. Gold is used to buy <ac>Items</ac> which have different abilities and augment the hero's strength."
+gen_intro,Intro,"Each hero gains <ac>Experience Points</ac> (also known as <ac>XP</ac>), either by killing or being near a slain enemy, which increases their power and allows them to gain new spells."
+gen_runes,Runes,"Every 5 minutes, four bounty runes spawn on the map. Each rune that is picked up gives gold for the entire team, so the bounty spawns are often heavily contested between the teams."
+gen_juking,Juking,"Players at low health often hide in trees that block vision or move in unpredictable paths, commonly referred to as juking. They can then try to walk or TP away to safety."
+gen_diving,Diving,"Towers deal significant damage to anyone within their range. Teams sometimes dive deeper in enemy territory to secure a kill, even under the threat of a tower."
+gen_lategame,Late game,"As the game goes on, heroes get more items and abilities that help them kill enemies and gain objectives. Respawn timers also increase making kills more valuable than in the early game."
+gen_lategame,Late game,Cores become much stronger late game and capturing the enemy high ground becomes important to winning. Teams often focus on killing the enemies and gaining objectives afterwards.
+gen_daynight,Day Night Circle,"Every 4 minutes, the game switches between day and night. During night, heroes have less vision, which makes ganking easier. Some heroes are stronger depending on the day/night cycle."
+gen_position,Position,Supports are usually stronger early game and fall off later on. Most supports help by ganking the enemy cores or help their own core hero farm more efficiently.
+gen_position,Position,"Core heroes are usually weak early game, but get much stronger late game. During game, teams give them priority to get most of the gold and XP. "
+gen_gold,Gold,"Gold is very important as it allows to buy items. Most gold is gained by killing creeps, but destroying enemy structures or heroes also yield significant gold. "
+gen_gold,Gold,"Networth is the total gold earned by a hero throughout the game. If a hero has a higher networth, enemies gain more gold for killing that hero."
+gen_illusion,Illusion,"Some heroes and abilities can create copies called illusions. To enemies, they look same as the hero, but allies and spectators see them as a different colour. "
+gen_armor,Armor,Armor makes a hero stronger against physical attacks. Heroes with high HP often get more armor to become much harder to kill. Killing enemy heroes is much easier if you reduce their armor.
+gen_bounty,Bounty,Heroes who get multiple kills without dying get a killing streak. Killing someone with a streak gives a large amount of gold and XP to the participating heroes.
+gen_barracks,Barracks,"If the enemies barracks are destroyed, your creeps get stronger on that lane. Destroying all barracks leads to Mega Creeps, which are a lot stronger than usual creeps or even the stronger creeps."
+gen_gg,GG,"Teams type GG or ""Good Game"" at the end of the game to surrender. When GG is called, the game automatically ends. Surrendering is available in pro games, but not the average game."
+gen_laning,Laning,"It is common that two heroes start in the same lane. The core hero takes most of the gold in lane, while the support harrases the enemy and tries to protect their core."
+gen_laning,Laning,Three heroes go to a single lane is called a trilane. A trilane can effectively zone out enemy heroes from getting gold or XP.
+gen_experience,Experience,XP or experience leads to levels. A hero with more levels is stronger and has more or stronger abilities to use. You get XP if creeps or enemy heroes die around you.
+gen_towers,Towers,"Killing outer towers allows you to damage the inner towers. Only after killing the Tier 4 towers that are deep in the base, the ancient is exposed."
+gen_towers,Towers,There are 3 towers in each lane. Towers attack nearby enemies and often need multiple heroes to be destroyed. 
+gen_splitpush,Split Pushing,"Split pushing refers to heroes splitting far away from their team in order to bring down towers or barracks on the opposite side of the map. Sometimes also refered as ""ratting""."
+gen_laning,Laning,"During the early game, heroes often stick a lane and farm creeps for Gold and XP. Some heroes leave their lane to roam for kills and disrupt the farm of enemy cores. "
+Generic,Lanes,"Every 30 seconds, creeps spawn and move towards the enemy in three lanes (Top, mid and bottom). Lanes are the best places to get Gold and XP early in the game."
+gen_glyph,Glyph,"When you use glyph, the enemy cannot damage your creeps, towers or structures. Glyph is often used strategically to defend important pushes. "
+gen_scan,Scan,Using scan on an area shows if any enemies are present there. Scans can be used anywhere in the map and detect invisible enemies. 
+gen_invisibility,Invisibility,"Some abilities and items like Shadowblade make the hero invisible. Without a form of detection like dust, a sentry or a gem, it is not possible to see invisible heroes."
+gen_silence,Silence,"If a hero is silenced, they cannot use their abilities. Silences often counter ability dependant heroes quite easily. Some items can dispell or remove the silence from a hero."

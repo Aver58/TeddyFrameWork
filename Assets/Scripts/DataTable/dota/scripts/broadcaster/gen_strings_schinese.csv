@@ -1,0 +1,41 @@
+Key,Readable,String
+gen_deny,Denying,对己方小兵发出最后一击，也就是<ac>反补</ac>，可以阻止敌人获得金钱，获得的经验也会大幅减少。
+gen_creeps,Creeps,<hc>小兵</hc>由AI控制，分别沿着三条<ac>分路</ac>进军。英雄击杀<hc>小兵</hc>可以获得金钱和经验。
+gen_aegis,Aegis (items),<ic>不朽之守护</ic>非常珍贵，只在<hc>Roshan</hc>被击杀时掉落。可以使携带者阵亡后马上复活。
+gen_cheese,Cheese (items),<ic>奶酪</ic>一经使用就会补充大量生命和魔法。比赛中<hc>Roshan</hc>第二次被击杀时掉落。
+gen_buyback,Buyback,英雄阵亡后可以花费一定金钱立刻复活，也就是<ic>买活</ic>。<ic>买活</ic>后再次死亡的复活时间将大幅增加。
+gen_buyback,Buyback,抓住合适的时机<ic>买活</ic>非常重要。一般在守护重要的建筑或利用敌人的失误时使用。
+gen_dieback,Dieback,<ic>买活死</ic>就是玩家买活后再次阵亡。他们先阵亡，然后马上复活，紧接着再次死亡。
+gen_lasthitting,Last-hitting,击杀小兵时最后一击最关键，也就是<ac>补刀</ac>。<ac>补刀</ac>可以让玩家获得击杀金钱和经验。
+gen_jungling,Jungling,两条分路之间有一片丛林，也就是<ic>野区</ic>，击杀其中的中立生物可以获得额外的金钱和经验。这就是<ac>打野</ac>。
+gen_laning,Laning,<ic>优势路</ic>是地图中双方最长的分路。比赛初期优势路小兵的交会地点更有利于<ic>优势路</ic>一方。
+gen_laning,Laning,地图中有3条<ic>分路</ic>。其中<ic>中路</ic>在地图中央，从左下角沿对角线直到右上角。
+gen_laning,Laning,<ic>劣势路</ic>是地图里双方最短的分路，也是另一方的<ic>优势路</ic>。
+gen_roshan,Roshan,<hc>Roshan</hc>是一个住在河道里的可怕生物。他阵亡时会掉落<ic>不朽之守护</ic>，它可以让携带者在阵亡后马上复活。
+gen_creep_badguys_ranged,Ranged Creep,<hc>远程小兵</hc>的攻击力高于<hc>近战小兵</hc>，而且击杀金钱也更高。每波小兵中<hc>远程小兵</hc>比<hc>近战小兵</hc>少很多。
+gen_creep_badguys_melee,Melee Creep,<hc>近战小兵</hc>的攻击力低于<hc>远程小兵</hc>。但是每波小兵中<hc>近战小兵</hc>的数量比<hc>远程小兵<h/c>多很多。
+gen_creep_badguys_ranged_upgraded,Upgraded Creep,每条兵线的终点都是在基地里的<ic>兵营</ic>，其中一座是近战兵营，另一座是远程兵营。敌方的兵营被摧毁后己方相应的小兵就会升级。
+gen_creep_badguys_ranged_upgraded_mega,Mega Creep,敌人的所有<ic>兵营</ic>都被摧毁后，己方将开始产生<hc>超级士兵</hc>。超级士兵相比普通小兵或高级士兵更加强大。
+,,
+gen_silence,Silence,<ac>沉默</ac>阻止目标英雄无法施放任何技能。但是不影响他们使用物品的主动技能，而且效果可以被<ic>黑皇杖解除</ic>。
+gen_gank,Gank,<ac>抓人</ac>指的是在地图中游走，去击杀敌方英雄。正常比赛中会经历不少次抓人行动，让对线的队友获得优势，或者抓住敌人的失误。
+gen_shrine,Shrine,双方队伍在地图两侧均有两座<ic>圣坛</ic>。<ac>圣坛</ac>在使用时可以恢复范围内所有队友的生命和魔法。
+gen_fortification,Fortification,<ic>防御符文</ic>是一个团队技能，可以短时间使己方所有建筑和小兵不受任何伤害。开启符文后建筑和小兵身上的辉光表明了此时对伤害免疫。
+gen_highground,High Ground,<ic>高坡</ic>区域是地图中地势较高的部分，会有斜坡或楼梯作为标识。在<ic>低地</ic>的单位不能看到<ic>高坡</ic>的单位，而且攻击时会有一定几率落空。
+gen_runes,Runes,每隔两分钟，地图中就会在特定地点产生<ic>神符</ic>，英雄可以将其激活。 各种<ic>神符</ic>的功能有所不同，有提供金钱和经验、增强攻击力、提升移动速度或提供隐身状态。
+gen_talents,Talents,<ic>天赋</ic>会增强英雄的属性或技能。英雄达到相应等级后，他们就可以选择<ic>天赋</ic>。
+gen_pulling,Pulling,<ac>拉野</ac>指的是将野怪从营地拉出，吸引己方小兵攻击野怪，从而离开兵线，敌方英雄也就无法获得其经验和金钱。
+gen_stacking,Stacking,<ac>堆野</ac>指的是在野区的野怪刷新时间前将他们从营地中拉出。这样营地将再产生<ic>一组</ic>野怪，英雄也就能获得更多的金钱。
+gen_ancients,Ancients,<hc>远古</hc>或<hc>远古生物</hc>比一般的中立生物更厉害，他们的击杀难度更高，但提供的击杀金钱和经验也更多。
+gen_position,Position,<ac>1号位</ac>英雄对等级或金钱的需求非常高。也被称为“后期”，他们一般能产生全队最高的伤害。
+gen_position,Position,<ac>2号位</ac>英雄对等级或金钱的需求仅次于1号位。这些英雄也能造成大量伤害，不过一般都是首轮伤害。
+gen_position,Position,<ac>3号位</ac>一般是团战型英雄，购买的物品也是以<ic>闪烁匕首</ic>、<ic>韧鼓</ic>或其他类似加强团战作用的道具为主，帮助他们完成先手或在团战中存活。
+gen_position,Position,<ac>4号位</ac>是比较依赖装备的辅助。他们通常会帮5号位分担购买<ic>侦查守卫</ic>、<ic>显影之尘</ic>或<ic>诡计之雾</ic>等辅助性物品。
+gen_position,Position,<ac>5号位</ac>是纯辅助，一般拥有相当少的经济。他们大多通过<ic>侦查守卫</ic>和其他辅助性物品来辅佐团队。
+,,
+gen_intro,Intro,Dota中每一边都是5名英雄，他们与AI控制的<ac>小兵</ac>大军一同作战，向敌方基地进军， 摧毁了敌方的<ac>遗迹</ac>建筑后将获得比赛胜利。
+gen_intro,Intro,在比赛正式开始前有<ac>选人阶段</ac>，每名玩家从100多名英雄中选择一名使用的英雄。选择前双方还可以禁用英雄，被禁用的英雄将无法选择。
+gen_intro,Intro,与篮球相似，每个英雄都有不同的定位。<ac>核心</ac>在消灭敌方英雄和建筑时非常优秀。<ac>辅助</ac>帮助<ac>核心</ac>积攒力量，确保其在战斗中的存活，也能干扰敌方英雄。
+gen_intro,Intro,双方队伍分别兵分三路向敌人的基地进军，行进的路线被称为<ac>分路</ac>，沿途将遇到敌军的<ac>防御塔</ac>，高塔发射出高伤害的火球来击退敌人。
+gen_intro,Intro,比赛中每个英雄完成对敌人的击杀就能获得金钱（这个过程称为<ac>打钱</ac>）金钱可用于购买<ac>物品</ac>，获得各类可使用的技能，或增强英雄的属性。
+gen_intro,Intro,每个英雄击杀敌人或敌人阵亡时身在附近就能获得<ac>经验值</ac>（也称为<ac>经验</ac>），获得一定的经验值后可以升级，提高自身属性，还能学习新的技能。

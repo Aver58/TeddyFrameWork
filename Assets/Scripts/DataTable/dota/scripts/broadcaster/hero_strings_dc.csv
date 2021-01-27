@@ -1,0 +1,475 @@
+Internal Name, Readable Name,String
+npc_dota_hero_antimage,Anti-Mage,"While <hc>Anti-Mage</hc> is often a monster late game, pressuring him in the early game can slow him down and pay dividends."
+npc_dota_hero_antimage,Anti-Mage,<hc>Anti-Mage</hc> is strong against magic damage lineups as he takes less magic damage and drains mana upon attack.
+npc_dota_hero_antimage,Anti-Mage,<hc>Anti-Mage</hc> can move between creeps quickly with his <ac>Blink</ac> ability and quickly collect gold.
+npc_dota_hero_antimage,Anti-Mage,"<hc>Anti-Mage</hc> is vulnerable to heavy physical damage, pure damage, as well as disables like stuns, silences, and roots."
+npc_dota_hero_axe,Axe,Using <ac>Culling Blade</ac> effectively is imperative for <hc>Axe</hc> as it instantly kills the opponent and provides a speed buff to allies.
+npc_dota_hero_axe,Axe,<hc>Axe</hc> is effective at initiating as he can use his <ac>Berserker's Call</ac> ability to force enemies to attack him.
+npc_dota_hero_axe,Axe,<hc>Axe</hc> relies heavily on a timely <ic>Blink Dagger</ic> to make good use of his skills and have a higher impact on teamfights.
+npc_dota_hero_axe,Axe,<hc>Axe</hc> lanes well against melee heroes who are often in range of his <ac>Counter Helix</ac> and will take pure damage.
+npc_dota_hero_bane,Bane,<hc>Bane</hc> is effective at disabling heroes for long durations using his <ac>Fiend's Grip</ac> and <ac>Nightmare</ac> abilities.
+npc_dota_hero_bane,Bane,<hc>Bane</hc>'s <ac>Fiend's Grip</ac> has a long duration but can be interrupted by a stun or silence.
+npc_dota_hero_bane,Bane,<hc>Bane</hc> is difficult to kill because his <ac>Brain Sap</ac> heals him for the same damage he receives.
+npc_dota_hero_bane,Bane,"<hc>Bane</hc>'s spells all apply to a single target, making it more difficult for him to deal with creeps and summons."
+npc_dota_hero_bloodseeker,Bloodseeker,Having an item like <ic>Black King Bar</ic> helps <hc>Bloodseeker</hc> to avoid getting disabled when pursuing low health targets.
+npc_dota_hero_bloodseeker,Bloodseeker,<hc>Bloodseeker</hc> cannot stop his enemy from teleporting while <ac>Rupture</ac>d and replies on allies to prevent it.
+npc_dota_hero_bloodseeker,Bloodseeker,"<hc>Bloodseeker</hc> can initiate fights with <ac>Rupture</ac>, preventing enemies from safely running away."
+npc_dota_hero_bloodseeker,Bloodseeker,It's important to keep your health high as an enemy <hc>Bloodseeker</hc> could gain damage and move speed with his <ac>Thirst</ac> ability.
+npc_dota_hero_crystal_maiden,Crystal Maiden,<hc>Crystal Maiden</hc>'s <ac>Arcane Aura</ac> provides increased mana regeneration for her allies globally.
+npc_dota_hero_crystal_maiden,Crystal Maiden,<hc>Crystal Maiden</hc>'s <ac>Frostbite</ac> applies a root which can be very effective against mobile heroes.
+npc_dota_hero_crystal_maiden,Crystal Maiden,<hc>Crystal Maiden</hc> relies on mobility items to compensate for her slow movement speed and lower health points.
+npc_dota_hero_crystal_maiden,Crystal Maiden,<hc>Crystal Maiden</hc> is often drafted with heroes who struggle with mana regeneration on their own.
+npc_dota_hero_drow_ranger,Drow Ranger,<hc>Drow Ranger</hc>'s <ac>Precision Aura</ac> provides all ranged allied heroes with bonus damage and to ranged creeps when activated. 
+npc_dota_hero_drow_ranger,Drow Ranger,<hc>Drow Ranger</hc>'s relies on <ac>Gust</ac> to silence and push enemies away from her. 
+npc_dota_hero_drow_ranger,Drow Ranger,<hc>Drow Ranger</hc>'s long range and high damage allow her to siege towers from relative safety.
+npc_dota_hero_drow_ranger,Drow Ranger,<hc>Drow Ranger</hc> struggles against heroes that are very mobile and can get close to her.
+npc_dota_hero_earthshaker,Earthshaker,<hc>Earthshaker</hc> has many ways to stun nearby heroes which can be used in succession to keep enemies locked down.
+npc_dota_hero_earthshaker,Earthshaker,"<hc>Earthshaker</hc>'s <ac>Fissure</ac> creates a temporary wall to block escape paths, or allow for easy retreats."
+npc_dota_hero_earthshaker,Earthshaker,<hc>Earthshaker</hc>'s <ac>Fissure</ac> is useful for stunning and damaging enemies in a line from long distance.
+npc_dota_hero_earthshaker,Earthshaker,<hc>Earthshaker</hc> can heavily punish grouped enemies with a <ic>Blink Dagger</ic> and well timed <ac>Echo Slam</ac>.
+npc_dota_hero_juggernaut,Juggernaut,<hc>Juggernaut</hc> can use <ac>Blade Fury</ac> to deal damage while also protecting himself from spells.
+npc_dota_hero_juggernaut,Juggernaut,<hc>Juggernaut</hc> is often picked for his <ac>Healing Ward</ac> which helps his team push and remain at full health.
+npc_dota_hero_juggernaut,Juggernaut,<hc>Juggernaut</hc>'s <ac>Omnislash</ac> is best used on enemies that are alone or in small numbers.
+npc_dota_hero_juggernaut,Juggernaut,<hc>Juggernaut</hc> can use <ac>Blade Fury</ac> and a <ic>Town Portal Scroll</ic> to quickly escape a bad situation.
+npc_dota_hero_mirana,Mirana,<hc>Mirana</hc> has strong teamfight impact due to high burst damage and the ability to take setup fights with the invisibilty from <ac>Moonlight Shadow</ac>.
+npc_dota_hero_mirana,Mirana,<ac>Leap</ac> helps <hc>Mirana</hc> avoid death or get the jump on an enemy and deal crucial damage.
+npc_dota_hero_mirana,Mirana,<hc>Mirana</hc>'s signature ability <ac>Sacred Arrow</ac> is a hard to land skill shot. The stun lasts longer the farther it travels.
+npc_dota_hero_mirana,Mirana,<hc>Mirana</hc> is great at stunning enemies for a long duration if she can land her long range <ac>Sacred Arrow</ac> ability.
+npc_dota_hero_mirana,Mirana,<hc>Mirana</hc>'s abilities and talents allow her to be focus on building into high attack damage or high spell damage items making her very versatile.
+npc_dota_hero_nevermore,Shadow Fiend,<hc>Shadow Fiend</hc>'s <ac>Shadow Raze</ac> adds a stacking damage amplifier on the target that causes the enemy to take bonus Shadow Raze damage per stack.
+npc_dota_hero_nevermore,Shadow Fiend,"When <hc>Shadow Fiend</hc> kills or denies a unit he collects their soul, gaining bonus damage through <ac>Necromastery</ac> until he dies."
+npc_dota_hero_nevermore,Shadow Fiend,<hc>Shadow Fiend</hc> often purchases a <ic>Black King Bar</ic> to ensure successful channeling of his ultimate <ac>Requiem of Souls</ac>.
+npc_dota_hero_nevermore,Shadow Fiend,<hc>Shadow Fiend</hc> deals a lot of damage but is vulnerable to disables and ganks.
+npc_dota_hero_morphling,Morphling,<hc>Morphling</hc>'s ability <ac>Waveform</ac> is a powerful tool that helps him escape trouble or engage his target.
+npc_dota_hero_morphling,Morphling,"Unlike most heroes, <hc>Morphling</hc> can deal heavy magical damage with his skills while also dealing heavy physical damage with his attacks."
+npc_dota_hero_morphling,Morphling,"<hc>Morphling</hc> is generally hard to kill, but can be brought down with ease if he can be silenced or stunned before using <ac>Attribute Shift</ac>."
+npc_dota_hero_morphling,Morphling,"<hc>Morphling</hc>'s ultimate <ac>Morph</ac> changes his form to match the targeted enemy, gaining their basic abilities and expanding his toolkit."
+npc_dota_hero_phantom_lancer,Phantom Lancer,"<hc>Phantom Lancer</hc> creates identical looking illusions of himself, which can make fighting him confusing."
+npc_dota_hero_phantom_lancer,Phantom Lancer,"Like most illusion based heroes, <hc>Phantom Lancer</hc> benefits heavily from items that give his primary attribute, Agility."
+npc_dota_hero_phantom_lancer,Phantom Lancer,The mana burn from <ic>Diffusal Blade</ic> massively benefits <hc>Phantom Lancer</hc> because every hit from his hero and his many illusions will drain an enemy's mana.
+npc_dota_hero_phantom_lancer,Phantom Lancer,"Because Illusions take more damage than the primary hero, area of effect damage is vital to finding the real <hc>Phantom Lancer</hc>."
+npc_dota_hero_puck,Puck,<hc>Puck</hc> is very difficult to catch and kill especially later in the game with a <ic>Blink Dagger</ic> and <ic>Eul's Scepter</ic>.
+npc_dota_hero_puck,Puck,<hc>Puck</hc>'s <ac>Illusory Orb</ac> and <ac>Waning Rift</ac> can often be used to burst multiple nearby enemies.
+npc_dota_hero_puck,Puck,<hc>Puck</hc> can limit the mobility of enemies with <ac>Dream Coil</ac> which forces them to stay and fight or leave and be stunned.
+npc_dota_hero_puck,Puck,<hc>Puck</hc> is very mobile. He can easily cross terrain quickly as well as chase and catch retreating enemies.
+npc_dota_hero_puck,Puck,"In the late game, <hc>Puck</hc> has talents that can make him dangerous with either rapid spellcasting and damage, or blazing fast gold income."
+npc_dota_hero_pudge,Pudge,Escaping <hc>Pudge</hc> once he catches you is difficult due to his <ac>Rot</ac> and <ac>Dismember</ac> abilities.
+npc_dota_hero_pudge,Pudge,<hc>Pudge</hc>'s ability <ac>Meat Hook</ac> damages and drags the first unit it hits back to <hc>Pudge</hc>'s location.
+npc_dota_hero_pudge,Pudge,<hc>Pudge</hc>'s threat of <ac>Meat Hook</ac> can be a strong deterrent to enemies trying to take an objective.
+npc_dota_hero_pudge,Pudge,<hc>Pudge</hc> can save allies from difficult situations by hooking them back to his position.
+npc_dota_hero_razor,Razor,"<hc>Razor</hc> has difficulty catching up when behind, so killing him a few times early in the game can keep him on the back foot."
+npc_dota_hero_razor,Razor,Move speed or mobility items like <ic>Force Staff</ic> can help you escape a <hc>Razor</hc>'s <ac>Static Link</ac>.
+npc_dota_hero_razor,Razor,"<hc>Razor</hc> is best known for his ability <ac>Static Link</ac> which steals enemy damage, giving him an advantage in lane and fights."
+npc_dota_hero_razor,Razor,"An <ic>Aghanim's Scepter</ic> can boost <hc>Razor</hc>'s ultimate, <ac>Eye of the Storm</ac>, to do massive damage to heroes and towers."
+npc_dota_hero_sand_king,Sand King,<hc>Sand King</hc> can kill multiple creeps quickly with his large number of area of effect skills.
+npc_dota_hero_sand_king,Sand King,<hc>Sand King</hc> is good at weaving in and out of fights. It allows him to make an impact without threat of dying.
+npc_dota_hero_sand_king,Sand King,<hc>Sand King</hc> is a strong initiator because he can combo <ic>Blink Dagger</ic> and <ac>Burrowstrike</ac> to stun grouped heroes.
+npc_dota_hero_sand_king,Sand King,<hc>Sand King</hc> can be strong against melee heroes in the laning phase thanks to his <ac>Caustic Finale</ac> ability.
+npc_dota_hero_storm_spirit,Storm Spirit,<hc>Storm Spirit</hc> is very dependent on having sufficient mana.  Efficient use of skills is very important.
+npc_dota_hero_storm_spirit,Storm Spirit,"For <hc>Storm Spirit</hc> to maximize damage from <ac>Overload</ac>, he has to attack between every skill use."
+npc_dota_hero_storm_spirit,Storm Spirit,"Because <hc>Storm Spirit</hc> is difficult to kill without disables, he can be a strong pick late in the draft."
+npc_dota_hero_storm_spirit,Storm Spirit,"Due to his high mobility, <hc>Storm Spirit</hc> can pick off lone enemies around the map from long distances."
+npc_dota_hero_sven,Sven,<hc>Sven</hc>'s <ac>Great Cleave</ac> allows him to kill creeps faster than most heroes.
+npc_dota_hero_sven,Sven,<hc>Sven</hc> is good against physical damage enemies as <ac>Warcry</ac> can massively buff his team's armor. 
+npc_dota_hero_sven,Sven,"While <hc>Sven</hc> does large amounts of damage to enemies, he struggles to approach and stay close to them."
+npc_dota_hero_sven,Sven,<hc>Sven</hc>'s <ac>God's Strength</ac> amplifies his already high damage and can allow him to kill an enemy in a few hits.
+npc_dota_hero_sven,Sven,<hc>Sven</hc> players often pick up a <ic>Blink Dagger</ic> to help ensure he can be properly positioned when a fight breaks out.
+npc_dota_hero_tiny,Tiny,<hc>Tiny</hc>'s skills can combo his skills to instantly kill a nearby hero who has low health.
+npc_dota_hero_tiny,Tiny,<hc>Tiny</hc> can use his <ac>Tree Grab</ac> ability to pick up a tree to give him extra attack range and more damage to buildings .
+npc_dota_hero_tiny,Tiny,<hc>Tiny</hc> can use his <ac>Toss</ac> ability to throw an initiating ally into a fight or toss back an enemy to his team.
+npc_dota_hero_tiny,Tiny,"<hc>Tiny</hc> benefits from allies who provide large attack speed bonuses, as his base attack speed is quite low."
+npc_dota_hero_vengefulspirit,Vengeful Spirit,<hc>Vengeful Spirit</hc>'s <ac>Wave of Terror</ac> can be used to give vision further ahead than normal or over tree cover.
+npc_dota_hero_vengefulspirit,Vengeful Spirit,<hc>Vengeful Spirit</hc>'s <ac>Nether Swap</ac> is often used to trade save a more valuable ally at the expense of her own death.
+npc_dota_hero_vengefulspirit,Vengeful Spirit,<hc>Vengeful Spirit</hc>'s ultimate <ac>Nether Swap</ac> is very effective against enemies that can focus and disable a single hero.
+npc_dota_hero_vengefulspirit,Vengeful Spirit,"When <hc>Vengeful Spirit</hc> buys <ic>Aghanim's Scepter</ic>, she gets a greatly reduced cooldown on her <ac>Nether Swap</ac> ability and an illusion on death. "
+npc_dota_hero_windrunner,Windranger,<hc>Windranger</hc> often purchases <ic>Blink Dagger</ic> in order to position herself for the perfect angle for <ac>Shackleshot</ac> to latch.
+npc_dota_hero_windrunner,Windranger,<hc>Windranger</hc>'s <ac>Windrun</ac> ability helps her to escape or avoid physical attacks.
+npc_dota_hero_windrunner,Windranger,<hc>Windranger</hc>'s <ac>Powershot</ac> allows her to safely push creep waves while farming or snipe heroes from long distance.
+npc_dota_hero_windrunner,Windranger,<hc>Windranger</hc>'s <ac>Focus Fire</ac> ability can help her run down and finish off opponents or destroy towers faster.
+npc_dota_hero_zuus,Zeus,<hc>Zeus</hc> deals huge amounts of magic burst damage but has issues defending himself if attacked.
+npc_dota_hero_zuus,Zeus,<hc>Zeus</hc> can use his <ac>Lightning Bolt</ac> to check for invisible heroes or find observer wards that give the enemy vision.
+npc_dota_hero_zuus,Zeus,<hc>Zeus</hc>' global ultimate <ac>Thundergod's Wrath</ac> helps finish off low health enemy heroes or locate them on the map with a zap.
+npc_dota_hero_zuus,Zeus,<hc>Zeus</hc>' abilities are limited to magical damage which makes magic resistance and magic immunity valuable.
+npc_dota_hero_kunkka,Kunkka,<hc>Kunkka</hc> is great at setting up spell combinations with allies with his <ac>X Marks the Spot</ac> and <ac>Torrent</ac> abilities.
+npc_dota_hero_kunkka,Kunkka,<hc>Kunkka</hc> is very strong in team fights because he can deal heavy area damage and make it hard for opponents to escape.
+npc_dota_hero_kunkka,Kunkka,<hc>Kunkka</hc>'s ultimate <ac>Ghostship</ac> allows nearby allies to delay damage taken allowing them to get crucial spells off before potentially dying.
+npc_dota_hero_kunkka,Kunkka,<hc>Kunkka</hc>'s abilities are delayed skill shots so landing abilities in combination often requires perfect timing.
+npc_dota_hero_kunkka,Kunkka,"In the late game, <hc>Kunkka</hc>'s ability <ac>Tidebringer</ac> can do massive cleave damage with the right items."
+npc_dota_hero_lina,Lina,"<hc>Lina</hc> can kill creep waves very rapidly with her low cooldown, area of effect abilities."
+npc_dota_hero_lina,Lina,<hc>Lina</hc>'s <ac>Fiery Soul</ac> passive lets her deal large amounts of physical damage as long as she keeps casting spells.
+npc_dota_hero_lina,Lina,"<hc>Lina</hc>'s stun, <ac>Light Strike Array</ac>, is a delayed skill shot that does minimal damage but can be used to setup kills."
+npc_dota_hero_lina,Lina,<hc>Lina</hc> is known for her many magic damage spells that can rapidly burst down an enemy hero's health.
+npc_dota_hero_lich,Lich,"<hc>Lich</hc> is best known for his <ac>Chain Frost</ac> ability that bounces between nearby enemies, doing massive damage each bounce."
+npc_dota_hero_lich,Lich,"<hc>Lich</hc> is very strong in the laning stage because of his ability to <ac>Sacrifice</ac> an allied creep, denying the enemy its experience and gold."
+npc_dota_hero_lich,Lich,<hc>Lich</hc> doesn't have any disables other than slows and has trouble catching evasive or fast heroes.
+npc_dota_hero_lich,Lich,<hc>Lich</hc>'s <ac>Ice Armor</ac> can be used on buildings to slow down enemies trying to siege it.
+npc_dota_hero_lion,Lion,<hc>Lion</hc> has a mix of disables that he can chain together to help his allies kill an enemy hero without fear of a response.
+npc_dota_hero_lion,Lion,"<hc>Lion</hc>, with an early enough <ic>Blink Dagger</ic>, can initiate surprise ganks on enemy heroes."
+npc_dota_hero_lion,Lion,<hc>Lion</hc> is best used against heroes who rely on their abilities to stay alive.
+npc_dota_hero_lion,Lion,<hc>Lion</hc> has very good burst magical damage when he is able to use his <ac>Finger of Death</ac> ultimate.
+npc_dota_hero_shadow_shaman,Shadow Shaman,<hc>Shadow Shaman</hc> has an incredible amount of disable with his <ac>Shackles</ac> ability but using it makes him vulnerable due to it being a channeled ability.
+npc_dota_hero_shadow_shaman,Shadow Shaman,<hc>Shadow Shaman</hc> is great at pushing because he kills creeps rapidly and can drop his <ac>Mass Serpent Wards</ac> near towers.
+npc_dota_hero_shadow_shaman,Shadow Shaman,<hc>Shadow Shaman</hc> often purchases <ic>Blink Dagger</ic> so that he can rapidly close distances and use his short range stuns.
+npc_dota_hero_shadow_shaman,Shadow Shaman,<hc>Shadow Shaman</hc> has high base damage with his basic attack which allows him to punish cores in the laning phase.
+npc_dota_hero_slardar,Slardar,<hc>Slardar</hc> allows his team to quickly kill Roshan by lowering his armor with <ac>Corrosive Haze</ac>.
+npc_dota_hero_slardar,Slardar,<hc>Slardar</hc> gains an insane amount of move speed in the river with maximum level <ac>Guardian Sprint</ac>.
+npc_dota_hero_slardar,Slardar,"<hc>Slardar</hc>'s ultimate <ac>Corrosive Haze</ac> heavily reduces the armor of a target, increasing the physical damage they take."
+npc_dota_hero_slardar,Slardar,<hc>Slardar</hc> can use a <ic>Blink Dagger</ic> and his <ac>Slithereen Crush</ac> to disable multiple enemies during a fight.
+npc_dota_hero_tidehunter,Tidehunter,"<hc>Tidehunter</hc> is very hard to kill in the laning stage, making him a good fit for the dangerous offlane."
+npc_dota_hero_tidehunter,Tidehunter,<hc>Tidehunter</hc> can be very strong against physical damage heroes since <ac>Anchor Smash</ac> reduces the damage they do.
+npc_dota_hero_tidehunter,Tidehunter,"<hc>Tidehunter</hc> can rarely be disabled for more than a few seconds, thanks to <ac>Kraken Shell</ac>."
+npc_dota_hero_tidehunter,Tidehunter,<hc>Tidehunter</hc>'s threat of <ac>Ravage</ac> can sometimes be stronger than Ravage itself.
+npc_dota_hero_witch_doctor,Witch Doctor,"<hc>Witch Doctor</hc> is good at keeping allies alive in pushes and fights because of his AOE healing ability, <ac>Voodoo Restoration</ac>."
+npc_dota_hero_witch_doctor,Witch Doctor,"<hc>Witch Doctor</hc> can deal a huge amount of damage to enemies with his <ac>Death Ward</ac>.  However, it can be interrupted early by disables."
+npc_dota_hero_witch_doctor,Witch Doctor,<hc>Witch Doctor</hc> is strong against durable enemies as he can increase his team's damage on heroes cursed by <ac>Maledict</ac>.
+npc_dota_hero_witch_doctor,Witch Doctor,"<hc>Witch Doctor</hc> works best against clumped heroes since <ac>Paralyzing Cask</ac> bounces between enemies multiple times, stunning them."
+npc_dota_hero_riki,Riki,"<hc>Riki</hc> is one of the few heroes who can be invisible from the start of the game, making his ganks hard to predict."
+npc_dota_hero_riki,Riki,<hc>Riki</hc> is very effective against heroes who fear being restricted from using there abilities from the silence from his <ac>Smoke Screen</ac>.
+npc_dota_hero_riki,Riki,"<hc>Riki</hc> is invisible from the start of the game, but good uses of Sentries or <ic>Dust of Appearance</ic> can help to neutralize him."
+npc_dota_hero_riki,Riki,"<hc>Riki</hc> benefits heavily from agility items as they amplify his primary damage source, <ac>Cloak and Dagger</ac>."
+npc_dota_hero_enigma,Enigma,<hc>Enigma</hc>'s Black Hole is one of the strongest ultimates in the game because it can disable an entire enemy team.
+npc_dota_hero_enigma,Enigma,<hc>Enigma</hc> is best countered by heroes that have ways to interrupt his channeled ultimate from long range.
+npc_dota_hero_enigma,Enigma,"Because his ultimate is so important, <hc>Enigma</hc> often purchases <ic>Blink Dagger</ic> to initiate and <ic>Black King Bar</ic> to ensure the full channel duration."
+npc_dota_hero_enigma,Enigma,<hc>Enigma</hc> is strong at pushing towers and killing creeps with his <ac>Demonic Conversion</ac> eidolons.
+npc_dota_hero_tinker,Tinker,<hc>Tinker</hc> can use <ac>Rearm</ac> to remove the cooldown on his abilities and items which allows him to move rapidly and nuke creeps and heroes.
+npc_dota_hero_tinker,Tinker,"<hc>Tinker</hc>'s most important item is <ic>Boots of Travel</ic> because, with <ac>Rearm</ac>, it allows him to teleport around the map whenever needed."
+npc_dota_hero_tinker,Tinker,"<hc>Tinker</hc> can be very effective against physical damage heroes as he can blind them with <ac>Laser</ac>, making them miss their target."
+npc_dota_hero_tinker,Tinker,<hc>Tinker</hc> can be terrifying to play against late game because he can rapidly <ac>Rearm</ac> his items and kill weak heroes.
+npc_dota_hero_tinker,Tinker,<hc>Tinker</hc> provides a strong high ground defense by using multiple <ac>March of the Machines</ac> to damage heroes who are sieging.
+npc_dota_hero_sniper,Sniper,<hc>Sniper</hc> can use his long range to shoot enemies from a safe position.
+npc_dota_hero_sniper,Sniper,"<hc>Sniper</hc>'s <ac>Assassinate</ac> can be used to interrupt channeled abilities, even through spell immunity."
+npc_dota_hero_sniper,Sniper,<hc>Sniper</hc> is vulnerable to enemies that can rapidly close the gap that his range provides.
+npc_dota_hero_sniper,Sniper,<hc>Sniper</hc> benefits from items like <ic>Shadow Blade</ic> or <ic>Hurricane Pike</ic> which can allow him to escape from trouble.
+npc_dota_hero_necrolyte,Necrophos,<hc>Necrophos</hc> uses his <ac>Reaper's Scythe</ac> to guarantee kills on enemies with low health.
+npc_dota_hero_necrolyte,Necrophos,<hc>Necrophos</hc> can heal nearby allies while hurting enemies which helps turn fights in his favor.
+npc_dota_hero_necrolyte,Necrophos,<hc>Necrophos</hc> can use his ability <ac>Ghost Shroud</ac> to prevent incoming physical damage while amplifying his healing abilities.
+npc_dota_hero_necrolyte,Necrophos,<hc>Necrophos</hc> constantly damages nearby enemy heroes with <ac>Heartstopper Aura</ac> which can add up to significant damage over a long engagement.
+npc_dota_hero_warlock,Warlock,<hc>Warlock</hc>'s ultimate <ac>Chaotic Offering</ac> is a great way to disrupt an enemy team during a fight.
+npc_dota_hero_warlock,Warlock,"<hc>Warlock</hc>'s ultimate stuns enemies even if they are Spell Immune, so it can be useful to stop teleports or important teamfight ultimates."
+npc_dota_hero_warlock,Warlock,<hc>Warlock</hc> is strong in the early game because of his <ac>Shadow Word</ac> ability which can do significant damage over time to enemies or can heal allies.
+npc_dota_hero_warlock,Warlock,<hc>Warlock</hc> has amazing team fight abilities but has difficulty defending himself against chasing enemies.
+npc_dota_hero_beastmaster,Beastmaster,<hc>Beastmaster</hc> is a very fast pusher as he can rapidly kill creeps and towers with assistance from his <ac>Inner Beast</ac> aura.
+npc_dota_hero_beastmaster,Beastmaster,"<hc>Beastmaster</hc>'s ultimate <ac>Primal Roar</ac> is good for setting up kills since it stuns enemies, even if they are spell immune."
+npc_dota_hero_beastmaster,Beastmaster,<hc>Beastmaster</hc> often purchases a <ic>Necronomicon</ic> to summon additional units to help him kill enemies and siege buildings.
+npc_dota_hero_beastmaster,Beastmaster,<hc>Beastmaster</hc> summons animal friends to help him in various ways such as providing vision and slowing enemies.
+npc_dota_hero_queenofpain,Queen of Pain,"<hc>Queen of Pain</hc> is capable of doing large bursts of area of effect, magical damage."
+npc_dota_hero_queenofpain,Queen of Pain,<hc>Queen of Pain</hc> is extremely mobile and hard to catch due to her low cooldown <ac>Blink</ac> ability.
+npc_dota_hero_queenofpain,Queen of Pain,<hc>Queen of Pain</hc> is often picked because she's strong at laning and can either punish vulnerable enemies or score kills.
+npc_dota_hero_queenofpain,Queen of Pain,"While <hc>Queen of Pain</hc> does a lot of damage, she lacks disables and needs to make up for it with items."
+npc_dota_hero_venomancer,Venomancer,<hc>Venomancer</hc>'s abilities do damage over time rather than all at once.
+npc_dota_hero_venomancer,Venomancer,<hc>Venomancer</hc> is often used for pushing and defending towers relatively safely with his <ac>Plague Ward</ac>s.
+npc_dota_hero_venomancer,Venomancer,<hc>Venomancer</hc> lacks any form of disable other than slows.
+npc_dota_hero_venomancer,Venomancer,<hc>Venomancer</hc>'s plague wards do far more damage to creeps than heroes and towers.
+npc_dota_hero_faceless_void,Faceless Void,"<hc>Faceless Void</hc>'s ultimate <ac>Chronosphere</ac> stuns all units in a large bubble, including allies."
+npc_dota_hero_faceless_void,Faceless Void,<hc>Faceless Void</hc> can <ac>Time Walk</ac> his health points back to where they were a short time ago.
+npc_dota_hero_faceless_void,Faceless Void,<hc>Faceless Void</hc> is most often used for his teamfight prowess. He waits for the perfect moment to jump in and initiate.
+npc_dota_hero_faceless_void,Faceless Void,"<hc>Faceless Void</hc> often relies on items that remove disables like silences and stuns, so he can always be able to use his strong abilities."
+npc_dota_hero_skeleton_king,Wraith King,<hc>Wraith King</hc>'s ultimate <ac>Reincarnation</ac> allows him to resurrect once in a fight so long as he has the mana.
+npc_dota_hero_skeleton_king,Wraith King,<hc>Wraith King</hc> does a huge amount of damage with his sword but often has trouble staying close to enemies.
+npc_dota_hero_skeleton_king,Wraith King,"<hc>Wraith King</hc>'s stun <ac>Wraithfire Blast</ac> stuns and slows enemies, helping him secure kills."
+npc_dota_hero_skeleton_king,Wraith King,<hc>Wraith King</hc> often purchases <ic>Armlet of Mordiggian</ic> which gives him increased damage in exchange for a health drain.
+npc_dota_hero_death_prophet,Death Prophet,<hc>Death Prophet</hc> is a strong tower pusher because her ultimate <ac>Exorcism</ac> can deal damage to towers as well as enemies.
+npc_dota_hero_death_prophet,Death Prophet,<hc>Death Prophet</hc> can be difficult to kill because she can use <ac>Spirit Siphon</ac> to stay alive when enemies try to focus her.
+npc_dota_hero_death_prophet,Death Prophet,"<hc>Death Prophet</hc>'s abilities deal massive damage to nearby enemies, making survivability items her priority."
+npc_dota_hero_death_prophet,Death Prophet,"<hc>Death Prophet</hc> is limited by the long cooldown of her ultimate, <ac>Exorcism</ac>. Using it wisely is important."
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>Phantom Assassin</hc> can do large amounts of physical damage in a short time with damage items and her critical strikes.
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>Phantom Assassin</hc> is difficult to attack because of her built in evasion with <ac>Blur</ac>.
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>Phantom Assassin</hc> is weak to stuns and magic damage abilities.
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>Phantom Assassin</hc> can use <ac>Blink Strike</ac> to easily jump to opponents which makes escaping her difficult.
+npc_dota_hero_phantom_assassin,Phantom Assassin,<hc>Phantom Assassin</hc> can use <ac>Blink Strike</ac> to jump safely away from danger to allies.
+npc_dota_hero_pugna,Pugna,<hc>Pugna</hc> deals almost entirely magic damage and can amplify it by casting <ac>Decrepify</ac> first.
+npc_dota_hero_pugna,Pugna,"<hc>Pugna</hc> has weak disables and low health, but has strong teamfight and high magic damage to compensate."
+npc_dota_hero_pugna,Pugna,"<hc>Pugna</hc>'s primary nuke <ac>Nether Blast</ac> is a rare spell that can damage buildings, making <hc>Pugna</hc> a fantastic tower pusher."
+npc_dota_hero_pugna,Pugna,<hc>Pugna</hc> is strongest in the early and mid game as enemies can purchase items that counter <hc>Pugna</hc> later.
+npc_dota_hero_templar_assassin,Templar Assassin,"<hc>Templar Assassin</hc> deals heavy physical damage, amplified by her negative armor ability, <ac>Meld</ac>."
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>Templar Assassin</hc> can kill the mighty Roshan by herself once she purchases a <ic>Desolator</ic>.
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>Templar Assassin</hc> is difficult to kill because of her <ac>Refraction</ac> ability unless the enemy team has damage over time abilities.
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>Templar Assassin</hc> can kill creep waves and neutral camps quickly with her line cleaving <ac>Psi Blades</ac>.
+npc_dota_hero_templar_assassin,Templar Assassin,<hc>Templar Assassin</hc> benefits heavily from stacked neutral camps in the midgame because she can farm them quickly and easily.
+npc_dota_hero_viper,Viper,<hc>Viper</hc> is able to heavily slow enemy heroes in fights and do increasing damage as they get closer to death.
+npc_dota_hero_viper,Viper,<hc>Viper</hc> is known for his prowess in the mid lane where he can bully out weaker heroes.
+npc_dota_hero_viper,Viper,<hc>Viper</hc> is very difficult to kill because of his high health points and <ac>Corrosive Skin</ac> ability.
+npc_dota_hero_viper,Viper,<hc>Viper</hc> prefers to be on the front line of the fight taking damage as it allows his allies to respond unthreatened.
+npc_dota_hero_luna,Luna,"<hc>Luna</hc> has incredible teamfight with her ultimate, <ac>Eclipse</ac>, which strikes random nearby heroes with <ac>Lucent Beam</ac>s."
+npc_dota_hero_luna,Luna,<hc>Luna</hc> can see farther than most heroes during night because of her <ac>Lunar Blessing</ac> aura.
+npc_dota_hero_luna,Luna,<hc>Luna</hc> can push waves and farm neutrals rapidly with her <ac>Moon Glaives</ac> which cause her attacks to bounce between enemies.
+npc_dota_hero_luna,Luna,"With an <ic>Aghanim's Scepter</ic>, <hc>Luna</hc> can cast <ac>Eclipse</ac> on an allied unit or herself and have its effects follow them. She can also cast it in an area."
+npc_dota_hero_dragon_knight,Dragon Knight,<hc>Dragon Knight</hc> is strong at pushing towers when he uses his ultimate <ac>Elder Dragon Form</ac>.
+npc_dota_hero_dragon_knight,Dragon Knight,<hc>Dragon Knight</hc> is surprisingly difficult to kill in lane because of his increased armor and health regeneration from <ac>Dragon Blood</ac>.
+npc_dota_hero_dragon_knight,Dragon Knight,<hc>Dragon Knight</hc> is good at initiating with a <ic>Blink Dagger</ic> and the long stun duration of <ac>Dragon Tail</ac>.
+npc_dota_hero_dragon_knight,Dragon Knight,<hc>Dragon Knight</hc>'s ability <ac>Breathe Fire</ac> can be used to farm creep in the laning phase while also damaging enemy heroes and reducing their attack damage.
+npc_dota_hero_dazzle,Dazzle,<hc>Dazzle</hc> can keep an ally from dying for a few seconds with <ac>Shallow Grave</ac>.
+npc_dota_hero_dazzle,Dazzle,"<hc>Dazzle</hc> is very strong in the laning stage because of his heal, <ac>Shadow Wave</ac>, that also damages nearby enemies."
+npc_dota_hero_dazzle,Dazzle,<hc>Dazzle</hc> is great at saving allies but has trouble saving himself if he gets stunned or silenced.
+npc_dota_hero_dazzle,Dazzle,<hc>Dazzle</hc> has to stay behind allies to support them or he will be focused first by his enemies.
+npc_dota_hero_rattletrap,Clockwerk,<hc>Clockwerk</hc> is a very mobile initiating hero that can scout with <ac>Rocket Flare</ac> and use <ac>Hookshot</ac> to initiate at a moment's notice.
+npc_dota_hero_rattletrap,Clockwerk,<hc>Clockwerk</hc> works best when he can trap enemy heroes with him inside his <ac>Power Cogs</ac>.
+npc_dota_hero_rattletrap,Clockwerk,<hc>Clockwerk</hc>'s positioning and timing is imperative as he can block escape paths or separate enemy heroes.
+npc_dota_hero_rattletrap,Clockwerk,<hc>Clockwerk</hc> most fears an enemy's <ic>Force Staff</ic> because it can be used to push the enemy out of <hc>Clockwerk</hc>'s <ac>Power Cogs</ac>.
+npc_dota_hero_leshrac,Leshrac,<hc>Leshrac</hc> has a mix of spells that do terrifying amounts of area of effect damage if he gets close to enemies.
+npc_dota_hero_leshrac,Leshrac,<hc>Leshrac</hc> must be close to enemies to output full damage but is fragile without items.
+npc_dota_hero_leshrac,Leshrac,<hc>Leshrac</hc> requires heavy mana regen to continue casting his spells.
+npc_dota_hero_leshrac,Leshrac,"<hc>Leshrac</hc>'s ability <ac>Diabolic Edict</ac> can hit towers, making <hc>Leshrac</hc> a fast tower pusher if uncontested."
+npc_dota_hero_leshrac,Leshrac,<hc>Leshrac</hc>'s ability to cast a large number of area of effect spells makes him very useful against illusion based heroes.
+npc_dota_hero_furion,Nature's Prophet,<hc>Nature's Prophet</hc> is good at assististing with ganks using <ac>Teleportation</ac>.
+npc_dota_hero_furion,Nature's Prophet,"<hc>Nature's Prophet</hc> can has many playstyles, but is best known for his ability to push towers."
+npc_dota_hero_furion,Nature's Prophet,<hc>Nature's Prophet</hc> works best by using <ac>Teleportation</ac> to arrive at undefended towers and force his enemies to react to his presence.
+npc_dota_hero_furion,Nature's Prophet,"<hc>Nature's Prophet</hc> spends much of his downtime killing creeps, which allows him to bring powerful items to ganks and fights."
+npc_dota_hero_life_stealer,Lifestealer,"<hc>Lifestealer</hc> outputs large amounts of damage, but is also difficult to kill since his abilities are good at keeping him alive."
+npc_dota_hero_life_stealer,Lifestealer,"<hc>Lifestealer</hc> lacks mobility but can solve this with his ultimate, <ac>Infest</ac>, which lets him hitch a ride inside an ally."
+npc_dota_hero_life_stealer,Lifestealer,<hc>Lifestealer</hc> is strong against disables because his <ac>Rage</ac> ability makes him spell immune for a short period of time.
+npc_dota_hero_life_stealer,Lifestealer,"<hc>Lifestealer</hc> benefits from items that reduce enemy armor or increase his attack speed, damage, or movement speed."
+npc_dota_hero_dark_seer,Dark Seer,"<hc>Dark Seer</hc>'s <ac>Ion Shell</ac> can be placed on all units, dealing damage to surrounding enemies."
+npc_dota_hero_dark_seer,Dark Seer,<hc>Dark Seer</hc> is most known for his strong teamfight as <ac>Vacuum</ac> can group enemy heroes close together.
+npc_dota_hero_dark_seer,Dark Seer,<hc>Dark Seer</hc> often purchases teamfight support items like <ic>Guardian Greaves</ic> and <ic>Pipe of Insight</ic> to help keep allies alive.
+npc_dota_hero_dark_seer,Dark Seer,<hc>Dark Seer</hc> is often played in the dangerous offlane since he can use <ac>Ion Shell</ac> on creeps to secure gold and experience.
+npc_dota_hero_clinkz,Clinkz,<hc>Clinkz</hc> can deal heavy physical damage to enemies and towers by attacking with his <ac>Searing Arrows</ac>.
+npc_dota_hero_clinkz,Clinkz,"<hc>Clinkz</hc> can move around the map invisibly, ganking using his <ac>Skeleton Walk</ac>, but needs damage items to be successful."
+npc_dota_hero_clinkz,Clinkz,<hc>Clinkz</hc> often purchases armor reduction items like <ic>Desolator</ic> so that he can more quickly kill heroes and towers.
+npc_dota_hero_clinkz,Clinkz,"<hc>Clinkz</hc> has difficulty escaping enemies once he's caught, especially if they have detection like <ic>Dust of Appearance</ic>."
+npc_dota_hero_clinkz,Clinkz,"With the ability <ac>Strafe</ac>, <hc>Clinkz</hc> can dish out heavy physical damage to heroes or towers while also being able to dodge projectiles."
+npc_dota_hero_omniknight,Omniknight,"<hc>Omniknight</hc>'s abilities help save him and his allies from disables and, potentially, death."
+npc_dota_hero_omniknight,Omniknight,"<hc>Omniknight</hc>'s <ac>Repel</ac> makes an ally spell immune,  allowing them to play aggressive or escape danger for a short time."
+npc_dota_hero_omniknight,Omniknight,<hc>Omniknight</hc> can easily turn fights using <ac>Purification</ac> on a hurt melee hero since it damages in an area while healing allies.
+npc_dota_hero_omniknight,Omniknight,<hc>Omniknight</hc> can prevent any temporarily physical damage done to nearby allies with <ac>Guardian Angel</ac>.
+npc_dota_hero_omniknight,Omniknight,Positioning is often very important on <hc>Omniknight</hc> which is why picking up a <ic>Drum of Endurance</ic> or <ic>Blink Dagger</ic> is a good idea.
+npc_dota_hero_enchantress,Enchantress,<hc>Enchantress</hc> can <ac>Enchant</ac> powerful neutral creeps and use them to bully and gank her opponents.
+npc_dota_hero_enchantress,Enchantress,"<hc>Enchantress</hc> has a very low health pool, but she's difficult to kill due to her abilities and enchanted friends."
+npc_dota_hero_enchantress,Enchantress,<hc>Enchantress</hc> is countered by burst damage spells that ignore her <ac>Untouchable</ac> ability and kill her before she can heal.
+npc_dota_hero_enchantress,Enchantress,<hc>Enchantress</hc>'s <ac>Impetus</ac> deals pure damage based on the distance traveled before striking the enemy.
+npc_dota_hero_enchantress,Enchantress,A <ic>Hurricane Pike</ic> is a popular pickup for <hc>Enchantress</hc> because it helps create distance and increase the damage from her <ac>Impetus</ac> ability.
+npc_dota_hero_huskar,Huskar,<hc>Huskar</hc> stacks <ac>Burning Spear</ac>s with every attack which burn through your health pool alarmingly fast.
+npc_dota_hero_huskar,Huskar,<hc>Huskar</hc> gets stronger when his health gets lower so it's imperative that you kill him quickly during a fight.
+npc_dota_hero_huskar,Huskar,<ic>Armlet</ic> works well on <hc>Huskar</hc> since it increases his damage and the life drain only helps him to get stronger.
+npc_dota_hero_huskar,Huskar,<hc>Huskar</hc> can easily kill multiple heroes when low on health if they make the mistake of underestimating him.
+npc_dota_hero_huskar,Huskar,Pairing <hc>Huskar</hc> with a healing support can often allow him to unleash his offensive potential without much fear of death.
+npc_dota_hero_night_stalker,Night Stalker,All of <hc>Night Stalker</hc>'s abilities are enhanced at night time including his movement speed and vision range.
+npc_dota_hero_night_stalker,Night Stalker,<hc>Night Stalker</hc> is great at hunting and catching enemy heroes during nighttime.
+npc_dota_hero_night_stalker,Night Stalker,<hc>Night Stalker</hc> heavily limits enemy vision as he can use <ac>Darkness</ac> to turn day into night temporarily.
+npc_dota_hero_night_stalker,Night Stalker,"<hc>Night Stalker</hc>'s ability, <ac>Hunter in the Night</ac>, grants him flying movement during the night for 2 seconds for quick engagements or escapes. "
+npc_dota_hero_broodmother,Broodmother,<hc>Broodmother</hc> is a very strong laner with the movement speed and health regeneration bonus from her <ac>Spin Web</ac> ability.
+npc_dota_hero_broodmother,Broodmother,<hc>Broodmother</hc> is most effective against heroes who lack area of effect abilities and disables.
+npc_dota_hero_broodmother,Broodmother,<hc>Broodmother</hc> has a dominant laning stage but can suffer later as her skillset doesn't transition well to late game.
+npc_dota_hero_broodmother,Broodmother,<hc>Broodmother</hc> can often be a surprise late pick in the draft for teams who can't counter her.
+npc_dota_hero_bounty_hunter,Bounty Hunter,<hc>Bounty Hunter</hc> can go invisible using <ac>Shadow Walk</ac> then bully or gank heroes when he finds a target.
+npc_dota_hero_bounty_hunter,Bounty Hunter,<hc>Bounty Hunter</hc> accelerates his teams gold gain from hero kills by using <ac>Track</ac> on enemies prior to their death.
+npc_dota_hero_bounty_hunter,Bounty Hunter,<hc>Bounty Hunter</hc> applies a lot of pressure in the early game but falters a bit in teamfights without items.
+npc_dota_hero_bounty_hunter,Bounty Hunter,<hc>Bounty Hunter</hc> can use <ac>Shadow Walk</ac> and <ac>Track</ac> to use important scouting information to outmaneuver the enemy.
+npc_dota_hero_weaver,Weaver,"<hc>Weaver</hc> is effective at hit and run tactics with <ac>Shukuchi</ac>, but can be easily killed if he is disabled."
+npc_dota_hero_weaver,Weaver,<hc>Weaver</hc> benefits greatly from damage items since <ac>Geminate Attack</ac> gives him a double attack every few seconds.
+npc_dota_hero_weaver,Weaver,"If <hc>Weaver</hc> is focused but not killed in the initial burst, he can use <ac>Time Lapse</ac> to reset health and mana in order to continue fighting."
+npc_dota_hero_weaver,Weaver,<hc>Weaver</hc> works best in large open areas away from towers as he can abuse his invisibility and movement speed to give chase.
+npc_dota_hero_jakiro,Jakiro,"<hc>Jakiro</hc> is a lumbering, damage over time hero that can damage and disable grouped up enemy heroes."
+npc_dota_hero_jakiro,Jakiro,<hc>Jakiro</hc> is most effective against enemies on confined ramps and paths as they will not be able to avoid his spells easily.
+npc_dota_hero_jakiro,Jakiro,<hc>Jakiro</hc> can easily siege towers by using the creep clearing <ac>Dual Breath</ac> and the tower damaging <ac>Liquid Fire</ac>.
+npc_dota_hero_jakiro,Jakiro,<hc>Jakiro</hc> works best against melee heroes with weak mobility as <hc>Jakiro</hc> can easily slow them and make their escape path treacherous.
+npc_dota_hero_batrider,Batrider,<hc>Batrider</hc> can use <ac>Sticky Napalm</ac> on enemies to enhance the burning effect from his fiery attacks and spells.
+npc_dota_hero_batrider,Batrider,<hc>Batrider</hc> helps his team by finding an enemy hero and dragging them to his allies with <ac>Flaming Lasso</ac>.
+npc_dota_hero_batrider,Batrider,<hc>Batrider</hc> often pulls his targets up cliffs to make it harder for them to return to safety.
+npc_dota_hero_batrider,Batrider,<hc>Batrider</hc>'s ultimate <ac>Flaming Lasso</ac> can be used on Spell Immune enemies.
+npc_dota_hero_batrider,Batrider,<hc>Batrider</hc> is often paired with a <ic>Blink Dagger</ic> and <ic>Force Staff</ic> to give the most mobility for his <ac>Flaming Lasso</ac>
+npc_dota_hero_chen,Chen,<hc>Chen</hc> can use <ac>Holy Persuasion</ac> to take control of neutral creeps for ganking and pushing purposes.
+npc_dota_hero_chen,Chen,<hc>Chen</hc> can boost his <ac>Holy Persuasion</ac> with an <ic>Aghanim's Scepter</ic> allowing him to target Ancient Creeps.
+npc_dota_hero_chen,Chen,"<hc>Chen</hc> can heal his creeps and allied heroes with his ultimate <ac>Hand of God</ac>, making him effective against burst damage lineups."
+npc_dota_hero_chen,Chen,<hc>Chen</hc> can also use <ac>Holy Persuasion</ac> to send an ally back to the fountain after a short delay allowing him to save an ally that would surely die otherwise.
+npc_dota_hero_spectre,Spectre,<hc>Spectre</hc> is a fearsome carry in the late game because her ultimate <ac>Haunt</ac> provides strong teamfight and mobility.
+npc_dota_hero_spectre,Spectre,<hc>Spectre</hc> can be at any fight on the map using her ultimate <ac>Haunt</ac> that spawns her illusions on all enemies.
+npc_dota_hero_spectre,Spectre,<hc>Spectre</hc> has low impact in the early game and is very vulnerable to pressure from aggressive heroes.
+npc_dota_hero_spectre,Spectre,"<hc>Spectre</hc> can easily slow and chase enemy heroes, making vulnerable heroes a liability."
+npc_dota_hero_doom_bringer,Doom,<hc>Doom</hc> is best known for his ultimate <hc>Doom</hc> which makes an enemy unable to use their abilities or items in a fight.
+npc_dota_hero_doom_bringer,Doom,<hc>Doom</hc> takes on the abilities of the last neutral creep he <ac>Devour</ac>ed.
+npc_dota_hero_doom_bringer,Doom,<hc>Doom</hc> is known for chasing down his helpless opponents until his damage over time skills take the last bit of their health.
+npc_dota_hero_doom_bringer,Doom,<hc>Doom</hc> can adjust his abilities and item builds based on the enemy hero composition.
+npc_dota_hero_ancient_apparition,Ancient Apparition,<hc>Ancient Apparition</hc> can launch his ultimate across the map to help out with ganks and team fights.
+npc_dota_hero_ancient_apparition,Ancient Apparition,<hc>Ancient Apparition</hc>'s ultimate lowers an enemy's death threshold and prevents any heal for the fight.
+npc_dota_hero_ancient_apparition,Ancient Apparition,<hc>Ancient Apparition</hc> is very vulnerable to enemy focus so he prefers to stay at the edge of engagements.
+npc_dota_hero_ancient_apparition,Ancient Apparition,<hc>Ancient Apparition</hc>'s skill shots work best with an allies setup so that he can amplify theirs and land his own.
+npc_dota_hero_ursa,Ursa,<hc>Ursa</hc>'s damage increases on every hit which makes fighting <hc>Ursa</hc> for more than a few blows dangerous.
+npc_dota_hero_ursa,Ursa,<hc>Ursa</hc> is the best hero in the game at killing Roshan since he can defeat him solo much earlier in the game than most heroes.
+npc_dota_hero_ursa,Ursa,"<hc>Ursa</hc> does huge burst damage to a hero he jumps on, but struggles to finish them off if they are highly mobile."
+npc_dota_hero_ursa,Ursa,<hc>Ursa</hc> lacks disables and relies on killing his opponents before they can react or escape.
+npc_dota_hero_spirit_breaker,Spirit Breaker,<hc>Spirit Breaker</hc> has a mix of stuns that he can use to gap close to mobile heroes or lockdown a threatening enemy.
+npc_dota_hero_spirit_breaker,Spirit Breaker,<hc>Spirit Breaker</hc> relies on <ac>Greater Bash</ac> which has a very high change of knocking back or stunning his target.
+npc_dota_hero_spirit_breaker,Spirit Breaker,<ac>Charge of Darkness</ac> gives <hc>Spirit Breaker</hc> vision of his target until he is interrupted or he reaches his target.
+npc_dota_hero_spirit_breaker,Spirit Breaker,"<hc>Spirit Breaker</hc> can easily catch invisible heroes if he can spot them, even just for a moment, and carries a <ic>Dust of Appearance</ic>."
+npc_dota_hero_gyrocopter,Gyrocopter,<hc>Gyrocopter</hc> has a large amount of area of effect and single target damage to use against enemy heroes and creeps to collect gold.
+npc_dota_hero_gyrocopter,Gyrocopter,<hc>Gyrocopter</hc> benefits heavily from damage items as <ac>Flak Cannon</ac> lets him attack all nearby enemies for up to 6 attacks.
+npc_dota_hero_gyrocopter,Gyrocopter,"<hc>Gyrocopter</hc> wants items that provide some mix of health, damage, movement speed, or spell immunity to help in teamfights."
+npc_dota_hero_gyrocopter,Gyrocopter,"With an <ic>Aghanim's Scepter</ic>, <hc>Gyrocopter</hc> activates his Side Gunner that, at random, attacks nearby enemy units, increasing his damage output."
+npc_dota_hero_alchemist,Alchemist,<hc>Alchemist</hc> gains extra gold each time he kills an enemy because of his <ac>Greevil's Greed</ac>. He can buy items faster than any hero in the game.
+npc_dota_hero_alchemist,Alchemist,<hc>Alchemist</hc> is very difficult to kill when his <ac>Chemical Rage</ac> is active because it grants high movement speed and a large amount of health regen.
+npc_dota_hero_alchemist,Alchemist,"It takes <hc>Alchemist</hc> a few seconds to shake up his <ac>Unstable Concoction</ac>. If you disable <hc>Alchemist</hc> towards the end of the timer, he will be stunned."
+npc_dota_hero_alchemist,Alchemist,<hc>Alchemist</hc> needs to stay ahead of his opponents in gold and items or he won't be as effective.
+npc_dota_hero_invoker,Invoker,"<hc>Invoker</hc> changes the combinations of his <ac>Quas</ac>, <ac>Wex</ac>, and <ac>Exort</ac> orbs to <ac>Invoke</ac> up to 10 different spells with various uses."
+npc_dota_hero_invoker,Invoker,"While each <hc>Invoker</hc> ability can seem lackluster on their own, they combo together in ways that are capable of killing the entire enemy team."
+npc_dota_hero_invoker,Invoker,"<hc>Invoker</hc> has incredible teamfight prowess. He can disable, stun, disarm, slow and deal massive amounts of damage."
+npc_dota_hero_invoker,Invoker,It takes an <hc>Invoker</hc> player about 5 keyboard presses to Invoke and cast each spell. The best Invokers cast most of their 10 spells in a late game fight.
+npc_dota_hero_silencer,Silencer,<hc>Silencer</hc> is named for his ultimate <ac>Global Silence</ac> that silences all enemy units on the map for a few seconds. It should be used when an enemy has committed to a fight.
+npc_dota_hero_silencer,Silencer,"<hc>Silencer</hc> steals Intelligence from his opponents when they die nearby, which gives him bonus damage, mana, spell amp, and increases the damage of his <ac>Glaives of Wisdom</ac>."
+npc_dota_hero_silencer,Silencer,<ac>Silence</ac> prevents an enemy from casting their abilities but not from attacking. This makes <hc>Silencer</hc> weak at defending himself from chasing physical attack heroes.
+npc_dota_hero_silencer,Silencer,"<hc>Silencer</hc>'s <ac>Global Silence</ac> can silence heroes who have spell immunity, but the right items can dispel this silence after it goes into effect."
+npc_dota_hero_obsidian_destroyer,Outworld Devourer,"<hc>Outworld Devourer</hc> adds pure damage to his attack based on his current mana pool which gives him massive damage, especially versus high armor heroes."
+npc_dota_hero_obsidian_destroyer,Outworld Devourer,"<hc>Outworld Devourer</hc> can banish himself or any other unit with <ac>Astral Imprisonment</ac>. This prevents them from being attacked, but also from performing any other actions."
+npc_dota_hero_obsidian_destroyer,Outworld Devourer,"<hc>Outworld Devourer</hc> deals a large amount of damage when being ignored, but is vulnerable to stuns, silences, and other disables, making <ic>Black King Bar</ic> an important item."
+npc_dota_hero_obsidian_destroyer,Outworld Devourer,"<hc>Outworld Devourer</hc>'s <ac>Arcane Orb</ac> and <ac>Sanity's Eclipse</ac> deal more damage as his Intelligence grows from items, levelups, and intelligence steal from <ac>Arcane Orb</ac>."
+npc_dota_hero_lycan,Lycan,<hc>Lycan</hc> is a strong physical damage dealer that also amplifies his allies and summoned units to deal more damage and easily kill towers.
+npc_dota_hero_lycan,Lycan,"When <hc>Lycan</hc> uses <ac>Shapeshift</ac> to transform into his wolf form, he grants critical strikes and movement speed to him and his units."
+npc_dota_hero_lycan,Lycan,<hc>Lycan</hc> becomes immune to slows during <ac>Shapeshift</ac> which makes stuns and roots necessary to prevent his movement.
+npc_dota_hero_lycan,Lycan,<hc>Lycan</hc> is best known for his ability to easily destroy towers and split push when enemies are busy elsewhere on the map.
+npc_dota_hero_brewmaster,Brewmaster,"<hc>Brewmaster</hc> is effective at disrupting teamfights by slowing enemies, lowering their accuracy, and disrupting problematic heroes."
+npc_dota_hero_brewmaster,Brewmaster,If <hc>Brewmaster</hc> is in danger of death he can use <ac>Primal Split</ac> ability to split into 3 elemental warriors to continue fighting or to escape.
+npc_dota_hero_brewmaster,Brewmaster,<hc>Brewmaster</hc> is very difficult to kill so preventing his ultimate with a stun or <ac>Silence</ac> is critical.
+npc_dota_hero_brewmaster,Brewmaster,A <ic>Blink Dagger</ic> is often a wise choice for <hc>Brewmaster</hc> to alow for better positioning during team fights.
+npc_dota_hero_shadow_demon,Shadow Demon,<hc>Shadow Demon</hc>'s <ac>Disruption</ac> can be used on an enemy to set up a skill shot or on an ally to temporarily banish them from danger.
+npc_dota_hero_shadow_demon,Shadow Demon,The illusions created from <ac>Disruption</ac> are based on the hero being banished so they become much stronger in the late game.
+npc_dota_hero_shadow_demon,Shadow Demon,"<hc>Shadow Demon</hc> can slow an enemy using <ac>Demonic Purge</ac> even if an enemy is spell immune, making it useful against slow melee heroes."
+npc_dota_hero_shadow_demon,Shadow Demon,<hc>Shadow Demon</hc> can have weak damage in the early game but a well timed <ac>Disruption</ac> can offset a strong skill or ultimate.
+npc_dota_hero_lone_druid,Lone Druid,<hc>Lone Druid</hc> fights next to his bear (summoned from <ac>Summon Spirit Bear</ac>) who can hold items like a hero.
+npc_dota_hero_lone_druid,Lone Druid,"<hc>Lone Druid</hc>'s Spirit Bear has to fight nearby him to attack, but he can fight heroes or creeps far away when using items like <ic>Radiance</ic>, Mjolnir, or <ic>Aghanim's Scepter</ic>."
+npc_dota_hero_lone_druid,Lone Druid,"<hc>Lone Druid</hc> can re-summon his Spirit Bear if it is killed, but if the he dies so does his bear."
+npc_dota_hero_lone_druid,Lone Druid,"<hc>Lone Druid</hc> often uses his bear to act as a buffer between him and his enemies, but if the enemy team can reach <hc>Lone Druid</hc> has difficulty escaping."
+npc_dota_hero_chaos_knight,Chaos Knight,"<hc>Chaos Knight</hc> can easily close the gap to enemies and stun them, but can have trouble dealing enough damage to kill them withou his ultimate <ac>Phantasm</ac>."
+npc_dota_hero_chaos_knight,Chaos Knight,"The illusions from <hc>Chaos Knight</hc>'s ultimate <ac>Phantasm</ac> deal the same damage his hero does, making Strength items extremely valuable."
+npc_dota_hero_chaos_knight,Chaos Knight,<hc>Chaos Knight</hc> works best against heroes that do single target damage since he can overwhelm them with his abilities and illusions.
+npc_dota_hero_chaos_knight,Chaos Knight,A <ic>Silver Edge</ic> can help <hc>Chaos Knight</hc> get surprise enemies while still providing respectable stats and damage.
+npc_dota_hero_meepo,Meepo,"<hc>Meepo</hc> creates duplicates of himself with every level of <ac>Divided We Stand</ac> that can move and act independently. If any of the <hc>Meepo</hc>'s die, however, all of them die."
+npc_dota_hero_meepo,Meepo,<hc>Meepo</hc>'s individual abilities are very weak but are effectively multiplied in strength with each <hc>Meepo</hc> under his control.
+npc_dota_hero_meepo,Meepo,Each <hc>Meepo</hc> can use <ac>Poof</ac> to teleport to the other which allows them to group when needed.
+npc_dota_hero_meepo,Meepo,The primary <hc>Meepo</hc> has a regular inventory but the cloned <hc>Meepo</hc>s only gain the boot item.  Clones benefit from any attributes the primary Meepo has.
+npc_dota_hero_treant,Treant Protector,"<ac>Nature's Guise</ac> allows <hc>Treant Protector</hc> to become invisible when near trees. He uses this to scout enemies, initiate a team fight, or avoid danger."
+npc_dota_hero_treant,Treant Protector,<hc>Treant Protector</hc> helps keep his allies alive with the area healing <ac>Leech Seed</ac> and the global block and regen from <ac>Living Armor</ac>.
+npc_dota_hero_treant,Treant Protector,"<hc>Treant Protector</hc> has weak damage, but, with enough levels, his disable can easily make up for it."
+npc_dota_hero_treant,Treant Protector,<hc>Treant Protector</hc> can protect and heal his team's towers with <ac>Living Armor</ac> which makes it difficult to chip away at towers over time.
+npc_dota_hero_treant,Treant Protector,"With an <ic>Aghanim's Scepter</ic> <hc>Treant Protector</hc> gains the ability <ac>Eyes In The Forest</ac> which enchants a tree, granting him unobstructed vision in that location."
+npc_dota_hero_ogre_magi,Ogre Magi,<hc>Ogre Magi</hc> can amplify his ally's movement and attack speed with <ac>Bloodlust</ac>.
+npc_dota_hero_ogre_magi,Ogre Magi,<hc>Ogre Magi</hc>'s ultimate <ac>Multicast</ac> gives a chance to cast multiple instances of his basic spells.
+npc_dota_hero_ogre_magi,Ogre Magi,"<hc>Ogre Magi</hc> is incredibly hard to bring down in the early game because of his huge health pool, base armor, and regeneration rate."
+npc_dota_hero_ogre_magi,Ogre Magi,<hc>Ogre Magi</hc> has below average Intelligence gain which is uncommon for a hero who relies so heavily on spells and mana.
+npc_dota_hero_undying,Undying,<hc>Undying</hc> is very difficult to kill in teamfights as he can keep himself and allies alive with his abilities.
+npc_dota_hero_undying,Undying,"<hc>Undying</hc> can use <ac>Decay</ac> to lower enemy Strength while increasing his own, making him difficult to fight against in the early game."
+npc_dota_hero_undying,Undying,<hc>Undying</hc> thrives during a sloppy team fights as his <ac>Tombstone</ac> zombies eventually turn the fight in his favor if the Tombstone is protected.
+npc_dota_hero_undying,Undying,"<hc>Undying</hc> is strong at teamfights and early game laning, but can quickly feel weak if the game devolves into waiting or split pushing."
+npc_dota_hero_rubick,Rubick,<hc>Rubick</hc> can be as useful as the spells he steals with <ac>Spell Steal</ac>.  This can make him valuable against big teamfight ultimates.
+npc_dota_hero_rubick,Rubick,"<hc>Rubick</hc>'s <ac>Spell Steal</ac> allows him to take his enemy's most recently cast ability. <hc>Rubick</hc> needs to time the steal perfectly or he might borrow a different, weaker ability."
+npc_dota_hero_rubick,Rubick,"<hc>Rubick</hc> is fragile, but can cover for those weaknesses with properly stolen spells."
+npc_dota_hero_rubick,Rubick,<hc>Rubick</hc>'s <ac>Null Field</ac> can be toggled offensively or defensively to reduce enemy magic resistance or increase allied magic resistance.
+npc_dota_hero_disruptor,Disruptor,<hc>Disruptor</hc> is good at catching and disabling heroes that are good at escaping with his long ranged <ac>Glimpse</ac> ability.
+npc_dota_hero_disruptor,Disruptor,"<hc>Disruptor</hc> lacks hard disables but can use both <ac>Kinetic Field</ac> and his ultimate, <ac>Static Storm</ac>, to trap enemies in a cloud of damage and silence."
+npc_dota_hero_disruptor,Disruptor,"If <hc>Disruptor</hc>'s manages to farm a <ic>Aghanim's Scepter</ic>, his <ac>Static Storm</ac> becomes strong enough to mute enemies' items."
+npc_dota_hero_disruptor,Disruptor,"<hc>Disruptor</hc> has strong abilities, but has difficulty protecting himself, especially when his enemies have a <ic>Black King Bar</ic>."
+npc_dota_hero_nyx_assassin,Nyx Assassin,<hc>Nyx Assassin</hc> has a mix of damage and disable that makes him a strong gank and teamfight hero.
+npc_dota_hero_nyx_assassin,Nyx Assassin,"<hc>Nyx Assassin</hc> can use <ac>Spiked Carapace</ac> when being attacked to guarantee his opponent is stunned and follow up with his hard to land ability, <ac>Impale</ac>."
+npc_dota_hero_nyx_assassin,Nyx Assassin,<hc>Nyx Assassin</hc> can use <ac>Vendetta</ac> to search for enemies while invisible. He can deal bonus damage attacking from his invisible state and <ac>Impale</ac> afterwards to stun them.
+npc_dota_hero_nyx_assassin,Nyx Assassin,<hc>Nyx Assassin</hc> works best against spell casters because he can reflect their damage with <ac>Spiked Carapace</ac> and easily burst them down.
+npc_dota_hero_naga_siren,Naga Siren,<hc>Naga Siren</hc> is an illusion hero who works well as a disabling utility support or a map controlling late game core.
+npc_dota_hero_naga_siren,Naga Siren,"<hc>Naga Siren</hc> is known for her <ac>Song of the Siren</ac> ultimate which puts enemies into an invulnerable sleep, allowing her to retreat or set up for a big teamfight combo with her allies."
+npc_dota_hero_naga_siren,Naga Siren,"<hc>Naga Siren</hc> can always save herself from a gank if she casts <ac>Song of the Siren</ac> in time, so it's important to use silences and stuns to prevent it."
+npc_dota_hero_naga_siren,Naga Siren,<hc>Naga Siren</hc> is a great candidate for utility items like <ic>Pipe of Insight</ic> and <ic>Spirit Vessel</ic> which can benefit her team.
+npc_dota_hero_keeper_of_the_light,Keeper of the Light,"<hc>Keeper of the Light</hc> can use <ac>Illuminate</ac> to blast damage towards enemy creep waves, making him good at pushing and defending against pushes."
+npc_dota_hero_keeper_of_the_light,Keeper of the Light,<hc>Keeper of the Light</hc> is easy to kill once caught since he has weak disables and lacks escape.
+npc_dota_hero_keeper_of_the_light,Keeper of the Light,<hc>Keeper of the Light</hc> relies on long range <ac>Illuminate</ac> blasts and careful positioning to make up for his long cast times and low health pool.
+npc_dota_hero_keeper_of_the_light,Keeper of the Light,"<hc>Keeper of the Light</hc> can use his ultimate to gain access to abilities like Recall, which brings an allied hero across the map to him."
+npc_dota_hero_wisp,Io,"<hc>Io</hc> uses <ac>Tether</ac> to link himself to an ally, providing them bonus healing and regeneration."
+npc_dota_hero_wisp,Io,"<hc>Io</hc> can channel <ac>Relocate</ac> to bring himself and an ally anywhere on the map, either to escape danger or arrive at a fight. <hc>Io</hc> returns to the original departure point after a delay."
+npc_dota_hero_wisp,Io,<hc>Io</hc> has to balance careful positioning to help an ally and stay alive. <hc>Io</hc> makes the <ac>Tether</ac>'d ally much harder to kill.
+npc_dota_hero_wisp,Io,"<hc>Io</hc> must channel <ac>Relocate</ac>, but if <hc>Io</hc> is stunned before the completion <ac>Relocate</ac> is interrupted and leaving both heroes vulnerable."
+npc_dota_hero_visage,Visage,"<hc>Visage</hc> is weak in the early game until he gains his ultimate, <ac>Summon Familiars</ac>. His familiars help him to push waves, kill creeps, and teamfight."
+npc_dota_hero_visage,Visage,"<hc>Visage</hc> is individually wea,k but with his familiars it is difficult to fully remove him from a fight."
+npc_dota_hero_visage,Visage,"Between <hc>Visage</hc> and his familiars, <hc>Visage</hc> can deal heavy amounts of physical burst damage and often purchases <ic>Solar Crest</ic> to amplify this damage."
+npc_dota_hero_visage,Visage,<ic>Aghanim's Scepter</ic> is a common pickup for <hc>Visage</hc> as it allows him to summon an extra familiar.
+npc_dota_hero_slark,Slark,<hc>Slark</hc> is very good at ganking heroes with stuns because he can catch them with <ac>Pounce</ac> and then use his <ac>Dark Pact</ac> to strong dispel any response from his opponents.
+npc_dota_hero_slark,Slark,"Fighting <hc>Slark</hc> for long periods of time is dangerous because he steals attributes from you with every hit, increasing his attack speed, damage, and armor."
+npc_dota_hero_slark,Slark,<hc>Slark</hc> is very difficult to kill because a poorly timed disable can be removed by his low cooldown <ac>Dark Pact</ac>. He can become untargetable for a few seconds while healing with <ac>Shadow Dance</ac>.
+npc_dota_hero_slark,Slark,"Because <hc>Slark</hc> is very dependent on his abilities to stay alive, disabling him before <ac>Dark Pact</ac> is used will often ensure a kill."
+npc_dota_hero_medusa,Medusa,"<hc>Medusa</hc> can deal a moderate amount of damage to several enemies at the same time, but lacks the output to easily put down isolated heroes."
+npc_dota_hero_medusa,Medusa,<hc>Medusa</hc> is very difficult to kill because her <ac>Mana Shield</ac> blocks incoming damage. Draining her mana can be an effective way to lower her effectiveness.
+npc_dota_hero_medusa,Medusa,"<hc>Medusa</hc> requires a moderate amount of gold and items to become a damage threat, but is always strong in a teamfight due to <ac>Stone Gaze</ac>."
+npc_dota_hero_medusa,Medusa,<hc>Medusa</hc> benefits a lot from an item like <ic>Eye of Skadi</ic> as it provides survivability and and a gives slow to combo with her <ac>Split Shot</ac> ability.
+npc_dota_hero_troll_warlord,Troll Warlord,"<hc>Troll Warlord</hc> has high attack speed as well as a chance to bash in close range, making him dangerous if you lack disable or mobility."
+npc_dota_hero_troll_warlord,Troll Warlord,"<hc>Troll Warlord</hc> often purchase items with a mix of attributes, life steal, and movement speed to chase enemies and maneuver around teamfights."
+npc_dota_hero_troll_warlord,Troll Warlord,<hc>Troll Warlord</hc> beats most physical damage heroes as his <ac>Whirling Axes</ac> ability can make them miss attacks.
+npc_dota_hero_troll_warlord,Troll Warlord,"<hc>Troll Warlord</hc> can amplify his team's attack speed, allowing his team to blow through undefended towers and barracks."
+npc_dota_hero_centaur,Centaur Warrunner,"<hc>Centaur Warrunner</hc> is great at initiating teamfights, either by charging in with <ac>Stampede</ac>, or using a <ic>Blink Dagger</ic>."
+npc_dota_hero_centaur,Centaur Warrunner,"<hc>Centaur Warrunner</hc> can use <ac>Double Edge</ac> to rapidly clear creeps or heavily damaged, grouped heroes."
+npc_dota_hero_centaur,Centaur Warrunner,"<hc>Centaur Warrunner</hc> works best when using <ac>Hoof Stomp</ac> to stun multiple enemies, allowing time for allies to follow up."
+npc_dota_hero_centaur,Centaur Warrunner,<hc>Centaur Warrunner</hc> works best in the offlane because he can <ac>Return</ac> some of harass damage he takes and jungle if the lane gets too dangerous.
+npc_dota_hero_magnataur,Magnus,<hc>Magnus</hc>' ultimate <ac>Reverse Polarity</ac> groups and stuns nearby enemies. 
+npc_dota_hero_magnataur,Magnus,<hc>Magnus</hc> often purchases <ic>Blink Dagger</ic> to help him take advantage of positioning mistakes by his enemies.
+npc_dota_hero_magnataur,Magnus,<hc>Magnus</hc> can give an ally a cleave with <ac>Empower</ac> which helps them kill creeps much faster and profit from his <ac>Reverse Polarity</ac>.
+npc_dota_hero_magnataur,Magnus,<hc>Magnus</hc> can use <ac>Skewer</ac> to escape danger or to charge enemies towards his allies to ensure a kill.
+npc_dota_hero_shredder,Timbersaw,<hc>Timbersaw</hc> deals pure damage with his abilities but requires a lot of mana and skill to cast them.
+npc_dota_hero_shredder,Timbersaw,<hc>Timbersaw</hc> uses <ac>Timber Chain</ac> to zip around teamfights quickly.
+npc_dota_hero_shredder,Timbersaw,"<hc>Timbersaw</hc>'s armor and regen are increased the more he is attacked, making him very difficult to kill through physical damage."
+npc_dota_hero_shredder,Timbersaw,<hc>Timbersaw</hc> is best at killing Strength heroes since <ac>Whirling Death</ac> temporarily reduces their primary attribute.
+npc_dota_hero_bristleback,Bristleback,<hc>Bristleback</hc> takes reduced damage when he turns his back to his enemies.  He has a chance to release damaging quills on every received attack.
+npc_dota_hero_bristleback,Bristleback,<hc>Bristleback</hc> relies on items that increase his survivability like <ic>Crimson Guard</ic> or <ic>Pipe of Insight</ic>.
+npc_dota_hero_bristleback,Bristleback,<hc>Bristleback</hc> prefers to be focused over his allies as he can reduce incoming damage.
+npc_dota_hero_bristleback,Bristleback,<hc>Bristleback</hc> does more damage as the fight goes on due to the stacking damage from <ac>Quill Spray</ac> and the damage increase from <ac>Warpath</ac>.
+npc_dota_hero_tusk,Tusk,<hc>Tusk</hc> is very strong at chasing enemies.  He can block their escape path with <ac>Ice Shards</ac> or catch them in a <ac>Snowball</ac> with his allies.
+npc_dota_hero_tusk,Tusk,<hc>Tusk</hc> can protect himself and nearby allies by rolling them into his <ac>Snowball</ac>.
+npc_dota_hero_tusk,Tusk,<hc>Tusk</hc> can use his <ac>Frozen Sigil</ac> to scout for enemy movement or simply reduce their attack and movement speed in a fight.
+npc_dota_hero_tusk,Tusk,<hc>Tusk</hc> wants to block enemy retreat paths and initiate with his other damage and stun abilities when they turn to fight.
+npc_dota_hero_skywrath_mage,Skywrath Mage,<hc>Skywrath Mage</hc> is very vulnerable but makes up for it with huge burst damage that works best when combo'ed with an ally.
+npc_dota_hero_skywrath_mage,Skywrath Mage,<hc>Skywrath Mage</hc> works well against heroes who require their abilities to survive since <ac>Ancient Seal</ac> silences them and lowers their magic resistance.
+npc_dota_hero_skywrath_mage,Skywrath Mage,<hc>Skywrath Mage</hc> falls off heavily in usefulness once his opponents purchase <ic>Black King Bar</ic> since it counters all of his skills.
+npc_dota_hero_skywrath_mage,Skywrath Mage,<hc>Skywrath Mage</hc> combos well with allies who have stuns or roots since it guarantees <hc>Skywrath Mage</hc> maximizes his <ac>Mystic Flare</ac> damage.
+npc_dota_hero_abaddon,Abaddon,"<hc>Abaddon</hc> can use <ac>Aphotic Shield</ac> to dispel most negative debuffs from his allies such as stuns, silences, or slows."
+npc_dota_hero_abaddon,Abaddon,"Between <ac>Aphotic Shield</ac> and <ac>Mist Coil</ac>, <hc>Abaddon</hc> can usually keep an ally alive if they are focused or disabled."
+npc_dota_hero_abaddon,Abaddon,<hc>Abaddon</hc> is very difficult to kill because of <ac>Borrowed Time</ac>. It automatically triggers when he is low health and any damage he takes heals him instead.
+npc_dota_hero_abaddon,Abaddon,"<hc>Abaddon</hc> can be annoying to play against. He is difficult to kill, but he can also heal and dispel the debuffs placed on his allies."
+npc_dota_hero_elder_titan,Elder Titan,<hc>Elder Titan</hc> amplifies the damage your team does by reducing nearby enemies' base armor and magic resistance with <ac>Natural Order</ac>.
+npc_dota_hero_elder_titan,Elder Titan,<hc>Elder Titan</hc>'s abilities are difficult to land but can combo to deal a huge amount of damage.
+npc_dota_hero_elder_titan,Elder Titan,<hc>Elder Titan</hc>'s <ac>Astral Spirit</ac> can be moved independently of his hero for a short time and does a mirrored version of his <ac>Echo Stomp</ac> ability.
+npc_dota_hero_legion_commander,Legion Commander,"<hc>Legion Commander</hc> is known for her <ac>Duel</ac> ability that forces an opponent to fight her, giving the winner permanent bonus damage. She uses this to lock down difficult to kill heroes."
+npc_dota_hero_legion_commander,Legion Commander,<hc>Legion Commander</hc> often prioritizes killing creeps to purchase <ic>Blink Dagger</ic> so that she can more easily <ac>Duel</ac> heroes who are out of position.
+npc_dota_hero_legion_commander,Legion Commander,<hc>Legion Commander</hc> can use <ac>Press The Attack</ac> to dispel most negative debuffs from herself and allies as well as buff her attack speed before a <ac>Duel</ac>.
+npc_dota_hero_legion_commander,Legion Commander,<hc>Legion Commander</hc> is effective against illusion-based heroes thanks to her <ac>Overwhelming Odds</ac> ability.
+npc_dota_hero_ember_spirit,Ember Spirit,"<hc>Ember Spirit</hc> is an extremely mobile hero with a high skill cap. He uses his skills to block or dodge damage taken while rooting, chasing, and finishing off retreating enemies."
+npc_dota_hero_ember_spirit,Ember Spirit,<hc>Ember Spirit</hc> uses <ac>Sleight of Fist</ac> to reach out and hit enemies in an area while safely applying <ac>Searing Chains</ac> to initiate.
+npc_dota_hero_ember_spirit,Ember Spirit,"<hc>Ember Spirit</hc> is very good at split pushing because he can drop a <ac>Fire Remnant</ac>, teleport to another lane to push, then return to his placed <ac>Fire Remnant</ac>."
+npc_dota_hero_ember_spirit,Ember Spirit,<hc>Ember Spirit</hc> is weak versus silences and stuns that prevent him from using his evasive abilities.
+npc_dota_hero_earth_spirit,Earth Spirit,"<hc>Earth Spirit</hc> has an area of effect stun and silence, making him very strong at ganking and teamfighting."
+npc_dota_hero_earth_spirit,Earth Spirit,<hc>Earth Spirit</hc> can use <ac>Rolling Boulder</ac> to roll great distances to quickly initiate on enemies.
+npc_dota_hero_earth_spirit,Earth Spirit,<hc>Earth Spirit</hc> can deal massive damage in a teamfight with <ac>Magnetize</ac>. Nearby <ac>Stone Remnants</ac> explode and increase it's duration.
+npc_dota_hero_earth_spirit,Earth Spirit,"<hc>Earth Spirit</hc> requires <ac>Stone Remnants</ac> to make his abilities stronger, but needs to carefully balance their charges or risk being less effective."
+npc_dota_hero_terrorblade,Terrorblade,<hc>Terrorblade</hc> uses <ac>Conjure Image</ac> to create illusions of himself to help him kill creeps and battle enemy heroes.
+npc_dota_hero_terrorblade,Terrorblade,<hc>Terrorblade</hc> uses <ac>Metamorphosis</ac> to greatly increase his damage and attack range.  This allows him to better siege towers and be more effective in teamfights.
+npc_dota_hero_terrorblade,Terrorblade,"If <hc>Terrorblade</hc> is not killed quickly when low on health, he can use <ac>Sunder</ac> on an enemy to swap their health amounts, often causing their death and his escape."
+npc_dota_hero_terrorblade,Terrorblade,"<hc>Terrorblade</hc> is best countered by stuns, magic damage, and silences to prevent him from escaping."
+npc_dota_hero_phoenix,Phoenix,"<hc>Phoenix</hc> deals a large amount of damage over time, but loses health points with every ability use."
+npc_dota_hero_phoenix,Phoenix,"<hc>Phoenix</hc> is very mobile and good at dealing damage from long range, but can be countered by silences."
+npc_dota_hero_phoenix,Phoenix,"<hc>Phoenix</hc> can swing teamfights with <ac>Supernova</ac>.  If the enemy team fails to hit the egg enough times before it explodes, <hc>Phoenix</hc> is reborn."
+npc_dota_hero_phoenix,Phoenix,"<hc>Phoenix</hc> must place <ac>Supernova</ac> in a perfect position. If it's too safe, it won't threaten his opponents. If placed too aggressive, it will be focused and killed."
+npc_dota_hero_oracle,Oracle,<hc>Oracle</hc> uses <ac>False Promise</ac> to dispel stuns or disables on an ally and amplify their healing to keep them alive when they get focused.
+npc_dota_hero_oracle,Oracle,"<hc>Oracle</hc> deals above average magic damage with <ac>Purifying Flames</ac>.  However, at the end of it's damage over time effect, it partially heals the target."
+npc_dota_hero_oracle,Oracle,<hc>Oracle</hc> wants to sit behind and protect his allies without being focused as he can't easily defend himself.
+npc_dota_hero_oracle,Oracle,<hc>Oracle</hc> can use his <ac>Fate's Edict</ac> ability to stop an enemy from attacking or save an ally from magical damage.
+npc_dota_hero_techies,Techies,"<hc>Techies</hc>' proximity mines cannot be detected by True Sight, but become visible if an enemy is within the area of the mine."
+npc_dota_hero_techies,Techies,<hc>Techies</hc> can set up his <ac>Proximity Mines</ac> inside tree paths to catch heroes by surprise.
+npc_dota_hero_techies,Techies,<hc>Techies</hc> lets his mines do the fighting for him and relies on them to make up for low damage and slow movement speed.
+npc_dota_hero_techies,Techies,<hc>Techies</hc> can place his cloaked <ac>Remote Mines</ac> in a clump and wait for any unsuspecting heroes to cross their path before triggering them.
+npc_dota_hero_winter_wyvern,Winter Wyvern,<hc>Winter Wyvern</hc> can save allies against physical damage by using <ac>Cold Embrace</ac>.
+npc_dota_hero_winter_wyvern,Winter Wyvern,"<hc>Winter Wyvern</hc> has trouble fighting 1v1, but excels at teamfights with abilities like <ac>Winter's Curse</ac>."
+npc_dota_hero_winter_wyvern,Winter Wyvern,<hc>Winter Wyvern</hc> can abuse the low cooldown of <ac>Splinter Blast</ac> to quickly stop creep pushes.
+npc_dota_hero_winter_wyvern,Winter Wyvern,<hc>Winter Wyvern</hc> can escape danger by flying over cliffs and trees using <ac>Arctic Burn</ac>.
+npc_dota_hero_arc_warden,Arc Warden,"<hc>Arc Warden</hc> gets double benefit from his items, like <ic>Hand of Midas</ic>, since his <ac>Tempest Double</ac> copies his inventory."
+npc_dota_hero_arc_warden,Arc Warden,<hc>Arc Warden</hc> can pressure enemies and split push from safety by using his <ac>Tempest Double</ac> to do the dirty work.
+npc_dota_hero_arc_warden,Arc Warden,<hc>Arc Warden</hc>'s abilities are useful for chasing and slowing enemies but become limited if enemies are grouped.
+npc_dota_hero_arc_warden,Arc Warden,<hc>Arc Warden</hc>'s ability <ac>Magnetic Field</ac> can be used at a crucial time to win a team fight or save a building by protecting anything inside from attacks.
+npc_dota_hero_abyssal_underlord,Underlord,<hc>Underlord</hc> is very good at clearing creep waves with a well placed <ac>Firestorm</ac>.
+npc_dota_hero_abyssal_underlord,Underlord,<hc>Underlord</hc> collects gold very quickly.  He purchases items like <ic>Crimson Guard</ic> or <ic>Pipe of Insight</ic> to allow him to be more effective in teamfights.
+npc_dota_hero_abyssal_underlord,Underlord,"<hc>Underlord</hc> thrives versus low mobility, melee heroes, especially those weak to area of effect control and damage."
+npc_dota_hero_abyssal_underlord,Underlord,<hc>Underlord</hc>'s ability <ac>Dark Rift</ac> provides a safe escape from a big push or fight if timed properly.
+npc_dota_hero_monkey_king,Monkey King,It's unwise to fight <hc>Monkey King</hc> long enough for his <ac>Jingu Mastery</ac> to activate which grants him bonus damage and lifesteal.
+npc_dota_hero_monkey_king,Monkey King,<hc>Monkey King</hc> has many tricks up his sleeve that allow him to escape from danger or hide in plain sight.
+npc_dota_hero_monkey_king,Monkey King,<hc>Monkey King</hc> works best moving around the map and finding a weak lane to pressure or gank.
+npc_dota_hero_monkey_king,Monkey King,"<hc>Monkey King</hc> can jump across trees to scout for enemies and look for a gank, but is very vulnerable to tree clearing abilities."
+npc_dota_hero_monkey_king,Monkey King,<hc>Monkey King</hc> can unleash devastating damage if his enemies are forced to fight inside his <ac>Wukong's Command</ac>.
+npc_dota_hero_dark_willow,Dark Willow,<hc>Dark Willow</hc> is a ranged intelligence hero with a powerful array of disables and nukes.
+npc_dota_hero_dark_willow,Dark Willow,<hc>Dark Willow</hc>'s ability <ac>Shadow Realm</ac> allows her to become untargetable and makes it difficult for enemies to kill her.
+npc_dota_hero_dark_willow,Dark Willow,<hc>Dark Willow</hc> can force opponents who like to stick together to split up with her area of effect stun <ac>Cursed Crown</ac>.
+npc_dota_hero_dark_willow,Dark Willow,<hc>Dark Willow</hc>'s <ac>Terrorize</ac> ability causes enemies to run in fear.  It can disrupt an enemy engagement and cause an opening for her team.
+npc_dota_hero_pangolier,Pangolier,"<hc>Pangolier</hc> is an aggressive, brawling-oriented hero who is best played in a position where he can quickly get an item advantage over the enemy."
+npc_dota_hero_pangolier,Pangolier,<hc>Pangolier</hc>'s ability <ac>Swashbuckle</ac> paired with <ac>Heartpiercer</ac> can add punishing damage and reduce your opponents armor to 0.
+npc_dota_hero_pangolier,Pangolier,"When using his ultimate ability <ac>Rolling Thunder</ac>, <hc>Pangolier</hc> gains spell immunity and can lock down his enemies."
+npc_dota_hero_pangolier,Pangolier,<hc>Pangolier</hc> can reduce the damage output of his enemies if hits his enemies with <ac>Shield Crash</ac>.

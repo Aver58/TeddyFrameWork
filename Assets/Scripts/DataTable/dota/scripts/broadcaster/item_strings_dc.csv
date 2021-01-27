@@ -1,0 +1,344 @@
+Internal Name,Item ID,String
+item_blink,1,"<ic>Blink Dagger</ic> teleports a hero a short distance. It is used mostly to initiate on enemies, but can be used to escape danger if the hero hasn't recently taken damage."
+item_blink,1,<ic>Blink Dagger</ic> allows a hero to instantly move closer to their enemies and use an ability before they can react.
+item_blink,1,"<ic>Blink Dagger</ic> allows the wielder to blink into trees, making it more difficult for enemies to find them."
+item_blink,1,"Using <ic>Blink Dagger</ic> allows the player to disjoint many projectiles, like ranged attacks or slow moving spells."
+item_blades_of_attack,2,<ic>Blades of Attack</ic> increase a hero's damage and are commonly used components of other items.
+item_blades_of_attack,2,Two <ic>Blades of Attack</ic> combine with <ic>Boots of Speed</ic> to make <ic>Phase Boots</ic> which increase a hero's damage and give bursts of speed.
+item_broadsword,3,"<ic>Broadsword</ic> increases a hero's damage and is always combined into another, stronger item."
+item_broadsword,3,<ic>Broadsword</ic> is built into items like <ic>Blademail</ic> and <ic>Crystalys</ic>.
+item_chainmail,4,<ic>Chainmail</ic> increases a hero's armor which reduces the amount of physical damage they receive.
+item_chainmail,4,"<ic>Chainmail</ic> is purchased as a component for items like <ic>Buckler</ic>, <ic>Medallion of Courage</ic>, and <ic>Assault Cuirass</ic>."
+item_claymore,5,"<ic>Claymore</ic> gives some attack damage, but is primarily used as a component for other items."
+item_claymore,5,<ic>Claymore</ic> builds into <ic>Shadow Blade</ic> and <ic>Satanic</ic>.
+item_helm_of_iron_will,6,<ic>Helm of Iron Will</ic> increases armor and health regeneration which helps players survive enemy harassment.
+item_helm_of_iron_will,6,<ic>Helm of Iron Will</ic> builds into <ic>Armlet of Mordiggian</ic> and <ic>Veil of Discord</ic>.
+item_javelin,7,<ic>Javelin</ic> has a chance to pierce through evasion and deal heavy bonus damage.
+item_javelin,7,"<ic>Javelin</ic> is used as a component for items that have a chance for bonus damage, like <ic>Monkey King Bar</ic> and <ic>Maelstrom</ic>."
+item_mithril_hammer,8,<ic>Mithril Hammer</ic> increases the damage a hero does with auto attacks.
+item_mithril_hammer,8,"<ic>Mithril Hammer</ic> builds into a few items, but is most commonly used for <ic>Black King Bar</ic>, <ic>Desolator</ic>, and <ic>Maelstrom</ic>."
+item_platemail,9,<ic>Platemail</ic> provides a large armor bonus to the hero which helps them survive against physical damage sources.
+item_platemail,9,"<ic>Platemail</ic> builds into strong armor items like <ic>Shiva's Guard</ic>, <ic>Assault Cuirass</ic>, and <ic>Lotus Orb</ic>."
+item_quarterstaff,10,<ic>Quarterstaff</ic> increases a hero's attack speed and damage by a small amount.
+item_quarterstaff,10,"<ic>Quarterstaff</ic> builds into a variety of items but is most commonly used for <ic>Mask of Madness</ic>, <ic>Oblivion Staff</ic> and <ic>Butterfly</ic>."
+item_quelling_blade,11,"<ic>Quelling Blade</ic> increases the damage done by a hero when attacking regular creeps. It does not provide a bonus against heroes, and deals far more damage when wielded by a melee hero."
+item_quelling_blade,11,<ic>Quelling Blade</ic> can be used to instantly chop down trees near a hero which can open up new pathways and help the hero hide or escape enemies.
+item_quelling_blade,11,<ic>Quelling Blade</ic> can be used to chop down nearby <ic>Observer Wards</ic> and <ic>Sentry Wards</ic>.
+item_faerie_fire,237,"<ic>Faerie Fire</ic> provides a damage bonus to a hero and can be consumed for a short burst of healing that might surprise the opponent, allowing the hero to escape or kill them first."
+item_infused_raindrop,265,<ic>Infused Raindrop</ic> is used to provide mana regen over time and block some incoming magic damage.
+item_infused_raindrop,265,<ic>Infused Raindrop</ic> builds into an <ic>Urn of Shadows</ic> which provides the hero even greater mana regeneration.
+item_infused_raindrop,265,<ic>Infused Raindrop</ic> should be used to enhance the hero's survivability against magic burst heroes.
+item_wind_lace,244,"<ic>Wind Lace</ic> increases a hero's movement speed while the hero holds it. This can help the hero escape, chase, or dodge enemy spells."
+item_wind_lace,244,"<ic>Wind Lace</ic> builds into a few items that increase a hero's movement speed like <ic>Tranquil Boots</ic>, <ic>Drum of Endurance</ic>, or Eul's Scepter."
+item_wind_lace,244,<ic>Wind Lace</ic> is commonly purchased in the early game and held until the hero runs out of item slots.
+item_ring_of_protection,12,"<ic>Ring of Protection</ic> increases a hero's armor by a small amount and builds into a few inexpensive items like <ic>Ring of Basilius</ic>, and <ic>Urn of Shadows</ic>."
+item_stout_shield,182,<ic>Stout Shield</ic> blocks a portion of the damage from enemy attacks and works best against low damage enemies like creeps.
+item_stout_shield,182,<ic>Stout Shield</ic> is more effective against melee heroes then ranged ones.
+item_stout_shield,182,<ic>Stout Shield</ic> is very important to have when fighting against enemy and neutral creeps.
+item_moon_shard,247,<ic>Moon Shard</ic> greatly increases a hero's attack speed while increasing a hero's vision range during night time.
+item_moon_shard,247,"<ic>Moon Shard</ic> can be consumed to give you half of its bonuses for the rest of the game, but should only be done when the hero is out of item slots."
+item_gauntlets,13,<ic>Gauntlets of Strength</ic> increase a hero's Strength by a small amount. Strength increases a hero's health and health regen. Strength heroes also get a damage boost.
+item_slippers,14,"<ic>Slippers of Agility</ic> can be built into a <ic>Wraith Band</ic>, an item valued for its early game attributes."
+item_slippers,14,<ic>Slippers of Agility</ic> increase a hero's Agility attribute which increases a hero's attack speed and armor by a small amount.
+item_mantle,15,"<ic>Mantle of Intelligence</ic> increases a hero's Intelligence which provides them more mana, mana regeneration, spell amplification."
+item_mantle,15,<ic>Mantle of Intelligence</ic> can be built into a <ic>Null Talisman</ic> for strong early game stats.
+item_branches,16,"<ic>Iron Branch</ic> is a low cost, common item that provides 1 of each attribute."
+item_branches,16,<ic>Iron Branch</ic> can be used to plant a temporary tree in the ground. The tree can be used to block jungle entrances or eaten with a <ic>Tango</ic> for extra healing.
+item_belt_of_Strength,17,<ic>Belt of Strength</ic> increases a hero's Strength by a moderate amount. It is used to make items like <ic>Power Treads</ic> or <ic>Sange</ic>.
+item_boots_of_elves,18,"<ic>Band of Elvenskin</ic> increases a hero's Agility by a moderate amount. It is used to make items like <ic>Power Treads</ic>, <ic>Dragon Lance</ic>, or <ic>Yasha</ic>."
+item_robe,19,"<ic>Robe of the Magi</ic> increases a hero's Intelligence by a moderate amount. It is used to make items like <ic>Power Treads</ic>, <ic>Oblivion Staff</ic>, or <ic>Blade Mail</ic>."
+item_ogre_axe,21,"<ic>Ogre Axe</ic> increases a hero's Strength by a large amount and is purchased to build into items like <ic>Black King Bar</ic>, <ic>Dragon Lance</ic>, and <ic>Aghanim's Scepter</ic>."
+item_blade_of_alacrity,22,"<ic>Blade of Alacrity</ic> increases a hero's Agility by a large amount and is purchased to build into items like <ic>Diffusal Blade</ic>, <ic>Yasha</ic>, and <ic>Aghanim's Scepter</ic>."
+item_staff_of_wizardry,23,"<ic>Staff of Wizardry</ic> increases a hero's Intelligence by a large amount and is purchased to build into items like <ic>Force Staff</ic>, <ic>Eul's Scepter of Divinity</ic>, and <ic>Aghanim's Scepter</ic>."
+item_ultimate_orb,24,"<ic>Ultimate Orb</ic> provides a large amount of every stat but is expensive. It's combines into many strong items like <ic>Manta Style</ic>, <ic>Linken's Sphere</ic>, and <ic>Silver Edge</ic>."
+item_ultimate_orb,24,<ic>Ultimate Orb</ic> can only be purchased outside of each base at either secret shop.
+item_gloves,25,"<ic>Gloves of Haste</ic> increase a hero's attack speed by a moderate amount and builds into items like <ic>Power Treads</ic>, <ic>Hand of Midas</ic>, and <ic>Helm of the Dominator</ic>."
+item_lifesteal,26,<ic>Morbid Mask</ic> increases a hero's damage and allows them to heal for a portion of the damage they deal to opponents with attacks.
+item_lifesteal,26,"<ic>Morbid Mask</ic> builds into stronger lifesteal items like <ic>Satanic</ic>, <ic>Vladmir's Offering</ic>, and <ic>Mask of Madness</ic>."
+item_ring_of_regen,27,"<ic>Ring of Regen</ic> slowly heals the hero over time and is combined into items like <ic>Tranquil Boots</ic>, <ic>Headdress</ic>, and <ic>Hood of Defiance</ic>."
+item_ring_of_regen,27,"<ic>Ring of Regen</ic> heals the hero at a much slower pace than <ic>Tango</ic> and <ic>Healing Salve</ic>, but builds into other items."
+item_sobi_mask,28,"<ic>Sage's Mask</ic> increases a hero's current mana regeneration by a percentage amount, making it better when the hero has high Intelligence."
+item_sobi_mask,28,"<ic>Sage's Mask</ic> builds into many items like <ic>Ring of Basilius</ic>, <ic>Drum of Endurance</ic>, and <ic>Medallion of Courage</ic>."
+item_boots,29,<ic>Boots of Speed</ic> are a must buy because movement speed helps chase enemies and avoid danger. Rapidly get from place to place allows the owner to change the outcome of ganks and fights.
+item_boots,29,<ic>Boots of Speed</ic> are basic boots that later build into more specialized options depending on the hero's needs.
+item_gem,30,<ic>Gem of True Sight</ic> provides true sight of invisible enemies near the gem holder. It's best used for checking multiple locations for enemies or wards.
+item_gem,30,<ic>Gem of True Sight</ic> drops from the hero's inventory upon death. Any player on either team can pick it up and use it afterwards.
+item_cloak,31,<ic>Cloak</ic> increases the hero's magic resistance which makes it a good purchase against heavy magic damage enemies.
+item_cloak,31,<ic>Cloak</ic> can build into better magic resistance items like <ic>Hood of Defiance</ic> and <ic>Glimmer Cape</ic>.
+item_talisman_of_evasion,32,"<ic>Talisman of Evasion</ic> makes enemy hits against the hero unreliable. It combines into stronger items like <ic>Butterfly</ic>, <ic>Heaven's Halberd</ic>, and <ic>Solar Crest</ic>."
+item_magic_stick,34,<ic>Magic Stick</ic> provides charges when nearby heroes cast spells. These charges can be used to restore health and mana points during fights to stay alive or gain mana for a crucial skill.
+item_magic_stick,34,<ic>Magic Stick</ic> is a valuable item against heroes who cast many spells because it's owner can rely on the extra health and mana.
+item_magic_wand,36,"<ic>Magic Wand</ic> gains charges when an enemy casts a spell nearby. When activating <ic>Magic Wand</ic>, it restores health and mana for the amount of charges."
+item_magic_wand,36,<ic>Magic Wand</ic> is extremely valuable as a health and mana item because of the cheap attributes and increased charge limit over <ic>Magic Stick</ic>.
+item_ghost,37,"<ic>Ghost Scepter</ic> is used to make the hero ethereal for a short time during which the hero cannot be attacked. However, bonus magical damage is taken in ethereal form."
+item_ghost,37,<ic>Ghost Scepter</ic> should be purchased on heroes that need to stay alive for a few seconds when targeted by a physical damage hero.
+item_clarity,38,<ic>Clarity</ic> Potions are used to restore a hero's mana pool without walking to the fountain or shrine. It is interrupted by hero or Roshan damage so its best to use them away from enemies.
+item_clarity,38,<ic>Clarity</ic> Potions are useful to leave in a backpack to restore a hero's mana between fights.
+item_enchanted_mango,216,<ic>Enchanted Mango</ic> slowly refills a hero's health points over time and can be consumed to instantly refill a large chunk of a hero's mana if needed.
+item_enchanted_mango,216,<ic>Enchanted Mango</ic> can also be used on an ally hero to aid their mana needs.
+item_flask,39,<ic>Healing Salve</ic> is a consumable that is used to rapidly heal after narrowly escaping death or taking too much harassment. Its effect is interrupted by hero or Roshan damage.
+item_flask,39,"<ic>Healing Salve</ic> is primarily used for healing when a lot of damage has been taken, but in a pinch it can be used when juking enemies to heal just enough to turn and fight again."
+item_dust,40,"<ic>Dust of Appearance</ic> not only reveals nearby invisible heroes, but also applies a decent slow on affected heroes."
+item_dust,40,<ic>Dust of Appearance</ic> is an effective tool to hunt down elusive invisible heroes and make ganking invisible heroes hesitant about approaching.
+item_bottle,41,<ic>Bottle</ic> is used to refill a hero's health and mana. It can be refilled at the fountain or by grabbing a rune on the map for storage.
+item_bottle,41,"<ic>Bottle</ic> is not a consumable despite having limited charges, but it does require the player to refill it or bottle runes to take full advantage."
+item_bottle,41,<ic>Bottle</ic> stores runes for later use. You can grab an invisibility rune and save it to avoid danger or bottle the haste rune to activate when you need to chase down an enemy.
+item_bottle,41,Using <ic>Bottle</ic> on a bounty rune will fill it with 3 charges.
+item_ward_observer,42,<ic>Observer Wards</ic> provide vision of enemy movement and are very important to winning a game.
+item_ward_observer,42,<ic>Observer Wards</ic> should be placed where the enemy team is unlikely to guess their location as you don't want your enemy to find and destroy them.
+item_ward_observer,42,<ic>Observer Wards</ic> lasts for a long time when placed and are invisible to the naked eye. A nearby <ic>Sentry Ward</ic> or a <ic>Gem of True Sight</ic> can reveal their location.
+item_ward_observer,42,"<ic>Observer Wards</ic> grant information that can be used to perform strategic maneuvers against one's enemies, especially when they are in a jungle by themselves attacking creeps."
+item_ward_sentry,43,<ic>Sentry Wards</ic> are used to protect an area from invisible heroes or to indicate when they are lurking nearby.
+item_ward_sentry,43,<ic>Sentry Wards</ic> are usually used as a defensive measure since they can reveal enemies.
+item_ward_sentry,43,<ic>Sentry Wards</ic> are used often to locate enemy <ic>Observer Wards</ic> because a successful deward returns the gold lost and limits the enemy's vision.
+item_tango,44,<ic>Tango</ic> is a common starting item as it allows the player to eat a tree and receive a heal over time.
+item_tango,44,<ic>Tangos</ic> can be used to cut through trees in rapid succession to make an escape path that opponents won't expect.
+item_tango,44,"<ic>Tangos</ic> come in a pack of 4 and can be shared between allies.  However, only the original owner can use them in rapid succesion."
+item_courier,45,<ic>Animal Couriers</ic> are used to ferry out purchased items so heroes can continue collecting gold and fighting enemies without having to go to a shop.
+item_courier,45,"<ic>Animal Couriers</ic> can be killed easily, especially by invisible heroes who can lie in wait for them to walk between towers. If they are killed, the enemy team gets a large gold bonus."
+item_courier,45,"<ic>Animal Couriers</ic> will upgrade automatically into a <ic>Flying Courier</ic> upon reaching the 3 minute mark of the game, offering better protection to the courier and speeding up its deliveries."
+item_tpscroll,46,<ic>Town Portal Scroll</ic> teleports a hero from his location to an allied building. It can save the player time and can be used for a strategic advantage.
+item_tpscroll,46,<ic>Town Portal Scrolls</ic> can be used to avoid a gank by an enemy hero who lacks a stun.  They will not be able to interrupt its channel.
+item_tpscroll,46,<ic>Town Portal Scrolls</ic> can be used to defend allies who are in danger in different lanes.
+item_travel_boots,48,"<ic>Boots of Travel</ic> are more expensive than <ic>Town Portal Scrolls</ic>, but increase a hero's movement speed, have a lower cooldown, and allow teleporting to allied creeps as well as structures."
+item_travel_boots,48,<ic>Boots of Travel</ic> can be used to teleport to allied creeps instead of just buildings. It can be used to gank enemies or defend nearby allies.
+item_phase_boots,50,<ic>Phase Boots</ic> are a common boot upgrade that increase a hero's damage and can increase movement speed for a short period of time.
+item_phase_boots,50,<ic>Phase Boots</ic> are often purchased by melee heroes who need to remain close to enemies to attack them.
+item_phase_boots,50,<ic>Phase Boots</ic> should be purchased by heroes who prefer a higher damage attack and bursts of movement speed.
+item_demon_edge,51,"<ic>Demon Edge</ic> increases the holder's damage by a large amount and builds into damage items like <ic>Monkey King Bar</ic>, <ic>Daedalus</ic>, and <ic>Divine Rapier</ic>."
+item_eagle,52,<ic>Eaglesong</ic> provides a massive amount of Agility and can be built into either a <ic>Butterfly</ic> or <ic>Ethereal Blade</ic>.
+item_reaver,53,<ic>Reaver</ic> provides a massive amount of Strength and can be built into either <ic>Heart of Tarrasque</ic> or <ic>Satanic</ic>.
+item_relic,54,"<ic>Sacred Relic</ic> gives a large damage increase and can be built into either <ic>Radiance</ic>, <ic>Nullifier</ic>, or <ic>Divine Rapier</ic>."
+item_hyperstone,55,"<ic>Hyperstone</ic> provides a large boost in attack speed and upgrades into items like <ic>Assault Cuirass</ic>, <ic>Moon Shard</ic>, and <ic>Mjollnir</ic>."
+item_ring_of_health,56,"<ic>Ring of Health</ic> gives the holder a large amount of health regen and is bought as a precursor to items like <ic>Vanguard</ic>, <ic>Hood of Defiance</ic>, or <ic>Helm of the Dominator</ic>."
+item_void_stone,57,<ic>Void Stone</ic> provides much more mana regeneration when the hero has high Intelligence.
+item_void_stone,57,"<ic>Void Stone</ic> increases the mana regeneration of the hero and can be built into items like <ic>Eul's Scepter of Divinity</ic>, <ic>Aether Lens</ic>, or <ic>Scythe of Vyse</ic>."
+item_mystic_staff,58,"<ic>Mystic Staff</ic> provides a massive amount of Intelligence and can be built into <ic>Scythe of Vyse</ic>, <ic>Shiva's Guard</ic>, or <ic>Octarine Core</ic>."
+item_energy_booster,59,<ic>Energy Booster</ic> increases a hero's mana pool and is commonly purchased to upgrade <ic>Boots of Speed</ic> into <ic>Arcane Boots</ic> in the early game.
+item_point_booster,60,<ic>Point Booster</ic> increases a hero's max health and max mana and builds into common items like <ic>Bloodstone</ic> and <ic>Aghanim's Scepter</ic>.
+item_vitality_booster,61,"<ic>Vitality Booster</ic> increases a hero's max health and builds into items like <ic>Vanguard</ic>, <ic>Bloodstone</ic>, and <ic>Heart of Tarrasque</ic>."
+item_power_treads,63,<ic>Power Treads</ic> are a very versatile item.  The attribute it buffs can be changed as needed.
+item_power_treads,63,<ic>Power Treads</ic> are valued on heroes who need attack speed and bonuses from attributes such as extra health.
+item_power_treads,63,You can use <ic>Power Treads</ic> to adjust a hero's stats such as lowering the mana cost of a hero's spells with Intelligence treads and increasing regen gained when set to Agility.
+item_hand_of_midas,65,<ic>Hand of Midas</ic> is used to increase the gold and experience gain of the hero. It works best when purchased early.
+item_hand_of_midas,65,<ic>Hand of Midas</ic> is sometimes purchased when the player wants to collect gold faster than their opponents and don't expect to fight much.
+item_hand_of_midas,65,"<ic>Hand of Midas</ic> makes the hero weaker in the short term, but if a hero's team can hold their ground it can make for a much stronger late game."
+item_oblivion_staff,67,"<ic>Oblivion Staff</ic> provides a mix of damage, increased Intelligence, and attack speed. It builds into <ic>Orchid Malevolence</ic> and <ic>Echo Sabre</ic>."
+item_pers,69,<ic>Perseverance</ic> provides health and mana regen. It is purchased early to lead into items like <ic>Battle Fury</ic> or <ic>Linken's Sphere</ic>.
+item_pers,69,<ic>Perseverance</ic> should not be purchased only for its regeneration effects. There are often better health and mana regen items available.
+item_bracer,73,<ic>Bracer</ic> is usually purchased to temporarily increase a hero's health and build into later items.
+item_bracer,73,"<ic>Bracer</ic> gives a mix of attribute bonuses, the most prominent being its Strength boost. It can be upgraded into <ic>Drum of Endurance</ic> and <ic>Rod of Atos</ic>."
+item_wraith_band,75,<ic>Wraith Bands</ic> are often purchased early in the game to keep Agility heroes competitive at last hitting.
+item_wraith_band,75,<ic>Wraith Band</ic> gives a mix of attributes that mostly increases a hero's Agility. It is often built into a <ic>Ring of Aquila</ic> on Agility heroes.
+item_null_talisman,77,<ic>Null Talisman</ic> is usually purchased by Intelligence heroes to increase their damage in lane and help to secure last hits on creeps.
+item_null_talisman,77,<ic>Null Talisman</ic> gives a mix of attributes that mostly increases a hero's Intelligence. It can upgrade into <ic>Veil of Discord</ic> or <ic>Dagon</ic>.
+item_mekansm,79,<ic>Mekansm</ic> provides strong stats and armor to the hero and its active ability can be use to heal the owner and nearby allies.
+item_mekansm,79,<ic>Mekansm</ic> is best used to help a team sustain area of effect damage taken during a fight. Keeping allies alive ensures they can deal more damage in the fight.
+item_mekansm,79,<ic>Mekansm</ic> is useful when pushing towers as it can heal any creeps and summons to allow a tower push to continue.
+item_vladmir,81,"<ic>Vladmir's Offering</ic> grants an aura that affects nearby allies and provides lifesteal, armor, and increased damage. It also provides a small amount of health and mana regen."
+item_vladmir,81,<ic>Vladmir's Offering</ic> is often used to provide an armor aura to nearby creeps and summons so you can keep a hero's units alive versus towers.
+item_vladmir,81,<ic>Vladmir's Offering</ic> is usually purchased by carries because of the lifesteal and damage bonus from its aura.
+item_flying_courier,84,<ic>Flying Courier</ic> makes a courier faster by letting it fly to its destination instead of walk. It becomes faster and harder to kill.
+item_buckler,86,<ic>Buckler</ic> is an armor item that is mostly purchased on the way to another item like <ic>Mekansm</ic> or <ic>Crimson Guard</ic>.
+item_ring_of_basilius,88,"<ic>Ring of Basilius</ic> is a cheap item that is bought for its armor and mana regen aura. It is often built into a <ic>Ring of Aquila</ic>, but can also be used for <ic>Vladmir's Offering</ic>."
+item_ring_of_basilius,88,"<ic>Ring of Basilius</ic> helps in the laning stage as it slowly regenerates a hero's mana, grants damage, and helps a hero's creeps survive longer with its armor aura."
+item_pipe,90,"<ic>Pipe of Insight</ic> is purchased to increase a hero's magic resistance. It can also help protect allies, especially against area of effect magic damage."
+item_pipe,90,<ic>Pipe of Insight</ic> helps a player's team kill towers and enemy barracks by protecting allies and creeps from enemy retribution.
+item_urn_of_shadows,92,<ic>Urn of Shadows</ic> catches souls after and enemy is killed. The souls can be used to heal the hero and their allies or to damage the hero's enemies.
+item_urn_of_shadows,92,"<ic>Urn of Shadows</ic> provides a good mix of attributes, armor, and mana regeneration but is primarily used to heal allies after a fight."
+item_urn_of_shadows,92,<ic>Urn of Shadows</ic> is very effective at countering enemy <ic>Blink Daggers</ic> as its damage over time effect causes <ic>Blink Dagger</ic> to remain on cooldown.
+item_urn_of_shadows,92,<ic>Urn of Shadows</ic> can be upgraded into a <ic>Spirit Vessel</ic> which provides increased health and more potent magic damage.
+item_headdress,94,"<ic>Headdress</ic> has a health regen aura and small attribute buffs, but is mostly used to upgrade into <ic>Helm of the Dominator</ic>, <ic>Pipe of Insight</ic>, or <ic>Vladmir's Offering</ic>."
+item_sheepstick,96,"<ic>Scythe of Vyse</ic> can be used to hex opponents, turning them into a harmless critter. When hexed, they cannot cast spells, use items, or attack but they can move at slow critter speeds."
+item_sheepstick,96,<ic>Scythe of Vyse</ic> can hex opponents but the hex can be countered by items like <ic>Force Staff</ic> and <ic>Linken's Sphere</ic>
+item_orchid,98,<ic>Orchid Malevolence</ic> can apply a short silence to opponents and amplifies any damage taken while silenced.
+item_orchid,98,<ic>Orchid Malevolence</ic> is commonly purchased on heroes who lack disable and like to gank as it prevents enemies from using spells to defend themselves.
+item_orchid,98,<ic>Orchid Malevolence</ic> is best used to kill heroes who rely on their abilities to defend themselves.
+item_orchid,98,"<ic>Orchid Malevolence</ic>'s soul burn active can be countered by items like <ic>Manta Style</ic>, <ic>Lotus Orb</ic>, and <ic>Eul's Scepter of Divinity</ic>."
+item_bloodthorn,250,"<ic>Bloodthorn</ic>'s active ability, <ac>Soul Rend</ac>, is similar to <ic>Orchid Malevolence</ic> but also adds true strike and critical hits to the targeted hero."
+item_bloodthorn,250,<ic>Bloodthorn</ic> is not much stronger than <ic>Orchid Malevolence</ic> despite the increased cost. It can be worth the cost if a player desires true strike and more firepower.
+item_bloodthorn,250,"<ic>Bloodthorn</ic>, like <ic>Orchid Malevolence</ic>, is countered by cheaper items, like <ic>Black King Bar</ic>."
+item_echo_sabre,252,<ic>Echo Sabre</ic> helps melee heroes slow and burst down enemies with their strong physical attack.
+item_echo_sabre,252,"<ic>Echo Sabre</ic> gives a good mix of benefits that benefit most carries with its health boost, increased attack speed, and mana regen."
+item_cyclone,100,"<ic>Eul's Scepter of Divinity</ic> provides movement speed, increased Intelligence, and mana regen as well as the active Cyclone."
+item_cyclone,100,<ic>Eul's Scepter of Divinity</ic> can be used to Cyclone the hero for a few seconds to avoid damage from opponents or dispel negative debuffs like silence.
+item_cyclone,100,The Cyclone ability is often used to perfectly time skill shots on fast moving heroes and guarantee a stun.
+item_aether_lens,232,<ic>Aether Lens</ic> increases the cast range of a hero's abilities while also increasing their mana pool and mana regeneration.
+item_aether_lens,232,The cast range increase from <ic>Aether Lens</ic> can be used by heroes to affect teamfights without putting themselves in harm's way.
+item_aether_lens,232,<ic>Aether Lens</ic> helps heroes to keep a range advantage on their opponents during fights.
+item_force_staff,102,<ic>Force Staff</ic> is primarily used to push the hero away from danger. It can also be used to force a stunned or disabled ally outside of an opponent's attack and spell range.
+item_force_staff,102,<ic>Force Staff</ic> can often negate an enemy slow or stun by moving the player farther away. 
+item_force_staff,102,<ic>Force Staff</ic> can be used to push a hero up or down cliffs to help separate them from dangerous situations.
+item_force_staff,102,<ic>Force Staff</ic> can be used on opponents to push them towards a hero's base when they don't expect it.
+item_hurricane_pike,263,<ic>Hurricane Pike</ic> is often purchased on carries who are easily killed and need to be able to separate themselves from danger.
+item_hurricane_pike,263,<ic>Hurricane Pike</ic>'s active Hurricane Thrust pushes the hero and enemy away from one another while increasing attack speed.
+item_hurricane_pike,263,"<ic>Hurricane Pike</ic>, like <ic>Dragon Lance</ic>, increases the attack range of the ranged units who wield it."
+item_dagon,104,<ic>Dagon</ic> is used as an extra source of magic damage if the hero wants to burst down enemies.
+item_dagon,201,<ic>Dagon</ic> 2 does more damage than <ic>Dagon</ic> but is an expensive upgrade for the amount.
+item_dagon,202,<ic>Dagon</ic> 3 does 50% more damage than <ic>Dagon</ic> but costs almost twice as much.
+item_dagon,203,<ic>Dagon</ic> 4 does more damage than its previous level and comes off cooldown much sooner than <ic>Dagon</ic>.
+item_dagon,204,<ic>Dagon</ic> 5 is worth purchasing when you can refresh the cooldown to cast it twice or amplify the damage with <ic>Ethereal Blade</ic>.
+item_dagon,204,<ic>Dagon</ic> 5 deals twice the damage of <ic>Dagon</ic> but also has a much lower cooldown and increased cast range.
+item_necronomicon,106,<ic>Necronomicon</ic> summons two warriors to fight by the hero's side that deal heavy damage and drain the mana of their opponents.
+item_necronomicon,193,<ic>Necronomicon</ic> 2 summons stronger warriors than the baseline version.
+item_necronomicon,194,<ic>Necronomicon</ic> 3 provides a true sight aura around the warrior summons which can be useful for detecting <ic>Observer Wards</ic> or invisible heroes.
+item_necronomicon,194,<ic>Necronomicon</ic> 3 is stronger when paired with auras that increase damage and attack speed.
+item_ultimate_scepter,108,"<ic>Aghanim's Scepter</ic> is purchased when a hero wants health, mana, and attribute increase as well as the ability enhancement that it provides."
+item_ultimate_scepter,108,<ic>Aghanim's Scepter</ic> has a very easy buildup for most heroes but doesn't always provide the most needed passive benefits.
+item_refresher,110,"When used, <ic>Refresher Orb</ic> resets all ability and item cooldowns on the hero back to zero allowing their use a second time in the same fight."
+item_refresher,110,"For some heroes, it can be worthwhile to buy <ic>Refresher Orb</ic> to refresh items mid-battle like <ic>Black King Bar</ic>, <ic>Satanic</ic>, or <ic>Scythe of Vyse</ic>."
+item_refresher,110,<ic>Refresher Orb</ic> is rarely purchased but allows you to use the same strong teamfight ultimate twice in a row.
+item_refresher,110,<ic>Refresher Orb</ic> is very situational as it's relatively expensive with little passive impact and costs a lot of mana.
+item_assault,112,"<ic>Assault Cuirass</ic> provides allies with increased attack speed and armor. It lowers enemy armor, including towers."
+item_assault,112,<ic>Assault Cuirass</ic> is best purchased as a late game armor item if the hero deals damage primarily from attacks.
+item_assault,112,<ic>Assault Cuirass</ic> works best combined with other sources of negative armor such as <ic>Desolator</ic>.
+item_heart,114,<ic>Heart of Tarrasque</ic> increases the health of a hero more than any other item in the game. It also provides a modest Strength boost.
+item_heart,114,"<ic>Heart of Tarrasque</ic> passively heals the hero for a large amount when out of combat, allowing them to re-engage after a short time."
+item_heart,114,<ic>Heart of Tarrasque</ic> works best on high resistance heroes who need large amounts of health to live longer or on heroes who benefit from its Strength boost.
+item_heart,114,<ic>Heart of Tarrasque</ic> works best versus burst damage heroes as the enemy will often have difficulty increasing their burst to counter Heart's effect.
+item_black_king_bar,116,<ic>Black King Bar</ic> is a staple item as its active makes the hero Spell Immune for a short time. It should be used during teamfights to protect from spell damage and disables.
+item_black_king_bar,116,<ic>Black King Bar</ic> is relied upon by many heroes to ensure they can fight up close with enemies who would prefer to use their spells to get kills at the start of the fight.
+item_black_king_bar,116,"<ic>Black King Bar</ic> has weak base stats for its cost, but the active helps ensure survival and can help turn teamfights."
+item_black_king_bar,116,"If the enemies have a heavy amount of stuns and magic damage, <ic>Black King Bar</ic>'s value is increased greatly making it a situational purchase."
+item_shivas_guard,119,<ic>Shiva's Guard</ic> is primarily purchased because of the large armor boost it provides. It is also useful for its active that can slow and damage nearby units.
+item_shivas_guard,119,<ic>Shiva's Guard</ic> produces an aura that heavily reduces the attack speed of enemies nearby.
+item_shivas_guard,119,<ic>Shiva's Guard</ic> is usually purchased by Intelligence heroes for their late game armor item.
+item_shivas_guard,119,<ic>Shiva's Guard</ic> can also be useful for the extra vision it's active provides.
+item_bloodstone,121,<ic>Bloodstone</ic> is often purchased for its large amount of mana regen. It also increases a hero's health and mana pool.
+item_bloodstone,121,"<ic>Bloodstone</ic> gives more mana regen depending on the number of charges. One charge is gained when enemies die near the hero, but many are lost upon death."
+item_bloodstone,121,<ic>Bloodstone</ic> can be used to instantly kill the holder. This prevents enemies from gaining gold and experience from the caster's death.
+item_sphere,123,"<ic>Linken's Sphere</ic> gives the hero a good mix of attributes and regen. However, its main benefit is that it can block an enemy spell once every 13 seconds."
+item_sphere,123,<ic>Linken's Sphere</ic> only blocks single target abilities or items. It won't stop area of effect or ground targeted abilities.
+item_sphere,123,<ic>Linken's Sphere</ic> works best as active protection since it automatically reacts to quick disables that can't be anticipated.
+item_sphere,123,"<ic>Linken's Sphere</ic> is used as an extra layer of protection against enemy abilities that often result in a hero's death, like <hc>Batrider's</hc> <ac>Flaming Lasso</ac> or <hc>Legion Commander</hc>'s <ac>Duel</ac>."
+item_lotus_orb,226,<ic>Lotus Orb</ic> is mostly used for its active <ac>Echo Shell</ac> which reflects a copy of single target spells towards their caster. It also dispels any weak disables on the hero upon use.
+item_lotus_orb,226,"<ic>Lotus Orb</ic> can help win fights by reflecting key abilities like stuns, hexes, or ultimates such as <hc>Beastmaster</hc>'s <ac>Primal Roar</ac>."
+item_lotus_orb,226,<ic>Lotus Orb</ic> works well as a reactionary item against silences.
+item_lotus_orb,226,"<ic>Lotus Orb</ic> gives you a moderate mix of armor, health and mana regen, as well as an increased mana pool, but it is not purchased solely for the stats it provides."
+item_vanguard,125,"<ic>Vanguard</ic> gives a large amount of survivability if purchased early in the game. It increases health, health regen and a chance to block damage from attacks."
+item_crimson_guard,242,<ic>Crimson Guard</ic> is similar to <ic>Vanguard</ic> in passive stats but is preferred for its active <ac>Guard</ac> which guarantees damage block on nearby allied heroes.
+item_crimson_guard,242,<ic>Crimson Guard</ic>'s active ability is best used against heroes who can attack multiple enemies at the same time or rapidly attack a single hero.
+item_blade_mail,127,<ic>Blade Mail</ic>'s active damage return reflects back an equal amount of damage dealt to the attacker/caster.
+item_blade_mail,127,<ic>Blade Mail</ic> dissuades enemies from attacking or casting spells for a short time and can buy enough time for a quick escape.
+item_blade_mail,127,<ic>Blade Mail</ic> works best on heroes that can use abilities to force enemies to fight them. It can reflect any retribution damage which may occur.
+item_soul_booster,129,<ic>Soul Booster</ic> provides a large amount of health and mana and is purchased to build into either <ic>Bloodstone</ic> or <ic>Octarine Core</ic>.
+item_hood_of_defiance,131,<ic>Hood of Defiance</ic> is purchased to give the user magic resistance and health regen. It is often built into <ic>Pipe of Insight</ic> to increase the magic resistance and health regen.
+item_hood_of_defiance,131,<ic>Hood of Defiance</ic> has a helpful active <ac>Barrier</ac> which acts as a spell shield that absorbs up to 325 magic damage.
+item_hood_of_defiance,131,<ic>Hood of Defiance</ic> is an important purchase if playing against a team that relies heavily on magic damage.
+item_rapier,133,"<ic>Divine Rapier</ic> gives a ridiculous amount of damage for its gold cold, but drops on the ground if the wielder dies."
+item_monkey_king_bar,135,"<ic>Monkey King Bar</ic> is a late game damage item that ensures most attacks will not miss, even if the target has evasion."
+item_monkey_king_bar,135,<ic>Monkey King Bar</ic> has a high chance to deal additional magic damage and will pierce through any evasion.
+item_monkey_king_bar,135,<ic>Monkey King Bar</ic> is most often purchased to deal with sources of evasion like <ic>Butterfly</ic> or <ic>Solar Crest</ic>.
+item_radiance,137,"<ic>Radiance</ic> increases a hero's damage, but more importantly deals magic damage to any nearby enemies while lowering their accuracy."
+item_radiance,137,<ic>Radiance</ic> provides its damage aura to any illusions of the hero. The illusions can disperse to multiple places on the map to kill creeps and collect gold more quickly.
+item_radiance,137,"<ic>Radiance</ic> has a difficult purchase path as <ic>Sacred Relic</ic> is the most expensive component in the game. Once it's built, however, you can easily collect gold."
+item_butterfly,139,<ic>Butterfly</ic> is best on Agility heroes because they gain damage from its Agility boost. It also gives a moderate amount of attack speed and armor with a huge amount of evasion.
+item_butterfly,139,<ic>Butterfly</ic>'s evasion can give the hero an advantage in combat if any enemy attackers aren't prepared with evasion mitigation.
+item_butterfly,139,"<ic>Butterfly</ic> makes heroes much harder to kill because of its miss chance, but is a poor choice if a hero's opponent relies on spells instead of attacks."
+item_greater_crit,141,<ic>Daedalus</ic> greatly increases damage and provides a chance to critical strike for a bonus multiplier.
+item_greater_crit,141,<ic>Daedalus</ic> provides a lot of damage in fights through its potential for critical strikes that can quickly kill an enemy hero.
+item_greater_crit,141,"<ic>Daedalus</ic> provides the second best damage increase, but is a lot safer to buy than <ic>Divine Rapier</ic>."
+item_basher,143,<ic>Skull Basher</ic> provides the hero a chance to bash on attack which stuns and deals bonus damage.
+item_basher,143,<ic>Skull Basher</ic> works best on heroes with high attack speed who have trouble staying close to their enemies.
+item_basher,143,<ic>Skull Basher</ic> can be upgraded into an <ic>Abyssal Blade</ic> which retains the bash qualities and has an extra stun ability.
+item_bfury,145,<ic>Battle Fury</ic> increases the hero's damage and adds a cleave effect to the hero's attacks that help clear creep waves quickly.
+item_bfury,145,<ic>Battle Fury</ic> is used to swiftly clear creep waves and neutral creep camps which helps the player purchase items faster.
+item_bfury,145,<ic>Battle Fury</ic> can be used as a damage item to help deal with illusion heroes.
+item_manta,147,"Using <ic>Manta Style</ic>'s active ability, <ac>Mirror Image</ac>, creates two illusions of the hero. It also dispels many negative abilities."
+item_manta,147,<ic>Manta Style</ic> works best for Agility heroes who commonly purchase an assortment of attribute items since illusion damage is only enhanced by attributes.
+item_lesser_crit,149,"<ic>Crystalys</ic> increases a hero's damage and provides a chance to critical strike, but is often purchased to build into <ic>Daedalus</ic> or <ic>Bloodthorn</ic>."
+item_dragon_lance,236,<ic>Dragon Lance</ic> provides a lot of Strength and Agility while increasing the attack range of ranged heroes.
+item_dragon_lance,236,<ic>Dragon Lance</ic> helps heroes stay alive in early fights as it allows them to attack from a safer position with their longer range.
+item_dragon_lance,236,"<ic>Dragon Lance</ic> allows many ranged heroes to outrange enemy towers, making killing towers easier."
+item_armlet,151,"<ic>Armlet of Mordiggian</ic> provides a lot of benefit for its cost, but comes at a price. When the Armlet is activated, the hero's health is drained at a moderate rate."
+item_armlet,151,"<ic>Armlet of Mordiggian</ic> increases a hero's current health when turned on, even at 1 HP. You can abuse this by toggling armlet off and then on again when close to death."
+item_invis_sword,152,<ic>Shadow Blade</ic> is a common item for heroes who need to start fights in melee range. It prevents an enemy from reacting to danger until it's too late.
+item_invis_sword,152,"<ic>Shadow Blade</ic> is a slower form of mobility than <ic>Blink Dagger</ic>, but it deals bonus damage when attacking from invisibility as well providing attack speed and increased damage."
+item_invis_sword,152,<ic>Shadow Blade</ic> is strong in the late game for finding mobile heroes in dangerous areas without them realizing you are nearby.
+item_invis_sword,152,"<ic>Shadow Blade</ic> can be used to easily avoid enemy ganks if the ganking heroes didn't bring any forms of detection, like <ic>Dust of Appearance</ic>."
+item_silver_edge,249,<ic>Silver Edge</ic> is an upgraded form of <ic>Shadow Blade</ic> that has better passive stats and a better <ac>Shadow Walk</ac> active.
+item_silver_edge,249,<ic>Silver Edge</ic>'s <ac>Shadow Walk</ac> applies break upon attack which disables the enemy's passive abilities. This can provide an opening to kill an otherwise strong hero.
+item_silver_edge,249,<ic>Silver Edge</ic> can apply temporary damage reduction to enemies attacked from <ac>Shadow Walk</ac>.
+item_sange_and_yasha,154,"<ic>Sange and Yasha</ic> is strong on heroes who need a mix of Strength and Agility attributes, attack speed, and movement speed. It also gives the user a chance to apply a slow when attacking."
+item_sange_and_yasha,154,<ic>Sange and Yasha</ic> provides a huge amount of movement speed with a moderate amount of Strength and Agility for a reasonable cost.
+item_satanic,156,<ic>Satanic</ic> is purchased as a late game item for its <ac>Unholy Rage</ac> active that lets the hero lifesteal to full health with a few hits.
+item_mjollnir,158,<ic>Mjollnir</ic> allows a hero to do pseudo AOE damage with the chain lightning it releases and the <ac>Static Charge</ac> active that nukes nearby enemies.
+item_mjollnir,158,<ic>Mjollnir</ic> has some weaknesses compared to <ic>Battle Fury</ic> in that it doesn't scale with the hero's damage and the damage it deals can't be amplified with critical strikes.
+item_mjollnir,158,<ic>Mjollnir</ic> helps the player spend less time pushing creep waves given them gold at a faster rate and allowing more time to do other things.
+item_skadi,160,"<ic>Eye of Skadi</ic> is purchased to increase the health of a hero while still providing them a moderate amount of damage, attack speed and armor."
+item_skadi,160,<ic>Eye of Skadi</ic>'s cold attack is most useful against heroes who are weak at gap closing especially when they purchase <ic>Black King Bar</ic> as cold attack still affects those heroes.
+item_sange,162,"<ic>Sange</ic> is a buildup item that provides a good mix of Strength, damage, and a passive lesser maim effect that sometimes slows enemies."
+item_sange,162,<ic>Sange</ic> is often built into either a <ic>Sange and Yasha</ic> for it's mix of attributes and mobility or <ic>Heaven's Halberd</ic> to make the user hard to kill and difficult to attack.
+item_helm_of_the_dominator,164,<ic>Helm of the Dominator</ic> provides an attack speed and health regen aura to nearby allies but primarily is used to dominate a neutral creep to help the hero fight.
+item_helm_of_the_dominator,164,"You can use the Dominate active from <ic>Helm of the Dominator</ic> to control a neutral creep, giving it substantial bonus health and movement speed."
+item_maelstrom,166,<ic>Maelstrom</ic> is an easy way to deal area of effect damage through a hero's attacks. It can be later upgraded into the better version <ic>Mjollnir</ic>.
+item_maelstrom,166,"<ic>Maelstrom</ic> increases the rate that you kill enemy creeps and helps to kill enemy heroes, but the chain lightning doesn't work on buildings or spell immune enemies."
+item_desolator,168,<ic>Desolator</ic> is one of the most valuable damage items in the game as it both increases a hero's damage and lowers the armor of attacked enemies.
+item_desolator,168,<ic>Desolator</ic> gives a large damage bonus against low armor heroes and can be stacked with other negative armor sources to quickly kill enemies.
+item_desolator,168,<ic>Desolator</ic> lowers the armor of towers and buildings that are attacked which allows other attackers to do more damage.
+item_yasha,170,"<ic>Yasha</ic> is increases a hero's attack speed by a moderate amount, provides Agility and increases movement speed. It is often built into a <ic>Sange and Yasha</ic> or <ic>Manta Style</ic>."
+item_yasha,170,<ic>Yasha</ic> is useful for carries in the early game as it helps to rapidly kill creeps as well as move quickly between neutral camps and objectives on the map.
+item_yasha,170,<ic>Yasha</ic> provides valuable movement speed which can help a hero outrun chasing enemies or ensure the hero can catch up to fleeing enemies and secure kills.
+item_mask_of_madness,172,"<ic>Mask of Madness</ic> gives passive lifesteal and damage, but its active, <ac>Berserk</ac>, provides insane attack and movement speed at the cost of being silenced and reducing a hero's armor."
+item_mask_of_madness,172,<ic>Mask of Madness</ic> can be used for a large portion of the game and later be disassembled back into the original components to use in new items such as a <ic>Satanic</ic> and <ic>Butterfly</ic>.
+item_diffusal_blade,174,<ic>Diffusal Blade</ic> gives a large amount of Agility and Intelligence to the wielder as well as a passive manabreak which drains the mana of an enemy upon hit.
+item_diffusal_blade,174,<ic>Diffusal Blade</ic> has an active called <ac>Inhibit</ac> that can slow enemies for a few seconds.
+item_diffusal_blade,174,<ic>Diffusal Blade</ic> works best with illusion heroes as the illusions can also drain enemy mana with its mana break effect.
+item_ethereal_blade,176,<ic>Ethereal Blade</ic> provides a large amount of Agility and the ability to damage and make ethereal an enemy hero while amplifying the magic damage they take.
+item_ethereal_blade,176,<ic>Ethereal Blade</ic> can be useful to put a disabled ally into ethereal form when they are about to be killed from a physical damage source.
+item_ethereal_blade,176,<ic>Ethereal Blade</ic> should be used to burst down a hero with magic damage from the <ac>Ether Blast</ac> active with another source such as a hero ability or <ic>Dagon</ic>.
+item_soul_ring,178,<ic>Soul Ring</ic> gives a temporary supply of mana in exchange for health points.
+item_soul_ring,178,<ic>Soul Ring</ic> is a common item on heroes who regularly cast expensive spells.
+item_soul_ring,178,<ic>Soul Ring</ic> is best purchased on heroes who have health to spare but are short on mana.
+item_arcane_boots,180,<ic>Arcane Boots</ic> are the footwear of choice for heroes who need to increase their mana pools and provide themselves and allies mana with <ac>Replenish</ac>.
+item_arcane_boots,180,"<ic>Arcane Boots</ic> can be disassembled later to upgrade the <ic>Energy Booster</ic> into a different item like <ic>Aeon Disk</ic>, <ic>Lotus Orb</ic>, or <ic>Aether Lens</ic>."
+item_octarine_core,235,<ic>Octarine Core</ic> reduces the cooldown of a hero's spells and abilities as well as providing spell lifesteal against heroes and enemy creeps.
+item_octarine_core,235,<ic>Octarine Core</ic> is usually purchased on Intelligence heroes who need a crucial ability to come off of cooldown faster while also helping them stay alive with spell lifesteal.
+item_orb_of_venom,181,<ic>Orb of Venom</ic> is an early game item that applies a weak slow and provides damage over time upon attack.
+item_orb_of_venom,181,"<ic>Orb of Venom</ic> helps melee heroes get a movement speed advantage over their opponents, increasing the pressure on an enemy hero in lane."
+item_blight_stone,240,<ic>Blight Stone</ic> is an early game item that lowers the armor of an enemy upon attack. Lowering enemy armor increases the physical damage done.
+item_blight_stone,240,"<ic>Blight Stone</ic> can be purchased in the laning stage for a small advantage, but is primarily used to upgrade into <ic>Medallion of Courage</ic> and <ic>Desolator</ic>."
+item_ancient_janggo,185,<ic>Drum of Endurance</ic> gives the holder a strong mix of stats but is primarily purchased for its team auras.
+item_ancient_janggo,185,<ic>Drum of Endurance</ic> provides a movement speed aura to allies. Its <ac>Endurance</ac> active moderately boosts ally movement and attack speed for a few seconds.
+item_medallion_of_courage,187,<ic>Medallion of Courage</ic> is an item often purchased by supports that can be used on allies to transfer a portion of a the caster's armor to the target.
+item_medallion_of_courage,187,<ic>Medallion of Courage</ic> can be cast to remove armor from both the caster and the targeted enemy.
+item_medallion_of_courage,187,<ic>Medallion of Courage</ic> works well against Roshan as its armor reduction reduces the damage needed to kill him.
+item_solar_crest,229,<ic>Solar Crest</ic> is best used to protect allies right before a they are damaged to maximize the benefit of its armor and evasion increase.
+item_solar_crest,229,<ic>Solar Crest</ic> has the <ac>Shine</ac> active which can lower the armor and evasiveness of enemies or increase the armor and evasion of allies at the cost of a hero's own.
+item_solar_crest,229,<ic>Solar Crest</ic> can be used in conjunction with other negative armor items to make killing high health heroes a trivial matter.
+item_smoke_of_deceit,188,<ic>Smoke of Deceit</ic> is a consumable that is used to help a hero's team move across the map undetected.
+item_smoke_of_deceit,188,"<ic>Smoke of Deceit</ic> is best used to cross <ic>Observer Wards</ic> since you stay invisible, even through truesight, unless an enemy tower or hero comes close."
+item_smoke_of_deceit,188,"If a team has <ic>Smoke of Deceit</ic>, it's very likely they are trying to gank their enemies, move across the map to push a tower, or sneak into Roshan to quietly collect the Aegis."
+item_tome_of_knowledge,257,<ic>Tome of Knowledge</ic> is a consumable used to help heroes behind on levels.  It can be used to get a well timed level 6 for their ultimate or to get closer to a valuable talent tree reward.
+item_tome_of_knowledge,257,<ic>Tome of Knowledge</ic> increases the experience it gives you with every subsequent tome that is read.
+item_veil_of_discord,190,"<ic>Veil of Discord</ic> is a common Intelligence, armor, and regen item. It has an active called <ac>Magic Weakness</ac> that lowers enemy magic resistance."
+item_veil_of_discord,190,<ic>Veil of Discord</ic> is often purchased on heroes who primarily output magic damage.
+item_veil_of_discord,190,<ic>Veil of Discord</ic> applies its <ac>Magic Weakness</ac> active in an area making it a good pickup for heroes with area of effect magic damage spells.
+item_guardian_greaves,231,"<ic>Guardian Greaves</ic> are created to save inventory space, lower the cooldown of the previous Restore healing active, and provide armor and regen to nearby allies that are close to death."
+item_guardian_greaves,231,<ic>Guardian Greaves</ic> helps support heroes stay alive at the back of the fight against mobile heroes carrying <ic>Orchid Malevolence</ic> or other silences.
+item_rod_of_atos,206,<ic>Rod of Atos</ic> has an active called <ac>Cripple</ac> that roots an enemy for 2 seconds. 
+item_rod_of_atos,206,"<ic>Rod of Atos</ic> provides a large amount of health and Intelligence with a useful, but counterable, active ability, <ac>Cripple</ac>."
+item_rod_of_atos,206,"<ic>Rod of Atos</ic> is mostly used as an offensive item to catch evasive and fast heroes, but it's utility is limited once enemies buy a <ic>Force Staff</ic> or <ic>Black King Bar</ic>."
+item_abyssal_blade,208,<ic>Abyssal Blade</ic> provides better control for heroes than a <ic>Skull Basher</ic> as it can ensure a stun with the <ac>Overwhelm</ac> active.
+item_abyssal_blade,208,<ic>Abyssal Blade</ic> can instantly stun an enemy in a crucial moment. <ac>Overwhelm</ac> stuns even if the target is spell immune.
+item_abyssal_blade,208,"<ic>Abyssal Blade</ic> is very expensive, but stuns can ensure enemy heroes can't react and will die when ganked."
+item_heavens_halberd,210,"<ic>Heaven's Halberd</ic> makes heroes very difficult to kill between the granted Strength gain, evasion, and its active which disarms an opponent for a few seconds."
+item_ring_of_aquila,212,"<ic>Ring of Aquila</ic> combines the efficiency of <ic>Wraith Band</ic> and <ic>Ring of Basilius</ic> into something even more valuable. It cheaply provides damage, armor, and attack speed."
+item_ring_of_aquila,212,"<ic>Ring of Aquila</ic> helps the hero kill enemy creeps at a fast rate, push towers with it's armor aura, and allows participation in early skirmishes."
+item_tranquil_boots,214,"<ic>Tranquil Boots</ic> are the fastest boots for a low price. They not only make you faster when out of combat, but also provide a large amount of health regeneration."
+item_tranquil_boots,214,<ic>Tranquil Boots</ic> are best purchased on heroes who need to get close to their target before initiating with a spell.
+item_tranquil_boots,214,<ic>Tranquil Boots</ic> work well on heroes who take heavy damage during fights and need to heal up quickly afterwards while looking for the next fight.
+item_shadow_amulet,215,"<ic>Shadow Amulet</ic> can make the hero invisible while standing in the same spot, but is primarily used to upgrade to either <ic>Shadow Blade</ic> or <ic>Glimmer Cape</ic>."
+item_shadow_amulet,215,<ic>Shadow Amulet</ic> can be used on a hero after beginning a channeling spell to protect them from danger for the duration of the channel.
+item_glimmer_cape,254,<ic>Glimmer Cape</ic> temporarily increases the user's magic resistance while making them invisible. It works best to keep allies alive or help dodge enemies that are too strong to fight.
+item_glimmer_cape,254,"<ic>Glimmer Cape</ic> can help to initiate ganks, but is best used to reduce the damage dealt to an ally that is being focused by enemy abilities."
+item_aeon_disk,256,<ic>Aeon Disk</ic>'s ability <ac>Combo Breaker</ac> provides a strong dispel and applies a buff which causes all incoming and outgoing damage to be reduced to zero.
+item_aeon_disk,256,<ic>Aeon Disk</ic> gives generous health and mana as well as increasing status resistance.
+item_aeon_disk,256,<ic>Aeon Disk</ic> is a great item choice for squishy heroes who need to get their abilities off against burst heavy lineups.
+item_kaya,259,<ic>Kaya</ic> increases mana efficiency by reducing mana costs for spells and also increasing spell damage. 
+item_kaya,259,<ic>Kaya</ic> works best on Intelligence heroes that frequently cast spells with high mana costs.
+item_meteor_hammer,223,"<ic>Meteor Hammer</ic> can turn the tide of a fight with its stun and damage over time effect, but requires a long uninterrupted channel."
+item_meteor_hammer,223,<ic>Meteor Hammer</ic> can help chip away at and stun towers that are normally hard to siege.
+item_nullifier,225,<ic>Nullifier</ic> prevents an enemy from using items while also slowing them. It is well suited for countering heroes with a <ic>Black King Bar</ic>.
+item_spirit_vessel,267,<ic>Spirit Vessel</ic> is often used to counter tanky heroes with healing skills or high health regeneration.
+item_spirit_vessel,267,"<ic>Spirit Vessel</ic> amplifies healing when used on allies, making it an excellent restoration item after fights."

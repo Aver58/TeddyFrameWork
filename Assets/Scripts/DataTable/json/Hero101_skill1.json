@@ -8,7 +8,6 @@
     "UNIT_AI_TARGET_RESEARCH"
   ],
 
-
   "AbilityType": "ABILITY_TYPE_ULTIMATE",
   "AbilityBranch": "ABILITY_BRANCH_PHYSICAL",
   "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",

@@ -3,7 +3,7 @@
   "AbilityType": "ABILITY_TYPE_ATTACK",
   "AbilityBranch": "ABILITY_BRANCH_PHYSICAL",
   "AbilityBehavior": [
-    "ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ATTACK"
+    "ABILITY_BEHAVIOR_NO_TARGET"
   ],
   "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
   "AbilityUnitAiTargetCondition": "UNIT_TARGET_RANGE_MIN",

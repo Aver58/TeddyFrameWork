@@ -23,9 +23,12 @@
   "AbilityCostType": "ENERGY",
   "AbilityCostValue": 1000,
 
-  "AbilityAoeSector": {
-    "Radius": 6,
-    "Angle": 60
+  "AoeArea": {
+    "AreaType": "DAMAGE_AREA_TYPE_SECTOR",
+    "Sector": {
+      "Radius": 6,
+      "Angle": 60
+    }
   },
 
   "Precache": [
@@ -88,15 +91,7 @@
       "Target": {
         "Center": "CASTER",
         "Teams": "UNIT_TARGET_TEAM_ENEMY",
-        "Types": "UNIT_TARGET_HERO",
-
-        "AoeArea": {
-          "AreaType": "DAMAGE_AREA_TYPE_SECTOR",
-          "Sector": {
-            "Radius": 6,
-            "Angle": 60
-          }
-        }
+        "Types": "UNIT_TARGET_HERO"
       },
 
       "Action": {
