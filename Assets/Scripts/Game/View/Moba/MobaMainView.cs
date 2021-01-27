@@ -88,6 +88,8 @@ public class MobaMainView : MainViewBase
         m_cameraManager.SetWorldCameraPosition(actor.transform.position);
         m_cameraManager.SetWorldCameraTarget(actor.transform);
 
+        //m_joystick.axisX.directTransform = actor.transform;//todo 这个控制会比较舒服吗？
+
         m_PlayerActor = actor;
         m_PlayerEntity = actor.battleEntity;
         var skillIDs = m_PlayerEntity.GetSkillList();
@@ -200,11 +202,11 @@ public class MobaMainView : MainViewBase
     private void OnFingerDrag(AbilityCastType abilityCastType, Vector2 mouseDelta)
     {
         //Debug.RawLog(mouseDelta);
-        var originPos = m_PlayerActor.transform.position;
-        skillForward.Set(originPos.x + mouseDelta.x, originPos.y, originPos.z + mouseDelta.y);
+        //var originPos = m_PlayerActor.transform.position;
+        //skillForward.Set(originPos.x + mouseDelta.x, originPos.y, originPos.z + mouseDelta.y);
 
         if(m_PlayerActor != null)
-            m_PlayerActor.OnFingerDrag(abilityCastType, skillForward);
+            m_PlayerActor.OnFingerDrag(abilityCastType, mouseDelta);
     }
 
     private void OnFingerUp(AbilityCastType abilityCastType)

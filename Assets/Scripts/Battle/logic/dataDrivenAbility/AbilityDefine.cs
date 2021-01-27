@@ -42,12 +42,26 @@ public enum AbilityUnitTargetTeam
     UNIT_TARGET_TEAM_BOTH,
 }
 
+public enum AbilityUnitTargetType
+{
+    UNIT_TARGET_HERO,
+}
+
 // 技能目标
 public enum AbilitySingTarget
 {
     CASTER,
     TARGET,
     POINT,
+}
+
+// 技能目标中心点（AOE区域以中心点展开）
+public enum AbilityUnitTargetCenter
+{
+    CASTER,
+    TARGET,
+    POINT,
+    ATTACKER,
 }
 
 //技能请求目标类型

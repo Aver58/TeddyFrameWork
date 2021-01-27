@@ -16,14 +16,14 @@ using LitJson;
 public static class AbilityReader
 {
     #region 创建Action映射方法
-    public static Dictionary<string, Func<JsonData, AbilityRange, AbilityData, D2Action>> AbilityActionCreateMap = new Dictionary<string, Func<JsonData, AbilityRange, AbilityData, D2Action>>
+    public static Dictionary<string, Func<JsonData, ActionTarget, AbilityData, D2Action>> AbilityActionCreateMap = new Dictionary<string, Func<JsonData, ActionTarget, AbilityData, D2Action>>
     {
         { "IsHit" , CreateIsHitAction},
         { "ChangeEnergy" , CreateChangeEnergyAction},
         { "Damage" , CreateDamageAction},
     };
 
-    private static D2Action CreateIsHitAction(JsonData actionJsonData,AbilityRange abilityRange, AbilityData abilityData)
+    private static D2Action CreateIsHitAction(JsonData actionJsonData,ActionTarget actionTarget, AbilityData abilityData)
     {
         JsonData onSuccessActionConfig = GetJsonValue(actionJsonData, "OnSuccess");
         if(onSuccessActionConfig == null)
@@ -37,7 +37,7 @@ public static class AbilityReader
         return d2Action_IsHit;
     }
 
-    private static D2Action CreateChangeEnergyAction(JsonData actionJsonData, AbilityRange abilityRange, AbilityData abilityData)
+    private static D2Action CreateChangeEnergyAction(JsonData actionJsonData, ActionTarget actionTarget, AbilityData abilityData)
     {
         JsonData energyParams = GetJsonValue(actionJsonData, "EnergyParams");
         if(energyParams == null)
@@ -55,7 +55,8 @@ public static class AbilityReader
         return d2Action_ChangeEnergy;
     }
 
-    /*"Damage": 
+    /*
+    "Damage": 
       {
           "Target":"TARGET",
           "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
@@ -80,7 +81,7 @@ public static class AbilityReader
               }
           }
       }*/
-    private static D2Action CreateDamageAction(JsonData actionJsonData, AbilityRange abilityRange, AbilityData abilityData)
+    private static D2Action CreateDamageAction(JsonData actionJsonData, ActionTarget actionTarget, AbilityData abilityData)
     {
         string damageTypeConfig = GetJsonValueToString(actionJsonData, "DamageType");
         if(damageTypeConfig == null)
@@ -181,42 +182,86 @@ public static class AbilityReader
         return abilityValueSource;
     }
 
-    private static AbilityRange ParseAbilityRange(JsonData jsonData, AbilityData abilityData)
+    // 大招技能指示器解析，这部分有点冗余，是自己抽出来的，不是dota源解析，那dota是怎么实现技能指示器的
+    private static ActionTarget ParseAbilityRange(JsonData jsonData, AbilityData abilityData)
     {
         if(jsonData == null)
             return null;
-        AbilityRange abilityRange = new AbilityRange();
-        AbilityUnitTargetTeam abilityTargetTeam = GetJsonValueToEnum<AbilityUnitTargetTeam>(jsonData, "AbilityUnitTargetTeam");
-        abilityRange.SetTargetTeam(abilityTargetTeam);
 
-        //todo 解析大招的指示器范围
-        return abilityRange;
-        //return ParseActionRange(jsonData, abilityData);
+        var actionTarget = new ActionTarget();
+        var targetTeam = GetJsonValueToEnum<AbilityUnitTargetTeam>(jsonData, "AbilityUnitTargetTeam");
+        //var targetTypes = GetJsonValueToEnum<AbilityUnitTargetType>(jsonData, "AbilityUnitTargetType");
+
+        actionTarget.SetTargetTeam(targetTeam);
+
+        var abilityBehavior = abilityData.abilityBehavior;
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_LINE_AOE) != 0) 
+        {
+            var lineJsonData = GetJsonValue(jsonData, "AbilityAoeLine");
+            if(lineJsonData == null)
+            {
+                BattleLog.LogError("技能[{0}]行为是ABILITY_BEHAVIOR_LINE_AOE，未找到AbilityAoeLine配置", abilityData.configFileName);
+                return null;
+            }
+
+            float length = (float)GetJsonValue(lineJsonData, "Length");
+            float thickness = (float)GetJsonValue(lineJsonData, "Thickness");
+            actionTarget.SetLineAoe(AbilityUnitTargetCenter.CASTER, length, thickness);
+        }
+
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_SECTOR_AOE) != 0)
+        {
+            var sectorJsonData = GetJsonValue(jsonData, "AbilityAoeSector");
+            if(sectorJsonData == null)
+            {
+                BattleLog.LogError("技能[{0}]行为是ABILITY_BEHAVIOR_SECTOR_AOE，未找到AbilityAoeSector配置", abilityData.configFileName);
+                return null;
+            }
+
+            float sectorRadius = (float)GetJsonValue(sectorJsonData, "Radius");
+            float angle = (float)GetJsonValue(sectorJsonData, "Angle");
+            actionTarget.SetSectorAoe(AbilityUnitTargetCenter.CASTER, sectorRadius, angle);
+        }
+
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_RADIUS_AOE) != 0)
+        {
+            var radiusJson = GetJsonValue(jsonData, "AbilityAoeRadius");
+            if(radiusJson == null)
+            {
+                BattleLog.LogError("技能[{0}]行为是ABILITY_BEHAVIOR_RADIUS_AOE，未找到AbilityAoeRadius配置", abilityData.configFileName);
+                return null;
+            }
+
+            float radius = (float)radiusJson;
+            actionTarget.SetRadiusAoe(AbilityUnitTargetCenter.CASTER, radius);
+        }
+
+        return actionTarget;
     }
 
-    private static AbilityRange ParseActionRange(JsonData targetJsonData, AbilityData abilityData)
+    private static ActionTarget ParseActionTarget(JsonData targetJsonData, AbilityData abilityData)
     {
         if(targetJsonData == null)
             return null;
-        AbilityRange actionRange = new AbilityRange();
+        var actionTarget = new ActionTarget();
         if(targetJsonData.IsObject)
         {
-            JsonData aoeAreaJsonData = GetJsonValue(targetJsonData, "AoeArea");
+            var aoeAreaJsonData = GetJsonValue(targetJsonData, "AoeArea");
             if(aoeAreaJsonData == null)
             {
                 BattleLog.LogError("技能[%s]中Target配置是区域目标配置，但是未配置AoeArea或者配置错误", abilityData.configFileName);
                 return null;
             }
-            string targetCenter = GetJsonValueToString(targetJsonData, "Center");
+            var targetCenter = GetJsonValueToEnum<AbilityUnitTargetCenter>(targetJsonData, "Center");
 
             string areaType = GetJsonValueToString(aoeAreaJsonData, "AreaType");
-            AbilityAreaDamageType abilityAreaDamageType = GetEnumValue<AbilityAreaDamageType>(areaType);
+            var abilityAreaDamageType = GetEnumValue<AbilityAreaDamageType>(areaType);
    
             switch(abilityAreaDamageType)
             {
                 case AbilityAreaDamageType.Radius:
                     float radius = (int)GetJsonValue(aoeAreaJsonData, "Radius");
-                    actionRange.SetRadiusAoe(targetCenter, radius);
+                    actionTarget.SetRadiusAoe(targetCenter, radius);
                     break;
                 case AbilityAreaDamageType.Line:
                     JsonData lineJsonData = (int)GetJsonValue(aoeAreaJsonData, "Line");
@@ -227,7 +272,7 @@ public static class AbilityReader
                     }
                     float length = (float)GetJsonValue(lineJsonData, "Length");
                     float thickness = (float)GetJsonValue(lineJsonData, "Thickness");
-                    actionRange.SetLineAoe(targetCenter, length, thickness);
+                    actionTarget.SetLineAoe(targetCenter, length, thickness);
                     break;
                 case AbilityAreaDamageType.Sector:
                     JsonData sectorJsonData = GetJsonValue(targetJsonData, "Sector");
@@ -238,21 +283,21 @@ public static class AbilityReader
                     }
                     float sectorRadius = (float)GetJsonValue(sectorJsonData, "Radius");
                     float angle = (float)GetJsonValue(sectorJsonData, "Angle");
-                    actionRange.SetSectorAoe(targetCenter, sectorRadius, angle);
+                    actionTarget.SetSectorAoe(targetCenter, sectorRadius, angle);
                     break;
                 default:
                     break;
             }
             string teamJsonData = GetJsonValueToString(targetJsonData, "Teams");
-            AbilityUnitTargetTeam abilityTargetTeam = GetEnumValue<AbilityUnitTargetTeam>(teamJsonData);
-            actionRange.SetTargetTeam(abilityTargetTeam);
+            var abilityTargetTeam = GetEnumValue<AbilityUnitTargetTeam>(teamJsonData);
+            actionTarget.SetTargetTeam(abilityTargetTeam);
         }
         else
         {
-            AbilitySingTarget target = (AbilitySingTarget)Enum.Parse(typeof(AbilitySingTarget), targetJsonData.ToString());
-            actionRange.SetSingTarget(target);
+            var target = (AbilitySingTarget)Enum.Parse(typeof(AbilitySingTarget), targetJsonData.ToString());
+            actionTarget.SetSingTarget(target);
         }
-        return actionRange;
+        return actionTarget;
     }
 
     private static List<D2Action> ParseActions(JsonData eventsJsonDatas, AbilityData abilityData)
@@ -263,13 +308,13 @@ public static class AbilityReader
         List<D2Action> actions = new List<D2Action>();
         foreach(string key in eventsJsonDatas.Keys)
         {
-            Func<JsonData, AbilityRange, AbilityData, D2Action> createMethodName;
+            Func<JsonData, ActionTarget, AbilityData, D2Action> createMethodName;
             if(AbilityActionCreateMap.TryGetValue(key,out createMethodName))
             {
                 JsonData actionJsonData = GetJsonValue(eventsJsonDatas, key);
                 JsonData targetJsonData = GetJsonValue(actionJsonData, "Target");
-                AbilityRange abilityRange = ParseActionRange(targetJsonData, abilityData);
-                D2Action d2Action = createMethodName(actionJsonData, abilityRange, abilityData);
+                ActionTarget actionTarget = ParseActionTarget(targetJsonData, abilityData);
+                D2Action d2Action = createMethodName(actionJsonData, actionTarget, abilityData);
                 actions.Add(d2Action);
             }
         }
@@ -382,7 +427,7 @@ public static class AbilityReader
         abilityData.costType = GetJsonValueToEnum<AbilityCostType>(jsonData, "AbilityCostType");
         abilityData.costValue = GetJsonValueToFloat(jsonData, "AbilityCostValue");
 
-        abilityData.abilityRange = ParseAbilityRange(jsonData, abilityData);
+        abilityData.abilityTarget = ParseAbilityRange(jsonData, abilityData);
 
         // 解析技能事件
         abilityData.eventMap = ParseAbilityEvents(jsonData, abilityData);

@@ -160,10 +160,10 @@ public class HeroActor
         abilityActor.OnFingerDown();
     }
 
-    public void OnFingerDrag(AbilityCastType castType, Vector3 forward)
+    public void OnFingerDrag(AbilityCastType castType, Vector2 mouseDelta)
     {
         var abilityActor = GetAbilityActor(castType);
-        abilityActor.OnFingerDrag(forward);
+        abilityActor.OnFingerDrag(mouseDelta);
     }
 
     public void OnFingerUp(AbilityCastType castType)

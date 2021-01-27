@@ -12,7 +12,7 @@
 /// <summary>
 /// 技能目标及范围
 /// </summary>
-public class AbilityRange
+public class ActionTarget
 {
     public bool isSingleTarget;
     public AbilitySingTarget singTarget { get; set; }
@@ -21,11 +21,11 @@ public class AbilityRange
     public float Radius { get; set; }
     public float LineLength { get; set; }
     public float LineThickness { get; set; }
-    public string Center { get; set; }
+    public AbilityUnitTargetCenter Center { get; set; }
     public float SectorRadius { get; set; }
     public float SectorAngle { get; set; }
 
-    public AbilityRange()
+    public ActionTarget()
     {
         isSingleTarget = false;
     }
@@ -40,7 +40,7 @@ public class AbilityRange
         targetTeam = value;
     }
 
-    public void SetRadiusAoe(string targetCenter,float radius)
+    public void SetRadiusAoe(AbilityUnitTargetCenter targetCenter,float radius)
     {
         isSingleTarget = false;
         areaDamageType = AbilityAreaDamageType.Radius;
@@ -48,7 +48,7 @@ public class AbilityRange
         Radius = radius;
     }
 
-    public void SetLineAoe(string targetCenter, float lineLength, float lineThickness)
+    public void SetLineAoe(AbilityUnitTargetCenter targetCenter, float lineLength, float lineThickness)
     {
         isSingleTarget = false;
         areaDamageType = AbilityAreaDamageType.Line;
@@ -57,7 +57,7 @@ public class AbilityRange
         LineThickness = lineThickness;
     }
 
-    public void SetSectorAoe(string targetCenter, float sectorRadius, float sectorAngle)
+    public void SetSectorAoe(AbilityUnitTargetCenter targetCenter, float sectorRadius, float sectorAngle)
     {
         isSingleTarget = false;
         areaDamageType = AbilityAreaDamageType.Sector;

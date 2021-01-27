@@ -220,36 +220,36 @@ public class Ability
         return m_AbilityData.castDuration;
     }
 
-    public AbilityRange GetAbilityRange()
+    public ActionTarget GetAbilityRange()
     {
-        return m_AbilityData.abilityRange;
+        return m_AbilityData.abilityTarget;
     }
 
     public float GetAbilityAOERadius()
     {
-        return m_AbilityData.abilityRange.Radius;
+        return m_AbilityData.abilityTarget.Radius;
     }
 
     public void GetSectorAoe(out float sectorRadius, out float sectorAngle)
     {
-        sectorRadius = m_AbilityData.abilityRange.SectorRadius;
-        sectorAngle = m_AbilityData.abilityRange.SectorAngle;
+        sectorRadius = m_AbilityData.abilityTarget.SectorRadius;
+        sectorAngle = m_AbilityData.abilityTarget.SectorAngle;
     }
 
     public void GetLineAoe(out float lineLength, out float lineThickness)
     {
-        lineLength = m_AbilityData.abilityRange.LineLength;
-        lineThickness = m_AbilityData.abilityRange.LineThickness;
+        lineLength = m_AbilityData.abilityTarget.LineLength;
+        lineThickness = m_AbilityData.abilityTarget.LineThickness;
     }
 
     public AbilityUnitTargetTeam GetTargetTeam()
     {
-        return m_AbilityData.abilityRange.targetTeam;
+        return m_AbilityData.abilityTarget.targetTeam;
     }
 
     public AbilityAreaDamageType GetDamageType()
     {
-        return m_AbilityData.abilityRange.areaDamageType;
+        return m_AbilityData.abilityTarget.areaDamageType;
     }
 
     public string GetCastAnimation()

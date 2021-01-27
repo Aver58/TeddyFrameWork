@@ -37,7 +37,7 @@ public class AbilityActor
             m_abilityInput.OnFingerDown();
     }
 
-    public void OnFingerDrag(Vector3 forward)
+    public void OnFingerDrag(Vector2 mouseDelta)
     {
         if(m_abilityInput != null)
         {
@@ -45,8 +45,8 @@ public class AbilityActor
             float dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ;
 
             // z轴正方向为up 技能范围*delta
-            dragWorldPointX = casterPos.x + m_radius * forward.x;
-            dragWorldPointZ = casterPos.z + m_radius * forward.y;
+            dragWorldPointX = casterPos.x + m_radius * mouseDelta.x;
+            dragWorldPointZ = casterPos.z + m_radius * mouseDelta.y;
             dragForwardX = dragWorldPointX - casterPos.x;
             dragForwardZ = dragWorldPointZ - casterPos.z;
             m_abilityInput.OnFingerDrag(casterPos.x, casterPos.z, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
@@ -134,14 +134,17 @@ public class AbilityActor
             }
             else
             {
+                abilityIndicatorType = AbilityIndicatorType.SECTOR60_AREA;
                 BattleLog.LogError("技能[{0}]中有未定义的扇形AOE范围角度[{1}]", m_ability.GetConfigName(), sectorAngle);
             }
 
-            var trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
-            //todo abilityIndicatorType解析
-            var abilityIndicatorSector = new AbilityIndicatorLine(trans, m_casterTransform, sectorRadius, sectorRadius);
+            var castRange = m_ability.GetCastRange();
+            abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_casterTransform, castRange);
 
-            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_casterTransform, sectorRadius, sectorRadius);
+            var trans = GetIndicatorAsset(abilityIndicatorType);
+            var abilityIndicatorSector = new AbilityIndicatorLine(trans, m_casterTransform, sectorRadius, sectorRadius);
+         
+            abilityInput.AddAbilityIndicator(abilityIndicatorRange);
             abilityInput.AddAbilityIndicator(abilityIndicatorSector);
             return abilityInput;
         }
@@ -195,7 +198,7 @@ public class AbilityActor
     //解析技能行为
     private AbilityInput CreateAbilityInput(Ability ability)
     {
-        //非指向性技能，妲己一技能
+        // 非指向性技能，妲己一技能
         AbilityBehavior abilityBehavior = ability.GetAbilityBehavior();
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_NO_TARGET) != 0)
             return CreateAbilityNoTargetInput(abilityBehavior);

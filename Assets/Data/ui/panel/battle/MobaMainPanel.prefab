@@ -113,7 +113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 120, y: 119.81558}
+  m_AnchoredPosition: {x: 120, y: 119.81555}
   m_SizeDelta: {x: 180, y: 179.63115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114292340166391944
@@ -163,7 +163,7 @@ MonoBehaviour:
   showSpriteInspector: 0
   showEventInspector: 0
   showBehaviourInspector: 0
-  showAxesInspector: 0
+  showAxesInspector: 1
   showTouchEventInspector: 0
   showDownEventInspector: 0
   showPressEventInspector: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   thumb: {fileID: 224022467781832766}
   joystickArea: 1
   userArea: {fileID: 0}
-  isTurnAndMove: 0
+  isTurnAndMove: 1
   tmSpeed: 10
   tmAdditionnalRotation: 0
   tmMoveCurve:
