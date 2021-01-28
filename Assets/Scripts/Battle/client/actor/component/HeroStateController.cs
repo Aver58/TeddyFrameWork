@@ -84,6 +84,7 @@ public class HeroStateController
         {HeroState.MOVE,new HeroStateAction(EnterMoveState) },
         {HeroState.DEAD,new HeroStateAction(EnterDeadState) },
         {HeroState.CASTING,new HeroStateAction(EnterCastingState) },
+        {HeroState.REARY_CAST,new HeroStateAction(EnterReadyCastState) },
     };
 
     private static void SetAnimationControllerTrigger(AnimationController ani,string triggerName)
@@ -110,6 +111,12 @@ public class HeroStateController
     private static void EnterCastingState(AnimationController ani, string skillName = null, bool isSkipCastPoint = false)
     {
         SetAnimationControllerTrigger(ani, skillName);
+    }
+
+    private static void EnterReadyCastState(AnimationController ani, string skillName = null, bool isSkipCastPoint = false)
+    {
+        // 如果有准备动作，播放表现
+        SetAnimationControllerTrigger(ani, skillName + "_ready");
     }
 
     #endregion

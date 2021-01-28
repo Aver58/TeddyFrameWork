@@ -158,6 +158,8 @@ public class HeroActor
     {
         var abilityActor = GetAbilityActor(castType);
         abilityActor.OnFingerDown();
+
+        battleEntity.PrepareCastAbility(abilityActor.ability);
     }
 
     public void OnFingerDrag(AbilityCastType castType, Vector2 mouseDelta)

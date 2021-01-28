@@ -80,6 +80,14 @@ public class BattleEntity : Entity
         return null;
     }
 
+    public void PrepareCastAbility(Ability ability)
+    {
+        if(ability == null)
+            return;
+
+        SetState(HeroState.REARY_CAST, ability.GetCastAnimation());
+    }
+
     public void CastAbility(Ability ability, bool isSkipCastPoint = false)
     {
         if(ability == null)
@@ -343,7 +351,7 @@ public class BattleEntity : Entity
     public void SetState(HeroState state, string skillName = null, bool isSkipCastPoint = false)
     {
         m_HeroState = state;
-        GameMsg.instance.SendMessage(GameMsgDef.Hero_ChangeState,new HeorChangeStateEventArgs(id,state, skillName, isSkipCastPoint));
+        GameMsg.instance.SendMessage(GameMsgDef.Hero_ChangeState,new HeorChangeStateEventArgs(id, state, skillName, isSkipCastPoint));
     }
 
     #endregion
