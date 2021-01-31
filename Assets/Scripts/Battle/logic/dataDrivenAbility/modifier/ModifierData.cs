@@ -29,8 +29,8 @@ public class ModifierData
     public MultipleTargetsTeam Aura_Teams;
     public MultipleTargetsType Aura_Types;
 
-    public ModifierState States;
-    public ModifierPropertyValue ModifierProperties;
+    public List<ModifierState> States;
+    public List<ModifierPropertyValue> ModifierProperties;
     public Dictionary<ModifierEvents, D2Event> ModifierEventMap;
     // 特效
     public string EffectName;

@@ -11,6 +11,9 @@
 
 using System.Collections.Generic;
 
+/// <summary>
+/// 应用Modifier
+/// </summary>
 public class D2Action_ApplyModifier : D2Action
 {
     private string modifierName;

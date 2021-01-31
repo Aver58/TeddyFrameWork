@@ -493,13 +493,66 @@ public static class AbilityReader
     private static void ParseModifierProperties(JsonData json, AbilityData abilityData, ModifierData modifier)
     {
         var propertyDataConfig = GetJsonValue(json, "Properties");
-        if(propertyDataConfig == null)
+        if(propertyDataConfig != null)
         {
-            foreach(var item in propertyDataConfig)
+            var modifierPropertyDatas = new List<ModifierPropertyValue>();
+            foreach(var propertyType in propertyDataConfig.Keys)
             {
-
+                var propertyEnum = GetEnumValue<ModifierProperties>(propertyType.ToString());
+                if(propertyEnum == default)
+                {
+                    BattleLog.LogError("技能[{0}]中有未定义的ModifierProperty类型[{1}]", abilityData.configFileName, propertyType);
+                }
+                else
+                {
+                    var modifierPropertyValue = new ModifierPropertyValue();
+                    var propertyValueConfig = propertyDataConfig[propertyType];
+                    if(propertyValueConfig.IsArray)
+                    {
+                        // todo 解析数值
+                        var valueSourceJson = GetJsonValue(propertyValueConfig, "ValueSource");
+                        if(valueSourceJson == null)
+                        {
+                            //modifierPropertyValue.
+                        }
+                        else
+                        {
+                            //var damageValueSource = ParseValueSource(valueSourceJson, abilityData);
+                        }
+                        modifierPropertyDatas.Add(modifierPropertyValue);
+                    }
+                    else
+                    {
+                        BattleLog.LogError("技能[{0}]中的ModifierProperty类型[{1}]不是数组配置或者ValueSource类型", abilityData.configFileName, propertyType);
+                    }
+                }
             }
-            //modifier.ModifierProperties = 
+
+            modifier.ModifierProperties = modifierPropertyDatas;
+        }
+    }
+
+    private static void ParseModifierStates(JsonData json, AbilityData abilityData, ModifierData modifier)
+    {
+        var stateDataConfig = GetJsonValue(json, "States");
+        if(stateDataConfig != null)
+        {
+            var modifierStates = new List<ModifierState>();
+            foreach(var stateName in stateDataConfig.Keys)
+            {
+                var stateEnum = GetEnumValue<ModifierStates>(stateName.ToString());
+                if(stateEnum == default)
+                {
+                    BattleLog.LogError("技能[{0}]中有未定义的ModifierStates类型[{1}]", abilityData.configFileName, stateName);
+                }
+                else
+                {
+                    var stateValue = GetIntValue(stateDataConfig, stateName);
+                    // todo 解析数值
+                    //modifierStates.Add();
+                }
+            }
+            modifier.States = modifierStates;
         }
     }
 
@@ -525,6 +578,8 @@ public static class AbilityReader
         // ModifierProperties
         ParseModifierProperties(json, abilityData, modifier);
         // States
+        ParseModifierStates(json, abilityData, modifier);
+
         return modifier;
     }
 

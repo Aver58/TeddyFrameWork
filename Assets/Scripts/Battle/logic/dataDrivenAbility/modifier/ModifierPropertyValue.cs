@@ -11,5 +11,8 @@
 
 public class ModifierPropertyValue
 {
+    public void SetValueWithValueSource()
+    {
 
+    }
 }
