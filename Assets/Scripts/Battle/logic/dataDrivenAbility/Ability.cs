@@ -141,7 +141,7 @@ public class Ability
         caster.CastAbilityEnd();
     }
 
-    #region 技能事件
+    #region Event 技能事件
 
     public void ExecuteEvent(AbilityEvent abilityEvent)
     {
@@ -242,14 +242,14 @@ public class Ability
         lineThickness = m_AbilityData.abilityTarget.LineThickness;
     }
 
-    public AbilityUnitTargetTeam GetTargetTeam()
+    public MultipleTargetsTeam GetTargetTeam()
     {
-        return m_AbilityData.abilityTarget.targetTeam;
+        return m_AbilityData.abilityTarget.Teams;
     }
 
-    public AbilityAreaDamageType GetDamageType()
+    public MultipleTargetsType GetDamageType()
     {
-        return m_AbilityData.abilityTarget.areaDamageType;
+        return m_AbilityData.abilityTarget.Types;
     }
 
     public string GetCastAnimation()

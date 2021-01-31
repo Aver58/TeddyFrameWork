@@ -27,11 +27,13 @@ public class D2Action_Damage : D2Action
         m_AbilityValueSource = damageValueSource;
     }
 
-    protected override void ExecuteByUnit(BattleEntity source, BattleEntity target)
+    protected override void ExecuteByUnit(BattleEntity source, List<BattleEntity> targets)
     {
-        if(target != null)
+        for(int i = 0; i < targets.Count; i++)
         {
-            AbilityFormula.ApplyDamage(source, target, damageType, damageFlag, m_AbilityValueSource, m_AbilityData.configFileName);
+            var target = targets[i];
+            if(target != null)
+                AbilityFormula.ApplyDamage(source, target, damageType, damageFlag, m_AbilityValueSource, abilityData.configFileName);
         }
 
         //有造成伤害（也就是有攻击到目标）, 执行OnSuccess Actions

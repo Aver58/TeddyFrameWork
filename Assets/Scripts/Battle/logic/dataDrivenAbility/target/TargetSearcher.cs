@@ -61,32 +61,30 @@ public class TargetSearcher : Singleton<TargetSearcher>
         }
     }
 
-    private List<BattleEntity> FindTargetUnits(BattleEntity source, AbilityUnitTargetTeam targetTeam, AbilityAreaDamageType targetDemageType)
+    private List<BattleEntity> FindTargetUnits(BattleEntity source, MultipleTargetsTeam targetTeam, MultipleTargetsType targetDemageType)
     {
         List<BattleEntity> targets = new List<BattleEntity>(0);
-        if(targetTeam == AbilityUnitTargetTeam.UNIT_TARGET_TEAM_NONE)
-            return targets;
 
         // 根据阵营找对象
         BattleCamp sourceCamp = source.camp;
-        if(targetTeam == AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY)
+        if(targetTeam == MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY)
         {
-            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY : AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY;
+            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY : MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY;
         }
-        else if(targetTeam == AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY)  
+        else if(targetTeam == MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY)  
         {
-            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY : AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY;
+            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY : MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY;
         }
 
         switch(targetTeam)
         {
-            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY:
+            case MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY:
                 InsertToTargetList(BattleEntityManager.instance.GetEntities(BattleCamp.ENEMY), targets);
                 break;
-            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY:
+            case MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY:
                 InsertToTargetList(BattleEntityManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
-            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_BOTH:
+            case MultipleTargetsTeam.UNIT_TARGET_TEAM_BOTH:
                 InsertToTargetList(BattleEntityManager.instance.GetEntities(BattleCamp.ENEMY), targets);
                 InsertToTargetList(BattleEntityManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
@@ -175,8 +173,8 @@ public class TargetSearcher : Singleton<TargetSearcher>
             return source;
 
         BattleEntity lastTarget = source.target;
-        AbilityUnitTargetTeam targetTeam = ability.GetTargetTeam();
-        AbilityAreaDamageType targetDemageType = ability.GetDamageType();
+        MultipleTargetsTeam targetTeam = ability.GetTargetTeam();
+        MultipleTargetsType targetDemageType = ability.GetDamageType();
 
         BattleEntity newTarget;
         if(lastTarget == null || lastTarget.IsUnSelectable())

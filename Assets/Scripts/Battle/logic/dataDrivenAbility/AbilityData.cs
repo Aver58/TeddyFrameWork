@@ -15,6 +15,7 @@ using System.Collections.Generic;
 public class AbilityData
 {
     public Dictionary<string, D2Event> eventMap { get; set; }
+    public Dictionary<string, ModifierData> modifierMap { get; set; }
     public ActionTarget abilityTarget { get; set; }
     public string configFileName { get; set; }
     public string abilityType { get; set; }
@@ -34,7 +35,7 @@ public class AbilityData
     public float costValue { get; set; }
     public string abilityEvents { get; set; }
     public string modifierNames { get; set; }
-    public string modifierDataMap { get; set; }
+    public Dictionary<string, ModifierData> modifierDataMap { get; set; }
 
     public void ExecuteEvent(AbilityEvent abilityEvent, BattleEntity source, RequestTarget requestTarget)
     {
@@ -47,5 +48,14 @@ public class AbilityData
         {
             @event.Execute(source, requestTarget);
         }
+    }
+
+    public ModifierData GetModifierData(string modifierName)
+    {
+        ModifierData d2Modifier;
+        if(modifierDataMap.TryGetValue(modifierName, out d2Modifier))
+            return d2Modifier;
+
+        return null;
     }
 }

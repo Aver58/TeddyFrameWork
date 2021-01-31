@@ -18,13 +18,4 @@ public class D2Action_IsHit : D2Action
     {
         m_SuccessActions = successActions;
     }
-
-    protected override void ExecuteByUnit(BattleEntity source, BattleEntity target)
-    {
-        for(int i = 0; i < m_SuccessActions.Count; i++)
-        {
-            D2Action action = m_SuccessActions[i];
-            action.Execute(source, m_RequestTarget);
-        }
-    }
 }

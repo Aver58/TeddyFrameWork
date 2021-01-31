@@ -99,7 +99,7 @@ public class AbilityActor
         var rangeTrans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
 
         // 直线型
-        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_LINE_AOE) != 0)
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_DIRECTIONAL) != 0)
         {
             abilityInput = new AbilityInputDirection(m_casterTransform, ability);
             var castRange = ability.GetCastRange();

@@ -103,6 +103,29 @@ public class BattleEntity : Entity
         SetState(HeroState.IDLE);
     }
 
+    #region modifier
+
+    public void ApplyModifierByName(BattleEntity caster, AbilityData abilityData, string modifierName)
+    {
+        var modifierData = abilityData.GetModifierData(modifierName);
+        if(modifierData != null)
+        {
+            BattleLog.LogError("角色[{0}]的技能[{1}]未找到Modifier[{2}]的数据", id, abilityData.configFileName, modifierName);
+            return;
+        }
+
+        ApplyModifier(caster, abilityData, modifierData);
+    }
+
+    public void ApplyModifier(BattleEntity caster, AbilityData abilityData, ModifierData modifierData)
+    {
+        var modifier = new D2Modifier(caster, modifierData, this);
+
+        modifier.OnCreate();
+    }
+
+    #endregion
+
     #endregion
 
     #region 技能、决策树、行为树更新
@@ -175,16 +198,23 @@ public class BattleEntity : Entity
     // 技能刷新
     public int UpdateAbility(float gameTime, float deltaTime)
     {
+        // 技能
         foreach(Ability ability in abilities)
         {
             ability.Update(deltaTime);
         }
+        // buff
+        foreach(Ability ability in abilities)
+        {
+            ability.Update(deltaTime);
+        }
+
         return 0;
     }
 
     #endregion
 
-    #region get interface
+    #region get
 
     protected virtual TBTActionPrioritizedSelector GetBehaviorTree()
     {
@@ -341,7 +371,7 @@ public class BattleEntity : Entity
 
     #endregion
 
-    #region set interface
+    #region set
 
     public void UpdateHP(float damage)
     {

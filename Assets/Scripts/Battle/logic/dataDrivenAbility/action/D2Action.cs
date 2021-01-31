@@ -11,15 +11,19 @@
 
 using System.Collections.Generic;
 
+/// <summary>
+/// 技能行为
+/// Each of these keys is a block that contains one or more action descriptions.
+/// </summary>
 public class D2Action
 {
     private List<BattleEntity> m_Targets;
     protected RequestTarget m_RequestTarget;
-    protected AbilityData m_AbilityData;
+    protected AbilityData abilityData;
 
     public D2Action(AbilityData abilityData)
     {
-        m_AbilityData = abilityData;
+        this.abilityData = abilityData;
     }
 
     public virtual void Execute(BattleEntity source, RequestTarget requestTarget)
@@ -31,8 +35,7 @@ public class D2Action
         // 根据类型区分，单位和范围
         if(requestTarget.targetType == AbilityRequestTargetType.UNIT)
         {
-            BattleEntity target = m_Targets[0];
-            ExecuteByUnit(source, target);
+            ExecuteByUnit(source, m_Targets);
         }
         else
         {
@@ -43,7 +46,7 @@ public class D2Action
     /// <summary>
     /// 单体技能
     /// </summary>
-    protected virtual void ExecuteByUnit(BattleEntity source, BattleEntity target) { }
+    protected virtual void ExecuteByUnit(BattleEntity source, List<BattleEntity> targets) { }
     /// <summary>
     /// 范围伤害
     /// </summary>

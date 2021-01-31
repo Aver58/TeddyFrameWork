@@ -15,31 +15,111 @@ using LitJson;
 
 public static class AbilityReader
 {
-    #region 创建Action映射方法
+
+    #region Json Parse
+
+    private static T GetEnumValue<T>(string str)
+    {
+        if(str == null)
+            return default(T);
+
+        T value = (T)Enum.Parse(typeof(T), str.ToString());
+        return value;
+    }
+
+    private static JsonData GetJsonValue(JsonData json, string key)
+    {
+        if(json == null || string.IsNullOrEmpty(key))
+            return null;
+
+        if(json.Keys.Contains(key))
+            return json[key];
+
+        return null;
+    }
+
+    private static float GetIntValue(JsonData json, string key)
+    {
+        var res = GetJsonValue(json, key);
+        return res != null ? (int)res : -1;
+    }
+
+    private static float GetFloatValue(JsonData json, string key)
+    {
+        var res = GetJsonValue(json, key);
+        return res != null ? (float)res : 0f;
+    }
+
+    private static bool GetBoolValue(JsonData json, string key)
+    {
+        var res = GetIntValue(json, key);
+        return res == 1;
+    }
+
+    private static string GetStringValue(JsonData json, string key)
+    {
+        var res = GetJsonValue(json, key);
+        return res != null ? res.ToString() : null;
+    }
+
+    private static T GetEnumValue<T>(JsonData json, string key)
+    {
+        string str = GetStringValue(json, key);
+        return GetEnumValue<T>(str);
+    }
+
+    #endregion
+
+    /// <summary>
+    /// 解析技能行为数组
+    /// </summary>
+    private static AbilityBehavior ParseAbilityBehaviorArray(JsonData json, string key)
+    {
+        var behaviorConfigs = GetJsonValue(json, key);
+        if(behaviorConfigs == null)
+            return 0;
+        AbilityBehavior behavior = 0;
+        if(behaviorConfigs.IsArray)
+        {
+            for(int i = 0; i < behaviorConfigs.Count; i++)
+            {
+                string item = behaviorConfigs[i].ToString();
+                var abilityBehavior = GetEnumValue<AbilityBehavior>(item);
+                behavior |= abilityBehavior;
+            }
+        }
+        return behavior;
+    }
+
+    #region Action
+
+    #region Action Map
+
     public static Dictionary<string, Func<JsonData, ActionTarget, AbilityData, D2Action>> AbilityActionCreateMap = new Dictionary<string, Func<JsonData, ActionTarget, AbilityData, D2Action>>
     {
         { "IsHit" , CreateIsHitAction},
         { "ChangeEnergy" , CreateChangeEnergyAction},
         { "Damage" , CreateDamageAction},
+        { "ApplyModifier" , CreateApplyModifierAction},
     };
 
-    private static D2Action CreateIsHitAction(JsonData actionJsonData,ActionTarget actionTarget, AbilityData abilityData)
+    private static D2Action CreateIsHitAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
     {
-        JsonData onSuccessActionConfig = GetJsonValue(actionJsonData, "OnSuccess");
+        var onSuccessActionConfig = GetJsonValue(json, "OnSuccess");
         if(onSuccessActionConfig == null)
         {
             BattleLog.LogError("技能[%s]中IsHit未找到key[OnSuccess]的配置", abilityData.configFileName);
             return null;
         }
-        List<D2Action> successActions = ParseActions(onSuccessActionConfig, abilityData);
+        var successActions = ParseActions(onSuccessActionConfig, abilityData);
 
-        D2Action_IsHit d2Action_IsHit = new D2Action_IsHit(successActions, abilityData);
+        var d2Action_IsHit = new D2Action_IsHit(successActions, abilityData);
         return d2Action_IsHit;
     }
 
-    private static D2Action CreateChangeEnergyAction(JsonData actionJsonData, ActionTarget actionTarget, AbilityData abilityData)
+    private static D2Action CreateChangeEnergyAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
     {
-        JsonData energyParams = GetJsonValue(actionJsonData, "EnergyParams");
+        var energyParams = GetJsonValue(json, "EnergyParams");
         if(energyParams == null)
         {
             BattleLog.LogError("技能[{0}]中ChangeEnergy中未找到key[EnergyParams]的配置", abilityData.configFileName);
@@ -51,7 +131,7 @@ public static class AbilityReader
             return null;
         }
 
-        D2Action_ChangeEnergy d2Action_ChangeEnergy = new D2Action_ChangeEnergy(energyParams, abilityData);
+        var d2Action_ChangeEnergy = new D2Action_ChangeEnergy(energyParams, abilityData);
         return d2Action_ChangeEnergy;
     }
 
@@ -81,53 +161,73 @@ public static class AbilityReader
               }
           }
       }*/
-    private static D2Action CreateDamageAction(JsonData actionJsonData, ActionTarget actionTarget, AbilityData abilityData)
+    private static D2Action CreateDamageAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
     {
-        string damageTypeConfig = GetJsonValueToString(actionJsonData, "DamageType");
+        var damageTypeConfig = GetStringValue(json, "DamageType");
         if(damageTypeConfig == null)
             return null;
-        AbilityDamageType damageType = GetEnumValue<AbilityDamageType>(damageTypeConfig);
 
-        JsonData damageFlagConfig = GetJsonValue(actionJsonData, "DamageFlags");
+        var damageType = GetEnumValue<AbilityDamageType>(damageTypeConfig);
+        var damageFlagConfig = GetJsonValue(json, "DamageFlags");
         if(damageFlagConfig == null)
             return null;
 
         AbilityDamageFlag damageFlag = ParseDamageFlagArray(damageFlagConfig);
 
-        AbilityValueSource damageValueSource = ParseValueSource(actionJsonData, abilityData);
-        JsonData dealDamageSuccessActionConfig = GetJsonValue(actionJsonData, "OnSuccess");
-        List<D2Action> actions = ParseActions(dealDamageSuccessActionConfig, abilityData);
-        D2Action_Damage d2Action_Damage = new D2Action_Damage(damageType, damageFlag, damageValueSource, actions, abilityData);
+        var damageValueSource = ParseValueSource(json, abilityData);
+        var dealDamageSuccessActionConfig = GetJsonValue(json, "OnSuccess");
+        var actions = ParseActions(dealDamageSuccessActionConfig, abilityData);
+        var d2Action_Damage = new D2Action_Damage(damageType, damageFlag, damageValueSource, actions, abilityData);
         return d2Action_Damage;
     }
 
+    /*
+        "ApplyModifier":
+         {
+             "Target":"TARGET",
+             "ModifierName":"dunji"
+         }
+         */
+    private static D2Action CreateApplyModifierAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
+    {
+        var modifierName = GetStringValue(json, "ModifierName");
+        if(string.IsNullOrEmpty(modifierName))
+        {
+            BattleLog.LogError("技能[{0}]中ApplyModifier未找到key[ModifierName]的配置", abilityData.configFileName);
+            return null;
+        }
+
+        //var targetFlags = 
+        var applyModifier = new D2Action_ApplyModifier(abilityData, modifierName,actionTarget);
+        return applyModifier;
+    }
     #endregion
 
-    private static AbilityDamageFlag ParseDamageFlagArray(JsonData jsonData)
+    private static AbilityDamageFlag ParseDamageFlagArray(JsonData json)
     {
-        AbilityDamageFlag res = AbilityDamageFlag.DAMAGE_FLAG_NONE;
-        if(jsonData == null)
+        var res = AbilityDamageFlag.DAMAGE_FLAG_NONE;
+        if(json == null)
             return res;
-        if(jsonData.IsArray)
+        if(json.IsArray)
         {
-            for(int i = 0; i < jsonData.Count; i++)
+            for(int i = 0; i < json.Count; i++)
             {
-                string item = jsonData[i].ToString();
-                AbilityDamageFlag damageFlag = GetEnumValue<AbilityDamageFlag>(item);
+                string item = json[i].ToString();
+                var damageFlag = GetEnumValue<AbilityDamageFlag>(item);
                 res |= damageFlag;
             }
         }
         return res;
     }
 
-    private static AbilityValueSource ParseValueSource(JsonData jsonData, AbilityData abilityData)
+    private static AbilityValueSource ParseValueSource(JsonData json, AbilityData abilityData)
     {
-        AbilityValueSource abilityValueSource = new AbilityValueSource();
-        JsonData valueSourceJsonData = GetJsonValue(jsonData, "ValueSource");
+        var abilityValueSource = new AbilityValueSource();
+        var valueSourceJsonData = GetJsonValue(json, "ValueSource");
         if(valueSourceJsonData == null)
             return abilityValueSource;
 
-        JsonData valueBasicParamsConfig = GetJsonValue(valueSourceJsonData, "ValueBasicParams");
+        var valueBasicParamsConfig = GetJsonValue(valueSourceJsonData, "ValueBasicParams");
         if(valueBasicParamsConfig == null)
             return abilityValueSource;
 
@@ -137,24 +237,24 @@ public static class AbilityReader
         }
         else
         {
-            string baseJsonData = valueBasicParamsConfig[0].ToString();
-            string baseGrowJsonData = valueBasicParamsConfig[1].ToString();
-            float baseValue = string.IsNullOrEmpty(baseJsonData) ? 0f : float.Parse(baseJsonData);
-            float baseValueGrow = string.IsNullOrEmpty(baseGrowJsonData) ? 0f : float.Parse(baseGrowJsonData);
+            var baseJsonData = valueBasicParamsConfig[0].ToString();
+            var baseGrowJsonData = valueBasicParamsConfig[1].ToString();
+            var baseValue = string.IsNullOrEmpty(baseJsonData) ? 0f : float.Parse(baseJsonData);
+            var baseValueGrow = string.IsNullOrEmpty(baseGrowJsonData) ? 0f : float.Parse(baseGrowJsonData);
             abilityValueSource.baseValue = baseValue;
             abilityValueSource.baseValueGrow = baseValueGrow;
         }
         //todo 附加值
-        JsonData valueAdditionParamsConfig = GetJsonValue(valueSourceJsonData, "ValueAdditionParams");
+        var valueAdditionParamsConfig = GetJsonValue(valueSourceJsonData, "ValueAdditionParams");
         if(valueAdditionParamsConfig != null)
         {
             if(valueAdditionParamsConfig.IsArray)
             {
                 for(int i = 0; i < valueAdditionParamsConfig.Count; i++)
                 {
-                    JsonData additionValueConfig = valueAdditionParamsConfig[i];
-                    AbilityValueSourceType valueSourceType = GetJsonValueToEnum<AbilityValueSourceType>(additionValueConfig, "ValueSourceType");
-                    JsonData valueSourceParamsConfig = GetJsonValue(additionValueConfig, "ValueSourceParams");
+                    var additionValueConfig = valueAdditionParamsConfig[i];
+                    var valueSourceType = GetEnumValue<AbilityValueSourceType>(additionValueConfig, "ValueSourceType");
+                    var valueSourceParamsConfig = GetJsonValue(additionValueConfig, "ValueSourceParams");
                     if(valueSourceParamsConfig != null)
                     {
                         if(valueSourceParamsConfig.IsArray)
@@ -167,65 +267,60 @@ public static class AbilityReader
                                 sourceValueCoefficient, sourceValueCoefficientGrow, limitBasicValue, limitBasicValueGrow);
                         }
                         else
-                        {
                             BattleLog.LogError("技能[%s]中的[ValueSource]的[ValueSourceParams]的配置必须是数组类型", abilityData.configFileName);
-                        }
                     }
                 }
             }
             else
-            {
                 BattleLog.LogError("技能[%s]中的[ValueSource]的[ValueAdditionParams]的配置必须是数组类型", abilityData.configFileName);
-            }
         }
 
         return abilityValueSource;
     }
 
     // 大招技能指示器解析，这部分有点冗余，是自己抽出来的，不是dota源解析，那dota是怎么实现技能指示器的
-    private static ActionTarget ParseAbilityRange(JsonData jsonData, AbilityData abilityData)
+    private static ActionTarget ParseAbilityRange(JsonData json, AbilityData abilityData)
     {
-        if(jsonData == null)
+        if(json == null)
             return null;
 
         var actionTarget = new ActionTarget();
-        var targetTeam = GetJsonValueToEnum<AbilityUnitTargetTeam>(jsonData, "AbilityUnitTargetTeam");
-        //var targetTypes = GetJsonValueToEnum<AbilityUnitTargetType>(jsonData, "AbilityUnitTargetType");
+        var targetTeam = GetEnumValue<MultipleTargetsTeam>(json, "AbilityUnitTargetTeam");
 
         actionTarget.SetTargetTeam(targetTeam);
 
         var abilityBehavior = abilityData.abilityBehavior;
-        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_LINE_AOE) != 0) 
+        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_DIRECTIONAL) != 0)
         {
-            var lineJsonData = GetJsonValue(jsonData, "AbilityAoeLine");
+            var lineJsonData = GetJsonValue(json, "AbilityAoeLine");
             if(lineJsonData == null)
             {
                 BattleLog.LogError("技能[{0}]行为是ABILITY_BEHAVIOR_LINE_AOE，未找到AbilityAoeLine配置", abilityData.configFileName);
                 return null;
             }
 
-            float length = (float)GetJsonValue(lineJsonData, "Length");
-            float thickness = (float)GetJsonValue(lineJsonData, "Thickness");
-            actionTarget.SetLineAoe(AbilityUnitTargetCenter.CASTER, length, thickness);
+            var length = (float)GetJsonValue(lineJsonData, "Length");
+            var thickness = (float)GetJsonValue(lineJsonData, "Thickness");
+            actionTarget.SetLineAoe(ActionMultipleTargetsCenter.CASTER, length, thickness);
         }
 
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_SECTOR_AOE) != 0)
         {
-            var sectorJsonData = GetJsonValue(jsonData, "AbilityAoeSector");
+            var sectorJsonData = GetJsonValue(json, "AbilityAoeSector");
             if(sectorJsonData == null)
             {
                 BattleLog.LogError("技能[{0}]行为是ABILITY_BEHAVIOR_SECTOR_AOE，未找到AbilityAoeSector配置", abilityData.configFileName);
                 return null;
             }
 
-            float sectorRadius = (float)GetJsonValue(sectorJsonData, "Radius");
-            float angle = (float)GetJsonValue(sectorJsonData, "Angle");
-            actionTarget.SetSectorAoe(AbilityUnitTargetCenter.CASTER, sectorRadius, angle);
+            var sectorRadius = (float)GetJsonValue(sectorJsonData, "Radius");
+            var angle = (float)GetJsonValue(sectorJsonData, "Angle");
+            actionTarget.SetSectorAoe(ActionMultipleTargetsCenter.CASTER, sectorRadius, angle);
         }
 
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_RADIUS_AOE) != 0)
         {
-            var radiusJson = GetJsonValue(jsonData, "AbilityAoeRadius");
+            var radiusJson = GetJsonValue(json, "AbilityAoeRadius");
             if(radiusJson == null)
             {
                 BattleLog.LogError("技能[{0}]行为是ABILITY_BEHAVIOR_RADIUS_AOE，未找到AbilityAoeRadius配置", abilityData.configFileName);
@@ -233,88 +328,88 @@ public static class AbilityReader
             }
 
             float radius = (float)radiusJson;
-            actionTarget.SetRadiusAoe(AbilityUnitTargetCenter.CASTER, radius);
+            actionTarget.SetRadiusAoe(ActionMultipleTargetsCenter.CASTER, radius);
         }
 
         return actionTarget;
     }
 
-    private static ActionTarget ParseActionTarget(JsonData targetJsonData, AbilityData abilityData)
+    private static ActionTarget ParseActionTarget(JsonData json, AbilityData abilityData)
     {
-        if(targetJsonData == null)
+        if(json == null)
             return null;
         var actionTarget = new ActionTarget();
-        if(targetJsonData.IsObject)
+        if(json.IsObject)
         {
-            var aoeAreaJsonData = GetJsonValue(targetJsonData, "AoeArea");
+            var aoeAreaJsonData = GetJsonValue(json, "AoeArea");
             if(aoeAreaJsonData == null)
             {
                 BattleLog.LogError("技能[%s]中Target配置是区域目标配置，但是未配置AoeArea或者配置错误", abilityData.configFileName);
                 return null;
             }
-            var targetCenter = GetJsonValueToEnum<AbilityUnitTargetCenter>(targetJsonData, "Center");
+            var targetCenter = GetEnumValue<ActionMultipleTargetsCenter>(json, "Center");
 
-            string areaType = GetJsonValueToString(aoeAreaJsonData, "AreaType");
-            var abilityAreaDamageType = GetEnumValue<AbilityAreaDamageType>(areaType);
-   
+            var areaType = GetStringValue(aoeAreaJsonData, "AreaType");
+            var abilityAreaDamageType = GetEnumValue<MultipleTargetsType>(areaType);
+
             switch(abilityAreaDamageType)
             {
-                case AbilityAreaDamageType.Radius:
+                case MultipleTargetsType.Radius:
                     float radius = (int)GetJsonValue(aoeAreaJsonData, "Radius");
                     actionTarget.SetRadiusAoe(targetCenter, radius);
                     break;
-                case AbilityAreaDamageType.Line:
+                case MultipleTargetsType.Line:
                     JsonData lineJsonData = (int)GetJsonValue(aoeAreaJsonData, "Line");
                     if(lineJsonData == null)
                     {
                         BattleLog.LogError("技能[{0}]中Target配置是区域目标配置，但是未配置Line", abilityData.configFileName);
                         return null;
                     }
-                    float length = (float)GetJsonValue(lineJsonData, "Length");
-                    float thickness = (float)GetJsonValue(lineJsonData, "Thickness");
+                    var length = (float)GetJsonValue(lineJsonData, "Length");
+                    var thickness = (float)GetJsonValue(lineJsonData, "Thickness");
                     actionTarget.SetLineAoe(targetCenter, length, thickness);
                     break;
-                case AbilityAreaDamageType.Sector:
-                    JsonData sectorJsonData = GetJsonValue(targetJsonData, "Sector");
+                case MultipleTargetsType.Sector:
+                    JsonData sectorJsonData = GetJsonValue(json, "Sector");
                     if(sectorJsonData == null)
                     {
                         BattleLog.LogError("技能[{0}]中Target配置是区域目标配置，但是未配置Sector", abilityData.configFileName);
                         return null;
                     }
-                    float sectorRadius = (float)GetJsonValue(sectorJsonData, "Radius");
-                    float angle = (float)GetJsonValue(sectorJsonData, "Angle");
+                    var sectorRadius = (float)GetJsonValue(sectorJsonData, "Radius");
+                    var angle = (float)GetJsonValue(sectorJsonData, "Angle");
                     actionTarget.SetSectorAoe(targetCenter, sectorRadius, angle);
                     break;
                 default:
                     break;
             }
-            string teamJsonData = GetJsonValueToString(targetJsonData, "Teams");
-            var abilityTargetTeam = GetEnumValue<AbilityUnitTargetTeam>(teamJsonData);
+            var teamJsonData = GetStringValue(json, "Teams");
+            var abilityTargetTeam = GetEnumValue<MultipleTargetsTeam>(teamJsonData);
             actionTarget.SetTargetTeam(abilityTargetTeam);
         }
         else
         {
-            var target = (AbilitySingTarget)Enum.Parse(typeof(AbilitySingTarget), targetJsonData.ToString());
+            var target = (ActionSingTarget)Enum.Parse(typeof(ActionSingTarget), json.ToString());
             actionTarget.SetSingTarget(target);
         }
         return actionTarget;
     }
 
-    private static List<D2Action> ParseActions(JsonData eventsJsonDatas, AbilityData abilityData)
+    private static List<D2Action> ParseActions(JsonData json, AbilityData abilityData)
     {
-        if(eventsJsonDatas == null)
+        if(json == null)
             return null;
 
-        List<D2Action> actions = new List<D2Action>();
-        foreach(string key in eventsJsonDatas.Keys)
+        var actions = new List<D2Action>();
+        foreach(string key in json.Keys)
         {
             Func<JsonData, ActionTarget, AbilityData, D2Action> createMethodName;
-            if(AbilityActionCreateMap.TryGetValue(key,out createMethodName))
+            if(AbilityActionCreateMap.TryGetValue(key, out createMethodName))
             {
-                JsonData actionJsonData = GetJsonValue(eventsJsonDatas, key);
-                JsonData targetJsonData = GetJsonValue(actionJsonData, "Target");
-                ActionTarget actionTarget = ParseActionTarget(targetJsonData, abilityData);
-                D2Action d2Action = createMethodName(actionJsonData, actionTarget, abilityData);
+                var actionJsonData = GetJsonValue(json, key);
+                var targetJsonData = GetJsonValue(actionJsonData, "Target");
+                var actionTarget = ParseActionTarget(targetJsonData, abilityData);
+                var d2Action = createMethodName(actionJsonData, actionTarget, abilityData);
                 actions.Add(d2Action);
             }
         }
@@ -322,110 +417,162 @@ public static class AbilityReader
         return actions;
     }
 
-    private static Dictionary<string,D2Event> ParseAbilityEvents(JsonData jsonData, AbilityData abilityData)
+    #endregion
+
+    #region Event
+
+    private static Dictionary<string, D2Event> ParseAbilityEvents(JsonData json, AbilityData abilityData)
     {
-        if(jsonData == null)
+        if(json == null)
             return null;
-        Dictionary<string, D2Event> eventMap = new Dictionary<string, D2Event>();
-        foreach(string key in jsonData.Keys)
+
+        var eventMap = new Dictionary<string, D2Event>();
+        foreach(string key in json.Keys)
         {
             if(Enum.IsDefined(typeof(AbilityEvent), key))
             {
-                JsonData eventsJsonData = GetJsonValue(jsonData, key);
-                List<D2Action> actions = ParseActions(eventsJsonData, abilityData);
-                D2Event d2Event = new D2Event(actions);
+                var eventsJsonData = GetJsonValue(json, key);
+                var actions = ParseActions(eventsJsonData, abilityData);
+                var d2Event = new D2Event(actions);
                 eventMap.Add(key, d2Event);
             }
         }
         return eventMap;
     }
 
-    private static T GetEnumValue<T>(string enumStr)
-    {
-        if(enumStr == null)
-            return default(T);
+    #endregion
 
-        T value = (T)Enum.Parse(typeof(T), enumStr.ToString());
-        return value;
-    }
+    #region Modifier
 
-    private static JsonData GetJsonValue(JsonData jsonData, string key)
+    private static Dictionary<ModifierEvents, D2Event> ParseModifierEvents(JsonData json, AbilityData abilityData)
     {
-        if(jsonData == null || string.IsNullOrEmpty(key))
+        if(json == null)
             return null;
 
-        if(jsonData.Keys.Contains(key))
+        var eventMap = new Dictionary<ModifierEvents, D2Event>();
+        foreach(var key in json.Keys)
         {
-            return jsonData[key];
+            if(Enum.IsDefined(typeof(ModifierEvents), key))
+            {
+                var eventsJsonData = GetJsonValue(json, key);
+                var actions = ParseActions(eventsJsonData, abilityData);
+                var d2Event = new D2Event(actions);
+                var eventName = GetEnumValue<ModifierEvents>(key);
+                eventMap.Add(eventName, d2Event);
+            }
         }
-        return null;
+        return eventMap;
     }
 
-    private static string GetJsonValueToString(JsonData jsonData, string key)
+    private static void ParseModifierAura(JsonData json, AbilityData abilityData, ModifierData modifier)
     {
-        JsonData resultJsonData = GetJsonValue(jsonData, key);
-        if(resultJsonData != null)
-            return resultJsonData.ToString();
-
-        return null;
+        modifier.Aura = GetStringValue(json, "Aura");
+        if(modifier.Aura != null)
+        {
+            modifier.Aura_Teams = GetEnumValue<MultipleTargetsTeam>(json, "Aura_Teams");
+            if(modifier.Aura_Teams == default)
+            {
+                BattleLog.LogError("技能[{0}]的Modifier[{1}]中配置了光环类型，但是Aura_Teams未找到或者配置有错误", abilityData.configFileName, modifier.Name);
+                return;
+            }
+            modifier.Aura_Types = GetEnumValue<MultipleTargetsType>(json, "Aura_Types");
+            if(modifier.Aura_Teams == default)
+            {
+                BattleLog.LogError("技能[{0}]的Modifier[{1}]中配置了光环类型，但是Aura_Types未找到或者配置有错误", abilityData.configFileName, modifier.Name);
+                return;
+            }
+            modifier.Aura_Radius = GetFloatValue(json, "Aura_Radius");
+            if(modifier.Aura_Teams == default)
+            {
+                BattleLog.LogError("技能[{0}]的Modifier[{1}]中配置了光环类型，但是Aura_Radius未配置", abilityData.configFileName, modifier.Name);
+                return;
+            }
+        }
     }
 
-    private static float GetJsonValueToFloat(JsonData jsonData, string key)
+    private static void ParseModifierProperties(JsonData json, AbilityData abilityData, ModifierData modifier)
     {
-        string resultJsonData = GetJsonValueToString(jsonData, key);
-        float res = string.IsNullOrEmpty(resultJsonData) ? 0 : float.Parse(resultJsonData);
-        return res;
+        var propertyDataConfig = GetJsonValue(json, "Properties");
+        if(propertyDataConfig == null)
+        {
+            foreach(var item in propertyDataConfig)
+            {
+
+            }
+            //modifier.ModifierProperties = 
+        }
     }
 
-    private static T GetJsonValueToEnum<T>(JsonData jsonData, string key)
+    private static ModifierData ParseModifier(JsonData json, AbilityData abilityData)
     {
-        string resultStr = GetJsonValueToString(jsonData, key);
-        return GetEnumValue<T>(resultStr);
+        var modifier = new ModifierData();
+        
+        //modifier.Name = json; json.key
+        modifier.Duration = GetFloatValue(json, "Duration");
+        modifier.ThinkInterval = GetFloatValue(json, "ThinkInterval");
+        modifier.IsDebuff = GetBoolValue(json, "IsDebuff");
+        modifier.IsBuff = GetBoolValue(json, "IsBuff");
+        modifier.Passive = GetBoolValue(json, "Passive");
+        modifier.IsHidden = GetBoolValue(json, "IsHidden");
+        modifier.IsPurgable = GetBoolValue(json, "IsPurgable");
+        // effect
+        modifier.EffectName = GetStringValue(json, "EffectName");
+        modifier.EffectAttachType = GetEnumValue<ModifierEffectAttachType>(json, "EffectAttachType");
+        // event
+        modifier.ModifierEventMap = ParseModifierEvents(json, abilityData);
+        // aura
+        ParseModifierAura(json, abilityData, modifier);
+        // ModifierProperties
+        ParseModifierProperties(json, abilityData, modifier);
+        // States
+        return modifier;
     }
 
     /// <summary>
-    /// 解析技能行为数组
+    /// 解析modifier
     /// </summary>
-    private static AbilityBehavior ParseAbilityBehaviorArray(JsonData jsonData, string key)
+    private static Dictionary<string, ModifierData> ParseModifiers(JsonData json, AbilityData abilityData)
     {
-        JsonData behaviorConfigs = GetJsonValue(jsonData, key);
-        if(behaviorConfigs == null)
-            return 0;
-        AbilityBehavior behavior = 0;
-        if(behaviorConfigs.IsArray)
+        var res = new Dictionary<string, ModifierData>();
+        var Modifiers = GetJsonValue(json, "Modifiers");
+        if(Modifiers.IsArray)
         {
-            for(int i = 0; i < behaviorConfigs.Count; i++)
+            for(int i = 0; i < Modifiers.Count; i++)
             {
-                string item = behaviorConfigs[i].ToString();
-                AbilityBehavior abilityBehavior = GetEnumValue<AbilityBehavior>(item);
-                behavior |= abilityBehavior;
+                var modifierJson = Modifiers[i];
+                var modifier = ParseModifier(modifierJson, abilityData);
+                res.Add(modifier.Name, modifier);
             }
         }
-        return behavior;
+        return res;
     }
 
-    private static AbilityData CreateAbility(string configPath) 
+
+    #endregion
+
+    private static AbilityData CreateAbility(string path) 
     {
-        JsonData jsonData = LoadModule.LoadJson(configPath);
+        JsonData jsonData = LoadModule.LoadJson(path);
         if(jsonData == null)
         {
-            BattleLog.LogError("[CreateAbility]没有找到指定json配置！", configPath);
+            BattleLog.LogError("[CreateAbility]没有找到指定json配置！", path);
             return null;
         }
+
         AbilityData abilityData = new AbilityData();
-        abilityData.configFileName = GetJsonValueToString(jsonData, "Name");
-        string abilityType = GetJsonValueToString(jsonData, "AbilityType");
+        abilityData.configFileName = GetStringValue(jsonData, "Name");
+        string abilityType = GetStringValue(jsonData, "AbilityType");
         abilityData.abilityType = abilityType;
-        abilityData.abilityBranch = GetJsonValueToEnum<AbilityBranch>(jsonData, "AbilityBranch");
+        abilityData.abilityBranch = GetEnumValue<AbilityBranch>(jsonData, "AbilityBranch");
         abilityData.abilityBehavior = ParseAbilityBehaviorArray(jsonData, "AbilityBehavior"); 
-        abilityData.aiTargetCondition = GetJsonValueToEnum<AbilityUnitAITargetCondition>(jsonData, "AbilityUnitAiTargetCondition");
-        abilityData.castRange = GetJsonValueToFloat(jsonData, "AbilityCastRange");
-        abilityData.castPoint = GetJsonValueToFloat(jsonData, "AbilityCastPoint");
-        abilityData.castDuration = GetJsonValueToFloat(jsonData, "AbilityCastDuration");
-        abilityData.castAnimation = GetJsonValueToString(jsonData, "AbilityCastAnimation");
-        abilityData.cooldown = GetJsonValueToFloat(jsonData, "AbilityCooldown");
-        abilityData.costType = GetJsonValueToEnum<AbilityCostType>(jsonData, "AbilityCostType");
-        abilityData.costValue = GetJsonValueToFloat(jsonData, "AbilityCostValue");
+        abilityData.aiTargetCondition = GetEnumValue<AbilityUnitAITargetCondition>(jsonData, "AbilityUnitAiTargetCondition");
+        abilityData.castRange = GetFloatValue(jsonData, "AbilityCastRange");
+        abilityData.castPoint = GetFloatValue(jsonData, "AbilityCastPoint");
+        abilityData.castDuration = GetFloatValue(jsonData, "AbilityCastDuration");
+        abilityData.castAnimation = GetStringValue(jsonData, "AbilityCastAnimation");
+        abilityData.cooldown = GetFloatValue(jsonData, "AbilityCooldown");
+        abilityData.costType = GetEnumValue<AbilityCostType>(jsonData, "AbilityCostType");
+        abilityData.costValue = GetFloatValue(jsonData, "AbilityCostValue");
 
         abilityData.abilityTarget = ParseAbilityRange(jsonData, abilityData);
 
@@ -433,10 +580,12 @@ public static class AbilityReader
         abilityData.eventMap = ParseAbilityEvents(jsonData, abilityData);
 
         // 解析Modifier
+        abilityData.modifierMap = ParseModifiers(jsonData, abilityData);
+
         return abilityData;
     }
     
-    public static Ability CreateAbility(int id,BattleEntity caster)
+    public static Ability CreateAbility(int id, BattleEntity caster)
     {
         skillItem skillItem = skillTable.Instance.GetTableItem(id);
         if(skillItem == null)
@@ -445,9 +594,9 @@ public static class AbilityReader
             return null;
         }
 
-        string config = skillItem.config;
+        string path = skillItem.config;
         int priority = skillItem.priority;
-        AbilityData abilityData = CreateAbility(config);
+        AbilityData abilityData = CreateAbility(path);
         Ability ability = new Ability(id, priority, caster, abilityData);
         return ability;
     }
