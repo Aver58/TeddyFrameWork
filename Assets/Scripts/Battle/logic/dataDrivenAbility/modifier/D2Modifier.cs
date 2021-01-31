@@ -37,6 +37,7 @@ public class D2Modifier
         requestTarget.SetUnitTarget(target);
     }
 
+    // 创建
     public void OnCreate()
     {
         ApplyAura();
@@ -57,10 +58,9 @@ public class D2Modifier
 
     public void OnDestroy()
     {
+        RemoveAura();
         isDestroyed = true;
         ExecuteEvent(ModifierEvents.OnDestroy);
-
-        RemoveAura();
 
         if(target != null)
         {
