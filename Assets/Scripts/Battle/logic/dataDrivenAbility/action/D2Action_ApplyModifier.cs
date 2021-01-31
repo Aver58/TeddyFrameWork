@@ -25,7 +25,7 @@ public class D2Action_ApplyModifier : D2Action
         this.actionTarget = actionTarget;
     }
 
-    protected override void ExecuteByPoint(BattleEntity source, List<BattleEntity> targets)
+    protected override void ExecuteByPoint(BattleUnit source, List<BattleUnit> targets)
     {
         for(int i = 0; i < targets.Count; i++)
         {

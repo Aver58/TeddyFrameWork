@@ -19,10 +19,10 @@ public class RequestTarget
 {
     public AbilityRequestTargetType targetType { get; set; }
 
-    private BattleEntity m_TargetUnit;
+    private BattleUnit m_TargetUnit;
     private Vector2 m_TargetPos;
 
-    public void SetUnitTarget(BattleEntity battleEntity)
+    public void SetUnitTarget(BattleUnit battleEntity)
     {
         targetType = AbilityRequestTargetType.UNIT;
         m_TargetUnit = battleEntity;

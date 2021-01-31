@@ -9,17 +9,16 @@
 */
 #endregion
 
-using System;
 using System.Collections.Generic;
 using TsiU;
 using UnityEngine;
 
-public class BattleEntity : Entity
+public class BattleUnit : Unit
 {
     public BattleCamp camp { get; }
     public BattleCamp enemyCamp { get;set; }
     public int hash { get { return GetHashCode(); } }
-    public BattleEntity target { get; set; }
+    public BattleUnit target { get; set; }
     public List<Ability> abilities;
 
     private static Dictionary<string, AbilityCastType> m_stringToCastTypeMap = new Dictionary<string, AbilityCastType> {
@@ -36,7 +35,7 @@ public class BattleEntity : Entity
     private BattleBehaviorWorkingData m_BehaviorWorkData;
     private Dictionary<AbilityCastType, Ability> m_abilityMap;
 
-    public BattleEntity(int id, BattleCamp battleCamp, BattleProperty property) : base(id)
+    public BattleUnit(int id, BattleCamp battleCamp, BattleProperty property) : base(id)
     {
         property.id = id;
         camp = battleCamp;
@@ -105,7 +104,7 @@ public class BattleEntity : Entity
 
     #region modifier
 
-    public void ApplyModifierByName(BattleEntity caster, AbilityData abilityData, string modifierName)
+    public void ApplyModifierByName(BattleUnit caster, AbilityData abilityData, string modifierName)
     {
         var modifierData = abilityData.GetModifierData(modifierName);
         if(modifierData != null)
@@ -117,7 +116,7 @@ public class BattleEntity : Entity
         ApplyModifier(caster, abilityData, modifierData);
     }
 
-    public void ApplyModifier(BattleEntity caster, AbilityData abilityData, ModifierData modifierData)
+    public void ApplyModifier(BattleUnit caster, AbilityData abilityData, ModifierData modifierData)
     {
         var modifier = new D2Modifier(caster, modifierData, this);
 

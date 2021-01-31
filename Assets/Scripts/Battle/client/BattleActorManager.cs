@@ -27,7 +27,7 @@ public class BattleActorManager : Singleton<BattleActorManager>
         m_ActorMap.Add(hash,e);
     }
 
-    public List<HeroActor> GetActors(List<BattleEntity> entities)
+    public List<HeroActor> GetActors(List<BattleUnit> entities)
     {
         m_Temps = new List<HeroActor>();
         foreach(var entity in entities)

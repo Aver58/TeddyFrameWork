@@ -11,7 +11,7 @@
 
 public class BattleDecisionWorkingData : BattleWorkingData
 {
-    public BattleDecisionWorkingData(BattleEntity battleEntity) : base(battleEntity)
+    public BattleDecisionWorkingData(BattleUnit battleEntity) : base(battleEntity)
     {
 
     }

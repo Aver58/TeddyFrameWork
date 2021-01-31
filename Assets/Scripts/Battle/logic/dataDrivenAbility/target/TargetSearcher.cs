@@ -18,16 +18,16 @@ public delegate bool IsInRange(Vector2 sourcePos, Vector2 targetPos, float viewR
 public class TargetSearcher : Singleton<TargetSearcher>
 {
     // 寻找离指定施放者最近的单位
-    public BattleEntity FindNearestEnemyUnit(BattleEntity source)
+    public BattleUnit FindNearestEnemyUnit(BattleUnit source)
     {
-        BattleEntity targetEntity = null;
+        BattleUnit targetEntity = null;
         // 找出敌对阵营
         BattleCamp enemyCamp = source.enemyCamp;
         // 获取指定标记的所有单位
-        List<BattleEntity> entities = BattleEntityManager.instance.GetEntities(enemyCamp);
+        List<BattleUnit> entities = BattleEntityManager.instance.GetEntities(enemyCamp);
         // 比较距离，找出最近单位
         float minDistance = Int32.MaxValue;
-        foreach(BattleEntity entity in entities)
+        foreach(BattleUnit entity in entities)
         {
             Vector2 distance = source.Get2DPosition() - entity.Get2DPosition();
             if(distance.magnitude < minDistance)
@@ -53,17 +53,17 @@ public class TargetSearcher : Singleton<TargetSearcher>
     /// </summary>
     /// <param name="sourceList"></param>
     /// <param name="targetList"></param>
-    private void InsertToTargetList(List<BattleEntity> sourceList, List<BattleEntity> targetList)
+    private void InsertToTargetList(List<BattleUnit> sourceList, List<BattleUnit> targetList)
     {
-        foreach(BattleEntity item in sourceList)
+        foreach(BattleUnit item in sourceList)
         {
             targetList.Add(item);
         }
     }
 
-    private List<BattleEntity> FindTargetUnits(BattleEntity source, MultipleTargetsTeam targetTeam, MultipleTargetsType targetDemageType)
+    private List<BattleUnit> FindTargetUnits(BattleUnit source, MultipleTargetsTeam targetTeam, MultipleTargetsType targetDemageType)
     {
-        List<BattleEntity> targets = new List<BattleEntity>(0);
+        List<BattleUnit> targets = new List<BattleUnit>(0);
 
         // 根据阵营找对象
         BattleCamp sourceCamp = source.camp;
@@ -98,13 +98,13 @@ public class TargetSearcher : Singleton<TargetSearcher>
     private Comparison<IComparable> MinValueCompare() { return (x, y) => x.CompareTo(y); }
     private Comparison<IComparable> MaxValueCompare() { return (x, y) => -x.CompareTo(y); }
 
-    private BattleEntity GetRandomHeroEntity(List<BattleEntity> targetUnits)
+    private BattleUnit GetRandomHeroEntity(List<BattleUnit> targetUnits)
     {
         int index = new System.Random().Next(0, targetUnits.Count - 1);
         return targetUnits[index];
     }
 
-    private BattleEntity GetRangeHeroEntity(Vector2 sourcePos,List<BattleEntity> targetUnits,Comparison<IComparable> comparison)
+    private BattleUnit GetRangeHeroEntity(Vector2 sourcePos,List<BattleUnit> targetUnits,Comparison<IComparable> comparison)
     {
         targetUnits.Sort((x, y) =>
         {
@@ -115,25 +115,25 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targetUnits[0];
     }
 
-    private BattleEntity GetHpHeroEntity(List<BattleEntity> targetUnits, Comparison<IComparable> comparison)
+    private BattleUnit GetHpHeroEntity(List<BattleUnit> targetUnits, Comparison<IComparable> comparison)
     {
         targetUnits.Sort((x, y) =>{return comparison(x.GetHP(), y.GetHP());});
         return targetUnits[0];
     }
 
-    private BattleEntity GetHpPercentHeroEntity(List<BattleEntity> targetUnits, Comparison<IComparable> comparison)
+    private BattleUnit GetHpPercentHeroEntity(List<BattleUnit> targetUnits, Comparison<IComparable> comparison)
     {
         targetUnits.Sort((x, y) => { return comparison(x.GetHPPercent(), y.GetHPPercent()); });
         return targetUnits[0];
     }
 
-    private BattleEntity GetEnergyHeroEntity(List<BattleEntity> targetUnits, Comparison<IComparable> comparison)
+    private BattleUnit GetEnergyHeroEntity(List<BattleUnit> targetUnits, Comparison<IComparable> comparison)
     {
         targetUnits.Sort((x, y) => { return comparison(x.GetEnergy(), y.GetEnergy()); });
         return targetUnits[0];
     }
 
-    private BattleEntity FilterTargetEntityFromList(BattleEntity source, Ability ability, List<BattleEntity> targetUnits)
+    private BattleUnit FilterTargetEntityFromList(BattleUnit source, Ability ability, List<BattleUnit> targetUnits)
     {
         if(targetUnits.Count <= 0)
             return null;
@@ -166,21 +166,21 @@ public class TargetSearcher : Singleton<TargetSearcher>
 
     #endregion
 
-    public BattleEntity FindTargetUnitByAbility(BattleEntity source, Ability ability)
+    public BattleUnit FindTargetUnitByAbility(BattleUnit source, Ability ability)
     {
         // 全屏技能
         if(ability.GetCastRange() <= 0)
             return source;
 
-        BattleEntity lastTarget = source.target;
+        BattleUnit lastTarget = source.target;
         MultipleTargetsTeam targetTeam = ability.GetTargetTeam();
         MultipleTargetsType targetDemageType = ability.GetDamageType();
 
-        BattleEntity newTarget;
+        BattleUnit newTarget;
         if(lastTarget == null || lastTarget.IsUnSelectable())
         {
             BattleCamp sourceCamp = source.camp;
-            List<BattleEntity> targets = FindTargetUnits(source, targetTeam, targetDemageType);
+            List<BattleUnit> targets = FindTargetUnits(source, targetTeam, targetDemageType);
             newTarget = FilterTargetEntityFromList(source, ability, targets);
         }
         else
@@ -190,9 +190,9 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return newTarget;
     }
 
-    public List<BattleEntity> GetActionTarget(BattleEntity source, RequestTarget requestTarget)
+    public List<BattleUnit> GetActionTarget(BattleUnit source, RequestTarget requestTarget)
     {
-        List<BattleEntity> targets = new List<BattleEntity>();
+        List<BattleUnit> targets = new List<BattleUnit>();
         if(requestTarget.targetType == AbilityRequestTargetType.UNIT)
         {
             targets.Add(FindNearestEnemyUnit(source));
@@ -204,10 +204,10 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targets;
     }
 
-    public List<BattleEntity> FindTargetUnitsByManualSelect(BattleEntity source, Ability ability, 
+    public List<BattleUnit> FindTargetUnitsByManualSelect(BattleUnit source, Ability ability, 
         float dragWorldPointX = -1, float dragWorldPointZ = -1)
     {
-        List<BattleEntity> targets = new List<BattleEntity>();
+        List<BattleUnit> targets = new List<BattleUnit>();
         var castRange = ability.GetCastRange();
         if(castRange <= 0)
         {

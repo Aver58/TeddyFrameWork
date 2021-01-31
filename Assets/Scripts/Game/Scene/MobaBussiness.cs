@@ -45,13 +45,13 @@ public class MobaBussiness : Singleton<MobaBussiness>
         m_ActorMgr = BattleActorManager.instance;
         
         //AddPlayer();
-        BattleEntity myEntity = m_EntityMgr.GetMyEntity();
+        BattleUnit myEntity = m_EntityMgr.GetMyEntity();
         m_playerActor = new HeroActor(myEntity);
         m_playerActor.LoadAsset(OnLoadPlayer);
 
         //AddEnemy();
         var entyties = m_EntityMgr.GetEntities(BattleCamp.ENEMY);
-        foreach(BattleEntity entity in entyties)
+        foreach(BattleUnit entity in entyties)
         {
             HeroActor actor = new HeroActor(entity);
             actor.LoadAsset(OnLoadGuard);

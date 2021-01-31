@@ -20,7 +20,7 @@ public class NOD_UpdateRequest : TBTActionLeaf
     {
         base.onEnter(wData);
         BattleDecisionWorkingData decisionData = wData as BattleDecisionWorkingData;
-        BattleEntity caster = decisionData.owner;
+        BattleUnit caster = decisionData.owner;
         Ability ability = caster.SelectCastableAbility();
 
         if(ability == null)
@@ -49,7 +49,7 @@ public class NOD_UpdateRequest : TBTActionLeaf
         else
         {
             // 寻找技能目标, 如果有目标被放逐了，可能就选不到目标!
-            BattleEntity target = TargetSearcher.instance.FindTargetUnitByAbility(caster,ability);
+            BattleUnit target = TargetSearcher.instance.FindTargetUnitByAbility(caster,ability);
             if(target!=null)
             {
                 BattleLog.Log("【NOD_UpdateRequest】选取到技能ability：{0}，target：{1}", ability.GetConfigName(), target.GetName());

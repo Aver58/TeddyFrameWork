@@ -17,7 +17,7 @@ public class NOD_SetUnitIdle : TBTActionLeaf
     {
         BattleLog.Log("【NOD_SetUnitIdle】onEnter");
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-        BattleEntity source = behaviorData.owner;
+        BattleUnit source = behaviorData.owner;
         var request = behaviorData.request;
         
         source.SetState(HeroState.IDLE);

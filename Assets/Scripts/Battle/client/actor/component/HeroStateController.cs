@@ -22,7 +22,7 @@ public class HeroStateController
     //private BattleEntity m_BattleEntity;
     private AnimationController m_AnimController;
 
-    public HeroStateController(BattleEntity source, AnimationController animController)
+    public HeroStateController(BattleUnit source, AnimationController animController)
     {
         //m_BattleEntity = source;
         m_AnimController = animController;

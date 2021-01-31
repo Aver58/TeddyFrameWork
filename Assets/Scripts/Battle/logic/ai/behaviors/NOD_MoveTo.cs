@@ -19,7 +19,7 @@ namespace TsiU
         {
             //BattleLog.Log("【NOD_MoveTo】onEnter");
             BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-            BattleEntity source = behaviorData.owner;
+            BattleUnit source = behaviorData.owner;
             source.SetState(HeroState.MOVE);
         }
 
@@ -32,9 +32,9 @@ namespace TsiU
         {
             BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
             float deltaTime = behaviorData.deltaTime;
-            BattleEntity source = behaviorData.owner;
+            BattleUnit source = behaviorData.owner;
             AIBehaviorRequest request = behaviorData.request;
-            Entity target = request.target;
+            Unit target = request.target;
 
             Vector2 ownerPos = source.Get2DPosition();
             Vector2 targetPos = target.Get2DPosition();

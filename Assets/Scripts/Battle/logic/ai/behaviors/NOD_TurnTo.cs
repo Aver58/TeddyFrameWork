@@ -18,7 +18,7 @@ public class NOD_TurnTo : TBTActionLeaf
     {
         //BattleLog.Log("【NOD_TurnTo】onEnter");
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-        BattleEntity owner = behaviorData.owner;
+        BattleUnit owner = behaviorData.owner;
         owner.SetState(HeroState.TURN);
     }
 
@@ -31,9 +31,9 @@ public class NOD_TurnTo : TBTActionLeaf
     {
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
         float deltaTime = behaviorData.deltaTime;
-        BattleEntity source = behaviorData.owner;
+        BattleUnit source = behaviorData.owner;
         AIBehaviorRequest request = behaviorData.request;
-        Entity target = request.target;
+        Unit target = request.target;
 
         Vector2 sourcePos = source.Get2DPosition();
         Vector2 targetPos = target.Get2DPosition();

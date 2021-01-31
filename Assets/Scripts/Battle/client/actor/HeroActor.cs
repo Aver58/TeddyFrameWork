@@ -24,7 +24,7 @@ public class HeroActor
     public BattleCamp camp;
     public bool isLoadDone;// { get; set; }
 
-    public BattleEntity battleEntity { get; }
+    public BattleUnit battleEntity { get; }
     public Transform transform { get; private set; }
     public GameObject gameObject { get; private set; }
 
@@ -37,7 +37,7 @@ public class HeroActor
 
     protected Action<GameObject> m_LoadedCallback;
 
-    public HeroActor(BattleEntity battleEntity)
+    public HeroActor(BattleUnit battleEntity)
     {
         id = battleEntity.GetUniqueID();
         camp = battleEntity.camp;

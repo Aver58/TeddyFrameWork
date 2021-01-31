@@ -18,8 +18,8 @@ public class D2Modifier
 {
     public int ID;
 
-    private BattleEntity caster;
-    private BattleEntity target;
+    private BattleUnit caster;
+    private BattleUnit target;
     private ModifierData modifierData;
     private RequestTarget requestTarget;
 
@@ -28,7 +28,7 @@ public class D2Modifier
     private float passedTime;
     private float thinkPassedTime;
 
-    public D2Modifier(BattleEntity caster, ModifierData modifierData, BattleEntity target)
+    public D2Modifier(BattleUnit caster, ModifierData modifierData, BattleUnit target)
     {
         this.caster = caster;
         this.target = target;

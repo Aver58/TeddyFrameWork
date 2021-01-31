@@ -31,7 +31,7 @@ public static class BattleLog
         Debug.Log($"【{type}】onExit");
     }
 
-    public static void LogRpgBattleAttacker(int logicFrame, BattleEntity caster, BattleEntity victim, string configName, float damage)
+    public static void LogRpgBattleAttacker(int logicFrame, BattleUnit caster, BattleUnit victim, string configName, float damage)
     {
         Debug.Log("[逻辑帧:{0}]（{1}）使用了【{2}】对（{3}）造成伤害：{4}", logicFrame, caster.GetName(), configName, victim.GetName(), damage.ToString());
     }

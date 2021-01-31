@@ -56,7 +56,7 @@ public class D2Event
         m_Actions = actions;
     }
 
-    public void Execute(BattleEntity source, RequestTarget requestTarget)
+    public void Execute(BattleUnit source, RequestTarget requestTarget)
     {
         //BattleLog.Log("【D2Event】{0}，source：{1}，target：{2}", GetType().Name, source.GetName(), requestTarget.ToString());
 

@@ -12,7 +12,7 @@
 public static class AbilityFormula
 {
     // 造成伤害
-    public static void ApplyDamage(BattleEntity caster,BattleEntity victim, AbilityDamageType damageType, 
+    public static void ApplyDamage(BattleUnit caster,BattleUnit victim, AbilityDamageType damageType, 
         AbilityDamageFlag damageFlag, AbilityValueSource damageValueSource,string configName)
     {
         int casterLevel = caster.GetLevel();

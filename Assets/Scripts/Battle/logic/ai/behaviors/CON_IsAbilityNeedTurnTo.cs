@@ -16,9 +16,9 @@ public class CON_IsAbilityNeedTurnTo : TBTPreconditionLeaf
     public override bool IsTrue(TBTWorkingData wData)
     {
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-        BattleEntity source = behaviorData.owner;
+        BattleUnit source = behaviorData.owner;
         AutoCastAbilityRequest request = behaviorData.request as AutoCastAbilityRequest;
-        Entity target = request.target;
+        Unit target = request.target;
         Ability ability = request.ability;
 
         //目标是自己，不用转身

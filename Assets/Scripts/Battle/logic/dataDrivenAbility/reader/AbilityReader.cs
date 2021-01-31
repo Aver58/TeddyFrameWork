@@ -640,7 +640,7 @@ public static class AbilityReader
         return abilityData;
     }
     
-    public static Ability CreateAbility(int id, BattleEntity caster)
+    public static Ability CreateAbility(int id, BattleUnit caster)
     {
         skillItem skillItem = skillTable.Instance.GetTableItem(id);
         if(skillItem == null)

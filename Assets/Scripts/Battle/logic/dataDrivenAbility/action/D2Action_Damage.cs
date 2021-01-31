@@ -27,7 +27,7 @@ public class D2Action_Damage : D2Action
         m_AbilityValueSource = damageValueSource;
     }
 
-    protected override void ExecuteByUnit(BattleEntity source, List<BattleEntity> targets)
+    protected override void ExecuteByUnit(BattleUnit source, List<BattleUnit> targets)
     {
         for(int i = 0; i < targets.Count; i++)
         {

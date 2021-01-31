@@ -14,15 +14,15 @@
 public class Ability
 {
     public int ID { get; }
-    public float CD { get; set; } = 0f;
+    public float CD { get; set; }
     public int priority { get; }
     public float castTime { get; set; }
-    public BattleEntity caster { get; }
+    public BattleUnit caster { get; }
     public AbilityState abilityState { get; set; }
     public RequestTarget requestTarget { get; set; }
     private AbilityData m_AbilityData;
 
-    public Ability(int id, int priority,BattleEntity battleEntity,AbilityData abilityData)
+    public Ability(int id, int priority,BattleUnit battleEntity,AbilityData abilityData)
     {
         ID = id;
         this.priority = priority;

@@ -12,7 +12,7 @@
 public class AutoCastAbilityRequest : AIBehaviorRequest
 {
     public Ability ability { get; set; }
-    public AutoCastAbilityRequest(Ability ability, BattleEntity target) : base(RequestType.AutoCastAbility)
+    public AutoCastAbilityRequest(Ability ability, BattleUnit target) : base(RequestType.AutoCastAbility)
     {
         this.ability = ability;
         this.target = target;

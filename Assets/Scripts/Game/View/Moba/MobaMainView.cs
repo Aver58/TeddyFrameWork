@@ -20,7 +20,7 @@ public class MobaMainView : MainViewBase
     private RectTransform hudParent;
     private ETCJoystick m_joystick;
     private HeroActor m_PlayerActor;
-    private BattleEntity m_PlayerEntity;
+    private BattleUnit m_PlayerEntity;
     private Vector3 moveDistance = Vector3.zero;
     private Vector3 skillForward = Vector3.zero;
 

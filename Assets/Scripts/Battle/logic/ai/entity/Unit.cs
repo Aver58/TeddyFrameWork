@@ -13,7 +13,7 @@ using UnityEngine;
 
 // 数据层
 // 维护不依赖表现的真实位置坐标
-public class Entity
+public class Unit
 {
     private float m_PosX;
     private float m_PosY;
@@ -30,7 +30,7 @@ public class Entity
     public void OnExit(){ }
     public void Update(float deltaTime,int logicFrame) { }
 
-    public Entity(int id)
+    public Unit(int id)
     {
         this.id = id;
     }

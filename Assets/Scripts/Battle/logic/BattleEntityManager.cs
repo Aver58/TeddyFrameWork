@@ -14,21 +14,21 @@ using System.Collections.Generic;
 public class BattleEntityManager : Singleton<BattleEntityManager>
 {
     //--------------------------------------------------------------------------------------
-    public delegate int AIEntityUpdater(BattleEntity entity, float gameTime, float deltaTime);
+    public delegate int AIEntityUpdater(BattleUnit entity, float gameTime, float deltaTime);
     //--------------------------------------------------------------------------------------
 
-    private List<BattleEntity> m_Entites;
-    private List<BattleEntity> m_Temps;
+    private List<BattleUnit> m_Entites;
+    private List<BattleUnit> m_Temps;
 
     public BattleEntityManager()
     {
-        m_Entites = new List<BattleEntity>();
-        m_Temps = new List<BattleEntity>();
+        m_Entites = new List<BattleUnit>();
+        m_Temps = new List<BattleUnit>();
     }
 
     public void IteratorDo(AIEntityUpdater updater, float gameTime, float deltaTime)
     {
-        foreach(BattleEntity e in m_Entites)
+        foreach(BattleUnit e in m_Entites)
         {
             updater(e, gameTime, deltaTime);
         }
@@ -36,7 +36,7 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
 
     public void UpdateAbility(float gameTime, float deltaTime)
     {
-        foreach(BattleEntity entity in m_Entites)
+        foreach(BattleUnit entity in m_Entites)
         {
             if(!entity.IsDead())
             {
@@ -45,15 +45,15 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
         }
     }
 
-    public void AddEntity(BattleEntity e)
+    public void AddEntity(BattleUnit e)
     {
         m_Entites.Add(e);
     }
 
-    public List<BattleEntity> GetEntities(BattleCamp battleCamp)
+    public List<BattleUnit> GetEntities(BattleCamp battleCamp)
     {
-        m_Temps = new List<BattleEntity>(0);
-        foreach(BattleEntity entity in m_Entites)
+        m_Temps = new List<BattleUnit>(0);
+        foreach(BattleUnit entity in m_Entites)
         {
             if(entity.camp == battleCamp)
             {
@@ -64,9 +64,9 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
     }
 
     //todo 删除了
-    public BattleEntity GetMyEntity()
+    public BattleUnit GetMyEntity()
     {
-        foreach(BattleEntity entity in m_Entites)
+        foreach(BattleUnit entity in m_Entites)
         {
             if(entity.camp == BattleCamp.FRIENDLY)
             {

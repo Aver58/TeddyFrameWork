@@ -8,8 +8,8 @@ public class CON_IsInAbilityRange : TBTPrecondition
         // 判断物体是否在视野范围内
         BattleBehaviorWorkingData data = wData as BattleBehaviorWorkingData;
         AutoCastAbilityRequest request = data.request as AutoCastAbilityRequest;
-        BattleEntity owner = data.owner;
-        Entity target = request.target;
+        BattleUnit owner = data.owner;
+        Unit target = request.target;
         // 目标是自己
         if(target == owner)
             return true;

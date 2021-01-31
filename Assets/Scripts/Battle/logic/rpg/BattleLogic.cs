@@ -28,15 +28,15 @@ public class BattleLogic : Singleton<BattleLogic>
 
         m_EntityMgr = BattleEntityManager.instance;
 
-        m_DecisionUpdater = delegate (BattleEntity entity, float gameTime, float deltaTime)
+        m_DecisionUpdater = delegate (BattleUnit entity, float gameTime, float deltaTime)
         {
             return entity.UpdateDecision(gameTime, deltaTime);
         };
-        m_RequestUpdater = delegate (BattleEntity entity, float gameTime, float deltaTime)
+        m_RequestUpdater = delegate (BattleUnit entity, float gameTime, float deltaTime)
         {
             return entity.UpdateRequest(gameTime, deltaTime);
         };
-        m_BehaviorUpdater = delegate (BattleEntity entity, float gameTime, float deltaTime)
+        m_BehaviorUpdater = delegate (BattleUnit entity, float gameTime, float deltaTime)
         {
             return entity.UpdateBehavior(gameTime, deltaTime);
         };
@@ -58,7 +58,7 @@ public class BattleLogic : Singleton<BattleLogic>
     {
         BattleProperty property = new BattleProperty(npcPropertyTable.Instance.GetTableItem(101));
         property.Level = 1;
-        BattleEntity entity = new BattleEntity(GetUniqueID(), BattleCamp.FRIENDLY, property);
+        BattleUnit entity = new BattleUnit(GetUniqueID(), BattleCamp.FRIENDLY, property);
         entity.enemyCamp = BattleCamp.ENEMY;
 
         m_EntityMgr.AddEntity(entity);
@@ -68,7 +68,7 @@ public class BattleLogic : Singleton<BattleLogic>
     {
         BattleProperty property = new BattleProperty(npcPropertyTable.Instance.GetTableItem(102));
         property.Level = 1;
-        HeroEntity guardEntity = new HeroEntity(GetUniqueID(), BattleCamp.ENEMY, property);
+        HeroUnit guardEntity = new HeroUnit(GetUniqueID(), BattleCamp.ENEMY, property);
         guardEntity.enemyCamp = BattleCamp.FRIENDLY;
         m_EntityMgr.AddEntity(guardEntity);
     }

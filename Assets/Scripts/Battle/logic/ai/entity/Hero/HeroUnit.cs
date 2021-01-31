@@ -11,9 +11,9 @@
 
 using TsiU;
 
-public class HeroEntity : BattleEntity
+public class HeroUnit : BattleUnit
 {
-    public HeroEntity(int id, BattleCamp camp, BattleProperty property) : base(id, camp, property)
+    public HeroUnit(int id, BattleCamp camp, BattleProperty property) : base(id, camp, property)
     {
     }
 

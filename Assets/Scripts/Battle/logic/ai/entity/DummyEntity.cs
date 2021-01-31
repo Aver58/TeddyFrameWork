@@ -9,7 +9,7 @@
 */
 #endregion
 
-public class DummyEntity : Entity
+public class DummyEntity : Unit
 {
     public DummyEntity(int id,float pointX,float pointZ) : base(id)
     {

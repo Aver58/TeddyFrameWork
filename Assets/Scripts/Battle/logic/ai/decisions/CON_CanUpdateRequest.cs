@@ -16,7 +16,7 @@ public class CON_CanUpdateRequest : TBTPrecondition
     public override bool IsTrue(TBTWorkingData wData)
     {
         BattleDecisionWorkingData decisionData = wData as BattleDecisionWorkingData;
-        BattleEntity battleEntity = decisionData.owner;
+        BattleUnit battleEntity = decisionData.owner;
         if(!battleEntity.IsCanDecision())
             return false;
         

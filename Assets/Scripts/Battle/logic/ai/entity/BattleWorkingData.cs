@@ -15,9 +15,9 @@ public class BattleWorkingData : TBTWorkingData
 {
     public AIBehaviorRequest request { get; set; }
 
-    public BattleEntity owner { get; set; }
+    public BattleUnit owner { get; set; }
 
-    public BattleWorkingData(BattleEntity battleEntity)
+    public BattleWorkingData(BattleUnit battleEntity)
     {
         owner = battleEntity;
     }

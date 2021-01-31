@@ -11,12 +11,12 @@
 
 public class ChaseRequest : AIBehaviorRequest
 {
-    public ChaseRequest(Entity target) : base(RequestType.Chase)
+    public ChaseRequest(Unit target) : base(RequestType.Chase)
     {
         SetTarget(target);
     }
 
-    public void SetTarget(Entity target)
+    public void SetTarget(Unit target)
     {
         this.target = target;
         isRequestCompleted = false;

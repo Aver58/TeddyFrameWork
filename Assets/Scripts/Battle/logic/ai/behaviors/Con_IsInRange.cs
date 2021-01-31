@@ -8,7 +8,7 @@ public class CON_IsInRange : TBTPrecondition
         // 判断物体是否在视野范围内
         BattleBehaviorWorkingData data = wData as BattleBehaviorWorkingData;
         AIBehaviorRequest request = data.request;
-        BattleEntity owner = data.owner;
+        BattleUnit owner = data.owner;
         float viewRange = owner.GetViewRange();
         Vector2 targetPos = request.target.Get2DPosition();
         Vector2 ownerPos = owner.Get2DPosition();

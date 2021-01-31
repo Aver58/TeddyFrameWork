@@ -17,7 +17,7 @@ using System.Collections.Generic;
 /// </summary>
 public class D2Action
 {
-    private List<BattleEntity> m_Targets;
+    private List<BattleUnit> m_Targets;
     protected RequestTarget m_RequestTarget;
     protected AbilityData abilityData;
 
@@ -26,7 +26,7 @@ public class D2Action
         this.abilityData = abilityData;
     }
 
-    public virtual void Execute(BattleEntity source, RequestTarget requestTarget)
+    public virtual void Execute(BattleUnit source, RequestTarget requestTarget)
     {
         BattleLog.Log("【D2Action】{0}， source：{1}，target：{2}" ,GetType().Name, source.GetName(), requestTarget.ToString());
 
@@ -46,9 +46,9 @@ public class D2Action
     /// <summary>
     /// 单体技能
     /// </summary>
-    protected virtual void ExecuteByUnit(BattleEntity source, List<BattleEntity> targets) { }
+    protected virtual void ExecuteByUnit(BattleUnit source, List<BattleUnit> targets) { }
     /// <summary>
     /// 范围伤害
     /// </summary>
-    protected virtual void ExecuteByPoint(BattleEntity source, List<BattleEntity> targets) { }
+    protected virtual void ExecuteByPoint(BattleUnit source, List<BattleUnit> targets) { }
 }

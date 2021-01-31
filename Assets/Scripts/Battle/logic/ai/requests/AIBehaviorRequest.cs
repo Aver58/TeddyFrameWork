@@ -2,7 +2,7 @@
 {
     public RequestType RequestType { get; }
     public bool isRequestCompleted { get; set; }
-    public Entity target { get; set; }
+    public Unit target { get; set; }
 
     public AIBehaviorRequest(RequestType requestType)
     {

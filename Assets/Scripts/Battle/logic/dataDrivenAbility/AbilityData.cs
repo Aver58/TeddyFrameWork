@@ -37,7 +37,7 @@ public class AbilityData
     public string modifierNames { get; set; }
     public Dictionary<string, ModifierData> modifierDataMap { get; set; }
 
-    public void ExecuteEvent(AbilityEvent abilityEvent, BattleEntity source, RequestTarget requestTarget)
+    public void ExecuteEvent(AbilityEvent abilityEvent, BattleUnit source, RequestTarget requestTarget)
     {
         BattleLog.Log("【AbilityData】ExecuteEvent：{0}，source：{1}，target：{2}", abilityEvent.ToString(), source.GetName(), requestTarget.ToString());
 

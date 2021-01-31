@@ -16,7 +16,7 @@ public class NOD_CastAbility : TBTActionLeaf
     protected override void onEnter(TBTWorkingData wData)
     {
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-        BattleEntity source = behaviorData.owner;
+        BattleUnit source = behaviorData.owner;
         Ability ability = source.SelectCastableAbility();
         BattleLog.Log("【NOD_CastAbility】onEnter {0}", ability.GetConfigName());
      
@@ -31,7 +31,7 @@ public class NOD_CastAbility : TBTActionLeaf
     protected override int onExecute(TBTWorkingData wData)
     {
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-        BattleEntity source = behaviorData.owner;
+        BattleUnit source = behaviorData.owner;
         Ability ability = source.SelectCastableAbility();
 
         //BattleLog.Log("【NOD_CastAbility】castTime：{0},duringTime：{1}", ability.castTime, ability.GetCastleDuring());

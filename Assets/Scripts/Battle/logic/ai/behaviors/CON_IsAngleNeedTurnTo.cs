@@ -17,9 +17,9 @@ public class CON_IsAngleNeedTurnTo : TBTPreconditionLeaf
     public override bool IsTrue(TBTWorkingData wData)
     {
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-        BattleEntity owner = behaviorData.owner;
+        BattleUnit owner = behaviorData.owner;
         AIBehaviorRequest request = behaviorData.request;
-        Entity target = request.target;
+        Unit target = request.target;
 
         Vector2 ownerPos = owner.Get2DPosition();
         Vector2 targetPos = target.Get2DPosition();
