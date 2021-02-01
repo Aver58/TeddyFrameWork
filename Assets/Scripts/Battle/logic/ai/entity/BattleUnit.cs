@@ -118,7 +118,7 @@ public class BattleUnit : Unit
 
     public void ApplyModifier(BattleUnit caster, AbilityData abilityData, ModifierData modifierData)
     {
-        var modifier = new D2Modifier(caster, modifierData, this);
+        var modifier = new D2Modifier(caster, modifierData, this, abilityData);
 
         modifier.OnCreate();
     }

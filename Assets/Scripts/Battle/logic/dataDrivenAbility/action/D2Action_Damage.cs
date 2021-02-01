@@ -19,7 +19,7 @@ public class D2Action_Damage : D2Action
     private List<D2Action> m_SuccessActions;
 
     public D2Action_Damage(AbilityDamageType damageType, AbilityDamageFlag damageFlag, 
-        AbilityValueSource damageValueSource, List<D2Action> successActions, AbilityData abilityData):base(abilityData)
+        AbilityValueSource damageValueSource, List<D2Action> successActions, ActionTarget actionTarget) :base(actionTarget)
     {
         this.damageType = damageType;
         this.damageFlag = damageFlag;
@@ -40,7 +40,7 @@ public class D2Action_Damage : D2Action
         for(int i = 0; i < m_SuccessActions.Count; i++)
         {
             D2Action action = m_SuccessActions[i];
-            action.Execute(source, m_RequestTarget);
+            action.Execute(source, abilityData, requestTarget);
         }
     }
 }

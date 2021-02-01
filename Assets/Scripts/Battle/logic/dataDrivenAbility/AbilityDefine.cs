@@ -43,7 +43,7 @@ public enum MultipleTargetsTeam
     UNIT_TARGET_TEAM_CUSTOM,
 }
 
-public enum AbilityUnitTargetType
+public enum MultipleTargetsType
 {
     UNIT_TARGET_HERO,
 }
@@ -197,11 +197,10 @@ public enum ActionMultipleTargetsCenter
     UNIT,
 }
 
-
 /// <summary>
 /// 伤害范围
 /// </summary>
-public enum MultipleTargetsType
+public enum AOEType
 {
     Radius = 1,//圆形半径
     Line,//线性

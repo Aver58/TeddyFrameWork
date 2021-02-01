@@ -17,10 +17,10 @@ using UnityEngine;
 /// </summary>
 public class RequestTarget
 {
-    public AbilityRequestTargetType targetType { get; set; }
-
+    public Vector2 targetPos;
     private BattleUnit m_TargetUnit;
-    private Vector2 m_TargetPos;
+
+    public AbilityRequestTargetType targetType;
 
     public void SetUnitTarget(BattleUnit battleEntity)
     {
@@ -31,12 +31,25 @@ public class RequestTarget
     public void SetPointTarget(float x,float z)
     {
         targetType = AbilityRequestTargetType.POINT;
-        m_TargetPos.Set(x, z);
+        targetPos.Set(x, z);
     }
 
-    public void GetTarget()
+    public void GetTarget2DPosition(out float x, out float z)
     {
+        if(targetType == AbilityRequestTargetType.UNIT)
+        {
+            m_TargetUnit.Get2DPosition(out x, out z);
+        }
+        else
+        {
+            x = targetPos.x;
+            z = targetPos.y;
+        }
+    }
 
+    public BattleUnit GetTargetUnit()
+    {
+        return m_TargetUnit;
     }
 
     public override string ToString()
@@ -50,7 +63,7 @@ public class RequestTarget
         }
         else
         {
-            return string.Format("position:({0},{1})", m_TargetPos.x.ToString(), m_TargetPos.y.ToString());
+            return string.Format("position:({0},{1})", targetPos.x.ToString(), targetPos.y.ToString());
         }
     }
 }

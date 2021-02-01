@@ -56,13 +56,13 @@ public class D2Event
         m_Actions = actions;
     }
 
-    public void Execute(BattleUnit source, RequestTarget requestTarget)
+    public void Execute(BattleUnit source, AbilityData abilityData, RequestTarget requestTarget)
     {
         //BattleLog.Log("【D2Event】{0}，source：{1}，target：{2}", GetType().Name, source.GetName(), requestTarget.ToString());
 
         foreach(D2Action action in m_Actions)
         {
-            action.Execute(source, requestTarget);
+            action.Execute(source, abilityData, requestTarget);
         }
     }
 }

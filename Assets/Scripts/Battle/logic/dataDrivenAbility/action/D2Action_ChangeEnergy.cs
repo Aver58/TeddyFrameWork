@@ -13,7 +13,7 @@ using LitJson;
 
 public class D2Action_ChangeEnergy : D2Action
 {
-    public D2Action_ChangeEnergy(JsonData jsonData, AbilityData abilityData) : base(abilityData)
+    public D2Action_ChangeEnergy(JsonData jsonData, ActionTarget actionTarget) : base(actionTarget)
     {
 
     }

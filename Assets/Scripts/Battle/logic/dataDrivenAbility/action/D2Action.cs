@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// 技能行为
@@ -17,29 +18,33 @@ using System.Collections.Generic;
 /// </summary>
 public class D2Action
 {
-    private List<BattleUnit> m_Targets;
-    protected RequestTarget m_RequestTarget;
-    protected AbilityData abilityData;
+    private List<BattleUnit> m_targets;
 
-    public D2Action(AbilityData abilityData)
+    protected AbilityData abilityData;
+    protected ActionTarget actionTarget;
+    protected RequestTarget requestTarget;
+
+    public D2Action(ActionTarget actionTarget)
     {
-        this.abilityData = abilityData;
+        this.actionTarget = actionTarget;
     }
 
-    public virtual void Execute(BattleUnit source, RequestTarget requestTarget)
+    public virtual void Execute(BattleUnit source, AbilityData abilityData, RequestTarget requestTarget)
     {
         BattleLog.Log("【D2Action】{0}， source：{1}，target：{2}" ,GetType().Name, source.GetName(), requestTarget.ToString());
 
-        m_RequestTarget = requestTarget;
-        m_Targets = TargetSearcher.instance.GetActionTarget(source, requestTarget);
+        this.abilityData = abilityData;
+        this.requestTarget = requestTarget;
+
+        var targetCollection = TargetSearcher.instance.GetActionTargets(source, abilityData, requestTarget, actionTarget);
         // 根据类型区分，单位和范围
         if(requestTarget.targetType == AbilityRequestTargetType.UNIT)
         {
-            ExecuteByUnit(source, m_Targets);
+            ExecuteByUnit(source, targetCollection.units);
         }
         else
         {
-            ExecuteByPoint(source, m_Targets);
+            ExecuteByPoint(source, targetCollection.points);
         }
     }
 
@@ -50,5 +55,5 @@ public class D2Action
     /// <summary>
     /// 范围伤害
     /// </summary>
-    protected virtual void ExecuteByPoint(BattleUnit source, List<BattleUnit> targets) { }
+    protected virtual void ExecuteByPoint(BattleUnit source, List<Vector2> targets) { }
 }

@@ -47,7 +47,7 @@ public static class AbilityReader
     private static float GetFloatValue(JsonData json, string key)
     {
         var res = GetJsonValue(json, key);
-        return res != null ? (float)res : 0f;
+        return res != null ? float.Parse(res.ToString()) : 0f;
     }
 
     private static bool GetBoolValue(JsonData json, string key)
@@ -113,7 +113,7 @@ public static class AbilityReader
         }
         var successActions = ParseActions(onSuccessActionConfig, abilityData);
 
-        var d2Action_IsHit = new D2Action_IsHit(successActions, abilityData);
+        var d2Action_IsHit = new D2Action_IsHit(successActions, actionTarget);
         return d2Action_IsHit;
     }
 
@@ -131,7 +131,7 @@ public static class AbilityReader
             return null;
         }
 
-        var d2Action_ChangeEnergy = new D2Action_ChangeEnergy(energyParams, abilityData);
+        var d2Action_ChangeEnergy = new D2Action_ChangeEnergy(energyParams, actionTarget);
         return d2Action_ChangeEnergy;
     }
 
@@ -177,7 +177,7 @@ public static class AbilityReader
         var damageValueSource = ParseValueSource(json, abilityData);
         var dealDamageSuccessActionConfig = GetJsonValue(json, "OnSuccess");
         var actions = ParseActions(dealDamageSuccessActionConfig, abilityData);
-        var d2Action_Damage = new D2Action_Damage(damageType, damageFlag, damageValueSource, actions, abilityData);
+        var d2Action_Damage = new D2Action_Damage(damageType, damageFlag, damageValueSource, actions, actionTarget);
         return d2Action_Damage;
     }
 
@@ -198,7 +198,7 @@ public static class AbilityReader
         }
 
         //var targetFlags = 
-        var applyModifier = new D2Action_ApplyModifier(abilityData, modifierName,actionTarget);
+        var applyModifier = new D2Action_ApplyModifier(modifierName, actionTarget);
         return applyModifier;
     }
     #endregion
@@ -350,15 +350,15 @@ public static class AbilityReader
             var targetCenter = GetEnumValue<ActionMultipleTargetsCenter>(json, "Center");
 
             var areaType = GetStringValue(aoeAreaJsonData, "AreaType");
-            var abilityAreaDamageType = GetEnumValue<MultipleTargetsType>(areaType);
+            var abilityAreaDamageType = GetEnumValue<AOEType>(areaType);
 
             switch(abilityAreaDamageType)
             {
-                case MultipleTargetsType.Radius:
+                case AOEType.Radius:
                     float radius = (int)GetJsonValue(aoeAreaJsonData, "Radius");
                     actionTarget.SetRadiusAoe(targetCenter, radius);
                     break;
-                case MultipleTargetsType.Line:
+                case AOEType.Line:
                     JsonData lineJsonData = (int)GetJsonValue(aoeAreaJsonData, "Line");
                     if(lineJsonData == null)
                     {
@@ -369,7 +369,7 @@ public static class AbilityReader
                     var thickness = (float)GetJsonValue(lineJsonData, "Thickness");
                     actionTarget.SetLineAoe(targetCenter, length, thickness);
                     break;
-                case MultipleTargetsType.Sector:
+                case AOEType.Sector:
                     JsonData sectorJsonData = GetJsonValue(json, "Sector");
                     if(sectorJsonData == null)
                     {
@@ -590,7 +590,7 @@ public static class AbilityReader
     {
         var res = new Dictionary<string, ModifierData>();
         var Modifiers = GetJsonValue(json, "Modifiers");
-        if(Modifiers.IsArray)
+        if(Modifiers != null && Modifiers.IsArray)
         {
             for(int i = 0; i < Modifiers.Count; i++)
             {

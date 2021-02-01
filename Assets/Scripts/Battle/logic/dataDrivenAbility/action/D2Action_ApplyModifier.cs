@@ -17,20 +17,18 @@ using System.Collections.Generic;
 public class D2Action_ApplyModifier : D2Action
 {
     private string modifierName;
-    private ActionTarget actionTarget;
 
-    public D2Action_ApplyModifier(AbilityData abilityData, string modifierName, ActionTarget actionTarget) : base(abilityData)
+    public D2Action_ApplyModifier(string modifierName, ActionTarget actionTarget) : base(actionTarget)
     {
         this.modifierName = modifierName;
-        this.actionTarget = actionTarget;
     }
 
-    protected override void ExecuteByPoint(BattleUnit source, List<BattleUnit> targets)
-    {
-        for(int i = 0; i < targets.Count; i++)
-        {
-            var target = targets[i];
-            target.ApplyModifierByName(source, abilityData, modifierName);
-        }
-    }
+    //protected override void ExecuteByPoint(BattleUnit source, List<BattleUnit> targets)
+    //{
+    //    for(int i = 0; i < targets.Count; i++)
+    //    {
+    //        var target = targets[i];
+    //        target.ApplyModifierByName(source, abilityData, modifierName);
+    //    }
+    //}
 }

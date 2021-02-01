@@ -46,7 +46,7 @@ public class AbilityData
         eventMap.TryGetValue(eventName,out @event);
         if(@event!=null)
         {
-            @event.Execute(source, requestTarget);
+            @event.Execute(source, this, requestTarget);
         }
     }
 

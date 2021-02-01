@@ -19,6 +19,7 @@ public class D2Modifier
     public int ID;
 
     private BattleUnit caster;
+    private AbilityData abilityData;
     private BattleUnit target;
     private ModifierData modifierData;
     private RequestTarget requestTarget;
@@ -28,10 +29,11 @@ public class D2Modifier
     private float passedTime;
     private float thinkPassedTime;
 
-    public D2Modifier(BattleUnit caster, ModifierData modifierData, BattleUnit target)
+    public D2Modifier(BattleUnit caster, ModifierData modifierData, BattleUnit target, AbilityData abilityData)
     {
         this.caster = caster;
         this.target = target;
+        this.abilityData = abilityData;
         this.modifierData = modifierData;
         requestTarget = new RequestTarget();
         requestTarget.SetUnitTarget(target);
@@ -99,7 +101,7 @@ public class D2Modifier
         var @event = modifierData.GetEvent(eventName);
         if(@event != null)
         {
-            @event.Execute(caster, requestTarget);
+            @event.Execute(caster, abilityData, requestTarget);
         }
     }
 

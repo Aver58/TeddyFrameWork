@@ -29,6 +29,7 @@ public class ActionTarget
     public float LineLength { get; set; }
     public float LineThickness { get; set; }
     public ActionMultipleTargetsCenter Center { get; set; }
+    public AOEType aoeType { get; set; }
     public float SectorRadius { get; set; }
     public float SectorAngle { get; set; }
 
@@ -50,7 +51,7 @@ public class ActionTarget
     public void SetRadiusAoe(ActionMultipleTargetsCenter targetCenter,float radius)
     {
         isSingleTarget = false;
-        Types = MultipleTargetsType.Radius;
+        aoeType = AOEType.Radius;
         Center = targetCenter;
         Radius = radius;
     }
@@ -58,7 +59,7 @@ public class ActionTarget
     public void SetLineAoe(ActionMultipleTargetsCenter targetCenter, float lineLength, float lineThickness)
     {
         isSingleTarget = false;
-        Types = MultipleTargetsType.Line;
+        aoeType = AOEType.Line;
         Center = targetCenter;
         LineLength = lineLength;
         LineThickness = lineThickness;
@@ -67,7 +68,7 @@ public class ActionTarget
     public void SetSectorAoe(ActionMultipleTargetsCenter targetCenter, float sectorRadius, float sectorAngle)
     {
         isSingleTarget = false;
-        Types = MultipleTargetsType.Sector;
+        aoeType = AOEType.Sector;
         Center = targetCenter;
         SectorRadius = sectorRadius;
         SectorAngle = sectorAngle;
