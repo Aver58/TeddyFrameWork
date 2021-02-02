@@ -72,7 +72,7 @@
             }
         },
 
-        "ChangeEnergy": 
+        "ChangeEnergy":
         {
             "Target" : "CASTER",
             "EnergyParams" : [100]

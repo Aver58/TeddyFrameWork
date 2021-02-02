@@ -6,7 +6,6 @@
     "ABILITY_BEHAVIOR_NO_TARGET"
   ],
   "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
-  "AbilityUnitAiTargetCondition": "UNIT_TARGET_RANGE_MIN",
   "AbilityCastRange": 1.5,
   "AbilityCastPoint": 0.39,
   "AbilityCastDuration": 1,

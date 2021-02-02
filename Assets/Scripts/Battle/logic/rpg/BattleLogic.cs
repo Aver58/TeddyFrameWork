@@ -15,18 +15,18 @@ public class BattleLogic : Singleton<BattleLogic>
 {
     public int logicFrame = 0;
     private int m_UniqueID = 0;
-    private BattleEntityManager m_EntityMgr;
+    private BattleUnitManager m_UnitMgr;
 
-    private BattleEntityManager.AIEntityUpdater m_DecisionUpdater;
-    private BattleEntityManager.AIEntityUpdater m_RequestUpdater;
-    private BattleEntityManager.AIEntityUpdater m_BehaviorUpdater;
+    private BattleUnitManager.AIEntityUpdater m_DecisionUpdater;
+    private BattleUnitManager.AIEntityUpdater m_RequestUpdater;
+    private BattleUnitManager.AIEntityUpdater m_BehaviorUpdater;
 
     public BattleLogic()
     {
         TableConfig config = new TableConfig();
         config.LoadTableConfig();
 
-        m_EntityMgr = BattleEntityManager.instance;
+        m_UnitMgr = BattleUnitManager.instance;
 
         m_DecisionUpdater = delegate (BattleUnit entity, float gameTime, float deltaTime)
         {
@@ -44,7 +44,7 @@ public class BattleLogic : Singleton<BattleLogic>
 
     public void Init()
     {
-        //AddEnemy();
+        AddEnemy();
         AddPlayer();
     }
 
@@ -61,7 +61,7 @@ public class BattleLogic : Singleton<BattleLogic>
         BattleUnit entity = new BattleUnit(GetUniqueID(), BattleCamp.FRIENDLY, property);
         entity.enemyCamp = BattleCamp.ENEMY;
 
-        m_EntityMgr.AddEntity(entity);
+        m_UnitMgr.AddPlayer(entity);
     }
 
     private void AddEnemy()
@@ -70,20 +70,20 @@ public class BattleLogic : Singleton<BattleLogic>
         property.Level = 1;
         HeroUnit guardEntity = new HeroUnit(GetUniqueID(), BattleCamp.ENEMY, property);
         guardEntity.enemyCamp = BattleCamp.FRIENDLY;
-        m_EntityMgr.AddEntity(guardEntity);
+        m_UnitMgr.AddUnit(guardEntity);
     }
 
     public void Update()
     {
         float deltaTime = Time.deltaTime;
         float gameTime = Time.realtimeSinceStartup;
-        m_EntityMgr.UpdateAbility(gameTime, deltaTime);
+        m_UnitMgr.UpdateAbility(gameTime, deltaTime);
         //Update Decision
-        m_EntityMgr.IteratorDo(m_DecisionUpdater, gameTime, deltaTime);
+        m_UnitMgr.IteratorDo(m_DecisionUpdater, gameTime, deltaTime);
         //Update Request
-        m_EntityMgr.IteratorDo(m_RequestUpdater, gameTime, deltaTime);
+        m_UnitMgr.IteratorDo(m_RequestUpdater, gameTime, deltaTime);
         //Update Behaivor
-        m_EntityMgr.IteratorDo(m_BehaviorUpdater, gameTime, deltaTime);
+        m_UnitMgr.IteratorDo(m_BehaviorUpdater, gameTime, deltaTime);
 
         logicFrame += 1;
     }

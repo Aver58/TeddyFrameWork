@@ -11,24 +11,25 @@
 
 using System.Collections.Generic;
 
-public class BattleEntityManager : Singleton<BattleEntityManager>
+public class BattleUnitManager : Singleton<BattleUnitManager>
 {
     //--------------------------------------------------------------------------------------
     public delegate int AIEntityUpdater(BattleUnit entity, float gameTime, float deltaTime);
     //--------------------------------------------------------------------------------------
 
-    private List<BattleUnit> m_Entites;
+    private List<BattleUnit> m_Units;
     private List<BattleUnit> m_Temps;
+    public BattleUnit playerUnit;
 
-    public BattleEntityManager()
+    public BattleUnitManager()
     {
-        m_Entites = new List<BattleUnit>();
+        m_Units = new List<BattleUnit>();
         m_Temps = new List<BattleUnit>();
     }
 
     public void IteratorDo(AIEntityUpdater updater, float gameTime, float deltaTime)
     {
-        foreach(BattleUnit e in m_Entites)
+        foreach(BattleUnit e in m_Units)
         {
             updater(e, gameTime, deltaTime);
         }
@@ -36,7 +37,7 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
 
     public void UpdateAbility(float gameTime, float deltaTime)
     {
-        foreach(BattleUnit entity in m_Entites)
+        foreach(BattleUnit entity in m_Units)
         {
             if(!entity.IsDead())
             {
@@ -45,34 +46,25 @@ public class BattleEntityManager : Singleton<BattleEntityManager>
         }
     }
 
-    public void AddEntity(BattleUnit e)
+    public void AddPlayer(BattleUnit e)
     {
-        m_Entites.Add(e);
+        playerUnit = e;
+        AddUnit(e);
+    }
+
+    public void AddUnit(BattleUnit e)
+    {
+        m_Units.Add(e);
     }
 
     public List<BattleUnit> GetEntities(BattleCamp battleCamp)
     {
         m_Temps = new List<BattleUnit>(0);
-        foreach(BattleUnit entity in m_Entites)
+        foreach(BattleUnit entity in m_Units)
         {
             if(entity.camp == battleCamp)
-            {
                 m_Temps.Add(entity);
-            }
         }
         return m_Temps;
-    }
-
-    //todo 删除了
-    public BattleUnit GetMyEntity()
-    {
-        foreach(BattleUnit entity in m_Entites)
-        {
-            if(entity.camp == BattleCamp.FRIENDLY)
-            {
-                return entity;
-            }
-        }
-        return null;
     }
 }

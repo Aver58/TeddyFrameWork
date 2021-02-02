@@ -27,13 +27,15 @@ public enum AbilityEvent
 // 技能状态
 public enum AbilityState
 {
+    None,
     CastPoint,      //施法前摇
     Channeling,     //持续施法
     CastBackSwing,  //施法后摇
-    None,
 }
 
-// 技能对象
+/// <summary>
+/// 技能对象
+/// </summary>
 public enum MultipleTargetsTeam
 {
     UNIT_TARGET_TEAM_NONE,
@@ -43,12 +45,17 @@ public enum MultipleTargetsTeam
     UNIT_TARGET_TEAM_CUSTOM,
 }
 
+/// <summary>
+/// 指定的类型
+/// </summary>
 public enum MultipleTargetsType
 {
-    UNIT_TARGET_HERO,
+    UNIT_TARGET_NONE,//无
+    UNIT_TARGET_HERO,//英雄
+    UNIT_TARGET_ALL,//所有
 }
 
-//技能请求目标类型
+//技能请求目标类型  （一样可以用 | 来指定多种类型）
 public enum AbilityRequestTargetType
 {
     UNIT,       //单位
@@ -202,7 +209,7 @@ public enum ActionMultipleTargetsCenter
 /// </summary>
 public enum AOEType
 {
-    Radius = 1,//圆形半径
+    Radius,//圆形半径
     Line,//线性
     Sector,//扇形
 }

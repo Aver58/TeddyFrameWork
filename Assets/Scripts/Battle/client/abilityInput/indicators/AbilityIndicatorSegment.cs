@@ -28,6 +28,7 @@ public class AbilityIndicatorSegment : AbilityIndicator
     protected override void OnUpdate(float casterX, float casterZ, float targetX, float targetZ, float targetForwardX, float targetForwardZ)
     {
         base.OnUpdate(casterX, casterZ, targetX, targetZ, targetForwardX, targetForwardZ);
+
         m_length = BattleMath.SqartDistance2DMagnitude(casterX, casterZ, targetX, targetZ);
 
         var scale = m_indicatorTransform.localScale;
@@ -35,6 +36,7 @@ public class AbilityIndicatorSegment : AbilityIndicator
         m_indicatorTransform.localScale = m_scale;
 
         m_position.Set(targetForwardX, 0, targetForwardZ);
-        m_indicatorTransform.forward = m_position;
+        if(m_position != Vector3.zero)
+            m_indicatorTransform.forward = m_position;
     }
 }

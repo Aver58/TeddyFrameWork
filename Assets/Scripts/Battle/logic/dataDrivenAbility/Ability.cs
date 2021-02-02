@@ -37,6 +37,7 @@ public class Ability
 
     public void Update(float deltaTime)
     {
+        Debug.Log(CD.ToString());
         if(CD > 0)
         {
             CD -= deltaTime;

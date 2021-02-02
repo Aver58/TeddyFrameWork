@@ -40,6 +40,7 @@ public class ActionTarget
 
     public void SetSingTarget(ActionSingTarget value)
     {
+        isSingleTarget = true;
         singTarget = value;
     }
 

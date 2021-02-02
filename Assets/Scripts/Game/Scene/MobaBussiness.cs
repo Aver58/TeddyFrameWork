@@ -17,7 +17,7 @@ public class MobaBussiness : Singleton<MobaBussiness>
 {
     private HeroActor m_playerActor;
 
-    private BattleEntityManager m_EntityMgr;
+    private BattleUnitManager m_UnitMgr;
     private BattleActorManager m_ActorMgr;
     
     private DebugController m_DrawTool;
@@ -41,16 +41,16 @@ public class MobaBussiness : Singleton<MobaBussiness>
     public void Init()
     {
         m_DrawTool = GameObject.Find("MoveArea").GetComponent<DebugController>();
-        m_EntityMgr = BattleEntityManager.instance;
+        m_UnitMgr = BattleUnitManager.instance;
         m_ActorMgr = BattleActorManager.instance;
         
         //AddPlayer();
-        BattleUnit myEntity = m_EntityMgr.GetMyEntity();
+        BattleUnit myEntity = m_UnitMgr.playerUnit;
         m_playerActor = new HeroActor(myEntity);
         m_playerActor.LoadAsset(OnLoadPlayer);
 
         //AddEnemy();
-        var entyties = m_EntityMgr.GetEntities(BattleCamp.ENEMY);
+        var entyties = m_UnitMgr.GetEntities(BattleCamp.ENEMY);
         foreach(BattleUnit entity in entyties)
         {
             HeroActor actor = new HeroActor(entity);

@@ -373,6 +373,7 @@ public class Timer
             this._onUpdate(this.GetTimeElapsed());
         }
 
+        Debug.Log("{0},{1}", GetWorldTime(), GetFireTime());
         if(this.GetWorldTime() >= this.GetFireTime())
         {
 
