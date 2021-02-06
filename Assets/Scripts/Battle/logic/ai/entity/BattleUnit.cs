@@ -94,7 +94,9 @@ public class BattleUnit : Unit
         
         ability.CastAbilityBegin(isSkipCastPoint);
 
-        SetState(HeroState.CASTING,ability.GetCastAnimation(), isSkipCastPoint);
+        SetState(HeroState.CASTING, ability.GetCastAnimation(), isSkipCastPoint);
+
+        GameMsg.instance.SendMessage(GameMsgDef.Hero_Cast_Ability, id, ability.GetCastAnimation());
     }
 
     public void CastAbilityEnd()
@@ -225,20 +227,11 @@ public class BattleUnit : Unit
         return null;
     }
 
-    public Ability GetAbility(string skillName)
-    {
-        if(string.IsNullOrEmpty(skillName))
-            return null;
-       
-        var castType = m_stringToCastTypeMap[skillName];
-        return GetAbility(castType);
-    }
-
     public AbilityCastType GetCastType(string skillName)
     {
-        //if(string.IsNullOrEmpty(skillName))
-        //    return ;
-        return m_stringToCastTypeMap[skillName];
+        AbilityCastType abilityCastType;
+        m_stringToCastTypeMap.TryGetValue(skillName, out abilityCastType);
+        return abilityCastType;
     }
 
     public Ability GetAbility(AbilityCastType castType)

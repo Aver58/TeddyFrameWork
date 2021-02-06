@@ -34,6 +34,7 @@ public class AbilityIndicatorSegment : AbilityIndicator
         var scale = m_indicatorTransform.localScale;
         m_scale.Set(scale.x, scale.y, m_length);
         m_indicatorTransform.localScale = m_scale;
+        m_indicatorTransform.position = m_casterTransform.position;
 
         m_position.Set(targetForwardX, 0, targetForwardZ);
         if(m_position != Vector3.zero)

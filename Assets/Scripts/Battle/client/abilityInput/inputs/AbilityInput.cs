@@ -47,10 +47,10 @@ public abstract class AbilityInput
     public virtual void OnFingerDrag(float casterX, float casterZ, float dragWorldPointX, float dragWorldPointZ, float dragForwardX, float dragForwardZ)
     {
         //更新施法者朝向
-        m_ability.caster.Set2DForward(dragForwardX, dragForwardZ);
-        m_cacheVector.Set(dragForwardX, 0, dragForwardZ);
-        if(m_cacheVector != Vector3.zero)
-            m_casterTransform.forward = m_cacheVector;
+        //m_ability.caster.Set2DForward(dragForwardX, dragForwardZ);
+        //m_cacheVector.Set(dragForwardX, 0, dragForwardZ);
+        //if(m_cacheVector != Vector3.zero)
+        //    m_casterTransform.forward = m_cacheVector;
 
         //更新技能指示器
         for(int i = 0; i < m_AbilityIndicators.Count; i++)

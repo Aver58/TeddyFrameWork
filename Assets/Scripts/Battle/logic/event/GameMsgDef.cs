@@ -17,4 +17,5 @@ public enum GameMsgDef
     BattleActor_Created,   //一个角色实例创建
     PlayerActor_Created,   //客户端玩家实例创建
     BattleEntity_HP_Updated,   //一个角色创建
+    Hero_Cast_Ability,          //一个角色释放技能
 }

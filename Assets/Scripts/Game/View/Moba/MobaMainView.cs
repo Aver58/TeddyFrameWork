@@ -61,25 +61,24 @@ public class MobaMainView : MainViewBase
 
         GameMsg.instance.AddMessage<HeroActor, bool>(GameMsgDef.BattleActor_Created,OnHeroActorCreated);
         GameMsg.instance.AddMessage<HeroActor, bool>(GameMsgDef.PlayerActor_Created, OnPlayerActorCreated);
-        GameMsg.instance.AddMessage<HeorChangeStateEventArgs>(GameMsgDef.Hero_ChangeState, (OnHeroActorStateChanged));
+        GameMsg.instance.AddMessage<int, string>(GameMsgDef.Hero_Cast_Ability, OnHeroCastAbility);
     }
 
-    private void OnHeroActorStateChanged(HeorChangeStateEventArgs args)
+    private MobaSkillItem GetSkillItem(AbilityCastType castType)
     {
-        int heroID = args.id;
-        string skillName = args.skillName;
-        HeroState heroState = args.heroState;
-        if(heroState == HeroState.CASTING)
+        MobaSkillItem item;
+        m_MobaSkillItemMap.TryGetValue(castType, out item);
+        return item;
+    }
+
+    private void OnHeroCastAbility(int id, string skillName)
+    {
+        if(m_PlayerActor.id == id)
         {
-            // 施法,todo，区分玩家和其他玩家
-            if(heroID == m_PlayerEntity.id)
-            {
-                var castType = m_PlayerEntity.GetCastType(skillName);
-                MobaSkillItem item;
-                m_MobaSkillItemMap.TryGetValue(castType, out item);
-                if(item!=null)
-                    item.SetCDState();
-            }
+            var castType = m_PlayerEntity.GetCastType(skillName);
+            MobaSkillItem item = GetSkillItem(castType);
+            if(item != null)
+                item.SetCDState();
         }
     }
 

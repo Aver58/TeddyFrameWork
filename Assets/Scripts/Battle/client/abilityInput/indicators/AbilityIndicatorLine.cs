@@ -39,5 +39,6 @@ public class AbilityIndicatorLine : AbilityIndicator
 
         m_position.Set(targetForwardX, 0, targetForwardZ);
         m_indicatorTransform.forward = m_position;
+        m_indicatorTransform.position = m_casterTransform.position;
     }
 }

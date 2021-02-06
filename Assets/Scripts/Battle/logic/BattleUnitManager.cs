@@ -37,11 +37,11 @@ public class BattleUnitManager : Singleton<BattleUnitManager>
 
     public void UpdateAbility(float gameTime, float deltaTime)
     {
-        foreach(BattleUnit entity in m_Units)
+        foreach(BattleUnit unit in m_Units)
         {
-            if(!entity.IsDead())
+            if(!unit.IsDead())
             {
-                entity.UpdateAbility(gameTime, deltaTime);
+                unit.UpdateAbility(gameTime, deltaTime);
             }
         }
     }

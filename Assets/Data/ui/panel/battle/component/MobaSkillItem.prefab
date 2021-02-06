@@ -76,7 +76,7 @@ MonoBehaviour:
   followRotationDamping: 5
   followHeightDamping: 5
   pointId: -1
-  enableKeySimulation: 1
+  enableKeySimulation: 0
   allowSimulationStandalone: 0
   visibleOnStandalone: 1
   dPadAxisCount: 0
@@ -85,10 +85,10 @@ MonoBehaviour:
   isSwipeIn: 0
   isSwipeOut: 0
   showPSInspector: 1
-  showSpriteInspector: 1
+  showSpriteInspector: 0
   showEventInspector: 0
   showBehaviourInspector: 0
-  showAxesInspector: 0
+  showAxesInspector: 1
   showTouchEventInspector: 0
   showDownEventInspector: 0
   showPressEventInspector: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   thumb: {fileID: 5067647157242786676}
   joystickArea: 1
   userArea: {fileID: 0}
-  isTurnAndMove: 1
+  isTurnAndMove: 0
   tmSpeed: 10
   tmAdditionnalRotation: 0
   tmMoveCurve:
@@ -329,7 +329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1933301932497750610
 RectTransform:
   m_ObjectHideFlags: 0

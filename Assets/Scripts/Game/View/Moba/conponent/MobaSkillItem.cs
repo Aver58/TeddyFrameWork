@@ -62,8 +62,7 @@ public class MobaSkillItem : ViewBase
     {
         bool isInCD = m_ability.CD > 0;
         m_imgCDMask.gameObject.SetActive(isInCD);
-        Debug.RawLog(m_ability.CD);
-        timer = Timer.Register(m_ability.CD, OnCDDone, OnCDUpdate, false);
+        timer = Timer.Register(m_ability.CD, OnCDDone, OnCDUpdate, false);//todo 为啥时间对不上
     }
 
     private void OnCDDone()
