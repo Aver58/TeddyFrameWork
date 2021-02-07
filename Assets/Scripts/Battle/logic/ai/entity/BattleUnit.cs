@@ -134,6 +134,11 @@ public class BattleUnit : Unit
     // 决策层：输入（游戏世界信息），输出（请求）
     // 行为层：输入（请求），输出（修改游戏世界的相关信息）
 
+    public void SetDecisionRequest(AIBehaviorRequest request)
+    {
+        m_DecisionWorkData.request = request;
+    }
+
     // 更新决策树
     public int UpdateDecision(float gameTime, float deltaTime)
     {

@@ -51,7 +51,7 @@ public class GameMsg : Singleton<GameMsg>
     }
 
 
-    public void AddDelegate(GameMsgDef msgName, Delegate listener)
+    private void AddDelegate(GameMsgDef msgName, Delegate listener)
     {
         if (listener == null)
             return;

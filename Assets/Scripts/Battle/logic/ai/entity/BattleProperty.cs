@@ -18,7 +18,7 @@ public class BattleProperty
     public int id { get; set; }
     public int curHP { get; set; }
     public int curEnergy{ get; set; }
-    public int Level { get; set; }
+    public int Level { get; set; } = 1;
 
     #endregion
 

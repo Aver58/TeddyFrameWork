@@ -49,13 +49,13 @@ public class MobaBussiness : Singleton<MobaBussiness>
 
         //AddEnemy();
         var entyties = m_UnitMgr.GetEntities(BattleCamp.ENEMY);
-        foreach(BattleUnit entity in entyties)
+        foreach(BattleUnit unit in entyties)
         {
-            HeroActor actor = new HeroActor(entity);
+            HeroActor actor = new HeroActor(unit);
             actor.LoadAsset(OnLoadGuard);
-            m_ActorMgr.AddActor(entity.hash,actor);
+            m_ActorMgr.AddActor(unit.hash,actor);
             // 绘制移动区域
-            m_DrawTool.DrawMoveArea(entity.GetStartPoint(), entity.GetViewRange());
+            m_DrawTool.DrawMoveArea(unit.GetStartPoint(), unit.GetViewRange());
         }
     }
 
@@ -65,12 +65,33 @@ public class MobaBussiness : Singleton<MobaBussiness>
         go.transform.SetParent(heroParent);
     }
 
-    void OnLoadPlayer(GameObject go)
+    private void OnLoadDummyUnit(GameObject go)
+    {
+        Transform heroParent = GameObject.Find("GuardNode").transform;
+        go.transform.SetParent(heroParent);
+        go.transform.position = m_playerActor.transform.position;
+    }
+
+    private void OnLoadPlayer(GameObject go)
     {
         m_playerActor.InitPosition(new Vector3(-9, 0, -9));
         Transform heroParent = GameObject.Find("HeroNode").transform;
         go.transform.SetParent(heroParent);
     }
+
+    #region API
+
+    /// <summary>
+    /// 增加一个单位
+    /// </summary>
+    public void AddOneUnit(BattleUnit unit)
+    {
+        HeroActor actor = new HeroActor(unit);
+        actor.LoadAsset(OnLoadDummyUnit);
+        m_ActorMgr.AddActor(unit.hash, actor);
+    }
+
+    #endregion
 
     #region EventHandler
 

@@ -9,9 +9,9 @@
 */
 #endregion
 
-public class DummyEntity : Unit
+public class DummyUnit : Unit
 {
-    public DummyEntity(int id,float pointX,float pointZ) : base(id)
+    public DummyUnit(int id,float pointX,float pointZ) : base(id)
     {
         Set2DPosition(pointX, pointZ);
     }

@@ -256,5 +256,6 @@ public abstract class ViewBase
     {
         transform.localPosition = active ? FarAwayPosition : Vector3.zero;
     }
+
     #endregion
 }

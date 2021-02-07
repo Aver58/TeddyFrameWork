@@ -44,7 +44,6 @@ public class BattleLogic : Singleton<BattleLogic>
 
     public void Init()
     {
-        AddEnemy();
         AddPlayer();
     }
 
@@ -57,20 +56,36 @@ public class BattleLogic : Singleton<BattleLogic>
     private void AddPlayer()
     {
         BattleProperty property = new BattleProperty(npcPropertyTable.Instance.GetTableItem(101));
-        property.Level = 1;
         BattleUnit entity = new BattleUnit(GetUniqueID(), BattleCamp.FRIENDLY, property);
         entity.enemyCamp = BattleCamp.ENEMY;
 
         m_UnitMgr.AddPlayer(entity);
     }
 
-    private void AddEnemy()
+    #region API
+
+    /// <summary>
+    /// 有行为树，不攻击的玩偶
+    /// </summary>
+    public BattleUnit AddOneDummyUnit()
+    {
+        var property = new BattleProperty(npcPropertyTable.Instance.GetTableItem(102));
+        var unit = new BattleUnit(GetUniqueID(), BattleCamp.ENEMY, property);
+        unit.enemyCamp = BattleCamp.FRIENDLY;
+        m_UnitMgr.AddUnit(unit);
+        return unit;
+    }
+
+    /// <summary>
+    /// 有行为树，会攻击，会寻路的AI
+    /// </summary>
+    public BattleUnit AddOneEnemyUnit()
     {
         BattleProperty property = new BattleProperty(npcPropertyTable.Instance.GetTableItem(102));
-        property.Level = 1;
-        HeroUnit guardEntity = new HeroUnit(GetUniqueID(), BattleCamp.ENEMY, property);
-        guardEntity.enemyCamp = BattleCamp.FRIENDLY;
-        m_UnitMgr.AddUnit(guardEntity);
+        HeroUnit unit = new HeroUnit(GetUniqueID(), BattleCamp.ENEMY, property);
+        unit.enemyCamp = BattleCamp.FRIENDLY;
+        m_UnitMgr.AddUnit(unit);
+        return unit;
     }
 
     public void Update()
@@ -87,4 +102,7 @@ public class BattleLogic : Singleton<BattleLogic>
 
         logicFrame += 1;
     }
+
+    #endregion
+
 }

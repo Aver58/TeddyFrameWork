@@ -20,9 +20,8 @@ public class MobaMainView : MainViewBase
     private RectTransform hudParent;
     private ETCJoystick m_joystick;
     private HeroActor m_PlayerActor;
-    private BattleUnit m_PlayerEntity;
+    private BattleUnit m_PlayerUnit;
     private Vector3 moveDistance = Vector3.zero;
-    private Vector3 skillForward = Vector3.zero;
 
     private CameraManager m_cameraManager;
     private HudActorManager m_hudActorManager;
@@ -38,8 +37,41 @@ public class MobaMainView : MainViewBase
 
         m_hudActorManager = HudActorManager.instance;
         m_hudActorManager.Init(hudParent);
+
+        InitCheatPanel();
     }
-    
+
+    #region Cheat
+
+    private void InitCheatPanel()
+    {
+        AddOneCheatButton("添加人偶", AddOneDummyUnit);
+        AddOneCheatButton("添加AI", AddOneEnemyUnit);
+    }
+
+    private void AddOneCheatButton(string text, System.Action callBack)
+    {
+        var prefab = (GameObject)UI["CheatButtonItem"];
+        var parent = (Transform)UI["GridLayout"];
+        var item = GenerateOne(typeof(CheatButtonItem), prefab, parent) as CheatButtonItem;
+        item.Init(text, callBack);
+    }
+
+    // 添加一个人偶对象
+    private void AddOneDummyUnit()
+    {
+        var unit = BattleLogic.instance.AddOneDummyUnit();
+        MobaBussiness.instance.AddOneUnit(unit);
+    }
+
+    private void AddOneEnemyUnit()
+    {
+        var unit = BattleLogic.instance.AddOneEnemyUnit();
+        MobaBussiness.instance.AddOneUnit(unit);
+    }
+
+    #endregion
+
     protected override void AddAllListener()
     {
         base.AddAllListener();
@@ -75,7 +107,7 @@ public class MobaMainView : MainViewBase
     {
         if(m_PlayerActor.id == id)
         {
-            var castType = m_PlayerEntity.GetCastType(skillName);
+            var castType = m_PlayerUnit.GetCastType(skillName);
             MobaSkillItem item = GetSkillItem(castType);
             if(item != null)
                 item.SetCDState();
@@ -90,11 +122,11 @@ public class MobaMainView : MainViewBase
         //m_joystick.axisX.directTransform = actor.transform;//todo 这个控制会比较舒服吗？
 
         m_PlayerActor = actor;
-        m_PlayerEntity = actor.battleEntity;
-        var skillIDs = m_PlayerEntity.GetSkillList();
+        m_PlayerUnit = actor.battleEntity;
+        var skillIDs = m_PlayerUnit.GetSkillList();
         if(skillIDs == null || skillIDs.Count < 4)
         {
-            Debug.LogError("OnPlayerActorCreated player配置的技能列表少于4个！id : "+ m_PlayerEntity.GetID().ToString());
+            Debug.LogError("OnPlayerActorCreated player配置的技能列表少于4个！id : "+ m_PlayerUnit.GetID().ToString());
             return;
         }
 
@@ -111,7 +143,7 @@ public class MobaMainView : MainViewBase
         {
             var castType = castTypes[i];
             var item = GenerateOne(typeof(MobaSkillItem), prefab, parents[i]) as MobaSkillItem;
-            item.Init(castType, m_PlayerEntity.GetAbility(castType), OnFingerDown, OnFingerDrag, OnFingerUp);
+            item.Init(castType, m_PlayerUnit.GetAbility(castType), OnFingerDown, OnFingerDrag, OnFingerUp);
             m_MobaSkillItemMap.Add(castType,item);
         }
     }
@@ -216,15 +248,15 @@ public class MobaMainView : MainViewBase
 
     private void OnCastAbility(AbilityCastType castType)
     {
-        if(m_PlayerEntity != null)
+        if(m_PlayerUnit != null)
         {
-            Ability ability = m_PlayerEntity.GetAbility(castType);
+            Ability ability = m_PlayerUnit.GetAbility(castType);
             if(ability.CD > 0)
             {
                 Debug.Log("冷却中");
                 return;
             }
-            m_PlayerEntity.CastAbility(ability);
+            m_PlayerUnit.CastAbility(ability);
         }
     }
 }
