@@ -27,7 +27,7 @@ namespace TsiU
         {
             if (m_maxChildCount >= 0 && m_children.Count >= m_maxChildCount) 
             {
-                Debug.LogWarning("**BT** exceeding child count");
+                GameLog.LogWarning("**BT** exceeding child count");
                 return this;
             }
             m_children.Add(node);

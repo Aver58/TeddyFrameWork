@@ -113,7 +113,7 @@ namespace KcpProject
                 rn = mSocket.Receive(mRecvBuffer.RawBuffer, mRecvBuffer.WriterIndex, mRecvBuffer.WritableBytes, SocketFlags.None);
             } 
             catch(Exception ex) {
-                Debug.Log(ex.Message);
+                GameLog.Log(ex.Message);
                 rn = -1;
             }
 

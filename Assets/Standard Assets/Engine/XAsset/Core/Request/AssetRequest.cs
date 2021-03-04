@@ -129,7 +129,7 @@ public class AssetRequest : Reference, IEnumerator
         }
         catch(Exception ex)
         {
-            Debug.LogException(ex);
+            GameLog.LogException(ex);
         }
 
         completed = null;

@@ -27,13 +27,13 @@ public class SceneModule : ModuleBase
         var lastSceneID = GetSceneID();
         if(lastSceneID == sceneID)
         {
-            Debug.Log("[ChangeScene]current scene is the target... sceneID:" + sceneID.ToString());
+            GameLog.Log("[ChangeScene]current scene is the target... sceneID:" + sceneID.ToString());
             return;
         }
 
         if(IsLoading())
         {
-            Debug.Log("[ChangeScene]current scene is loading....:" + lastSceneID.ToString() + sceneID.ToString());
+            GameLog.Log("[ChangeScene]current scene is loading....:" + lastSceneID.ToString() + sceneID.ToString());
             return;
         }
 

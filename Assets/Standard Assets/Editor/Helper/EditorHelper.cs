@@ -31,7 +31,7 @@ public class EditorHelper
 
 		AssetDatabase.SaveAssets();
 		AssetDatabase.Refresh();
-		Debug.Log(string.Format("{0} Completed", name));
+		GameLog.Log(string.Format("{0} Completed", name));
 	}
 
 	public static void UpdateProgress(string info, int current, int total)

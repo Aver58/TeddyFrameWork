@@ -25,7 +25,7 @@ public class TestNet : MonoBehaviour
 
     private void Test(string msg)
     {
-        Debug.Log(msg);
+        GameLog.Log(msg);
     }
 
     private void OnBtnClick()

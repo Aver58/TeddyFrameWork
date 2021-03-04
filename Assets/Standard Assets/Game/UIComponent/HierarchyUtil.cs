@@ -19,14 +19,14 @@ public static class HierarchyUtil
     {
         if (go == null)
         {
-            Debug.LogError("【HierarchyUtil.ExportToTarget】go is null！！！");
+            GameLog.LogError("【HierarchyUtil.ExportToTarget】go is null！！！");
             return null;
         }
 
         UIHierarchy uiHierarchy = go.GetComponent<UIHierarchy>();
         if (uiHierarchy == null)
         {
-            Debug.LogError(go.name + "没有UIHierarchy组件！！");
+            GameLog.LogError(go.name + "没有UIHierarchy组件！！");
             return null;
         }
 

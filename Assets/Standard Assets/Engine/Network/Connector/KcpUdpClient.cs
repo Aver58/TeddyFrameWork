@@ -86,7 +86,7 @@ public class KcpUdpClient
         m_onConnected = callback;
         if(m_timerConn != null)
         {
-            Debug.LogError("重连的时候，上次连接还没完成，逻辑有问题哦");
+            GameLog.LogError("重连的时候，上次连接还没完成，逻辑有问题哦");
             return;
         }
 
@@ -147,7 +147,7 @@ public class KcpUdpClient
         m_startConnTime = Util.GetCurrMilliSeconds();
 
         // 直接UdpSocket发送
-        Debug.Log("SendConnectRequest, flowid:{0}, time:{1}, packet:{2}", s_flowID, Util.GetCurrMilliSeconds(), packet.ToString());
+        GameLog.Log("SendConnectRequest, flowid:{0}, time:{1}, packet:{2}", s_flowID, Util.GetCurrMilliSeconds(), packet.ToString());
 
         Send(packet.Data, packet.Size);
         m_buffers.Return(packet.Data);
@@ -178,7 +178,7 @@ public class KcpUdpClient
             if(data == null)
                 break;
 
-            Debug.LogFormat("OnTimerCheckConn, 收到连接应答包，data:{0}", data.ToHex());
+            GameLog.LogFormat("OnTimerCheckConn, 收到连接应答包，data:{0}", data.ToHex());
             DealConnectingRspData(data);
         }
         if(State == ConnectState.Connecting)
@@ -195,7 +195,7 @@ public class KcpUdpClient
             return;
 
         StopConnTimer();
-        Debug.LogFormat("DealConnectingRspData, info:{0}", optInfo.ToString());
+        GameLog.LogFormat("DealConnectingRspData, info:{0}", optInfo.ToString());
         switch(optInfo.cmd)
         {
             // 连接成功
@@ -203,7 +203,7 @@ public class KcpUdpClient
                 {
                     if(optInfo.flowID == s_flowID)
                     {
-                        Debug.Log("连接成功");
+                        GameLog.Log("连接成功");
                         State = ConnectState.Connected;
                         m_conKey = optInfo.content;
                         m_conv = optInfo.conv;
@@ -211,7 +211,7 @@ public class KcpUdpClient
                             m_onConnected(m_conv, NErrorCode.SUCCESS);
                     }
                     else
-                        Debug.Log("收到连接应答，flowID 不匹配");
+                        GameLog.Log("收到连接应答，flowID 不匹配");
                     break;
                 }
             // 连接失败

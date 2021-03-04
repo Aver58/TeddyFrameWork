@@ -50,7 +50,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
     public void Init(int timeout)
     {
         m_connReqTimeout = timeout;
-        Debug.Log("超时时间:{0}ms", m_connReqTimeout);
+        GameLog.Log("超时时间:{0}ms", m_connReqTimeout);
     }
 
     public void AddListeners(Action connected, Action<NErrorCode> connectedFail, Action disconnected)
@@ -71,13 +71,13 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
 
     public void Connect(string ipOrName, int port)
     {
-        Debug.Log("Connect,host:{0},port:{1}", ipOrName, port);
+        GameLog.Log("Connect,host:{0},port:{1}", ipOrName, port);
         if(State != ConnectState.Disconnected)
             return;
 
         if(m_timerTick != null)
         {
-            Debug.Log("当前有tick在执行，这不正常");
+            GameLog.Log("当前有tick在执行，这不正常");
             m_timerTick.Stop();
         }
 
@@ -95,7 +95,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
     // 业务层调用的发送
     public void Send(byte[] data)
     {
-        Debug.Log("发送数据，state:{0}, data:{1}", State, data.ToHex());
+        GameLog.Log("发送数据，state:{0}, data:{1}", State, data.ToHex());
         if(data == null || State != ConnectState.Connected)
             return;
 
@@ -128,21 +128,21 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
     /// </summary>
     private void OnUdpConnected(uint conv, NErrorCode code)
     {
-        Debug.Log("OnUdpConnected,conv:{0}, code:{1}", conv, code);
+        GameLog.Log("OnUdpConnected,conv:{0}, code:{1}", conv, code);
         if(code == NErrorCode.SUCCESS)
         {
             State = ConnectState.Connected;
             if(m_thread == null)
             {
                 // 新建一个线程
-                Debug.Log("[OnUdpConnected]新建一个线程");
+                GameLog.Log("[OnUdpConnected]新建一个线程");
                 m_thread = new Thread(ThreadProcess);
                 m_thread.Start();
             }
             else
             {
                 // 恢复线程
-                Debug.Log("[OnUdpConnected]恢复线程");
+                GameLog.Log("[OnUdpConnected]恢复线程");
                 m_threadResetEvent.Set();
             }
             m_timerTick = FrameTimer.Create(Tick, 1, -1);
@@ -159,15 +159,15 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
     // 线程处理函数
     private void ThreadProcess()
     {
-        Debug.Log("kcp线程启动");
+        GameLog.Log("kcp线程启动");
         while(true)
         {
             Thread.Sleep(10);
             if(State == ConnectState.Disconnected)
             {
-                Debug.Log("检测到网络断开，线程挂起");
+                GameLog.Log("检测到网络断开，线程挂起");
                 m_threadResetEvent.WaitOne();
-                Debug.Log("线程恢复");
+                GameLog.Log("线程恢复");
                 return;
             }
             // 接收UDP包 收到的包传入Kcp进行处理
@@ -196,7 +196,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
             // 数据包处理
             lock(m_lockKcp)
             {
-                Debug.Log("kcp收到UDP数据包,sieze:{0},  data:{1}", data.Length, data.ToHex());
+                GameLog.Log("kcp收到UDP数据包,sieze:{0},  data:{1}", data.Length, data.ToHex());
                 int result = CKcp.KcpInput(m_kcp, data, data.Length);
             }
         }
@@ -209,7 +209,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
         while(m_udpClient.State == ConnectState.Connected && m_udpSendQueue.Count > 0)
         { 
             packet = m_udpSendQueue.Dequeue();
-            Debug.Log("DealSendBuffToUdp， 发送数据udp，data:" + packet.ToString());
+            GameLog.Log("DealSendBuffToUdp， 发送数据udp，data:" + packet.ToString());
             m_udpClient.Send(packet.Data, packet.Size);
             m_buffers.Return(packet.Data);
         }
@@ -242,7 +242,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
             int headSize = data[0] * 256 + data[1] + 2;
             if(rcvSize != peekSize || rcvSize != headSize)
             {
-                Debug.LogWarningFormat("收到的包size验证失败,headSize+2:{0}, realSize:{1}, peekSize:{2}", 
+                GameLog.LogWarningFormat("收到的包size验证失败,headSize+2:{0}, realSize:{1}, peekSize:{2}", 
                     headSize, rcvSize, peekSize);
                 continue;
             }
@@ -251,7 +251,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
             {
                 byte[] realData = new byte[rcvSize - 2];
                 Array.Copy(data, 2, realData, 0, rcvSize - 2);
-                Debug.LogFormat("收到kcp处理后的包,放入待接收队列，size:{0}, data:{1}", rcvSize - 2, realData.ToHex());
+                GameLog.LogFormat("收到kcp处理后的包,放入待接收队列，size:{0}, data:{1}", rcvSize - 2, realData.ToHex());
                 m_queueRcvData.Enqueue(realData);
             }
         }
@@ -338,7 +338,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
         if(State == ConnectState.Disconnected)
             return;
 
-        Debug.Log("TcpConnector Clear");
+        GameLog.Log("TcpConnector Clear");
         if(m_timerTick != null)
         {
             m_timerTick.Stop();

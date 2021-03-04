@@ -33,7 +33,7 @@ public class ModuleManager : Singleton<ModuleManager>
 				return m_Modules[i];
 			}
 		}
-		Debug.LogErrorFormat("[Module获取失败] {0}: 未被注册.", name);
+		GameLog.LogErrorFormat("[Module获取失败] {0}: 未被注册.", name);
 		return null;
 	}
 

@@ -44,7 +44,7 @@ public abstract class SceneBase
         if(!string.IsNullOrEmpty(assetRequest.error))
         {
             assetRequest.Release();
-            Debug.LogError("加载场景失败:" + panelName);
+            GameLog.LogError("加载场景失败:" + panelName);
             return;
         }
 

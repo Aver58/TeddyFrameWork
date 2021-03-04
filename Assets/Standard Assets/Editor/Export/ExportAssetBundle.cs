@@ -24,7 +24,7 @@ public class ExportAssetBundle : Editor
 
         // Build AB到Temp目录
         BuildAssetBundle();
-        Debug.LogFormat("-->BuildBundle complete use time: {0}s", watch.ElapsedMilliseconds * 0.001f);
+        GameLog.LogFormat("-->BuildBundle complete use time: {0}s", watch.ElapsedMilliseconds * 0.001f);
 
         watch.Reset();
     }

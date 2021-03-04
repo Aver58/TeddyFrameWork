@@ -70,7 +70,7 @@ namespace libx
             var patterns = searchPattern.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
             if (!Directory.Exists(searchPath))
             {
-                Debug.LogWarning("Rule searchPath not exist:" + searchPath);
+                GameLog.LogWarning("Rule searchPath not exist:" + searchPath);
                 return new string[0];
             }
 

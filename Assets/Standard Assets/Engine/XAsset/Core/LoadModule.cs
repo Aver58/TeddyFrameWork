@@ -91,7 +91,7 @@ public sealed class LoadModule : ModuleBase
 
         Clear();
 
-        Debug.Log(string.Format(
+        GameLog.Log(string.Format(
          "Initialize with: runtimeMode={0}\nbasePath：{1}\nupdatePath={2}",
          runtimeMode, basePath, updatePath));
 
@@ -113,7 +113,7 @@ public sealed class LoadModule : ModuleBase
     {
         if(string.IsNullOrEmpty(path))
         {
-            Debug.LogError("invalid path");
+            GameLog.LogError("invalid path");
             return null;
         }
 
@@ -134,7 +134,7 @@ public sealed class LoadModule : ModuleBase
         asset.Load();
         asset.Retain();
         _scenes.Add(asset);
-        Debug.Log(string.Format("LoadScene:{0}", path));
+        GameLog.Log(string.Format("LoadScene:{0}", path));
         return asset;
     }
 
@@ -209,7 +209,7 @@ public sealed class LoadModule : ModuleBase
         }
         else
         {
-            Debug.LogError(path + "不存在!");
+            GameLog.LogError(path + "不存在!");
             return null;
         }
     }
@@ -245,7 +245,7 @@ public sealed class LoadModule : ModuleBase
             }
             else
             {
-                Debug.LogError(string.Format("{0} bundle {1} not exist.", path, item.bundle));
+                GameLog.LogError(string.Format("{0} bundle {1} not exist.", path, item.bundle));
             }
         }
     }
@@ -297,7 +297,7 @@ public sealed class LoadModule : ModuleBase
             for(int i = 0; i < _unusedAssets.Count; ++i)
             {
                 AssetRequest request = _unusedAssets[i];
-                Debug.Log(string.Format("UnloadAsset:{0}", request.name));
+                GameLog.Log(string.Format("UnloadAsset:{0}", request.name));
                 _assets.Remove(request.name);
                 request.Unload();
             }
@@ -310,7 +310,7 @@ public sealed class LoadModule : ModuleBase
             if(request.Update() || !request.IsUnused())
                 continue;
             _scenes.RemoveAt(i);
-            Debug.Log(string.Format("UnloadScene:{0}", request.name));
+            GameLog.Log(string.Format("UnloadScene:{0}", request.name));
             request.Unload();
             --i;
         }
@@ -363,7 +363,7 @@ public sealed class LoadModule : ModuleBase
             {
                 item.Unload();
                 _bundles.Remove(item.name);
-                Debug.Log("UnloadBundle: " + item.name);
+                GameLog.Log("UnloadBundle: " + item.name);
             }
         }
         _unusedBundles.Clear();
@@ -380,7 +380,7 @@ public sealed class LoadModule : ModuleBase
     {
         if(string.IsNullOrEmpty(path))
         {
-            Debug.LogError("empty path!");
+            GameLog.LogError("empty path!");
             return null;
         }
 
@@ -417,7 +417,7 @@ public sealed class LoadModule : ModuleBase
         request.assetType = type;
         AddAssetRequest(request);
         request.Retain();
-        Debug.Log(string.Format("LoadAsset:{0}", path));
+        GameLog.Log(string.Format("LoadAsset:{0}", path));
         return request;
     }
 
@@ -443,7 +443,7 @@ public sealed class LoadModule : ModuleBase
                     return existPath;
             }
 
-            Debug.LogError("找不到资源路径" + path);
+            GameLog.LogError("找不到资源路径" + path);
             return path;
         }
 #endif
@@ -457,7 +457,7 @@ public sealed class LoadModule : ModuleBase
                 return existPath;
         }
 
-        Debug.LogError("资源没有收集打包" + path);
+        GameLog.LogError("资源没有收集打包" + path);
         return path;
     }
 
@@ -527,7 +527,7 @@ public sealed class LoadModule : ModuleBase
     {
         if(string.IsNullOrEmpty(assetBundleName))
         {
-            Debug.LogError("assetBundleName == null");
+            GameLog.LogError("assetBundleName == null");
             return null;
         }
 
@@ -564,7 +564,7 @@ public sealed class LoadModule : ModuleBase
         {
             bundle.Load();
             _loadingBundles.Add(bundle);
-            Debug.Log("LoadBundle: " + url);
+            GameLog.Log("LoadBundle: " + url);
         }
 
         bundle.Retain();
@@ -603,7 +603,7 @@ public sealed class LoadModule : ModuleBase
         }
 
         if(bestFit == int.MaxValue - 1)
-            Debug.LogWarning(
+            GameLog.LogWarning(
                 "Ambiguous asset bundle variant chosen because there was no matching active variant: " +
                 bundlesWithVariant[bestFitIndex]);
 

@@ -286,7 +286,7 @@ public class ETCAxis {
 					directRigidBody.AddForce( localAxis * axisValue * speed);
 				}
 				else{
-					Debug.LogWarning("ETCAxis : "+ name + " No rigidbody on gameobject : "+ _directTransform.name); 
+					GameLog.LogWarning("ETCAxis : "+ name + " No rigidbody on gameobject : "+ _directTransform.name); 
 				}
 				break;
 
@@ -295,7 +295,7 @@ public class ETCAxis {
 					directRigidBody.AddRelativeForce( localAxis * axisValue * speed);
 				}
 				else{
-					Debug.LogWarning("ETCAxis : "+ name + " No rigidbody on gameobject : "+ _directTransform.name); 
+					GameLog.LogWarning("ETCAxis : "+ name + " No rigidbody on gameobject : "+ _directTransform.name); 
 				}
 				break;
 
@@ -304,7 +304,7 @@ public class ETCAxis {
 					directRigidBody.AddTorque(localAxis * axisValue * speed);
 				}
 				else{
-					Debug.LogWarning("ETCAxis : "+ name + " No rigidbody on gameobject : "+ _directTransform.name); 
+					GameLog.LogWarning("ETCAxis : "+ name + " No rigidbody on gameobject : "+ _directTransform.name); 
 				}
 				break;
 
@@ -313,7 +313,7 @@ public class ETCAxis {
 					directRigidBody.AddRelativeTorque(localAxis * axisValue * speed);
 				}
 				else{
-					Debug.LogWarning("ETCAxis : "+ name + " No rigidbody on gameobject : "+ _directTransform.name); 
+					GameLog.LogWarning("ETCAxis : "+ name + " No rigidbody on gameobject : "+ _directTransform.name); 
 				}
 				break;
 

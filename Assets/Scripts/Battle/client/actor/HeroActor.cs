@@ -176,7 +176,7 @@ public class HeroActor
         Ability ability = battleEntity.GetAbility(castType);
         if(ability.CD > 0)
         {
-            Debug.Log("冷却中");
+            GameLog.Log("冷却中");
             return;
         }
         battleEntity.CastAbility(ability);

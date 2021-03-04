@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 系统日志模块
 /// </summary>
-public static class Debug
+public static class GameLog
 {
     public static bool EnableLog = true;    // 是否启用日志，仅可控制普通级别的日志的启用与关闭，LogError和LogWarn都是始终启用的。
     public static bool EnableSave = false;  // 是否允许保存日志，即把日志写入到文件中
@@ -258,11 +258,11 @@ public static class Debug
         {
             if(type == LogPackageType.ClientToServer)
             {
-                Debug.Warning(string.Format("{0} <color=#ffff00>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
+                GameLog.Warning(string.Format("{0} <color=#ffff00>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
             }
             else
             {
-                Debug.Warning(string.Format("{0} <color=#01c00f>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
+                GameLog.Warning(string.Format("{0} <color=#01c00f>{1}</color>  - {2}", info, cmd.ToString(), DateTime.Now.ToString()));
             }
         }
     }

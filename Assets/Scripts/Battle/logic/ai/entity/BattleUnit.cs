@@ -161,12 +161,12 @@ public class BattleUnit : Unit
             //比对决策树和行为树的请求是否一致
             if(foregroundRequest != null)
             {
-                Debug.Log("【UpdateRequest】当前在处理的请求（前端）：" + foregroundRequest.ToString());
+                GameLog.Log("【UpdateRequest】当前在处理的请求（前端）：" + foregroundRequest.ToString());
             }
 
             if(backgroundRequest != null)
             {
-                Debug.Log("【UpdateRequest】下一个要处理的请求（后端）：" + backgroundRequest.ToString());
+                GameLog.Log("【UpdateRequest】下一个要处理的请求（后端）：" + backgroundRequest.ToString());
             }
             //reset bev tree 清理一些状态
             m_BehaviorTree.Transition(m_BehaviorWorkData);

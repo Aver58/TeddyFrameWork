@@ -124,7 +124,7 @@ public class Download : DownloadHandlerScript, IDisposable, ICloneable
             _request.SetRequestHeader("Range", "bytes=" + position + "-");
             _request.downloadHandler = this;
             _request.SendWebRequest();
-            Debug.Log("Start Download：" + url);
+            GameLog.Log("Start Download：" + url);
         }
         else
         {
@@ -204,7 +204,7 @@ public class Download : DownloadHandlerScript, IDisposable, ICloneable
             {
                 File.Copy(tempPath, savePath, true);
                 File.Delete(tempPath);
-                Debug.Log("Complete Download：" + url);
+                GameLog.Log("Complete Download：" + url);
                 if(completed == null)
                     return;
                 completed.Invoke(this);

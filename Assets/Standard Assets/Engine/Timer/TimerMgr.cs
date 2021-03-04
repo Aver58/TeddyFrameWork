@@ -30,7 +30,7 @@ public class TimerMgr:Singleton<TimerMgr>
     {
         if(m_lstRunningTimer.IndexOf(timer) >= 0)
         {
-            Debug.Log("已经存在的定时器");
+            GameLog.Log("已经存在的定时器");
             return;
         }
         m_lstRunningTimer.Add(timer);

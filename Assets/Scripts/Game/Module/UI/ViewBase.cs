@@ -55,7 +55,7 @@ public abstract class ViewBase
     {
         if(go == null)
         {
-            Debug.LogError("!!构造初始化，没有传入GameObject！");
+            GameLog.LogError("!!构造初始化，没有传入GameObject！");
             return;
         }
         UI = HierarchyUtil.GetHierarchyItems(go);
@@ -97,7 +97,7 @@ public abstract class ViewBase
     /// </summary>
     public void Close()
     {
-        Debug.Log(panelName + "Close");
+        GameLog.Log(panelName + "Close");
         closeTime = Time.time;
         openParam = null;
 
@@ -206,7 +206,7 @@ public abstract class ViewBase
         if(!string.IsNullOrEmpty(request.error))
         {
             request.Release();
-            Debug.LogError("加载界面失败:" + panelName);
+            GameLog.LogError("加载界面失败:" + panelName);
             return;
         }
 

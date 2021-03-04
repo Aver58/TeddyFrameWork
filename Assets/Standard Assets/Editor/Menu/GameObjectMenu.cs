@@ -19,6 +19,6 @@ public class GameObjectMenu
     {
         ExportPanelHierarchy.ExportNested(Selection.activeObject);
 
-        Debug.Log("Export GameObject Hierarchy Completed");
+        GameLog.Log("Export GameObject Hierarchy Completed");
     }
 }

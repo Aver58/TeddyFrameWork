@@ -79,7 +79,7 @@ public class UIModule : ModuleBase
         }
         else
         {
-            Debug.LogError("[UIModule]界面实例化失败" + key.ToString());
+            GameLog.LogError("[UIModule]界面实例化失败" + key.ToString());
         }
     }
 
@@ -95,12 +95,12 @@ public class UIModule : ModuleBase
             }
             else
             {
-                Debug.LogWarning("[UIModule]界面关闭失败，已经关闭！" + key.ToString());
+                GameLog.LogWarning("[UIModule]界面关闭失败，已经关闭！" + key.ToString());
             }
         }
         else
         {
-            Debug.LogError("[UIModule]界面关闭失败，没有找到指定界面！" + key.ToString());
+            GameLog.LogError("[UIModule]界面关闭失败，没有找到指定界面！" + key.ToString());
         }
     }
 

@@ -48,7 +48,7 @@ public class ObjectPool<T> where T : new()
 	public void Release(T element)
 	{
 		if(m_Stack.Count > 0 && ReferenceEquals(m_Stack.Peek(), element))
-			Debug.LogError("Internal error. Trying to destroy object that is already released to pool.");
+			GameLog.LogError("Internal error. Trying to destroy object that is already released to pool.");
 		if(m_ActionOnRelease != null)
 			m_ActionOnRelease(element);
 		m_Stack.Push(element);
@@ -56,6 +56,6 @@ public class ObjectPool<T> where T : new()
 
 	public void PrintInfo()
 	{
-		Debug.Log("当前池子中对象数量：{0}", m_Stack.Count);
+		GameLog.Log("当前池子中对象数量：{0}", m_Stack.Count);
 	}
 }

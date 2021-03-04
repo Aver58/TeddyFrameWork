@@ -75,7 +75,7 @@ public class ImporterHeroModel
             }
             else
             {
-                Debug.LogError("没有找到对应的模型配置信息！" + p);
+                GameLog.LogError("没有找到对应的模型配置信息！" + p);
             }
         }
 
@@ -112,7 +112,7 @@ public class ImporterHeroModel
     // 导入一个模型的所有Animator
     private static string ImportOneCharacterModelAnimator(string artModelfolder, string prefabCharacterPath)
     {
-        Debug.Log(artModelfolder);
+        GameLog.Log(artModelfolder);
         string[] modelAssets = AssetDatabase.FindAssets("t:Model", new string[] { artModelfolder });
         if (modelAssets.Length == 0)
         {
@@ -146,7 +146,7 @@ public class ImporterHeroModel
             {
                 if (mainModelImporter != null)
                 {
-                    Debug.LogErrorFormat("多余的Model模型FBX{0}", modelAssetPath);
+                    GameLog.LogErrorFormat("多余的Model模型FBX{0}", modelAssetPath);
                 }
 
                 modelImporter.materialLocation = ModelImporterMaterialLocation.External;// 2020.1.20 2017版本修改成外部材质
@@ -414,7 +414,7 @@ public class ImporterHeroModel
 
         if (string.IsNullOrEmpty(targetControllerPath))
         {
-            Debug.LogErrorFormat("模型{0}没找到目标控制器", characterModelName);
+            GameLog.LogErrorFormat("模型{0}没找到目标控制器", characterModelName);
             return false;
         }
 
@@ -439,7 +439,7 @@ public class ImporterHeroModel
             }
             else
             {
-                Debug.LogWarningFormat("模型{0}fbx中未找到名字为{1}的动画文件", characterModelName, clipName);
+                GameLog.LogWarningFormat("模型{0}fbx中未找到名字为{1}的动画文件", characterModelName, clipName);
             }
         }
 

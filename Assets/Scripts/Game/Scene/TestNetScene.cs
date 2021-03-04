@@ -15,12 +15,12 @@ public class TestNetScene : SceneBase
 {
     public override void OnEnter()
     {
-        Debug.Log(panelName+"OnEnter");
+        GameLog.Log(panelName+"OnEnter");
     }
 
     public override void OnExit()
     {
-        Debug.Log(panelName + "OnExit");
+        GameLog.Log(panelName + "OnExit");
     }
 
     public override void OnUpdate()

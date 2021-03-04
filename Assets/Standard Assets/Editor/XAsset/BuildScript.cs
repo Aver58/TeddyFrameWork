@@ -142,7 +142,7 @@ namespace libx
 
 			var levels = GetLevelsFromBuildSettings ();
 			if (levels.Length == 0) {
-				Debug.Log ("Nothing to build.");
+				GameLog.Log ("Nothing to build.");
 				return;
 			}
 
@@ -211,7 +211,7 @@ namespace libx
 						});
 					}
 				} else {
-					Debug.LogError (path + " file not exsit.");
+					GameLog.LogError (path + " file not exsit.");
 				}
 			}
 
@@ -280,7 +280,7 @@ namespace libx
 				return "";
 			// Add more build targets for your own.
 			default:
-				Debug.Log ("Target not implemented.");
+				GameLog.Log ("Target not implemented.");
 				return null;
 			}
 		}

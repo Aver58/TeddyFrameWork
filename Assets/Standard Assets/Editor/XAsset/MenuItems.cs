@@ -123,7 +123,7 @@ namespace libx
             watch.Start();
             BuildScript.ApplyBuildRules();
             watch.Stop();
-            Debug.Log("ApplyBuildRules " + watch.ElapsedMilliseconds + " ms.");
+            GameLog.Log("ApplyBuildRules " + watch.ElapsedMilliseconds + " ms.");
         }
 
         [MenuItem(KBuildAssetBundles)]
@@ -134,7 +134,7 @@ namespace libx
 			BuildScript.ApplyBuildRules();
             BuildScript.BuildAssetBundles();
             watch.Stop();
-            Debug.Log("BuildAssetBundles " + watch.ElapsedMilliseconds + " ms.");
+            GameLog.Log("BuildAssetBundles " + watch.ElapsedMilliseconds + " ms.");
         } 
 
         [MenuItem(KBuildPlayer)]
@@ -189,7 +189,7 @@ namespace libx
             using (var fs = File.OpenRead(path))
             {
                 var crc = Utility.GetCRC32Hash(fs);
-                Debug.Log(crc);
+                GameLog.Log(crc);
             }
         }
 
@@ -205,7 +205,7 @@ namespace libx
             using (var fs = File.OpenRead(path))
             {
                 var crc = Utility.GetMD5Hash(fs);
-                Debug.Log(crc);
+                GameLog.Log(crc);
             }
         }
 

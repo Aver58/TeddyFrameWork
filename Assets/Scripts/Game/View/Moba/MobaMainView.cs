@@ -126,7 +126,7 @@ public class MobaMainView : MainViewBase
         var skillIDs = m_PlayerUnit.GetSkillList();
         if(skillIDs == null || skillIDs.Count < 4)
         {
-            Debug.LogError("OnPlayerActorCreated player配置的技能列表少于4个！id : "+ m_PlayerUnit.GetID().ToString());
+            GameLog.LogError("OnPlayerActorCreated player配置的技能列表少于4个！id : "+ m_PlayerUnit.GetID().ToString());
             return;
         }
 
@@ -253,7 +253,7 @@ public class MobaMainView : MainViewBase
             Ability ability = m_PlayerUnit.GetAbility(castType);
             if(ability.CD > 0)
             {
-                Debug.Log("冷却中");
+                GameLog.Log("冷却中");
                 return;
             }
             m_PlayerUnit.CastAbility(ability);

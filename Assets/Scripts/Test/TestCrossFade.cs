@@ -14,7 +14,7 @@ public class TestCrossFade : MonoBehaviour
     {
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("A2"))
         {
-            Debug.RawLog(Time.time);
+            GameLog.RawLog(Time.time);
             enabled = false;
         }
     }

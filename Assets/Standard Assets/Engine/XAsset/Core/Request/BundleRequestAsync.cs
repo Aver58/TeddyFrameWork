@@ -74,7 +74,7 @@ public class BundleRequestAsync : BundleRequest
         Load();
         assetBundle = _request.assetBundle;
         if(assetBundle != null) 
-            Debug.LogWarning("LoadImmediate:" + assetBundle.name);
+            GameLog.LogWarning("LoadImmediate:" + assetBundle.name);
         loadState = AssetLoadState.Loaded;
     }
 }

@@ -78,7 +78,7 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
 
     public void StartUpdate()
     {
-        Debug.Log("StartUpdate.Development:" + development);
+        GameLog.Log("StartUpdate.Development:" + development);
 #if UNITY_EDITOR
         if(development)
         {
@@ -416,7 +416,7 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
         }
 
         var url = GetDownloadURL(Versions.Filename);
-        Debug.Log(url);
+        GameLog.Log(url);
         var request = UnityWebRequest.Get(url);
         request.downloadHandler = new DownloadHandlerFile(_savePath + Versions.Filename);
         yield return request.SendWebRequest();
@@ -447,7 +447,7 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
         }
         catch(Exception e)
         {
-            Debug.LogException(e);
+            GameLog.LogException(e);
             MessageBox.Show("提示", "版本文件加载失败", "重试", "退出").onComplete +=
                 delegate (MessageBox.EventId id)
                 {

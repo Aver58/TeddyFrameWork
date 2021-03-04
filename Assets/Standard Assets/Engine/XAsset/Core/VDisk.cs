@@ -179,7 +179,7 @@ public class VDisk
 				var path = string.Format("{0}/{1}", dir, item.name);
 				WriteFile(path, writer);
 				File.Delete(path);
-				Debug.Log("Delete:" + path);
+				GameLog.Log("Delete:" + path);
 			}
 		}
 	}

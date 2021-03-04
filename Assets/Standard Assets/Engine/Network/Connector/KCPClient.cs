@@ -31,7 +31,7 @@ public class KCPClient:Singleton<KCPClient>
         m_udpSession.WriteDelay = false;
 
         m_udpSession.Connect(ip, port);
-        Debug.Log("Connet to {0}:{1}",ip,port);
+        GameLog.Log("Connet to {0}:{1}",ip,port);
         //开启一个线程连接
         m_connectThread = new Thread(new ThreadStart(Receive));
         m_connectThread.Start();
@@ -52,11 +52,11 @@ public class KCPClient:Singleton<KCPClient>
 
                 if(!stopSend)
                 {
-                    Debug.Log("Write Message...");
+                    GameLog.Log("Write Message...");
                     var send = m_udpSession.Send(buffer, 0, buffer.Length);
                     if(send < 0)
                     {
-                        Debug.Log("Write message failed.");
+                        GameLog.Log("Write message failed.");
                         break;
                     }
 
@@ -77,18 +77,18 @@ public class KCPClient:Singleton<KCPClient>
                 }
                 else if(n < 0)
                 {
-                    Debug.Log("Receive Message failed.");
+                    GameLog.Log("Receive Message failed.");
                     break;
                 }
                 else
                 {
                     recvBytes += n;
-                    Debug.Log($"{recvBytes} / {sendBytes}");
+                    GameLog.Log($"{recvBytes} / {sendBytes}");
                 }
             }
             catch(Exception ex)
             {
-                Debug.Log("receive error" + ex.Message);
+                GameLog.Log("receive error" + ex.Message);
             }
         }
     }

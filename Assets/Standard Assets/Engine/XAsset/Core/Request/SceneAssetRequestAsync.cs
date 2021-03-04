@@ -111,7 +111,7 @@ public class SceneAssetRequestAsync : SceneAssetRequest
         }
         catch(Exception e)
         {
-            Debug.LogException(e);
+            GameLog.LogException(e);
             error = e.Message;
             loadState = AssetLoadState.Loaded;
         }

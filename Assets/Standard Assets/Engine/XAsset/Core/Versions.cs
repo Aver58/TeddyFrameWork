@@ -116,7 +116,7 @@ public static class Versions
 		}
 		catch(Exception e)
 		{
-			Debug.LogException(e);
+			GameLog.LogException(e);
 			return -1;
 		}
 	}
@@ -131,7 +131,7 @@ public static class Versions
 			var reader = new BinaryReader(stream);
 			var list = new List<VFile>();
 			var ver = reader.ReadInt32();
-			Debug.Log("LoadVersions:" + ver);
+			GameLog.Log("LoadVersions:" + ver);
 			int count = reader.ReadInt32();
 			for(var i = 0; i < count; i++)
 			{

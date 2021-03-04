@@ -38,7 +38,7 @@ public class GameMain : MonoBehaviour
 
     void StartGame()
     {
-        Debug.Log("---StartGame---");
+        GameLog.Log("---StartGame---");
         m_moduleMgr.StartGame();
 
         //UIModule.OpenView(ViewID.Test);

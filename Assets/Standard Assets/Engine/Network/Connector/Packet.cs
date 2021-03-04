@@ -98,7 +98,7 @@ public class Packet
     {
         if(Size < m_index + 2)
         {
-            Debug.LogError("ReadShort index 超出数据长度");
+            GameLog.LogError("ReadShort index 超出数据长度");
             return -1;
         }
         int value = Data[m_index++] << 8;
@@ -110,7 +110,7 @@ public class Packet
     {
         if(Size < m_index + 4)
         {
-            Debug.LogError("ReadShort index 超出数据长度");
+            GameLog.LogError("ReadShort index 超出数据长度");
             return -1;
         }
         int value = Data[m_index++] << 24;

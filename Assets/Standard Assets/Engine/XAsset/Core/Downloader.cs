@@ -167,7 +167,7 @@ public class Downloader : MonoBehaviour
             _downloadIndex++;
         }
         _finishedIndex++;
-        Debug.Log(string.Format("OnFinished:{0}, {1}", _finishedIndex, _downloads.Count));
+        GameLog.Log(string.Format("OnFinished:{0}, {1}", _finishedIndex, _downloads.Count));
         if(_finishedIndex != downloads.Count)
             return;
         if(onFinished != null)

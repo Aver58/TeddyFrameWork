@@ -45,7 +45,7 @@ public class ETCInput : MonoBehaviour{
 	public void RegisterControl(ETCBase ctrl){
 
 		if (controls.ContainsKey( ctrl.name)){
-			Debug.LogWarning("ETCInput control : " + ctrl.name + " already exists");
+			GameLog.LogWarning("ETCInput control : " + ctrl.name + " already exists");
 		}
 		else{
 			controls.Add( ctrl.name, ctrl);
@@ -110,7 +110,7 @@ public class ETCInput : MonoBehaviour{
 			control.visible = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 		}
 	}
 	
@@ -119,7 +119,7 @@ public class ETCInput : MonoBehaviour{
 			return control.visible;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 			return false;
 		}
 	}
@@ -130,7 +130,7 @@ public class ETCInput : MonoBehaviour{
 			control.activated = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 		}
 	}
 	
@@ -139,7 +139,7 @@ public class ETCInput : MonoBehaviour{
 			return control.activated;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 			return false;
 		}
 	}
@@ -152,7 +152,7 @@ public class ETCInput : MonoBehaviour{
 			control.isSwipeIn = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 		}
 	}
 
@@ -161,7 +161,7 @@ public class ETCInput : MonoBehaviour{
 			return control.isSwipeIn;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 			return false;
 		}
 	}
@@ -172,7 +172,7 @@ public class ETCInput : MonoBehaviour{
 			control.isSwipeOut = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 		}
 	}
 
@@ -181,7 +181,7 @@ public class ETCInput : MonoBehaviour{
 			return control.isSwipeOut ;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 			return false;
 		}
 	}
@@ -192,7 +192,7 @@ public class ETCInput : MonoBehaviour{
 			control.dPadAxisCount = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 		}
 	}
 
@@ -201,7 +201,7 @@ public class ETCInput : MonoBehaviour{
 			return control.dPadAxisCount;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + ctrlName + " doesn't exist");
 			return ETCBase.DPadAxis.Two_Axis;
 		}
 	}
@@ -301,7 +301,7 @@ public class ETCInput : MonoBehaviour{
 			axis.speed = speed;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -310,7 +310,7 @@ public class ETCInput : MonoBehaviour{
 			axis.gravity = gravity;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -329,7 +329,7 @@ public class ETCInput : MonoBehaviour{
 			axis.axisSpeedValue =0;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -338,7 +338,7 @@ public class ETCInput : MonoBehaviour{
 			axis.enable = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 	
@@ -347,7 +347,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.enable;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -358,7 +358,7 @@ public class ETCInput : MonoBehaviour{
 			axis.invertedAxis = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -367,7 +367,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.invertedAxis;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -378,7 +378,7 @@ public class ETCInput : MonoBehaviour{
 			axis.deadValue = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -387,7 +387,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.deadValue;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -398,7 +398,7 @@ public class ETCInput : MonoBehaviour{
 			axis.speed = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -407,7 +407,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.speed;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -418,7 +418,7 @@ public class ETCInput : MonoBehaviour{
 			axis.axisThreshold = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -427,7 +427,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.axisThreshold;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -438,7 +438,7 @@ public class ETCInput : MonoBehaviour{
 			axis.isEnertia = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -447,7 +447,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.isEnertia;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -458,7 +458,7 @@ public class ETCInput : MonoBehaviour{
 			axis.inertia = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -467,7 +467,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.inertia;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -479,7 +479,7 @@ public class ETCInput : MonoBehaviour{
 			axis.inertiaThreshold = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -488,7 +488,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.inertiaThreshold;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -499,7 +499,7 @@ public class ETCInput : MonoBehaviour{
 			axis.isAutoStab = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -508,7 +508,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.isAutoStab;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -519,7 +519,7 @@ public class ETCInput : MonoBehaviour{
 			axis.autoStabSpeed = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -528,7 +528,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.autoStabSpeed;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -539,7 +539,7 @@ public class ETCInput : MonoBehaviour{
 			axis.autoStabThreshold = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 	
@@ -548,7 +548,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.autoStabThreshold;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -559,7 +559,7 @@ public class ETCInput : MonoBehaviour{
 			axis.isClampRotation = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -568,7 +568,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.isClampRotation;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -580,7 +580,7 @@ public class ETCInput : MonoBehaviour{
 			axis.maxAngle = max;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -589,7 +589,7 @@ public class ETCInput : MonoBehaviour{
 			axis.minAngle = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -598,7 +598,7 @@ public class ETCInput : MonoBehaviour{
 			axis.maxAngle = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -607,7 +607,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.minAngle;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -617,7 +617,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.maxAngle;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -628,7 +628,7 @@ public class ETCInput : MonoBehaviour{
 			axis.directTransform = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -637,7 +637,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.directTransform;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return null;
 		}
 	}
@@ -648,7 +648,7 @@ public class ETCInput : MonoBehaviour{
 			axis.directAction = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -657,7 +657,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.directAction;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return ETCAxis.DirectAction.Rotate;
 		}
 	}
@@ -668,7 +668,7 @@ public class ETCInput : MonoBehaviour{
 			axis.axisInfluenced = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -677,7 +677,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.axisInfluenced;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return ETCAxis.AxisInfluenced.X;
 		}
 	}
@@ -688,7 +688,7 @@ public class ETCInput : MonoBehaviour{
 			axis.isValueOverTime = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -697,7 +697,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.isValueOverTime;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -708,7 +708,7 @@ public class ETCInput : MonoBehaviour{
 			axis.overTimeStep = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -717,7 +717,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.overTimeStep;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -728,7 +728,7 @@ public class ETCInput : MonoBehaviour{
 			axis.maxOverTimeValue = value;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 		}
 	}
 
@@ -737,7 +737,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.maxOverTimeValue;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -750,7 +750,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.axisValue;
 		}
 		else{
-			Debug.LogWarning("ETCInput : " + axisName + " doesn't exist");
+			GameLog.LogWarning("ETCInput : " + axisName + " doesn't exist");
 			return 0;
 		}
 	}
@@ -761,7 +761,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.axisSpeedValue;
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return 0;
 		}
 		
@@ -779,7 +779,7 @@ public class ETCInput : MonoBehaviour{
 			
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -794,7 +794,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -809,7 +809,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -824,7 +824,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -841,7 +841,7 @@ public class ETCInput : MonoBehaviour{
 			
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -856,7 +856,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -872,7 +872,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -887,7 +887,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(axisName + " doesn't exist");
+			GameLog.LogWarning(axisName + " doesn't exist");
 			return false;
 		}
 	}
@@ -904,7 +904,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(buttonName + " doesn't exist");
+			GameLog.LogWarning(buttonName + " doesn't exist");
 			return false;
 		}
 	}
@@ -919,7 +919,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(buttonName + " doesn't exist");
+			GameLog.LogWarning(buttonName + " doesn't exist");
 			return false;
 		}
 	}
@@ -934,7 +934,7 @@ public class ETCInput : MonoBehaviour{
 			}
 		}
 		else{
-			Debug.LogWarning(buttonName + " doesn't exist");
+			GameLog.LogWarning(buttonName + " doesn't exist");
 			return false;
 		}
 	}
@@ -945,7 +945,7 @@ public class ETCInput : MonoBehaviour{
 			return axis.axisValue;
 		}
 		else{
-			Debug.LogWarning(buttonName + " doesn't exist");
+			GameLog.LogWarning(buttonName + " doesn't exist");
 			return -1;
 		}
 	}
@@ -955,7 +955,7 @@ public class ETCInput : MonoBehaviour{
 	private void RegisterAxis(ETCAxis axis){
 		
 		if (ETCInput.instance.axes.ContainsKey( axis.name)){
-			Debug.LogWarning("ETCInput axis : " + axis.name + " already exists");
+			GameLog.LogWarning("ETCInput axis : " + axis.name + " already exists");
 		}
 		else{
 			axes.Add( axis.name,axis);
