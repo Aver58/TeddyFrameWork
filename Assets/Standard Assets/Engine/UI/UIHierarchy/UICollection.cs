@@ -19,7 +19,7 @@ using UnityEngine;
 public sealed class UICollection : MonoBehaviour
 {
     [SerializeField]
-    internal List<Component> components = new List<Component>();
+    public List<Component> components = new List<Component>();
     public T GetComponent<T>(int index) where T : Object
     {
         return components[index] as T;

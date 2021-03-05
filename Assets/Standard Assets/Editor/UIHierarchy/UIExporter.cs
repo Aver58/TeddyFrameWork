@@ -11,18 +11,29 @@ public class UIExporter
 {
     private static Dictionary<string, int> uiExportElementDic = new Dictionary<string, int>();
     private static Dictionary<string, string> uiExportTypeElementDic = new Dictionary<string, string>();
-    private static List<Type> ExportComponentTypes = new List<Type>() { typeof(Button),typeof(InputField),typeof(Dropdown),typeof(Toggle),typeof(Slider),
-        typeof(ScrollRect),typeof(Scrollbar)};
-    private static List<Type> ExportPropertyTypes = new List<Type>() { typeof(Image), typeof(RawImage), typeof(Text), typeof(RectTransform), typeof(Transform) };
+    private static List<Type> ExportComponentTypes = new List<Type>() { 
+        typeof(Button),
+        typeof(InputField),
+        typeof(Dropdown),
+        typeof(Toggle),
+        typeof(Slider),
+        typeof(ScrollRect),
+        typeof(Scrollbar)};
+    private static List<Type> ExportPropertyTypes = new List<Type>() { 
+        typeof(Image), 
+        typeof(RawImage), 
+        typeof(Text), 
+        typeof(RectTransform), 
+        typeof(Transform) };
     private static UICollection uiCollection;
     private static int UIComponentIndex = -1;
     private const string UIExportPrefabPath = "Assets/Resources/UI/";
     private const string UIViewTag = "UIView";
     private const string UIPropertyTag = "UIProperty";
     private const string UIIgnoreTag = "UIIgnore";
-    private const string UIExportCSViewPath = "Assets/Code/Logic/Demo/UIBindView/";
+    private const string UIExportCSViewPath = "Assets/Scripts/Game/View/UIBindView/";
 
-    [MenuItem("GameObject/UI/ColaUI/ExportUIView", false, 1)]
+    [MenuItem("GameObject/UI/ExportUIView", false, 1)]
     public static void ExportUIView()
     {
         var uiObj = Selection.activeGameObject;
@@ -49,21 +60,15 @@ public class UIExporter
     private static void ProcessUIPrefab(GameObject gameObject)
     {
         if(null == gameObject) return;
-        if(gameObject.CompareTag(UIViewTag))
+        uiCollection = gameObject.GetComponent<UICollection>();
+        if(null == uiCollection)
         {
-            uiCollection = gameObject.GetComponent<UICollection>();
-            if(null == uiCollection)
-            {
-                uiCollection = gameObject.AddComponent<UICollection>();
-            }
-            uiCollection.components.Clear();
+            uiCollection = gameObject.AddComponent<UICollection>();
         }
+
+        uiCollection.components.Clear();
         foreach(Transform transform in gameObject.transform)
         {
-            if(transform.CompareTag(UIIgnoreTag))
-            {
-                continue;
-            }
             ProcessUIPrefab(transform.gameObject);
             bool isHandled = false;
             foreach(var type in ExportComponentTypes)
@@ -80,11 +85,12 @@ public class UIExporter
                     break;
                 }
             }
-            if(isHandled) continue;
+            if(isHandled) 
+                continue;
             foreach(var type in ExportPropertyTypes)
             {
                 var UIComp = transform.GetComponent(type);
-                if(null != UIComp && transform.CompareTag(UIPropertyTag))
+                if(null != UIComp)
                 {
                     UIComponentIndex++;
                     uiCollection.components.Add(UIComp);
