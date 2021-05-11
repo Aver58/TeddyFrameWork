@@ -14,12 +14,12 @@
 /// </summary>
 namespace Aver3
 {
-    public class BTPrioritySelector : BTAction
+    public class BTActionPrioritySelector : BTAction
     {
         protected override BTResult OnUpdate()
         {
 
-            return BTResult.End;
+            return BTResult.Finished;
         }
     }
 }

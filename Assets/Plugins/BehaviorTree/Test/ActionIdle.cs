@@ -11,8 +11,6 @@
 
 namespace Aver3
 {
-    public class ActionIdle : BTAction
-    {
-
-    }
+    public class ActionIdle : BTAction{ }
+    public class ActionPatrol : BTAction{ }
 }

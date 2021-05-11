@@ -10,13 +10,27 @@
 #endregion
 
 using Aver3;
+using UnityEngine;
 
-public class TestBT
+public class TestBT : MonoBehaviour 
 {
-    public void Main()
+    private BTAction root;
+    void Awake()
     {
+        // 构建行为树
         var root = new BTAction();
+        root.AddChild(new ActionIdle());
+        root.AddChild(new ActionPatrol());
+    }
 
-          
+    private void Update()
+    {
+        // 开始测试
+        for(int i = 0; i < root.childCount; i++)
+        {
+            var node = root.GetChild(i) as BTAction;
+            if(node.Evaluate())
+                node.Update();
+        }
     }
 }
