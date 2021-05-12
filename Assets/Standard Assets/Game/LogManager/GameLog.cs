@@ -14,7 +14,7 @@ public static class GameLog
     public static bool IsOpenNetPackageLog = false;// 是否开放网络日志
     public static string LogFileDir = null;
     public static string LogFileName = "";
-    public static string Prefix = "> ";     // 用于与Unity默认的系统日志做区分。本日志系统输出的日志头部都会带上这个标记。
+    public static string Prefix = "";     // 用于与Unity默认的系统日志做区分。本日志系统输出的日志头部都会带上这个标记。
     public static StreamWriter LogFileWriter = null;
 
     /// <summary>
@@ -30,7 +30,7 @@ public static class GameLog
     private static string GetLogTime()
     {
         string str = "";
-        str = DateTime.Now.ToString("HH:mm:ss.fff") + " ";
+        //str = DateTime.Now.ToString("HH:mm:ss.fff") + " ";
 
         return str;
     }

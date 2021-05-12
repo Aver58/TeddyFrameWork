@@ -18,19 +18,25 @@ public class TestBT : MonoBehaviour
     void Awake()
     {
         // 构建行为树
-        var root = new BTAction();
-        root.AddChild(new ActionIdle());
+        root = new BTPrioritySelector();
         root.AddChild(new ActionPatrol());
+        root.AddChild(new ActionIdle());
     }
 
     private void Update()
     {
         // 开始测试
-        for(int i = 0; i < root.childCount; i++)
-        {
-            var node = root.GetChild(i) as BTAction;
-            if(node.Evaluate())
-                node.Update();
-        }
+        //for(int i = 0; i < root.childCount; i++)
+        //{
+        //    var node = root.GetChild(i) as BTAction;
+        //    if(node.Evaluate())
+        //    {
+        //        node.Update();
+        //        break;
+        //    }
+        //}
+
+        if(root.Evaluate())
+            root.Update();
     }
 }

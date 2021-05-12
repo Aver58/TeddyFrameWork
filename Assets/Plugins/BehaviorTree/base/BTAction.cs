@@ -30,14 +30,10 @@ namespace Aver3
         public bool Evaluate()
         {
             // 评估这个节点是否可以进入：1.有设置条件；2.条件通过；
-            if(m_precondition != null && m_precondition.IsTrue()) //&& OnEvaluate())
-                return true;
-
-            return false;
+            return (m_precondition == null || m_precondition.IsTrue())&& OnEvaluate();
         }
 
-        // 给子类提供个性化检查的接口
-        //protected virtual bool OnEvaluate() { return true; }
+        protected virtual bool OnEvaluate() { return true; }
 
         /// <summary>
         /// 供外部调用
@@ -79,20 +75,7 @@ namespace Aver3
         protected virtual void OnEnter() 
         {
             if(BTConst.ENABLE_BTACTION_LOG)
-            {   // For debug
                 GameLog.Log("OnEnter " + " [" + this.Name + "]");
-            }
-        }
-
-        /// <summary>
-        /// 离开行为
-        /// </summary>
-        protected virtual void OnExit() 
-        {
-            if(BTConst.ENABLE_BTACTION_LOG)
-            {   // For debug
-                GameLog.Log("OnExit " + " [" + this.Name + "]");
-            }
         }
 
         /// <summary>
@@ -101,7 +84,19 @@ namespace Aver3
         /// <returns></returns>
         protected virtual BTResult OnExecute()
         {
+            if(BTConst.ENABLE_BTACTION_LOG)
+                GameLog.Log("OnExecute " + " [" + this.Name + "]");
+
             return BTResult.Finished;
+        }
+
+        /// <summary>
+        /// 离开行为
+        /// </summary>
+        protected virtual void OnExit() 
+        {
+            if(BTConst.ENABLE_BTACTION_LOG)
+                GameLog.Log("OnExit " + " [" + this.Name + "]");
         }
     }
 }

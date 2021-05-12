@@ -18,22 +18,22 @@ namespace Aver3
     /// </summary>
     public abstract class BTNode
     {
-        private List<BTNode> m_children;
-        public int childCount { get { return m_children.Count; } }
+        public List<BTNode> children { get; }
+        public int childCount { get { return children.Count; } }
 
         public BTNode()
         {
-            m_children = new List<BTNode>();
+            children = new List<BTNode>();
         }
 
         private bool IsIndexValid(int index)
         {
-            return index >= 0 && index < m_children.Count;
+            return index >= 0 && index < children.Count;
         }
 
         public void AddChild(BTNode node)
         {
-            m_children.Add(node);
+            children.Add(node);
         }
 
         public BTNode GetChild(int index)
@@ -41,7 +41,7 @@ namespace Aver3
             if(!IsIndexValid(index))
                 return null;
 
-            return m_children[index];
+            return children[index];
         }
     }
 }
