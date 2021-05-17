@@ -11,18 +11,19 @@
 
 /// <summary>
 /// 优先选择节点
+/// 每次都是自左向右依次选择，当发现找到一个可执行的子节点后就停止搜索后续子节点。
 /// </summary>
 namespace Aver3
 {
-    public class BTPrioritySelector : BTAction
+    public class BTPrioritySelector : BTNode
     {
-        private BTAction m_activeChild;
+        protected BTNode m_activeChild;
 
         protected override bool OnEvaluate()
         {
             for(int i = 0; i < childCount; i++)
             {
-                var child = GetChild(i) as BTAction;
+                var child = GetChild(i);
                 if(child.Evaluate())
                 {
                     m_activeChild = child;

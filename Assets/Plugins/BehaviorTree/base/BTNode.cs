@@ -18,6 +18,7 @@ namespace Aver3
     /// </summary>
     public abstract class BTNode
     {
+        private BTPrecondition m_precondition;
         public List<BTNode> children { get; }
         public int childCount { get { return children.Count; } }
 
@@ -26,9 +27,30 @@ namespace Aver3
             children = new List<BTNode>();
         }
 
+        protected virtual BTResult OnUpdate() { return BTResult.Finished; }
+        protected virtual bool OnEvaluate() { return true; }
+
         private bool IsIndexValid(int index)
         {
             return index >= 0 && index < children.Count;
+        }
+
+        #region API
+
+        public bool Evaluate()
+        {
+            // 评估这个节点是否可以进入：1.有设置条件；2.条件通过；
+            return (m_precondition == null || m_precondition.IsTrue()) && OnEvaluate();
+        }
+
+        public BTResult Update()
+        {
+            return OnUpdate();
+        }
+
+        public void SetPrecondition(BTPrecondition precondition)
+        {
+            m_precondition = precondition;
         }
 
         public void AddChild(BTNode node)
@@ -43,5 +65,7 @@ namespace Aver3
 
             return children[index];
         }
+
+        #endregion
     }
 }

@@ -18,36 +18,13 @@ namespace Aver3
     /// </summary>
     public class BTAction : BTNode
     {
-        private BTPrecondition m_precondition;
         private BTActionStatus m_status = BTActionStatus.Ready;
         public string Name { get { return GetType().ToString(); } }
-
-        public void SetPrecondition(BTPrecondition precondition)
-        {
-            m_precondition = precondition;
-        }
-
-        public bool Evaluate()
-        {
-            // 评估这个节点是否可以进入：1.有设置条件；2.条件通过；
-            return (m_precondition == null || m_precondition.IsTrue())&& OnEvaluate();
-        }
-
-        protected virtual bool OnEvaluate() { return true; }
-
-        /// <summary>
-        /// 供外部调用
-        /// </summary>
-        /// <returns></returns>
-        public BTResult Update()
-        {
-            return OnUpdate();
-        }
 
         /// <summary>
         ///  行为的执行，返回BTResult
         /// </summary>
-        protected virtual BTResult OnUpdate()
+        protected override BTResult OnUpdate()
         {
             BTResult result = BTResult.Finished;
             if(m_status == BTActionStatus.Ready)
