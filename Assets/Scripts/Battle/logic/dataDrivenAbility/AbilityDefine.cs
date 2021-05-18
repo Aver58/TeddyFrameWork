@@ -28,9 +28,9 @@ public enum AbilityEvent
 public enum AbilityState
 {
     None,
-    CastPoint,      //施法前摇
-    Channeling,     //持续施法
-    CastBackSwing,  //施法后摇
+    BeforeCastPoint,        //施法前摇
+    Channeling,             //持续施法
+    CastBackSwing,          //施法后摇
 }
 
 /// <summary>
@@ -111,7 +111,7 @@ public enum AbilityUnitAITargetCondition
 // 技能分支
 public enum AbilityBranch
 {
-    ABILITY_BRANCH_PHYSICAL,//物理类型的技能，可被缴械等物理沉默导致技能不可释放
+    ABILITY_BRANCH_PHYSICAL = 1,//物理类型的技能，可被缴械等物理沉默导致技能不可释放
     ABILITY_BRANCH_MAGICAL, //法术类型的技能，可被沉默等法术沉默导致技能不可释放
 }
 

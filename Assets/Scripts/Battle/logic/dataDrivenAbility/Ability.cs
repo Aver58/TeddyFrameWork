@@ -52,7 +52,7 @@ public class Ability
             float castPoint = m_AbilityData.castPoint;
 
             // 前摇
-            if(abilityState == AbilityState.CastPoint)
+            if(abilityState == AbilityState.BeforeCastPoint)
             {
                 if(castTime > castPoint)
                     OnSpellStart();
@@ -95,7 +95,7 @@ public class Ability
         {
             OnAbilityPhaseStart();
 
-            abilityState = AbilityState.CastPoint;
+            abilityState = AbilityState.BeforeCastPoint;
             if(m_AbilityData.castPoint <= 0)
             {
                 //没有前摇就直接触发OnSpellStart
@@ -130,6 +130,8 @@ public class Ability
     public void CastAbilityBreak()
     {
         abilityState = AbilityState.None;
+        caster.SetState(HeroState.IDLE);
+        // todo 发消息清理特效
     }
 
     /// <summary>
@@ -139,6 +141,29 @@ public class Ability
     {
         abilityState = AbilityState.None;
         caster.CastAbilityEnd();
+    }
+
+    //如果技能处于后摇状态，false 就不管（后摇动作会继续播放,也就是技能会正常结束) true 会被停止(后摇动作会被切换，技能提前结束)
+    public void TryBreakAbility(bool forceBreak, AbilityBranch breakAbilityBranch = default)
+    {
+        if(abilityState == AbilityState.None)
+            return;
+
+        if(forceBreak == false)
+        {
+            if(m_AbilityData.abilityBranch != breakAbilityBranch)
+                return;
+        }
+
+        if(abilityState == AbilityState.BeforeCastPoint)
+        {
+            CastAbilityBreak();
+        }
+
+        if(abilityState == AbilityState.Channeling)
+        {
+            CastAbilityChannelEnd();
+        }
     }
 
     #region Event 技能事件
@@ -155,7 +180,7 @@ public class Ability
     {
         BattleLog.Log("【吟唱阶段】OnAbilityPhaseStart" + m_AbilityData.configFileName);
 
-        abilityState = AbilityState.CastPoint;
+        abilityState = AbilityState.BeforeCastPoint;
         ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
     }
 

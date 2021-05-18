@@ -1,9 +1,11 @@
 ﻿// 共享行为树
 //http://www.aisharing.com/archives/750
 using TsiU;
+using Aver3;
 
 public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 {
+	private static BTNode m_BehaviorTree;
 	private static TBTActionPrioritizedSelector m_DecisionTree;
 	private static TBTActionPrioritizedSelector m_BehaviorTreeNode;
 
@@ -74,4 +76,13 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 
 		return m_BehaviorTreeNode;
 	}
+
+	//public static BTNode GetCommonBehaviorTree()
+ //   {
+	//	if(m_BehaviorTree == null)
+ //       {
+	//		m_BehaviorTree = new BTPrioritySelector();
+
+	//	}
+	//}
 }

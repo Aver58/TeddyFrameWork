@@ -65,13 +65,6 @@ public class MobaBussiness : Singleton<MobaBussiness>
         go.transform.SetParent(heroParent);
     }
 
-    private void OnLoadDummyUnit(GameObject go)
-    {
-        Transform heroParent = GameObject.Find("GuardNode").transform;
-        go.transform.SetParent(heroParent);
-        go.transform.position = m_playerActor.transform.position;
-    }
-
     private void OnLoadPlayer(GameObject go)
     {
         m_playerActor.InitPosition(new Vector3(-9, 0, -9));
@@ -89,6 +82,13 @@ public class MobaBussiness : Singleton<MobaBussiness>
         HeroActor actor = new HeroActor(unit);
         actor.LoadAsset(OnLoadDummyUnit);
         m_ActorMgr.AddActor(unit.hash, actor);
+    }
+
+    private void OnLoadDummyUnit(GameObject go)
+    {
+        Transform heroParent = GameObject.Find("GuardNode").transform;
+        go.transform.SetParent(heroParent);
+        go.transform.position = m_playerActor.transform.position;
     }
 
     #endregion

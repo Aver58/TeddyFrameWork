@@ -26,7 +26,7 @@ public class DebugController: MonoBehaviour
     private float _moveRange;
     private Color moveAreaColor = new Color(0, 1, 0, 0.1f);
     private Color viewAreaColor = new Color(0, 0, 1, 0.1f);
-
+    private float YOffset = 0.1f;// 因为叠面了，所以设置了个偏移值
     void Awake()
     {
         CreateLineMaterial();
@@ -42,14 +42,14 @@ public class DebugController: MonoBehaviour
             //用代码的方式实例一个材质球
             Shader shader = Shader.Find("Hidden/Internal-Colored");
             lineMaterial = new Material(shader);
-            lineMaterial.hideFlags = HideFlags.HideAndDontSave;
+            //lineMaterial.hideFlags = HideFlags.HideAndDontSave;
             //设置参数
             lineMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             lineMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
             //设置参数
             lineMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
             //设置参数
-            lineMaterial.SetInt("_ZWrite", 0);
+            //lineMaterial.SetInt("_ZWrite", 0);
         }
     }
 
@@ -69,8 +69,8 @@ public class DebugController: MonoBehaviour
             //GL.Color(new Color(a, 1 - a, 0, 0.8F));
             GL.Color(color);
             GL.Vertex(center);
-            GL.Vertex3(Mathf.Cos(lastAngle) * radius, 0, Mathf.Sin(lastAngle) * radius);
-            GL.Vertex3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
+            GL.Vertex3(Mathf.Cos(lastAngle) * radius, YOffset, Mathf.Sin(lastAngle) * radius);
+            GL.Vertex3(Mathf.Cos(angle) * radius, YOffset, Mathf.Sin(angle) * radius);
         }
     }
 

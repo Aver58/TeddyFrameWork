@@ -31,6 +31,7 @@ public class BattleUnit : Unit
     private TBTAction m_BehaviorTree;
     private TBTAction m_DecisionTree;
     private BattleProperty m_Property;
+    private Ability m_lastAbility;
     private BattleDecisionWorkingData m_DecisionWorkData;
     private BattleBehaviorWorkingData m_BehaviorWorkData;
     private Dictionary<AbilityCastType, Ability> m_abilityMap;
@@ -79,6 +80,10 @@ public class BattleUnit : Unit
         return null;
     }
 
+    /// <summary>
+    /// 技能准备动作：比如钟馗的甩钩子，可以取消的
+    /// </summary>
+    /// <param name="ability"></param>
     public void PrepareCastAbility(Ability ability)
     {
         if(ability == null)
@@ -93,6 +98,7 @@ public class BattleUnit : Unit
             return;
         
         ability.CastAbilityBegin(isSkipCastPoint);
+        m_lastAbility = ability;
 
         SetState(HeroState.CASTING, ability.GetCastAnimation(), isSkipCastPoint);
 
@@ -102,6 +108,8 @@ public class BattleUnit : Unit
     public void CastAbilityEnd()
     {
         SetState(HeroState.IDLE);
+
+        m_lastAbility = null;
     }
 
     #region modifier
@@ -364,6 +372,19 @@ public class BattleUnit : Unit
     public List<int> GetSkillList()
     {
         return m_Property.GetSkillList();
+    }
+
+    /// <summary>
+    /// 尝试打断技能
+    /// </summary>
+    /// <param name="forceBreak">如果技能处于后摇状态，false 就不管（后摇动作会继续播放,也就是技能会正常结束) true 会被停止(后摇动作会被切换，技能提前结束)</param>
+    /// <param name="breakAbilityBranch">打断的技能分支：物理/魔法</param>
+    public void TryBreakAbility(bool forceBreak, AbilityBranch breakAbilityBranch = default)
+    {
+        if(m_lastAbility !=null)
+        {
+            m_lastAbility.TryBreakAbility(forceBreak, breakAbilityBranch);
+        }
     }
 
     #endregion

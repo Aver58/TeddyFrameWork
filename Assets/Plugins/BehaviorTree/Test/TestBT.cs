@@ -14,7 +14,7 @@ using UnityEngine;
 
 public class TestBT : MonoBehaviour 
 {
-    private BTAction root;
+    private BTNode root;
     void Awake()
     {
         // 构建行为树
