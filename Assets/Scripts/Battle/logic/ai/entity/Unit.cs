@@ -13,7 +13,7 @@ using UnityEngine;
 
 // 数据层
 // 维护不依赖表现的真实位置坐标
-public class Unit
+public abstract class Unit
 {
     private float m_PosX;
     private float m_PosY;
@@ -26,9 +26,9 @@ public class Unit
     private Vector3 m_Position3D;
     public int id { get; set; }
 
-    public void OnEnter(){ }
-    public void OnExit(){ }
-    public void Update(float deltaTime,int logicFrame) { }
+    public virtual void OnEnter(){ }
+    public virtual void OnExit(){ }
+    public virtual void Update(float deltaTime,int logicFrame) { }
 
     public Unit(int id)
     {
@@ -111,6 +111,5 @@ public class Unit
         m_ForwardZ = forward.y;
     }
     #endregion
-
 }
 

@@ -23,12 +23,12 @@ public class D2Action_ApplyModifier : D2Action
         this.modifierName = modifierName;
     }
 
-    //protected override void ExecuteByPoint(BattleUnit source, List<BattleUnit> targets)
-    //{
-    //    for(int i = 0; i < targets.Count; i++)
-    //    {
-    //        var target = targets[i];
-    //        target.ApplyModifierByName(source, abilityData, modifierName);
-    //    }
-    //}
+    protected override void ExecuteByUnit(BattleUnit source, List<BattleUnit> targets)
+    {
+        for(int i = 0; i < targets.Count; i++)
+        {
+            var target = targets[i];
+            target.ApplyModifierByName(source, abilityData, modifierName);
+        }
+    }
 }

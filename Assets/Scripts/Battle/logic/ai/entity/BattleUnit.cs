@@ -28,10 +28,11 @@ public class BattleUnit : Unit
         { "skill3",AbilityCastType.SKILL3},
     };
     private HeroState m_HeroState;
+    private Ability m_lastAbility;
     private TBTAction m_BehaviorTree;
     private TBTAction m_DecisionTree;
     private BattleProperty m_Property;
-    private Ability m_lastAbility;
+    private List<D2Modifier> m_activeModifiers;
     private BattleDecisionWorkingData m_DecisionWorkData;
     private BattleBehaviorWorkingData m_BehaviorWorkData;
     private Dictionary<AbilityCastType, Ability> m_abilityMap;
@@ -52,6 +53,50 @@ public class BattleUnit : Unit
 
         InitAbilities();
     }
+
+    #region 生命周期
+
+    /// <summary>
+    /// 进入战斗
+    /// </summary>
+    public override void OnEnter()
+    {
+
+    }
+
+    /// <summary>
+    /// 退出战斗
+    /// </summary>
+    public override void OnExit()
+    {
+
+    }
+
+    /// <summary>
+    /// 出生
+    /// </summary>
+    public void OnBorn()
+    {
+        ActivePassiveModifier();
+    }
+
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    public void OnDead()
+    {
+
+    }
+
+    /// <summary>
+    /// 重生
+    /// </summary>
+    public void OnReincarnate()
+    {
+
+    }
+
+    #endregion
 
     #region ability
     public void InitAbilities()
@@ -112,7 +157,10 @@ public class BattleUnit : Unit
         m_lastAbility = null;
     }
 
+    #endregion
+
     #region modifier
+    //可以理解为buff，就是对角色属性的一些修改：比如物理攻击增加
 
     public void ApplyModifierByName(BattleUnit caster, AbilityData abilityData, string modifierName)
     {
@@ -129,23 +177,30 @@ public class BattleUnit : Unit
     public void ApplyModifier(BattleUnit caster, AbilityData abilityData, ModifierData modifierData)
     {
         var modifier = new D2Modifier(caster, modifierData, this, abilityData);
-
         modifier.OnCreate();
     }
 
-    #endregion
-
+    // 激活被动
+    private void ActivePassiveModifier()
+    {
+        for(int i = 0; i < abilities.Count; i++)
+        {
+            var ability = abilities[i];
+            var modifierDatas = ability.GetAllPassiveModifierData();
+            GameLog.Log(id.ToString() + " modifier数量："+modifierDatas.Count.ToString());
+            for(int j = 0; j < modifierDatas.Count; j++)
+            {
+                var modifierData = modifierDatas[i];
+                ApplyModifier(this, ability.abilityData, modifierData);
+            }
+        }
+    }
     #endregion
 
     #region 技能、决策树、行为树更新
 
     // 决策层：输入（游戏世界信息），输出（请求）
     // 行为层：输入（请求），输出（修改游戏世界的相关信息）
-
-    public void SetDecisionRequest(AIBehaviorRequest request)
-    {
-        m_DecisionWorkData.request = request;
-    }
 
     // 更新决策树
     public int UpdateDecision(float gameTime, float deltaTime)
@@ -217,11 +272,12 @@ public class BattleUnit : Unit
         {
             ability.Update(deltaTime);
         }
-        // buff
-        foreach(Ability ability in abilities)
-        {
-            ability.Update(deltaTime);
-        }
+
+        // buff刷新
+        //foreach(Ability ability in abilities)
+        //{
+        //    ability.Update(deltaTime);
+        //}
 
         return 0;
     }

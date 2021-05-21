@@ -114,14 +114,9 @@
           }
         },
 
-        "LevelCondition": {
+        "ApplyModifier": {
           "Target": "TARGET",
-          "OnSuccess": {
-            "ApplyModifier": {
-              "Target": "TARGET",
-              "ModifierName": "zhendangbo"
-            }
-          }
+          "ModifierName": "zhendangbo"
         }
       }
     }

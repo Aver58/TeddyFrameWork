@@ -37,11 +37,13 @@ public class ToolMenu
     //    ImportSprite.ImportAll();
     //}
 
-    //[MenuItem("Tools/初始化shader", false, 5)]
-    //static void InitShader()
-    //{
-    //    ShaderManager.InitGlobal();
-    //}
+    [MenuItem("Tools/初始化shader", false, 5)]
+    static void InitShader()
+    {
+        UnityEngine.Shader.SetGlobalFloat("_GlobalBrightness", 1);
+        UnityEngine.Shader.SetGlobalFloat("_SingleBrightness", 0);
+        //ShaderManager.InitGlobal();
+    }
     //创建so
     //[MenuItem("Tools/ConfigData Creator")]
     //chestatic void NewSO()

@@ -9,8 +9,6 @@
 */
 #endregion
 
-using System.Collections.Generic;
-
 /// <summary>
 /// buff 管理
 /// </summary>
@@ -42,14 +40,14 @@ public class D2Modifier
     // 创建
     public void OnCreate()
     {
-        ApplyAura();
-
         passedTime = 0;
         thinkPassedTime = 0;
         isEnding = false;
         isDestroyed = false;
+        
         ExecuteEvent(ModifierEvents.OnCreated);
 
+        ApplyAura();
         // todo 不是傀儡对象
         if(target != null) 
         {
@@ -100,9 +98,7 @@ public class D2Modifier
     {
         var @event = modifierData.GetEvent(eventName);
         if(@event != null)
-        {
             @event.Execute(caster, abilityData, requestTarget);
-        }
     }
 
     // 光环

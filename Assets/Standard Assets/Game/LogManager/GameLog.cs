@@ -49,22 +49,22 @@ public static class GameLog
 
         if(args != null && args.Length > 0)
             message = string.Format(message, args);
-        string str = Prefix + GetLogTime() + message;
+        string str = Prefix + message;
         AddLogToList(1,str);
-        UnityEngine.Debug.Log(str, null);
+        Debug.Log(str);
         LogToFile("[I]" + str, false);
     }
 
     public static void RawLog(object message)
     {
-        UnityEngine.Debug.Log(message);
+        Debug.Log(message);
     }
 
     public static void LogException(Exception message)
     {
         string str = GetLogTime() + message.Message;
         AddLogToList(2, str);
-        UnityEngine.Debug.LogException(message);
+        Debug.LogException(message);
         LogToFile("[E]" + str, true);
     }
     
@@ -77,7 +77,7 @@ public static class GameLog
         string str = Prefix + GetLogTime() + message;
         AddLogToList(3, str);
 
-        UnityEngine.Debug.LogError(str, null);
+        Debug.LogError(str, null);
         LogToFile("[E]" + str, true);
     }
 
@@ -89,7 +89,7 @@ public static class GameLog
         }
         string str = Prefix + GetLogTime() + message;
         AddLogToList(4, str);
-        UnityEngine.Debug.LogWarning(str, null);
+        Debug.LogWarning(str, null);
         LogToFile("[W]" + str, true);
     }
 
@@ -97,7 +97,7 @@ public static class GameLog
     {
         string str = Prefix + message;
         AddLogToList(5, str);
-        UnityEngine.Debug.LogWarning(str, null);
+        Debug.LogWarning(str, null);
         LogToFile("[W]" + str, false);
     }
 

@@ -15,7 +15,6 @@ using System.Collections.Generic;
 public class AbilityData
 {
     public Dictionary<string, D2Event> eventMap { get; set; }
-    public Dictionary<string, ModifierData> modifierMap { get; set; }
     public ActionTarget abilityTarget { get; set; }
     public string configFileName { get; set; }
     public string abilityType { get; set; }
@@ -57,5 +56,19 @@ public class AbilityData
             return d2Modifier;
 
         return null;
+    }
+
+    public List<ModifierData> GetAllPassiveModifierData()
+    {
+        List<ModifierData> modifiers = new List<ModifierData>();
+        foreach(var item in modifierDataMap)
+        {
+            var modifierData = item.Value;
+            if(modifierData.Passive)
+            {
+                modifiers.Add(modifierData);
+            }
+        }
+        return modifiers;
     }
 }

@@ -197,7 +197,6 @@ public static class AbilityReader
             return null;
         }
 
-        //var targetFlags = 
         var applyModifier = new D2Action_ApplyModifier(modifierName, actionTarget);
         return applyModifier;
     }
@@ -635,7 +634,7 @@ public static class AbilityReader
         abilityData.eventMap = ParseAbilityEvents(jsonData, abilityData);
 
         // 解析Modifier
-        abilityData.modifierMap = ParseModifiers(jsonData, abilityData);
+        abilityData.modifierDataMap = ParseModifiers(jsonData, abilityData);
 
         return abilityData;
     }

@@ -11,6 +11,8 @@
 
 // 技能图标
 // http://mxd.17173.com/content/2013-02-26/20130226150805219.shtml
+using System.Collections.Generic;
+
 public class Ability
 {
     public int ID { get; }
@@ -20,17 +22,17 @@ public class Ability
     public BattleUnit caster { get; }
     public AbilityState abilityState { get; set; }
     public RequestTarget requestTarget { get; set; }
-    private AbilityData m_AbilityData;
+    public AbilityData abilityData { get; }
 
     public Ability(int id, int priority,BattleUnit battleEntity,AbilityData abilityData)
     {
         ID = id;
         this.priority = priority;
         caster = battleEntity;
-        m_AbilityData = abilityData;
+        this.abilityData = abilityData;
 
         castTime = 0f;
-        CD = m_AbilityData.cooldown;
+        CD = this.abilityData.cooldown;
         abilityState = AbilityState.None;
         requestTarget = new RequestTarget();
     }
@@ -49,7 +51,7 @@ public class Ability
         if(abilityState != AbilityState.None)
         {
             castTime += deltaTime;
-            float castPoint = m_AbilityData.castPoint;
+            float castPoint = abilityData.castPoint;
 
             // 前摇
             if(abilityState == AbilityState.BeforeCastPoint)
@@ -61,16 +63,16 @@ public class Ability
             // 持续施法
             if(abilityState == AbilityState.Channeling)
             {
-                if(castTime > castPoint + m_AbilityData.channelTime)
+                if(castTime > castPoint + abilityData.channelTime)
                     CastAbilityChannelEnd();
             }
 
             // 后摇
             if(abilityState == AbilityState.CastBackSwing)
             {
-                if(castTime > m_AbilityData.castDuration)
+                if(castTime > abilityData.castDuration)
                 {
-                    castTime = m_AbilityData.castDuration;
+                    castTime = abilityData.castDuration;
                     CastAbilityEnd();
                 }
             }
@@ -84,10 +86,10 @@ public class Ability
     public void CastAbilityBegin(bool isSkipCastPoint = false)
     {
         castTime = 0f;
-        CD = m_AbilityData.cooldown;
+        CD = abilityData.cooldown;
         if(isSkipCastPoint)
         {
-            castTime = m_AbilityData.castPoint;
+            castTime = abilityData.castPoint;
             // 跳过前摇
             OnSpellStart();
         }
@@ -96,7 +98,7 @@ public class Ability
             OnAbilityPhaseStart();
 
             abilityState = AbilityState.BeforeCastPoint;
-            if(m_AbilityData.castPoint <= 0)
+            if(abilityData.castPoint <= 0)
             {
                 //没有前摇就直接触发OnSpellStart
                 OnSpellStart();
@@ -149,21 +151,14 @@ public class Ability
         if(abilityState == AbilityState.None)
             return;
 
-        if(forceBreak == false)
-        {
-            if(m_AbilityData.abilityBranch != breakAbilityBranch)
-                return;
-        }
+        if((forceBreak == false) && (abilityData.abilityBranch != breakAbilityBranch))
+            return;
 
         if(abilityState == AbilityState.BeforeCastPoint)
-        {
             CastAbilityBreak();
-        }
 
         if(abilityState == AbilityState.Channeling)
-        {
             CastAbilityChannelEnd();
-        }
     }
 
     #region Event 技能事件
@@ -172,13 +167,13 @@ public class Ability
     {
         //BattleLog.Log("【Ability】ExecuteEvent :" + abilityEvent.ToString());
 
-        m_AbilityData.ExecuteEvent(abilityEvent, caster, requestTarget);
+        abilityData.ExecuteEvent(abilityEvent, caster, requestTarget);
     }
 
     // 吟唱阶段
     private void OnAbilityPhaseStart()
     {
-        BattleLog.Log("【吟唱阶段】OnAbilityPhaseStart" + m_AbilityData.configFileName);
+        BattleLog.Log("【吟唱阶段】OnAbilityPhaseStart" + abilityData.configFileName);
 
         abilityState = AbilityState.BeforeCastPoint;
         ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
@@ -187,9 +182,9 @@ public class Ability
     // 施法阶段
     private void OnSpellStart()
     {
-        BattleLog.Log("【施法阶段】OnSpellStart" + m_AbilityData.configFileName);
+        BattleLog.Log("【施法阶段】OnSpellStart" + abilityData.configFileName);
 
-        if(m_AbilityData.channelTime > 0)
+        if(abilityData.channelTime > 0)
         {
             abilityState = AbilityState.Channeling;
         }
@@ -222,69 +217,74 @@ public class Ability
 
     public string GetConfigName()
     {
-        return m_AbilityData.configFileName;
+        return abilityData.configFileName;
     }
 
     public float GetCastRange()
     {
-        return m_AbilityData.castRange;
+        return abilityData.castRange;
     }
 
     public AbilityUnitAITargetCondition GetAiTargetCondition()
     {
-        return m_AbilityData.aiTargetCondition;
+        return abilityData.aiTargetCondition;
     }
 
     public AbilityBehavior GetAbilityBehavior()
     {
-        return m_AbilityData.abilityBehavior;
+        return abilityData.abilityBehavior;
     }
 
     public float GetCastleDuring()
     {
-        return m_AbilityData.castDuration;
+        return abilityData.castDuration;
     }
 
     public ActionTarget GetAbilityRange()
     {
-        return m_AbilityData.abilityTarget;
+        return abilityData.abilityTarget;
     }
 
     public float GetAbilityAOERadius()
     {
-        return m_AbilityData.abilityTarget.Radius;
+        return abilityData.abilityTarget.Radius;
     }
 
     public void GetSectorAoe(out float sectorRadius, out float sectorAngle)
     {
-        sectorRadius = m_AbilityData.abilityTarget.SectorRadius;
-        sectorAngle = m_AbilityData.abilityTarget.SectorAngle;
+        sectorRadius = abilityData.abilityTarget.SectorRadius;
+        sectorAngle = abilityData.abilityTarget.SectorAngle;
     }
 
     public void GetLineAoe(out float lineLength, out float lineThickness)
     {
-        lineLength = m_AbilityData.abilityTarget.LineLength;
-        lineThickness = m_AbilityData.abilityTarget.LineThickness;
+        lineLength = abilityData.abilityTarget.LineLength;
+        lineThickness = abilityData.abilityTarget.LineThickness;
     }
 
     public MultipleTargetsTeam GetTargetTeam()
     {
-        return m_AbilityData.abilityTarget.Teams;
+        return abilityData.abilityTarget.Teams;
     }
 
     public MultipleTargetsType GetDamageType()
     {
-        return m_AbilityData.abilityTarget.Types;
+        return abilityData.abilityTarget.Types;
     }
 
     public string GetCastAnimation()
     {
-        return m_AbilityData.castAnimation;
+        return abilityData.castAnimation;
     }
 
     public float GetTotalCD()
     {
-        return m_AbilityData.cooldown;
+        return abilityData.cooldown;
+    }
+
+    public List<ModifierData> GetAllPassiveModifierData()
+    {
+        return abilityData.GetAllPassiveModifierData();
     }
     #endregion
 }
