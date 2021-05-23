@@ -65,9 +65,7 @@ public class AbilityData
         {
             var modifierData = item.Value;
             if(modifierData.Passive)
-            {
                 modifiers.Add(modifierData);
-            }
         }
         return modifiers;
     }

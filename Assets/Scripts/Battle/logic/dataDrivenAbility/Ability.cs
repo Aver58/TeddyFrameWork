@@ -287,4 +287,12 @@ public class Ability
         return abilityData.GetAllPassiveModifierData();
     }
     #endregion
+
+    #region set
+
+    public void SetUnitTarget(BattleUnit target)
+    {
+        requestTarget.SetUnitTarget(target);
+    }
+    #endregion
 }

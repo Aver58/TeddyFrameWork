@@ -20,41 +20,38 @@ public class GameMsg : Singleton<GameMsg>
 
     public void AddMessage(GameMsgDef msgName, Action listener)
     {
-        if (listener == null)
-            return;
-
+        if (listener == null)return;
         AddDelegate(msgName, listener);
     }
 
     public void AddMessage<T>(GameMsgDef msgName, Action<T> listener)
     {
-        if (listener == null)
-            return;
-
+        if (listener == null)return;
         AddDelegate(msgName, listener);
     }
 
     public void AddMessage<T1, T2>(GameMsgDef msgName, Action<T1, T2> listener)
     {
-        if (listener == null)
-            return;
-
+        if (listener == null)return;
         AddDelegate(msgName, listener);
     }
 
     public void AddMessage<T1, T2, T3>(GameMsgDef msgName, Action<T1, T2, T3> listener)
     {
-        if (listener == null)
-            return;
+        if (listener == null) return;
+        AddDelegate(msgName, listener);
+    }
 
+    public void AddMessage<T1, T2, T3, T4>(GameMsgDef msgName, Action<T1, T2, T3, T4> listener)
+    {
+        if(listener == null) return;
         AddDelegate(msgName, listener);
     }
 
 
     private void AddDelegate(GameMsgDef msgName, Delegate listener)
     {
-        if (listener == null)
-            return;
+        if (listener == null)return;
 
         Delegate func = null;
         if (m_MsgMap.TryGetValue(msgName, out func))
@@ -141,6 +138,20 @@ public class GameMsg : Singleton<GameMsg>
             {
                 Action<T1, T2, T3> tmp = (Action<T1, T2, T3>)func;
                 tmp(arg1, arg2, arg3);
+            }
+        }
+    }
+
+    // 4个参
+    public void SendMessage<T1, T2, T3, T4>(GameMsgDef msgName, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+    {
+        Delegate funcs = null;
+        if(m_MsgMap.TryGetValue(msgName, out funcs))
+        {
+            foreach(Delegate func in funcs.GetInvocationList())
+            {
+                Action<T1, T2, T3, T4> tmp = (Action<T1, T2, T3, T4>)func;
+                tmp(arg1, arg2, arg3, arg4);
             }
         }
     }

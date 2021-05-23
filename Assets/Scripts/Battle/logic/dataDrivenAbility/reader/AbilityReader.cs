@@ -11,21 +11,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 using LitJson;
 
 public static class AbilityReader
 {
 
     #region Json Parse
-
-    private static T GetEnumValue<T>(string str)
-    {
-        if(str == null)
-            return default(T);
-
-        T value = (T)Enum.Parse(typeof(T), str.ToString());
-        return value;
-    }
 
     private static JsonData GetJsonValue(JsonData json, string key)
     {
@@ -52,8 +45,11 @@ public static class AbilityReader
 
     private static bool GetBoolValue(JsonData json, string key)
     {
-        var res = GetIntValue(json, key);
-        return res == 1;
+        var res = GetJsonValue(json, key);
+        if(res!=null && res.IsBoolean)
+            return (bool)res;
+
+        return false;
     }
 
     private static string GetStringValue(JsonData json, string key)
@@ -66,6 +62,15 @@ public static class AbilityReader
     {
         string str = GetStringValue(json, key);
         return GetEnumValue<T>(str);
+    }
+
+    private static T GetEnumValue<T>(string str)
+    {
+        if(str == null)
+            return default(T);
+
+        T value = (T)Enum.Parse(typeof(T), str.ToString());
+        return value;
     }
 
     #endregion
@@ -100,6 +105,7 @@ public static class AbilityReader
         { "IsHit" , CreateIsHitAction},
         { "ChangeEnergy" , CreateChangeEnergyAction},
         { "Damage" , CreateDamageAction},
+        { "Heal" , CreateHealAction},
         { "ApplyModifier" , CreateApplyModifierAction},
     };
 
@@ -182,6 +188,36 @@ public static class AbilityReader
     }
 
     /*
+           "Heal": {
+              "Target": "CASTER",
+
+              "HealFlags": [ "HEAL_FLAG_NONE" ],
+              "ValueSource": {
+                "ValueBasicParams": [ 8, 4 ],
+                "ValueAdditionParams": [
+                  {
+                    "ValueSourceType": "SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams": [ 0, 0 ]
+                  }
+                ]
+              }
+            }
+     */
+    private static D2Action CreateHealAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
+    {
+        var flagConfig = GetJsonValue(json, "HealFlags");
+        if(flagConfig == null)
+            return null;
+
+        var healFlag = ParseHealFlagArray(flagConfig);
+
+        var valueSource = ParseValueSource(json, abilityData);
+
+        var d2Action_heal = new D2Action_Heal(healFlag, valueSource, actionTarget);
+        return d2Action_heal;
+    }
+    
+    /*
         "ApplyModifier":
          {
              "Target":"TARGET",
@@ -214,6 +250,23 @@ public static class AbilityReader
                 string item = json[i].ToString();
                 var damageFlag = GetEnumValue<AbilityDamageFlag>(item);
                 res |= damageFlag;
+            }
+        }
+        return res;
+    }
+
+    private static AbilityHealFlag ParseHealFlagArray(JsonData json)
+    {
+        var res = AbilityHealFlag.HEAL_FLAG_NONE;
+        if(json == null)
+            return res;
+        if(json.IsArray)
+        {
+            for(int i = 0; i < json.Count; i++)
+            {
+                string item = json[i].ToString();
+                var flag = GetEnumValue<AbilityHealFlag>(item);
+                res |= flag;
             }
         }
         return res;
@@ -506,12 +559,12 @@ public static class AbilityReader
                 {
                     var modifierPropertyValue = new ModifierPropertyValue();
                     var propertyValueConfig = propertyDataConfig[propertyType];
-                    if(propertyValueConfig.IsArray)
+                    if(propertyValueConfig!=null)
                     {
-                        // todo 解析数值
                         var valueSourceJson = GetJsonValue(propertyValueConfig, "ValueSource");
                         if(valueSourceJson == null)
                         {
+                            GameLog.Log("todo 解析数值");
                             //modifierPropertyValue.
                         }
                         else
@@ -537,16 +590,16 @@ public static class AbilityReader
         if(stateDataConfig != null)
         {
             var modifierStates = new List<ModifierState>();
-            foreach(var stateName in stateDataConfig.Keys)
+            foreach(string stateName in stateDataConfig.Keys)
             {
-                var stateEnum = GetEnumValue<ModifierStates>(stateName.ToString());
+                var stateEnum = GetEnumValue<ModifierStates>(stateName);
                 if(stateEnum == default)
                 {
                     BattleLog.LogError("技能[{0}]中有未定义的ModifierStates类型[{1}]", abilityData.configFileName, stateName);
                 }
                 else
                 {
-                    var stateValue = GetIntValue(stateDataConfig, stateName);
+                    //var stateValue = GetIntValue(stateDataConfig, stateName);
                     // todo 解析数值
                     //modifierStates.Add();
                 }
@@ -558,13 +611,13 @@ public static class AbilityReader
     private static ModifierData ParseModifier(JsonData json, AbilityData abilityData)
     {
         var modifier = new ModifierData();
-        
-        //modifier.Name = json; json.key
+
+        //modifier.Name = json; //json.key
         modifier.Duration = GetFloatValue(json, "Duration");
         modifier.ThinkInterval = GetFloatValue(json, "ThinkInterval");
         modifier.IsDebuff = GetBoolValue(json, "IsDebuff");
         modifier.IsBuff = GetBoolValue(json, "IsBuff");
-        modifier.Passive = GetBoolValue(json, "Passive");
+        modifier.Passive = GetBoolValue(json, "IsPassive");
         modifier.IsHidden = GetBoolValue(json, "IsHidden");
         modifier.IsPurgable = GetBoolValue(json, "IsPurgable");
         // effect
@@ -589,12 +642,14 @@ public static class AbilityReader
     {
         var res = new Dictionary<string, ModifierData>();
         var Modifiers = GetJsonValue(json, "Modifiers");
-        if(Modifiers != null && Modifiers.IsArray)
+        if(Modifiers != null)
         {
+            var keys = Modifiers.Keys.ToList();
             for(int i = 0; i < Modifiers.Count; i++)
             {
                 var modifierJson = Modifiers[i];
                 var modifier = ParseModifier(modifierJson, abilityData);
+                modifier.Name = keys[i];
                 res.Add(modifier.Name, modifier);
             }
         }

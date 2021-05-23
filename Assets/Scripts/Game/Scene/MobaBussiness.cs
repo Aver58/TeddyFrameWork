@@ -25,7 +25,7 @@ public class MobaBussiness : Singleton<MobaBussiness>
         GameMsg instance = GameMsg.instance;
         instance.AddMessage<HeorMoveEventArgs>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
         instance.AddMessage<HeorTurnEventArgs>(GameMsgDef.Hero_TurnTo2D, OnHeroTurnTo);
-        instance.AddMessage<HeorChangeStateEventArgs>(GameMsgDef.Hero_ChangeState, OnHeroActorStateChanged);
+        instance.AddMessage<int,HeroState,string,bool>(GameMsgDef.Hero_ChangeState, OnHeroActorStateChanged);
     }
 
     ~MobaBussiness()
@@ -113,13 +113,8 @@ public class MobaBussiness : Singleton<MobaBussiness>
         }
     }
 
-    private void OnHeroActorStateChanged(HeorChangeStateEventArgs args)
+    private void OnHeroActorStateChanged(int heroID, HeroState heroState, string skillName, bool isSkipCastPoint)
     {
-        int heroID = args.id;
-        HeroState heroState = args.heroState;
-        string skillName = args.skillName;
-        bool isSkipCastPoint = args.isSkipCastPoint;
-
         if(m_playerActor.id == heroID)
         {
             m_playerActor.ChangeState(heroState, skillName, isSkipCastPoint);

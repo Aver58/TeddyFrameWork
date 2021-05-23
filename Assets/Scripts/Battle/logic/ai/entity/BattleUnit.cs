@@ -26,6 +26,8 @@ public class BattleUnit : Unit
         { "skill1",AbilityCastType.SKILL1},
         { "skill2",AbilityCastType.SKILL2},
         { "skill3",AbilityCastType.SKILL3},
+        { "skill4",AbilityCastType.SKILL4},
+        { "passive",AbilityCastType.PASSIVE},
     };
     private HeroState m_HeroState;
     private Ability m_lastAbility;
@@ -43,7 +45,7 @@ public class BattleUnit : Unit
         camp = battleCamp;
         m_Property = property;
         abilities = new List<Ability>();
-        m_abilityMap = new Dictionary<AbilityCastType, Ability>(4);
+        m_abilityMap = new Dictionary<AbilityCastType, Ability>(5);
         m_HeroState = HeroState.IDLE;
         m_BehaviorTree = GetBehaviorTree();
         m_DecisionTree = GetDecisionTree();
@@ -77,7 +79,6 @@ public class BattleUnit : Unit
     /// </summary>
     public void OnBorn()
     {
-        ActivePassiveModifier();
     }
 
     /// <summary>
@@ -85,7 +86,10 @@ public class BattleUnit : Unit
     /// </summary>
     public void OnDead()
     {
+        SetState(HeroState.DEAD);
 
+        ClearAbilities();
+        ClearModifiers();
     }
 
     /// <summary>
@@ -104,14 +108,24 @@ public class BattleUnit : Unit
         List<int> skillList = GetSkillList();
         foreach(int skillID in skillList)
         {
-            skillItem skillItem = skillTable.Instance.GetTableItem(skillID);
-            //string skillConfig = skillItem.config;
+            //skillItem skillItem = skillTable.Instance.GetTableItem(skillID);
             Ability ability = AbilityReader.CreateAbility(skillID, this);
             string skillName = ability.GetCastAnimation();
+            if(string.IsNullOrEmpty(skillName))
+                skillName = "passive";
             var castType = m_stringToCastTypeMap[skillName];
             m_abilityMap[castType] = ability;
             abilities.Add(ability);
         }
+
+        m_activeModifiers = new List<D2Modifier>();
+
+        ActivePassiveModifier();
+    }
+
+    public void ClearAbilities()
+    {
+        abilities.Clear();
     }
 
     // 找到可以释放的技能
@@ -178,6 +192,13 @@ public class BattleUnit : Unit
     {
         var modifier = new D2Modifier(caster, modifierData, this, abilityData);
         modifier.OnCreate();
+
+        m_activeModifiers.Add(modifier);
+    }
+
+    public void ClearModifiers()
+    {
+        m_activeModifiers.Clear();
     }
 
     // 激活被动
@@ -187,10 +208,9 @@ public class BattleUnit : Unit
         {
             var ability = abilities[i];
             var modifierDatas = ability.GetAllPassiveModifierData();
-            GameLog.Log(id.ToString() + " modifier数量："+modifierDatas.Count.ToString());
             for(int j = 0; j < modifierDatas.Count; j++)
             {
-                var modifierData = modifierDatas[i];
+                var modifierData = modifierDatas[j];
                 ApplyModifier(this, ability.abilityData, modifierData);
             }
         }
@@ -268,16 +288,16 @@ public class BattleUnit : Unit
     public int UpdateAbility(float gameTime, float deltaTime)
     {
         // 技能
-        foreach(Ability ability in abilities)
+        for(int i = 0; i < abilities.Count; i++)
         {
-            ability.Update(deltaTime);
+            abilities[i].Update(deltaTime);
         }
 
         // buff刷新
-        //foreach(Ability ability in abilities)
-        //{
-        //    ability.Update(deltaTime);
-        //}
+        for(int i = 0; i < m_activeModifiers.Count; i++)
+        {
+            m_activeModifiers[i].Update(deltaTime);
+        }
 
         return 0;
     }
@@ -328,8 +348,7 @@ public class BattleUnit : Unit
 
     public bool IsDead()
     {
-        //return todo 
-        return false;
+        return GetHP() <= 0;
     }
 
     public bool IsUnSelectable()
@@ -450,12 +469,18 @@ public class BattleUnit : Unit
     public void UpdateHP(float damage)
     {
         m_Property.UpdateHP(damage);
+
+        var hp = GetHP();
+        if(hp <= 0)
+        {
+            OnDead();
+        }
     }
 
     public void SetState(HeroState state, string skillName = null, bool isSkipCastPoint = false)
     {
         m_HeroState = state;
-        GameMsg.instance.SendMessage(GameMsgDef.Hero_ChangeState,new HeorChangeStateEventArgs(id, state, skillName, isSkipCastPoint));
+        GameMsg.instance.SendMessage(GameMsgDef.Hero_ChangeState, id, state, skillName, isSkipCastPoint);
     }
 
     #endregion

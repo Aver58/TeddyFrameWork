@@ -73,10 +73,12 @@ public enum AbilityType
 // 技能类型
 public enum AbilityCastType
 {
-    ATTACK,
-    SKILL1,
-    SKILL2,
-    SKILL3,
+    PASSIVE,    // 被动
+    ATTACK,     // 普通攻击
+    SKILL1,     // 技能1
+    SKILL2,     // 技能2
+    SKILL3,     // 技能3
+    SKILL4,     // 技能4(optional)
 }
 
 // 伤害类型
@@ -123,6 +125,12 @@ public enum AbilityDamageFlag
     DAMAGE_FLAG_LIFELINK = 4,  // 吸血
 }
 
+// 治疗
+public enum AbilityHealFlag
+{
+    HEAL_FLAG_NONE = 1,     
+    HEAL_FLAG_CRIT = 2,     // 治疗暴击
+}
 
 /// <summary>
 /// 技能行为
@@ -242,10 +250,19 @@ public enum ModifierAttributes
 /// </summary>
 public enum ModifierEffectAttachType
 {
-    FOLLOW_ORIGIN,
-    FOLLOW_OVERHEAD,
-    START_AT_CUSTOMORIGIN,
-    WORLD_ORIGIN,
+    NO_FOLLOW_SPINE = 1,
+    NO_FOLLOW_ORIGIN = 2,
+    FOLLOW_ORIGIN = 3,
+    FOLLOW_OVERHEAD = 4,
+    FOLLOW_BIP_FOOT = 5,
+    FOLLOW_BIP_HEAD = 6,
+    FOLLOW_BIP_SPINE = 7,
+    FOLLOW_BIP_LEFT_HAND = 8,
+    FOLLOW_BIP_RIGHT_HAND = 9,
+    FOLLOW_BIP_LEFT_CLAVICLE = 10,
+    FOLLOW_BIP_RIGHT_CLAVICLE = 11,
+    FOLLOW_BIP_WEAPON1 = 12,
+    FOLLOW_BIP_WEAPON2 = 13
 }
 
 /// <summary>

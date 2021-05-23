@@ -13,18 +13,18 @@ using System.Collections.Generic;
 
 public class D2Action_Damage : D2Action
 {
-    public AbilityDamageType damageType;
-    public AbilityDamageFlag damageFlag;
+    private AbilityDamageType damageType;
+    private AbilityDamageFlag damageFlag;
     private AbilityValueSource m_AbilityValueSource;
     private List<D2Action> m_SuccessActions;
 
     public D2Action_Damage(AbilityDamageType damageType, AbilityDamageFlag damageFlag, 
-        AbilityValueSource damageValueSource, List<D2Action> successActions, ActionTarget actionTarget) :base(actionTarget)
+        AbilityValueSource valueSource, List<D2Action> successActions, ActionTarget actionTarget) :base(actionTarget)
     {
         this.damageType = damageType;
         this.damageFlag = damageFlag;
         m_SuccessActions = successActions;
-        m_AbilityValueSource = damageValueSource;
+        m_AbilityValueSource = valueSource;
     }
 
     protected override void ExecuteByUnit(BattleUnit source, List<BattleUnit> targets)
@@ -37,10 +37,13 @@ public class D2Action_Damage : D2Action
         }
 
         //有造成伤害（也就是有攻击到目标）, 执行OnSuccess Actions
-        for(int i = 0; i < m_SuccessActions.Count; i++)
+        if(m_SuccessActions!=null)
         {
-            D2Action action = m_SuccessActions[i];
-            action.Execute(source, abilityData, requestTarget);
+            for(int i = 0; i < m_SuccessActions.Count; i++)
+            {
+                D2Action action = m_SuccessActions[i];
+                action.Execute(source, abilityData, requestTarget);
+            }
         }
     }
 }

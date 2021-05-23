@@ -24,7 +24,7 @@ public class HeroActor
     public BattleCamp camp;
     public bool isLoadDone;// { get; set; }
 
-    public BattleUnit battleEntity { get; }
+    public BattleUnit battleUnit { get; }
     public Transform transform { get; private set; }
     public GameObject gameObject { get; private set; }
 
@@ -43,13 +43,13 @@ public class HeroActor
         camp = battleEntity.camp;
 
         isLoadDone = false;
-        this.battleEntity = battleEntity;
+        this.battleUnit = battleEntity;
     }
 
     public void LoadAsset(Action<GameObject> loadedCallback = null)
     {
         m_LoadedCallback = loadedCallback;
-        string path = battleEntity.GetModelPath();
+        string path = battleUnit.GetModelPath();
         LoadModule.LoadModel(path, OnLoadComplete);
     }
 
@@ -63,11 +63,11 @@ public class HeroActor
         m_PositionController = gameObject.AddComponent<PositionController>();
         // 绘制可视区域
         m_DrawTool = gameObject.AddComponent<DebugController>();
-        m_DrawTool.DrawViewArea(battleEntity.GetViewRange());     //可见范围
-        m_DrawTool.DrawAttackArea(battleEntity.GetAttackRange()); //攻击范围
+        m_DrawTool.DrawViewArea(battleUnit.GetViewRange());     //可见范围
+        m_DrawTool.DrawAttackArea(battleUnit.GetAttackRange()); //攻击范围
 
         m_AnimController = gameObject.AddComponent<AnimationController>();
-        m_HeroStateController = new HeroStateController(battleEntity, m_AnimController);
+        m_HeroStateController = new HeroStateController(battleUnit, m_AnimController);
 
         InitPosition(Vector3.zero);
 
@@ -79,8 +79,14 @@ public class HeroActor
             GameMsg.instance.SendMessage(GameMsgDef.PlayerActor_Created, this, camp == BattleCamp.ENEMY);
 
         gameObject.name = string.Format("[{0}][{1}][UID:{2}][CID:{3}][Lv:{4}][Speed:{5}]",
-            battleEntity.GetName(),camp.ToString(),battleEntity.GetUniqueID(),battleEntity.GetID(),battleEntity.GetLevel(),battleEntity.GetMoveSpeed());
+            battleUnit.GetName(),camp.ToString(),battleUnit.GetUniqueID(),battleUnit.GetID(),battleUnit.GetLevel(),battleUnit.GetMoveSpeed());
         GameMsg.instance.SendMessage(GameMsgDef.BattleActor_Created, this, camp == BattleCamp.ENEMY);
+    }
+
+    #region API
+    public bool IsDead()
+    {
+        return battleUnit.IsDead();
     }
 
     public void ChangeState(HeroState newState, string skillName = null, bool isSkipCastPoint = false)
@@ -93,17 +99,22 @@ public class HeroActor
     {
         if(isLoadDone)
         {
-            battleEntity.Set3DPosition(position);
-            battleEntity.Set3DForward(transform.forward);
+            battleUnit.Set3DPosition(position);
+            battleUnit.Set3DForward(transform.forward);
             m_PositionController.InitPosition(position, transform.forward);
         }
     }
 
     public void Set3DPosition(Vector3 position)
     {
-        battleEntity.Set3DPosition(position);
-        float logicDeltaTime = (position - transform.position).magnitude / battleEntity.GetMoveSpeed();
+        battleUnit.Set3DPosition(position);
+        float logicDeltaTime = (position - transform.position).magnitude / battleUnit.GetMoveSpeed();
         m_PositionController.MoveTo3DPoint(logicDeltaTime, position, OnMoveEnd);
+    }
+
+    public void OnMoveEnd()
+    {
+        ChangeState(HeroState.IDLE);
     }
 
     public void Set2DForward(Vector2 position)
@@ -114,7 +125,7 @@ public class HeroActor
 
     public void Set3DForward(Vector3 position)
     {
-        battleEntity.Set3DForward(position);
+        battleUnit.Set3DForward(position);
         transform.forward = position;
     }
 
@@ -126,21 +137,18 @@ public class HeroActor
 
     public void Set3DForward(float posX, float posY, float posZ)
     {
-        battleEntity.Set3DForward(posX, posY, posZ);
+        battleUnit.Set3DForward(posX, posY, posZ);
         m_position.Set(posX, posY, posZ);
         transform.forward = m_position;
     }
 
-    public void OnMoveEnd()
-    {
-        ChangeState(HeroState.IDLE);
-    }
+    #endregion
 
     #region Ability Indicator
 
     private AbilityActor GetAbilityActor(AbilityCastType castType)
     {
-        Ability ability = battleEntity.GetAbility(castType);
+        Ability ability = battleUnit.GetAbility(castType);
         if(m_abilityActorMap == null)
             m_abilityActorMap = new Dictionary<AbilityCastType, AbilityActor>(4);
 
@@ -159,7 +167,7 @@ public class HeroActor
         var abilityActor = GetAbilityActor(castType);
         abilityActor.OnFingerDown();
 
-        battleEntity.PrepareCastAbility(abilityActor.ability);
+        battleUnit.PrepareCastAbility(abilityActor.ability);
     }
 
     public void OnFingerDrag(AbilityCastType castType, Vector2 mouseDelta)
@@ -173,13 +181,18 @@ public class HeroActor
         var abilityActor = GetAbilityActor(castType);
         abilityActor.OnFingerUp();
 
-        Ability ability = battleEntity.GetAbility(castType);
+        Ability ability = battleUnit.GetAbility(castType);
         if(ability.CD > 0)
         {
             GameLog.Log("冷却中");
             return;
         }
-        battleEntity.CastAbility(ability);
+
+        BattleUnit target = TargetSearcher.instance.FindTargetUnitByAbility(battleUnit, ability);
+        if(target!=null)
+            ability.SetUnitTarget(target);
+
+        battleUnit.CastAbility(ability);
     }
 
     #endregion

@@ -22,9 +22,9 @@ public class BattleProperty
 
     #endregion
 
-    private npcPropertyItem m_BaseValue;
+    private NPCPropertyItem m_BaseValue;
 
-    public BattleProperty(npcPropertyItem item)
+    public BattleProperty(NPCPropertyItem item)
     {
         m_BaseValue = item;
 

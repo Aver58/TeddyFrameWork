@@ -12,24 +12,22 @@
             "IsPassive":true,
             "ThinkInterval":1,
 
-            "OnIntervalThink":
-            {
-              "Damage": {
-                "Target": "CASTER",
+          "OnIntervalThink": {
+            "Heal": {
+              "Target": "CASTER",
 
-                "DamageFlags": [ "DAMAGE_FLAG_CRIT" ],
-                "DamageType": "DAMAGE_TYPE_PHYSICAL",
-                "ValueSource": {
-                  "ValueBasicParams": [ 8, 4 ],
-                  "ValueAdditionParams": [
-                    {
-                      "ValueSourceType": "SOURCE_TYPE_PHYSICAL_ATTACK",
-                      "ValueSourceParams": [ 0, 0 ]
-                    }
-                  ]
-                }
-              }                
+              "HealFlags": [ "HEAL_FLAG_NONE" ],
+              "ValueSource": {
+                "ValueBasicParams": [ 8, 4 ],
+                "ValueAdditionParams": [
+                  {
+                    "ValueSourceType": "SOURCE_TYPE_PHYSICAL_ATTACK",
+                    "ValueSourceParams": [ 0, 0 ]
+                  }
+                ]
+              }
             }
+          }
         }
     }
 }

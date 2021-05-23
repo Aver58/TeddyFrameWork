@@ -17,6 +17,6 @@ public class AutoCastAbilityRequest : AIBehaviorRequest
         this.ability = ability;
         this.target = target;
 
-        ability.requestTarget.SetUnitTarget(target);
+        ability.SetUnitTarget(target);
     }
 }

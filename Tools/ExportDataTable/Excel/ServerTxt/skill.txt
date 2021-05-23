@@ -3,6 +3,7 @@
 10102	Hero101_skill1.json	1	icon_skill1_101
 10103	Hero101_skill2.json	1	icon_skill2_101
 10104	Hero101_skill3.json	1	icon_skill3_101
+10105	Hero101_skill4.json	1	icon_skill3_101
 10201	Hero102_attack.json	2	icon_attack_101
 10202	Hero102_skill1.json	1	icon_skill1_101
 10203	Hero102_skill2.json	1	icon_skill2_101

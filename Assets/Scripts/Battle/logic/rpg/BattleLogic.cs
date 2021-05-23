@@ -55,7 +55,7 @@ public class BattleLogic : Singleton<BattleLogic>
 
     private void AddPlayer()
     {
-        BattleProperty property = new BattleProperty(npcPropertyTable.Instance.GetTableItem(101));
+        BattleProperty property = new BattleProperty(NPCPropertyTable.Instance.GetTableItem(101));
         BattleUnit entity = new BattleUnit(GetUniqueID(), BattleCamp.FRIENDLY, property);
         entity.enemyCamp = BattleCamp.ENEMY;
 
@@ -70,7 +70,7 @@ public class BattleLogic : Singleton<BattleLogic>
     /// </summary>
     public BattleUnit AddOneDummyUnit()
     {
-        var property = new BattleProperty(npcPropertyTable.Instance.GetTableItem(102));
+        var property = new BattleProperty(NPCPropertyTable.Instance.GetTableItem(102));
         var unit = new BattleUnit(GetUniqueID(), BattleCamp.ENEMY, property);
         unit.enemyCamp = BattleCamp.FRIENDLY;
         m_UnitMgr.AddUnit(unit);
@@ -82,7 +82,7 @@ public class BattleLogic : Singleton<BattleLogic>
     /// </summary>
     public BattleUnit AddOneEnemyUnit()
     {
-        BattleProperty property = new BattleProperty(npcPropertyTable.Instance.GetTableItem(102));
+        BattleProperty property = new BattleProperty(NPCPropertyTable.Instance.GetTableItem(102));
         HeroUnit unit = new HeroUnit(GetUniqueID(), BattleCamp.ENEMY, property);
         unit.enemyCamp = BattleCamp.FRIENDLY;
         m_UnitMgr.AddUnit(unit);

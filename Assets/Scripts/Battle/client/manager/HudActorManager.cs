@@ -66,7 +66,7 @@ public class HudActorManager : Singleton<HudActorManager>
             Transform targetTransform = heroGO.transform.Find("Dummy OverHead");
             hudController.Init(canvasTransform, targetTransform, uiCamera, 0, isFriend);
             HudActor hudActor = new HudActor(go, hudController);
-            float hpPercent = actor.battleEntity.GetHPPercent();
+            float hpPercent = actor.battleUnit.GetHPPercent();
             hudActor.SetValue(hpPercent);
 
             m_actorMap.Add(actor.id, hudActor);

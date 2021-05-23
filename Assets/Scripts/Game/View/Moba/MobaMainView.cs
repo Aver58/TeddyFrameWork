@@ -39,6 +39,8 @@ public class MobaMainView : MainViewBase
         m_hudActorManager.Init(hudParent);
 
         InitCheatPanel();
+
+        AddOneDummyUnit();
     }
 
     #region Cheat
@@ -122,7 +124,7 @@ public class MobaMainView : MainViewBase
         //m_joystick.axisX.directTransform = actor.transform;//todo 这个控制会比较舒服吗？
 
         m_PlayerActor = actor;
-        m_PlayerUnit = actor.battleEntity;
+        m_PlayerUnit = actor.battleUnit;
         var skillIDs = m_PlayerUnit.GetSkillList();
         if(skillIDs == null || skillIDs.Count < 4)
         {
@@ -155,6 +157,9 @@ public class MobaMainView : MainViewBase
 
     private void MovePlayerToPoint(Vector3 position)
     {
+        if(m_PlayerActor.IsDead())
+            return;
+
         if(m_PlayerActor != null)
         {
             var forward = position - m_PlayerActor.transform.position;
@@ -169,6 +174,9 @@ public class MobaMainView : MainViewBase
     private void OnMoving()
     {
         if(m_joystick.name != "JoystickLeft")
+            return;
+
+        if(m_PlayerActor.IsDead())
             return;
 
         //获取虚拟摇杆偏移量  [-1,1]
@@ -203,6 +211,9 @@ public class MobaMainView : MainViewBase
 
     protected override void OnUpdate()
     {
+        if(m_PlayerActor.IsDead())
+            return;
+
         //按下鼠标右键时
         if(Input.GetMouseButton(1))
         {
@@ -226,15 +237,17 @@ public class MobaMainView : MainViewBase
 
     private void OnFingerDown(AbilityCastType abilityCastType)
     {
+        if(m_PlayerActor.IsDead())
+            return;
+
         if(m_PlayerActor != null)
             m_PlayerActor.OnFingerDown(abilityCastType);
     }
 
     private void OnFingerDrag(AbilityCastType abilityCastType, Vector2 mouseDelta)
     {
-        //Debug.RawLog(mouseDelta);
-        //var originPos = m_PlayerActor.transform.position;
-        //skillForward.Set(originPos.x + mouseDelta.x, originPos.y, originPos.z + mouseDelta.y);
+        if(m_PlayerActor.IsDead())
+            return;
 
         if(m_PlayerActor != null)
             m_PlayerActor.OnFingerDrag(abilityCastType, mouseDelta);
@@ -242,21 +255,10 @@ public class MobaMainView : MainViewBase
 
     private void OnFingerUp(AbilityCastType abilityCastType)
     {
+        if(m_PlayerActor.IsDead())
+            return;
+
         if(m_PlayerActor != null)
             m_PlayerActor.OnFingerUp(abilityCastType);
-    }
-
-    private void OnCastAbility(AbilityCastType castType)
-    {
-        if(m_PlayerUnit != null)
-        {
-            Ability ability = m_PlayerUnit.GetAbility(castType);
-            if(ability.CD > 0)
-            {
-                GameLog.Log("冷却中");
-                return;
-            }
-            m_PlayerUnit.CastAbility(ability);
-        }
     }
 }

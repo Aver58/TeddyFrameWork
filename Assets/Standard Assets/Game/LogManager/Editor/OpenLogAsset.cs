@@ -26,7 +26,7 @@ public class OpenLogAsset
                 while(matches.Success)
                 {
                     pathline = matches.Groups[1].Value;
-                    if(!pathline.Contains("Debug.cs") && !pathline.Contains("BattleLog.cs"))
+                    if(!pathline.Contains("GameLog.cs") && !pathline.Contains("BattleLog.cs"))
                     {
                         int splitIndex = pathline.LastIndexOf(":");
                         string path = pathline.Substring(0, splitIndex);

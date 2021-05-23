@@ -47,7 +47,7 @@ public class BattleActorManager : Singleton<BattleActorManager>
         foreach(var keyValuePair in m_ActorMap)
         {
             var actor = keyValuePair.Value;
-            if(actor.battleEntity.camp == BattleCamp.ENEMY)
+            if(actor.battleUnit.camp == BattleCamp.ENEMY)
             {
                 m_Temps.Add(actor);
             }

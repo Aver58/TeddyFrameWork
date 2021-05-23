@@ -12,14 +12,14 @@
 public static class AbilityFormula
 {
     // 造成伤害
-    public static void ApplyDamage(BattleUnit caster,BattleUnit victim, AbilityDamageType damageType, 
-        AbilityDamageFlag damageFlag, AbilityValueSource damageValueSource,string configName)
+    public static void ApplyDamage(BattleUnit caster, BattleUnit victim, AbilityDamageType damageType,
+        AbilityDamageFlag damageFlag, AbilityValueSource damageValueSource, string configName)
     {
         int casterLevel = caster.GetLevel();
         BattleProperty casterProperty = caster.GetProperty();
         BattleProperty victimProperty = victim.GetProperty();
         float abilityValue = damageValueSource.GetAbilityValue(casterLevel, casterProperty, victimProperty);
-        float finalDamage = CalcDamageByDamageType(abilityValue,damageType, casterProperty, victimProperty);
+        float finalDamage = CalcDamageByDamageType(abilityValue, damageType, casterProperty, victimProperty);
         // 护盾
         // 吸血
 
@@ -27,8 +27,8 @@ public static class AbilityFormula
         BattleLog.LogRpgBattleAttacker(BattleLogic.instance.logicFrame, caster, victim, configName, finalDamage);
     }
 
-
-    private static float CalcDamageByDamageType(float abilityValue,AbilityDamageType damageType, 
+    // 计算不同伤害类型造成的伤害
+    private static float CalcDamageByDamageType(float abilityValue, AbilityDamageType damageType,
         BattleProperty casterProperty, BattleProperty targetProperty)
     {
         // todo 计算减伤
@@ -45,5 +45,18 @@ public static class AbilityFormula
                 break;
         }
         return abilityValue;
+    }
+
+    // 治疗
+    public static void ApplyHeal(BattleUnit caster, BattleUnit victim, AbilityHealFlag healFlag, AbilityValueSource damageValueSource, string configName)
+    {
+        int casterLevel = caster.GetLevel();
+        BattleProperty casterProperty = caster.GetProperty();
+        BattleProperty victimProperty = victim.GetProperty();
+        float abilityValue = damageValueSource.GetAbilityValue(casterLevel, casterProperty, victimProperty);
+        var finalDamage = abilityValue;
+
+        victim.UpdateHP(finalDamage);
+        BattleLog.LogRpgBattleAttacker(BattleLogic.instance.logicFrame, caster, victim, configName, finalDamage);
     }
 }
