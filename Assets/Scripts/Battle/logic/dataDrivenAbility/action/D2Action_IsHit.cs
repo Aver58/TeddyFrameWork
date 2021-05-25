@@ -18,4 +18,34 @@ public class D2Action_IsHit : D2Action
     {
         m_SuccessActions = successActions;
     }
+
+    //todo 计算闪避
+    private bool IsDodge(BattleUnit source, BattleUnit target)
+    {
+        return false;
+    }
+
+    protected override void ExecuteByUnit(BattleUnit source, List<BattleUnit> targets)
+    {
+        for(int i = 0; i < targets.Count; i++)
+        {
+            var target = targets[i];
+            if(target != null)
+            {
+                if(IsDodge(source,target))
+                {
+                    BattleLog.LogTargetDodge(BattleLogic.instance.logicFrame, source, target, abilityData.configFileName);
+                    GameMsg.instance.SendMessage(GameMsgDef.DAMAGE_EFFECT_NOTICED, target.GetUniqueID(), DamageEffectDefine.DODGE);
+                }
+                else
+                {
+                    if(m_SuccessActions != null)
+                    {
+                        for(int j = 0; j < m_SuccessActions.Count; j++)
+                            m_SuccessActions[j].Execute(source, abilityData, requestTarget);
+                    }
+                }
+            }
+        }
+    }
 }

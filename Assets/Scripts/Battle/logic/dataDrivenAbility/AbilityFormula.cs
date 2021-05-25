@@ -48,15 +48,15 @@ public static class AbilityFormula
     }
 
     // 治疗
-    public static void ApplyHeal(BattleUnit caster, BattleUnit victim, AbilityHealFlag healFlag, AbilityValueSource damageValueSource, string configName)
+    public static void ApplyHeal(BattleUnit caster, BattleUnit target, AbilityHealFlag healFlag, AbilityValueSource damageValueSource, string configName)
     {
         int casterLevel = caster.GetLevel();
         BattleProperty casterProperty = caster.GetProperty();
-        BattleProperty victimProperty = victim.GetProperty();
+        BattleProperty victimProperty = target.GetProperty();
         float abilityValue = damageValueSource.GetAbilityValue(casterLevel, casterProperty, victimProperty);
-        var finalDamage = abilityValue;
+        var finalValue = abilityValue;
 
-        victim.UpdateHP(finalDamage);
-        BattleLog.LogRpgBattleAttacker(BattleLogic.instance.logicFrame, caster, victim, configName, finalDamage);
+        target.UpdateHP(finalValue);
+        //BattleLog.LogRpgBattleHealer(BattleLogic.instance.logicFrame, caster, target, configName, finalValue);
     }
 }

@@ -182,7 +182,7 @@ public class Ability
     // 施法阶段
     private void OnSpellStart()
     {
-        BattleLog.Log("【施法阶段】OnSpellStart" + abilityData.configFileName);
+        BattleLog.Log("【施法阶段】OnSpellStart" + abilityData.configFileName + abilityData.channelTime.ToString());
 
         if(abilityData.channelTime > 0)
         {

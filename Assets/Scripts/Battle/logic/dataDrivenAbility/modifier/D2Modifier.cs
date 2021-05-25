@@ -96,7 +96,7 @@ public class D2Modifier
 
     public void ExecuteEvent(ModifierEvents eventName)
     {
-        BattleLog.Log("【D2Modifier】{0}， eventName：{1}", GetType().Name, eventName);
+        //BattleLog.Log("【D2Modifier】{0}， eventName：{1}", GetType().Name, eventName);
         var @event = modifierData.GetEvent(eventName);
         if(@event != null)
             @event.Execute(caster, abilityData, requestTarget);

@@ -19,6 +19,11 @@ public enum RequestType
     ManualCastAbility,
 }
 
+public enum DamageEffectDefine
+{
+    DODGE,//閃避
+}
+
 public static class BattleDefine
 {
     public static float FireInterval = 1f;

@@ -18,4 +18,7 @@ public enum GameMsgDef
     PlayerActor_Created,   //客户端玩家实例创建
     BattleEntity_HP_Updated,   //一个角色创建
     Hero_Cast_Ability,          //一个角色释放技能
+
+    DAMAGE_EFFECT_NOTICED,          //傷害特效通知
+    
 }

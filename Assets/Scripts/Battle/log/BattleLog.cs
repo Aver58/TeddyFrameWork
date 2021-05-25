@@ -35,4 +35,15 @@ public static class BattleLog
     {
         GameLog.Log("[逻辑帧:{0}]（{1}）使用了【{2}】对（{3}）造成伤害：{4}", logicFrame, caster.GetName(), configName, victim.GetName(), damage.ToString());
     }
+
+    public static void LogRpgBattleHealer(int logicFrame, BattleUnit caster, BattleUnit target, string configName, float value)
+    {
+        GameLog.Log("[逻辑帧:{0}]（{1}）使用了【{2}】对（{3}）造成治疗值：{4}", logicFrame, caster.GetName(), configName, target.GetName(), value.ToString());
+    }
+
+    public static void LogTargetDodge(int logicFrame, BattleUnit caster, BattleUnit target, string configName)
+    {
+        GameLog.Log("[逻辑帧:{0}]（{1}）对（{2}）使用了【{3}】,被成功闪避！", logicFrame, caster.GetName() , target.GetName(), configName);
+    }
+
 }

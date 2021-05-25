@@ -109,6 +109,12 @@ public static class AbilityReader
         { "ApplyModifier" , CreateApplyModifierAction},
     };
 
+    /*
+    "IsHit": {
+      "Target": "TARGET",
+      "OnSuccess": {}
+    },
+     */
     private static D2Action CreateIsHitAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
     {
         var onSuccessActionConfig = GetJsonValue(json, "OnSuccess");
