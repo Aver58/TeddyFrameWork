@@ -44,7 +44,6 @@ public class Ability
             CD -= deltaTime;
             if(CD<0)
                 CD = 0;
-            return;
         }
 
         // 施法的状态切换
@@ -182,7 +181,7 @@ public class Ability
     // 施法阶段
     private void OnSpellStart()
     {
-        BattleLog.Log("【施法阶段】OnSpellStart" + abilityData.configFileName + abilityData.channelTime.ToString());
+        BattleLog.Log("【施法阶段】OnSpellStart : {0},channelTime:{1},castPoint:{2}" ,abilityData.configFileName , abilityData.channelTime.ToString(),abilityData.castPoint.ToString());
 
         if(abilityData.channelTime > 0)
         {
