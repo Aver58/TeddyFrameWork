@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Game : MonoBehaviour {
+public class GameBT : MonoBehaviour {
 
 	private Transform _orcTrans;
 	private Transform _goblinTrans;
