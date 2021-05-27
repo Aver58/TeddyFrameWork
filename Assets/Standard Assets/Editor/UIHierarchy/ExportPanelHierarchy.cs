@@ -10,12 +10,18 @@
 #endregion
 
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ExportPanelHierarchy
 {
+    private const string ViewStr = "View";
+    private const string PanelStr = "Panel";
+    private const string UIExportCSViewPath = "Assets/Scripts/Game/View/UIBindView/";
+
     private static System.Type[] ms_componentTypes =
     {
         typeof(ETCJoystick),
@@ -26,10 +32,27 @@ public class ExportPanelHierarchy
         typeof(TMPro.TextMeshProUGUI),
     };
 
-    public static void ExportNested(Object obj)
+    public static void ExportUIView()
+    {
+        var uiObj = Selection.activeObject;
+        if(null == uiObj) return;
+        var UIViewName = uiObj.name;
+        if(UIViewName.EndsWith(PanelStr))
+            UIViewName = UIViewName.Replace(PanelStr, ViewStr);
+
+        var hierarchy = ExportNested(uiObj);
+
+        GenUIViewCode(UIViewName, hierarchy);
+
+        EditorUtility.SetDirty(uiObj);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
+    public static UIHierarchy ExportNested(Object obj)
     {
         GameObject root = obj as GameObject;
-        if(root == null) return;
+        if(root == null) return null;
 
         UIHierarchy hierarchy = root.GetComponent<UIHierarchy>();
         if(hierarchy == null)
@@ -57,9 +80,7 @@ public class ExportPanelHierarchy
             childHrcy.SetWidgets(childUIItem);
         }
 
-
-        EditorUtility.SetDirty(root);
-        AssetDatabase.SaveAssets();
+        return hierarchy;
     }
 
     //导出传入节点的层级，直到某个子节点挂有UIHierarchy组件
@@ -99,7 +120,7 @@ public class ExportPanelHierarchy
         }
     }
 
-    static Object GetChildComponent(GameObject go)
+    private static Object GetChildComponent(GameObject go)
     {
         Object component = null;
         for(int i = 0; i < ms_componentTypes.Length; ++i)
@@ -109,5 +130,50 @@ public class ExportPanelHierarchy
                 break;
         }
         return component;
+    }
+
+    private static void GenUIViewCode(string UIViewName,UIHierarchy uIHierarchy)
+    {
+        var codePath = UIExportCSViewPath + UIViewName + ".deginer.cs";
+
+        StringBuilder sb = new StringBuilder(16);
+        sb.Append("///[[Notice:This file is auto generate by ExportPanelHierarchy，don't modify it manually! it will be call OnLoaded--]]\n\n");
+        sb.Append("public partial class " + UIViewName + "\n{\n");
+
+        sb.Append("\t//widgets\n");
+        foreach(var itemInfo in uIHierarchy.widgets)
+        {
+            var typeName = itemInfo.item.GetType().ToString();
+            sb.Append("\tprivate ").Append(typeName).Append(" ").Append(itemInfo.name).Append(";\n");
+        }
+
+        sb.Append("\t//externals\n");
+        foreach(var itemInfo in uIHierarchy.externals)
+        {
+            var typeName = itemInfo.item.GetType().ToString();
+            sb.Append("\tprivate ").Append(typeName).Append(" ").Append(itemInfo.name).Append(";\n");
+        }
+
+        sb.Append("\tprotected override void BindView()\n\t{\n\t\tvar UIHierarchy = this.transform.GetComponent<UIHierarchy>();\n");
+
+        sb.Append("\t\t//widgets\n");
+        for(int i = 0; i < uIHierarchy.widgets.Count; i++)
+        {
+            var itemInfo = uIHierarchy.widgets[i];
+            var typeName = itemInfo.item.GetType().ToString();
+            sb.Append("\t\t").Append(itemInfo.name).Append(" = (").Append(typeName).Append(")UIHierarchy.widgets[").Append(i).Append("].item;\n");
+        }
+
+        sb.Append("\t\t//externals\n");
+        for(int i = 0; i < uIHierarchy.externals.Count; i++)
+        {
+            var itemInfo = uIHierarchy.externals[i];
+            var typeName = itemInfo.item.GetType().ToString();
+            sb.Append("\t\t").Append(itemInfo.name).Append(" = (").Append(typeName).Append(")UIHierarchy.externals[").Append(i).Append("].item;\n");
+        }
+        sb.Append("\t}\n");
+        sb.Append("}\n");
+
+        File.WriteAllText(codePath, sb.ToString());
     }
 }
