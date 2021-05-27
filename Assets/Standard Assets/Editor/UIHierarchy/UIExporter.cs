@@ -33,7 +33,7 @@ public class UIExporter
     private const string UIIgnoreTag = "UIIgnore";
     private const string UIExportCSViewPath = "Assets/Scripts/Game/View/UIBindView/";
 
-    [MenuItem("GameObject/UI/ExportUIView", false, 1)]
+    //[MenuItem("GameObject/UI/ExportUIView", false, 1)]
     public static void ExportUIView()
     {
         var uiObj = Selection.activeGameObject;
@@ -131,17 +131,17 @@ public class UIExporter
         File.WriteAllText(codePath, sb.ToString());
     }
 
-    public static void CreateOrReplacePrefab(GameObject gameobject, string path, ReplacePrefabOptions options = ReplacePrefabOptions.ConnectToPrefab)
+    public static void CreateOrReplacePrefab(GameObject gameobject, string path, InteractionMode options = InteractionMode.UserAction)
     {
         GameObject prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
         if(prefab != null)
         {
-            PrefabUtility.ReplacePrefab(gameobject, prefab, options);
+            PrefabUtility.SaveAsPrefabAssetAndConnect(gameobject, path, options);
         }
         else
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path));
-            PrefabUtility.CreatePrefab(path, gameobject, options);
+            PrefabUtility.SaveAsPrefabAsset(gameobject,path);
         }
     }
 }

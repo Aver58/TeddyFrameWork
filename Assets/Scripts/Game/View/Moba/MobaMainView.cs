@@ -53,9 +53,7 @@ public partial class MobaMainView : MainViewBase
 
     private void AddOneCheatButton(string text, System.Action callBack)
     {
-        var prefab = CheatButtonItem;
-        var parent = GridLayout;
-        var item = GenerateOne(typeof(CheatButtonItem), prefab, parent) as CheatButtonItem;
+        var item = GenerateOne(typeof(CheatButtonItem), CheatButtonItem, GridLayout) as CheatButtonItem;
         item.Init(text, callBack);
     }
 
@@ -132,19 +130,13 @@ public partial class MobaMainView : MainViewBase
             return;
         }
 
-        var prefab = MobaSkillItem;
-        var nodeAttack = NodeAttack;
-        var nodeSkill1 = NodeSkill1;
-        var nodeSkill2 = NodeSkill2;
-        var nodeSkill3 = NodeSkill3;
-
         m_MobaSkillItemMap = new Dictionary<AbilityCastType, MobaSkillItem>();
-        List<RectTransform> parents = new List<RectTransform> { nodeAttack , nodeSkill1, nodeSkill2, nodeSkill3 };
+        List<RectTransform> parents = new List<RectTransform> { NodeAttack, NodeSkill1, NodeSkill2, NodeSkill3 };
         List<AbilityCastType> castTypes = new List<AbilityCastType> { AbilityCastType.ATTACK, AbilityCastType.SKILL1, AbilityCastType.SKILL2, AbilityCastType.SKILL3 };
         for(int i = 0; i < 4; i++)
         {
             var castType = castTypes[i];
-            var item = GenerateOne(typeof(MobaSkillItem), prefab, parents[i]) as MobaSkillItem;
+            var item = GenerateOne(typeof(MobaSkillItem), MobaSkillItem, parents[i]) as MobaSkillItem;
             item.Init(castType, m_PlayerUnit.GetAbility(castType), OnFingerDown, OnFingerDrag, OnFingerUp);
             m_MobaSkillItemMap.Add(castType,item);
         }

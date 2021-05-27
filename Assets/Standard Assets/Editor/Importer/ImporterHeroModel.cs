@@ -299,12 +299,12 @@ public class ImporterHeroModel
         if (File.Exists(prefabPath))
         {
             UnityEngine.Object oldPrefab = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(prefabPath);
-            return PrefabUtility.ReplacePrefab(prefabGameObject, oldPrefab, ReplacePrefabOptions.ReplaceNameBased);
+            return PrefabUtility.SaveAsPrefabAssetAndConnect(prefabGameObject, prefabPath,InteractionMode.UserAction);
         }
         else
         {
             FileHelper.CreateDirectory(prefabCharacterPath);
-            return PrefabUtility.CreatePrefab(prefabPath, prefabGameObject);
+            return PrefabUtility.SaveAsPrefabAsset(prefabGameObject, prefabPath);
         }
     }
 

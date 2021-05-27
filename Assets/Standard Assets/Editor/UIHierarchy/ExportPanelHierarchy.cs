@@ -9,12 +9,12 @@
 */
 #endregion
 
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ExportPanelHierarchy
 {
@@ -140,37 +140,50 @@ public class ExportPanelHierarchy
         sb.Append("///[[Notice:This file is auto generate by ExportPanelHierarchy，don't modify it manually! it will be call OnLoaded--]]\n\n");
         sb.Append("public partial class " + UIViewName + "\n{\n");
 
-        sb.Append("\t//widgets\n");
-        foreach(var itemInfo in uIHierarchy.widgets)
+        if(uIHierarchy.widgets.Count > 0)
         {
-            var typeName = itemInfo.item.GetType().ToString();
-            sb.Append("\tprivate ").Append(typeName).Append(" ").Append(itemInfo.name).Append(";\n");
+            sb.Append("\t//widgets\n");
+            foreach(var itemInfo in uIHierarchy.widgets)
+            {
+                var typeName = itemInfo.item.GetType().ToString();
+                sb.Append("\tprivate ").Append(typeName).Append(" ").Append(itemInfo.name).Append(";\n");
+            }
         }
 
-        sb.Append("\t//externals\n");
-        foreach(var itemInfo in uIHierarchy.externals)
+        if(uIHierarchy.externals.Count > 0)
         {
-            var typeName = itemInfo.item.GetType().ToString();
-            sb.Append("\tprivate ").Append(typeName).Append(" ").Append(itemInfo.name).Append(";\n");
+            sb.Append("\t//externals\n");
+            foreach(var itemInfo in uIHierarchy.externals)
+            {
+                var typeName = itemInfo.item.GetType().ToString();
+                sb.Append("\tprivate ").Append(typeName).Append(" ").Append(itemInfo.name).Append(";\n");
+            }
         }
 
         sb.Append("\tprotected override void BindView()\n\t{\n\t\tvar UIHierarchy = this.transform.GetComponent<UIHierarchy>();\n");
 
-        sb.Append("\t\t//widgets\n");
-        for(int i = 0; i < uIHierarchy.widgets.Count; i++)
+        if(uIHierarchy.externals.Count > 0)
         {
-            var itemInfo = uIHierarchy.widgets[i];
-            var typeName = itemInfo.item.GetType().ToString();
-            sb.Append("\t\t").Append(itemInfo.name).Append(" = (").Append(typeName).Append(")UIHierarchy.widgets[").Append(i).Append("].item;\n");
+            sb.Append("\t\t//widgets\n");
+            for(int i = 0; i < uIHierarchy.widgets.Count; i++)
+            {
+                var itemInfo = uIHierarchy.widgets[i];
+                var typeName = itemInfo.item.GetType().ToString();
+                sb.Append("\t\t").Append(itemInfo.name).Append(" = (").Append(typeName).Append(")UIHierarchy.widgets[").Append(i).Append("].item;\n");
+            }
         }
 
-        sb.Append("\t\t//externals\n");
-        for(int i = 0; i < uIHierarchy.externals.Count; i++)
+        if(uIHierarchy.externals.Count > 0)
         {
-            var itemInfo = uIHierarchy.externals[i];
-            var typeName = itemInfo.item.GetType().ToString();
-            sb.Append("\t\t").Append(itemInfo.name).Append(" = (").Append(typeName).Append(")UIHierarchy.externals[").Append(i).Append("].item;\n");
+            sb.Append("\t\t//externals\n");
+            for(int i = 0; i < uIHierarchy.externals.Count; i++)
+            {
+                var itemInfo = uIHierarchy.externals[i];
+                var typeName = itemInfo.item.GetType().ToString();
+                sb.Append("\t\t").Append(itemInfo.name).Append(" = (").Append(typeName).Append(")UIHierarchy.externals[").Append(i).Append("].item;\n");
+            }
         }
+        
         sb.Append("\t}\n");
         sb.Append("}\n");
 
