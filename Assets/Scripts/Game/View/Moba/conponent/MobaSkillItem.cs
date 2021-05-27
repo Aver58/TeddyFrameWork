@@ -14,7 +14,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MobaSkillItem : ViewBase
+public partial class MobaSkillItem : ViewBase
 {
     private int m_skillID;
     private Ability m_ability;
@@ -29,7 +29,7 @@ public class MobaSkillItem : ViewBase
 
     public MobaSkillItem(GameObject go,Transform parent):base(go,parent)
     {
-        m_joystick = (ETCJoystick)UI["Joystick"];
+        m_joystick = Joystick;
         m_joystick.onTouchStart.AddListener(OnPointerDown);
         m_joystick.onTouchUp.AddListener(OnPointerUp);
         m_joystick.onMove.AddListener(OnDrag);
@@ -49,11 +49,10 @@ public class MobaSkillItem : ViewBase
         skillItem skillItem = skillTable.Instance.GetTableItem(m_skillID);
         string iconName = skillItem.icon;
         iconName = "skill/" + iconName;//todo 导出动态图片映射表
-        ImageEx ImgIcon = (ImageEx)UI["ImgIcon"];
         ImgIcon.SetSprite(iconName);
 
-        m_txtCD = (TextMeshProUGUI)UI["TxtCD"];
-        m_imgCDMask = (Image)UI["ImgCDMask"];
+        m_txtCD = TxtCD;
+        m_imgCDMask = ImgCDMask;
 
         SetCDState();
     }

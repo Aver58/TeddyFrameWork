@@ -12,15 +12,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CheatButtonItem : ViewBase
+public partial class CheatButtonItem : ViewBase
 {
     private Text text;
     private System.Action callBack;
     public CheatButtonItem(GameObject go, Transform parent) : base(go, parent)
     {
-        var button = (Button)UI["Button"];
-        text = (Text)UI["Text"];
-        button.onClick.AddListener(OnBtnClick);
+        text = this.Text;
+        this.Button.onClick.AddListener(OnBtnClick);
     }
 
     public void Init(string btnText, System.Action action)

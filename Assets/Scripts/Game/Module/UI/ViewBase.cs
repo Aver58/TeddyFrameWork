@@ -36,9 +36,7 @@ public abstract class ViewBase
     /// </summary>
     protected bool optimizationVisible = true;
     protected Transform transform;
-    // 这个还要拆装箱，有点烦，
-    // 咨询了一下，还可以代码生成一个展示类，使用的时候逻辑类引用展示类，使用的时候直接点出来
-    protected Dictionary<string, Object> UI;
+
     /// <summary>
     /// 打开传入的参数
     /// </summary>
@@ -50,7 +48,7 @@ public abstract class ViewBase
     private LoadState m_loadState;// 加载状态
     protected Vector3 FarAwayPosition = new Vector3(10000, 10000, 0);
 
-    protected ViewBase() { }
+    protected ViewBase() {}
     protected ViewBase(GameObject go,Transform parent)
     {
         if(go == null)
@@ -58,9 +56,10 @@ public abstract class ViewBase
             GameLog.LogError("!!构造初始化，没有传入GameObject！");
             return;
         }
-        UI = HierarchyUtil.GetHierarchyItems(go);
         gameObject = go;
         transform = go.transform;
+
+        BindView();
     }
 
     #region API
@@ -130,9 +129,6 @@ public abstract class ViewBase
         if(m_assetRequest != null)
             LoadModule.UnloadAsset(m_assetRequest);
 
-        if(UI != null && UI.Count > 0)
-            UI.Clear();
-
         if(gameObject != null)
             GameObject.Destroy(gameObject);
     }
@@ -195,7 +191,7 @@ public abstract class ViewBase
     protected virtual void OnOpen(UIEventArgs args = null) { }
     protected virtual void OnClose() { }
     protected virtual void OnUpdate() { }
-
+    protected virtual void BindView() { }
     #endregion
 
     #region Private
@@ -219,7 +215,7 @@ public abstract class ViewBase
         gameObject.name = request.asset.name;
 
         transform = gameObject.transform;
-        UI = HierarchyUtil.GetHierarchyItems(gameObject);
+        BindView();
 
         OnLoaded();
         AddAllListener();

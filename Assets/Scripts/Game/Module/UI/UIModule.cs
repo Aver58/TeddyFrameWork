@@ -55,7 +55,7 @@ public class UIModule : ModuleBase
 
     #region API
 
-    // todo 这个传参也很麻烦，
+    // todo 这个传参也很麻烦，改成多个方法，1个参，2个参，3个参这样
     public static void OpenView(ViewID key, UIEventArgs args = null)
     {
         ViewBase view = GetView(key);

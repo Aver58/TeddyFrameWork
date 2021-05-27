@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MobaMainView : MainViewBase
+public partial class MobaMainView : MainViewBase
 {
     public float runSpeed = 1f;
 
@@ -31,7 +31,7 @@ public class MobaMainView : MainViewBase
     {
         base.OnLoaded();
 
-        hudParent = (RectTransform)UI["HPHuds"];
+        hudParent = HPHuds;
         m_cameraManager = CameraManager.instance;
         m_cameraManager.Init();
 
@@ -53,8 +53,8 @@ public class MobaMainView : MainViewBase
 
     private void AddOneCheatButton(string text, System.Action callBack)
     {
-        var prefab = (GameObject)UI["CheatButtonItem"];
-        var parent = (Transform)UI["GridLayout"];
+        var prefab = CheatButtonItem;
+        var parent = GridLayout;
         var item = GenerateOne(typeof(CheatButtonItem), prefab, parent) as CheatButtonItem;
         item.Init(text, callBack);
     }
@@ -78,9 +78,9 @@ public class MobaMainView : MainViewBase
     {
         base.AddAllListener();
 
-        AddListener((Button)UI["BtnAttack"], OnBtnAttack);
+        AddListener(BtnAttack, OnBtnAttack);
 
-        m_joystick = (ETCJoystick)UI["JoystickLeft"];
+        m_joystick = JoystickLeft;
         m_joystick.onMoveEnd.AddListener(OnMoveEnd);
         //方式一：按键方法注册
         m_joystick.OnPressLeft.AddListener(OnMoving);
@@ -132,11 +132,11 @@ public class MobaMainView : MainViewBase
             return;
         }
 
-        var prefab = (GameObject)UI["MobaSkillItem"];
-        var nodeAttack = (RectTransform)UI["NodeAttack"];
-        var nodeSkill1 = (RectTransform)UI["NodeSkill1"];
-        var nodeSkill2 = (RectTransform)UI["NodeSkill2"];
-        var nodeSkill3 = (RectTransform)UI["NodeSkill3"];
+        var prefab = MobaSkillItem;
+        var nodeAttack = NodeAttack;
+        var nodeSkill1 = NodeSkill1;
+        var nodeSkill2 = NodeSkill2;
+        var nodeSkill3 = NodeSkill3;
 
         m_MobaSkillItemMap = new Dictionary<AbilityCastType, MobaSkillItem>();
         List<RectTransform> parents = new List<RectTransform> { nodeAttack , nodeSkill1, nodeSkill2, nodeSkill3 };
