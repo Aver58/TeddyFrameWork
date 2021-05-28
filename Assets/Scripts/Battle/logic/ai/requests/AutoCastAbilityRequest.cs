@@ -9,7 +9,7 @@
 */
 #endregion
 
-public class AutoCastAbilityRequest : AIBehaviorRequest
+public class AutoCastAbilityRequest : BehaviorRequest
 {
     public Ability ability { get; set; }
     public AutoCastAbilityRequest(Ability ability, BattleUnit target) : base(RequestType.AutoCastAbility)

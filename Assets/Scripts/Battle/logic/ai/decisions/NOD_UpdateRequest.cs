@@ -21,8 +21,10 @@ public class NOD_UpdateRequest : TBTActionLeaf
         base.onEnter(wData);
         BattleDecisionWorkingData decisionData = wData as BattleDecisionWorkingData;
         BattleUnit caster = decisionData.owner;
-        Ability ability = caster.SelectCastableAbility();
+        // 手动
 
+        // 自动
+        Ability ability = caster.SelectCastableAbility();
         if(ability == null)
         {
             // 没有技能就追逐

@@ -1,4 +1,4 @@
-﻿public class IdleRequest : AIBehaviorRequest
+﻿public class IdleRequest : BehaviorRequest
 {
     public IdleRequest() : base(RequestType.Idle)
     {

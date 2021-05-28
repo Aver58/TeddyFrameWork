@@ -18,7 +18,7 @@ public class CON_IsAngleNeedTurnTo : TBTPreconditionLeaf
     {
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
         BattleUnit owner = behaviorData.owner;
-        AIBehaviorRequest request = behaviorData.request;
+        BehaviorRequest request = behaviorData.request;
         Unit target = request.target;
 
         Vector2 ownerPos = owner.Get2DPosition();

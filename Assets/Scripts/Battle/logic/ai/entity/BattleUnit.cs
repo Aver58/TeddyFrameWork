@@ -217,10 +217,16 @@ public class BattleUnit : Unit
     }
     #endregion
 
-    #region 技能、决策树、行为树更新
+    #region 决策树、行为树、技能更新
 
     // 决策层：输入（游戏世界信息），输出（请求）
     // 行为层：输入（请求），输出（修改游戏世界的相关信息）
+
+    // 设置决策
+    public void ForceUpdateDecisionRequest(BehaviorRequest behaviorRequest)
+    {
+        m_DecisionWorkData.request = behaviorRequest;
+    }
 
     // 更新决策树
     public int UpdateDecision(float gameTime, float deltaTime)
@@ -237,8 +243,8 @@ public class BattleUnit : Unit
     // 更新请求
     public int UpdateRequest(float gameTime, float deltaTime)
     {
-        AIBehaviorRequest foregroundRequest = m_BehaviorWorkData.request;
-        AIBehaviorRequest backgroundRequest = m_DecisionWorkData.request;
+        BehaviorRequest foregroundRequest = m_BehaviorWorkData.request;
+        BehaviorRequest backgroundRequest = m_DecisionWorkData.request;
         if(backgroundRequest != foregroundRequest)
         {
             //比对决策树和行为树的请求是否一致
@@ -265,7 +271,7 @@ public class BattleUnit : Unit
         if(m_BehaviorTree == null)
             return 1;
 
-        AIBehaviorRequest currentRequest = m_BehaviorWorkData.request;
+        BehaviorRequest currentRequest = m_BehaviorWorkData.request;
 
         if(currentRequest == null)
             return 1;
