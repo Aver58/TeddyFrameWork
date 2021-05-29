@@ -89,6 +89,11 @@ public class HeroActor
         return battleUnit.IsDead();
     }
 
+    public bool CanMove()
+    {
+        return battleUnit.IsDead();
+    }
+
     public void ChangeState(HeroState newState, string skillName = null, bool isSkipCastPoint = false)
     {
         if(m_HeroStateController != null)
@@ -167,13 +172,22 @@ public class HeroActor
         var abilityActor = GetAbilityActor(castType);
         abilityActor.OnFingerDown();
 
-        battleUnit.PrepareCastAbility(abilityActor.ability);
+        Ability ability = battleUnit.GetAbility(castType);
+        // 技能准备动作
+        battleUnit.PrepareCastAbility(ability);
+
+        // 初始化目标
+        battleUnit.target = TargetSearcher.instance.FindTargetUnitByAbility(battleUnit, ability);
     }
 
     public void OnFingerDrag(AbilityCastType castType, Vector2 mouseDelta)
     {
         var abilityActor = GetAbilityActor(castType);
         abilityActor.OnFingerDrag(mouseDelta);
+
+        // 更新目标，根据区域选择敌人
+        //Ability ability = battleUnit.GetAbility(castType);
+        //battleUnit.target = TargetSearcher.instance.FindTargetUnitByAbility(battleUnit, ability);
     }
 
     public void OnFingerUp(AbilityCastType castType)
@@ -184,15 +198,16 @@ public class HeroActor
         Ability ability = battleUnit.GetAbility(castType);
         if(ability.CD > 0)
         {
-            GameLog.Log("冷却中");
+            GameLog.Log(ability.GetConfigName() + "冷却中...");
             return;
         }
 
-        BattleUnit target = TargetSearcher.instance.FindTargetUnitByAbility(battleUnit, ability);
-        if(target!=null)
-            ability.SetUnitTarget(target);
+        // 向决策树输入请求
+        //battleUnit.ForceUpdateDecisionRequest();
+        //if(target!=null)
+        //    ability.SetUnitTarget(target);
 
-        battleUnit.CastAbility(ability);
+        //battleUnit.CastAbility(ability);
     }
 
     #endregion

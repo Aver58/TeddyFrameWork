@@ -13,7 +13,7 @@ using TsiU;
 
 public class BattleWorkingData : TBTWorkingData
 {
-    public AIBehaviorRequest request { get; set; }
+    public BehaviorRequest request { get; set; }
 
     public BattleUnit owner { get; set; }
 

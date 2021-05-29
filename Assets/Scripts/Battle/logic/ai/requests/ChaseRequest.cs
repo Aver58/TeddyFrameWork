@@ -9,7 +9,7 @@
 */
 #endregion
 
-public class ChaseRequest : AIBehaviorRequest
+public class ChaseRequest : BehaviorRequest
 {
     public ChaseRequest(Unit target) : base(RequestType.Chase)
     {

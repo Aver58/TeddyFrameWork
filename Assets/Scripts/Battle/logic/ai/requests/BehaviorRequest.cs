@@ -1,10 +1,10 @@
-﻿public class AIBehaviorRequest
+﻿public class BehaviorRequest
 {
     public RequestType RequestType { get; }
     public bool isRequestCompleted { get; set; }
     public Unit target { get; set; }
 
-    public AIBehaviorRequest(RequestType requestType)
+    public BehaviorRequest(RequestType requestType)
     {
         isRequestCompleted = false;
         RequestType = requestType;

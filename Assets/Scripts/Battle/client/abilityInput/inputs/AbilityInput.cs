@@ -61,11 +61,28 @@ public abstract class AbilityInput
     {
         HideAbilityAllIndicator();
         m_targetActors.Clear();
+
+        TriggerSkill();
+    }
+
+    #endregion
+
+    #region Protected
+
+    protected void OnManualCastSkill()
+    {
+
     }
 
     #endregion
 
     #region Private
+
+    private void TriggerSkill()
+    {
+        OnManualCastSkill();
+    }
+
     private void ShowAbilityAllIndicator()
     {
         for(int i = 0; i < m_AbilityIndicators.Count; i++)

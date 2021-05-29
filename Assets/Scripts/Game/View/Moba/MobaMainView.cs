@@ -9,15 +9,13 @@
 */
 #endregion
 
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
 public partial class MobaMainView : MainViewBase
 {
     public float runSpeed = 1f;
 
-    private RectTransform hudParent;
     private ETCJoystick m_joystick;
     private HeroActor m_PlayerActor;
     private BattleUnit m_PlayerUnit;
@@ -31,12 +29,11 @@ public partial class MobaMainView : MainViewBase
     {
         base.OnLoaded();
 
-        hudParent = HPHuds;
         m_cameraManager = CameraManager.instance;
         m_cameraManager.Init();
 
         m_hudActorManager = HudActorManager.instance;
-        m_hudActorManager.Init(hudParent);
+        m_hudActorManager.Init(HPHuds);
 
         InitCheatPanel();
 

@@ -32,4 +32,9 @@ public class AbilityInputTarget : AbilityInput
         // 更新角色朝向
         target.Set2DForward(dragForwardX, dragForwardZ);
     }
+
+    protected new void OnManualCastSkill()
+    {
+
+    }
 }

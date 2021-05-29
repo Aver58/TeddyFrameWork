@@ -32,7 +32,7 @@ public class NOD_TurnTo : TBTActionLeaf
         BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
         float deltaTime = behaviorData.deltaTime;
         BattleUnit source = behaviorData.owner;
-        AIBehaviorRequest request = behaviorData.request;
+        BehaviorRequest request = behaviorData.request;
         Unit target = request.target;
 
         Vector2 sourcePos = source.Get2DPosition();

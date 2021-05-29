@@ -21,13 +21,15 @@ public class CON_CanUpdateRequest : TBTPrecondition
             return false;
         
         // 新的决策
-        AIBehaviorRequest request = decisionData.request;
+        BehaviorRequest request = decisionData.request;
         if(request == null)
             return true;
         else
         {
-            //上一个请求已经执行完成，就更新新请求
-            return request.IsRequestCompleted();
+            //上一个请求已经执行完成，就更新新请求 or 追逐请求中，也可以更新请求替换它(比如技能可以使用了等情况)
+            var isRequestCompleted = request.IsRequestCompleted();
+            var isChaseRequest = request.RequestType == RequestType.Chase;
+            return isRequestCompleted || isChaseRequest;
         }
     }
 }
