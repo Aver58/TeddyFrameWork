@@ -79,12 +79,13 @@ public partial class MobaMainView : MainViewBase
         AddListener(BtnAttack, OnBtnAttack);
 
         m_joystick = JoystickLeft;
+        m_joystick.onMove.AddListener(OnMoving);
         m_joystick.onMoveEnd.AddListener(OnMoveEnd);
         //方式一：按键方法注册
-        m_joystick.OnPressLeft.AddListener(OnMoving);
-        m_joystick.OnPressRight.AddListener(OnMoving);
-        m_joystick.OnPressUp.AddListener(OnMoving);
-        m_joystick.OnPressDown.AddListener(OnMoving);
+        //m_joystick.OnDownLeft.AddListener(OnMoving);
+        //m_joystick.OnDownRight.AddListener(OnMoving);
+        //m_joystick.OnDownDown.AddListener(OnMoving);
+        //m_joystick.OnDownUp.AddListener(OnMoving);
     }
 
     protected override void AddAllMessage()
@@ -149,9 +150,6 @@ public partial class MobaMainView : MainViewBase
 
     private void MovePlayerToPoint(Vector3 position)
     {
-        if(m_PlayerActor.IsDead())
-            return;
-
         if(m_PlayerActor != null)
         {
             var forward = position - m_PlayerActor.transform.position;
@@ -163,8 +161,10 @@ public partial class MobaMainView : MainViewBase
         }
     }
 
-    private void OnMoving()
+    private void OnMoving(Vector2 axisValue)
     {
+        //if(!IsInIdleState())
+        //    return;
         if(m_joystick.name != "JoystickLeft")
             return;
 
@@ -172,8 +172,8 @@ public partial class MobaMainView : MainViewBase
             return;
 
         //获取虚拟摇杆偏移量  [-1,1]
-        float h = m_joystick.axisX.axisValue;
-        float v = m_joystick.axisY.axisValue;
+        float h = axisValue.x;
+        float v = axisValue.y;
 
         if(Mathf.Abs(h) > 0f || (Mathf.Abs(v) > 0f))
         {
