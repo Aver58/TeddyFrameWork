@@ -78,11 +78,6 @@ public partial class MobaMainView : MainViewBase
         m_joystick = JoystickLeft;
         m_joystick.onMove.AddListener(OnMoving);
         m_joystick.onMoveEnd.AddListener(OnMoveEnd);
-        //方式一：按键方法注册
-        //m_joystick.OnDownLeft.AddListener(OnMoving);
-        //m_joystick.OnDownRight.AddListener(OnMoving);
-        //m_joystick.OnDownDown.AddListener(OnMoving);
-        //m_joystick.OnDownUp.AddListener(OnMoving);
     }
 
     protected override void AddAllMessage()
@@ -116,8 +111,6 @@ public partial class MobaMainView : MainViewBase
     {
         m_cameraManager.SetWorldCameraPosition(actor.transform.position);
         m_cameraManager.SetWorldCameraTarget(actor.transform);
-
-        //m_joystick.axisX.directTransform = actor.transform;//todo 这个控制会比较舒服吗？
 
         m_PlayerActor = actor;
         m_PlayerUnit = actor.battleUnit;
@@ -160,8 +153,6 @@ public partial class MobaMainView : MainViewBase
 
     private void OnMoving(Vector2 axisValue)
     {
-        //if(!IsInIdleState())
-        //    return;
         if(m_joystick.name != "JoystickLeft")
             return;
 
@@ -177,7 +168,11 @@ public partial class MobaMainView : MainViewBase
             moveDistance.Set(h, 0, v);
             moveDistance *= runSpeed;
             var newPosition = m_PlayerActor.transform.position + moveDistance;
-            MovePlayerToPoint(newPosition);
+            // MovePlayerToPoint(newPosition);
+            // todo 改成请求,发个移动请求到指定位置的请求到行为树里
+            var dummyUnit = new DummyUnit(newPosition.x,newPosition.z);
+            var chaseRequest = new ChaseRequest(dummyUnit);
+            m_PlayerActor.ForceUpdateDecisionRequest(chaseRequest);
         }
         else
         {
@@ -210,7 +205,7 @@ public partial class MobaMainView : MainViewBase
             var worldCamera = CameraManager.instance.worldCamera;
             Vector3 mousePosOnScreen = Input.mousePosition;
             Ray ray = worldCamera.ScreenPointToRay(mousePosOnScreen);
-            UnityEngine.Debug.DrawLine(ray.origin, ray.direction, Color.red, 50f);
+            Debug.DrawLine(ray.origin, ray.direction, Color.red, 50f);
             // 如果点击到玩家，就攻击
 
             if(Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, LayerMask.GetMask("Ground")))

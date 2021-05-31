@@ -11,7 +11,7 @@
 
 public class DummyUnit : Unit
 {
-    public DummyUnit(int id,float pointX,float pointZ) : base(id)
+    public DummyUnit(float pointX,float pointZ)
     {
         Set2DPosition(pointX, pointZ);
     }

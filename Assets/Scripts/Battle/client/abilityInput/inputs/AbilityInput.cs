@@ -69,10 +69,7 @@ public abstract class AbilityInput
 
     #region Protected
 
-    protected void OnManualCastSkill()
-    {
-
-    }
+    protected virtual void OnManualCastSkill(){}
 
     #endregion
 

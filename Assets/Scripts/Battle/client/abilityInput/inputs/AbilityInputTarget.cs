@@ -9,12 +9,11 @@
 */
 #endregion
 
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityInputTarget : AbilityInput
 {
-    private List<HeroActor> m_targets; 
+    private BattleUnit m_target; 
     public AbilityInputTarget(Transform casterTransform, Ability ability) : base(casterTransform, ability)
     {
     }
@@ -26,15 +25,16 @@ public class AbilityInputTarget : AbilityInput
         var entitys = TargetSearcher.instance.FindTargetUnitsByManualSelect(m_ability.caster,m_ability);
         if(entitys.Count != 1)
             return;
-        
-        var actors = BattleActorManager.instance.GetActors(entitys);
-        var target = actors[0];
+
+        m_target = entitys[0];
+        var targetActor = BattleActorManager.instance.GetActor(m_target);
         // 更新角色朝向
-        target.Set2DForward(dragForwardX, dragForwardZ);
+        targetActor.Set2DForward(dragForwardX, dragForwardZ);
     }
 
-    protected new void OnManualCastSkill()
+    protected override void OnManualCastSkill()
     {
-
+        var request = new ManualCastAbilityRequest(m_ability,m_target);
+        m_target.ForceUpdateDecisionRequest(request);
     }
 }

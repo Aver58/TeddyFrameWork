@@ -62,27 +62,22 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 			castAbilitySelectorNode.AddChild(new NOD_CastAbility());
 			castAbilitySelectorNode.AddChild(setUnitIdleNode);
 
-			var autoCastAbilityNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsAutoCastAbilityRequest());
-			
 			// 转向、移动、施法
-			autoCastAbilityNode.AddChild(abilityTurnMoveToParallelNode);
-			autoCastAbilityNode.AddChild(castAbilitySelectorNode);
+			//var autoCastAbilityNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsAutoCastAbilityRequest());
+			//autoCastAbilityNode.AddChild(abilityTurnMoveToParallelNode);
+			//autoCastAbilityNode.AddChild(castAbilitySelectorNode);
 
+			// ③手动施放节点构建
+			var manualCastAbilityNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsManualCastAbilityRequest());
+			manualCastAbilityNode.AddChild(abilityTurnMoveToParallelNode);
+			manualCastAbilityNode.AddChild(castAbilitySelectorNode);
 
 			/// 开始构造树
 			m_BehaviorTreeNode.AddChild(chaseSelectorNode);
-			m_BehaviorTreeNode.AddChild(autoCastAbilityNode);
+			//m_BehaviorTreeNode.AddChild(autoCastAbilityNode);
+			m_BehaviorTreeNode.AddChild(manualCastAbilityNode);
 		}
 
 		return m_BehaviorTreeNode;
 	}
-
-	//public static BTNode GetCommonBehaviorTree()
- //   {
-	//	if(m_BehaviorTree == null)
- //       {
-	//		m_BehaviorTree = new BTPrioritySelector();
-
-	//	}
-	//}
 }

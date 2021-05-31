@@ -14,7 +14,6 @@ using UnityEngine;
 public class BattleLogic : Singleton<BattleLogic>
 {
     public int logicFrame = 0;
-    private int m_UniqueID = 0;
     private BattleUnitManager m_UnitMgr;
 
     private BattleUnitManager.AIEntityUpdater m_DecisionUpdater;
@@ -47,16 +46,10 @@ public class BattleLogic : Singleton<BattleLogic>
         AddPlayer();
     }
 
-    private int GetUniqueID()
-    {
-        m_UniqueID += 1;
-        return m_UniqueID;
-    }
-
     private void AddPlayer()
     {
         BattleProperty property = new BattleProperty(NPCPropertyTable.Instance.GetTableItem(101));
-        BattleUnit entity = new BattleUnit(GetUniqueID(), BattleCamp.FRIENDLY, property);
+        var entity = new HeroUnit(BattleCamp.FRIENDLY, property);
         entity.enemyCamp = BattleCamp.ENEMY;
 
         m_UnitMgr.AddPlayer(entity);
@@ -71,7 +64,7 @@ public class BattleLogic : Singleton<BattleLogic>
     public BattleUnit AddOneDummyUnit()
     {
         var property = new BattleProperty(NPCPropertyTable.Instance.GetTableItem(102));
-        var unit = new BattleUnit(GetUniqueID(), BattleCamp.ENEMY, property);
+        var unit = new BattleUnit(BattleCamp.ENEMY, property);
         unit.enemyCamp = BattleCamp.FRIENDLY;
         m_UnitMgr.AddUnit(unit);
         return unit;
@@ -83,7 +76,7 @@ public class BattleLogic : Singleton<BattleLogic>
     public BattleUnit AddOneEnemyUnit()
     {
         BattleProperty property = new BattleProperty(NPCPropertyTable.Instance.GetTableItem(102));
-        HeroUnit unit = new HeroUnit(GetUniqueID(), BattleCamp.ENEMY, property);
+        HeroUnit unit = new HeroUnit(BattleCamp.ENEMY, property);
         unit.enemyCamp = BattleCamp.FRIENDLY;
         m_UnitMgr.AddUnit(unit);
         return unit;

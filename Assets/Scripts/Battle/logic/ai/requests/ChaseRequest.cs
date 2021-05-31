@@ -13,11 +13,6 @@ public class ChaseRequest : BehaviorRequest
 {
     public ChaseRequest(Unit target) : base(RequestType.Chase)
     {
-        SetTarget(target);
-    }
-
-    public void SetTarget(Unit target)
-    {
         this.target = target;
         isRequestCompleted = false;
     }

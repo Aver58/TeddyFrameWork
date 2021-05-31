@@ -53,7 +53,7 @@ public abstract class ViewBase
     {
         if(go == null)
         {
-            GameLog.LogError("!!构造初始化，没有传入GameObject！");
+            GameLog.LogError("[ViewBase]构造初始化，没有传入GameObject！");
             return;
         }
         gameObject = go;

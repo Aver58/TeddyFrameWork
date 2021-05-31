@@ -94,6 +94,11 @@ public class HeroActor
         return battleUnit.IsDead();
     }
 
+    public void ForceUpdateDecisionRequest(BehaviorRequest request)
+    {
+        battleUnit.ForceUpdateDecisionRequest(request);
+    }
+    
     public void ChangeState(HeroState newState, string skillName = null, bool isSkipCastPoint = false)
     {
         if(m_HeroStateController != null)

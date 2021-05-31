@@ -17,6 +17,7 @@ public class BattleUnitManager : Singleton<BattleUnitManager>
     public delegate int AIEntityUpdater(BattleUnit entity, float gameTime, float deltaTime);
     //--------------------------------------------------------------------------------------
 
+    private int m_UniqueID = 0;
     private List<BattleUnit> m_Units;
     private List<BattleUnit> m_Temps;
     public BattleUnit playerUnit;
@@ -44,6 +45,12 @@ public class BattleUnitManager : Singleton<BattleUnitManager>
                 unit.UpdateAbility(gameTime, deltaTime);
             }
         }
+    }
+
+    public int GetUniqueID()
+    {
+        m_UniqueID += 1;
+        return m_UniqueID;
     }
 
     public void AddPlayer(BattleUnit e)

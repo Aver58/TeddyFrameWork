@@ -27,18 +27,11 @@ public class BattleActorManager : Singleton<BattleActorManager>
         m_ActorMap.Add(hash,e);
     }
 
-    public List<HeroActor> GetActors(List<BattleUnit> entities)
+    public HeroActor GetActor(BattleUnit entity)
     {
-        m_Temps = new List<HeroActor>();
-        foreach(var entity in entities)
-        {
-            HeroActor actor;
-            if(m_ActorMap.TryGetValue(entity.hash, out actor))
-            {
-                m_Temps.Add(actor);
-            }
-        }
-        return m_Temps;
+        HeroActor actor;
+        m_ActorMap.TryGetValue(entity.hash, out actor);
+        return actor;
     }
 
     public List<HeroActor> GetEnemyActors()

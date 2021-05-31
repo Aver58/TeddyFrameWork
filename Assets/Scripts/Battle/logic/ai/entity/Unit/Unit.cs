@@ -30,8 +30,9 @@ public abstract class Unit
     public virtual void OnExit(){ }
     public virtual void Update(float deltaTime,int logicFrame) { }
 
-    public Unit(int id)
+    public Unit()
     {
+        int id = BattleUnitManager.instance.GetUniqueID();
         this.id = id;
     }
 

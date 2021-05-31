@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using TsiU;
 using UnityEngine;
 
+// 没有行为树
 public class BattleUnit : Unit
 {
     public BattleCamp camp { get; }
@@ -39,8 +40,8 @@ public class BattleUnit : Unit
     private BattleBehaviorWorkingData m_BehaviorWorkData;
     private Dictionary<AbilityCastType, Ability> m_abilityMap;
 
-    public BattleUnit(int id, BattleCamp battleCamp, BattleProperty property) : base(id)
-    {
+    public BattleUnit(BattleCamp battleCamp, BattleProperty property)
+    {        
         property.id = id;
         camp = battleCamp;
         m_Property = property;
@@ -272,7 +273,6 @@ public class BattleUnit : Unit
             return 1;
 
         BehaviorRequest currentRequest = m_BehaviorWorkData.request;
-
         if(currentRequest == null)
             return 1;
 

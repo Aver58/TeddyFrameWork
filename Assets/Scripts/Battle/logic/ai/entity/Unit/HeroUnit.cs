@@ -11,11 +11,10 @@
 
 using TsiU;
 
+// 有行为树
 public class HeroUnit : BattleUnit
 {
-    public HeroUnit(int id, BattleCamp camp, BattleProperty property) : base(id, camp, property)
-    {
-    }
+    public HeroUnit(BattleCamp camp, BattleProperty property) : base(camp, property){}
 
     protected override TBTActionPrioritizedSelector GetBehaviorTree()
     {

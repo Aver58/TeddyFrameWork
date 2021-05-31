@@ -19,6 +19,11 @@ public class AnimationController : MonoBehaviour, IActor
         m_Animator = GetComponentInChildren<Animator>();
     }
 
+    private bool IsInIdleState()
+    {
+        return m_Animator.IsInState("idle");
+    }
+
     public void SetTrigger(string animName)
     { 
         if (!string.IsNullOrEmpty(m_LastAnimName)) {
@@ -26,6 +31,7 @@ public class AnimationController : MonoBehaviour, IActor
         }
 
         m_LastAnimName = animName;
+        // GameLog.RawLog(animName);
         m_Animator.SetTrigger(animName);
     }
 
