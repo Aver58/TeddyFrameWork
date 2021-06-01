@@ -16,6 +16,6 @@ namespace Aver3
     /// </summary>
     public abstract class BTPrecondition : BTNode
     {
-        public abstract bool IsTrue();
+        public abstract bool IsTrue(BTData bTData);
     }
 }

@@ -42,7 +42,7 @@ namespace TsiU
             float attackRange = source.GetAttackRange();
             float distance = (targetPos - ownerPos).magnitude;
 
-            if(distance <= attackRange)
+            if(distance <= 0f)
                 return TBTRunningStatus.FINISHED;
 
             float moveSpeed = source.GetMoveSpeed();
@@ -57,12 +57,7 @@ namespace TsiU
             //    moveSpeed.ToString(), ownerPos.x.ToString(),ownerPos.y.ToString(), targetPos.x.ToString(),targetPos.y.ToString()
             //    ,newPosX.ToString(),newPosZ.ToString());
 
-            GameMsg.instance.SendMessage(GameMsgDef.Hero_MoveTo, new HeorMoveEventArgs()
-            {
-                id = source.id,
-                targetPos = new Vector3(newPosX, 0, newPosZ),
-                forward = new Vector3(toForwardX,0, toForwardZ)
-            });
+            GameMsg.instance.SendMessage(GameMsgDef.Hero_MoveTo, source.id, new Vector3(newPosX, 0, newPosZ), new Vector3(toForwardX, 0, toForwardZ));
             return TBTRunningStatus.EXECUTING;
         }
     }

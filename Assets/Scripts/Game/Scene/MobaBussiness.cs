@@ -23,8 +23,8 @@ public class MobaBussiness : Singleton<MobaBussiness>
     public MobaBussiness()
     {
         GameMsg instance = GameMsg.instance;
-        instance.AddMessage<HeorMoveEventArgs>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
-        instance.AddMessage<HeorTurnEventArgs>(GameMsgDef.Hero_TurnTo2D, OnHeroTurnTo);
+        instance.AddMessage<int, Vector3, Vector3>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
+        instance.AddMessage<int,Vector2>(GameMsgDef.Hero_TurnTo2D, OnHeroTurnTo);
         instance.AddMessage<int,HeroState,string,bool>(GameMsgDef.Hero_ChangeState, OnHeroActorStateChanged);
     }
 
@@ -97,19 +97,25 @@ public class MobaBussiness : Singleton<MobaBussiness>
 
     //todo 根据id 筛选
     //todo 为啥不能用 HeorMoveEventArgs
-    private void OnHeroMoveTo(HeorMoveEventArgs args)
+    private void OnHeroMoveTo(int id, Vector3 targetPos, Vector3 toForward)
     {
         foreach(HeroActor render in m_ActorMgr.GetEnemyActors())
         {
-            render.Set3DPosition(args.targetPos);
+            if(render.id == id)
+            {
+                render.Set3DPosition(targetPos);
+            }
         }
     }
 
-    private void OnHeroTurnTo(HeorTurnEventArgs args)
+    private void OnHeroTurnTo(int id ,Vector2 forward)
     {
         foreach(HeroActor render in m_ActorMgr.GetEnemyActors())
         {
-            render.Set2DForward(args.forward);
+            if(render.id == id)
+            {
+                render.Set2DForward(forward);
+            }
         }
     }
 

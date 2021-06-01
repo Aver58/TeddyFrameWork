@@ -127,16 +127,19 @@ public class HeroActor
         ChangeState(HeroState.IDLE);
     }
 
-    public void Set2DForward(Vector2 position)
+    public void Set2DForward(Vector2 forward)
     {
-        m_position.Set(position.x, transform.position.y, position.y);
+        m_position.Set(forward.x, transform.position.y, forward.y);
         Set3DForward(m_position);
     }
 
-    public void Set3DForward(Vector3 position)
+    public void Set3DForward(Vector3 forward)
     {
-        battleUnit.Set3DForward(position);
-        transform.forward = position;
+        if(forward == Vector3.zero)
+            return;
+        
+        battleUnit.Set3DForward(forward);
+        transform.forward = forward;
     }
 
     public void Set2DForward(float posX, float posZ)

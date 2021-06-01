@@ -24,21 +24,21 @@ namespace Aver3
         /// <summary>
         ///  行为的执行，返回BTResult
         /// </summary>
-        protected override BTResult OnUpdate()
+        protected override BTResult OnUpdate(BTData bTData)
         {
             BTResult result = BTResult.Finished;
             if(m_status == BTActionStatus.Ready)
             {
                 m_status = BTActionStatus.Running;
-                OnEnter();
+                OnEnter(bTData);
             }
 
             if(m_status == BTActionStatus.Running)
             {       
-                result = OnExecute();
+                result = OnExecute(bTData);
                 if(result != BTResult.Running)
                 {
-                    OnExit();
+                    OnExit(bTData);
                     m_status = BTActionStatus.Ready;
                 }
             }
@@ -49,7 +49,7 @@ namespace Aver3
         /// <summary>
         /// 第一次进入行为
         /// </summary>
-        protected virtual void OnEnter() 
+        protected virtual void OnEnter(BTData bTData) 
         {
             if(BTConst.ENABLE_BTACTION_LOG)
                 GameLog.Log("OnEnter " + " [" + this.Name + "]");
@@ -59,7 +59,7 @@ namespace Aver3
         /// 行为进行中
         /// </summary>
         /// <returns></returns>
-        protected virtual BTResult OnExecute()
+        protected virtual BTResult OnExecute(BTData bTData)
         {
             if(BTConst.ENABLE_BTACTION_LOG)
                 GameLog.Log("OnExecute " + " [" + this.Name + "]");
@@ -70,7 +70,7 @@ namespace Aver3
         /// <summary>
         /// 离开行为
         /// </summary>
-        protected virtual void OnExit() 
+        protected virtual void OnExit(BTData bTData) 
         {
             if(BTConst.ENABLE_BTACTION_LOG)
                 GameLog.Log("OnExit " + " [" + this.Name + "]");

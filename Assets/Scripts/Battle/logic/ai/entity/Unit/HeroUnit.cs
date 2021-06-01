@@ -23,6 +23,8 @@ public class HeroUnit : BattleUnit
 
     protected override TBTActionPrioritizedSelector GetDecisionTree()
     {
-        return BehaviorTreeFactory.GetDecisionTree();
+        //BehaviorTreeFactory.GetDecisionTree()
+        // 玩家没有决策树，决策都是输入触发，比如移动、释放技能
+        return null;
     }
 }

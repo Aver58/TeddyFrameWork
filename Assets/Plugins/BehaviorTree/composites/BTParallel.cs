@@ -25,13 +25,13 @@ namespace Aver3
             m_func = func;
         }
 
-        protected override bool OnEvaluate()
+        protected override bool OnEvaluate(BTData bTData)
         {
             bool isAndFunc = m_func == ParallelFunction.And;
             for(int i = 0; i < childCount; i++)
             {
                 var child = GetChild(i);
-                if(isAndFunc && (child.Evaluate() == false))
+                if(isAndFunc && (child.Evaluate(bTData) == false))
                 {
                     return false;
                 }
@@ -39,7 +39,7 @@ namespace Aver3
             return true;
         }
 
-        protected override BTResult OnUpdate()
+        protected override BTResult OnUpdate(BTData bTData)
         {
             // todo
             //m_failResultCount = 0;

@@ -7,16 +7,16 @@ namespace Aver3
     /// </summary>
     public class BTNoPrioritySelector : BTPrioritySelector
     {
-        protected override bool OnEvaluate()
+        protected override bool OnEvaluate(BTData bTData)
         {
             if(m_activeChild != null)
             {
-                if(m_activeChild.Evaluate())
+                if(m_activeChild.Evaluate(bTData))
                 {
                     return true;
                 }
             }
-            return base.Evaluate();
+            return base.Evaluate(bTData);
         }
     }
 }

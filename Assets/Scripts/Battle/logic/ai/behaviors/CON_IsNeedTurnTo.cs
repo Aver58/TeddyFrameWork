@@ -9,14 +9,14 @@
 */
 #endregion
 
-using TsiU;
+using Aver3;
 using UnityEngine;
 
-public class CON_IsAngleNeedTurnTo : TBTPreconditionLeaf
+public class CON_IsNeedTurnTo : BTPrecondition
 {
-    public override bool IsTrue(TBTWorkingData wData)
+    public override bool IsTrue(BTData bTData)
     {
-        BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+        BattleData behaviorData = bTData as BattleData;
         BattleUnit owner = behaviorData.owner;
         BehaviorRequest request = behaviorData.request;
         Unit target = request.target;
@@ -26,6 +26,7 @@ public class CON_IsAngleNeedTurnTo : TBTPreconditionLeaf
 
         Vector2 toForward = targetPos - ownerPos;
         Vector2 ownerForward = owner.Get2DForward();
+
         float angle = Vector2.Angle(toForward, ownerForward);
         //BattleLog.Log("【CON_IsAngleNeedTurnTo】angle:{0}", angle);
         return angle > 0.1f;

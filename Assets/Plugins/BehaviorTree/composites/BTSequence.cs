@@ -9,7 +9,7 @@
     {
         private int m_activeIndex = 0;
 
-        protected override bool OnEvaluate()
+        protected override bool OnEvaluate(BTData bTData)
         {
             if(m_activeIndex == -1)
                 m_activeIndex = 0;
@@ -17,7 +17,7 @@
             if(m_activeIndex != -1)
             {
                 var child = GetChild(m_activeIndex);
-                bool result = child.Evaluate();
+                bool result = child.Evaluate(bTData);
                 if(result == false)
                 {
                     m_activeIndex = -1;
@@ -25,13 +25,13 @@
                 }
             }
 
-            return GetChild(0).Evaluate();
+            return GetChild(0).Evaluate(bTData);
         }
 
-        protected override BTResult OnUpdate()
+        protected override BTResult OnUpdate(BTData bTData)
         {
             var child = GetChild(m_activeIndex);
-            var result = child.Update();
+            var result = child.Update(bTData);
             if(result == BTResult.Finished)
             {
                 m_activeIndex++;

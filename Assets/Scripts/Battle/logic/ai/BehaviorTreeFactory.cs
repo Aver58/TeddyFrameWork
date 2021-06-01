@@ -5,9 +5,9 @@ using Aver3;
 
 public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 {
-	private static BTNode m_BehaviorTree;
 	private static TBTActionPrioritizedSelector m_DecisionTree;
-	private static TBTActionPrioritizedSelector m_BehaviorTreeNode;
+	private static TBTActionPrioritizedSelector m_BehaviorTree;
+	private static TBTActionPrioritizedSelector m_MobaBehaviorTree;
 
 	public static TBTActionPrioritizedSelector GetDecisionTree()
 	{
@@ -20,36 +20,58 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 		return m_DecisionTree;
 	}
 
+	// 追逐节点
+	public BTPrioritySelector BuildChaseNode()
+	{
+		var node = new BTPrioritySelector();
+		node.SetPrecondition(new CON_IsChaseRequest());
+		var turnToSelectorNode = new BTPrioritySelector();
+		turnToSelectorNode.SetPrecondition(new CON_IsNeedTurnTo());
+
+		//node.AddChild();
+		return node;
+	}
+
+	public TBTActionPrioritizedSelector GetMobaBehaviorTree()
+	{
+		if(m_MobaBehaviorTree == null)
+		{
+			m_MobaBehaviorTree = new TBTActionPrioritizedSelector();
+			//m_MobaBehaviorTree.
+		}
+		return m_MobaBehaviorTree;
+	}
+
 	public static TBTActionPrioritizedSelector GetBehaviorTree()
 	{
-		if(m_BehaviorTreeNode == null)
+		if(m_BehaviorTree == null)
 		{
 			// 父节点
-			m_BehaviorTreeNode = new TBTActionPrioritizedSelector();
+			m_BehaviorTree = new TBTActionPrioritizedSelector();
 
 			// 设置idle节点
 			var setUnitIdleNode = new NOD_SetUnitIdle();
 			// 转向节点
 			var turnToSelectorNode = new TBTActionPrioritizedSelector();
-			turnToSelectorNode.SetPrecondition(new CON_IsAngleNeedTurnTo());
+			turnToSelectorNode.SetPrecondition(new CON_IsNeedTurnTo());
 			turnToSelectorNode.AddChild(new NOD_TurnTo());//todo can turn to
-			turnToSelectorNode.AddChild(setUnitIdleNode);
+			//turnToSelectorNode.AddChild(setUnitIdleNode);
 			// 追逐节点
 			var moveToSelectorNode = new TBTActionPrioritizedSelector();
 			moveToSelectorNode.SetPrecondition(new CON_IsInRange());
 			moveToSelectorNode.AddChild(new NOD_MoveTo());//todo can Move to
-			moveToSelectorNode.AddChild(setUnitIdleNode);
+			//moveToSelectorNode.AddChild(setUnitIdleNode);
 
 			// ①追逐
-			TBTAction chaseSelectorNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsChaseRequest());
-			chaseSelectorNode.AddChild(turnToSelectorNode);
-			chaseSelectorNode.AddChild(moveToSelectorNode);
+			//TBTAction chaseSelectorNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsChaseRequest());
+			//chaseSelectorNode.AddChild(turnToSelectorNode);
+			//chaseSelectorNode.AddChild(moveToSelectorNode);
 
 			// ②自动战斗节点构建
 			// 转向和追逐并行
 			var abilityTurnMoveToParallelNode = new TBTActionParallel();
 			// 技能转向节点
-			TBTPreconditionAND abilityTurnCondition = new TBTPreconditionAND(new CON_IsAbilityNeedTurnTo(), new CON_IsAngleNeedTurnTo());
+			TBTPreconditionAND abilityTurnCondition = new TBTPreconditionAND(new CON_IsAbilityNeedTurnTo(), new CON_IsNeedTurnTo());
 			abilityTurnMoveToParallelNode.AddChild(new NOD_TurnTo().SetPrecondition(abilityTurnCondition));
 			// 技能追逐节点
 			TBTPreconditionNOT abilityMoveCondition = new TBTPreconditionNOT(new CON_IsInAbilityRange());
@@ -73,11 +95,11 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 			manualCastAbilityNode.AddChild(castAbilitySelectorNode);
 
 			/// 开始构造树
-			m_BehaviorTreeNode.AddChild(chaseSelectorNode);
+			//m_BehaviorTree.AddChild(chaseSelectorNode);
 			//m_BehaviorTreeNode.AddChild(autoCastAbilityNode);
-			m_BehaviorTreeNode.AddChild(manualCastAbilityNode);
+			m_BehaviorTree.AddChild(manualCastAbilityNode);
 		}
 
-		return m_BehaviorTreeNode;
+		return m_BehaviorTree;
 	}
 }

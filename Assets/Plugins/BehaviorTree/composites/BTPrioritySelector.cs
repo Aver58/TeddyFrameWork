@@ -19,12 +19,12 @@ namespace Aver3
     {
         protected BTNode m_activeChild;
 
-        protected override bool OnEvaluate()
+        protected override bool OnEvaluate(BTData bTData)
         {
             for(int i = 0; i < childCount; i++)
             {
                 var child = GetChild(i);
-                if(child.Evaluate())
+                if(child.Evaluate(bTData))
                 {
                     m_activeChild = child;
                     return true;
@@ -33,12 +33,12 @@ namespace Aver3
             return false;
         }
 
-        protected override BTResult OnUpdate()
+        protected override BTResult OnUpdate(BTData bTData)
         {
             if(m_activeChild == null)
                 return BTResult.Finished;
 
-            var result = m_activeChild.Update();
+            var result = m_activeChild.Update(bTData);
             if(result != BTResult.Running)
             {
                 m_activeChild = null;

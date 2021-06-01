@@ -46,6 +46,21 @@ public class BattleLogic : Singleton<BattleLogic>
         AddPlayer();
     }
 
+    public void Update()
+    {
+        float deltaTime = Time.deltaTime;
+        float gameTime = Time.realtimeSinceStartup;
+        m_UnitMgr.UpdateAbility(gameTime, deltaTime);
+        //Update Decision
+        m_UnitMgr.IteratorDo(m_DecisionUpdater, gameTime, deltaTime);
+        //Update Request
+        m_UnitMgr.IteratorDo(m_RequestUpdater, gameTime, deltaTime);
+        //Update Behaivor
+        m_UnitMgr.IteratorDo(m_BehaviorUpdater, gameTime, deltaTime);
+
+        logicFrame += 1;
+    }
+
     private void AddPlayer()
     {
         BattleProperty property = new BattleProperty(NPCPropertyTable.Instance.GetTableItem(101));
@@ -80,21 +95,6 @@ public class BattleLogic : Singleton<BattleLogic>
         unit.enemyCamp = BattleCamp.FRIENDLY;
         m_UnitMgr.AddUnit(unit);
         return unit;
-    }
-
-    public void Update()
-    {
-        float deltaTime = Time.deltaTime;
-        float gameTime = Time.realtimeSinceStartup;
-        m_UnitMgr.UpdateAbility(gameTime, deltaTime);
-        //Update Decision
-        m_UnitMgr.IteratorDo(m_DecisionUpdater, gameTime, deltaTime);
-        //Update Request
-        m_UnitMgr.IteratorDo(m_RequestUpdater, gameTime, deltaTime);
-        //Update Behaivor
-        m_UnitMgr.IteratorDo(m_BehaviorUpdater, gameTime, deltaTime);
-
-        logicFrame += 1;
     }
 
     #endregion

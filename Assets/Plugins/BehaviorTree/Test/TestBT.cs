@@ -18,9 +18,9 @@ public class TestBT : MonoBehaviour
     void Awake()
     {
         // 构建行为树
-        root = new BTPrioritySelector();
-        root.AddChild(new ActionPatrol());
-        root.AddChild(new ActionIdle());
+        //root = new BTPrioritySelector();
+        //root.AddChild(new ActionPatrol());
+        //root.AddChild(new ActionIdle());
     }
 
     private void Update()
@@ -36,7 +36,7 @@ public class TestBT : MonoBehaviour
         //    }
         //}
 
-        if(root.Evaluate())
-            root.Update();
+        //if(root.Evaluate())
+        //    root.Update();
     }
 }

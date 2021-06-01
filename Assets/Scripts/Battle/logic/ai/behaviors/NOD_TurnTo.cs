@@ -48,11 +48,7 @@ public class NOD_TurnTo : TBTActionLeaf
         if(angle < radianToTurn * Mathf.Rad2Deg)
         {
             source.Set2DForward(targetForward);
-            GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo2D, new HeorTurnEventArgs()
-            {
-                id = source.id,
-                forward = targetForward,
-            });
+            GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo2D, source.id, targetForward);
             return TBTRunningStatus.FINISHED;
         }
 
@@ -65,11 +61,7 @@ public class NOD_TurnTo : TBTActionLeaf
 
         //BattleLog.Log("【NOD_TurnTo】自己朝向：{0} 目标朝向：{1} 相隔角度：{2} 旋转弧度：{3} 叉乘：{4} 新的朝向：{5}", sourceForward.ToString(),targetForward.ToString(), angle.ToString(),(radianToTurn * Mathf.Rad2Deg).ToString(), cross.ToString(), newForward.ToString());
         source.Set2DForward(newForward);
-        GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo2D, new HeorTurnEventArgs()
-        {
-            id = source.id,
-            forward = newForward,
-        });
+        GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo2D , source.id, targetForward);
         return TBTRunningStatus.EXECUTING;
     }
 }

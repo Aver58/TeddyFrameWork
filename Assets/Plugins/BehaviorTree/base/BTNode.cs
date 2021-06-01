@@ -27,8 +27,8 @@ namespace Aver3
             children = new List<BTNode>();
         }
 
-        protected virtual BTResult OnUpdate() { return BTResult.Finished; }
-        protected virtual bool OnEvaluate() { return true; }
+        protected virtual BTResult OnUpdate(BTData bTData) { return BTResult.Finished; }
+        protected virtual bool OnEvaluate(BTData bTData) { return true; }
 
         private bool IsIndexValid(int index)
         {
@@ -37,15 +37,15 @@ namespace Aver3
 
         #region API
 
-        public bool Evaluate()
+        public bool Evaluate(BTData bTData)
         {
             // 评估这个节点是否可以进入：1.有设置条件；2.条件通过；
-            return (m_precondition == null || m_precondition.IsTrue()) && OnEvaluate();
+            return (m_precondition == null || m_precondition.IsTrue(bTData)) && OnEvaluate(bTData);
         }
 
-        public BTResult Update()
+        public BTResult Update(BTData bTData)
         {
-            return OnUpdate();
+            return OnUpdate(bTData);
         }
 
         public void SetPrecondition(BTPrecondition precondition)
