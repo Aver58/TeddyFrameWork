@@ -11,27 +11,21 @@
 
 using UnityEngine;
 
-namespace TsiU
+namespace Aver3
 {
-    public class NOD_MoveTo : TBTActionLeaf
+    public class NOD_MoveTo : BTAction
     {
-        protected override void onEnter(TBTWorkingData wData)
+        protected override void OnEnter(BTData wData)
         {
-            //BattleLog.Log("【NOD_MoveTo】onEnter");
-            BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+            var behaviorData = wData as BattleData;
             BattleUnit source = behaviorData.owner;
             source.SetState(HeroState.MOVE);
         }
 
-        protected override void onExit(TBTWorkingData wData, int runningStatus)
+        protected override BTResult OnExecute(BTData wData)
         {
-            //BattleLog.Log("【NOD_MoveTo】onExit");
-        }
-
-        protected override int onExecute(TBTWorkingData wData)
-        {
-            BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
-            float deltaTime = behaviorData.deltaTime;
+            var behaviorData = wData as BattleData;
+            //float deltaTime = behaviorData.deltaTime;
             BattleUnit source = behaviorData.owner;
             BehaviorRequest request = behaviorData.request;
             Unit target = request.target;
@@ -39,11 +33,11 @@ namespace TsiU
             Vector2 ownerPos = source.Get2DPosition();
             Vector2 targetPos = target.Get2DPosition();
 
-            float attackRange = source.GetAttackRange();
+            //float attackRange = source.GetAttackRange();
             float distance = (targetPos - ownerPos).magnitude;
 
             if(distance <= 0f)
-                return TBTRunningStatus.FINISHED;
+                return BTResult.Finished;
 
             float moveSpeed = source.GetMoveSpeed();
             float detalTime = behaviorData.deltaTime;
@@ -58,7 +52,7 @@ namespace TsiU
             //    ,newPosX.ToString(),newPosZ.ToString());
 
             GameMsg.instance.SendMessage(GameMsgDef.Hero_MoveTo, source.id, new Vector3(newPosX, 0, newPosZ), new Vector3(toForwardX, 0, toForwardZ));
-            return TBTRunningStatus.EXECUTING;
+            return BTResult.Running;
         }
     }
 }

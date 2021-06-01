@@ -11,8 +11,9 @@
 
 public class BattleData : BTData
 {
+    public float deltaTime { get; set; }
+    public float gameTime { get; set; }
     public BehaviorRequest request { get; set; }
-
     public BattleUnit owner { get; set; }
 
     public BattleData(BattleUnit battleEntity)

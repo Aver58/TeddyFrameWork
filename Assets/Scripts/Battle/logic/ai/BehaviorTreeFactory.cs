@@ -25,11 +25,14 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 	{
 		var node = new BTPrioritySelector();
 		node.SetPrecondition(new CON_IsChaseRequest());
-		var turnToSelectorNode = new BTPrioritySelector();
-		turnToSelectorNode.SetPrecondition(new CON_IsNeedTurnTo());
+		var nodeTurnTo = new BTPrioritySelector();
+		nodeTurnTo.SetPrecondition(new CON_IsNeedTurnTo());
+		nodeTurnTo.AddChild(new NOD_TurnTo());
 
-		//node.AddChild();
-		return node;
+		var nodeMoveTo = new TBTActionPrioritizedSelector();
+
+        node.AddChild(nodeTurnTo);
+        return node;
 	}
 
 	public TBTActionPrioritizedSelector GetMobaBehaviorTree()
@@ -53,8 +56,8 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 			var setUnitIdleNode = new NOD_SetUnitIdle();
 			// 转向节点
 			var turnToSelectorNode = new TBTActionPrioritizedSelector();
-			turnToSelectorNode.SetPrecondition(new CON_IsNeedTurnTo());
-			turnToSelectorNode.AddChild(new NOD_TurnTo());//todo can turn to
+			//turnToSelectorNode.SetPrecondition(new CON_IsNeedTurnTo());
+			//turnToSelectorNode.AddChild(new NOD_TurnTo());//todo can turn to
 			//turnToSelectorNode.AddChild(setUnitIdleNode);
 			// 追逐节点
 			var moveToSelectorNode = new TBTActionPrioritizedSelector();

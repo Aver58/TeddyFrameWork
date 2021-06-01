@@ -9,27 +9,21 @@
 */
 #endregion
 
-using TsiU;
+using Aver3;
 using UnityEngine;
 
-public class NOD_TurnTo : TBTActionLeaf
+public class NOD_TurnTo : BTAction
 {
-    protected override void onEnter(TBTWorkingData wData)
+    protected override void OnEnter(BTData bTData)
     {
-        //BattleLog.Log("【NOD_TurnTo】onEnter");
-        BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+        var behaviorData = bTData as BattleData;
         BattleUnit owner = behaviorData.owner;
         owner.SetState(HeroState.TURN);
     }
 
-    protected override void onExit(TBTWorkingData wData, int runningStatus)
+    protected override BTResult OnExecute(BTData bTData)
     {
-        //BattleLog.Log("【NOD_TurnTo】onExit");
-    }
-
-    protected override int onExecute(TBTWorkingData wData)
-    {
-        BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+        var behaviorData = bTData as BattleData;
         float deltaTime = behaviorData.deltaTime;
         BattleUnit source = behaviorData.owner;
         BehaviorRequest request = behaviorData.request;
@@ -49,7 +43,7 @@ public class NOD_TurnTo : TBTActionLeaf
         {
             source.Set2DForward(targetForward);
             GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo2D, source.id, targetForward);
-            return TBTRunningStatus.FINISHED;
+            return BTResult.Finished;
         }
 
         // 叉积算出方向 unity是左手坐标系，所以反过来了
@@ -62,6 +56,6 @@ public class NOD_TurnTo : TBTActionLeaf
         //BattleLog.Log("【NOD_TurnTo】自己朝向：{0} 目标朝向：{1} 相隔角度：{2} 旋转弧度：{3} 叉乘：{4} 新的朝向：{5}", sourceForward.ToString(),targetForward.ToString(), angle.ToString(),(radianToTurn * Mathf.Rad2Deg).ToString(), cross.ToString(), newForward.ToString());
         source.Set2DForward(newForward);
         GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo2D , source.id, targetForward);
-        return TBTRunningStatus.EXECUTING;
+        return BTResult.Running;
     }
 }
