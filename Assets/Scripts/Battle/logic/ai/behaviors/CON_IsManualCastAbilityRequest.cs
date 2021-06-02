@@ -9,15 +9,16 @@
 */
 #endregion
 
-using TsiU;
-
-public class CON_IsManualCastAbilityRequest : TBTPreconditionLeaf
+namespace Aver3
 {
-    public override bool IsTrue(TBTWorkingData wData)
+    public class CON_IsManualCastAbilityRequest : BTPrecondition
     {
-        BattleBehaviorWorkingData data = wData as BattleBehaviorWorkingData;
-        if(data.request != null && data.request.RequestType == RequestType.ManualCastAbility)
-            return true;
-        return false;
+        public override bool IsTrue(BTData wData)
+        {
+            var data = wData as BattleData;
+            if(data.request != null && data.request.RequestType == RequestType.ManualCastAbility)
+                return true;
+            return false;
+        }
     }
 }

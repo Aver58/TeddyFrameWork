@@ -9,14 +9,15 @@
 */
 #endregion
 
-using TsiU;
 
-public class NOD_SetUnitIdle : TBTActionLeaf
+using Aver3;
+
+public class NOD_SetUnitIdle : BTAction
 {
-    protected override void onEnter(TBTWorkingData wData)
+    protected override void OnEnter(BTData wData)
     {
         BattleLog.Log("【NOD_SetUnitIdle】onEnter");
-        BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+        var behaviorData = wData as BattleData;
         BattleUnit source = behaviorData.owner;
         var request = behaviorData.request;
         

@@ -9,19 +9,19 @@
 */
 #endregion
 
-using TsiU;
+using Aver3;
 
 // 有行为树
 public class HeroUnit : BattleUnit
 {
     public HeroUnit(BattleCamp camp, BattleProperty property) : base(camp, property){}
 
-    protected override TBTActionPrioritizedSelector GetBehaviorTree()
+    protected override BTAction GetBehaviorTree()
     {
-        return BehaviorTreeFactory.GetBehaviorTree();
+        return BehaviorTreeFactory.instance.GetMobaBehaviorTree();
     }
 
-    protected override TBTActionPrioritizedSelector GetDecisionTree()
+    protected override BTAction GetDecisionTree()
     {
         //BehaviorTreeFactory.GetDecisionTree()
         // 玩家没有决策树，决策都是输入触发，比如移动、释放技能

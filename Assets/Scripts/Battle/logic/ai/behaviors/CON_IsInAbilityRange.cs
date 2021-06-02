@@ -1,13 +1,13 @@
-﻿using TsiU;
+﻿using Aver3;
 using UnityEngine;
 
-public class CON_IsInAbilityRange : TBTPrecondition
+public class CON_IsInAbilityRange : BTPrecondition
 {
-    public override bool IsTrue(TBTWorkingData wData = null)
+    public override bool IsTrue(BTData wData)
     {
         // 判断物体是否在视野范围内
-        BattleBehaviorWorkingData data = wData as BattleBehaviorWorkingData;
-        AutoCastAbilityRequest request = data.request as AutoCastAbilityRequest;
+        var data = wData as BattleData;
+        var request = data.request as AutoCastAbilityRequest;
         BattleUnit owner = data.owner;
         Unit target = request.target;
         // 目标是自己

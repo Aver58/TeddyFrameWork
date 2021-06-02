@@ -5,7 +5,7 @@
     /// todo test
     /// 将其所有子节点依次执行，也就是说当前一个返回“完成”状态后，再运行下一个子节点
     /// </summary>
-    public class BTSequence : BTNode
+    public class BTSequence : BTAction
     {
         private int m_activeIndex = 0;
 
@@ -16,7 +16,7 @@
 
             if(m_activeIndex != -1)
             {
-                var child = GetChild(m_activeIndex);
+                var child = GetChild<BTAction>(m_activeIndex);
                 bool result = child.Evaluate(bTData);
                 if(result == false)
                 {
@@ -25,12 +25,12 @@
                 }
             }
 
-            return GetChild(0).Evaluate(bTData);
+            return GetChild<BTAction>(0).Evaluate(bTData);
         }
 
         protected override BTResult OnUpdate(BTData bTData)
         {
-            var child = GetChild(m_activeIndex);
+            var child = GetChild<BTAction>(m_activeIndex);
             var result = child.Update(bTData);
             if(result == BTResult.Finished)
             {

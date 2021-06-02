@@ -9,6 +9,8 @@
 */
 #endregion
 
+using Aver3;
+
 public class BattleData : BTData
 {
     public float deltaTime { get; set; }

@@ -15,15 +15,17 @@
 /// </summary>
 namespace Aver3
 {
-    public class BTPrioritySelector : BTNode
+    public class BTPrioritySelector : BTAction
     {
-        protected BTNode m_activeChild;
+        protected BTAction m_activeChild;
 
         protected override bool OnEvaluate(BTData bTData)
         {
             for(int i = 0; i < childCount; i++)
             {
-                var child = GetChild(i);
+                var child = GetChild<BTAction>(i);
+                if(BTConst.ENABLE_BTACTION_LOG)
+                    GameLog.Log("Evaluate【{0}】", child.Name);
                 if(child.Evaluate(bTData))
                 {
                     m_activeChild = child;

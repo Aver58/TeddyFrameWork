@@ -1,5 +1,4 @@
-﻿
-namespace Aver3
+﻿namespace Aver3
 {
     /// <summary>
     /// 不优先选择节点

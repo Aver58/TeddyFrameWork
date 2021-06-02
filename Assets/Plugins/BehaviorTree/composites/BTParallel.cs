@@ -13,7 +13,7 @@ namespace Aver3
         Or = 2,     // 如果是or条件，全部节点失败，结果才会失败
     }
 
-    public class BTParallel : BTNode
+    public class BTParallel : BTAction
     {
         private int m_failResultCount = 0;
         protected ParallelFunction m_func;
@@ -30,7 +30,7 @@ namespace Aver3
             bool isAndFunc = m_func == ParallelFunction.And;
             for(int i = 0; i < childCount; i++)
             {
-                var child = GetChild(i);
+                var child = GetChild<BTAction>(i);
                 if(isAndFunc && (child.Evaluate(bTData) == false))
                 {
                     return false;

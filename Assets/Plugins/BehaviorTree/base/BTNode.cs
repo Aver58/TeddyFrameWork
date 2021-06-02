@@ -15,10 +15,10 @@ namespace Aver3
 {
     /// <summary>
     /// BT node 是行为树所有节点的基类
+    /// http://www.aisharing.com/
     /// </summary>
     public abstract class BTNode
     {
-        private BTPrecondition m_precondition;
         public List<BTNode> children { get; }
         public int childCount { get { return children.Count; } }
 
@@ -27,30 +27,9 @@ namespace Aver3
             children = new List<BTNode>();
         }
 
-        protected virtual BTResult OnUpdate(BTData bTData) { return BTResult.Finished; }
-        protected virtual bool OnEvaluate(BTData bTData) { return true; }
-
         private bool IsIndexValid(int index)
         {
             return index >= 0 && index < children.Count;
-        }
-
-        #region API
-
-        public bool Evaluate(BTData bTData)
-        {
-            // 评估这个节点是否可以进入：1.有设置条件；2.条件通过；
-            return (m_precondition == null || m_precondition.IsTrue(bTData)) && OnEvaluate(bTData);
-        }
-
-        public BTResult Update(BTData bTData)
-        {
-            return OnUpdate(bTData);
-        }
-
-        public void SetPrecondition(BTPrecondition precondition)
-        {
-            m_precondition = precondition;
         }
 
         public void AddChild(BTNode node)
@@ -58,14 +37,12 @@ namespace Aver3
             children.Add(node);
         }
 
-        public BTNode GetChild(int index)
+        public T GetChild<T>(int index) where T : BTNode
         {
             if(!IsIndexValid(index))
-                return null;
+                return default;
 
-            return children[index];
+            return (T)children[index];
         }
-
-        #endregion
     }
 }

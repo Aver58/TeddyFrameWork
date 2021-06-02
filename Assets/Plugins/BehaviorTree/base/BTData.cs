@@ -9,7 +9,14 @@
 */
 #endregion
 
-public class BTData
+namespace Aver3
 {
+    /// <summary>
+    ///  行为树有个黑板的概念
+    ///  这个行为树参照的是http://www.aisharing.com/的行为树，用传参的方式去实现这个数据的传递
+    /// </summary>
+    public class BTData
+    {
 
+    }
 }

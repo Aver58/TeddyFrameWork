@@ -10,7 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
-using TsiU;
+using Aver3;
 using UnityEngine;
 
 // 没有行为树
@@ -32,12 +32,12 @@ public class BattleUnit : Unit
     };
     private HeroState m_HeroState;
     private Ability m_lastAbility;
-    private TBTAction m_BehaviorTree;
-    private TBTAction m_DecisionTree;
+    private BTAction m_BehaviorTree;
+    private BTAction m_DecisionTree;
     private BattleProperty m_Property;
     private List<D2Modifier> m_activeModifiers;
-    private BattleDecisionWorkingData m_DecisionWorkData;
-    private BattleBehaviorWorkingData m_BehaviorWorkData;
+    private BattleData m_DecisionWorkData;
+    private BattleData m_BehaviorWorkData;
     private Dictionary<AbilityCastType, Ability> m_abilityMap;
 
     public BattleUnit(BattleCamp battleCamp, BattleProperty property)
@@ -51,8 +51,8 @@ public class BattleUnit : Unit
         m_BehaviorTree = GetBehaviorTree();
         m_DecisionTree = GetDecisionTree();
 
-        m_DecisionWorkData = new BattleDecisionWorkingData(this);
-        m_BehaviorWorkData = new BattleBehaviorWorkingData(this);
+        m_DecisionWorkData = new BattleData(this);
+        m_BehaviorWorkData = new BattleData(this);
 
         InitAbilities();
     }
@@ -250,16 +250,13 @@ public class BattleUnit : Unit
         {
             //比对决策树和行为树的请求是否一致
             if(foregroundRequest != null)
-            {
-                GameLog.Log("【UpdateRequest】当前在处理的请求（前端）：" + foregroundRequest.ToString());
-            }
+                GameLog.Log("【UpdateRequest】当前正在处理的请求：" + foregroundRequest.ToString());
 
             if(backgroundRequest != null)
-            {
-                GameLog.Log("【UpdateRequest】下一个要处理的请求（后端）：" + backgroundRequest.ToString());
-            }
+                GameLog.Log("【UpdateRequest】下一个要处理的请求：" + backgroundRequest.ToString());
+            
             //reset bev tree 清理一些状态
-            m_BehaviorTree.Transition(m_BehaviorWorkData);
+            //m_BehaviorTree.Transition(m_BehaviorWorkData);
             //assign to current
             m_BehaviorWorkData.request = backgroundRequest;
         }
@@ -312,12 +309,12 @@ public class BattleUnit : Unit
 
     #region get
 
-    protected virtual TBTActionPrioritizedSelector GetBehaviorTree()
+    protected virtual BTAction GetBehaviorTree()
     {
         return null;
     }
 
-    protected virtual TBTActionPrioritizedSelector GetDecisionTree()
+    protected virtual BTAction GetDecisionTree()
     {
         return null;
     }

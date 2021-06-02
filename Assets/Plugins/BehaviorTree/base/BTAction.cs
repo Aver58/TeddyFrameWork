@@ -18,26 +18,59 @@ namespace Aver3
     /// </summary>
     public class BTAction : BTNode
     {
+        private BTPrecondition m_precondition;
         private BTActionStatus m_status = BTActionStatus.Ready;
+        protected virtual bool OnEvaluate(BTData bTData) { return true; }
+
         public string Name { get { return GetType().ToString(); } }
 
+        #region API
+
+        public bool Evaluate(BTData bTData)
+        {
+            // 评估这个节点是否可以进入：1.有设置条件；2.条件通过；
+            var condition1 = (m_precondition == null || m_precondition.IsTrue(bTData));
+            var condition2 = OnEvaluate(bTData);
+            return condition1 && condition2;
+        }
+
+        public BTResult Update(BTData bTData)
+        {
+            return OnUpdate(bTData);
+        }
+
+        public void SetPrecondition(BTPrecondition precondition)
+        {
+            m_precondition = precondition;
+        }
+
+        #endregion
+
+        #region 叶子节点，生命周期维护
+
         /// <summary>
-        ///  行为的执行，返回BTResult
+        ///  行为的生命周期维护，返回BTResult
         /// </summary>
-        protected override BTResult OnUpdate(BTData bTData)
+        protected virtual BTResult OnUpdate(BTData bTData)
         {
             BTResult result = BTResult.Finished;
             if(m_status == BTActionStatus.Ready)
             {
-                m_status = BTActionStatus.Running;
+                if(BTConst.ENABLE_BTACTION_LOG)
+                    GameLog.Log("OnEnter【{0}】", Name);
                 OnEnter(bTData);
+                m_status = BTActionStatus.Running;
             }
 
             if(m_status == BTActionStatus.Running)
-            {       
+            {
+                if(BTConst.ENABLE_BTACTION_LOG)
+                    GameLog.Log("OnExecute【{0}】", Name);
                 result = OnExecute(bTData);
                 if(result != BTResult.Running)
                 {
+                    if(BTConst.ENABLE_BTACTION_LOG)
+                        GameLog.Log("OnExit【{0}】", Name);
                     OnExit(bTData);
                     m_status = BTActionStatus.Ready;
                 }
@@ -46,34 +79,23 @@ namespace Aver3
             return result;
         }
 
-        /// <summary>
-        /// 第一次进入行为
-        /// </summary>
         protected virtual void OnEnter(BTData bTData) 
         {
-            if(BTConst.ENABLE_BTACTION_LOG)
-                GameLog.Log("OnEnter " + " [" + this.Name + "]");
+            //if(BTConst.ENABLE_BTACTION_LOG)
+            //    GameLog.Log("OnEnter【{0}】", Name);
         }
-
-        /// <summary>
-        /// 行为进行中
-        /// </summary>
-        /// <returns></returns>
-        protected virtual BTResult OnExecute(BTData bTData)
+        protected virtual BTResult OnExecute(BTData bTData) 
         {
-            if(BTConst.ENABLE_BTACTION_LOG)
-                GameLog.Log("OnExecute " + " [" + this.Name + "]");
-
-            return BTResult.Finished;
+            //if(BTConst.ENABLE_BTACTION_LOG)
+            //    GameLog.Log("OnExecute【{0}】", Name);
+            return BTResult.Finished; 
         }
-
-        /// <summary>
-        /// 离开行为
-        /// </summary>
         protected virtual void OnExit(BTData bTData) 
         {
-            if(BTConst.ENABLE_BTACTION_LOG)
-                GameLog.Log("OnExit " + " [" + this.Name + "]");
+            //if(BTConst.ENABLE_BTACTION_LOG)
+            //    GameLog.Log("OnExit【{0}】", Name);
         }
+
+        #endregion
     }
 }

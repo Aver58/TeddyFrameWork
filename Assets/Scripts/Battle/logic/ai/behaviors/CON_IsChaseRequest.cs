@@ -16,7 +16,6 @@ namespace Aver3
         public override bool IsTrue(BTData wData)
         {
             var data = wData as BattleData;
-            //BattleLog.Log("【CON_IsChaseRequest】data：{0}", data.ToString());
             if(data.request != null && data.request.RequestType == RequestType.Chase)
                 return true;
             return false;

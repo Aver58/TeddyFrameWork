@@ -28,7 +28,7 @@ public class CON_IsNeedTurnTo : BTPrecondition
         Vector2 ownerForward = owner.Get2DForward();
 
         float angle = Vector2.Angle(toForward, ownerForward);
-        //BattleLog.Log("【CON_IsAngleNeedTurnTo】angle:{0}", angle);
+        //BattleLog.Log("【{0}】angle:{1}",GetType().ToString(), angle);
         return angle > 0.1f;
     }
 }
