@@ -25,7 +25,6 @@ namespace Aver3
         protected override BTResult OnExecute(BTData wData)
         {
             var behaviorData = wData as BattleData;
-            //float deltaTime = behaviorData.deltaTime;
             BattleUnit source = behaviorData.owner;
             BehaviorRequest request = behaviorData.request;
             Unit target = request.target;
@@ -33,7 +32,6 @@ namespace Aver3
             Vector2 ownerPos = source.Get2DPosition();
             Vector2 targetPos = target.Get2DPosition();
 
-            //float attackRange = source.GetAttackRange();
             float distance = (targetPos - ownerPos).magnitude;
 
             if(distance <= 0f)
@@ -47,9 +45,9 @@ namespace Aver3
             float newPosZ = ownerPos.y + detalTime * moveSpeed * toForwardZ;
 
             source.Set2DPosition(newPosX, newPosZ);
-            //BattleLog.Log("【NOD_MoveTo】移动速度：{0} 当前位置：{1},{2} 目标位置：{3},{4} newPosX：{5} newPosZ：{6}}", 
-            //    moveSpeed.ToString(), ownerPos.x.ToString(),ownerPos.y.ToString(), targetPos.x.ToString(),targetPos.y.ToString()
-            //    ,newPosX.ToString(),newPosZ.ToString());
+            BattleLog.Log("【NOD_MoveTo】移动速度：{0} 当前位置：{1},{2} 目标位置：{3},{4} newPosX：{5} newPosZ：{6}}",
+                moveSpeed.ToString(), ownerPos.x.ToString(), ownerPos.y.ToString(), targetPos.x.ToString(), targetPos.y.ToString()
+                , newPosX.ToString(), newPosZ.ToString());
 
             GameMsg.instance.SendMessage(GameMsgDef.Hero_MoveTo, source.id, new Vector3(newPosX, 0, newPosZ), new Vector3(toForwardX, 0, toForwardZ));
             return BTResult.Running;

@@ -31,6 +31,8 @@ namespace Aver3
             // 评估这个节点是否可以进入：1.有设置条件；2.条件通过；
             var condition1 = (m_precondition == null || m_precondition.IsTrue(bTData));
             var condition2 = OnEvaluate(bTData);
+            if(BTConst.ENABLE_BTACTION_LOG)
+                GameLog.Log("Evaluate{0}【{1},{2}】", Name,condition1, condition2);
             return condition1 && condition2;
         }
 
@@ -56,21 +58,15 @@ namespace Aver3
             BTResult result = BTResult.Finished;
             if(m_status == BTActionStatus.Ready)
             {
-                if(BTConst.ENABLE_BTACTION_LOG)
-                    GameLog.Log("OnEnter【{0}】", Name);
                 OnEnter(bTData);
                 m_status = BTActionStatus.Running;
             }
 
             if(m_status == BTActionStatus.Running)
             {
-                if(BTConst.ENABLE_BTACTION_LOG)
-                    GameLog.Log("OnExecute【{0}】", Name);
                 result = OnExecute(bTData);
                 if(result != BTResult.Running)
                 {
-                    if(BTConst.ENABLE_BTACTION_LOG)
-                        GameLog.Log("OnExit【{0}】", Name);
                     OnExit(bTData);
                     m_status = BTActionStatus.Ready;
                 }
@@ -81,19 +77,19 @@ namespace Aver3
 
         protected virtual void OnEnter(BTData bTData) 
         {
-            //if(BTConst.ENABLE_BTACTION_LOG)
-            //    GameLog.Log("OnEnter【{0}】", Name);
+            if(BTConst.ENABLE_BTACTION_LOG)
+                GameLog.Log("OnEnter【{0}】", Name);
         }
         protected virtual BTResult OnExecute(BTData bTData) 
         {
-            //if(BTConst.ENABLE_BTACTION_LOG)
-            //    GameLog.Log("OnExecute【{0}】", Name);
+            if(BTConst.ENABLE_BTACTION_LOG)
+                GameLog.Log("OnExecute【{0}】", Name);
             return BTResult.Finished; 
         }
         protected virtual void OnExit(BTData bTData) 
         {
-            //if(BTConst.ENABLE_BTACTION_LOG)
-            //    GameLog.Log("OnExit【{0}】", Name);
+            if(BTConst.ENABLE_BTACTION_LOG)
+                GameLog.Log("OnExit【{0}】", Name);
         }
 
         #endregion

@@ -24,6 +24,7 @@ public class CON_IsNeedMoveTo : BTPrecondition
         var targetPos = target.Get2DPosition();
 
         var distance = Vector2.Distance(targetPos , ownerPos);
+        GameLog.Log("distance:{0}",distance);
         return distance > 0;
     }
 }

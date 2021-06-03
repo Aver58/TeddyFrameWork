@@ -38,7 +38,7 @@ public class NOD_TurnTo : BTAction
         float angle = Vector2.Angle(targetForward, sourceForward);
         float radianToTurn = turnSpeed * deltaTime;
 
-        //BattleLog.Log("【NOD_TurnTo】angle:{0},{1}", angle, radianToTurn * Mathf.Rad2Deg);
+        BattleLog.Log("【NOD_TurnTo】angle:{0},{1}", angle, radianToTurn * Mathf.Rad2Deg);
         if(angle < radianToTurn * Mathf.Rad2Deg)
         {
             source.Set2DForward(targetForward);
@@ -54,7 +54,7 @@ public class NOD_TurnTo : BTAction
         Vector2 newForward = BattleMath.Vector2RotateFromRadian(sourceForward.x, sourceForward.y,radianToTurn);
         source.Set2DForward(newForward);
         GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo2D , source.id, targetForward);
-        //BattleLog.Log("【NOD_TurnTo】自己朝向：{0} 目标朝向：{1} 相隔角度：{2} 旋转弧度：{3} 叉乘：{4} 新的朝向：{5}", sourceForward.ToString(),targetForward.ToString(), angle.ToString(),(radianToTurn * Mathf.Rad2Deg).ToString(), cross.ToString(), newForward.ToString());
+        BattleLog.Log("【NOD_TurnTo】自己朝向：{0} 目标朝向：{1} 相隔角度：{2} 旋转弧度：{3} 叉乘：{4} 新的朝向：{5}", sourceForward.ToString(), targetForward.ToString(), angle.ToString(), (radianToTurn * Mathf.Rad2Deg).ToString(), cross.ToString(), newForward.ToString());
         return BTResult.Running;
     }
 }

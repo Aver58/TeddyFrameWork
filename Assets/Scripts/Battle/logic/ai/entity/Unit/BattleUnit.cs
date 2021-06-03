@@ -250,15 +250,16 @@ public class BattleUnit : Unit
         {
             //比对决策树和行为树的请求是否一致
             if(foregroundRequest != null)
-                GameLog.Log("【UpdateRequest】当前正在处理的请求：" + foregroundRequest.ToString());
+                GameLog.Log("[UpdateRequest]当前请求：" + foregroundRequest.ToString());
 
             if(backgroundRequest != null)
-                GameLog.Log("【UpdateRequest】下一个要处理的请求：" + backgroundRequest.ToString());
+                GameLog.Log("[UpdateRequest]下一个请求：" + backgroundRequest.ToString());
             
             //reset bev tree 清理一些状态
             //m_BehaviorTree.Transition(m_BehaviorWorkData);
             //assign to current
             m_BehaviorWorkData.request = backgroundRequest;
+            m_DecisionWorkData.request = null;// 消耗掉了这个请求
         }
         return 0;
     }
