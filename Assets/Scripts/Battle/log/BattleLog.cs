@@ -13,7 +13,7 @@ public static class BattleLog
 {
     public static void Log(string format, params object[] @params)
     {
-        GameLog.Log(string.Format(format, @params));
+        GameLog.Log(format, @params);
     }
 
     public static void LogError(string format,params object[] @params)

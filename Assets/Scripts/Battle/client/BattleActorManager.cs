@@ -34,6 +34,11 @@ public class BattleActorManager : Singleton<BattleActorManager>
         return actor;
     }
 
+    public Dictionary<int, HeroActor> GetAllActors()
+    {
+        return m_ActorMap;
+    }
+
     public List<HeroActor> GetEnemyActors()
     {
         m_Temps = new List<HeroActor>();

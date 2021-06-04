@@ -31,8 +31,6 @@ namespace Aver3
             // 评估这个节点是否可以进入：1.有设置条件；2.条件通过；
             var condition1 = (m_precondition == null || m_precondition.IsTrue(bTData));
             var condition2 = OnEvaluate(bTData);
-            if(BTConst.ENABLE_BTACTION_LOG)
-                GameLog.Log("Evaluate{0}【{1},{2}】", Name,condition1, condition2);
             return condition1 && condition2;
         }
 

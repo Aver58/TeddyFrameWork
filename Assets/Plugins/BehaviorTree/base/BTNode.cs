@@ -19,7 +19,7 @@ namespace Aver3
     /// </summary>
     public abstract class BTNode
     {
-        public List<BTNode> children { get; }
+        public List<BTNode> children;
         public int childCount { get { return children.Count; } }
 
         public BTNode()

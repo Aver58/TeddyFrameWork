@@ -17,6 +17,7 @@ namespace Aver3
     {
         protected override void OnEnter(BTData wData)
         {
+            GameLog.Log("NOD_MoveTo OnEnter");
             var behaviorData = wData as BattleData;
             BattleUnit source = behaviorData.owner;
             source.SetState(HeroState.MOVE);
@@ -45,9 +46,7 @@ namespace Aver3
             float newPosZ = ownerPos.y + detalTime * moveSpeed * toForwardZ;
 
             source.Set2DPosition(newPosX, newPosZ);
-            BattleLog.Log("【NOD_MoveTo】移动速度：{0} 当前位置：{1},{2} 目标位置：{3},{4} newPosX：{5} newPosZ：{6}}",
-                moveSpeed.ToString(), ownerPos.x.ToString(), ownerPos.y.ToString(), targetPos.x.ToString(), targetPos.y.ToString()
-                , newPosX.ToString(), newPosZ.ToString());
+            GameLog.Log("【NOD_MoveTo】移动速度：{0} 当前位置：{1},{2} 目标位置：{3},{4} newPosX：{5} newPosZ：{6}",moveSpeed.ToString(), ownerPos.x.ToString(), ownerPos.y.ToString(), targetPos.x.ToString(), targetPos.y.ToString(), newPosX.ToString(), newPosZ.ToString());
 
             GameMsg.instance.SendMessage(GameMsgDef.Hero_MoveTo, source.id, new Vector3(newPosX, 0, newPosZ), new Vector3(toForwardX, 0, toForwardZ));
             return BTResult.Running;

@@ -24,7 +24,6 @@ namespace Aver3
             for(int i = 0; i < childCount; i++)
             {
                 var child = GetChild<BTAction>(i);
-                GameLog.Log("OnEvaluate{0}:{1}",i, child.Evaluate(bTData));
                 if(child.Evaluate(bTData))
                 {
                     m_activeChild = child;

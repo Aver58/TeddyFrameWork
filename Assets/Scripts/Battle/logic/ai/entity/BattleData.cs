@@ -13,10 +13,10 @@ using Aver3;
 
 public class BattleData : BTData
 {
-    public float deltaTime { get; set; }
-    public float gameTime { get; set; }
-    public BehaviorRequest request { get; set; }
-    public BattleUnit owner { get; set; }
+    public float deltaTime;
+    public float gameTime;
+    public BattleUnit owner;
+    public BehaviorRequest request;
 
     public BattleData(BattleUnit battleEntity)
     {

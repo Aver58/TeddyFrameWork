@@ -95,26 +95,27 @@ public class MobaBussiness : Singleton<MobaBussiness>
 
     #region EventHandler
 
-    //todo 根据id 筛选
-    //todo 为啥不能用 HeorMoveEventArgs
     private void OnHeroMoveTo(int id, Vector3 targetPos, Vector3 toForward)
     {
-        foreach(HeroActor render in m_ActorMgr.GetEnemyActors())
+        foreach(var item in m_ActorMgr.GetAllActors())
         {
-            if(render.id == id)
+            var actor = item.Value;
+            GameLog.Log(actor.id.ToString() + id.ToString());
+            if(actor.id == id)
             {
-                render.Set3DPosition(targetPos);
+                actor.Set3DPosition(targetPos);
             }
         }
     }
 
     private void OnHeroTurnTo(int id ,Vector2 forward)
     {
-        foreach(HeroActor render in m_ActorMgr.GetEnemyActors())
+        foreach(var item in m_ActorMgr.GetAllActors())
         {
-            if(render.id == id)
+            var actor = item.Value;
+            if(actor.id == id)
             {
-                render.Set2DForward(forward);
+                actor.Set2DForward(forward);
             }
         }
     }

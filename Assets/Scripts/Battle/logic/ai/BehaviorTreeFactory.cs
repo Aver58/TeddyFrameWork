@@ -27,14 +27,12 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 		nodeChase.SetPrecondition(new CON_IsChaseRequest());
 
 		// 旋转
-		var nodeTurnTo = new BTAction();
+		var nodeTurnTo = new NOD_TurnTo();
 		nodeTurnTo.SetPrecondition(new CON_IsNeedTurnTo());//todo 角色是否可以转向 CON_CanTurnTo
-		nodeTurnTo.AddChild(new NOD_TurnTo());
 
 		// 移动
-		var nodeMoveTo = new BTAction();
+		var nodeMoveTo = new NOD_MoveTo();
 		nodeMoveTo.SetPrecondition(new CON_IsNeedMoveTo());//todo 角色是否可以移动 CON_CanMoveTo
-		nodeMoveTo.AddChild(new NOD_MoveTo());
 
 		nodeChase.AddChild(nodeTurnTo);
 		nodeChase.AddChild(nodeMoveTo);
@@ -58,7 +56,6 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 		{
 			m_MobaBehaviorTree = new BTPrioritySelector();
 			m_MobaBehaviorTree.AddChild(GetChaseNode());
-			//m_MobaBehaviorTree.
 		}
 		return m_MobaBehaviorTree;
 	}
