@@ -25,13 +25,16 @@ public static class BattleMath
         return (float)Math.Sqrt(Distance2DMagnitude(leftX, leftZ, rightX, rightZ));
     }
 
-    public static Vector2 Vector2RotateFromRadian(float forwardX, float forwardZ, float radian)
+    /// <summary>
+    /// 绕y轴旋转矩阵
+    /// 顺时针角度为负，逆时针角度为正
+    /// </summary>
+    public static void RotateByYAxis(float x, float y, float z, float radian,out float x1, ref float y1, out float z1)
     {
-        //2维向量旋转(逆时针旋转公式) 顺时针角度为负，逆时针角度为正
         float sinValue = (float)Math.Sin(radian);
         float cosValue = (float)Math.Cos(radian);
-        float x = forwardX * cosValue - forwardZ * sinValue;
-        float z = forwardX * sinValue + forwardZ * cosValue;
-        return new Vector2(x,z);
+        x1 = x * cosValue - z * sinValue;
+        z1 = x * sinValue + z * cosValue;
     }
+
 }

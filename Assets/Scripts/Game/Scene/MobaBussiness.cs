@@ -23,8 +23,8 @@ public class MobaBussiness : Singleton<MobaBussiness>
     public MobaBussiness()
     {
         GameMsg instance = GameMsg.instance;
-        instance.AddMessage<int, Vector3, Vector3>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
-        instance.AddMessage<int,Vector2>(GameMsgDef.Hero_TurnTo2D, OnHeroTurnTo);
+        instance.AddMessage<int, float, float, float>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
+        instance.AddMessage<int, float, float, float>(GameMsgDef.Hero_TurnTo3D, OnHeroTurnTo);
         instance.AddMessage<int,HeroState,string,bool>(GameMsgDef.Hero_ChangeState, OnHeroActorStateChanged);
     }
 
@@ -32,7 +32,7 @@ public class MobaBussiness : Singleton<MobaBussiness>
     {
         GameMsg instance = GameMsg.instance;
         instance.RemoveMessage(GameMsgDef.Hero_MoveTo, this);
-        instance.RemoveMessage(GameMsgDef.Hero_TurnTo2D, this);
+        instance.RemoveMessage(GameMsgDef.Hero_TurnTo3D, this);
         instance.RemoveMessage(GameMsgDef.Hero_ChangeState, this);
     }
 
@@ -53,7 +53,6 @@ public class MobaBussiness : Singleton<MobaBussiness>
         {
             HeroActor actor = new HeroActor(unit);
             actor.LoadAsset(OnLoadGuard);
-            m_ActorMgr.AddActor(unit.hash,actor);
             // 绘制移动区域
             m_DrawTool.DrawMoveArea(unit.GetStartPoint(), unit.GetViewRange());
         }
@@ -81,7 +80,6 @@ public class MobaBussiness : Singleton<MobaBussiness>
     {
         HeroActor actor = new HeroActor(unit);
         actor.LoadAsset(OnLoadDummyUnit);
-        m_ActorMgr.AddActor(unit.hash, actor);
     }
 
     private void OnLoadDummyUnit(GameObject go)
@@ -95,29 +93,18 @@ public class MobaBussiness : Singleton<MobaBussiness>
 
     #region EventHandler
 
-    private void OnHeroMoveTo(int id, Vector3 targetPos, Vector3 toForward)
+    private void OnHeroMoveTo(int id, float x, float y, float z)
     {
-        foreach(var item in m_ActorMgr.GetAllActors())
-        {
-            var actor = item.Value;
-            GameLog.Log(actor.id.ToString() + id.ToString());
-            if(actor.id == id)
-            {
-                actor.Set3DPosition(targetPos);
-            }
-        }
+        var actor = m_ActorMgr.GetActor(id);
+        if(actor!=null)
+            actor.Set3DPosition(x,y,z);
     }
 
-    private void OnHeroTurnTo(int id ,Vector2 forward)
+    private void OnHeroTurnTo(int id, float x, float y, float z)
     {
-        foreach(var item in m_ActorMgr.GetAllActors())
-        {
-            var actor = item.Value;
-            if(actor.id == id)
-            {
-                actor.Set2DForward(forward);
-            }
-        }
+        var actor = m_ActorMgr.GetActor(id);
+        if(actor != null)
+            actor.Set3DForward(x,y,z);
     }
 
     private void OnHeroActorStateChanged(int heroID, HeroState heroState, string skillName, bool isSkipCastPoint)

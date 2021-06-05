@@ -25,6 +25,9 @@ public partial class MobaMainView : MainViewBase
     private HudActorManager m_hudActorManager;
     private Dictionary<AbilityCastType,MobaSkillItem> m_MobaSkillItemMap;
 
+    private DummyUnit m_cacheDummyUnit;
+    private ChaseRequest m_cacheChaseRequest;
+
     protected override void OnLoaded()
     {
         base.OnLoaded();
@@ -38,6 +41,9 @@ public partial class MobaMainView : MainViewBase
         InitCheatPanel();
 
         AddOneDummyUnit();
+
+        m_cacheDummyUnit = new DummyUnit(-1, -1);
+        m_cacheChaseRequest = new ChaseRequest(m_cacheDummyUnit);
     }
 
     #region Cheat
@@ -162,17 +168,17 @@ public partial class MobaMainView : MainViewBase
         //获取虚拟摇杆偏移量  [-1,1]
         float h = axisValue.x;
         float v = axisValue.y;
-
         if(Mathf.Abs(h) > 0f || (Mathf.Abs(v) > 0f))
         {
             moveDistance.Set(h, 0, v);
             moveDistance *= runSpeed;
             var newPosition = m_PlayerActor.transform.position + moveDistance;
             // MovePlayerToPoint(newPosition);
-            // todo 改成请求,发个移动请求到指定位置的请求到行为树里
-            var dummyUnit = new DummyUnit(newPosition.x,newPosition.z);
-            var chaseRequest = new ChaseRequest(dummyUnit);
-            m_PlayerActor.ForceUpdateDecisionRequest(chaseRequest);
+            // todo 改成请求,发个移动请求到指定位置的请求到行为树里 todo 缓存请求和unit
+
+            m_cacheDummyUnit.Set3DPosition(newPosition.x,0,newPosition.z);
+            //m_cacheChaseRequest.target = m_cacheDummyUnit;
+            m_PlayerActor.ForceUpdateDecisionRequest(m_cacheChaseRequest);
         }
         else
         {

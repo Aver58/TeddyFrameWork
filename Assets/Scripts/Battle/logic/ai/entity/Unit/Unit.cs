@@ -22,9 +22,11 @@ public abstract class Unit
     private float m_ForwardY;
     private float m_ForwardZ;
     private Vector2 m_Forward2D;
+    private Vector3 m_Forward3D;
     private Vector2 m_Position2D;
     private Vector3 m_Position3D;
-    public int id { get; set; }
+
+    public int id;
 
     public virtual void OnEnter(){ }
     public virtual void OnExit(){ }
@@ -50,10 +52,10 @@ public abstract class Unit
         return m_Position2D;
     }
 
-    public Vector2 Get2DForward()
+    public Vector3 Get3DForward()
     {
-        m_Forward2D.Set(m_ForwardX, m_ForwardZ);
-        return m_Forward2D;
+        m_Forward3D.Set(m_ForwardX, m_ForwardY, m_ForwardZ);
+        return m_Forward3D;
     }
 
     public Vector3 Get3DPosition()
@@ -65,12 +67,10 @@ public abstract class Unit
     #endregion
 
     #region set
-    // todo 改成set都是设置3d，get可以取2d或者3d
+
     public void Set3DPosition(Vector3 pos)
     {
-        m_PosX = pos.x;
-        m_PosY = pos.y;
-        m_PosZ = pos.z;
+        Set3DPosition(pos.x, pos.y, pos.z);
     }
 
     public void Set3DPosition(float posX, float posY, float posZ)
@@ -80,24 +80,14 @@ public abstract class Unit
         m_PosZ = posZ;
     }
 
-    public void Set2DPosition(float posX, float posZ)
+    public void Set2DForward(Vector2 forward)
     {
-        m_PosX = posX;
-        m_PosZ = posZ;
+        Set2DForward(forward.x, forward.y);
     }
 
     public void Set3DForward(Vector3 pos)
     {
-        m_ForwardX = pos.x;
-        m_ForwardY = pos.y;
-        m_ForwardZ = pos.z;
-    }
-
-    public void Set3DForward(float posX, float posY, float posZ)
-    {
-        m_ForwardX = posX;
-        m_ForwardY = posY;
-        m_ForwardZ = posZ;
+        Set3DForward(pos.x, pos.y, pos.z);
     }
 
     public void Set2DForward(float posX, float posZ)
@@ -106,11 +96,18 @@ public abstract class Unit
         m_ForwardZ = posZ;
     }
 
-    public void Set2DForward(Vector2 forward)
+    public void Set3DForward(float posX, float posY, float posZ)
     {
-        m_ForwardX = forward.x;
-        m_ForwardZ = forward.y;
+        if(posX == 0f && posY == 0f && posZ == 0f)
+        {
+            GameLog.Log("Set3DForward is zero!");
+            return;
+        }
+        m_ForwardX = posX;
+        m_ForwardY = posY;
+        m_ForwardZ = posZ;
     }
+
     #endregion
 }
 

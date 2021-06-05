@@ -27,16 +27,15 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 		nodeChase.SetPrecondition(new CON_IsChaseRequest());
 
 		// 旋转
-		var nodeTurnTo = new NOD_TurnTo();
-		nodeTurnTo.SetPrecondition(new CON_IsNeedTurnTo());//todo 角色是否可以转向 CON_CanTurnTo
+		//var nodeTurnTo = new NOD_TurnTo();
+		//nodeTurnTo.SetPrecondition(new CON_IsNeedTurnTo());//todo 角色是否可以转向 CON_CanTurnTo
 
 		// 移动
 		var nodeMoveTo = new NOD_MoveTo();
 		nodeMoveTo.SetPrecondition(new CON_IsNeedMoveTo());//todo 角色是否可以移动 CON_CanMoveTo
 
-		nodeChase.AddChild(nodeTurnTo);
+		//nodeChase.AddChild(nodeTurnTo);
 		nodeChase.AddChild(nodeMoveTo);
-		nodeChase.AddChild(new NOD_SetUnitIdle());
 		return nodeChase;
 	}
 

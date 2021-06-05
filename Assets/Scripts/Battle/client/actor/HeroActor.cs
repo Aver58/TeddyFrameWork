@@ -31,7 +31,7 @@ public class HeroActor
     private Vector3 m_position = Vector3.zero;
     private DebugController m_DrawTool;
     private AnimationController m_AnimController;
-    private PositionController m_PositionController;
+    //private PositionController m_PositionController;
     private HeroStateController m_HeroStateController;
     private Dictionary<AbilityCastType, AbilityActor> m_abilityActorMap;
 
@@ -60,7 +60,7 @@ public class HeroActor
 
         gameObject = GameObject.Instantiate<GameObject>(asset);
         transform = gameObject.transform;
-        m_PositionController = gameObject.AddComponent<PositionController>();
+        //m_PositionController = gameObject.AddComponent<PositionController>();
         // 绘制可视区域
         m_DrawTool = gameObject.AddComponent<DebugController>();
         m_DrawTool.DrawViewArea(battleUnit.GetViewRange());     //可见范围
@@ -80,6 +80,8 @@ public class HeroActor
 
         gameObject.name = string.Format("[{0}][{1}][UID:{2}][CID:{3}][Lv:{4}][Speed:{5}]",
             battleUnit.GetName(),camp.ToString(),battleUnit.GetUniqueID(),battleUnit.GetID(),battleUnit.GetLevel(),battleUnit.GetMoveSpeed());
+        BattleActorManager.instance.AddActor(battleUnit.id, this);
+
         GameMsg.instance.SendMessage(GameMsgDef.BattleActor_Created, this, camp == BattleCamp.ENEMY);
     }
 
@@ -111,20 +113,25 @@ public class HeroActor
         {
             battleUnit.Set3DPosition(position);
             battleUnit.Set3DForward(transform.forward);
-            m_PositionController.InitPosition(position, transform.forward);
+            //m_PositionController.InitPosition(position, transform.forward);
+            Set3DPosition(position);
+            Set3DForward(transform.forward);
         }
+    }
+
+    public void Set3DPosition(float x, float y, float z)
+    {
+        m_position.Set(x, y, z);
+        Set3DPosition(m_position);
     }
 
     public void Set3DPosition(Vector3 position)
     {
         battleUnit.Set3DPosition(position);
         float logicDeltaTime = (position - transform.position).magnitude / battleUnit.GetMoveSpeed();
-        m_PositionController.MoveTo3DPoint(logicDeltaTime, position, OnMoveEnd);
-    }
 
-    public void OnMoveEnd()
-    {
-        ChangeState(HeroState.IDLE);
+        //m_PositionController.MoveTo3DPoint(logicDeltaTime, position, OnMoveEnd);
+        transform.position = position;
     }
 
     public void Set2DForward(Vector2 forward)

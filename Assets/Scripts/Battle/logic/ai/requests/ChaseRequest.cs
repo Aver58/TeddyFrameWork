@@ -14,6 +14,6 @@ public class ChaseRequest : BehaviorRequest
     public ChaseRequest(Unit target) : base(RequestType.Chase)
     {
         this.target = target;
-        isRequestCompleted = false;
+        SetRequestCompleteState(false);
     }
 }

@@ -26,7 +26,7 @@ public enum DamageEffectDefine
 
 public static class BattleDefine
 {
-    public static float FireInterval = 1f;
+    public static float SearchArea = 6f;
 
     public static Dictionary<HeroPropertyType, string> HERO_PROPERTY_TYPE_MAP = new Dictionary<HeroPropertyType, string>{
         { HeroPropertyType.MAX_HP , "maxhp"},

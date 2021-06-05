@@ -16,12 +16,12 @@ public class NOD_SetUnitIdle : BTAction
 {
     protected override void OnEnter(BTData wData)
     {
-        BattleLog.Log("【NOD_SetUnitIdle】onEnter");
+        BattleLog.Log("【NOD_SetUnitIdle】OnEnter");
         var behaviorData = wData as BattleData;
         BattleUnit source = behaviorData.owner;
         var request = behaviorData.request;
         
         source.SetState(HeroState.IDLE);
-        request.isRequestCompleted = true;
+        request.SetRequestCompleteState(true);
     }
 }

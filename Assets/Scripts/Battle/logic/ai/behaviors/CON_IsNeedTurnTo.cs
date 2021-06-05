@@ -21,14 +21,14 @@ public class CON_IsNeedTurnTo : BTPrecondition
         BehaviorRequest request = behaviorData.request;
         Unit target = request.target;
 
-        Vector2 ownerPos = owner.Get2DPosition();
-        Vector2 targetPos = target.Get2DPosition();
+        var ownerPos = owner.Get3DPosition();
+        var targetPos = target.Get3DPosition();
 
-        Vector2 toForward = targetPos - ownerPos;
-        Vector2 ownerForward = owner.Get2DForward();
+        var toForward = (targetPos - ownerPos).normalized;
+        var ownerForward = owner.Get3DForward();
 
-        float angle = Vector2.Angle(toForward, ownerForward);
-        BattleLog.Log("【{0}】angle:{1}", GetType().ToString(), angle);
-        return angle > 0.1f;
+        float angle = Vector3.Angle(toForward, ownerForward);
+        BattleLog.Log("【{0}】angle:{1},toForward:{2},ownerForward:{3},targetPos:{4},ownerPos,{5}", GetType().ToString(), angle, toForward, ownerForward, targetPos, ownerPos);
+        return angle > 0.01f;
     }
 }

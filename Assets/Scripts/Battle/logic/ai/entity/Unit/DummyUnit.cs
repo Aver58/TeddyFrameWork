@@ -13,6 +13,6 @@ public class DummyUnit : Unit
 {
     public DummyUnit(float pointX,float pointZ)
     {
-        Set2DPosition(pointX, pointZ);
+        Set3DPosition(pointX,0, pointZ);
     }
 }

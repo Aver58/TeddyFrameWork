@@ -22,15 +22,22 @@ public class BattleActorManager : Singleton<BattleActorManager>
         m_Temps = new List<HeroActor>();
     }
 
-    public void AddActor(int hash,HeroActor e)
+    public void AddActor(int id,HeroActor e)
     {
-        m_ActorMap.Add(hash,e);
+        m_ActorMap.Add(id,e);
     }
 
     public HeroActor GetActor(BattleUnit entity)
     {
         HeroActor actor;
-        m_ActorMap.TryGetValue(entity.hash, out actor);
+        m_ActorMap.TryGetValue(entity.id, out actor);
+        return actor;
+    }
+
+    public HeroActor GetActor(int entityID)
+    {
+        HeroActor actor;
+        m_ActorMap.TryGetValue(entityID, out actor);
         return actor;
     }
 

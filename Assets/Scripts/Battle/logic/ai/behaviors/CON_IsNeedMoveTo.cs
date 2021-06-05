@@ -20,11 +20,11 @@ public class CON_IsNeedMoveTo : BTPrecondition
         var request = data.request as ChaseRequest;
         var target = request.target;
         var owner = data.owner;
-        var ownerPos = owner.Get2DPosition();
-        var targetPos = target.Get2DPosition();
+        var ownerPos = owner.Get3DPosition();
+        var targetPos = target.Get3DPosition();
 
-        var distance = Vector2.Distance(targetPos , ownerPos);
+        var distance = Vector3.Distance(targetPos , ownerPos);
         GameLog.Log("distance:{0}",distance);
-        return distance > 0;
+        return distance > 0.01f;
     }
 }

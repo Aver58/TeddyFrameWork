@@ -245,8 +245,8 @@ public class BattleUnit : Unit
     // 更新请求
     public int UpdateRequest(float gameTime, float deltaTime)
     {
-        BehaviorRequest foregroundRequest = m_BehaviorWorkData.request;
-        BehaviorRequest backgroundRequest = m_DecisionWorkData.request;
+        var foregroundRequest = m_BehaviorWorkData.request;
+        var backgroundRequest = m_DecisionWorkData.request;
         if(backgroundRequest != foregroundRequest)
         {
             //比对决策树和行为树的请求是否一致
@@ -255,9 +255,9 @@ public class BattleUnit : Unit
 
             if(backgroundRequest != null)
                 GameLog.Log("[UpdateRequest]下一个请求：" + backgroundRequest.ToString());
-            
-            //reset bev tree 清理一些状态
-            //m_BehaviorTree.Transition(m_BehaviorWorkData);
+
+            //reset 清理一些状态
+            m_BehaviorTree.Transition(m_BehaviorWorkData);
             //assign to current
             m_BehaviorWorkData.request = backgroundRequest;
             m_DecisionWorkData.request = null;// 消耗掉了这个请求
@@ -486,6 +486,12 @@ public class BattleUnit : Unit
     {
         m_HeroState = state;
         GameMsg.instance.SendMessage(GameMsgDef.Hero_ChangeState, id, state, skillName, isSkipCastPoint);
+    }
+
+    public void SetRequestComplete()
+    {
+        m_BehaviorWorkData.request.SetRequestCompleteState(true);
+        m_BehaviorWorkData.request = null;
     }
 
     #endregion

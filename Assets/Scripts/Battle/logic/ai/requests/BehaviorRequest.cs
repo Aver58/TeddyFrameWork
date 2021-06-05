@@ -1,17 +1,22 @@
 ﻿public class BehaviorRequest
 {
-    public RequestType RequestType { get; }
-    public bool isRequestCompleted { get; set; }
-    public Unit target { get; set; }
+    public RequestType RequestType;
+    private bool m_isRequestCompleted;
+    public Unit target;
 
     public BehaviorRequest(RequestType requestType)
     {
-        isRequestCompleted = false;
+        m_isRequestCompleted = false;
         RequestType = requestType;
+    }
+
+    public void SetRequestCompleteState(bool isComplete)
+    {
+        m_isRequestCompleted = isComplete;
     }
 
     public bool IsRequestCompleted() 
     {
-        return isRequestCompleted == true;
+        return m_isRequestCompleted == true;
     }
 }

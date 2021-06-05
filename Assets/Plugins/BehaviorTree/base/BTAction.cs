@@ -44,6 +44,13 @@ namespace Aver3
             m_precondition = precondition;
         }
 
+        public void Transition(BTData bTData)
+        {
+            m_status = BTActionStatus.Ready;
+            // 是否需要退出
+            OnExit(bTData);
+        }
+
         #endregion
 
         #region 叶子节点，生命周期维护
