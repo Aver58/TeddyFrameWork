@@ -40,9 +40,8 @@ namespace Aver3
 
             var result = m_activeChild.Update(bTData);
             if(result != BTResult.Running)
-            {
                 m_activeChild = null;
-            }
+
             return result;
         }
     }

@@ -7,7 +7,7 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 {
 	private static TBTActionPrioritizedSelector m_DecisionTree;
 	private static TBTActionPrioritizedSelector m_BehaviorTree;
-	private static BTPrioritySelector m_MobaBehaviorTree;
+	private static BTPrioritySelector m_mobaBehaviorTree;
 
 	public static TBTActionPrioritizedSelector GetDecisionTree()
 	{
@@ -23,19 +23,20 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 	// 追逐节点
 	public BTAction GetChaseNode()
 	{
-		var nodeChase = new BTPrioritySelector();
+		var nodeChase = new BTParallel(ParallelFunction.Or);
 		nodeChase.SetPrecondition(new CON_IsChaseRequest());
 
-		// 旋转
-		//var nodeTurnTo = new NOD_TurnTo();
-		//nodeTurnTo.SetPrecondition(new CON_IsNeedTurnTo());//todo 角色是否可以转向 CON_CanTurnTo
+        // 旋转
+        var nodeTurnTo = new NOD_TurnTo();
+        nodeTurnTo.SetPrecondition(new CON_IsNeedTurnTo());//todo 是否可以转向 CON_CanTurnTo
 
-		// 移动
-		var nodeMoveTo = new NOD_MoveTo();
-		nodeMoveTo.SetPrecondition(new CON_IsNeedMoveTo());//todo 角色是否可以移动 CON_CanMoveTo
+        // 移动
+        var nodeMoveTo = new NOD_MoveTo();
+		nodeMoveTo.SetPrecondition(new CON_IsNeedMoveTo());//todo 是否可以移动 CON_CanMoveTo
 
-		//nodeChase.AddChild(nodeTurnTo);
-		nodeChase.AddChild(nodeMoveTo);
+        nodeChase.AddChild(nodeTurnTo);
+        nodeChase.AddChild(nodeMoveTo);
+
 		return nodeChase;
 	}
 
@@ -44,19 +45,17 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 	//{
 	//	var node = new BTPrioritySelector();
 	//	node.SetPrecondition(new CON_IsManualCastAbilityRequest());
-
-
 	//	return node;
 	//}
 
 	public BTAction GetMobaBehaviorTree()
 	{
-		if(m_MobaBehaviorTree == null)
+		if(m_mobaBehaviorTree == null)
 		{
-			m_MobaBehaviorTree = new BTPrioritySelector();
-			m_MobaBehaviorTree.AddChild(GetChaseNode());
+			m_mobaBehaviorTree = new BTPrioritySelector();
+			m_mobaBehaviorTree.AddChild(GetChaseNode());
 		}
-		return m_MobaBehaviorTree;
+		return m_mobaBehaviorTree;
 	}
 
 	public static TBTActionPrioritizedSelector GetBehaviorTree()

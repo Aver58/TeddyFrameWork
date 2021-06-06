@@ -32,7 +32,7 @@ namespace Aver3
             return index >= 0 && index < children.Count;
         }
 
-        public void AddChild(BTNode node)
+        public virtual void AddChild(BTNode node)
         {
             children.Add(node);
         }

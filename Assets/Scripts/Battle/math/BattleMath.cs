@@ -14,15 +14,27 @@ using UnityEngine;
 
 public static class BattleMath
 {
-    // x*x + y*y
-    public static float Distance2DMagnitude(float leftX, float leftZ, float rightX,float rightZ)
+    // 距离平方 x*x + y*y
+    public static float GetDistance2DSquare(float leftX, float leftZ, float rightX, float rightZ)
     {
-        return (leftX - rightX) * (leftX - rightX) + (rightZ - leftZ) * rightZ - leftZ;
+        return (leftX - rightX) * (leftX - rightX) + (rightZ - leftZ) * (rightZ - leftZ);
     }
 
-    public static float SqartDistance2DMagnitude(float leftX, float leftZ, float rightX, float rightZ)
+    // 距离
+    public static float GetDistance2D(float leftX, float leftZ, float rightX, float rightZ)
     {
-        return (float)Math.Sqrt(Distance2DMagnitude(leftX, leftZ, rightX, rightZ));
+        return (float)Math.Sqrt(GetDistance2DSquare(leftX, leftZ, rightX, rightZ));
+    }
+
+    public static float GetDistance3DSquare(Vector3 left, Vector3 right)
+    {
+        return GetDistance3DSquare(left.x, left.y, left.z,right.x, right.y, right.z);
+    }
+
+    // 距离平方 x*x + y*y + z*z
+    public static float GetDistance3DSquare(float leftX, float leftY, float leftZ, float rightX, float rightY, float rightZ)
+    {
+        return (leftX - rightX) * (leftX - rightX) + (leftY - rightY) * (leftY - rightY) + (rightZ - leftZ) * (rightZ - leftZ);
     }
 
     /// <summary>

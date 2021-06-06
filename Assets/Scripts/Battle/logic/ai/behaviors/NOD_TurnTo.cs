@@ -16,6 +16,7 @@ public class NOD_TurnTo : BTAction
 {
     protected override void OnEnter(BTData bTData)
     {
+        GameLog.Log("NOD_TurnTo OnEnter");
         var behaviorData = bTData as BattleData;
         BattleUnit owner = behaviorData.owner;
         owner.SetState(HeroState.TURN);
@@ -24,19 +25,18 @@ public class NOD_TurnTo : BTAction
     protected override BTResult OnExecute(BTData bTData)
     {
         var behaviorData = bTData as BattleData;
-        float deltaTime = behaviorData.deltaTime;
-        BattleUnit source = behaviorData.owner;
-        BehaviorRequest request = behaviorData.request;
-        Unit target = request.target;
+        var source = behaviorData.owner;
+        var request = behaviorData.request;
+        var target = request.target;
 
         var ownerPos = source.Get3DPosition();
         var targetPos = target.Get3DPosition();
 
         var sourceForward = source.Get3DForward();
         var targetForward = (targetPos - ownerPos).normalized;
-        float turnSpeed = source.GetTurnSpeed();
+        float turnSpeed = 20;// owner.GetTurnSpeed();
         float angle = Vector3.Angle(targetForward, sourceForward);
-        float radianToTurn = turnSpeed * deltaTime;
+        float radianToTurn = turnSpeed * behaviorData.deltaTime;
 
         BattleLog.Log("【NOD_TurnTo】angle:{0},{1}", angle, radianToTurn * Mathf.Rad2Deg);
         if(angle < radianToTurn * Mathf.Rad2Deg)

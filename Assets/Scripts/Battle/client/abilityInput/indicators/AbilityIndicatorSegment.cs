@@ -29,7 +29,7 @@ public class AbilityIndicatorSegment : AbilityIndicator
     {
         base.OnUpdate(casterX, casterZ, targetX, targetZ, targetForwardX, targetForwardZ);
 
-        m_length = BattleMath.SqartDistance2DMagnitude(casterX, casterZ, targetX, targetZ);
+        m_length = BattleMath.GetDistance2D(casterX, casterZ, targetX, targetZ);
 
         var scale = m_indicatorTransform.localScale;
         m_scale.Set(scale.x, scale.y, m_length);

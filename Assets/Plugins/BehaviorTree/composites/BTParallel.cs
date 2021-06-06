@@ -17,11 +17,11 @@ namespace Aver3
     {
         private int m_failResultCount = 0;
         protected ParallelFunction m_func;
-        protected List<BTResult> m_results;
+        protected List<bool> m_results;
 
         public BTParallel(ParallelFunction func)
         {
-            m_results = new List<BTResult>();
+            m_results = new List<bool>();
             m_func = func;
         }
 
@@ -31,39 +31,51 @@ namespace Aver3
             for(int i = 0; i < childCount; i++)
             {
                 var child = GetChild<BTAction>(i);
-                if(isAndFunc && (child.Evaluate(bTData) == false))
-                {
+                var result = child.Evaluate(bTData);
+                m_results[i] = result;
+                if(isAndFunc && (result == false))
                     return false;
-                }
             }
+
             return true;
         }
 
         protected override BTResult OnUpdate(BTData bTData)
         {
-            // todo
-            //m_failResultCount = 0;
-            //bool isAndFunc = m_func == ParallelFunction.And;
-            //for(int i = 0; i < childCount; i++)
-            //{
-            //    var result = GetChild(i).Update();
-            //    if(isAndFunc)
-            //    {
-                    
-            //    }
-            //    else
-            //    {
-            //        if(result != BTResult.Running)
-            //        {
-            //            m_failResultCount += 1;
-            //        }
-            //    }
-            //}
+            m_failResultCount = 0;
+            bool isAndFunc = m_func == ParallelFunction.And;
+            for(int i = 0; i < childCount; i++)
+            {
+                var evaluationResult = m_results[i];
+                // 没通过的，不执行逻辑
+                if(evaluationResult == false)
+                    continue;
 
-            //if(m_failResultCount == childCount)
-            //    return BTResult.Finished;
+                var child = GetChild<BTAction>(i);
+                var runningResult = child.Update(bTData);
+                if(runningResult != BTResult.Running)
+                {
+                    if(isAndFunc)
+                    {
+                        return BTResult.Finished;
+                    }
+                    else
+                    {
+                        m_failResultCount += 1;
+                    }
+                }
+            }
+
+            if(m_failResultCount == childCount)
+                return BTResult.Finished;
 
             return BTResult.Running;
+        }
+
+        public override void AddChild(BTNode aNode)
+        {
+            base.AddChild(aNode);
+            m_results.Add(false);
         }
     }
 }

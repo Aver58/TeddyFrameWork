@@ -46,7 +46,7 @@ public class BattleUnit : Unit
         property.id = id;
         camp = battleCamp;
         m_Property = property;
-        abilities = new List<Ability>();
+        abilities = new List<Ability>(5);
         m_abilityMap = new Dictionary<AbilityCastType, Ability>(5);
         m_HeroState = HeroState.IDLE;
         m_BehaviorTree = GetBehaviorTree();
