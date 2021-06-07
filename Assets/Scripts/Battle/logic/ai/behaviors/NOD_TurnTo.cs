@@ -34,7 +34,7 @@ public class NOD_TurnTo : BTAction
 
         var sourceForward = source.Get3DForward();
         var targetForward = (targetPos - ownerPos).normalized;
-        float turnSpeed = 20;// owner.GetTurnSpeed();
+        float turnSpeed = 30;// owner.GetTurnSpeed();
         float angle = Vector3.Angle(targetForward, sourceForward);
         float radianToTurn = turnSpeed * behaviorData.deltaTime;
 

@@ -2,7 +2,6 @@
 {
     /// <summary>
     /// 序列节点
-    /// todo test
     /// 将其所有子节点依次执行，也就是说当前一个返回“完成”状态后，再运行下一个子节点
     /// </summary>
     public class BTSequence : BTAction

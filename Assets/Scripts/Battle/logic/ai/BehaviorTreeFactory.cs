@@ -23,19 +23,18 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 	// 追逐节点
 	public BTAction GetChaseNode()
 	{
-		var nodeChase = new BTParallel(ParallelFunction.Or);
+		var nodeChase = new BTPrioritySelector();
 		nodeChase.SetPrecondition(new CON_IsChaseRequest());
 
-        // 旋转
-        var nodeTurnTo = new NOD_TurnTo();
-        nodeTurnTo.SetPrecondition(new CON_IsNeedTurnTo());//todo 是否可以转向 CON_CanTurnTo
+		var nodeTurnAndMove = new BTParallel(ParallelFunction.Or);
+		var condition = new BTPreconditionOR(new CON_IsNeedTurnTo(), new CON_IsNeedMoveTo());
+		nodeTurnAndMove.SetPrecondition(condition);//todo 是否可以转向 CON_CanTurnTo //todo 是否可以移动 CON_CanMoveTo
 
-        // 移动
-        var nodeMoveTo = new NOD_MoveTo();
-		nodeMoveTo.SetPrecondition(new CON_IsNeedMoveTo());//todo 是否可以移动 CON_CanMoveTo
+		nodeTurnAndMove.AddChild(new NOD_TurnTo());// 旋转
+		nodeTurnAndMove.AddChild(new NOD_MoveTo());// 移动
 
-        nodeChase.AddChild(nodeTurnTo);
-        nodeChase.AddChild(nodeMoveTo);
+		nodeChase.AddChild(nodeTurnAndMove);
+		nodeChase.AddChild(new NOD_CompleteRequest());
 
 		return nodeChase;
 	}

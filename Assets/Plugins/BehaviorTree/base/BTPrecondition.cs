@@ -18,4 +18,41 @@ namespace Aver3
     {
         public abstract bool IsTrue(BTData bTData);
     }
+
+    #region 拓展
+
+    public abstract class BTPreconditionBinary : BTPrecondition
+    {
+        public BTPreconditionBinary(BTPrecondition lhs, BTPrecondition rhs)
+        {
+            AddChild(lhs);
+            AddChild(rhs);
+        }
+    }
+
+    public class BTPreconditionAND : BTPreconditionBinary
+    {
+        public BTPreconditionAND(BTPrecondition lhs, BTPrecondition rhs) : base(lhs, rhs){}
+
+        public override bool IsTrue(BTData bTData) 
+        {
+            var child1 = GetChild<BTPrecondition>(0); 
+            var child2 = GetChild<BTPrecondition>(1);
+            return child1.IsTrue(bTData) && child2.IsTrue(bTData);
+        }
+    }
+
+    public class BTPreconditionOR : BTPreconditionBinary
+    {
+        public BTPreconditionOR(BTPrecondition lhs, BTPrecondition rhs) : base(lhs, rhs) { }
+
+        public override bool IsTrue(BTData bTData)
+        {
+            var child1 = GetChild<BTPrecondition>(0);
+            var child2 = GetChild<BTPrecondition>(1);
+            return child1.IsTrue(bTData) || child2.IsTrue(bTData);
+        }
+    }
+
+    #endregion
 }

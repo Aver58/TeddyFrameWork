@@ -19,19 +19,11 @@ namespace Aver3
 
         protected override void OnEnter(BTData wData)
         {
-            GameLog.Log("NOD_MoveTo OnEnter");
             var behaviorData = wData as BattleData;
             BattleUnit owner = behaviorData.owner;
             owner.SetState(HeroState.MOVE);
         }
 
-        protected override void OnExit(BTData bTData)
-        {
-            GameLog.Log("NOD_MoveTo OnExit");
-            var behaviorData = bTData as BattleData;
-            behaviorData.owner.SetRequestComplete();
-        }
-        
         protected override BTResult OnExecute(BTData wData)
         {
             var behaviorData = wData as BattleData;
