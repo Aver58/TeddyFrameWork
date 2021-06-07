@@ -18,4 +18,21 @@ public static class AnimatorExtends
         var stateInfo = anim.GetCurrentAnimatorStateInfo(0);
         return stateInfo.IsName(stateName);
     }
+
+    public static bool HaveClip(this Animator anim, string clipName)
+    {
+        var controller = anim.runtimeAnimatorController;
+        if(controller!=null)
+        {
+            var animationClips = controller.animationClips;
+            for(int i = 0; i < animationClips.Length; i++)
+            {
+                if(animationClips[i].name == clipName)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

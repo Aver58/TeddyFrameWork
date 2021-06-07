@@ -9,7 +9,7 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 	private static TBTActionPrioritizedSelector m_BehaviorTree;
 	private static BTPrioritySelector m_mobaBehaviorTree;
 
-	public static TBTActionPrioritizedSelector GetDecisionTree()
+	public TBTActionPrioritizedSelector GetDecisionTree()
 	{
 		if(m_DecisionTree == null)
 		{
@@ -21,7 +21,7 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 	}
 
 	// 追逐节点
-	public BTAction GetChaseNode()
+	private BTPrioritySelector GetChaseNode()
 	{
 		var nodeChase = new BTPrioritySelector();
 		nodeChase.SetPrecondition(new CON_IsChaseRequest());
@@ -40,12 +40,45 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 	}
 
 	// 释放技能节点
-	//public BTNode GetSkillNode()
-	//{
-	//	var node = new BTPrioritySelector();
-	//	node.SetPrecondition(new CON_IsManualCastAbilityRequest());
-	//	return node;
-	//}
+	public BTPrioritySelector GetSkillNode()
+	{
+		var nodeSkill = new BTPrioritySelector();
+		nodeSkill.SetPrecondition(new CON_IsManualCastAbilityRequest());
+
+		var nodeCompleteRequest = new NOD_CompleteRequest();
+
+		// 1. 不在视野范围内，播放技能动画，不释放技能
+		var nodeOutOfView = new BTPrioritySelector();
+		nodeOutOfView.SetPrecondition(new BTPreconditionNOT(new CON_IsInViewRange()));
+		var nodeCastAbilityAnimation = new NOD_CastAbilityAnimation();
+		nodeOutOfView.AddChild(nodeCastAbilityAnimation);
+		nodeOutOfView.AddChild(nodeCompleteRequest);
+
+		// 2. 视野范围内，不在技能范围内，追逐，释放技能
+		var nodeInView = new BTPrioritySelector();
+		nodeInView.SetPrecondition(new BTPreconditionNOT(new CON_IsInAbilityRange()));
+		var nodeTurnAndMove = new BTParallel(ParallelFunction.Or);
+		var condition = new BTPreconditionOR(new CON_IsAbilityNeedTurnTo(), new CON_IsNeedMoveTo());
+		nodeTurnAndMove.SetPrecondition(condition);//todo 是否可以转向 CON_CanTurnTo //todo 是否可以移动 CON_CanMoveTo
+
+		nodeTurnAndMove.AddChild(new NOD_TurnTo());// 旋转
+		nodeTurnAndMove.AddChild(new NOD_MoveTo());// 移动
+
+		nodeInView.AddChild(nodeTurnAndMove);
+		nodeInView.AddChild(new NOD_CastAbility());
+		nodeInView.AddChild(nodeCompleteRequest);
+
+		// 3. 在技能范围内，直接释放技能
+		var nodeInAbilityRange = new BTPrioritySelector();
+		nodeInAbilityRange.AddChild(new NOD_CastAbility());
+		nodeInAbilityRange.AddChild(nodeCompleteRequest);
+
+		nodeSkill.AddChild(nodeOutOfView);
+		nodeSkill.AddChild(nodeInView);
+		nodeSkill.AddChild(nodeInAbilityRange);
+
+		return nodeSkill;
+	}
 
 	public BTAction GetMobaBehaviorTree()
 	{
@@ -53,68 +86,8 @@ public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
 		{
 			m_mobaBehaviorTree = new BTPrioritySelector();
 			m_mobaBehaviorTree.AddChild(GetChaseNode());
+			m_mobaBehaviorTree.AddChild(GetSkillNode());
 		}
 		return m_mobaBehaviorTree;
-	}
-
-	public static TBTActionPrioritizedSelector GetBehaviorTree()
-	{
-		if(m_BehaviorTree == null)
-		{
-			// 父节点
-			m_BehaviorTree = new TBTActionPrioritizedSelector();
-
-			// 设置idle节点
-			//var setUnitIdleNode = new NOD_SetUnitIdle();
-			// 转向节点
-			var turnToSelectorNode = new TBTActionPrioritizedSelector();
-			//turnToSelectorNode.SetPrecondition(new CON_IsNeedTurnTo());
-			//turnToSelectorNode.AddChild(new NOD_TurnTo());//todo can turn to
-			//turnToSelectorNode.AddChild(setUnitIdleNode);
-			// 追逐节点
-			var moveToSelectorNode = new TBTActionPrioritizedSelector();
-			moveToSelectorNode.SetPrecondition(new CON_IsInRange());
-			//moveToSelectorNode.AddChild(new NOD_MoveTo());//todo can Move to
-			//moveToSelectorNode.AddChild(setUnitIdleNode);
-
-			// ①追逐
-			//TBTAction chaseSelectorNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsChaseRequest());
-			//chaseSelectorNode.AddChild(turnToSelectorNode);
-			//chaseSelectorNode.AddChild(moveToSelectorNode);
-
-			// ②自动战斗节点构建
-			// 转向和追逐并行
-			var abilityTurnMoveToParallelNode = new TBTActionParallel();
-			// 技能转向节点
-			//TBTPreconditionAND abilityTurnCondition = new TBTPreconditionAND(new CON_IsAbilityNeedTurnTo(), new CON_IsNeedTurnTo());
-			//abilityTurnMoveToParallelNode.AddChild(new NOD_TurnTo().SetPrecondition(abilityTurnCondition));
-			// 技能追逐节点
-			//TBTPreconditionNOT abilityMoveCondition = new TBTPreconditionNOT(new CON_IsInAbilityRange());
-			//abilityTurnMoveToParallelNode.AddChild(new NOD_MoveTo().SetPrecondition(abilityMoveCondition));
-			abilityTurnMoveToParallelNode.SetEvaluationRelationship(TBTActionParallel.ECHILDREN_RELATIONSHIP.OR);
-
-			// 技能施法节点
-			var castAbilitySelectorNode = new TBTActionPrioritizedSelector();
-			castAbilitySelectorNode.SetPrecondition(new CON_CanCastAbility());
-			castAbilitySelectorNode.AddChild(new NOD_CastAbility());
-			//castAbilitySelectorNode.AddChild(setUnitIdleNode);
-
-			// 转向、移动、施法
-			//var autoCastAbilityNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsAutoCastAbilityRequest());
-			//autoCastAbilityNode.AddChild(abilityTurnMoveToParallelNode);
-			//autoCastAbilityNode.AddChild(castAbilitySelectorNode);
-
-			// ③手动施放节点构建
-			//var manualCastAbilityNode = new TBTActionPrioritizedSelector().SetPrecondition(new CON_IsManualCastAbilityRequest());
-			//manualCastAbilityNode.AddChild(abilityTurnMoveToParallelNode);
-			//manualCastAbilityNode.AddChild(castAbilitySelectorNode);
-
-			/// 开始构造树
-			//m_BehaviorTree.AddChild(chaseSelectorNode);
-			//m_BehaviorTreeNode.AddChild(autoCastAbilityNode);
-			//m_BehaviorTree.AddChild(manualCastAbilityNode);
-		}
-
-		return m_BehaviorTree;
 	}
 }

@@ -24,6 +24,11 @@ public class AnimationController : MonoBehaviour, IActor
         return m_Animator.IsInState("idle");
     }
 
+    public bool HaveClip(string clipName)
+    {
+        return m_Animator.HaveClip(clipName);
+    }
+
     public void SetTrigger(string animName)
     { 
         if (!string.IsNullOrEmpty(m_LastAnimName)) {

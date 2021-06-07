@@ -190,39 +190,18 @@ public class HeroActor
         Ability ability = battleUnit.GetAbility(castType);
         // 技能准备动作
         battleUnit.PrepareCastAbility(ability);
-
-        // 初始化目标
-        battleUnit.target = TargetSearcher.instance.FindTargetUnitByAbility(battleUnit, ability);
     }
 
     public void OnFingerDrag(AbilityCastType castType, Vector2 mouseDelta)
     {
         var abilityActor = GetAbilityActor(castType);
         abilityActor.OnFingerDrag(mouseDelta);
-
-        // 更新目标，根据区域选择敌人
-        //Ability ability = battleUnit.GetAbility(castType);
-        //battleUnit.target = TargetSearcher.instance.FindTargetUnitByAbility(battleUnit, ability);
     }
 
     public void OnFingerUp(AbilityCastType castType)
     {
         var abilityActor = GetAbilityActor(castType);
         abilityActor.OnFingerUp();
-
-        Ability ability = battleUnit.GetAbility(castType);
-        if(ability.CD > 0)
-        {
-            GameLog.Log(ability.GetConfigName() + "冷却中...");
-            return;
-        }
-
-        // 向决策树输入请求
-        //battleUnit.ForceUpdateDecisionRequest();
-        //if(target!=null)
-        //    ability.SetUnitTarget(target);
-
-        //battleUnit.CastAbility(ability);
     }
 
     #endregion

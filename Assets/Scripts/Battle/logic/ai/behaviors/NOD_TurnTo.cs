@@ -46,7 +46,7 @@ public class NOD_TurnTo : BTAction
             return BTResult.Finished;
         }
 
-        // 叉积算出方向 unity是左手坐标系，所以反过来了
+        // 叉积算出方向 unity是左手坐标系，所以反过来了//todo 这里转向好像有点问题
         Vector3 cross = Vector3.Cross(targetForward, sourceForward);
         if(cross.z > 0)
             radianToTurn = -radianToTurn;

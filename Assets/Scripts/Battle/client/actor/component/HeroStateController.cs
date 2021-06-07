@@ -89,7 +89,8 @@ public class HeroStateController
 
     private static void SetAnimationControllerTrigger(AnimationController ani,string triggerName)
     {
-        if(ani != null)
+        // 如果有准备动作，播放表现
+        if(ani != null && ani.HaveClip(triggerName))
             ani.SetTrigger(triggerName);
     }
 
@@ -115,7 +116,6 @@ public class HeroStateController
 
     private static void EnterReadyCastState(AnimationController ani, string skillName = null, bool isSkipCastPoint = false)
     {
-        // 如果有准备动作，播放表现
         SetAnimationControllerTrigger(ani, skillName + "_ready");
     }
 

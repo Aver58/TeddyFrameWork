@@ -34,6 +34,13 @@ public class AbilityInputTarget : AbilityInput
 
     protected override void OnManualCastSkill()
     {
+        if(m_ability.CD > 0)
+        {
+            GameLog.Log(m_ability.GetConfigName() + "冷却中...");
+            return;
+        }
+
+        // 向决策树输入请求
         var request = new ManualCastAbilityRequest(m_ability,m_target);
         m_target.ForceUpdateDecisionRequest(request);
     }

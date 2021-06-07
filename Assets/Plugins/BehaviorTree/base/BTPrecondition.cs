@@ -21,6 +21,19 @@ namespace Aver3
 
     #region 拓展
 
+    public class BTPreconditionNOT : BTPrecondition
+    {
+        public BTPreconditionNOT(BTPrecondition node)
+        {
+            AddChild(node);
+        }
+
+        public override bool IsTrue(BTData bTData) 
+        {
+            return !GetChild<BTPrecondition>(0).IsTrue(bTData);
+        }
+    }
+
     public abstract class BTPreconditionBinary : BTPrecondition
     {
         public BTPreconditionBinary(BTPrecondition lhs, BTPrecondition rhs)

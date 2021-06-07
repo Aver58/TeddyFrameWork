@@ -9,35 +9,31 @@
 */
 #endregion
 
-using TsiU;
 
-public class NOD_CastAbility : TBTActionLeaf
+using Aver3;
+
+public class NOD_CastAbility : BTAction
 {
-    protected override void onEnter(TBTWorkingData wData)
+    protected override void OnEnter(BTData wData)
     {
-        BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+        var behaviorData = wData as BattleData;
         BattleUnit source = behaviorData.owner;
         Ability ability = source.SelectCastableAbility();
-        BattleLog.Log("【NOD_CastAbility】onEnter {0}", ability.GetConfigName());
+        BattleLog.Log("【NOD_CastAbility】OnEnter {0}", ability.GetConfigName());
      
         source.CastAbility(ability);
     }
 
-    protected override void onExit(TBTWorkingData wData, int runningStatus)
+    protected override BTResult OnExecute(BTData wData)
     {
-        BattleLog.Log("【NOD_CastAbility】onExit");
-    }
-
-    protected override int onExecute(TBTWorkingData wData)
-    {
-        BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+        var behaviorData = wData as BattleData;
         BattleUnit source = behaviorData.owner;
         Ability ability = source.SelectCastableAbility();
 
         //BattleLog.Log("【NOD_CastAbility】castTime：{0},duringTime：{1}", ability.castTime, ability.GetCastleDuring());
         if(ability.castTime >= ability.GetCastleDuring())
-            return TBTRunningStatus.FINISHED;
+            return BTResult.Finished;
 
-        return TBTRunningStatus.EXECUTING;
+        return BTResult.Running;
     }
 }

@@ -9,13 +9,14 @@
 */
 #endregion
 
-using TsiU;
 
-public class CON_IsAbilityNeedTurnTo : TBTPreconditionLeaf
+using Aver3;
+
+public class CON_IsAbilityNeedTurnTo : BTPrecondition
 {
-    public override bool IsTrue(TBTWorkingData wData)
+    public override bool IsTrue(BTData wData)
     {
-        BattleBehaviorWorkingData behaviorData = wData as BattleBehaviorWorkingData;
+        var behaviorData = wData as BattleData;
         BattleUnit source = behaviorData.owner;
         AutoCastAbilityRequest request = behaviorData.request as AutoCastAbilityRequest;
         Unit target = request.target;

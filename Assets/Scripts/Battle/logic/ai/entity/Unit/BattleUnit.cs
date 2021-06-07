@@ -166,6 +166,11 @@ public class BattleUnit : Unit
         GameMsg.instance.SendMessage(GameMsgDef.Hero_Cast_Ability, id, ability.GetCastAnimation());
     }
 
+    public void CastAbilityAnimation(Ability ability, bool isSkipCastPoint = false)
+    {
+        SetState(HeroState.CASTING, ability.GetCastAnimation(), isSkipCastPoint);
+    }
+
     public void CastAbilityEnd()
     {
         SetState(HeroState.IDLE);

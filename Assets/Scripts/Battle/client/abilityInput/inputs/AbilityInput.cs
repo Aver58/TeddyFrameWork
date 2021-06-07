@@ -42,6 +42,8 @@ public abstract class AbilityInput
     public virtual void OnFingerDown()
     {
         ShowAbilityAllIndicator();
+        // 初始化目标
+        //battleUnit.target = TargetSearcher.instance.FindTargetUnitByAbility(battleUnit, ability);
     }
 
     public virtual void OnFingerDrag(float casterX, float casterZ, float dragWorldPointX, float dragWorldPointZ, float dragForwardX, float dragForwardZ)
@@ -55,6 +57,10 @@ public abstract class AbilityInput
         //更新技能指示器
         for(int i = 0; i < m_AbilityIndicators.Count; i++)
             m_AbilityIndicators[i].Update(casterX, casterZ, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
+
+        // 更新目标，根据区域选择敌人
+        //Ability ability = battleUnit.GetAbility(castType);
+        //battleUnit.target = TargetSearcher.instance.FindTargetUnitByAbility(battleUnit, ability);
     }
 
     public virtual void OnFingerUp()
