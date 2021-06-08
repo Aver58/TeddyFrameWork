@@ -111,8 +111,6 @@ public class HeroActor
     {
         if(isLoadDone)
         {
-            battleUnit.Set3DPosition(position);
-            battleUnit.Set3DForward(transform.forward);
             //m_PositionController.InitPosition(position, transform.forward);
             Set3DPosition(position);
             Set3DForward(transform.forward);
@@ -170,7 +168,7 @@ public class HeroActor
     {
         Ability ability = battleUnit.GetAbility(castType);
         if(m_abilityActorMap == null)
-            m_abilityActorMap = new Dictionary<AbilityCastType, AbilityActor>(4);
+            m_abilityActorMap = new Dictionary<AbilityCastType, AbilityActor>(5);
 
         AbilityActor abilityActor;
         if(m_abilityActorMap.TryGetValue(castType,out abilityActor))

@@ -33,24 +33,24 @@ namespace Aver3
 
             var ownerPos = owner.Get3DPosition();
             var targetPos = target.Get3DPosition();
+            float moveSpeed = owner.GetMoveSpeed();
+            float detalTime = behaviorData.deltaTime;
 
-            float distance = BattleMath.GetDistance3DSquare(ownerPos, targetPos);
-
-            if(distance <= m_threshold)
+            float distanceSquare = BattleMath.GetDistance3DSquare(ownerPos, targetPos);
+            var distanceToMove = detalTime * moveSpeed;
+            if(distanceSquare < distanceToMove * distanceToMove)
             {
                 owner.Set3DPosition(targetPos);
                 GameMsg.instance.SendMessage(GameMsgDef.Hero_MoveTo, owner.id, targetPos.x, targetPos.y, targetPos.z);
                 return BTResult.Finished;
             }
 
-            float moveSpeed = owner.GetMoveSpeed();
-            float detalTime = behaviorData.deltaTime;
+     
             var targetForward = (targetPos - ownerPos).normalized;
-            float newPosX = ownerPos.x + detalTime * moveSpeed * targetForward.x;
-            float newPosZ = ownerPos.z + detalTime * moveSpeed * targetForward.z;
+            float newPosX = ownerPos.x + distanceToMove * targetForward.x;
+            float newPosZ = ownerPos.z + distanceToMove * targetForward.z;
 
-            //distance = BattleMath.GetDistance3DSquare(ownerPos.x, ownerPos.y, ownerPos.z, newPosX,targetPos.y,newPosZ);
-            GameLog.Log("【NOD_MoveTo】speed：{0} 当前位置：{1},{2} 目标位置：{3},{4} newPos：{5},{6}",moveSpeed, ownerPos.x, ownerPos.z, targetPos.x, targetPos.z, newPosX, newPosZ);
+            GameLog.Log("【NOD_MoveTo】speed：{0} 当前位置：{1},{2} 目标位置：{3},{4} newPos：{5},{6}",moveSpeed, ownerPos.x,ownerPos.z, targetPos.x, targetPos.z, newPosX, newPosZ);
             
             owner.Set3DPosition(newPosX, targetPos.y, newPosZ);
             GameMsg.instance.SendMessage(GameMsgDef.Hero_MoveTo, owner.id, newPosX, targetPos.y, newPosZ);

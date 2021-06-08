@@ -15,14 +15,15 @@ using System.Collections.Generic;
 
 public class Ability
 {
-    public int ID { get; }
-    public float CD { get; set; }
-    public int priority { get; }
-    public float castTime { get; set; }
-    public BattleUnit caster { get; }
-    public AbilityState abilityState { get; set; }
-    public RequestTarget requestTarget { get; set; }
-    public AbilityData abilityData { get; }
+    public int ID;
+    public float CD;
+    public int priority;
+    public float castTime;
+    public BattleUnit caster;
+    public AbilityState abilityState;
+    public AbilityData abilityData;
+
+    private RequestTarget m_requestTarget;
 
     public Ability(int id, int priority,BattleUnit battleEntity,AbilityData abilityData)
     {
@@ -34,7 +35,7 @@ public class Ability
         castTime = 0f;
         CD = this.abilityData.cooldown;
         abilityState = AbilityState.None;
-        requestTarget = new RequestTarget();
+        m_requestTarget = new RequestTarget();
     }
 
     public void Update(float deltaTime)
@@ -166,7 +167,7 @@ public class Ability
     {
         //BattleLog.Log("【Ability】ExecuteEvent :" + abilityEvent.ToString());
 
-        abilityData.ExecuteEvent(abilityEvent, caster, requestTarget);
+        abilityData.ExecuteEvent(abilityEvent, caster, m_requestTarget);
     }
 
     // 吟唱阶段
@@ -291,7 +292,7 @@ public class Ability
 
     public void SetUnitTarget(BattleUnit target)
     {
-        requestTarget.SetUnitTarget(target);
+        m_requestTarget.SetUnitTarget(target);
     }
     #endregion
 }

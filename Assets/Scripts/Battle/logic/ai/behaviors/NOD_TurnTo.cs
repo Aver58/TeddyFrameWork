@@ -16,7 +16,6 @@ public class NOD_TurnTo : BTAction
 {
     protected override void OnEnter(BTData bTData)
     {
-        GameLog.Log("NOD_TurnTo OnEnter");
         var behaviorData = bTData as BattleData;
         BattleUnit owner = behaviorData.owner;
         owner.SetState(HeroState.TURN);
@@ -38,7 +37,7 @@ public class NOD_TurnTo : BTAction
         float angle = Vector3.Angle(targetForward, sourceForward);
         float radianToTurn = turnSpeed * behaviorData.deltaTime;
 
-        BattleLog.Log("【NOD_TurnTo】angle:{0},{1}", angle, radianToTurn * Mathf.Rad2Deg);
+        //BattleLog.Log("【NOD_TurnTo】angle:{0},{1}", angle, radianToTurn * Mathf.Rad2Deg);
         if(angle < radianToTurn * Mathf.Rad2Deg)
         {
             source.Set3DForward(targetForward);
@@ -52,7 +51,7 @@ public class NOD_TurnTo : BTAction
             radianToTurn = -radianToTurn;
 
         float y = targetForward.y;
-        BattleMath.RotateByYAxis(sourceForward.x, sourceForward.y, sourceForward.z,radianToTurn,out float x,ref y,out float z);
+        BattleMath.RotateByYAxis2D(sourceForward.x, sourceForward.z,radianToTurn,out float x,out float z);
         source.Set3DForward(x,y,z);
         GameMsg.instance.SendMessage(GameMsgDef.Hero_TurnTo3D , source.id, x,y,z);
         GameLog.Log("【NOD_TurnTo】自己朝向：{0} 目标朝向：{1} 相隔角度：{2} 旋转弧度：{3} 叉乘：{4} 新的朝向：{5},{6},{7}", sourceForward, targetForward, angle, radianToTurn * Mathf.Rad2Deg, cross, x, y, z);

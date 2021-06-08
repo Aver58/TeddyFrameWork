@@ -60,15 +60,15 @@ public class MobaBussiness : Singleton<MobaBussiness>
 
     private void OnLoadGuard(GameObject go)
     {
-        Transform heroParent = GameObject.Find("GuardNode").transform;
-        go.transform.SetParent(heroParent);
+        Transform parent = GameObject.Find("GuardNode").transform;
+        go.transform.SetParent(parent);
     }
 
     private void OnLoadPlayer(GameObject go)
     {
-        m_playerActor.InitPosition(new Vector3(-9, 0, -9));
-        Transform heroParent = GameObject.Find("HeroNode").transform;
-        go.transform.SetParent(heroParent);
+        m_playerActor.InitPosition(Vector3.zero);
+        Transform parent = GameObject.Find("HeroNode").transform;
+        go.transform.SetParent(parent);
     }
 
     #region API

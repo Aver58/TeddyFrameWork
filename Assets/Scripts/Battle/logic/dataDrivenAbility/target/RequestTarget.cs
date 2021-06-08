@@ -57,7 +57,7 @@ public class RequestTarget
         if(targetType == AbilityRequestTargetType.UNIT)
         {
             if(m_TargetUnit==null)
-                return "null target";
+                return "No Target";
 
             return m_TargetUnit.GetName();
         }

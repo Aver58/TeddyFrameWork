@@ -28,7 +28,7 @@ public class CON_IsNeedTurnTo : BTPrecondition
         var ownerForward = owner.Get3DForward();
 
         float angle = Vector3.Angle(toForward, ownerForward);
-        BattleLog.Log("【{0}】angle:{1},toForward:{2},ownerForward:{3},targetPos:{4},ownerPos,{5}", GetType().ToString(), angle, toForward, ownerForward, targetPos, ownerPos);
+        BattleLog.Log("【{0}】angle:{1}", GetType().ToString(), angle);
         return angle > 0.01f;
     }
 }

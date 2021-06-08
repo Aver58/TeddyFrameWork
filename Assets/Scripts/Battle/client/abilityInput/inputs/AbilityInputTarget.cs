@@ -14,9 +14,7 @@ using UnityEngine;
 public class AbilityInputTarget : AbilityInput
 {
     private BattleUnit m_target; 
-    public AbilityInputTarget(Transform casterTransform, Ability ability) : base(casterTransform, ability)
-    {
-    }
+    public AbilityInputTarget(Transform casterTransform, Ability ability) : base(casterTransform, ability){}
 
     public override void OnFingerDrag(float casterX, float casterZ, float dragWorldPointX, float dragWorldPointZ, float dragForwardX, float dragForwardZ)
     {
@@ -27,9 +25,6 @@ public class AbilityInputTarget : AbilityInput
             return;
 
         m_target = entitys[0];
-        var targetActor = BattleActorManager.instance.GetActor(m_target);
-        // 更新角色朝向
-        targetActor.Set2DForward(dragForwardX, dragForwardZ);
     }
 
     protected override void OnManualCastSkill()
@@ -42,6 +37,7 @@ public class AbilityInputTarget : AbilityInput
 
         // 向决策树输入请求
         var request = new ManualCastAbilityRequest(m_ability,m_target);
-        m_target.ForceUpdateDecisionRequest(request);
+        var playerUnit = BattleUnitManager.instance.playerUnit;
+        playerUnit.ForceUpdateDecisionRequest(request);
     }
 }

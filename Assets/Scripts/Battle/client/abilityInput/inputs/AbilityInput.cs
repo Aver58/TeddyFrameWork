@@ -21,7 +21,7 @@ public abstract class AbilityInput
     protected Ability m_ability;
     protected Vector3 m_cacheVector = Vector3.zero;
     protected Transform m_casterTransform;
-    private List<HeroActor> m_targetActors;
+    protected List<HeroActor> m_targetActors;
     private List<AbilityIndicator> m_AbilityIndicators;
 
     public AbilityInput(Transform casterTransform, Ability ability)
@@ -66,9 +66,9 @@ public abstract class AbilityInput
     public virtual void OnFingerUp()
     {
         HideAbilityAllIndicator();
-        m_targetActors.Clear();
 
         TriggerSkill();
+        m_targetActors.Clear();
     }
 
     #endregion

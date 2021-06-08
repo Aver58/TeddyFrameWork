@@ -33,8 +33,6 @@ public class AbilityIndicatorRange : AbilityIndicator
 
     protected override void OnUpdate(float casterX, float casterZ, float targetX, float targetZ, float targetForwardX, float targetForwardZ)
     {
-        base.OnUpdate(casterX, casterZ, targetX, targetZ, targetForwardX, targetForwardZ);
-
         m_indicatorTransform.position = m_casterTransform.position;
     }
 }

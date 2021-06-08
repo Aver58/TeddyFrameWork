@@ -15,15 +15,15 @@ using UnityEngine;
 public static class BattleMath
 {
     // 距离平方 x*x + y*y
-    public static float GetDistance2DSquare(float leftX, float leftZ, float rightX, float rightZ)
+    public static float GetDistance2DSquare(float x1, float z1, float x2, float z2)
     {
-        return (leftX - rightX) * (leftX - rightX) + (rightZ - leftZ) * (rightZ - leftZ);
+        return (x1 - x2) * (x1 - x2) + (z2 - z1) * (z2 - z1);
     }
 
     // 距离
-    public static float GetDistance2D(float leftX, float leftZ, float rightX, float rightZ)
+    public static float GetDistance2D(float x1, float z1, float x2, float z2)
     {
-        return (float)Math.Sqrt(GetDistance2DSquare(leftX, leftZ, rightX, rightZ));
+        return (float)Math.Sqrt(GetDistance2DSquare(x1, z1, x2, z2));
     }
 
     public static float GetDistance3DSquare(Vector3 left, Vector3 right)
@@ -32,21 +32,20 @@ public static class BattleMath
     }
 
     // 距离平方 x*x + y*y + z*z
-    public static float GetDistance3DSquare(float leftX, float leftY, float leftZ, float rightX, float rightY, float rightZ)
+    public static float GetDistance3DSquare(float x1, float y1, float z1, float x2, float y2, float z2)
     {
-        return (leftX - rightX) * (leftX - rightX) + (leftY - rightY) * (leftY - rightY) + (rightZ - leftZ) * (rightZ - leftZ);
+        return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z2 - z1) * (z2 - z1);
     }
 
     /// <summary>
     /// 绕y轴旋转矩阵
     /// 顺时针角度为负，逆时针角度为正
     /// </summary>
-    public static void RotateByYAxis(float x, float y, float z, float radian,out float x1, ref float y1, out float z1)
+    public static void RotateByYAxis2D(float x, float z, float radian, out float x1, out float z1)
     {
         float sinValue = (float)Math.Sin(radian);
         float cosValue = (float)Math.Cos(radian);
         x1 = x * cosValue - z * sinValue;
         z1 = x * sinValue + z * cosValue;
     }
-
 }
