@@ -476,6 +476,9 @@ public class BattleUnit : Unit
 
     #region set
 
+    /// <summary>
+    /// 更新血量
+    /// </summary>
     public void UpdateHP(float damage)
     {
         m_Property.UpdateHP(damage);
@@ -487,12 +490,21 @@ public class BattleUnit : Unit
         }
     }
 
+    /// <summary>
+    /// 设置角色状态
+    /// </summary>
+    /// <param name="state">状态枚举</param>
+    /// <param name="skillName">技能动画名称</param>
+    /// <param name="isSkipCastPoint">是否跳过前摇</param>
     public void SetState(HeroState state, string skillName = null, bool isSkipCastPoint = false)
     {
         m_HeroState = state;
         GameMsg.instance.SendMessage(GameMsgDef.Hero_ChangeState, id, state, skillName, isSkipCastPoint);
     }
 
+    /// <summary>
+    /// 完成当前行为
+    /// </summary>
     public void SetRequestComplete()
     {
         m_BehaviorWorkData.request.SetRequestCompleteState(true);

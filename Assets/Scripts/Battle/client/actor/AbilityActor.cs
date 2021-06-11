@@ -17,46 +17,46 @@ using UnityEngine;
 /// </summary>
 public class AbilityActor
 {
-    private float m_radius;
-    public Ability ability;
-    private Transform m_casterTransform;
-    private AbilityInput m_abilityInput;
+    private Ability m_Ability;
+    private float m_Radius;
+    private HeroActor m_CasterActor;
+    private AbilityInput m_AbilityInput;
 
-    public AbilityActor(Ability ability, Transform casterTransform)
+    public AbilityActor(Ability ability, HeroActor casterActor)
     {
-        this.ability = ability;
-        m_radius = ability.GetCastRange();
-        m_casterTransform = casterTransform;
+        this.m_Ability = ability;
+        m_CasterActor = casterActor;
+        m_Radius = ability.GetCastRange();
         // 解析技能指示器
-        m_abilityInput = CreateAbilityInput(ability);
+        m_AbilityInput = CreateAbilityInput(ability);
     }
 
     public void OnFingerDown()
     {
-        if(m_abilityInput != null)
-            m_abilityInput.OnFingerDown();
+        if(m_AbilityInput != null)
+            m_AbilityInput.OnFingerDown();
     }
 
     public void OnFingerDrag(Vector2 mouseDelta)
     {
-        if(m_abilityInput != null)
+        if(m_AbilityInput != null)
         {
-            var casterPos = m_casterTransform.position;
+            var casterPos = m_CasterActor.Get3DPosition();
             float dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ;
 
             // z轴正方向为up 技能范围*delta
-            dragWorldPointX = casterPos.x + m_radius * mouseDelta.x;
-            dragWorldPointZ = casterPos.z + m_radius * mouseDelta.y;
+            dragWorldPointX = casterPos.x + m_Radius * mouseDelta.x;
+            dragWorldPointZ = casterPos.z + m_Radius * mouseDelta.y;
             dragForwardX = dragWorldPointX - casterPos.x;
             dragForwardZ = dragWorldPointZ - casterPos.z;
-            m_abilityInput.OnFingerDrag(casterPos.x, casterPos.z, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
+            m_AbilityInput.OnFingerDrag(casterPos.x, casterPos.z, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
         }
     }
 
     public void OnFingerUp()
     {
-        if(m_abilityInput != null)
-            m_abilityInput.OnFingerUp();
+        if(m_AbilityInput != null)
+            m_AbilityInput.OnFingerUp();
     }
 
     #region Private
@@ -101,13 +101,13 @@ public class AbilityActor
         // 直线型
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_DIRECTIONAL) != 0)
         {
-            abilityInput = new AbilityInputDirection(m_casterTransform, ability);
-            var castRange = ability.GetCastRange();
-            abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_casterTransform, castRange);
+            abilityInput = new AbilityInputDirection(m_Ability, m_CasterActor);
+            var castRange = m_Ability.GetCastRange();
+            abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_CasterActor.transform, castRange);
             var trans = GetIndicatorAsset(AbilityIndicatorType.LINE_AREA);
             float lineLength, lineThickness;
-            ability.GetLineAoe(out lineLength, out lineThickness);
-            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_casterTransform, lineLength, lineThickness);
+            m_Ability.GetLineAoe(out lineLength, out lineThickness);
+            AbilityIndicatorLine abilityIndicatorLine = new AbilityIndicatorLine(trans, m_CasterActor.transform, lineLength, lineThickness);
             abilityInput.AddAbilityIndicator(abilityIndicatorRange);
             abilityInput.AddAbilityIndicator(abilityIndicatorLine);
             return abilityInput;
@@ -116,10 +116,10 @@ public class AbilityActor
         // 扇形型
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_SECTOR_AOE) != 0)
         {
-            abilityInput = new AbilityInputDirection(m_casterTransform, ability);
+            abilityInput = new AbilityInputDirection(m_Ability, m_CasterActor);
             AbilityIndicatorType abilityIndicatorType;
             float sectorRadius, sectorAngle;
-            ability.GetSectorAoe(out sectorRadius, out sectorAngle);
+            m_Ability.GetSectorAoe(out sectorRadius, out sectorAngle);
             if(sectorAngle == 60)
             {
                 abilityIndicatorType = AbilityIndicatorType.SECTOR60_AREA;
@@ -134,15 +134,15 @@ public class AbilityActor
             }
             else
             {
-                BattleLog.LogError("技能[{0}]中有未定义的扇形AOE范围角度[{1}]", ability.GetConfigName(), sectorAngle);
+                BattleLog.LogError("技能[{0}]中有未定义的扇形AOE范围角度[{1}]", m_Ability.GetConfigName(), sectorAngle);
                 return null;
             }
 
-            var castRange = ability.GetCastRange();
-            abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_casterTransform, castRange);
+            var castRange = m_Ability.GetCastRange();
+            abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_CasterActor.transform, castRange);
 
             var trans = GetIndicatorAsset(abilityIndicatorType);
-            var abilityIndicatorSector = new AbilityIndicatorLine(trans, m_casterTransform, sectorRadius, sectorRadius);
+            var abilityIndicatorSector = new AbilityIndicatorLine(trans, m_CasterActor.transform, sectorRadius, sectorRadius);
          
             abilityInput.AddAbilityIndicator(abilityIndicatorRange);
             abilityInput.AddAbilityIndicator(abilityIndicatorSector);
@@ -150,8 +150,8 @@ public class AbilityActor
         }
 
         // 范围型AOE 和 普通攻击，可以原地平A
-        abilityInput = new AbilityInputDirection(m_casterTransform, ability);
-        abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_casterTransform, ability.GetCastRange());
+        abilityInput = new AbilityInputDirection(m_Ability, m_CasterActor);
+        abilityIndicatorRange = new AbilityIndicatorRange(rangeTrans, m_CasterActor.transform, m_Ability.GetCastRange());
         abilityInput.AddAbilityIndicator(abilityIndicatorRange);
 
         return abilityInput;
@@ -160,20 +160,20 @@ public class AbilityActor
     // 点施法类型，王昭君大招
     private AbilityInput CreateAbilityPointInput(AbilityBehavior abilityBehavior)
     {
-        var abilityInput = new AbilityInputPoint(m_casterTransform, ability);
+        var abilityInput = new AbilityInputPoint(m_Ability, m_CasterActor);
         if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_RADIUS_AOE) != 0)
         {
-            var radius = ability.GetAbilityAOERadius();
+            var radius = m_Ability.GetAbilityAOERadius();
             var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
-            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, ability.GetCastRange());
+            AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_CasterActor.transform, m_Ability.GetCastRange());
             trans = GetIndicatorAsset(AbilityIndicatorType.CIRCLE_AREA);
-            AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_casterTransform, radius);
+            AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_CasterActor.transform, radius);
 
             abilityInput.AddAbilityIndicator(abilityIndicatorRange);
             abilityInput.AddAbilityIndicator(abilityIndicatorPoint);
         }
         else
-            BattleLog.LogError("技能[{0}]中有未定义的Point类型技能区域", ability.GetConfigName());
+            BattleLog.LogError("技能[{0}]中有未定义的Point类型技能区域", m_Ability.GetConfigName());
 
         return abilityInput;
     }
@@ -181,14 +181,14 @@ public class AbilityActor
     // 指向性技能输入：妲己二技能
     private AbilityInput CreateAbilityTargetInput(AbilityBehavior abilityBehavior)
     {
-        var abilityInput = new AbilityInputPoint(m_casterTransform, ability);
+        var abilityInput = new AbilityInputPoint(m_Ability, m_CasterActor);
         var trans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
-        AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_casterTransform, ability.GetCastRange());
+        AbilityIndicatorRange abilityIndicatorRange = new AbilityIndicatorRange(trans, m_CasterActor.transform, m_Ability.GetCastRange());
         trans = GetIndicatorAsset(AbilityIndicatorType.SEGMENT);
-        AbilityIndicatorSegment abilityIndicatorSegment = new AbilityIndicatorSegment(trans, m_casterTransform);
-        var radius = ability.GetAbilityAOERadius();
+        AbilityIndicatorSegment abilityIndicatorSegment = new AbilityIndicatorSegment(trans, m_CasterActor.transform);
+        var radius = m_Ability.GetAbilityAOERadius();
         trans = GetIndicatorAsset(AbilityIndicatorType.SEGMENT_AREA);
-        AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_casterTransform, radius);
+        AbilityIndicatorPoint abilityIndicatorPoint = new AbilityIndicatorPoint(trans, m_CasterActor.transform, radius);
         abilityInput.AddAbilityIndicator(abilityIndicatorRange);
         abilityInput.AddAbilityIndicator(abilityIndicatorSegment);
         abilityInput.AddAbilityIndicator(abilityIndicatorPoint);

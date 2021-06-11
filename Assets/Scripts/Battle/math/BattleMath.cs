@@ -48,4 +48,17 @@ public static class BattleMath
         x1 = x * cosValue - z * sinValue;
         z1 = x * sinValue + z * cosValue;
     }
+
+    /// <summary>
+    /// 点是否在圆内
+    /// </summary>
+    public static bool IsPointInCircle(float targetX,float targetZ, float circleCenterX,float circleCenterZ,float circleRadius)
+    {
+        // 判断点到圆心的距离是否小于半径
+        var distanceSquare = GetDistance2DSquare(targetX, targetZ, circleCenterX, circleCenterZ);
+        if(distanceSquare <= circleRadius * circleRadius)
+            return true;
+
+        return false;
+    }
 }

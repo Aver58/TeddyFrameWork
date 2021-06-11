@@ -51,13 +51,13 @@ public class NOD_UpdateRequest : TBTActionLeaf
         else
         {
             // 寻找技能目标, 如果有目标被放逐了，可能就选不到目标!
-            BattleUnit target = TargetSearcher.instance.FindTargetUnitByAbility(caster,ability);
-            if(target!=null)
-            {
-                BattleLog.Log("【NOD_UpdateRequest】选取到技能ability：{0}，target：{1}", ability.GetConfigName(), target.GetName());
-                m_autoCastAbilityRequest = new AutoCastAbilityRequest(ability, target);
-                decisionData.request = m_autoCastAbilityRequest;
-            }
+            //var target = TargetSearcher.instance.FindTargetUnitByAbility(caster,ability);
+            //if(target!=null)
+            //{
+            //    BattleLog.Log("【NOD_UpdateRequest】选取到技能ability：{0}，target：{1}", ability.GetConfigName(), target.GetName());
+            //    m_autoCastAbilityRequest = new AutoCastAbilityRequest(ability, target);
+            //    decisionData.request = m_autoCastAbilityRequest;
+            //}
         }
     }
 }

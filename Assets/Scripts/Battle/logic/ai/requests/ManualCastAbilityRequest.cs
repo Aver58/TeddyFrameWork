@@ -12,11 +12,8 @@
 public class ManualCastAbilityRequest : BehaviorRequest
 {
     public Ability ability { get; set; }
-    public ManualCastAbilityRequest(Ability ability, BattleUnit target) : base(RequestType.ManualCastAbility)
+    public ManualCastAbilityRequest(Ability ability) : base(RequestType.ManualCastAbility)
     {
         this.ability = ability;
-        this.target = target;
-
-        ability.SetUnitTarget(target);
     }
 }

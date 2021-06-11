@@ -13,7 +13,7 @@ using UnityEngine;
 
 public class AbilityInputPoint : AbilityInput
 {
-    public AbilityInputPoint(Transform casterTransform, Ability m_ability) : base(casterTransform, m_ability)
+    public AbilityInputPoint(Ability ability, HeroActor casterActor) : base(ability, casterActor)
     {
     }
 }

@@ -100,7 +100,7 @@ public static class AbilityReader
 
     #region Action Map
 
-    public static Dictionary<string, Func<JsonData, ActionTarget, AbilityData, D2Action>> AbilityActionCreateMap = new Dictionary<string, Func<JsonData, ActionTarget, AbilityData, D2Action>>
+    public static Dictionary<string, Func<JsonData, AbilityTarget, AbilityData, D2Action>> AbilityActionCreateMap = new Dictionary<string, Func<JsonData, AbilityTarget, AbilityData, D2Action>>
     {
         { "IsHit" , CreateIsHitAction},
         { "ChangeEnergy" , CreateChangeEnergyAction},
@@ -115,7 +115,7 @@ public static class AbilityReader
       "OnSuccess": {}
     },
      */
-    private static D2Action CreateIsHitAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
+    private static D2Action CreateIsHitAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData)
     {
         var onSuccessActionConfig = GetJsonValue(json, "OnSuccess");
         if(onSuccessActionConfig == null)
@@ -129,7 +129,7 @@ public static class AbilityReader
         return d2Action_IsHit;
     }
 
-    private static D2Action CreateChangeEnergyAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
+    private static D2Action CreateChangeEnergyAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData)
     {
         var energyParams = GetJsonValue(json, "EnergyParams");
         if(energyParams == null)
@@ -173,7 +173,7 @@ public static class AbilityReader
               }
           }
       }*/
-    private static D2Action CreateDamageAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
+    private static D2Action CreateDamageAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData)
     {
         var damageTypeConfig = GetStringValue(json, "DamageType");
         if(damageTypeConfig == null)
@@ -209,7 +209,7 @@ public static class AbilityReader
               }
             }
      */
-    private static D2Action CreateHealAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
+    private static D2Action CreateHealAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData)
     {
         var flagConfig = GetJsonValue(json, "HealFlags");
         if(flagConfig == null)
@@ -230,7 +230,7 @@ public static class AbilityReader
              "ModifierName":"dunji"
          }
          */
-    private static D2Action CreateApplyModifierAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData)
+    private static D2Action CreateApplyModifierAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData)
     {
         var modifierName = GetStringValue(json, "ModifierName");
         if(string.IsNullOrEmpty(modifierName))
@@ -337,12 +337,12 @@ public static class AbilityReader
     }
 
     // 大招技能指示器解析，这部分有点冗余，是自己抽出来的，不是dota源解析，那dota是怎么实现技能指示器的
-    private static ActionTarget ParseAbilityRange(JsonData json, AbilityData abilityData)
+    private static AbilityTarget ParseAbilityRange(JsonData json, AbilityData abilityData)
     {
         if(json == null)
             return null;
 
-        var actionTarget = new ActionTarget();
+        var actionTarget = new AbilityTarget();
         var targetTeam = GetEnumValue<MultipleTargetsTeam>(json, "AbilityUnitTargetTeam");
 
         actionTarget.SetTargetTeam(targetTeam);
@@ -392,11 +392,11 @@ public static class AbilityReader
         return actionTarget;
     }
 
-    private static ActionTarget ParseActionTarget(JsonData json, AbilityData abilityData)
+    private static AbilityTarget ParseActionTarget(JsonData json, AbilityData abilityData)
     {
         if(json == null)
             return null;
-        var actionTarget = new ActionTarget();
+        var actionTarget = new AbilityTarget();
         if(json.IsObject)
         {
             var aoeAreaJsonData = GetJsonValue(json, "AoeArea");
@@ -461,7 +461,7 @@ public static class AbilityReader
         var actions = new List<D2Action>();
         foreach(string key in json.Keys)
         {
-            Func<JsonData, ActionTarget, AbilityData, D2Action> createMethodName;
+            Func<JsonData, AbilityTarget, AbilityData, D2Action> createMethodName;
             if(AbilityActionCreateMap.TryGetValue(key, out createMethodName))
             {
                 var actionJsonData = GetJsonValue(json, key);

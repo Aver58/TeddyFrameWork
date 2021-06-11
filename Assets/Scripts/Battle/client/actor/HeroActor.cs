@@ -107,6 +107,11 @@ public class HeroActor
             m_HeroStateController.ChangeHeroState(newState, skillName, isSkipCastPoint);
     }
 
+    public Vector3 Get3DPosition()
+    {
+        return battleUnit.Get3DPosition();
+    }
+
     public void InitPosition(Vector3 position)
     {
         if(isLoadDone)
@@ -174,7 +179,7 @@ public class HeroActor
         if(m_abilityActorMap.TryGetValue(castType,out abilityActor))
             return abilityActor;
 
-        abilityActor = new AbilityActor(ability, transform);
+        abilityActor = new AbilityActor(ability,this);
         m_abilityActorMap[castType] = abilityActor;
         return abilityActor;
     }

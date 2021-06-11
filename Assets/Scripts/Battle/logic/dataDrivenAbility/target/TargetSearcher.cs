@@ -43,11 +43,6 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targetEntity;
     }
 
-    private bool IsInRange(Vector2 sourcePos, Vector2 targetPos, float viewRange)
-    {
-        return (targetPos - sourcePos).magnitude < viewRange;
-    }
-
     /// <summary>
     /// AddRange,封装是为了避免有条件要处理
     /// </summary>
@@ -61,40 +56,8 @@ public class TargetSearcher : Singleton<TargetSearcher>
         }
     }
 
-    private List<BattleUnit> FindTargetUnits(BattleUnit caster, MultipleTargetsTeam targetTeam, MultipleTargetsType targetDemageType)
-    {
-        List<BattleUnit> targets = new List<BattleUnit>(0);
-
-        // 根据阵营找对象
-        BattleCamp sourceCamp = caster.camp;
-        if(targetTeam == MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY)
-        {
-            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY : MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY;
-        }
-        else if(targetTeam == MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY)  
-        {
-            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY : MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY;
-        }
-
-        switch(targetTeam)
-        {
-            case MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY:
-                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
-                break;
-            case MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY:
-                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
-                break;
-            case MultipleTargetsTeam.UNIT_TARGET_TEAM_BOTH:
-                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
-                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
-                break;
-            default:
-                break;
-        }
-        return targets;
-    }
-
     #region 搜索满足特定条件的一个敌人
+
     private Comparison<IComparable> MinValueCompare() { return (x, y) => x.CompareTo(y); }
     private Comparison<IComparable> MaxValueCompare() { return (x, y) => -x.CompareTo(y); }
 
@@ -133,7 +96,10 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targetUnits[0];
     }
 
-    private BattleUnit FilterTargetEntityFromList(BattleUnit caster, Ability ability, List<BattleUnit> targetUnits)
+    /// <summary>
+    /// 用配置的ai筛选条件筛选目标
+    /// </summary>
+    private BattleUnit FilterTargetUnitFromList(BattleUnit caster, Ability ability, List<BattleUnit> targetUnits)
     {
         if(targetUnits.Count <= 0)
             return null;
@@ -159,43 +125,19 @@ public class TargetSearcher : Singleton<TargetSearcher>
                 return GetEnergyHeroEntity(targetUnits, MinValueCompare());
             case AbilityUnitAITargetCondition.UNIT_TARGET_ENERGY_MAX:
                 return GetEnergyHeroEntity(targetUnits, MaxValueCompare());
+            default:
+                return null;
         }
-        BattleLog.LogError("[FilterTargetUnitFromList]没有找到指定Entity,返回列表第一个单位！");
-        return null;
     }
 
     #endregion
 
-    public BattleUnit FindTargetUnitByAbility(BattleUnit caster, Ability ability)
-    {
-        // 全屏技能
-        if(ability.GetCastRange() <= 0)
-            return caster;
-
-        BattleUnit lastTarget = caster.target;
-        MultipleTargetsTeam targetTeam = ability.GetTargetTeam();
-        MultipleTargetsType targetDemageType = ability.GetDamageType();
-
-        BattleUnit newTarget;
-        if(lastTarget == null || lastTarget.IsUnSelectable())
-        {
-            BattleCamp sourceCamp = caster.camp;
-            List<BattleUnit> targets = FindTargetUnits(caster, targetTeam, targetDemageType);
-            newTarget = FilterTargetEntityFromList(caster, ability, targets);
-        }
-        else
-        {
-            newTarget = lastTarget;
-        }
-        return newTarget;
-    }
-
-    public TargetCollection CalculateAOETarget(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, ActionTarget actionTarget)
+    public TargetCollection CalculateAOETarget(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, AbilityTarget actionTarget)
     {
         var targetCollection = new TargetCollection();
 
         // 根据中心类型获取目标点
-        var centerType = actionTarget.Center;
+        var centerType = actionTarget.targetCenter;
         float centerX, centerZ;
         if(centerType == ActionMultipleTargetsCenter.CASTER)
         {
@@ -223,8 +165,8 @@ public class TargetSearcher : Singleton<TargetSearcher>
         // 根据目标点和范围获取目标对象
         List<BattleUnit> tempTargets;
         var casterCamp = caster.camp;
-        var Teams = actionTarget.Teams;
-        var Types = actionTarget.Types;
+        var Teams = actionTarget.targetTeam;
+        var Types = actionTarget.targetType;
         var aoeType = actionTarget.aoeType;
         if(aoeType == AOEType.Radius)
         {
@@ -246,7 +188,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targetCollection;
     }
 
-    public TargetCollection CalculateSingleTarget(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, ActionTarget actionTarget)
+    public TargetCollection CalculateSingleTarget(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, AbilityTarget actionTarget)
     {
         var targetCollection = new TargetCollection();
         if(actionTarget.singTarget == ActionSingTarget.CASTER)
@@ -289,7 +231,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
     /// <summary>
     /// 获取所有攻击目标
     /// </summary>
-    public TargetCollection GetActionTargets(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, ActionTarget actionTarget)
+    public TargetCollection GetActionTargets(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, AbilityTarget actionTarget)
     {
         TargetCollection targetCollection;
         if(actionTarget.isSingleTarget)
@@ -300,26 +242,79 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targetCollection;
     }
 
-    public List<BattleUnit> FindTargetUnitsByManualSelect(BattleUnit caster, Ability ability, 
-        float dragWorldPointX = -1, float dragWorldPointZ = -1)
+    private List<BattleUnit> FindTargetUnits(BattleCamp sourceCamp, MultipleTargetsTeam targetTeam, MultipleTargetsType targetTypes,ActionMultipleTargetsFlag targetFlags)
+    {
+        List<BattleUnit> targets = new List<BattleUnit>(0);
+
+        // 根据阵营找对象
+        if(targetTeam == MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY)
+        {
+            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY : MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY;
+        }
+        else if(targetTeam == MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY)
+        {
+            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY : MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY;
+        }
+
+        switch(targetTeam)
+        {
+            case MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY:
+                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
+                break;
+            case MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY:
+                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
+                break;
+            case MultipleTargetsTeam.UNIT_TARGET_TEAM_BOTH:
+                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
+                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
+                break;
+            default:
+                break;
+        }
+        return targets;
+    }
+
+    /// <summary>
+    /// 寻找技能范围内所有目标
+    /// </summary>
+    public List<BattleUnit> FindTargetUnitsByAbilityRange(BattleUnit caster, Ability ability)
     {
         List<BattleUnit> targets = new List<BattleUnit>();
-        var castRange = ability.GetCastRange();
-        if(castRange <= 0)
+        // 全屏技能
+        var radius = ability.GetCastRange();
+        if(radius <= 0)
         {
             targets.Add(caster);
             return targets;
         }
 
-        // 单个敌人
-        var abilityRange = ability.GetAbilityRange();
-        if(abilityRange.isSingleTarget)
-        {
-            var unit = FindNearestEnemyUnit(caster);
-            targets.Add(unit);
-            return targets;
-        }
+        caster.Get2DPosition(out float centerX, out float centerZ);
+        var targetTeams = ability.GetTargetTeam();
+        var targetTypes = ability.GetTargetType();
+        var tempTargets = FindTargetUnitsInRadius(caster.camp,targetTeams,targetTypes,default,centerX,centerZ,radius);
+        return tempTargets;
+    }
 
-        return null;
+    public BattleUnit FindTargetUnitByAbilityRange(BattleUnit caster, Ability ability)
+    {
+        var tempTargets = FindTargetUnitsByAbilityRange(caster, ability);
+        return FilterTargetUnitFromList(caster, ability, tempTargets);
+    }
+
+    /// <summary>
+    /// 获取在指定半径范围内的单位
+    /// </summary>
+    public List<BattleUnit> FindTargetUnitsInRadius(BattleCamp battleCamp, MultipleTargetsTeam targetTeams,MultipleTargetsType targetTypes,ActionMultipleTargetsFlag targetFlags,float centerX, float centerZ, float radius)
+    {
+        var targetUnits = FindTargetUnits(battleCamp, targetTeams, targetTypes, targetFlags);
+
+        for(int i = targetUnits.Count - 1; i > 0 ; i--)
+        {
+            var unit = targetUnits[i];
+            unit.Get2DPosition(out float posX, out float posZ);
+            if(!BattleMath.IsPointInCircle(posX,posZ,centerX,centerZ,radius))
+                targetUnits.RemoveAt(i);
+        }
+        return targetUnits;
     }
 }

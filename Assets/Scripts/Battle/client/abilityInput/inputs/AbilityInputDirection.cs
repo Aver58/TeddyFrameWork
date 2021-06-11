@@ -13,22 +13,30 @@ using UnityEngine;
 
 public class AbilityInputDirection : AbilityInput
 {
-    public AbilityInputDirection(Transform casterTransform, Ability m_ability) : base(casterTransform, m_ability)
+    private float m_TargetPointX;
+    private float m_TargetPointZ;
+    public AbilityInputDirection(Ability ability, HeroActor casterActor) : base(ability, casterActor)
     {
+    }
 
+    public override void OnFingerDrag(float casterX, float casterZ, float dragWorldPointX, float dragWorldPointZ, float dragForwardX, float dragForwardZ)
+    {
+        base.OnFingerDrag(casterX, casterZ, dragWorldPointX, dragWorldPointZ, dragForwardX, dragForwardZ);
+        m_TargetPointX = dragForwardX;
+        m_TargetPointZ = dragForwardZ;
     }
 
     protected override void OnManualCastSkill()
     {
-        if(m_ability.CD > 0)
+        if(m_Ability.CD > 0)
         {
-            GameLog.Log(m_ability.GetConfigName() + "冷却中...");
+            GameLog.Log(m_Ability.GetConfigName() + "冷却中...");
             return;
         }
 
         // 向决策树输入请求
-        //var request = new ManualCastAbilityRequest(m_ability, m_target);
-        //var playerUnit = BattleUnitManager.instance.playerUnit;
-        //playerUnit.ForceUpdateDecisionRequest(request);
+        m_Ability.SetPointTarget(m_TargetPointX, m_TargetPointZ);
+        var request = new ManualCastAbilityRequest(m_Ability);
+        m_CasterActor.ForceUpdateDecisionRequest(request);
     }
 }

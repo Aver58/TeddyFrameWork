@@ -18,7 +18,7 @@ public class D2Action_ApplyModifier : D2Action
 {
     private string modifierName;
 
-    public D2Action_ApplyModifier(string modifierName, ActionTarget actionTarget) : base(actionTarget)
+    public D2Action_ApplyModifier(string modifierName, AbilityTarget actionTarget) : base(actionTarget)
     {
         this.modifierName = modifierName;
     }

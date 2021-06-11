@@ -15,7 +15,7 @@ using System.Collections.Generic;
 public class AbilityData
 {
     public Dictionary<string, D2Event> eventMap { get; set; }
-    public ActionTarget abilityTarget { get; set; }
+    public AbilityTarget abilityTarget { get; set; }
     public string configFileName { get; set; }
     public string abilityType { get; set; }
     public AbilityBranch abilityBranch { get; set; }

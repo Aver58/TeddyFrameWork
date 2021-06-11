@@ -21,10 +21,10 @@ public class D2Action
     private List<BattleUnit> m_targets;
 
     protected AbilityData abilityData;
-    protected ActionTarget actionTarget;
+    protected AbilityTarget actionTarget;
     protected RequestTarget requestTarget;
 
-    public D2Action(ActionTarget actionTarget)
+    public D2Action(AbilityTarget actionTarget)
     {
         this.actionTarget = actionTarget;
     }

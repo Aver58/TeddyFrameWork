@@ -14,26 +14,26 @@
 /// Within an action the Target key can be given a value to specify what it is that the target is. 
 /// This exposes some choices to make as to what you may want to target.
 /// </summary>
-public class ActionTarget
+public class AbilityTarget
 {
     public bool isSingleTarget;
-    public ActionSingTarget singTarget { get; set; }
-    public MultipleTargetsTeam Teams { get; set; }
-    public MultipleTargetsType Types { get; set; }
-    public MultipleTargetsType ExcludeTypes { get; set; }
-    public ActionMultipleTargetsFlag Flags { get; set; }
-    public ActionMultipleTargetsFlag ExcludeFlags { get; set; }
-    public float Radius { get; set; }
-    public int MaxTargets { get; set; }
-    public bool Random { get; set; }// Whether to select a random unit if more than MaxTargets exist.
-    public float LineLength { get; set; }
-    public float LineThickness { get; set; }
-    public ActionMultipleTargetsCenter Center { get; set; }
-    public AOEType aoeType { get; set; }
-    public float SectorRadius { get; set; }
-    public float SectorAngle { get; set; }
+    public ActionSingTarget singTarget;
+    public MultipleTargetsTeam targetTeam;
+    public MultipleTargetsType targetType;
+    public MultipleTargetsType excludeTypes;
+    public ActionMultipleTargetsFlag targetFlags;
+    public ActionMultipleTargetsFlag excludeFlags;
+    public ActionMultipleTargetsCenter targetCenter;
+    public float radius;
+    public int maxTargets;
+    public bool randomOneTarget;// 如果有多个目标，是否随机选择一个目标
+    public float lineLength;
+    public float lineThickness;
+    public AOEType aoeType;
+    public float sectorRadius;
+    public float sectorAngle;
 
-    public ActionTarget()
+    public AbilityTarget()
     {
         isSingleTarget = false;
     }
@@ -46,32 +46,32 @@ public class ActionTarget
 
     public void SetTargetTeam(MultipleTargetsTeam value)
     {
-        Teams = value;
+        targetTeam = value;
     }
 
     public void SetRadiusAoe(ActionMultipleTargetsCenter targetCenter,float radius)
     {
         isSingleTarget = false;
         aoeType = AOEType.Radius;
-        Center = targetCenter;
-        Radius = radius;
+        this.targetCenter = targetCenter;
+        this.radius = radius;
     }
 
     public void SetLineAoe(ActionMultipleTargetsCenter targetCenter, float lineLength, float lineThickness)
     {
         isSingleTarget = false;
         aoeType = AOEType.Line;
-        Center = targetCenter;
-        LineLength = lineLength;
-        LineThickness = lineThickness;
+        this.targetCenter = targetCenter;
+        this.lineLength = lineLength;
+        this.lineThickness = lineThickness;
     }
 
     public void SetSectorAoe(ActionMultipleTargetsCenter targetCenter, float sectorRadius, float sectorAngle)
     {
         isSingleTarget = false;
         aoeType = AOEType.Sector;
-        Center = targetCenter;
-        SectorRadius = sectorRadius;
-        SectorAngle = sectorAngle;
+        this.targetCenter = targetCenter;
+        this.sectorRadius = sectorRadius;
+        this.sectorAngle = sectorAngle;
     }
 }

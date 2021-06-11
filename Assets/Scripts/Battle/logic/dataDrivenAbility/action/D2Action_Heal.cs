@@ -5,7 +5,7 @@ public class D2Action_Heal : D2Action
     private AbilityHealFlag healFlag;
     private AbilityValueSource m_AbilityValueSource;
 
-    public D2Action_Heal(AbilityHealFlag healFlag, AbilityValueSource valueSource, ActionTarget actionTarget) : base(actionTarget)
+    public D2Action_Heal(AbilityHealFlag healFlag, AbilityValueSource valueSource, AbilityTarget actionTarget) : base(actionTarget)
     {
         this.healFlag = healFlag;
         m_AbilityValueSource = valueSource;
