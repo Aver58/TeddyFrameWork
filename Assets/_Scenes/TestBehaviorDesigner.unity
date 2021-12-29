@@ -444,10 +444,10 @@ MonoBehaviour:
   startWhenEnabled: 1
   asynchronousLoad: 1
   pauseWhenDisabled: 1
-  restartWhenComplete: 0
-  logTaskChanges: 0
+  restartWhenComplete: 1
+  logTaskChanges: 1
   group: 0
-  resetValuesOnRestart: 0
+  resetValuesOnRestart: 1
   externalBehavior: {fileID: 11400000, guid: 54e870c6c85383d4b977de7a1f36d3e8, type: 2}
   mBehaviorSource:
     behaviorName: TestAI
@@ -457,7 +457,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"SharedTarget","IsShared":true}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
