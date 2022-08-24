@@ -9,8 +9,7 @@
 */
 #endregion
 
-// 技能图标
-// http://mxd.17173.com/content/2013-02-26/20130226150805219.shtml
+// [技能图标](http://mxd.17173.com/content/2013-02-26/20130226150805219.shtml)
 using System.Collections.Generic;
 
 public class Ability
@@ -54,7 +53,7 @@ public class Ability
             float castPoint = abilityData.castPoint;
 
             // 前摇
-            if(abilityState == AbilityState.BeforeCastPoint)
+            if(abilityState == AbilityState.CastPoint)
             {
                 if(castTime > castPoint)
                     OnSpellStart();
@@ -97,7 +96,7 @@ public class Ability
         {
             OnAbilityPhaseStart();
 
-            abilityState = AbilityState.BeforeCastPoint;
+            abilityState = AbilityState.CastPoint;
             if(abilityData.castPoint <= 0)
             {
                 //没有前摇就直接触发OnSpellStart
@@ -154,7 +153,7 @@ public class Ability
         if((forceBreak == false) && (abilityData.abilityBranch != breakAbilityBranch))
             return;
 
-        if(abilityState == AbilityState.BeforeCastPoint)
+        if(abilityState == AbilityState.CastPoint)
             CastAbilityBreak();
 
         if(abilityState == AbilityState.Channeling)
@@ -175,7 +174,7 @@ public class Ability
     {
         BattleLog.Log("【吟唱阶段】OnAbilityPhaseStart" + abilityData.configFileName);
 
-        abilityState = AbilityState.BeforeCastPoint;
+        abilityState = AbilityState.CastPoint;
         ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
     }
 

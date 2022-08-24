@@ -9,28 +9,32 @@
 */
 #endregion
 
+// [数据驱动类技能](https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools:zh-cn/Scripting:zh-cn/Abilities_Data_Driven:zh-cn)
 // 技能事件
 public enum AbilityEvent
 {
+    OnChannelFinish,//当持续性施法完成
+    OnChannelInterrupted,//当持续性施法被中断
+    OnChannelSucceeded,//当持续性施法成功
+    OnOwnerSpawned,//当拥有者死亡
+    OnOwnerDied,//当拥有者出生
+    OnProjectileFinish,//当弹道粒子特效结束
+    OnProjectileHitUnit,//当弹道粒子特效命中单位
     OnAbilityPhaseStart,
     OnAbilityPhaseCharge,
-    OnSpellStart,
-    OnChannelFinish,
-    OnChannelInterrupted,
-    OnChannelSucceeded,
-    OnOwnerSpawned,
-    OnOwnerDied,
-    OnProjectileFinish,
-    OnProjectileHitUnit,
+    OnSpellStart,//当技能施法开始
+    OnToggleOff,//当切换为关闭状态
+    OnToggleOn,//当切换为开启状态
+    OnUpgrade,//当升级
 }
 
 // 技能状态
 public enum AbilityState
 {
     None,
-    BeforeCastPoint,        //施法前摇
-    Channeling,             //持续施法
-    CastBackSwing,          //施法后摇
+    CastPoint,        //施法前摇
+    Channeling,       //持续施法
+    CastBackSwing,    //施法后摇
 }
 
 /// <summary>
