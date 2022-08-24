@@ -10,6 +10,7 @@
 #endregion
 
 // [数据驱动类技能](https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools:zh-cn/Scripting:zh-cn/Abilities_Data_Driven:zh-cn)
+
 // 技能事件
 public enum AbilityEvent
 {
@@ -28,7 +29,9 @@ public enum AbilityEvent
     OnUpgrade,//当升级
 }
 
-// 技能状态
+/// <summary>
+/// 施法状态
+/// </summary>
 public enum AbilityState
 {
     None,
@@ -85,12 +88,14 @@ public enum AbilityCastType
     SKILL4,     // 技能4(optional)
 }
 
-// 伤害类型
-public enum AbilityDamageType
+/// <summary>
+/// 伤害类型
+/// </summary>
+public enum AbilityUnitDamageType
 {
-    DAMAGE_TYPE_PHYSICAL,       // 物理
-    DAMAGE_TYPE_MAGICAL,        //魔法
-    DAMAGE_TYPE_PURE,           // 真实伤害
+    DAMAGE_TYPE_PHYSICAL,       // 物理伤害会被护甲和格挡（圆盾）减少
+    DAMAGE_TYPE_MAGICAL,        // 魔法伤害会被魔抗减少
+    DAMAGE_TYPE_PURE,           // 纯粹伤害不会被任何护甲或魔抗减少
 }
 
 // 技能消耗类型
@@ -138,40 +143,40 @@ public enum AbilityHealFlag
 
 /// <summary>
 /// 技能行为
-/// 描述技能如何生效，生效后如何执行，可以配置多条行为。
+/// 描述技能如何生效，生效后如何执行，可以配置多条行为。使用空格和 | 符号分割例子（注意空格！）
 /// 用来区分主动技能和被动技能。主要用于可以手动释放的大招技能的配置。
 /// </summary>
 public enum AbilityBehavior
 {
-    ABILITY_BEHAVIOR_HIDDEN = 1 << 0, //Can be owned by a unit but can't be cast and won't show up on the HUD.
-    ABILITY_BEHAVIOR_PASSIVE = 1 << 1, //Cannot be cast like above but this one shows up on the ability HUD. 被动技能，AI不会选取，不能释放，自动生效
-    ABILITY_BEHAVIOR_NO_TARGET = 1 << 2, //Doesn't need a target to be cast, ability fires off as soon as the button is pressed.无目标技能，不需要选取目标或者点就能释放
-    ABILITY_BEHAVIOR_UNIT_TARGET = 1 << 3, //Needs a target to be cast on.单位目标技能，需要目标释放
-    ABILITY_BEHAVIOR_POINT = 1 << 4, //Can be cast anywhere the mouse cursor is (if a unit is clicked it will just be cast where the unit was standing).点目标技能，释放时需要指定一个位置
-    ABILITY_BEHAVIOR_AOE = 1 << 5, //Draws a radius where the ability will have effect. Kinda like POINT but with a an area of effect display.
-    ABILITY_BEHAVIOR_NOT_LEARNABLE = 1 << 6, //Probably can be cast or have a casting scheme but cannot be learned (these are usually abilities that are temporary like techie's bomb detonate).
-    ABILITY_BEHAVIOR_CHANNELLED = 1 << 7, //Channeled ability. If the user moves or is silenced the ability is interrupted.持续施法技能，施法者被眩晕等情况技能会被打断, 需要配合AbilityChannelTime来使用
-    ABILITY_BEHAVIOR_ITEM = 1 << 8, //Ability is tied up to an item.
-    ABILITY_BEHAVIOR_TOGGLE = 1 << 9, //Can be insta-toggled.
-    ABILITY_BEHAVIOR_DIRECTIONAL = 1 << 10, //Has a direction from the hero, such as miranas arrow or pudge's hook.线形AOE技能，需要配合AbilityAoeLine来使用
-    ABILITY_BEHAVIOR_IMMEDIATE = 1 << 11, //Can be used instantly without going into the action queue.
-    ABILITY_BEHAVIOR_AUTOCAST = 1 << 12, //Can be cast automatically.
-    ABILITY_BEHAVIOR_NOASSIST = 1 << 13, //Ability has no reticle assist.
-    ABILITY_BEHAVIOR_AURA = 1 << 14, //Ability is an aura.  Not really used other than to tag the ability as such.
-    ABILITY_BEHAVIOR_ATTACK = 1 << 15, //Is an attack and cannot hit attack-immune targets.
-    ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT = 1 << 16, //Should not resume movement when it completes. Only applicable to no-target, non-immediate abilities.
-    ABILITY_BEHAVIOR_ROOT_DISABLES = 1 << 17, //Cannot be used when rooted
-    ABILITY_BEHAVIOR_UNRESTRICTED = 1 << 18, //Ability is allowed when commands are restricted
-    ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE = 1 << 19, //Can be executed while stunned, casting, or force-attacking. Only applicable to toggled abilities.
-    ABILITY_BEHAVIOR_IGNORE_CHANNEL = 1 << 20, //Can be executed without interrupting channels.
-    ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT = 1 << 21, //Doesn't cause certain modifiers to end, used for courier and speed burst.
-    ABILITY_BEHAVIOR_DONT_ALERT_TARGET = 1 << 22, //Does not alert enemies when target-cast on them.
-    ABILITY_BEHAVIOR_DONT_RESUME_ATTACK = 1 << 23, //Ability should not resume command-attacking the previous target when it completes. Only applicable to no-target, non-immediate abilities and unit-target abilities.
-    ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN = 1 << 24, //Ability still uses its normal cast point when stolen.
-    ABILITY_BEHAVIOR_IGNORE_BACKSWING = 1 << 25, //Ability ignores backswing pseudoqueue.
-    ABILITY_BEHAVIOR_RUNE_TARGET = 1 << 26, //Targets runes.
-    ABILITY_BEHAVIOR_RADIUS_AOE = 1 << 27, //圆形AOE技能，需要配合AbilityAoeRadius来使用
-    ABILITY_BEHAVIOR_SECTOR_AOE = 1 << 28,//扇形AOE技能，需要配合AbilityAoeSector来使用
+    ABILITY_BEHAVIOR_NO_TARGET  = 1, // 无目标技能，不需要选择目标释放，按下技能按钮即可释放
+    ABILITY_BEHAVIOR_UNIT_TARGET, // 单位目标技能，需要目标释放，需要AbilityUnitTargetTeam和AbilityUnitTargetType，参见
+    ABILITY_BEHAVIOR_POINT, // 点目标技能，可以对鼠标指向的任意位置释放，如果点击单位也只是对其位置释放
+    ABILITY_BEHAVIOR_PASSIVE, // 被动技能，AI不会选取，不能释放，自动生效 Cannot be cast like above but this one shows up on the ability HUD.
+    ABILITY_BEHAVIOR_CHANNELLED, // 持续施法技能，施法者被眩晕等情况技能会被打断, 需要配合AbilityChannelTime来使用 Channeled ability. If the user moves or is silenced the ability is interrupted.
+    ABILITY_BEHAVIOR_TOGGLE, // 开关技能，可以开关 Can be insta-toggled.
+    ABILITY_BEHAVIOR_AURA, // 光环技能，并没有实际作用而只是作为一个标签 Ability is an aura.  Not really used other than to tag the ability as such.
+    ABILITY_BEHAVIOR_AUTOCAST, // 自动施法，可以自动施法，通常如果不是一个 ATTACK技能的话本身并不工作 Can be cast automatically.
+    ABILITY_BEHAVIOR_HIDDEN, // 隐藏，不能释放并且不在HUD上显示 Can be owned by a unit but can't be cast and won't show up on the HUD.
+    ABILITY_BEHAVIOR_AOE, // AOE技能，会显示技能将要影响的范围，类似点目标技能，需要配合AoERadius来使用 Draws a radius where the ability will have effect. Kinda like POINT but with a an area of effect display.
+    ABILITY_BEHAVIOR_NOT_LEARNABLE, // 不可学习技能，不能通过点击HUD学习，例如卡尔的技能 Probably can be cast or have a casting scheme but cannot be learned (these are usually abilities that are temporary like techie's bomb detonate).
+    ABILITY_BEHAVIOR_ITEM, // 道具技能，技能与道具绑定，并不需要使用，游戏会在自动将此属性添加给任何基类为"item_datadriven"的技能 Ability is tied up to an item.
+    ABILITY_BEHAVIOR_DIRECTIONAL, // 方向技能，拥有一个从英雄出发的方向，例如白虎的箭和屠夫的钩子 Has a direction from the hero, such as miranas arrow or pudge's hook.
+    ABILITY_BEHAVIOR_IMMEDIATE, // 立即释放技能，立即释放而不进入操作序列 Can be used instantly without going into the action queue.
+    ABILITY_BEHAVIOR_NOASSIST, //技能没有辅助刻度 ？ Ability has no reticle assist.
+    ABILITY_BEHAVIOR_ATTACK, // ATTACK（攻击）技能，不能攻击不能被攻击的单位 Is an attack and cannot hit attack-immune targets.
+    ABILITY_BEHAVIOR_ROOT_DISABLES, // 被定身时无法使用 Cannot be used when rooted
+    ABILITY_BEHAVIOR_UNRESTRICTED, // 指令被限制时依然能够使用，例如食尸鬼大招 Ability is allowed when commands are restricted
+    ABILITY_BEHAVIOR_DONT_ALERT_TARGET, // 释放在敌人身上时不会警告他们，例如白牛的冲 Does not alert enemies when target-cast on them.
+    ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT, // 完成施法后不会恢复移动，只能对无目标、非立即技能生效 Should not resume movement when it completes. Only applicable to no-target, non-immediate abilities.
+    ABILITY_BEHAVIOR_DONT_RESUME_ATTACK, // 完成施法后不会继续继续攻击之前的目标，只对无目标，非立即释放和单位目标技能生效 Ability should not resume command-attacking the previous target when it completes. Only applicable to no-target, non-immediate abilities and unit-target abilities.
+    ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN, // 被偷窃时依然使用其默认施法前摇，例如地卜师的忽悠和先知的传送 Ability still uses its normal cast point when stolen.
+    ABILITY_BEHAVIOR_IGNORE_BACKSWING, // 无视施法后摇 Ability ignores backswing pseudoqueue.
+    ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE, // 在被眩晕、施法时或者强制攻击时都能执行，只对开关技能有效，例如变形 Can be executed while stunned, casting, or force-attacking. Only applicable to toggled abilities.
+    ABILITY_BEHAVIOR_RUNE_TARGET, // 可对符文释放 Targets runes.
+    ABILITY_BEHAVIOR_IGNORE_CHANNEL, //Can be executed without interrupting channels.
+    ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT, //Doesn't cause certain modifiers to end, used for courier and speed burst.
+    ABILITY_BEHAVIOR_RADIUS_AOE, //圆形AOE技能，需要配合AbilityAoeRadius来使用
+    ABILITY_BEHAVIOR_SECTOR_AOE,//扇形AOE技能，需要配合AbilityAoeSector来使用
 }
 
 /// <summary>

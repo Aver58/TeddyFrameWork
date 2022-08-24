@@ -12,14 +12,14 @@
 public static class AbilityFormula
 {
     // 造成伤害
-    public static void ApplyDamage(BattleUnit caster, BattleUnit victim, AbilityDamageType damageType,
+    public static void ApplyDamage(BattleUnit caster, BattleUnit victim, AbilityUnitDamageType unitDamageType,
         AbilityDamageFlag damageFlag, AbilityValueSource damageValueSource, string configName)
     {
         int casterLevel = caster.GetLevel();
         BattleProperty casterProperty = caster.GetProperty();
         BattleProperty victimProperty = victim.GetProperty();
         float abilityValue = damageValueSource.GetAbilityValue(casterLevel, casterProperty, victimProperty);
-        float finalDamage = CalcDamageByDamageType(abilityValue, damageType, casterProperty, victimProperty);
+        float finalDamage = CalcDamageByDamageType(abilityValue, unitDamageType, casterProperty, victimProperty);
         // 护盾
         // 吸血
 
@@ -28,18 +28,18 @@ public static class AbilityFormula
     }
 
     // 计算不同伤害类型造成的伤害
-    private static float CalcDamageByDamageType(float abilityValue, AbilityDamageType damageType,
+    private static float CalcDamageByDamageType(float abilityValue, AbilityUnitDamageType unitDamageType,
         BattleProperty casterProperty, BattleProperty targetProperty)
     {
         // todo 计算减伤
-        switch(damageType)
+        switch(unitDamageType)
         {
-            case AbilityDamageType.DAMAGE_TYPE_PHYSICAL:
+            case AbilityUnitDamageType.DAMAGE_TYPE_PHYSICAL:
 
                 break;
-            case AbilityDamageType.DAMAGE_TYPE_MAGICAL:
+            case AbilityUnitDamageType.DAMAGE_TYPE_MAGICAL:
                 break;
-            case AbilityDamageType.DAMAGE_TYPE_PURE:
+            case AbilityUnitDamageType.DAMAGE_TYPE_PURE:
                 break;
             default:
                 break;

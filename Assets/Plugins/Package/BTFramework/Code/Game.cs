@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameBT : MonoBehaviour {
 
@@ -31,7 +32,7 @@ public class GameBT : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) {
-			Application.LoadLevel(0);
+			SceneManager.LoadScene(0);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Escape)) {

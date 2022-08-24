@@ -179,7 +179,7 @@ public static class AbilityReader
         if(damageTypeConfig == null)
             return null;
 
-        var damageType = GetEnumValue<AbilityDamageType>(damageTypeConfig);
+        var damageType = GetEnumValue<AbilityUnitDamageType>(damageTypeConfig);
         var damageFlagConfig = GetJsonValue(json, "DamageFlags");
         if(damageFlagConfig == null)
             return null;
