@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -204,6 +205,29 @@ public sealed class LoadModule : ModuleBase
             {
                 string jsonText = streamReader.ReadToEnd();
                 JsonData jsonData = JsonMapper.ToObject(jsonText);
+                return jsonData;
+            }
+        }
+        else
+        {
+            GameLog.LogError(path + "不存在!");
+            return null;
+        }
+    }
+
+    public static Hashtable GetJsonHashTable(string path) {
+        stringBuilder.Clear();
+        stringBuilder.Append(JsonPathPrefix);
+        stringBuilder.Append(path);
+
+        path = JsonPathPrefix + path;
+        //Debug.Log("LoadJson: " + path);
+        if(FileHelper.IsFileExist(path))
+        {
+            using(var streamReader = new StreamReader(path))
+            {
+                var jsonText = streamReader.ReadToEnd();
+                var jsonData = jsonText.HashtableFromJson();
                 return jsonData;
             }
         }

@@ -1,4 +1,6 @@
-namespace Battle.logic.NewDataDrivenAbility {
+using System.Collections.Generic;
+
+namespace Battle.logic.ability_dataDriven {
     public struct AbilityConfig {
         public int AbilityDamage;
         public int AbilityManaCost;
@@ -16,5 +18,7 @@ namespace Battle.logic.NewDataDrivenAbility {
 
         public string AbilityCastAnimation;
         public string AbilityTextureName;
+
+        public Dictionary<AbilityEvent, D2Event> EventMap;
     }
 }

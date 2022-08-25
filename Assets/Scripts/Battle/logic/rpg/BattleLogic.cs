@@ -73,8 +73,8 @@ public class BattleLogic : Singleton<BattleLogic>
     #region API
 
     /// <summary>
-    /// 有行为树，不攻击的玩偶
-    /// 人偶也要有行为树，要可以受击、冰冻、眩晕、中毒、灼烧等状态
+    /// 有行为树，不攻击的傀儡
+    /// 傀儡也要有行为树，要可以受击、冰冻、眩晕、中毒、灼烧等状态
     /// </summary>
     public BattleUnit AddOneDummyUnit()
     {

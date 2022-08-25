@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Battle.logic.NewDataDrivenAbility {
+namespace Battle.logic.ability_dataDriven {
+    // [MMORPG技能管线设计经验总结](https://baijiahao.baidu.com/s?id=1740830613356473547&wfr=spider&for=pc)
     // [MOBA 类游戏技能系统设计](https://nashnie.github.io/gameplay/2018/11/13/moba-like-skill-system-design.html)
     // [Dota2 创意工坊](http://maps.dota2.com.cn/custommap/cbook)
     // 良好的数据结构驱动
@@ -12,45 +13,47 @@ namespace Battle.logic.NewDataDrivenAbility {
         private int fps;
         private float fixedDeltaTimeOfFps;
         private float currentTick;
-        //帧
+        // todo 怎么以帧为单位跑逻辑
         private int currentFrame;
+        private float cooldown;
 
         private float backSwingPoint;
         //技能表现部分，动作以及融合
         private AnimationClip animationClip;
         private bool applyRootMotion;
         private bool cancelable;
-        private AbilityConfig abilityConfig;
+        private readonly AbilityConfig abilityConfig;
 
         private AbilityState abilityState;
 
+        public Ability(AbilityConfig abilityConfig) {
+            this.abilityConfig = abilityConfig;
+        }
+
         #region LifeCycle
 
-        public void OnInit() {
-            fps = 30;
+        public void OnInit(int targetFrameRate) {
+            fps = targetFrameRate;
             currentTick = 0;
-            currentFrame = 0;
             abilityState = AbilityState.None;
-            fixedDeltaTimeOfFps = 1 / fps;
+            cooldown = abilityConfig.AbilityCooldown;
 
             backSwingPoint = abilityConfig.AbilityCastPoint + abilityConfig.AbilityChannelTime;
         }
         
-        public void OnFixedUpdate() {
-            currentTick += fixedDeltaTimeOfFps;
-            while (currentFrame < currentTick) {
-                currentFrame++;
-            }
+        public void OnFixedUpdate(float deltaTime) {
+            cooldown -= deltaTime;
+            currentTick += deltaTime;
 
-            if (currentFrame > 0 && currentFrame < abilityConfig.AbilityCastPoint) {
+            if (currentTick > 0 && currentTick < abilityConfig.AbilityCastPoint) {
                 EnterCastPoint();
             }
 
-            if (currentFrame > abilityConfig.AbilityCastPoint && currentFrame < backSwingPoint) {
+            if (currentTick > abilityConfig.AbilityCastPoint && currentTick < backSwingPoint) {
                 EnterChannel();
             }
 
-            if (currentFrame > backSwingPoint && currentFrame < abilityConfig.AbilityDuration) {
+            if (currentTick > backSwingPoint && currentTick < abilityConfig.AbilityDuration) {
                 EnterBackSwing();
             }
         }
@@ -64,6 +67,7 @@ namespace Battle.logic.NewDataDrivenAbility {
         private void EnterCastPoint() {
             if (abilityState == AbilityState.None) {
                 abilityState = AbilityState.CastPoint;
+                ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
             }
         }
 
@@ -72,6 +76,7 @@ namespace Battle.logic.NewDataDrivenAbility {
         private void EnterChannel() {
             if (abilityState == AbilityState.CastPoint) {
                 abilityState = AbilityState.Channeling;
+                ExecuteEvent(AbilityEvent.OnSpellStart);
             }
         }
 
@@ -80,6 +85,16 @@ namespace Battle.logic.NewDataDrivenAbility {
         private void EnterBackSwing() {
             if (abilityState == AbilityState.Channeling) {
                 abilityState = AbilityState.CastBackSwing;
+                ExecuteEvent(AbilityEvent.OnChannelFinish);
+            }
+        }
+
+        // 驱动事件
+        private void ExecuteEvent(AbilityEvent abilityEvent)
+        {
+            if (abilityConfig.EventMap.ContainsKey(abilityEvent)) {
+                var d2Event = abilityConfig.EventMap[abilityEvent];
+                // d2Event.Execute();
             }
         }
 

@@ -48,18 +48,17 @@ OnToggleOn
 OnUnitMoved
 OnUpgrade
      */
-public class D2Event
-{
-    private List<D2Action> m_Actions;
+public class D2Event {
+    private readonly List<D2Action> actions;
     public D2Event(List<D2Action> actions)
     {
-        m_Actions = actions;
+        this.actions = actions;
     }
 
     public void Execute(BattleUnit source, AbilityData abilityData, RequestTarget requestTarget)
     {
-        //BattleLog.Log("【D2Event】{0}，source：{1}，target：{2}", GetType().Name, source.GetName(), requestTarget.ToString());
-        foreach(D2Action action in m_Actions)
+        BattleLog.Log("【Execute D2Event】{0}，source：{1}，target：{2}", GetType().Name, source.GetName(), requestTarget.ToString());
+        foreach(var action in actions)
         {
             action.Execute(source, abilityData, requestTarget);
         }
