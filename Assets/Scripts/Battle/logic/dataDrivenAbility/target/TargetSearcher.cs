@@ -242,29 +242,29 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targetCollection;
     }
 
-    private List<BattleUnit> FindTargetUnits(BattleCamp sourceCamp, MultipleTargetsTeam targetTeam, MultipleTargetsType targetTypes,ActionMultipleTargetsFlag targetFlags)
+    private List<BattleUnit> FindTargetUnits(BattleCamp sourceCamp, AbilityUnitTargetTeam targetTeam, AbilityUnitTargetType targetTypes,AbilityUnitTargetFlags targetFlags)
     {
         List<BattleUnit> targets = new List<BattleUnit>(0);
 
         // 根据阵营找对象
-        if(targetTeam == MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY)
+        if(targetTeam == AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY)
         {
-            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY : MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY;
+            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY : AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY;
         }
-        else if(targetTeam == MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY)
+        else if(targetTeam == AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY)
         {
-            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY : MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY;
+            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY : AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY;
         }
 
         switch(targetTeam)
         {
-            case MultipleTargetsTeam.UNIT_TARGET_TEAM_ENEMY:
+            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY:
                 InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
                 break;
-            case MultipleTargetsTeam.UNIT_TARGET_TEAM_FRIENDLY:
+            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY:
                 InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
-            case MultipleTargetsTeam.UNIT_TARGET_TEAM_BOTH:
+            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_BOTH:
                 InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
                 InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
@@ -304,7 +304,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
     /// <summary>
     /// 获取在指定半径范围内的单位
     /// </summary>
-    public List<BattleUnit> FindTargetUnitsInRadius(BattleCamp battleCamp, MultipleTargetsTeam targetTeams,MultipleTargetsType targetTypes,ActionMultipleTargetsFlag targetFlags,float centerX, float centerZ, float radius)
+    public List<BattleUnit> FindTargetUnitsInRadius(BattleCamp battleCamp, AbilityUnitTargetTeam targetTeams,AbilityUnitTargetType targetTypes,AbilityUnitTargetFlags targetFlags,float centerX, float centerZ, float radius)
     {
         var targetUnits = FindTargetUnits(battleCamp, targetTeams, targetTypes, targetFlags);
 

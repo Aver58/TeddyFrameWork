@@ -261,12 +261,12 @@ public class Ability
         lineThickness = abilityData.abilityTarget.lineThickness;
     }
 
-    public MultipleTargetsTeam GetTargetTeam()
+    public AbilityUnitTargetTeam GetTargetTeam()
     {
         return abilityData.abilityTarget.targetTeam;
     }
 
-    public MultipleTargetsType GetTargetType()
+    public AbilityUnitTargetType GetTargetType()
     {
         return abilityData.abilityTarget.targetType;
     }

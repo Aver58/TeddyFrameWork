@@ -18,11 +18,11 @@ public class AbilityTarget
 {
     public bool isSingleTarget;
     public ActionSingTarget singTarget;
-    public MultipleTargetsTeam targetTeam;
-    public MultipleTargetsType targetType;
-    public MultipleTargetsType excludeTypes;
-    public ActionMultipleTargetsFlag targetFlags;
-    public ActionMultipleTargetsFlag excludeFlags;
+    public AbilityUnitTargetTeam targetTeam;
+    public AbilityUnitTargetType targetType;
+    public AbilityUnitTargetType excludeTypes;
+    public AbilityUnitTargetFlags targetFlags;
+    public AbilityUnitTargetFlags excludeFlags;
     public ActionMultipleTargetsCenter targetCenter;
     public float radius;
     public int maxTargets;
@@ -44,7 +44,7 @@ public class AbilityTarget
         singTarget = value;
     }
 
-    public void SetTargetTeam(MultipleTargetsTeam value)
+    public void SetTargetTeam(AbilityUnitTargetTeam value)
     {
         targetTeam = value;
     }

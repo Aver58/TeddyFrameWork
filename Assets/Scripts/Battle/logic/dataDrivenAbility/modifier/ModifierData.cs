@@ -26,8 +26,8 @@ public class ModifierData
     // Aura
     public string Aura;
     public float Aura_Radius;
-    public MultipleTargetsTeam Aura_Teams;
-    public MultipleTargetsType Aura_Types;
+    public AbilityUnitTargetTeam Aura_Teams;
+    public AbilityUnitTargetType Aura_Types;
 
     public List<ModifierState> States;
     public List<ModifierPropertyValue> ModifierProperties;

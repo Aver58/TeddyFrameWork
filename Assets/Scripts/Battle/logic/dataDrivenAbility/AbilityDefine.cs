@@ -14,6 +14,9 @@
 // 技能事件
 public enum AbilityEvent
 {
+    OnSpellStart,//当技能施法开始
+    OnToggleOn,//当切换为开启状态
+    OnToggleOff,//当切换为关闭状态
     OnChannelFinish,//当持续性施法完成
     OnChannelInterrupted,//当持续性施法被中断
     OnChannelSucceeded,//当持续性施法成功
@@ -21,12 +24,11 @@ public enum AbilityEvent
     OnOwnerDied,//当拥有者出生
     OnProjectileFinish,//当弹道粒子特效结束
     OnProjectileHitUnit,//当弹道粒子特效命中单位
-    OnAbilityPhaseStart,
     OnAbilityPhaseCharge,
-    OnSpellStart,//当技能施法开始
-    OnToggleOff,//当切换为关闭状态
-    OnToggleOn,//当切换为开启状态
-    OnUpgrade,//当升级
+    OnEquip,//道具被捡起
+    OnUnequip,//道具离开物品栏
+    OnUpgrade,//从用户界面升级此技能
+    OnAbilityPhaseStart,//技能开始施法（单位转向目标前）
 }
 
 /// <summary>
@@ -40,10 +42,12 @@ public enum AbilityState
     CastBackSwing,    //施法后摇
 }
 
+#region Target
+
 /// <summary>
-/// 技能对象
+/// 队伍
 /// </summary>
-public enum MultipleTargetsTeam
+public enum AbilityUnitTargetTeam
 {
     UNIT_TARGET_TEAM_NONE,
     UNIT_TARGET_TEAM_ENEMY,
@@ -53,14 +57,100 @@ public enum MultipleTargetsTeam
 }
 
 /// <summary>
-/// 指定的类型
+/// 类型
 /// </summary>
-public enum MultipleTargetsType
+public enum AbilityUnitTargetType
 {
-    UNIT_TARGET_NONE,//无
-    UNIT_TARGET_HERO,//英雄
-    UNIT_TARGET_ALL,//所有
+    DOTA_UNIT_TARGET_HERO,//英雄
+    DOTA_UNIT_TARGET_ALL,//任意，包括隐藏的实体
+    DOTA_UNIT_TARGET_BASIC,//基本单位, 包括召唤单位
+    DOTA_UNIT_TARGET_MECHANICAL,//npc_dota_creep_siege 机械单位（投石车） DOTA_NPC_UNIT_RELATIONSHIP_TYPE_SIEGE
+    DOTA_UNIT_TARGET_BUILDING,//npc_dota_tower, npc_dota_building 塔和建筑 DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING
+    DOTA_UNIT_TARGET_TREE,//ent_dota_tree 树 例子: 吃树, 补刀斧
+    DOTA_UNIT_TARGET_CREEP,//npc_dota_creature, npc_dota_creep 与BASIC类似但是可能不包括一些召唤单位 例子: 骨弓死亡契约
+    DOTA_UNIT_TARGET_COURIER,//npc_dota_courier, npc_dota_flying_courier 信使和飞行信使 DOTA_NPC_UNIT_RELATIONSHIP_TYPE_COURIER
+    DOTA_UNIT_TARGET_NONE,//没有
+    DOTA_UNIT_TARGET_OTHER,//任何前面不包括的单位
+    DOTA_UNIT_TARGET_CUSTOM,//未开放? 例子: 水人复制, TB灵魂隔断, 谜团恶魔转化, 艾欧链接, 小狗感染...
 }
+
+/// <summary>
+/// 标签允许对默认被忽略的目标单位 (例如魔法免疫敌人)施法, 或者忽略特定的单位类型 (例如远古单位和魔免友军)来允许对其施法.
+/// </summary>
+public enum AbilityUnitTargetFlags
+{
+    DOTA_UNIT_TARGET_FLAG_NONE,//缺省默认值
+    DOTA_UNIT_TARGET_FLAG_DEAD,//死亡单位忽略
+    DOTA_UNIT_TARGET_FLAG_MELEE_ONLY,//拥有攻击类型DOTA_UNIT_CAP_MELEE_ATTACK的单位
+    DOTA_UNIT_TARGET_FLAG_RANGED_ONLY,//拥有攻击类型DOTA_UNIT_CAP_RANGED_ATTACK的单位
+    DOTA_UNIT_TARGET_FLAG_MANA_ONLY,//在npc_unit中拥有魔法没有"StatusMana" "0"的单位
+    DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP,//禁用帮助的单位 尚不确定数据驱动技能如何使用？
+    DOTA_UNIT_TARGET_FLAG_NO_INVIS,//忽略拥有MODIFIER_STATE_INVISIBLE的不可见单位
+    DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,//指向拥有MODIFIER_STATE_MAGIC_IMMUNE （魔法免疫）的敌人单位 例子: 根须缠绕, 淘汰之刃, 原始咆哮...
+    DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES,//忽略拥有MODIFIER_STATE_MAGIC_IMMUNE（魔法免疫）的友军 例子: 痛苦之源噩梦
+    DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,//拥有MODIFIER_STATE_ATTACK_IMMUNE的单位（攻击免疫单位）
+    DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,//单位离开视野时打断 例子: 魔法汲取, 生命汲取
+    DOTA_UNIT_TARGET_FLAG_INVULNERABLE,//拥有MODIFIER_STATE_INVULNERABLE的单位（无敌单位） 例子: 暗杀, 召回, 巨力重击...
+    DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS,//忽略单位，使用标签"IsAncient" "1" 例子: 麦达斯之手
+    DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO,//忽略单位，使用标签"ConsideredHero" "1" 例子: 星体禁锢, 崩裂禁锢, 灵魂隔断
+    DOTA_UNIT_TARGET_FLAG_NOT_DOMINATED,//拥有MODIFIER_STATE_DOMINATED的单位（被支配的单位）
+    DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS,//拥有MODIFIER_PROPERTY_IS_ILLUSION的单位（幻象单位）
+    DOTA_UNIT_TARGET_FLAG_NOT_NIGHTMARED,//拥有MODIFIER_STATE_NIGHTMARED的单位（噩梦中单位）
+    DOTA_UNIT_TARGET_FLAG_NOT_SUMMONED,//通过SpawnUnit Action创建的单位
+    DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD,//拥有MODIFIER_STATE_OUT_OF_GAME的单位（离开游戏的单位）
+    DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED,//玩家控制的单位，接近Lua IsControllableByAnyPlayer()
+}
+
+#endregion
+
+#region Action
+
+public enum AbilityAction {
+    AddAbility,//添加技能 目标, 技能名 Target, AbilityName
+    ActOnTargets,//目标动作 目标,动作 Target, Action
+    ApplyModifier,//	应用Modifier 目标, Modifier名称, 持续时间 Target, ModifierName, Duration
+    ApplyMotionController,//	应用移动控制器 脚本文件,水平控制函数,垂直控制函数,测试重力函数 ScriptFile, HorizontalControlFunction, VerticalControlFunction, TestGravityFunc
+    AttachEffect,//当在modifier中使用时, AttachEffect将会在modifier被摧毁后自动停止例子特效,而FireEffect不会,所以如果你在modifier中使用FireEffect添加一个无限持续的粒子特,modifier被摧毁后效果依然会持续
+    //	附着效果 效果名称, 效果附加类型, 目标, 目标点, 控制点, 控制点实体, 目标点, 效果范围, 效果持续时间比例, 效果生命时间比例 ,效果颜色A, 效果颜色B, 效果透明度比例
+    //EffectName, EffectAttachType, Target, TargetPoint, ControlPoints,ControlPointEntities, TargetPoint, EffectRadius, EffectDurationScale, EffectLifeDurationScale ,EffectColorA, EffectColorB, EffectAlphaScale 
+    Blink,//闪烁 目标 Target
+    CleaveAttack,//	范围攻击 范围效果,范围百分比,范围半径 Cleave Effect, CleavePercent, CleaveRadius
+    CreateBonusAttack,//	创建奖励攻击 目标 Target
+    CreateThinker,//	创建Thinker 目标,Modifier名称 Target, ModifierName
+    CreateThinkerWall,//	创建ThinkerWall 目标,Modifier名称,宽度,长度,旋转 Target, ModifierName, Width, Length, Rotation
+    Damage,//	伤害 
+    // 目标,类型,最小伤害/最大伤害，伤害，基于当前生命百分比伤害，基于最大生命百分比伤害
+    // Target, Type, MinDamage/MaxDamage, Damage, CurrentHealthPercentBasedDamage, MaxHealthPercentBasedDamage
+    DelayedAction,//	延迟动作 延迟,动作 Delay, Action
+    DestroyTrees,//	破坏树木 目标,范围 Target, Radius
+    FireEffect,//	播放特效
+    // 效果名称, 效果附加类型, 目标, 目标点, 控制点, 目标点, 效果范围, 效果持续时间比例, 效果生命时间比例 ,效果颜色A, 效果颜色B, 效果透明度比例
+    // EffectName, EffectAttachType, Target, TargetPoint, ControlPoints, TargetPoint, EffectRadius, EffectDurationScale, EffectLifeDurationScale ,EffectColorA, EffectColorB, EffectAlphaScale
+    FireSound,//	播放声音 效果名称,目标 EffectName, Target
+    GrantXPGold,//	给予经验金钱 目标,经验数量,金币数量,可靠金币,均匀分配 Target, XPAmount, GoldAmount, ReliableGold, SplitEvenly
+    Heal,//	治疗 治疗量,目标 HealAmount, Target
+    IsCasterAlive,//	施法者生存 成功时,失败时 OnSuccess, OnFailure
+    Knockback,//	击退 目标,中心,持续时间,距离,高度,固定距离,眩晕 Target, Center, Duration, Distance, Height, IsFixedDistance, ShouldStun
+    LevelUpAbility,//	升级技能 目标,技能名称 Target, AbilityName
+    Lifesteal,//	吸血 目标,吸血比例 Target, LifestealPercent
+    LinearProjectile,//	线性投射物
+    // 目标,效果名称,移动速度,开始范围,结束范围,固定距离,开始位置,目标队伍,目标类型,目标标签,前方锥形,提供视野,视觉范围
+    // Target, EffectName, MoveSpeed, StartRadius, EndRadius, FixedDistance, StartPosition, TargetTeams, TargetTypes, TargetFlags, HasFrontalCone, ProvidesVision, VisionRadius
+    MoveUnit,//	移动单位 目标,移向目标 Target, MoveToTarget
+    Random,//	随机 几率,伪随机,成功时,失败时 Chance, PseudoRandom, OnSuccess, OnFailure
+    RemoveAbility,//	移除技能 目标,技能名称 Target, AbilityName
+    RemoveModifier,//	移除Modifier 目标,Modifier名称 Target, ModifierName
+    RemoveUnit,//	移除单位 目标 Target
+    ReplaceUnit	,//替换单位 单位名称,目标 UnitName,Target
+    Rotate,//	旋转 目标,俯仰角偏航角翻滚角 Target, PitchYawRoll
+    RunScript,//	运行脚本 目标,脚本文件,函数,额外参数 Target, ScriptFile, Function, Extra Parameters
+    SpawnUnit,//	产生单位 目标名称,目标数量,目标上限,产生范围,持续时间,目标,死亡金钱,死亡经验 UnitName, UnitCount, UnitLimit, SpawnRadius, Duration, Target, GrantsGold, GrantsXP
+    Stun,//	眩晕 目标,持续时间 Target, Duration
+    SpendMana,//	花费魔法值 魔法值 Mana
+    TrackingProjectile,//	追踪投射物 目标, 效果名称, 能否躲避, 提供视野, 视野范围, 移动速度, 源附着点 Target, EffectName, Dodgeable, ProvidesVision, VisionRadius, MoveSpeed, SourceAttachment
+}
+
+#endregion
 
 //技能请求目标类型  （一样可以用 | 来指定多种类型）
 public enum AbilityRequestTargetType
@@ -231,17 +321,6 @@ public enum AOEType
     Sector,//扇形
 }
 
-/// <summary>
-/// Target units with specific flags or reject units with specific flag.
-/// </summary>
-public enum ActionMultipleTargetsFlag
-{
-    UNIT_TARGET_FLAG_NONE,
-    UNIT_TARGET_FLAG_DEAD,
-    UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
-    UNIT_TARGET_FLAG_OUT_OF_WORLD,
-}
-
 #endregion
 
 #region Modifier
@@ -249,9 +328,9 @@ public enum ActionMultipleTargetsFlag
 public enum ModifierAttributes
 {
     MODIFIER_ATTRIBUTE_NONE,
-    MODIFIER_ATTRIBUTE_MULTIPLE,
-    MODIFIER_ATTRIBUTE_PERMANENT,
-    MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE,//无视不可伤害
+    MODIFIER_ATTRIBUTE_MULTIPLE,//同一个modifier可以存在多个实例，而不会覆盖
+    MODIFIER_ATTRIBUTE_PERMANENT,//死亡保持
+    MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE,//无视不可伤害,将会在无敌单位(MODIFIER_STATE_INVULNERABLE )上保持 想要对一个无敌单位应用你需要使用此属性，并在"Target"中使用"Flag" "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
 }
 
 /// <summary>
@@ -336,25 +415,42 @@ public enum ModifierStates
 // modifier 事件
 public enum ModifierEvents
 {
-    OnCreated,// - The modifier has been created.
-    OnDestroy,// - The modifier has been removed.
-    OnAbilityExecuted,
-    OnAttackStart,// - The unit this modifier is attached to has started to attack a target (when the attack animation begins, not when the autoattack projectile is created).
-    OnAttackLanded,// - The unit this modifier is attached to has landed an attack on a target. "%attack_damage" is set to the damage value before mitigation. Autoattack damage is dealt after this block executes.
-    OnDealDamage,// - The unit this modifier is attached to has dealt damage. "%attack_damage" is set to the damage value after mitigation.
-    OnAttacked,// - The unit this modifier is attached to has been attacked.
-    OnKill,//
-    OnDeath,//
-    OnIntervalThink,// 触发持续效果
-    OnTakeDamage,// - The unit this modifier is attached to has taken damage. "%attack_damage" is set to the damage value after mitigation.
-    OnOrbFire,//
-    OnOrbImpact,//
-    Orb,//
+    OnCreated,// modifier创建时 - The modifier has been created.
+    OnDestroy,// modifier移除时 - The modifier has been removed.
+    OnIntervalThink,//	每隔ThinkInterval秒
+    OnAttack,//	附加这个modifier的单位完成攻击时
+    OnAttacked,//	附加这个modifier的单位被攻击时，攻击结束时触发. 
+    OnAttackStart,//	附加这个modifier的单位开始攻击目标时 是在攻击动画开始时，而不是投射物创建时
+    OnAttackLanded,//	附加这个modifier的单位击中目标时
+    OnAttackFailed,//	单位攻击丢失时
+    OnAttackAllied,//	攻击队友单位时
+    OnDealDamage,//	附加这个modifier的单位造成伤害时
+    OnTakeDamage,//	附加这个modifier的单位受到伤害时"%attack_damage"是实际收到伤害值.
+    OnDeath,//	附加这个modifier的单位死亡
+    OnKill,//	单位杀死任意东西时
+    OnHeroKill,//	单位杀死英雄时
+    OnRespawn,//	经过复活时间，单位重生时
+    Orb,//	使用法球每次攻击时
+    OnOrbFire,//	法球的OnAttackStart
+    OnOrbImpact,//	法球的OnAttackLanded
+    OnAbilityExecuted,//	附加这个modifier的单位使用任意技能(包括物品)
+    OnAbilityStart,//	附加这个modifier的单位开始技能 与OnSpellStart相同，但是是一个Modifier Event
+    OnAbilityEndChannel,//	附加这个modifier的单位因为任何原因结束持续施法时
+    OnHealReceived,//	单位因为任何原因获取生命值时，满生命值也会触发
+    OnHealthGained,//	从外源获取生命值时
+    OnManaGained,//	获取魔法值时，满魔法也会触发.
+    OnSpentMana,//	单位花费魔法值时
+    OnOrder,//	当移动/施法/驻守/提示命令发布怒时
+    OnUnitMoved,//	移动时触发
+    OnTeleported,//	完成传送时触发
+    OnTeleporting,//	开始传送时触发
+    OnProjectileDodge,//	附加这个modifier的单位躲避投射物时
+    OnStateChanged,//	(可能) 单位获取modifier时
 }
 
 #endregion
 
-#region 客户端
+#region Client
 
 /// <summary>
 /// 技能指示器类型
