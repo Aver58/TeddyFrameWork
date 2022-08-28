@@ -62,7 +62,8 @@ namespace Battle.logic.ability_dataDriven {
 
         #region Private
 
-        // 前摇时间：技能开始，但是技能真正的结算流程还没开始。
+        // 前摇时间：
+        //      技能开始，但是技能真正的结算流程还没开始。
         //      技能开始以后，机能相关的特效和动作就开始播放。
         private void EnterCastPoint() {
             if (abilityState == AbilityState.None) {
@@ -71,7 +72,8 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
-        // 前摇时间结束：技能前摇结束时技能开始真正的释放以及结算，等技能前摇结束以后，技能真正的释放并结算。
+        // 前摇时间结束：
+        //      技能前摇结束时技能开始真正的释放以及结算，等技能前摇结束以后，技能真正的释放并结算。
         //      释放包括创建相应的弹道／法术场和buff。
         private void EnterChannel() {
             if (abilityState == AbilityState.CastPoint) {
@@ -80,7 +82,8 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
-        // 技能后摇点：技能播放到后摇点时间时，技能真正的结束。这时，技能对应的特效以及人物动作可能还会继续播放，但是技能流程已经正式结束了。
+        // 技能后摇点：
+        //      技能播放到后摇点时间时，技能真正的结束。这时，技能对应的特效以及人物动作可能还会继续播放，但是技能流程已经正式结束了。
         //      也就是说，下一个技能可以执行。
         private void EnterBackSwing() {
             if (abilityState == AbilityState.Channeling) {
@@ -92,8 +95,8 @@ namespace Battle.logic.ability_dataDriven {
         // 驱动事件
         private void ExecuteEvent(AbilityEvent abilityEvent)
         {
-            if (abilityConfig.EventMap.ContainsKey(abilityEvent)) {
-                var d2Event = abilityConfig.EventMap[abilityEvent];
+            if (abilityConfig.AbilityEventMap.ContainsKey(abilityEvent)) {
+                var d2Event = abilityConfig.AbilityEventMap[abilityEvent];
                 // d2Event.Execute();
             }
         }

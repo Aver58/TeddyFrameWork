@@ -10,25 +10,34 @@
 #endregion
 
 // [数据驱动类技能](https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools:zh-cn/Scripting:zh-cn/Abilities_Data_Driven:zh-cn)
-
 // 技能事件
+using System;
+
 public enum AbilityEvent
 {
+    OnCreated,
     OnSpellStart,//当技能施法开始
-    OnToggleOn,//当切换为开启状态
-    OnToggleOff,//当切换为关闭状态
     OnChannelFinish,//当持续性施法完成
     OnChannelInterrupted,//当持续性施法被中断
     OnChannelSucceeded,//当持续性施法成功
-    OnOwnerSpawned,//当拥有者死亡
-    OnOwnerDied,//当拥有者出生
+    OnProjectileHitUnit,//当弹道粒子特效命中单位 Adding the KV pair "DeleteOnHit" "0" in this block will cause the projectile to not disappear when it hits a unit.
     OnProjectileFinish,//当弹道粒子特效结束
-    OnProjectileHitUnit,//当弹道粒子特效命中单位
+    OnProjectileDodge,
+    OnAbilityPhaseStart,//技能开始施法（单位转向目标前） Triggers when the ability is cast (before the unit turns toward the target)
     OnAbilityPhaseCharge,
+    // 拓展，todo实现
+    OnUpgrade,//从用户界面升级此技能
     OnEquip,//道具被捡起
     OnUnequip,//道具离开物品栏
-    OnUpgrade,//从用户界面升级此技能
-    OnAbilityPhaseStart,//技能开始施法（单位转向目标前）
+    OnOwnerSpawned,//当拥有者死亡
+    OnOwnerDied,//当拥有者出生
+    OnRespawn,
+    OnToggleOn,//当切换为开启状态
+    OnToggleOff,//当切换为关闭状态
+    OnManaGained,
+    OnUnitMoved,
+    OnTeleported,
+    OnTeleporting,
 }
 
 /// <summary>
@@ -236,6 +245,7 @@ public enum AbilityHealFlag
 /// 描述技能如何生效，生效后如何执行，可以配置多条行为。使用空格和 | 符号分割例子（注意空格！）
 /// 用来区分主动技能和被动技能。主要用于可以手动释放的大招技能的配置。
 /// </summary>
+[Flags]
 public enum AbilityBehavior
 {
     ABILITY_BEHAVIOR_NO_TARGET  = 1, // 无目标技能，不需要选择目标释放，按下技能按钮即可释放

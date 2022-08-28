@@ -215,29 +215,6 @@ public sealed class LoadModule : ModuleBase
         }
     }
 
-    public static Hashtable GetJsonHashTable(string path) {
-        stringBuilder.Clear();
-        stringBuilder.Append(JsonPathPrefix);
-        stringBuilder.Append(path);
-
-        path = JsonPathPrefix + path;
-        //Debug.Log("LoadJson: " + path);
-        if(FileHelper.IsFileExist(path))
-        {
-            using(var streamReader = new StreamReader(path))
-            {
-                var jsonText = streamReader.ReadToEnd();
-                var jsonData = jsonText.HashtableFromJson();
-                return jsonData;
-            }
-        }
-        else
-        {
-            GameLog.LogError(path + "不存在!");
-            return null;
-        }
-    }
-
     #endregion
 
     #endregion

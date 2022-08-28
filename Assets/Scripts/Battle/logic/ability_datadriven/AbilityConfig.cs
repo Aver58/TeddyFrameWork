@@ -19,6 +19,6 @@ namespace Battle.logic.ability_dataDriven {
         public string AbilityCastAnimation;
         public string AbilityTextureName;
 
-        public Dictionary<AbilityEvent, D2Event> EventMap;
+        public Dictionary<AbilityEvent, D2Event> AbilityEventMap;
     }
 }

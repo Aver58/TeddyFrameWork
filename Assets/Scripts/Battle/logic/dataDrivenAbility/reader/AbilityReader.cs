@@ -30,10 +30,10 @@ namespace Battle.logic.DataDrivenAbility.reader {
             return null;
         }
 
-        private static float GetIntValue(JsonData json, string key)
+        private static int GetIntValue(JsonData json, string key)
         {
             var res = GetJsonValue(json, key);
-            return res != null ? (int)res : -1;
+            return res != null ? int.Parse(res.ToString()) : -1;
         }
 
         private static float GetFloatValue(JsonData json, string key)
@@ -99,7 +99,7 @@ namespace Battle.logic.DataDrivenAbility.reader {
 
         #region Action Map
 
-        public static Dictionary<string, Func<JsonData, AbilityTarget, AbilityData, D2Action>> AbilityActionCreateMap = new Dictionary<string, Func<JsonData, AbilityTarget, AbilityData, D2Action>>
+        private static Dictionary<string, Func<JsonData, AbilityTarget, AbilityData, D2Action>> AbilityActionCreateMap = new Dictionary<string, Func<JsonData, AbilityTarget, AbilityData, D2Action>>
         {
             { "IsHit" , CreateIsHitAction},
             { "ChangeEnergy" , CreateChangeEnergyAction},
@@ -484,7 +484,7 @@ namespace Battle.logic.DataDrivenAbility.reader {
                 return null;
 
             var eventMap = new Dictionary<string, D2Event>();
-            foreach(string key in json.Keys)
+            foreach(var key in json.Keys)
             {
                 if(Enum.IsDefined(typeof(AbilityEvent), key))
                 {
@@ -664,12 +664,12 @@ namespace Battle.logic.DataDrivenAbility.reader {
 
         #endregion
 
-        private static AbilityData CreateAbility(string path) 
+        private static AbilityData CreateAbility(string path)
         {
             JsonData jsonData = LoadModule.LoadJson(path);
             if(jsonData == null)
             {
-                BattleLog.LogError("[CreateAbility]没有找到指定json配置！", path);
+                BattleLog.LogError("[GetAbility]没有找到指定json配置！", path);
                 return null;
             }
 
@@ -699,7 +699,7 @@ namespace Battle.logic.DataDrivenAbility.reader {
             return abilityData;
         }
     
-        public static Ability CreateAbility(int id, BattleUnit caster)
+        public static Ability GetAbility(int id, BattleUnit caster)
         {
             skillItem skillItem = skillTable.Instance.GetTableItem(id);
             if(skillItem == null)
