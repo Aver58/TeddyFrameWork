@@ -9,25 +9,21 @@
 */
 #endregion
 
-public class ModuleBase
-{
-    public ModuleBase() { }
-
-    private string m_Name;
-    public string Name
-    {
-        get
-        {
-            if(string.IsNullOrEmpty(m_Name))
-                m_Name = GetType().Name;
-            return m_Name;
+public class ModuleBase {
+    private string name;
+    public string Name {
+        get {
+            if(string.IsNullOrEmpty(name))
+                name = GetType().Name;
+            return name;
         }
     }
-    protected bool m_bInit = false;
-    public bool IsInit { get { return m_bInit; } }
 
-    public virtual void Init() { m_bInit = true; }
-    public virtual void UnInit() { m_bInit = false; }
+    protected bool isInit = false;
+    public bool IsInit { get { return isInit; } }
+
+    public virtual void Init() { isInit = true; }
+    public virtual void UnInit() { isInit = false; }
     public virtual void StartGame() { }
     public virtual void Update(float dt) { }
     public virtual void Dispose() { }

@@ -20,21 +20,17 @@ using Object = UnityEngine.Object;
 
 public delegate void LoadedCallback(AssetRequest assetRequest);
 
-public sealed class LoadModule : ModuleBase
-{
+public sealed class LoadModule : ModuleBase {
     #region Instance
 
-    static LoadModule m_instance;
-    public static LoadModule instance
-    {
-        get
-        {
-            if(m_instance == null)
-            {
-                m_instance = ModuleManager.instance.Get<LoadModule>();
+    private static LoadModule instance;
+    public static LoadModule Instance {
+        get {
+            if(instance == null) {
+                instance = new LoadModule();
             }
 
-            return m_instance;
+            return instance;
         }
     }
 
@@ -71,7 +67,7 @@ public sealed class LoadModule : ModuleBase
 
     public static void AddSearchPath(string path)
     {
-        _searchPaths.Add(path);
+        searchPaths.Add(path);
     }
 
     public static ManifestRequest Initialize()
@@ -103,7 +99,7 @@ public sealed class LoadModule : ModuleBase
 
     public static void Clear()
     {
-        _searchPaths.Clear();
+        searchPaths.Clear();
         _activeVariants.Clear();
         _assetToBundles.Clear();
         _bundleToDependencies.Clear();
@@ -147,7 +143,6 @@ public sealed class LoadModule : ModuleBase
     public static AssetRequest LoadAssetAsync(string path, Type type, LoadedCallback loadedCallback = null)
     {
         AssetRequest assetRequest = LoadAsset(path, type, true);
-        // todo 这个loadedCallback 是我自己加的，源码里是怎么实现异步加载的
         if(loadedCallback != null)
             assetRequest.completed += loadedCallback;
         return assetRequest;
@@ -213,6 +208,14 @@ public sealed class LoadModule : ModuleBase
             GameLog.LogError(path + "不存在!");
             return null;
         }
+    }
+
+    private string suffix = ".prefab";
+    // todo 整个加载模块重写，抄得也太丑了吧
+    public GameObject LoadPrefab(string assetName) {
+        //todo 加载模块
+        var path = ModelPathPrefix + assetName + suffix;
+        return UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
     }
 
     #endregion
@@ -426,7 +429,7 @@ public sealed class LoadModule : ModuleBase
 
     #region Paths
 
-    private static List<string> _searchPaths = new List<string>();
+    private static List<string> searchPaths = new List<string>();
 
     private static string GetExistPath(string path)
     {
@@ -437,7 +440,7 @@ public sealed class LoadModule : ModuleBase
             if(File.Exists(path))
                 return path;
 
-            foreach(var item in _searchPaths)
+            foreach(var item in searchPaths)
             {
                 var existPath = string.Format("{0}/{1}", item, path);
                 if(File.Exists(existPath))
@@ -451,7 +454,7 @@ public sealed class LoadModule : ModuleBase
         if(_assetToBundles.ContainsKey(path))
             return path;
 
-        foreach(var item in _searchPaths)
+        foreach(var item in searchPaths)
         {
             var existPath = string.Format("{0}/{1}", item, path);
             if(_assetToBundles.ContainsKey(existPath))

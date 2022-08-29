@@ -1,5 +1,5 @@
 namespace Origins {
-    public class Unit {
+    public class EnermyEntity {
         
     }
 }

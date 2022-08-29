@@ -11,7 +11,6 @@
 
 using System.Collections.Generic;
 using Aver3;
-using TsiU;
 using UnityEngine;
 
 // 没有行为树
@@ -111,7 +110,7 @@ public class BattleUnit : Unit
         foreach(int skillID in skillList)
         {
             //skillItem skillItem = skillTable.Instance.GetTableItem(skillID);
-            Ability ability = AbilityReader.CreateAbility(skillID, this);
+            Ability ability = AbilityReader.GetAbility(skillID, this);
             string skillName = ability.GetCastAnimation();
             if(string.IsNullOrEmpty(skillName))
                 skillName = "passive";

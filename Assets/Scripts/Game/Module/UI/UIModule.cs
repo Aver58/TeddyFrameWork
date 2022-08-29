@@ -27,13 +27,20 @@ using UnityEngine;
 /// </summary>
 public class UIModule : ModuleBase
 {
-    /// <summary>
-    /// 上次检查缓存的时间
-    /// </summary>
+    private static UIModule instance;
+    public static UIModule Instance {
+        get {
+            if(instance == null) {
+                instance = new UIModule();
+            }
+
+            return instance;
+        }
+    }
+
+    // 上次检查缓存的时间
     private float m_lastCacheCheckTime = 0f;
-    /// <summary>
-    /// 已打开过的view哈希表
-    /// </summary>
+    // 已打开过的view哈希表
     private static Dictionary<ViewID, ViewBase> m_viewMap;
     private static Dictionary<ViewType, Transform> m_viewRoot;
     private static float UIPANEL_CACHE_TIME = ViewDefine.UIPANEL_CACHE_TIME;
@@ -45,8 +52,7 @@ public class UIModule : ModuleBase
         UINavigation.Init();
         // 随缘7个
         m_viewMap = new Dictionary<ViewID, ViewBase>(7);
-        m_viewRoot = new Dictionary<ViewType, Transform>
-        {
+        m_viewRoot = new Dictionary<ViewType, Transform> {
             {ViewType.MAIN,GameObject.Find("Canvas/Main").transform },
             {ViewType.POPUP,GameObject.Find("Canvas/Popup").transform },
             {ViewType.FIXED,GameObject.Find("Canvas/Fixed").transform },
@@ -55,7 +61,7 @@ public class UIModule : ModuleBase
 
     #region API
 
-    // todo 这个传参也很麻烦，改成多个方法，1个参，2个参，3个参这样
+    // todo 这个传参也很麻烦，改成多个方法重载，1个参，2个参，3个参这样
     public static void OpenView(ViewID key, UIEventArgs args = null)
     {
         ViewBase view = GetView(key);
@@ -102,6 +108,10 @@ public class UIModule : ModuleBase
         {
             GameLog.LogError("[UIModule]界面关闭失败，没有找到指定界面！" + key.ToString());
         }
+    }
+
+    public Transform GetParentTransform(ViewType viewType) {
+        return m_viewRoot[viewType];
     }
 
     // View通过这个接口拿父节点

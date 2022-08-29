@@ -1,20 +1,21 @@
-﻿using UnityEngine;
+﻿using Origins.Entity;
+using UnityEngine;
 
 namespace Origins {
     public class GameWorld : MonoBehaviour {
-        private BattleUnitManager battleUnitManager;
+        private EntityManager entityManager;
         private GameMainLoop gameMainLoop;
         // Start is called before the first frame update
-        void Start() {
+        void Awake() {
             gameMainLoop = GameMainLoop.instance;
-            battleUnitManager = BattleUnitManager.instance;
+            entityManager = EntityManager.instance;
         }
 
         // Update is called once per frame
         void Update()
         {
             gameMainLoop.OnUpdate();
-            battleUnitManager.OnUpdate();
+            entityManager.OnUpdate();
         }
     }
 }
