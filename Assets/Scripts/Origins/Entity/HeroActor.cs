@@ -1,14 +1,18 @@
+using System;
 using UnityEngine;
 
 namespace Origins.Entity {
     public class HeroActor : Actor {
         public Entity HeroEntity;
         private Rigidbody2D rigidbody2D;
+        private Transform mTransform;
         private Vector2 inputPos;
 
         public void Init(HeroEntity heroEntity, Rigidbody2D rigidbody) {
             inputPos = new Vector2();
             rigidbody2D = rigidbody;
+            mTransform = rigidbody.transform;
+            
             HeroEntity = heroEntity;
         }
 
@@ -20,13 +24,14 @@ namespace Origins.Entity {
         private void OnInput() {
             var horizontal = Input.GetAxisRaw("Horizontal");
             var vertical = Input.GetAxisRaw("Vertical");
-            Debug.LogError($"horizontal {horizontal} vertical {vertical}");
-            if (horizontal > 0.01f || vertical > 0.01f) {
-                inputPos.x = horizontal;
-                inputPos.y = vertical;
-                //向量归一，使其移动速度一致。
-                inputPos.Normalize();
-                rigidbody2D.velocity = inputPos * HeroEntity.MoveSpeed;
+            inputPos.x = horizontal;
+            inputPos.y = vertical;
+            // rigidbody2D.velocity = inputPos;
+            // rigidbody2D.MovePosition(targetPos);
+      
+            if (Math.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f) {
+                var targetPos = rigidbody2D.position + inputPos;//todo move speed
+                mTransform.position = targetPos;//todo 先用这种方式做，rigidbody2D 跑不起来
             }
         }
     }

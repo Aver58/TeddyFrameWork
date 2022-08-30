@@ -4,8 +4,6 @@ namespace Origins {
     public class GameMainLoop : Singleton<GameMainLoop> {
         private HeroEntity heroEntity;
 
-
-
         #region LifeCycle
 
         public GameMainLoop() {
