@@ -6,7 +6,15 @@ namespace Origins.Entity {
         public HeroActor HeroActor;
 
         public HeroEntity() {
+            InitProperty();
             AddActor();
+        }
+
+        private void InitProperty() {
+            var config = NPCPropertyTable.Instance.GetTableItem(103);
+            Hp = config.maxHp;
+            Mana = config.magic;
+            MoveSpeed = config.moveSpeed;
         }
 
         private void AddActor() {

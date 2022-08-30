@@ -30,7 +30,7 @@ namespace Origins.Entity {
             // rigidbody2D.MovePosition(targetPos);
       
             if (Math.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f) {
-                var targetPos = rigidbody2D.position + inputPos;//todo move speed
+                var targetPos = rigidbody2D.position + inputPos * HeroEntity.MoveSpeed;
                 mTransform.position = targetPos;//todo 先用这种方式做，rigidbody2D 跑不起来
             }
         }

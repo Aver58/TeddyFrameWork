@@ -6,9 +6,12 @@ namespace Origins.Entity {
         public int AutoIndex = 0;
         private List<int> entityIds;
         private List<Entity> entities;
+        private List<EnemyEntity> enemyEntityPool;
+
         public EntityManager() {
-            entities = new List<Entity>();
             entityIds = new List<int>();
+            entities = new List<Entity>();
+            enemyEntityPool = new List<EnemyEntity>();
         }
 
         public void OnUpdate() {
@@ -19,13 +22,6 @@ namespace Origins.Entity {
         }
 
         #region Public
-
-        public HeroEntity AddHeroEntity() {
-            var entity = new HeroEntity {Position = Vector2.zero};
-
-            AddEntity(entity);
-            return entity;
-        }
 
         public Entity AddEntity(Entity entity) {
             entityIds.Add(entity.Id);
@@ -42,6 +38,21 @@ namespace Origins.Entity {
                     break;
                 }
             }
+        }
+
+        public HeroEntity AddHeroEntity() {
+            var entity = new HeroEntity {Position = Vector2.zero};
+
+            AddEntity(entity);
+            return entity;
+        }
+
+        #endregion
+
+        #region Private
+
+        private void AddEnemyEntity() {
+
         }
 
         #endregion

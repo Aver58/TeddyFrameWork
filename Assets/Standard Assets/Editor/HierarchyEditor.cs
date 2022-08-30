@@ -11,8 +11,8 @@ public class HierarchyEditor
 
     static HierarchyEditor()
     {
-        EditorApplication.hierarchyWindowItemOnGUI += HierarchyWindowItemOnGUI;
-		Selection.selectionChanged += OnSelectionChanged;
+  //       EditorApplication.hierarchyWindowItemOnGUI += HierarchyWindowItemOnGUI;
+		// Selection.selectionChanged += OnSelectionChanged;
     }
 
     static void HierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
