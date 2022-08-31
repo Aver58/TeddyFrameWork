@@ -6,7 +6,7 @@ using LitJson;
 namespace Battle.logic.ability_dataDriven {
     public static class AbilityConfigParse {
         public static Ability GetAbility(int id) {
-            var skillItem = skillTable.Instance.GetTableItem(id);
+            var skillItem = skillTable.Instance.Get(id);
             if(skillItem == null)
             {
                 BattleLog.LogError("skill 表没有找到指定id:", id.ToString());

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8470765893897743192}
   - component: {fileID: 178628801315911945}
   m_Layer: 5
-  m_Name: HeroActor
+  m_Name: EnemyActor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:

@@ -1,0 +1,3 @@
+﻿id	totalLevel	totalTime
+1	10	300
+2	10	300

@@ -1,0 +1,4 @@
+﻿id	maxHp	maxMp	physic	magic	attackRange	viewRange	moveSpeed	turnSpeed	modelPath	skillList
+101	100	100	10	10	1	8	5	3	HeroActor.prefab	10301,10302,10303
+102	100	100	10	10	1	8	4	2	EnemyActor.prefab	
+103	200	200	20	20	1.5	8	5	3	EnemyActor.prefab	

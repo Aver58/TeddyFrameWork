@@ -214,7 +214,8 @@ public sealed class LoadModule : ModuleBase {
     // todo 整个加载模块重写，抄得也太丑了吧
     public GameObject LoadPrefab(string assetName) {
         //todo 加载模块
-        var path = ModelPathPrefix + assetName + suffix;
+        var path = ModelPathPrefix + assetName;
+        Debug.Log($"[LoadPrefab]{path}");
         return UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
     }
 

@@ -20,11 +20,19 @@ class DataReader
 
     public int GetInt(string s)
     {
+        if (string.IsNullOrEmpty(s)) {
+            return 0;
+        }
+
         return int.Parse(s);
     }
 
     public List<int> GetIntList(string s)
     {
+        if (string.IsNullOrEmpty(s)) {
+            return null;
+        }
+
         string[] vs = s.Split(',');
         List<int> ret = new List<int>();
         foreach(var ss in vs)
@@ -42,6 +50,10 @@ class DataReader
 
     public List<float> GetFloatList(string s)
     {
+        if (string.IsNullOrEmpty(s)) {
+            return null;
+        }
+
         string[] vs = s.Split(',');
         List<float> ret = new List<float>();
         foreach(var ss in vs)
@@ -61,6 +73,10 @@ class DataReader
 
     public List<T> GetObjectList<T>(string s) where T : ITableObject, new()
     {
+        if (string.IsNullOrEmpty(s)) {
+            return null;
+        }
+
         string[] vs = s.Split(';');
         List<T> ret = new List<T>();
         foreach(var ss in vs)

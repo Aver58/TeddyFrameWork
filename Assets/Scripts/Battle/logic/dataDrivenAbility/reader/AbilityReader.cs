@@ -655,7 +655,7 @@ public static class AbilityReader {
     }
 
     public static Ability GetAbility(int id, BattleUnit caster) {
-        skillItem skillItem = skillTable.Instance.GetTableItem(id);
+        skillItem skillItem = skillTable.Instance.Get(id);
         if (skillItem == null) {
             BattleLog.LogError("skill 表没有找到指定id:", id.ToString());
             return null;

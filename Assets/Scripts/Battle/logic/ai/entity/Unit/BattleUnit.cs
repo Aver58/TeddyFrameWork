@@ -109,7 +109,7 @@ public class BattleUnit : Unit
         List<int> skillList = GetSkillList();
         foreach(int skillID in skillList)
         {
-            //skillItem skillItem = skillTable.Instance.GetTableItem(skillID);
+            //skillItem skillItem = skillTable.Instance.Get(skillID);
             Ability ability = AbilityReader.GetAbility(skillID, this);
             string skillName = ability.GetCastAnimation();
             if(string.IsNullOrEmpty(skillName))

@@ -3,17 +3,18 @@ using UnityEngine;
 
 namespace Origins.Entity {
     public class HeroActor : Actor {
-        public Entity HeroEntity;
-        private Rigidbody2D rigidbody2D;
-        private Transform mTransform;
+        public Entity Entity;
+
         private Vector2 inputPos;
+        private Transform mTransform;
+        private Rigidbody2D rigidbody2D;
 
         public void Init(HeroEntity heroEntity, Rigidbody2D rigidbody) {
             inputPos = new Vector2();
             rigidbody2D = rigidbody;
             mTransform = rigidbody.transform;
             
-            HeroEntity = heroEntity;
+            Entity = heroEntity;
         }
 
         //获取物理操作
@@ -30,7 +31,7 @@ namespace Origins.Entity {
             // rigidbody2D.MovePosition(targetPos);
       
             if (Math.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f) {
-                var targetPos = rigidbody2D.position + inputPos * HeroEntity.MoveSpeed;
+                var targetPos = rigidbody2D.position + inputPos * Entity.MoveSpeed;
                 mTransform.position = targetPos;//todo 先用这种方式做，rigidbody2D 跑不起来
             }
         }

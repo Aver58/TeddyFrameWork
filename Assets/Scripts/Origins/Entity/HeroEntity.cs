@@ -2,31 +2,29 @@ using UnityEngine;
 
 namespace Origins.Entity {
     public class HeroEntity : Entity {
-        private const string HERO_ACTOR_NAME = "HeroActor";
-        public HeroActor HeroActor;
+        public HeroActor Actor;
 
-        public HeroEntity() {
-            InitProperty();
+        public HeroEntity(int characterId) : base(characterId) {
             AddActor();
         }
 
-        private void InitProperty() {
-            var config = NPCPropertyTable.Instance.GetTableItem(103);
-            Hp = config.maxHp;
-            Mana = config.magic;
-            MoveSpeed = config.moveSpeed;
-        }
-
         private void AddActor() {
-            var asset = LoadModule.Instance.LoadPrefab(HERO_ACTOR_NAME);
-            var go = Object.Instantiate(asset, UIModule.Instance.GetParentTransform(ViewType.MAIN));
-            var rigidBody = go.GetComponent<Rigidbody2D>();
-            HeroActor = new HeroActor();
-            HeroActor.Init(this, rigidBody);
+            var characterItem = CharacterTable.Instance.Get(CharacterId);
+            if (characterItem == null) {
+                return;
+            }
+
+            var asset = LoadModule.Instance.LoadPrefab(characterItem.modelPath);
+            if (asset != null) {
+                var go = Object.Instantiate(asset, UIModule.Instance.GetParentTransform(ViewType.MAIN));
+                var rigidBody = go.GetComponent<Rigidbody2D>();
+                Actor = new HeroActor();
+                Actor.Init(this, rigidBody);
+            }
         }
 
         public override void OnUpdate() {
-            HeroActor.OnUpdate();
+            Actor.OnUpdate();
         }
     }
 }

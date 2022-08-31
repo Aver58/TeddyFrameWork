@@ -1,19 +1,24 @@
-﻿using Origins.Entity;
+﻿using System;
+using Origins.Entity;
 using UnityEngine;
 
 namespace Origins {
     public class GameWorld : MonoBehaviour {
         private EntityManager entityManager;
         private GameMainLoop gameMainLoop;
-        void Awake() {
+
+        private void Awake() {
             gameMainLoop = GameMainLoop.instance;
             entityManager = EntityManager.instance;
         }
 
-        void Update()
-        {
+        private void Update() {
             gameMainLoop.OnUpdate();
             entityManager.OnUpdate();
+        }
+
+        private void FixedUpdate() {
+            gameMainLoop.OnFixedUpdate();
         }
     }
 }

@@ -46,7 +46,7 @@ public partial class MobaSkillItem : ViewBase
         m_skillID = ability.ID;
         m_abilityCastType = castType;
 
-        skillItem skillItem = skillTable.Instance.GetTableItem(m_skillID);
+        skillItem skillItem = skillTable.Instance.Get(m_skillID);
         string iconName = skillItem.icon;
         iconName = "skill/" + iconName;//todo 导出动态图片映射表
         ImgIcon.SetSprite(iconName);

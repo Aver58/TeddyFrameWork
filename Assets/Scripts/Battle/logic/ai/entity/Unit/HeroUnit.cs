@@ -2,7 +2,7 @@
 /*
 =====================================================
  AverFrameWork v1.0
- Filename:    HeroEntity.cs
+ Filename:    Entity.cs
  Author:      Zeng Zhiwei
  Time:        2020/8/26 13:46:22
 =====================================================
