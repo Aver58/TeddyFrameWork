@@ -2,7 +2,9 @@ using UnityEngine;
 
 namespace Origins {
     public class RoleEntity : Entity {
+        // todo 数据层表现层解耦
         public RoleActor RoleActor;
+        // todo 不同对象表现层逻辑拆分
         public GameDefine.RoleType RoleType;
         
         public RoleEntity(int roleId) {
