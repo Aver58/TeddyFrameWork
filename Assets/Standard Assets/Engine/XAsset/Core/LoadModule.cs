@@ -215,7 +215,7 @@ public sealed class LoadModule : ModuleBase {
     public GameObject LoadPrefab(string assetName) {
         //todo 加载模块
         var path = ModelPathPrefix + assetName;
-        Debug.Log($"[LoadPrefab]{path}");
+        // Debug.Log($"[LoadPrefab]{path}");
         return UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
     }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using Origins.Entity;
 using UnityEngine;
 
 namespace Origins {

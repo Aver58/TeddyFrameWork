@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Origins.Entity;
 using UnityEngine;
 
 namespace Origins {
     public class GameMainLoop : Singleton<GameMainLoop> {
         private float currentTime = 0;
         private const int MAX_LEVEL_NUM = 1000;
-        private HeroEntity heroEntity;
+        private RoleEntity roleEntity;
         private List<LevelDetailItem> levels;
 
         #region LifeCycle
@@ -46,7 +45,7 @@ namespace Origins {
         #region Private
 
         private void GenerateHero() {
-            heroEntity = EntityManager.instance.AddHeroEntity();
+            roleEntity = EntityManager.instance.AddHeroEntity();
         }
 
         private void GenerateEnemy(LevelDetailItem levelDetailItem) {

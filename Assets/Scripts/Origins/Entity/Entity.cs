@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Origins.Entity {
+namespace Origins {
     public abstract class Entity {
-        public int Id;
-        public int CharacterId;
+        public int InstanceId;
+        public int RoleId;
 
         public int Hp;
         public int Mana;
@@ -11,22 +11,23 @@ namespace Origins.Entity {
         public int Defense;
         public float MoveSpeed;
         public float AttackSpeed;
-        public Vector2 Position;
 
-        protected Entity(int characterId) {
-            Id = EntityManager.instance.AutoIndex++;
-            CharacterId = characterId;
-
-            InitProperty(characterId);
+        private Vector2 position;
+        public Vector2 Position {
+            get => position;
+            set {
+                position = value;
+            }
         }
 
-        private void InitProperty(int characterId) {
-            var config = CharacterTable.Instance.Get(characterId);
-            Hp = config.maxHp;
-            Mana = config.magic;
-            MoveSpeed = config.moveSpeed;
-        }
+        public abstract void OnUpdate();
+        public abstract void OnInit();
+        public abstract void OnClear();
 
-        public virtual void OnUpdate() { }
+        protected abstract void InitProperty(int roleId);
+        protected abstract void InitActor();
+
+        public virtual void Move() { }
+        public virtual void BeAttack(int value) { }
     }
 }
