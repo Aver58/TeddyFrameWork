@@ -5,7 +5,7 @@ namespace Origins {
     public class GameMainLoop : Singleton<GameMainLoop> {
         private float currentTime = 0;
         private const int MAX_LEVEL_NUM = 1000;
-        private RoleEntity roleEntity;
+        private HeroEntity heroEntity;
         private List<LevelDetailItem> levels;
 
         #region LifeCycle
@@ -45,7 +45,7 @@ namespace Origins {
         #region Private
 
         private void GenerateHero() {
-            roleEntity = EntityManager.instance.AddHeroEntity();
+            heroEntity = EntityManager.instance.AddHeroEntity();
         }
 
         private void GenerateEnemy(LevelDetailItem levelDetailItem) {
