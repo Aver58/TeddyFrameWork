@@ -329,7 +329,7 @@ public static class AbilityReader {
         actionTarget.SetTargetTeam(targetTeam);
 
         var abilityBehavior = abilityData.abilityBehavior;
-        if ((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_DIRECTIONAL) != 0) {
+        if ((abilityBehavior & AbilityBehavior.DOTA_ABILITY_BEHAVIOR_DIRECTIONAL) != 0) {
             var lineJsonData = GetJsonValue(json, "AbilityAoeLine");
             if (lineJsonData == null) {
                 BattleLog.LogError("技能[{0}]行为是ABILITY_BEHAVIOR_LINE_AOE，未找到AbilityAoeLine配置",
@@ -339,7 +339,7 @@ public static class AbilityReader {
 
             var length = (float) GetJsonValue(lineJsonData, "Length");
             var thickness = (float) GetJsonValue(lineJsonData, "Thickness");
-            actionTarget.SetLineAoe(ActionMultipleTargetsCenter.CASTER, length, thickness);
+            actionTarget.SetLineAoe(ActionMultipleTargets.CASTER, length, thickness);
         }
 
         if ((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_SECTOR_AOE) != 0) {
@@ -352,7 +352,7 @@ public static class AbilityReader {
 
             var sectorRadius = (float) GetJsonValue(sectorJsonData, "Radius");
             var angle = (float) GetJsonValue(sectorJsonData, "Angle");
-            actionTarget.SetSectorAoe(ActionMultipleTargetsCenter.CASTER, sectorRadius, angle);
+            actionTarget.SetSectorAoe(ActionMultipleTargets.CASTER, sectorRadius, angle);
         }
 
         if ((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_RADIUS_AOE) != 0) {
@@ -364,7 +364,7 @@ public static class AbilityReader {
             }
 
             float radius = (float) radiusJson;
-            actionTarget.SetRadiusAoe(ActionMultipleTargetsCenter.CASTER, radius);
+            actionTarget.SetRadiusAoe(ActionMultipleTargets.CASTER, radius);
         }
 
         return actionTarget;
@@ -381,7 +381,7 @@ public static class AbilityReader {
                 return null;
             }
 
-            var targetCenter = GetEnumValue<ActionMultipleTargetsCenter>(json, "Center");
+            var targetCenter = GetEnumValue<ActionMultipleTargets>(json, "Center");
 
             var areaType = GetStringValue(aoeAreaJsonData, "AreaType");
             var abilityAreaDamageType = GetEnumValue<AOEType>(areaType);
@@ -522,12 +522,11 @@ public static class AbilityReader {
         if (propertyDataConfig != null) {
             var modifierPropertyDatas = new List<ModifierPropertyValue>();
             foreach (var propertyType in propertyDataConfig.Keys) {
-                var propertyEnum = GetEnumValue<ModifierProperties>(propertyType.ToString());
+                var propertyEnum = GetEnumValue<ModifierProperty>(propertyType.ToString());
                 if (propertyEnum == default) {
                     BattleLog.LogError("技能[{0}]中有未定义的ModifierProperty类型[{1}]", abilityData.configFileName,
                         propertyType);
-                }
-                else {
+                } else {
                     var modifierPropertyValue = new ModifierPropertyValue();
                     var propertyValueConfig = propertyDataConfig[propertyType];
                     if (propertyValueConfig != null) {

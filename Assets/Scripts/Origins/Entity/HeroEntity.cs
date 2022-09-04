@@ -1,19 +1,33 @@
+using System.Collections.Generic;
+using Battle.logic.ability_dataDriven;
 using UnityEngine;
 
 namespace Origins {
-    public class HeroEntity : AbsEntity {
+    public sealed class HeroEntity : AbsEntity {
+        private int defaultSkillId;
+        private List<Battle.logic.ability_dataDriven.Ability> abilities;
+
         public HeroEntity(int roleId) {
             RoleId = roleId;
             InstanceId = EntityManager.instance.AutoIndex++;
+            abilities = new List<Battle.logic.ability_dataDriven.Ability>(1);
         }
 
         public override void OnUpdate() {
-            
+            if (abilities != null) {
+                if (abilities.Count > 0) {
+                    for (int i = 0; i < abilities.Count; i++) {
+                        var ability = abilities[i];
+                        ability.OnFixedUpdate(Time.fixedDeltaTime);
+                    }
+                }
+            }
         }
 
-        public sealed override void OnInit() {
+        public override void OnInit() {
             InitProperty(RoleId);
-            
+            InitDefaultSkill();
+
             var actor = ActorManager.instance.AddHeroActor(this);
         }
 
@@ -25,6 +39,7 @@ namespace Origins {
 
         public void SetPosition(Vector2 value) {
             Position = value;
+            ActorManager.instance.SetHeroActorPosition(value);
         }
 
         #endregion
@@ -32,10 +47,31 @@ namespace Origins {
         #region Private
 
         protected override void InitProperty(int roleId) {
-            var config = CharacterTable.Instance.Get(roleId);
-            Hp = config.maxHp;
-            Mana = config.magic;
+            var config = HeroConfigTable.Instance.Get(roleId);
+            MaxHp = config.maxHp;
+            MaxMp = config.maxMp;
+            Hp = MaxHp;
+            Mp = MaxMp;
+            PhysicsAttack = config.physicAttack;
             MoveSpeed = config.moveSpeed;
+            defaultSkillId = config.defaultSkillId;
+        }
+
+        protected override void Dead() {
+            base.Dead();
+
+            GameMainLoop.instance.GameOver();
+        }
+
+        #endregion
+
+        #region SkillSystem
+
+        private void InitDefaultSkill() {
+            var ability = AbilityConfigParse.GetAbility(defaultSkillId);
+            if (ability != null) {
+                abilities.Add(ability);
+            }
         }
 
         #endregion

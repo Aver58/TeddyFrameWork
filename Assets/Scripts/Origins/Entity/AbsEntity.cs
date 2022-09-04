@@ -5,12 +5,25 @@ namespace Origins {
         public int InstanceId;
         public int RoleId;
 
-        public int Hp;
-        public int Mana;
-        public int Attack;
+        private float hp;
+        public float Hp {
+            get => hp;
+            set {
+                hp = value;
+
+                if (hp <= 0) {
+                    Dead();
+                }
+            }
+        }
+
+        public float Mp;
+        public int MaxHp;
+        public int MaxMp;
+        public int PhysicsAttack;
         public int Defense;
         public float MoveSpeed;
-        public float AttackSpeed;
+        public float AttackCooldown;
 
         public Vector2 Position { get; set; }
 
@@ -22,5 +35,6 @@ namespace Origins {
 
         public virtual void Move() { }
         public virtual void BeAttack(int value) { }
+        protected virtual void Dead() { }
     }
 }

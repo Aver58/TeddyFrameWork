@@ -29,10 +29,10 @@ public class CON_IsAbilityNeedTurnTo : BTPrecondition
         AbilityBehavior abilityBehavior = ability.GetAbilityBehavior();
 
         //无目标技能类型
-        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_NO_TARGET) != 0)
+        if((abilityBehavior & AbilityBehavior.DOTA_ABILITY_BEHAVIOR_NO_TARGET) != 0)
         {
             //如果是线性或者扇形，虽然是无目标类型，也需要转向目标
-            if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_DIRECTIONAL) != 0
+            if((abilityBehavior & AbilityBehavior.DOTA_ABILITY_BEHAVIOR_DIRECTIONAL) != 0
             || (abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_SECTOR_AOE) != 0)
                 return true;
 

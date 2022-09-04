@@ -23,7 +23,7 @@ public class AbilityTarget
     public AbilityUnitTargetType excludeTypes;
     public AbilityUnitTargetFlags targetFlags;
     public AbilityUnitTargetFlags excludeFlags;
-    public ActionMultipleTargetsCenter targetCenter;
+    public ActionMultipleTargets Target;
     public float radius;
     public int maxTargets;
     public bool randomOneTarget;// 如果有多个目标，是否随机选择一个目标
@@ -49,28 +49,28 @@ public class AbilityTarget
         targetTeam = value;
     }
 
-    public void SetRadiusAoe(ActionMultipleTargetsCenter targetCenter,float radius)
+    public void SetRadiusAoe(ActionMultipleTargets target,float radius)
     {
         isSingleTarget = false;
         aoeType = AOEType.Radius;
-        this.targetCenter = targetCenter;
+        this.Target = target;
         this.radius = radius;
     }
 
-    public void SetLineAoe(ActionMultipleTargetsCenter targetCenter, float lineLength, float lineThickness)
+    public void SetLineAoe(ActionMultipleTargets target, float lineLength, float lineThickness)
     {
         isSingleTarget = false;
         aoeType = AOEType.Line;
-        this.targetCenter = targetCenter;
+        this.Target = target;
         this.lineLength = lineLength;
         this.lineThickness = lineThickness;
     }
 
-    public void SetSectorAoe(ActionMultipleTargetsCenter targetCenter, float sectorRadius, float sectorAngle)
+    public void SetSectorAoe(ActionMultipleTargets target, float sectorRadius, float sectorAngle)
     {
         isSingleTarget = false;
         aoeType = AOEType.Sector;
-        this.targetCenter = targetCenter;
+        this.Target = target;
         this.sectorRadius = sectorRadius;
         this.sectorAngle = sectorAngle;
     }

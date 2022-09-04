@@ -20,7 +20,7 @@ public class ExportPanelHierarchy
 {
     private const string ViewStr = "View";
     private const string PanelStr = "Panel";
-    private const string UIExportCSViewPath = "Assets/Scripts/Game/View/UIBindView/";
+    private const string UI_EXPORT_CS_VIEW_PATH = "Assets/Scripts/Game/View/UIBindView/";
 
     private static System.Type[] ms_componentTypes =
     {
@@ -35,14 +35,15 @@ public class ExportPanelHierarchy
     public static void ExportUIView()
     {
         var uiObj = Selection.activeObject;
-        if(null == uiObj) return;
-        var UIViewName = uiObj.name;
-        if(UIViewName.EndsWith(PanelStr))
-            UIViewName = UIViewName.Replace(PanelStr, ViewStr);
+        if(null == uiObj)
+            return;
+        var uiViewName = uiObj.name;
+        if(uiViewName.EndsWith(PanelStr))
+            uiViewName = uiViewName.Replace(PanelStr, ViewStr);
 
         var hierarchy = ExportNested(uiObj);
 
-        GenUIViewCode(UIViewName, hierarchy);
+        GenUIViewCode(uiViewName, hierarchy);
 
         EditorUtility.SetDirty(uiObj);
         AssetDatabase.SaveAssets();
@@ -132,13 +133,13 @@ public class ExportPanelHierarchy
         return component;
     }
 
-    private static void GenUIViewCode(string UIViewName,UIHierarchy uIHierarchy)
+    private static void GenUIViewCode(string uiViewName, UIHierarchy uIHierarchy)
     {
-        var codePath = UIExportCSViewPath + UIViewName + ".deginer.cs";
+        var codePath = UI_EXPORT_CS_VIEW_PATH + uiViewName + ".deginer.cs";
 
         StringBuilder sb = new StringBuilder(16);
         sb.Append("///[[Notice:This file is auto generate by ExportPanelHierarchy，don't modify it manually! it will be call OnLoaded--]]\n\n");
-        sb.Append("public partial class " + UIViewName + "\n{\n");
+        sb.Append("public partial class " + uiViewName + "\n{\n");
 
         if(uIHierarchy.widgets.Count > 0)
         {

@@ -22,8 +22,6 @@ public class D2Modifier
     private ModifierData modifierData;
     private RequestTarget requestTarget;
 
-    private bool isEnding;
-    private bool isDestroyed;
     private float passedTime;
     private float thinkPassedTime;
 
@@ -42,9 +40,7 @@ public class D2Modifier
     {
         passedTime = 0;
         thinkPassedTime = 0;
-        isEnding = false;
-        isDestroyed = false;
-        
+
         ExecuteEvent(ModifierEvents.OnCreated);
 
         ApplyAura();
@@ -59,7 +55,6 @@ public class D2Modifier
     public void OnDestroy()
     {
         RemoveAura();
-        isDestroyed = true;
         ExecuteEvent(ModifierEvents.OnDestroy);
 
         if(target != null)
@@ -88,8 +83,6 @@ public class D2Modifier
 
         // 是否结束
         var duration = modifierData.Duration;
-        if((duration != -1) && (passedTime >= duration))
-            isEnding = true;
 
         passedTime += deltaTime;
     }

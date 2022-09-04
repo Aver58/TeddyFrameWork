@@ -1,0 +1,61 @@
+﻿// 追踪投射物 目标, 效果名称, 能否躲避, 提供视野, 视野范围, 移动速度, 源附着点
+// Target, EffectName, Dodgeable, ProvidesVision, VisionRadius, MoveSpeed, SourceAttachment
+{
+  "Name": "线性投射物",
+  "AbilityDamage" : [10, 17.5, 25, 32.5],
+  "AbilityCooldown": 2,
+  "AbilityCastPoint": 0,
+  "AbilityCastRange": 500,
+  "AbilityCastDuration": 3,
+  "AbilityCastAnimation": "attack",
+
+  "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
+  "AbilityUnitTargetType": "DOTA_UNIT_TARGET_ALL",
+  "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL",
+
+  "AbilityBehavior": [
+    "ABILITY_BEHAVIOR_UNIT_TARGET"
+  ],
+
+  "OnSpellStart": {
+    "TrackingProjectile": {
+      "Target": "TARGET",
+      "EffectName" : "",
+      "Dodgeable" : 0,
+      "ProvidesVision" : 0,
+      "VisionRadius" : 0,
+      "MoveSpeed" : 500,
+      "SourceAttachment" : "",
+      "OnSuccess": {
+        "HitStop": {
+          "Duration":0.14
+        },
+        "Damage":
+        {
+          "Target" : "TARGET",
+          "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
+          "DamageType" : "DAMAGE_TYPE_PHYSICAL",
+          "ValueSource":
+          {
+            "ValueBasicParams":[0, 0],
+            "ValueAdditionParams":
+            [
+              {
+                "ValueSourceType":"SOURCE_TYPE_PHYSICAL_ATTACK",
+                "ValueSourceParams":[10000, 0]
+              }
+            ]
+          },
+          "OnSuccess":
+          {
+            "FireSound":
+            {
+              "SoundType":"SOUND_NORMAL",
+              "SoundName":99102
+            }
+          }
+        }
+      }
+    }
+  }
+}

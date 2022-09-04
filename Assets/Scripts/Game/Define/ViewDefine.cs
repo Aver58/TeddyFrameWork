@@ -41,6 +41,7 @@ public enum ViewID
     Test,
     Test2,
     MobaMainView,
+    HpSliderView,
 }
 
 public static class ViewDefine
@@ -50,6 +51,7 @@ public static class ViewDefine
     {
         { ViewID.Test,new ViewConfig("TestView","test/TestPanel",typeof(TestView))},
         { ViewID.MobaMainView,new ViewConfig("MobaMainView","battle/MobaMainPanel",typeof(MobaMainView))},
+        { ViewID.HpSliderView,new ViewConfig("HpSliderView","common/HpSliderPanel",typeof(Origins.HpSliderView))},
     };
 }
 

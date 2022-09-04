@@ -210,7 +210,6 @@ public sealed class LoadModule : ModuleBase {
         }
     }
 
-    private string suffix = ".prefab";
     // todo 整个加载模块重写，抄得也太丑了吧
     public GameObject LoadPrefab(string assetName) {
         //todo 加载模块

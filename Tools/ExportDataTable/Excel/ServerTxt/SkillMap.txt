@@ -1,0 +1,11 @@
+﻿id	config	icon
+1	Hero101_attack	icon_attack_101
+2	Hero101_attack	icon_skill1_101
+3	Hero101_attack	icon_skill2_101
+4	Hero101_attack	icon_skill3_101
+5	Hero101_attack	icon_skill3_101
+6	Hero101_attack	icon_attack_101
+7	Hero101_attack	icon_skill1_101
+8	Hero101_attack	icon_skill2_101
+9	Hero101_attack	icon_skill3_101
+10	Hero101_attack	icon_attack_101

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 public class ModifierData
 {
     public string Name;
-    public ModifierAttributes Attributes;
+    public ModifierProperty Property;
     public float Duration;
     public float ThinkInterval;//触发间隔
     public bool IsBuff;

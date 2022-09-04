@@ -137,13 +137,13 @@ public class TargetSearcher : Singleton<TargetSearcher>
         var targetCollection = new TargetCollection();
 
         // 根据中心类型获取目标点
-        var centerType = actionTarget.targetCenter;
+        var centerType = actionTarget.Target;
         float centerX, centerZ;
-        if(centerType == ActionMultipleTargetsCenter.CASTER)
+        if(centerType == ActionMultipleTargets.CASTER)
         {
             caster.Get2DPosition(out centerX, out centerZ);
         }
-        else if(centerType == ActionMultipleTargetsCenter.TARGET)
+        else if(centerType == ActionMultipleTargets.TARGET)
         {
             if(requestTarget.targetType == AbilityRequestTargetType.POINT)
             {
@@ -152,7 +152,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
             }
             requestTarget.GetTarget2DPosition(out centerX, out centerZ);
         }
-        else if(centerType == ActionMultipleTargetsCenter.POINT)
+        else if(centerType == ActionMultipleTargets.POINT)
         {
             requestTarget.GetTarget2DPosition(out centerX, out centerZ);
         }
@@ -163,7 +163,6 @@ public class TargetSearcher : Singleton<TargetSearcher>
         }
 
         // 根据目标点和范围获取目标对象
-        List<BattleUnit> tempTargets;
         var casterCamp = caster.camp;
         var Teams = actionTarget.targetTeam;
         var Types = actionTarget.targetType;
@@ -247,24 +246,24 @@ public class TargetSearcher : Singleton<TargetSearcher>
         List<BattleUnit> targets = new List<BattleUnit>(0);
 
         // 根据阵营找对象
-        if(targetTeam == AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY)
+        if(targetTeam == AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_FRIENDLY)
         {
-            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY : AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY;
+            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_FRIENDLY : AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_ENEMY;
         }
-        else if(targetTeam == AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY)
+        else if(targetTeam == AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_ENEMY)
         {
-            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY : AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY;
+            targetTeam = sourceCamp == BattleCamp.FRIENDLY ? AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_ENEMY : AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
         }
 
         switch(targetTeam)
         {
-            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_ENEMY:
+            case AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_ENEMY:
                 InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
                 break;
-            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_FRIENDLY:
+            case AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_FRIENDLY:
                 InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
-            case AbilityUnitTargetTeam.UNIT_TARGET_TEAM_BOTH:
+            case AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_BOTH:
                 InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
                 InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;

@@ -26,14 +26,18 @@ namespace Origins {
 
         public void SetPosition(Vector2 value) {
             Position = value;
-            ActorManager.instance.SetActorPosition(InstanceId, value);
+            ActorManager.instance.SetActorPosition(actorId, value);
         }
         
         protected override void InitProperty(int roleId) {
-            var config = CharacterTable.Instance.Get(roleId);
-            Hp = config.maxHp;
-            Mana = config.magic;
+            var config = EnemyConfigTable.Instance.Get(roleId);
+            MaxHp = config.maxHp;
+            MaxMp = config.maxMp;
+            Hp = MaxHp;
+            Mp = MaxMp;
+            PhysicsAttack = config.physicAttack;
             MoveSpeed = config.moveSpeed;
+            AttackCooldown = config.attackCooldown;
         }
     }
 }

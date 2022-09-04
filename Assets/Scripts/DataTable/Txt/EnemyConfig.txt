@@ -1,0 +1,4 @@
+﻿id	maxHp	maxMp	physicAttack	moveSpeed	attackCooldown	exp	modelPath
+101	10	10	10	100	1	1	EnemyActor.prefab
+102	10	10	10	100	1	1	EnemyActor.prefab
+103	12	12	12	120	1	2	EnemyActor.prefab

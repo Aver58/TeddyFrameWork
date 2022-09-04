@@ -9,6 +9,7 @@ namespace Battle.logic.ability_dataDriven {
     // 可预览的技能编辑
     // DOTA2 技能系统，按着对配置表的理解，自己进行梳理逻辑
     public class Ability {
+        public int abilitylevel;// 技能等级
         private string description;
         private int fps;
         private float fixedDeltaTimeOfFps;
@@ -23,8 +24,19 @@ namespace Battle.logic.ability_dataDriven {
         private bool applyRootMotion;
         private bool cancelable;
         private readonly AbilityConfig abilityConfig;
-
+        private AbilityTarget abilityTarget;
         private AbilityState abilityState;
+
+        private float baseDamage;
+        public float BaseDamage {
+            get {
+                if (abilityConfig.AbilityDamage != null) {
+                    baseDamage = abilityConfig.AbilityDamage[abilitylevel - 1];
+                }
+
+                return baseDamage;
+            }
+        }
 
         public Ability(AbilityConfig abilityConfig) {
             this.abilityConfig = abilityConfig;
@@ -35,6 +47,7 @@ namespace Battle.logic.ability_dataDriven {
         public void OnInit(int targetFrameRate) {
             fps = targetFrameRate;
             currentTick = 0;
+            abilitylevel = 1;
             abilityState = AbilityState.None;
             cooldown = abilityConfig.AbilityCooldown;
 

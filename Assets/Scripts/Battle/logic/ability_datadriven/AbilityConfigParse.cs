@@ -6,15 +6,14 @@ using LitJson;
 namespace Battle.logic.ability_dataDriven {
     public static class AbilityConfigParse {
         public static Ability GetAbility(int id) {
-            var skillItem = skillTable.Instance.Get(id);
-            if(skillItem == null)
+            var skillMapItem = SkillMapTable.Instance.Get(id);
+            if(skillMapItem == null)
             {
                 BattleLog.LogError("skill 表没有找到指定id:", id.ToString());
                 return null;
             }
 
-            var path = skillItem.config;
-            var priority = skillItem.priority;
+            var path = skillMapItem.config;
             var abilityConfig = LoadAbilityConfig(path);
             var ability = new Ability(abilityConfig);
             return ability;
@@ -28,12 +27,8 @@ namespace Battle.logic.ability_dataDriven {
             }
 
             var abilityConfig = new AbilityConfig() {
-                AbilityDamage = jsonData.GetIntValue("AbilityDamage"),
-                AbilityManaCost = jsonData.GetIntValue("AbilityManaCost"),
-
-                AbilityBehavior = ParseAbilityBehaviorArray(jsonData, "AbilityBehavior"),
-                AbilityUnitDamageType = jsonData.GetEnumValue<AbilityUnitDamageType>("AbilityUnitDamageType"),
-
+                AbilityDamage = jsonData.GetFloatArrayValue("AbilityDamage"),
+                AbilityManaCost = jsonData.GetFloatArrayValue("AbilityManaCost"),
                 AbilityCooldown = jsonData.GetFloatValue("AbilityCooldown"),
                 AbilityCastPoint = jsonData.GetFloatValue("AbilityCastPoint"),
                 AbilityCastRange = jsonData.GetFloatValue("AbilityCastRange"),
@@ -41,9 +36,15 @@ namespace Battle.logic.ability_dataDriven {
                 AbilityChannelledManaCostPerSecond = jsonData.GetFloatValue("AbilityChannelledManaCostPerSecond"),
                 AbilityDuration = jsonData.GetFloatValue("AbilityDuration"),
                 AoERadius = jsonData.GetFloatValue("AoERadius"),
-
                 AbilityCastAnimation = jsonData.GetStringValue("AbilityCastAnimation"),
                 AbilityTextureName = jsonData.GetStringValue("AbilityTextureName"),
+
+                AbilityUnitTargetTeam = jsonData.GetEnumValue<AbilityUnitTargetTeam>("AbilityUnitTargetTeam"),
+                AbilityUnitTargetType = jsonData.GetEnumValue<AbilityUnitTargetType>("AbilityUnitTargetType"),
+                AbilityUnitTargetFlags = jsonData.GetEnumValue<AbilityUnitTargetFlags>("AbilityUnitTargetFlags"),
+                AbilityUnitDamageType = jsonData.GetEnumValue<AbilityUnitDamageType>("AbilityUnitDamageType"),
+
+                AbilityBehavior = ParseAbilityBehaviorArray(jsonData, "AbilityBehavior"),
 
                 AbilityEventMap = ParseAbilityEvents(jsonData),
             };
@@ -54,18 +55,16 @@ namespace Battle.logic.ability_dataDriven {
         // 解析技能行为数组
         private static AbilityBehavior ParseAbilityBehaviorArray(JsonData json, string key)
         {
-            var behaviorConfigs = GetJsonValue(json, key);
-            if (behaviorConfigs == null) {
+            var jsonData = GetJsonValue(json, key);
+            if (jsonData == null) {
                 return default;
             }
 
             AbilityBehavior behavior = 0;
-            if(behaviorConfigs.IsArray)
-            {
-                for(var i = 0; i < behaviorConfigs.Count; i++)
-                {
-                    var item = behaviorConfigs[i].ToString();
-                    var abilityBehavior = GetEnumValue<AbilityBehavior>(item);
+            if(jsonData.IsArray) {
+                for(var i = 0; i < jsonData.Count; i++) {
+                    var item = jsonData[i];
+                    var abilityBehavior = GetEnumValue<AbilityBehavior>(item.ToString());
                     behavior |= abilityBehavior;
                 }
             }
@@ -112,7 +111,7 @@ namespace Battle.logic.ability_dataDriven {
 
         #region Create Action Static Method
 
-
+        // private static void
 
         #endregion
 
@@ -193,19 +192,34 @@ namespace Battle.logic.ability_dataDriven {
             return json.Keys.Contains(key) ? json[key] : null;
         }
 
-        public static int GetIntValue(this JsonData json, string key)
+        private static int GetIntValue(this JsonData json, string key)
         {
             var res = GetJsonValue(json, key);
             return res != null ? int.Parse(res.ToString()) : -1;
         }
 
-        public static float GetFloatValue(this JsonData json, string key)
+        private static float[] GetFloatArrayValue(this JsonData json, string key)
+        {
+            var res = GetJsonValue(json, key);
+            if (res != null && res.IsArray) {
+                var array = new float[res.Count];
+                for (int i = 0; i < res.Count; i++) {
+                    var value = res[i];
+                    array[i] = float.Parse(value.ToString());
+                }
+
+                return array;
+            }
+            return null;
+        }
+
+        private static float GetFloatValue(this JsonData json, string key)
         {
             var res = GetJsonValue(json, key);
             return res != null ? float.Parse(res.ToString()) : 0f;
         }
 
-        public static bool GetBoolValue(this JsonData json, string key)
+        private static bool GetBoolValue(this JsonData json, string key)
         {
             var res = GetJsonValue(json, key);
             if(res!=null && res.IsBoolean)
@@ -214,13 +228,13 @@ namespace Battle.logic.ability_dataDriven {
             return false;
         }
 
-        public static string GetStringValue(this JsonData json, string key)
+        private static string GetStringValue(this JsonData json, string key)
         {
             var res = GetJsonValue(json, key);
             return res?.ToString();
         }
 
-        public static T GetEnumValue<T>(this JsonData json, string key)
+        private static T GetEnumValue<T>(this JsonData json, string key)
         {
             var str = GetStringValue(json, key);
             return GetEnumValue<T>(str);
@@ -228,10 +242,11 @@ namespace Battle.logic.ability_dataDriven {
 
         private static T GetEnumValue<T>(string str)
         {
-            if(str == null)
-                return default(T);
+            if (str == null) {
+                return default;
+            }
 
-            var value = (T)Enum.Parse(typeof(T), str.ToString());
+            var value = (T)Enum.Parse(typeof(T), str);
             return value;
         }
 

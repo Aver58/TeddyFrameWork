@@ -36,7 +36,7 @@ public class Download : DownloadHandlerScript, IDisposable, ICloneable
 
     public int id { get; set; }
 
-    public new string error { get; private set; }
+    public string error { get; private set; }
 
     public long len { get; set; }
 

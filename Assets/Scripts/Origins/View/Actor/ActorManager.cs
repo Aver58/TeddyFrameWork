@@ -14,8 +14,10 @@ namespace Origins {
         }
 
         public void OnUpdate() {
-            HeroActor.OnUpdate();
-            
+            if (HeroActor) {
+                HeroActor.OnUpdate();
+            }
+
             for (var i = 0; i < entities.Count; i++) {
                 var entity = entities[i];
                 entity.OnUpdate();
@@ -28,7 +30,7 @@ namespace Origins {
                 return null;
             }
             
-            var characterItem = CharacterTable.Instance.Get(heroEntity.RoleId);
+            var characterItem = HeroConfigTable.Instance.Get(heroEntity.RoleId);
             if (characterItem == null) {
                 Debug.LogError("[AddEnemyActor]没有找到指定角色配置：" + heroEntity.RoleId);
                 return null;
@@ -37,15 +39,14 @@ namespace Origins {
             var asset = LoadModule.Instance.LoadPrefab(characterItem.modelPath);
             if (asset != null) {
                 var go = Object.Instantiate(asset, UIModule.Instance.GetParentTransform(ViewType.MAIN));
-                go.transform.localPosition = heroEntity.Position;
-                
-                var actor = go.GetComponent<HeroActor>();
-                if (actor != null) {
-                    actor.OnInit();
-                    actor.SetEntity(heroEntity);
+
+                HeroActor = go.GetComponent<HeroActor>();
+                if (HeroActor != null) {
+                    HeroActor.OnInit();
+                    HeroActor.SetEntity(heroEntity);
                 }
                 
-                return actor;
+                return HeroActor;
             } else {
                 Debug.LogError("[AddEnemyActor]没有找到指定模型：" + characterItem.modelPath);
             }
@@ -84,6 +85,16 @@ namespace Origins {
             return enemyActor;
         }
 
+        public EnemyActor GetActor(int instanceId) {
+            return enemyActorMap.ContainsKey(instanceId) ? enemyActorMap[instanceId] : null;
+        }
+
+        public void SetHeroActorPosition(Vector2 value) {
+            if (HeroActor) {
+                HeroActor.SetPosition(value);
+            }
+        }
+
         public void SetActorPosition(int instanceId, Vector2 value) {
             if (enemyActorMap.ContainsKey(instanceId)) {
                 enemyActorMap[instanceId].SetPosition(value);
@@ -98,7 +109,7 @@ namespace Origins {
                 return null;
             }
             
-            var characterItem = CharacterTable.Instance.Get(enemyEntity.RoleId);
+            var characterItem = EnemyConfigTable.Instance.Get(enemyEntity.RoleId);
             if (characterItem == null) {
                 Debug.LogError("[AddEnemyActor]没有找到指定角色配置：" + enemyEntity.RoleId);
                 return null;

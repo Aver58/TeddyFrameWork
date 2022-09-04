@@ -38,7 +38,9 @@ namespace Origins {
 
         #region Public
 
-
+        public void GameOver() {
+            Application.Quit();
+        }
 
         #endregion
 
@@ -54,10 +56,6 @@ namespace Origins {
             }
         }
 
-        private void CreateFood() {
-
-        }
-
         private void LoadLevelConfig() {
             var levelId = 1;
             var config = LevelConfigTable.Instance.Get(levelId);
@@ -70,7 +68,7 @@ namespace Origins {
                 }
             }
 
-            Debug.Log($"[GameMainLoop] 加载地图配置成功：{levels.Count}");
+            Debug.Log($"[GameMainLoop] 加载地图配置成功，总条数：{levels.Count}");
         }
 
         #endregion

@@ -99,7 +99,7 @@ public class AbilityActor
         var rangeTrans = GetIndicatorAsset(AbilityIndicatorType.RANGE_AREA);
 
         // 直线型
-        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_DIRECTIONAL) != 0)
+        if((abilityBehavior & AbilityBehavior.DOTA_ABILITY_BEHAVIOR_DIRECTIONAL) != 0)
         {
             abilityInput = new AbilityInputDirection(m_Ability, m_CasterActor);
             var castRange = m_Ability.GetCastRange();
@@ -200,15 +200,15 @@ public class AbilityActor
     {
         // 非指向性技能，妲己一技能
         AbilityBehavior abilityBehavior = ability.GetAbilityBehavior();
-        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_NO_TARGET) != 0)
+        if((abilityBehavior & AbilityBehavior.DOTA_ABILITY_BEHAVIOR_NO_TARGET) != 0)
             return CreateAbilityNoTargetInput(abilityBehavior);
 
         // 指向性技能：妲己二技能
-        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_UNIT_TARGET) != 0)
+        if((abilityBehavior & AbilityBehavior.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET) != 0)
             return CreateAbilityTargetInput(abilityBehavior);
 
         // 点施法类型，王昭君大招
-        if((abilityBehavior & AbilityBehavior.ABILITY_BEHAVIOR_POINT) != 0)
+        if((abilityBehavior & AbilityBehavior.DOTA_ABILITY_BEHAVIOR_POINT) != 0)
             return CreateAbilityPointInput(abilityBehavior);
 
         BattleLog.LogError("技能[%s]中有未定义的Input类型", ability.GetConfigName());

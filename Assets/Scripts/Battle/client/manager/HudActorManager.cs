@@ -56,8 +56,7 @@ public class HudActorManager : Singleton<HudActorManager>
         LoadModule.LoadUI(path, delegate (AssetRequest data) {
             GameObject asset = data.asset as GameObject;
 
-            GameObject go = Object.Instantiate(asset);
-            go.transform.SetParent(parentNode);
+            GameObject go = Object.Instantiate(asset, parentNode, true);
             go.transform.localPosition = Vector3.zero;
             go.transform.localScale = Vector3.one;
 
