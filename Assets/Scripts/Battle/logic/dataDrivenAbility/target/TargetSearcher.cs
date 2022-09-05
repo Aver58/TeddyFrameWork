@@ -241,7 +241,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targetCollection;
     }
 
-    private List<BattleUnit> FindTargetUnits(BattleCamp sourceCamp, AbilityUnitTargetTeam targetTeam, AbilityUnitTargetType targetTypes,AbilityUnitTargetFlags targetFlags)
+    private List<BattleUnit> FindTargetUnits(BattleCamp sourceCamp, AbilityUnitTargetTeam targetTeam, AbilityUnitTargetType targetTypes,AbilityUnitTargetFlag targetFlag)
     {
         List<BattleUnit> targets = new List<BattleUnit>(0);
 
@@ -303,9 +303,9 @@ public class TargetSearcher : Singleton<TargetSearcher>
     /// <summary>
     /// 获取在指定半径范围内的单位
     /// </summary>
-    public List<BattleUnit> FindTargetUnitsInRadius(BattleCamp battleCamp, AbilityUnitTargetTeam targetTeams,AbilityUnitTargetType targetTypes,AbilityUnitTargetFlags targetFlags,float centerX, float centerZ, float radius)
+    public List<BattleUnit> FindTargetUnitsInRadius(BattleCamp battleCamp, AbilityUnitTargetTeam targetTeams,AbilityUnitTargetType targetTypes,AbilityUnitTargetFlag targetFlag,float centerX, float centerZ, float radius)
     {
-        var targetUnits = FindTargetUnits(battleCamp, targetTeams, targetTypes, targetFlags);
+        var targetUnits = FindTargetUnits(battleCamp, targetTeams, targetTypes, targetFlag);
 
         for(int i = targetUnits.Count - 1; i > 0 ; i--)
         {

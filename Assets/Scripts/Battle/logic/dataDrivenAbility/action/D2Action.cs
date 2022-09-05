@@ -16,8 +16,7 @@ using UnityEngine;
 /// 技能行为
 /// Each of these keys is a block that contains one or more action descriptions.
 /// </summary>
-public class D2Action
-{
+public class D2Action {
     private List<BattleUnit> m_targets;
 
     protected AbilityData abilityData;

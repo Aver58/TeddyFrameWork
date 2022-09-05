@@ -22,7 +22,7 @@ public enum AbilityEvent {
     OnChannelSucceeded,//当持续性施法成功
     OnProjectileHitUnit,//当弹道粒子特效命中单位 Adding the KV pair "DeleteOnHit" "0" in this block will cause the projectile to not disappear when it hits a unit.
     OnProjectileFinish,//当弹道粒子特效结束
-    OnProjectileDodge,
+    OnProjectileDodge,//当弹道粒子特效被闪避
     OnAbilityPhaseStart,//技能开始施法（单位转向目标前） Triggers when the ability is cast (before the unit turns toward the target)
     OnAbilityPhaseCharge,
     // 拓展，todo实现
@@ -65,9 +65,7 @@ public enum AbilityAction {
     CreateBonusAttack,//	创建奖励攻击 目标 Target
     CreateThinker,//	创建Thinker 目标,Modifier名称 Target, ModifierName
     CreateThinkerWall,//	创建ThinkerWall 目标,Modifier名称,宽度,长度,旋转 Target, ModifierName, Width, Length, Rotation
-    Damage,//	伤害 
-    // 目标,类型,最小伤害/最大伤害，伤害，基于当前生命百分比伤害，基于最大生命百分比伤害
-    // Target, Type, MinDamage/MaxDamage, Damage, CurrentHealthPercentBasedDamage, MaxHealthPercentBasedDamage
+    Damage,//	伤害
     DelayedAction,//	延迟动作 延迟,动作 Delay, Action
     DestroyTrees,//	破坏树木 目标,范围 Target, Radius
     FireEffect,//	播放特效
@@ -81,8 +79,6 @@ public enum AbilityAction {
     LevelUpAbility,//	升级技能 目标,技能名称 Target, AbilityName
     Lifesteal,//	吸血 目标,吸血比例 Target, LifestealPercent
     LinearProjectile,//	线性投射物
-    // 目标,效果名称,移动速度,开始范围,结束范围,固定距离,开始位置,目标队伍,目标类型,目标标签,前方锥形,提供视野,视觉范围
-    // Target, EffectName, MoveSpeed, StartRadius, EndRadius, FixedDistance, StartPosition, TargetTeams, TargetTypes, TargetFlags, HasFrontalCone, ProvidesVision, VisionRadius
     TrackingProjectile,//	追踪投射物 目标, 效果名称, 能否躲避, 提供视野, 视野范围, 移动速度, 源附着点 Target, EffectName, Dodgeable, ProvidesVision, VisionRadius, MoveSpeed, SourceAttachment
     MoveUnit,//	移动单位 目标,移向目标 Target, MoveToTarget
     Random,//	随机 几率,伪随机,成功时,失败时 Chance, PseudoRandom, OnSuccess, OnFailure
@@ -131,6 +127,13 @@ public enum AbilityUnitDamageType {
     DAMAGE_TYPE_PURE,           // 纯粹伤害不会被任何护甲或魔抗减少
 }
 
+// 伤害标记
+public enum AbilityDamageFlag {
+    DAMAGE_FLAG_NONE = 1,      // 无
+    DAMAGE_FLAG_CRIT = 2,      // 暴击
+    DAMAGE_FLAG_LIFELINK = 4,  // 吸血
+}
+
 // 技能消耗类型
 public enum AbilityCostType {
     NO_COST,
@@ -154,13 +157,6 @@ public enum AbilityUnitAITargetCondition {
 public enum AbilityBranch {
     ABILITY_BRANCH_PHYSICAL = 1,//物理类型的技能，可被缴械等物理沉默导致技能不可释放
     ABILITY_BRANCH_MAGICAL, //法术类型的技能，可被沉默等法术沉默导致技能不可释放
-}
-
-// 伤害标记
-public enum AbilityDamageFlag {
-    DAMAGE_FLAG_NONE = 1,      // 无
-    DAMAGE_FLAG_CRIT = 2,      // 暴击
-    DAMAGE_FLAG_LIFELINK = 4,  // 吸血
 }
 
 // 治疗
@@ -285,23 +281,23 @@ public enum AbilityUnitTargetTeam
 /// </summary>
 public enum AbilityUnitTargetType
 {
-    DOTA_UNIT_TARGET_ALL,//任意，包括隐藏的实体
-    DOTA_UNIT_TARGET_BASIC,//基本单位, 包括召唤单位
-    DOTA_UNIT_TARGET_BUILDING,//塔和建筑 npc_dota_tower, npc_dota_building  DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING
-    DOTA_UNIT_TARGET_COURIER,//信使和飞行信使 npc_dota_courier, npc_dota_flying_courier  DOTA_NPC_UNIT_RELATIONSHIP_TYPE_COURIER
-    DOTA_UNIT_TARGET_CREEP,//野怪 npc_dota_creature, npc_dota_creep 与BASIC类似但是可能不包括一些召唤单位 例子: 骨弓死亡契约
-    DOTA_UNIT_TARGET_CUSTOM,//未开放? 例子: 水人复制, TB灵魂隔断, 谜团恶魔转化, 艾欧链接, 小狗感染...
-    DOTA_UNIT_TARGET_HERO,//英雄
-    DOTA_UNIT_TARGET_MECHANICAL,//机械单位（投石车） npc_dota_creep_siege  DOTA_NPC_UNIT_RELATIONSHIP_TYPE_SIEGE
-    DOTA_UNIT_TARGET_NONE,//没有
-    DOTA_UNIT_TARGET_OTHER,//任何前面不包括的单位
-    DOTA_UNIT_TARGET_TREE,//树木,ent_dota_tree 树 例子: 吃树, 补刀斧
+    DOTA_UNIT_TARGET_ALL,// 任意，包括隐藏的实体
+    DOTA_UNIT_TARGET_BASIC,// 基本单位, 包括召唤单位
+    DOTA_UNIT_TARGET_BUILDING,// 塔和建筑 npc_dota_tower, npc_dota_building  DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING
+    DOTA_UNIT_TARGET_COURIER,// 信使和飞行信使 npc_dota_courier, npc_dota_flying_courier  DOTA_NPC_UNIT_RELATIONSHIP_TYPE_COURIER
+    DOTA_UNIT_TARGET_CREEP,// 野怪 npc_dota_creature, npc_dota_creep 与BASIC类似但是可能不包括一些召唤单位 例子: 骨弓死亡契约
+    DOTA_UNIT_TARGET_CUSTOM,// 未开放? 例子: 水人复制, TB灵魂隔断, 谜团恶魔转化, 艾欧链接, 小狗感染...
+    DOTA_UNIT_TARGET_HERO,// 英雄
+    DOTA_UNIT_TARGET_MECHANICAL,// 机械单位（投石车） npc_dota_creep_siege  DOTA_NPC_UNIT_RELATIONSHIP_TYPE_SIEGE
+    DOTA_UNIT_TARGET_NONE,// 没有
+    DOTA_UNIT_TARGET_OTHER,// 任何前面不包括的单位
+    DOTA_UNIT_TARGET_TREE,// 树木,ent_dota_tree 树 例子: 吃树, 补刀斧
 }
 
 /// <summary>
 /// 标签允许对默认被忽略的目标单位 (例如魔法免疫敌人)施法, 或者忽略特定的单位类型 (例如远古单位和魔免友军)来允许对其施法.
 /// </summary>
-public enum AbilityUnitTargetFlags
+public enum AbilityUnitTargetFlag
 {
     DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP,//禁用帮助的单位 尚不确定数据驱动技能如何使用？
     DOTA_UNIT_TARGET_FLAG_DEAD,//死亡单位忽略

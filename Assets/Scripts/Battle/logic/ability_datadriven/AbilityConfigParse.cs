@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using LitJson;
 
 namespace Battle.logic.ability_dataDriven {
@@ -26,7 +27,7 @@ namespace Battle.logic.ability_dataDriven {
                 return default;
             }
 
-            var abilityConfig = new AbilityConfig() {
+            var abilityConfig = new AbilityConfig {
                 AbilityDamage = jsonData.GetFloatArrayValue("AbilityDamage"),
                 AbilityManaCost = jsonData.GetFloatArrayValue("AbilityManaCost"),
                 AbilityCooldown = jsonData.GetFloatValue("AbilityCooldown"),
@@ -36,15 +37,20 @@ namespace Battle.logic.ability_dataDriven {
                 AbilityChannelledManaCostPerSecond = jsonData.GetFloatValue("AbilityChannelledManaCostPerSecond"),
                 AbilityDuration = jsonData.GetFloatValue("AbilityDuration"),
                 AoERadius = jsonData.GetFloatValue("AoERadius"),
+
+                Name = jsonData.GetStringValue("Name"),
                 AbilityCastAnimation = jsonData.GetStringValue("AbilityCastAnimation"),
                 AbilityTextureName = jsonData.GetStringValue("AbilityTextureName"),
 
+                AbilityUnitTargetTeam = jsonData.GetEnumValue<AbilityUnitTargetTeam>("AbilityUnitTargetTeam"),
+                AbilityUnitTargetType = jsonData.GetEnumValue<AbilityUnitTargetType>("AbilityUnitTargetType"),
+                AbilityUnitTargetFlag = jsonData.GetEnumValue<AbilityUnitTargetFlag>("AbilityUnitTargetFlags"),
                 AbilityUnitDamageType = jsonData.GetEnumValue<AbilityUnitDamageType>("AbilityUnitDamageType"),
 
                 AbilityBehavior = ParseAbilityBehaviorArray(jsonData, "AbilityBehavior"),
-
-                AbilityEventMap = ParseAbilityEvents(jsonData),
             };
+
+            abilityConfig.AbilityEventMap = ParseAbilityEvents(jsonData, abilityConfig);
 
             return abilityConfig;
         }
@@ -68,51 +74,150 @@ namespace Battle.logic.ability_dataDriven {
             return behavior;
         }
 
-        private static Dictionary<AbilityEvent, D2Event> ParseAbilityEvents(JsonData json) {
-            if (json == null) {
+        private static Dictionary<AbilityEvent, DotaEvent> ParseAbilityEvents(JsonData jsonData, AbilityConfig abilityConfig) {
+            if (jsonData == null) {
                 return null;
             }
 
-            var eventMap = new Dictionary<AbilityEvent, D2Event>();
-            foreach(var key in json.Keys)
+            var eventMap = new Dictionary<AbilityEvent, DotaEvent>();
+            foreach(var key in jsonData.Keys)
             {
                 if(Enum.IsDefined(typeof(AbilityEvent), key))
                 {
-                    var eventsJsonData = GetJsonValue(json, key);
-                    var actions = ParseActions(eventsJsonData);
-                    var d2Event = new D2Event(actions);
+                    var eventsJsonData = GetJsonValue(jsonData, key);
+                    var actions = ParseActions(eventsJsonData, abilityConfig);
+                    var d2Event = new DotaEvent(actions);
                     eventMap.Add((AbilityEvent)Enum.Parse(typeof(AbilityEvent), key), d2Event);
                 }
             }
             return eventMap;
         }
 
-        private static List<D2Action> ParseActions(JsonData json)
-        {
-            if (json == null) {
+        #region Action
+
+        private static List<DotaAction> ParseActions(JsonData jsonData, AbilityConfig abilityConfig) {
+            if (jsonData == null) {
                 return null;
             }
 
-            var actions = new List<D2Action>();
+            var actions = new List<DotaAction>();
             var abilityConfigParseType = typeof(AbilityConfigParse);
-            foreach(var key in json.Keys) {
+            foreach(var key in jsonData.Keys) {
                 var methodName = key;
-                var method = abilityConfigParseType.GetMethod(methodName);
+                var method = abilityConfigParseType.GetMethod(methodName, BindingFlags.Static| BindingFlags.NonPublic);
                 if (method != null) {
-                    method.Invoke(null, new object[0]);
+                    var actionJsonData = jsonData[key];
+                    var abilityTarget = ParseActionTarget(actionJsonData, abilityConfig);
+                    var action = method.Invoke(null, new object[] {actionJsonData, abilityTarget, abilityConfig});
+                    if (action is DotaAction dotaAction) {
+                        // 嵌套Action
+                        var nestActions = ParseActions(actionJsonData, abilityConfig);
+                        if (nestActions != null && nestActions.Count > 0 ) {
+                            dotaAction.SetAction(nestActions);
+                        }
+                        actions.Add(dotaAction);
+                    }
                 }
             }
 
             return actions;
         }
 
+        private static AbilityTarget ParseActionTarget(JsonData actionJsonData, AbilityConfig abilityConfig) {
+            if (actionJsonData == null) {
+                return null;
+            }
+
+            if (!actionJsonData.ContainsKey("Target")) {
+                BattleLog.LogError("【技能对象解析】{0}没有配置Target字段！", abilityConfig.Name);
+                return null;
+            }
+
+            var abilityTarget = new AbilityTarget();
+            if (actionJsonData.IsArray) {
+                // var aoeAreaJsonData = GetJsonValue(json, "AoeArea");
+                // if (aoeAreaJsonData == null) {
+                //     BattleLog.LogError("技能[%s]中Target配置是区域目标配置，但是未配置AoeArea或者配置错误", abilityData.configFileName);
+                //     return null;
+                // }
+                //
+                // var targetCenter = GetEnumValue<ActionMultipleTargets>(json, "Center");
+                // var areaType = GetStringValue(aoeAreaJsonData, "AreaType");
+                // var abilityAreaDamageType = GetEnumValue<AOEType>(areaType);
+                //
+                // switch (abilityAreaDamageType) {
+                //     case AOEType.Radius:
+                //         float radius = (int) GetJsonValue(aoeAreaJsonData, "Radius");
+                //         actionTarget.SetRadiusAoe(targetCenter, radius);
+                //         break;
+                //     case AOEType.Line:
+                //         JsonData lineJsonData = (int) GetJsonValue(aoeAreaJsonData, "Line");
+                //         if (lineJsonData == null) {
+                //             BattleLog.LogError("技能[{0}]中Target配置是区域目标配置，但是未配置Line", abilityData.configFileName);
+                //             return null;
+                //         }
+                //
+                //         var length = (float) GetJsonValue(lineJsonData, "Length");
+                //         var thickness = (float) GetJsonValue(lineJsonData, "Thickness");
+                //         actionTarget.SetLineAoe(targetCenter, length, thickness);
+                //         break;
+                //     case AOEType.Sector:
+                //         JsonData sectorJsonData = GetJsonValue(json, "Sector");
+                //         if (sectorJsonData == null) {
+                //             BattleLog.LogError("技能[{0}]中Target配置是区域目标配置，但是未配置Sector", abilityData.configFileName);
+                //             return null;
+                //         }
+                //
+                //         var sectorRadius = (float) GetJsonValue(sectorJsonData, "Radius");
+                //         var angle = (float) GetJsonValue(sectorJsonData, "Angle");
+                //         actionTarget.SetSectorAoe(targetCenter, sectorRadius, angle);
+                //         break;
+                //     default:
+                //         break;
+                // }
+                //
+                // var teamJsonData = GetStringValue(json, "Teams");
+                // var abilityTargetTeam = GetEnumValue<AbilityUnitTargetTeam>(teamJsonData);
+                // actionTarget.SetTargetTeam(abilityTargetTeam);
+            }
+            else {
+                var actionSingTarget = actionJsonData.GetEnumValue<ActionSingTarget>("Target");
+                abilityTarget.SetSingTarget(actionSingTarget);
+            }
+
+            return abilityTarget;
+        }
+
         #region Create Action Static Method
 
-        // private static void
+        private static DotaAction Damage(JsonData jsonData, AbilityTarget abilityTarget, AbilityConfig abilityConfig) {
+            var damageType = jsonData.GetEnumValue<AbilityUnitDamageType>("Type");
+            var damages = jsonData.GetFloatArrayValue("Damage");
+            var action = new DotaAction_Damage(abilityTarget, damages, damageType) {AbilityName = abilityConfig.Name};
+            return action;
+        }
+
+        private static DotaAction LinearProjectile(JsonData jsonData, AbilityTarget abilityTarget, AbilityConfig abilityConfig) {
+            var effectName = jsonData.GetStringValue("EffectName");
+            var sourceAttachment = jsonData.GetStringValue("SourceAttachment");
+            var dodgeable = jsonData.GetBoolValue("Dodgeable");
+            var moveSpeed = jsonData.GetFloatValue("MoveSpeed");
+            var providesVision = jsonData.GetBoolValue("ProvidesVision");
+            var visionRadius = jsonData.GetFloatValue("VisionRadius");
+
+            var action = new DotaAction_LinearProjectile(abilityTarget, effectName, sourceAttachment, dodgeable, moveSpeed){AbilityName = abilityConfig.Name};
+            action.SetVisionParam(providesVision, visionRadius);
+            return action;
+        }
 
         #endregion
 
-        private static Dictionary<string, ModifierData> ParseModifiers(JsonData json)
+        #endregion
+
+
+        #region Modifier
+
+                private static Dictionary<string, ModifierData> ParseModifiers(JsonData json)
         {
             var res = new Dictionary<string, ModifierData>();
             var modifiers = GetJsonValue(json, "Modifiers");
@@ -146,7 +251,7 @@ namespace Battle.logic.ability_dataDriven {
             modifier.EffectName = GetStringValue(json, "EffectName");
             modifier.EffectAttachType = GetEnumValue<ModifierEffectAttachType>(json, "EffectAttachType");
             // event
-            modifier.ModifierEventMap = ParseModifierEvents(json);
+            // modifier.ModifierEventMap = ParseModifierEvents(json);
             // aura
             // ParseModifierAura(json, abilityData, modifier);
             // ModifierProperties
@@ -157,26 +262,28 @@ namespace Battle.logic.ability_dataDriven {
             return modifier;
         }
 
-        private static Dictionary<ModifierEvents, D2Event> ParseModifierEvents(JsonData json)
-        {
-            if (json == null) {
+        private static Dictionary<ModifierEvents, DotaEvent> ParseModifierEvents(JsonData jsonData, AbilityConfig abilityConfig) {
+            if (jsonData == null) {
                 return null;
             }
 
-            var eventMap = new Dictionary<ModifierEvents, D2Event>();
-            foreach(var key in json.Keys)
+            var eventMap = new Dictionary<ModifierEvents, DotaEvent>();
+            foreach(var key in jsonData.Keys)
             {
                 if(Enum.IsDefined(typeof(ModifierEvents), key))
                 {
-                    var eventsJsonData = GetJsonValue(json, key);
-                    var actions = ParseActions(eventsJsonData);
-                    var d2Event = new D2Event(actions);
+                    var eventsJsonData = GetJsonValue(jsonData, key);
+                    var actions = ParseActions(eventsJsonData, abilityConfig);
+                    var d2Event = new DotaEvent(actions);
                     var eventName = GetEnumValue<ModifierEvents>(key);
                     eventMap.Add(eventName, d2Event);
                 }
             }
             return eventMap;
         }
+
+
+        #endregion
 
         #region LitJson Extension
 

@@ -13,15 +13,16 @@ namespace Battle.logic.ability_dataDriven {
         public float[] AbilityDamage;
         public float[] AbilityManaCost;
 
+        public string Name;
         public string AbilityCastAnimation;
         public string AbilityTextureName;
 
         public AbilityUnitTargetTeam AbilityUnitTargetTeam;
         public AbilityUnitTargetType AbilityUnitTargetType;
-        public AbilityUnitTargetFlags AbilityUnitTargetFlags;
+        public AbilityUnitTargetFlag AbilityUnitTargetFlag;
         public AbilityUnitDamageType AbilityUnitDamageType;
 
         public AbilityBehavior AbilityBehavior;
-        public Dictionary<AbilityEvent, D2Event> AbilityEventMap;
+        public Dictionary<AbilityEvent, DotaEvent> AbilityEventMap;
     }
 }

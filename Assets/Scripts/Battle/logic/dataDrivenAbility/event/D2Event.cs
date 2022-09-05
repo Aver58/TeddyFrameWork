@@ -50,8 +50,7 @@ OnUpgrade
      */
 public class D2Event {
     private readonly List<D2Action> actions;
-    public D2Event(List<D2Action> actions)
-    {
+    public D2Event(List<D2Action> actions) {
         this.actions = actions;
     }
 

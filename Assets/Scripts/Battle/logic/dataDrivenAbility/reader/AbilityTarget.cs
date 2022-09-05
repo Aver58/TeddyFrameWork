@@ -21,8 +21,8 @@ public class AbilityTarget
     public AbilityUnitTargetTeam targetTeam;
     public AbilityUnitTargetType targetType;
     public AbilityUnitTargetType excludeTypes;
-    public AbilityUnitTargetFlags targetFlags;
-    public AbilityUnitTargetFlags excludeFlags;
+    public AbilityUnitTargetFlag TargetFlag;
+    public AbilityUnitTargetFlag ExcludeFlag;
     public ActionMultipleTargets Target;
     public float radius;
     public int maxTargets;
