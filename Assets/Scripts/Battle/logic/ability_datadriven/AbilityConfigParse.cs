@@ -39,9 +39,6 @@ namespace Battle.logic.ability_dataDriven {
                 AbilityCastAnimation = jsonData.GetStringValue("AbilityCastAnimation"),
                 AbilityTextureName = jsonData.GetStringValue("AbilityTextureName"),
 
-                AbilityUnitTargetTeam = jsonData.GetEnumValue<AbilityUnitTargetTeam>("AbilityUnitTargetTeam"),
-                AbilityUnitTargetType = jsonData.GetEnumValue<AbilityUnitTargetType>("AbilityUnitTargetType"),
-                AbilityUnitTargetFlags = jsonData.GetEnumValue<AbilityUnitTargetFlags>("AbilityUnitTargetFlags"),
                 AbilityUnitDamageType = jsonData.GetEnumValue<AbilityUnitDamageType>("AbilityUnitDamageType"),
 
                 AbilityBehavior = ParseAbilityBehaviorArray(jsonData, "AbilityBehavior"),

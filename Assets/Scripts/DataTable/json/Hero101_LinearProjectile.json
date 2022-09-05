@@ -9,10 +9,6 @@
   "AbilityCastDuration": 3,
   "AbilityCastAnimation": "attack",
 
-  "AbilityUnitTargetTeam": "UNIT_TARGET_TEAM_ENEMY",
-  "AbilityUnitTargetType": "DOTA_UNIT_TARGET_ALL",
-  "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL",
-
   "AbilityBehavior": [
     "ABILITY_BEHAVIOR_UNIT_TARGET"
   ],
@@ -33,7 +29,6 @@
         "Damage":
         {
           "Target" : "TARGET",
-          "DamageFlags" : ["DAMAGE_FLAG_CRIT","DAMAGE_FLAG_LIFELINK"],
           "DamageType" : "DAMAGE_TYPE_PHYSICAL",
           "ValueSource":
           {
