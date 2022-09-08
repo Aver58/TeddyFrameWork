@@ -28,7 +28,7 @@ namespace Origins {
             InitProperty(RoleId);
             InitDefaultSkill();
 
-            var actor = ActorManager.instance.AddHeroActor(this);
+            ActorManager.instance.AddHeroActor(this);
         }
 
         public override void OnClear() {
@@ -70,6 +70,7 @@ namespace Origins {
         private void InitDefaultSkill() {
             var ability = AbilityConfigParse.GetAbility(defaultSkillId);
             if (ability != null) {
+                ability.SetCaster(this);
                 abilities.Add(ability);
             }
         }

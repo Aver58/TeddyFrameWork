@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace Origins {
     public class EnemyEntity : AbsEntity {
-        private int actorId;
-        
         public EnemyEntity(int roleId) {
             RoleId = roleId;
             InstanceId = EntityManager.instance.AutoIndex++;
@@ -16,8 +14,7 @@ namespace Origins {
         public override void OnInit() {
             InitProperty(RoleId);
             
-            var actor = ActorManager.instance.GetActorFromPool(this);
-            actorId = actor.InstanceId;
+            ActorManager.instance.GetActorFromPool(this);
         }
 
         public override void OnClear() {
@@ -26,7 +23,7 @@ namespace Origins {
 
         public void SetPosition(Vector2 value) {
             Position = value;
-            ActorManager.instance.SetActorPosition(actorId, value);
+            ActorManager.instance.SetActorPosition(InstanceId, value);
         }
         
         protected override void InitProperty(int roleId) {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Origins;
+using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
     // [MMORPG技能管线设计经验总结](https://baijiahao.baidu.com/s?id=1740830613356473547&wfr=spider&for=pc)
@@ -10,6 +11,9 @@ namespace Battle.logic.ability_dataDriven {
     // DOTA2 技能系统，按着对配置表的理解，自己进行梳理逻辑
     public class Ability {
         public int abilitylevel;// 技能等级
+        
+        private readonly AbilityConfig abilityConfig;
+        
         private string description;
         private int fps;
         private float fixedDeltaTimeOfFps;
@@ -23,9 +27,9 @@ namespace Battle.logic.ability_dataDriven {
         private AnimationClip animationClip;
         private bool applyRootMotion;
         private bool cancelable;
-        private readonly AbilityConfig abilityConfig;
         private AbilityTarget abilityTarget;
         private AbilityState abilityState;
+        private AbsEntity caster; 
 
         private float baseDamage;
         public float BaseDamage {
@@ -38,18 +42,18 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
+        #region LifeCycle
+        
         public Ability(AbilityConfig abilityConfig) {
             this.abilityConfig = abilityConfig;
         }
-
-        #region LifeCycle
 
         public void OnInit(int targetFrameRate) {
             fps = targetFrameRate;
             currentTick = 0;
             abilitylevel = 1;
             abilityState = AbilityState.None;
-            cooldown = abilityConfig.AbilityCooldown;
+            cooldown = abilityConfig.AbilityCooldowns[abilitylevel];
 
             backSwingPoint = abilityConfig.AbilityCastPoint + abilityConfig.AbilityChannelTime;
         }
@@ -73,11 +77,19 @@ namespace Battle.logic.ability_dataDriven {
 
         #endregion
 
+        #region Public
+
+        public void SetCaster(AbsEntity entity) {
+            caster = entity;
+        }
+
+        #endregion
+        
         #region Private
 
         // 前摇时间：
-        //      技能开始，但是技能真正的结算流程还没开始。
-        //      技能开始以后，机能相关的特效和动作就开始播放。
+        //      技能开始，但是技能真正的结算流程还没开始
+        //      技能开始以后，机能相关的特效和动作就开始播放
         private void EnterCastPoint() {
             if (abilityState == AbilityState.None) {
                 abilityState = AbilityState.CastPoint;
@@ -86,8 +98,8 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         // 前摇时间结束：
-        //      技能前摇结束时技能开始真正的释放以及结算，等技能前摇结束以后，技能真正的释放并结算。
-        //      释放包括创建相应的弹道／法术场和buff。
+        //      技能前摇结束时技能开始真正的释放以及结算，等技能前摇结束以后，技能真正的释放并结算
+        //      释放包括创建相应的弹道／法术场和buff
         private void EnterChannel() {
             if (abilityState == AbilityState.CastPoint) {
                 abilityState = AbilityState.Channeling;
@@ -96,8 +108,8 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         // 技能后摇点：
-        //      技能播放到后摇点时间时，技能真正的结束。这时，技能对应的特效以及人物动作可能还会继续播放，但是技能流程已经正式结束了。
-        //      也就是说，下一个技能可以执行。
+        //      技能播放到后摇点时间时，技能真正的结束。这时，技能对应的特效以及人物动作可能还会继续播放，但是技能流程已经正式结束了
+        //      也就是说，下一个技能可以执行
         private void EnterBackSwing() {
             if (abilityState == AbilityState.Channeling) {
                 abilityState = AbilityState.CastBackSwing;
@@ -110,7 +122,7 @@ namespace Battle.logic.ability_dataDriven {
         {
             if (abilityConfig.AbilityEventMap.ContainsKey(abilityEvent)) {
                 var d2Event = abilityConfig.AbilityEventMap[abilityEvent];
-                // d2Event.Execute();
+                d2Event.Execute(caster);
             }
         }
 

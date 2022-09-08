@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Battle.logic.ability_dataDriven {
     public struct AbilityConfig {
-        public float AbilityCooldown;
+        public float[] AbilityCooldowns;
         public float AbilityCastPoint;
         public float AbilityCastRange;
         public float AbilityChannelTime;

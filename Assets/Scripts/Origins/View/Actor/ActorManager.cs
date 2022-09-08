@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Origins {
@@ -24,36 +25,34 @@ namespace Origins {
             }
         }
         
-        public HeroActor AddHeroActor(HeroEntity heroEntity) {
+        public void AddHeroActor(HeroEntity heroEntity) {
             if (heroEntity == null) {
-                Debug.LogError("[AddEnemyActor]没有传入敌人对象！");
-                return null;
+                Debug.LogError("[AddHeroActor]没有传入敌人对象！");
+                return;
             }
             
             var characterItem = HeroConfigTable.Instance.Get(heroEntity.RoleId);
             if (characterItem == null) {
-                Debug.LogError("[AddEnemyActor]没有找到指定角色配置：" + heroEntity.RoleId);
-                return null;
+                Debug.LogError("[AddHeroActor]没有找到指定角色配置：" + heroEntity.RoleId);
+                return;
             }
 
+            var path = "Assets/Data/character/HeroActor101.prefab";
+            var go1 = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
+            Debug.LogError(go1);
             var asset = LoadModule.Instance.LoadPrefab(characterItem.modelPath);
             if (asset != null) {
                 var go = Object.Instantiate(asset, UIModule.Instance.GetParentTransform(ViewType.MAIN));
-
                 HeroActor = go.GetComponent<HeroActor>();
                 if (HeroActor != null) {
                     HeroActor.OnInit();
                     HeroActor.SetEntity(heroEntity);
                 }
-                
-                return HeroActor;
             } else {
-                Debug.LogError("[AddEnemyActor]没有找到指定模型：" + characterItem.modelPath);
+                Debug.LogError("[AddHeroActor]没有找到指定模型：" + characterItem.modelPath);
             }
-
-            return null;
         }
-
+        
         public void RemoveEnemyActor(EnemyActor enemyActor) {
             if (enemyActor == null) {
                 Debug.LogError("[RemoveEnemyActor]没有传入敌人对象！");
@@ -128,11 +127,10 @@ namespace Origins {
                 
                 entities.Add(enemyActor);
                 enemyActorMap[enemyActor.InstanceId] = enemyActor;
-                return enemyActor;
             } else {
                 Debug.LogError("[AddEnemyActor]没有找到指定模型：" + characterItem.modelPath);
             }
-
+       
             return null;
         }
         

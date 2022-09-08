@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using LitJson;
+using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
     public static class AbilityConfigParse {
         public static Ability GetAbility(int id) {
             var skillMapItem = SkillMapTable.Instance.Get(id);
-            if(skillMapItem == null)
-            {
-                BattleLog.LogError("skill 表没有找到指定id:", id.ToString());
+            if(skillMapItem == null) {
                 return null;
             }
 
@@ -27,28 +26,27 @@ namespace Battle.logic.ability_dataDriven {
                 return default;
             }
 
-            var abilityConfig = new AbilityConfig {
-                AbilityDamage = jsonData.GetFloatArrayValue("AbilityDamage"),
-                AbilityManaCost = jsonData.GetFloatArrayValue("AbilityManaCost"),
-                AbilityCooldown = jsonData.GetFloatValue("AbilityCooldown"),
-                AbilityCastPoint = jsonData.GetFloatValue("AbilityCastPoint"),
-                AbilityCastRange = jsonData.GetFloatValue("AbilityCastRange"),
-                AbilityChannelTime = jsonData.GetFloatValue("AbilityChannelTime"),
-                AbilityChannelledManaCostPerSecond = jsonData.GetFloatValue("AbilityChannelledManaCostPerSecond"),
-                AbilityDuration = jsonData.GetFloatValue("AbilityDuration"),
-                AoERadius = jsonData.GetFloatValue("AoERadius"),
+            var abilityConfig = new AbilityConfig ();
+            abilityConfig.AbilityDamage = jsonData.GetFloatArrayValue("AbilityDamage");
+            abilityConfig.AbilityManaCost = jsonData.GetFloatArrayValue("AbilityManaCost");
+            abilityConfig.AbilityCooldowns = jsonData.GetFloatArrayValue("AbilityCooldown");
+            abilityConfig.AbilityCastPoint = jsonData.GetFloatValue("AbilityCastPoint");
+            abilityConfig.AbilityCastRange = jsonData.GetFloatValue("AbilityCastRange");
+            abilityConfig.AbilityChannelTime = jsonData.GetFloatValue("AbilityChannelTime");
+            abilityConfig.AbilityChannelledManaCostPerSecond = jsonData.GetFloatValue("AbilityChannelledManaCostPerSecond");
+            abilityConfig.AbilityDuration = jsonData.GetFloatValue("AbilityDuration");
+            abilityConfig.AoERadius = jsonData.GetFloatValue("AoERadius");
 
-                Name = jsonData.GetStringValue("Name"),
-                AbilityCastAnimation = jsonData.GetStringValue("AbilityCastAnimation"),
-                AbilityTextureName = jsonData.GetStringValue("AbilityTextureName"),
+            abilityConfig.Name = jsonData.GetStringValue("Name");
+            abilityConfig.AbilityCastAnimation = jsonData.GetStringValue("AbilityCastAnimation");
+            abilityConfig.AbilityTextureName = jsonData.GetStringValue("AbilityTextureName");
 
-                AbilityUnitTargetTeam = jsonData.GetEnumValue<AbilityUnitTargetTeam>("AbilityUnitTargetTeam"),
-                AbilityUnitTargetType = jsonData.GetEnumValue<AbilityUnitTargetType>("AbilityUnitTargetType"),
-                AbilityUnitTargetFlag = jsonData.GetEnumValue<AbilityUnitTargetFlag>("AbilityUnitTargetFlags"),
-                AbilityUnitDamageType = jsonData.GetEnumValue<AbilityUnitDamageType>("AbilityUnitDamageType"),
+            abilityConfig.AbilityUnitTargetTeam = jsonData.GetEnumValue<AbilityUnitTargetTeam>("AbilityUnitTargetTeam");
+            abilityConfig.AbilityUnitTargetType = jsonData.GetEnumValue<AbilityUnitTargetType>("AbilityUnitTargetType");
+            abilityConfig.AbilityUnitTargetFlag = jsonData.GetEnumValue<AbilityUnitTargetFlag>("AbilityUnitTargetFlags");
+            abilityConfig.AbilityUnitDamageType = jsonData.GetEnumValue<AbilityUnitDamageType>("AbilityUnitDamageType");
 
-                AbilityBehavior = ParseAbilityBehaviorArray(jsonData, "AbilityBehavior"),
-            };
+            abilityConfig.AbilityBehavior = ParseAbilityBehaviorArray(jsonData, "AbilityBehavior");
 
             abilityConfig.AbilityEventMap = ParseAbilityEvents(jsonData, abilityConfig);
 
@@ -268,10 +266,8 @@ namespace Battle.logic.ability_dataDriven {
             }
 
             var eventMap = new Dictionary<ModifierEvents, DotaEvent>();
-            foreach(var key in jsonData.Keys)
-            {
-                if(Enum.IsDefined(typeof(ModifierEvents), key))
-                {
+            foreach(var key in jsonData.Keys) {
+                if(Enum.IsDefined(typeof(ModifierEvents), key)) {
                     var eventsJsonData = GetJsonValue(jsonData, key);
                     var actions = ParseActions(eventsJsonData, abilityConfig);
                     var d2Event = new DotaEvent(actions);
@@ -287,8 +283,7 @@ namespace Battle.logic.ability_dataDriven {
 
         #region LitJson Extension
 
-        private static JsonData GetJsonValue(JsonData json, string key)
-        {
+        private static JsonData GetJsonValue(JsonData json, string key) {
             if (json == null || string.IsNullOrEmpty(key)) {
                 return null;
             }
@@ -296,14 +291,12 @@ namespace Battle.logic.ability_dataDriven {
             return json.Keys.Contains(key) ? json[key] : null;
         }
 
-        private static int GetIntValue(this JsonData json, string key)
-        {
+        private static int GetIntValue(this JsonData json, string key) {
             var res = GetJsonValue(json, key);
             return res != null ? int.Parse(res.ToString()) : -1;
         }
 
-        private static float[] GetFloatArrayValue(this JsonData json, string key)
-        {
+        private static float[] GetFloatArrayValue(this JsonData json, string key) {
             var res = GetJsonValue(json, key);
             if (res != null && res.IsArray) {
                 var array = new float[res.Count];
@@ -317,14 +310,12 @@ namespace Battle.logic.ability_dataDriven {
             return null;
         }
 
-        private static float GetFloatValue(this JsonData json, string key)
-        {
+        private static float GetFloatValue(this JsonData json, string key) {
             var res = GetJsonValue(json, key);
             return res != null ? float.Parse(res.ToString()) : 0f;
         }
 
-        private static bool GetBoolValue(this JsonData json, string key)
-        {
+        private static bool GetBoolValue(this JsonData json, string key) {
             var res = GetJsonValue(json, key);
             if(res!=null && res.IsBoolean)
                 return (bool)res;
@@ -332,26 +323,28 @@ namespace Battle.logic.ability_dataDriven {
             return false;
         }
 
-        private static string GetStringValue(this JsonData json, string key)
-        {
+        private static string GetStringValue(this JsonData json, string key) {
             var res = GetJsonValue(json, key);
             return res?.ToString();
         }
 
-        private static T GetEnumValue<T>(this JsonData json, string key)
-        {
+        private static T GetEnumValue<T>(this JsonData json, string key) {
             var str = GetStringValue(json, key);
-            return GetEnumValue<T>(str);
+            return str == null? default : GetEnumValue<T>(str);
         }
 
-        private static T GetEnumValue<T>(string str)
-        {
-            if (str == null) {
+        private static T GetEnumValue<T>(string str) {
+            if (string.IsNullOrEmpty(str)) {
                 return default;
             }
 
-            var value = (T)Enum.Parse(typeof(T), str);
-            return value;
+            try {
+                var value = Enum.Parse(typeof(T), str);
+                return (T)value;
+            } catch (Exception e) {
+                Debug.LogError($"【枚举解析失败】{typeof(T).Name}没有找到指定类型:{str}  \r\nException:{e.Message}");
+                throw;
+            }
         }
 
         #endregion

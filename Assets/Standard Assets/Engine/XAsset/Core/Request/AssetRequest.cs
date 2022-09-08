@@ -30,14 +30,11 @@ public class AssetRequest : Reference, IEnumerator
         loadState = AssetLoadState.Init;
     }
 
-    public AssetLoadState loadState
-    {
+    public AssetLoadState loadState {
         get { return _loadState; }
-        protected set
-        {
+        protected set {
             _loadState = value;
-            if(value == AssetLoadState.Loaded)
-            {
+            if(value == AssetLoadState.Loaded) {
                 Complete();
             }
         }
@@ -45,8 +42,7 @@ public class AssetRequest : Reference, IEnumerator
 
     protected void Complete()
     {
-        if(completed != null)
-        {
+        if(completed != null) {
             completed(this);
             completed = null;
         }

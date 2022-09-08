@@ -140,16 +140,11 @@ public sealed class LoadModule : ModuleBase {
         scene.Release();
     }
 
-    public static AssetRequest LoadAssetAsync(string path, Type type, LoadedCallback loadedCallback = null)
-    {
-        AssetRequest assetRequest = LoadAsset(path, type, true);
-        if(loadedCallback != null)
-            assetRequest.completed += loadedCallback;
-        return assetRequest;
+    public static AssetRequest LoadAssetAsync(string path, Type type, LoadedCallback loadedCallback = null) {
+        return LoadAsset(path, type, true, loadedCallback);
     }
 
-    public static AssetRequest LoadAsset(string path, Type type)
-    {
+    public static AssetRequest LoadAsset(string path, Type type) {
         return LoadAsset(path, type, false);
     }
 
@@ -377,10 +372,9 @@ public sealed class LoadModule : ModuleBase {
     {
         _assets.Add(request.name, request);
         _loadingAssets.Add(request);
-        request.Load();
     }
 
-    private static AssetRequest LoadAsset(string path, Type type, bool async)
+    private static AssetRequest LoadAsset(string path, Type type, bool async, LoadedCallback loadedCallback = null)
     {
         if(string.IsNullOrEmpty(path))
         {
@@ -399,27 +393,26 @@ public sealed class LoadModule : ModuleBase {
         }
 
         string assetBundleName;
-        if(GetAssetBundleName(path, out assetBundleName))
-        {
+        if(GetAssetBundleName(path, out assetBundleName)) {
             request = async ? new BundleAssetRequestAsync(assetBundleName) : new BundleAssetRequest(assetBundleName);
-        }
-        else
-        {
+        } else {
             if(path.StartsWith("http://", StringComparison.Ordinal) ||
                 path.StartsWith("https://", StringComparison.Ordinal) ||
                 path.StartsWith("file://", StringComparison.Ordinal) ||
                 path.StartsWith("ftp://", StringComparison.Ordinal) ||
-                path.StartsWith("jar:file://", StringComparison.Ordinal))
-            {
+                path.StartsWith("jar:file://", StringComparison.Ordinal)) {
                 request = new WebAssetRequest();
-            }
-            else
+            } else
                 request = new AssetRequest();
         }
 
         request.name = path;
         request.assetType = type;
         AddAssetRequest(request);
+        if (loadedCallback != null) {
+            request.completed += loadedCallback;
+        }
+        request.Load();
         request.Retain();
         GameLog.Log(string.Format("LoadAsset:{0}", path));
         return request;
