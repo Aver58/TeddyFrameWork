@@ -12,11 +12,6 @@ namespace Battle.logic.ability_dataDriven {
         private readonly bool dodgeable;
         private readonly float moveSpeed;
 
-        // todo 抽象弹道Action类
-        public delegate void OnProjectileHitUnit();
-        public delegate void OnProjectileFinish();
-        public delegate void OnProjectileDodge();
-
         // Optional 可选参数
         private bool providesVision;//提供视野
         private float visionRadius;//视野范围
@@ -42,8 +37,8 @@ namespace Battle.logic.ability_dataDriven {
 
         protected override void ExecuteBySingle() {
             // 创建子弹，子弹生命周期管理
-            var linearProjectile = new LinearProjectile();
-            
+            // var linearProjectile = new LinearProjectile();
+
         }
     }
 }
