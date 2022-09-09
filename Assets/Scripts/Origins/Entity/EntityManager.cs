@@ -8,11 +8,11 @@ namespace Origins {
         public HeroEntity HeroEntity;
 
         private List<AbsEntity> entities;
-        private List<HeroEntity> enemyEntityPool;
+        private ObjectPool<EnemyEntity> enemyEntityPool;
 
         public EntityManager() {
             entities = new List<AbsEntity>();
-            enemyEntityPool = new List<HeroEntity>();
+            enemyEntityPool = new ObjectPool<EnemyEntity>();
         }
 
         public void OnUpdate() {
@@ -28,11 +28,12 @@ namespace Origins {
             entities.Add(absEntity);
         }
 
-        public void RemoveEntity(AbsEntity absEntity) {
+        public void RemoveEntity(EnemyEntity entity) {
             for (int i = 0; i < entities.Count; i++) {
-                if (entities[i] == absEntity) {
+                if (entities[i] == entity) {
                     //todo remove swap back 移动到后面去删
                     entities.RemoveAt(i);
+                    enemyEntityPool.Release(entity);
                     break;
                 }
             }
@@ -54,7 +55,8 @@ namespace Origins {
             var distance = Random.Range(MinRang, MaxRang);
             var randomPosX = HeroEntity.Position.x + distance * Mathf.Cos(distance * Mathf.PI / 180);
             var randomPosY = HeroEntity.Position.y + distance * Mathf.Sin(distance * Mathf.PI / 180);
-            var entity = new EnemyEntity(roleId);
+            var entity = enemyEntityPool.Get();
+            entity.RoleId = roleId;
             entity.OnInit();
             entity.SetPosition(new Vector2(randomPosX, randomPosY));
             Debug.Log($"[EntityManager] 生成敌人：{entity.InstanceId} roleId: {roleId} pos:{entity.Position}");

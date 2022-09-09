@@ -27,7 +27,7 @@ public class ManifestRequest : AssetRequest
             if(isDone) 
                 return 1;
 
-            if(loadState == AssetLoadState.Init) 
+            if(LoadState == AssetLoadState.Init) 
                 return 0;
 
             if(request == null) 
@@ -44,11 +44,11 @@ public class ManifestRequest : AssetRequest
         {
             var assetBundleName = assetName.Replace(".asset", ".unity3d").ToLower();
             request = LoadModule.LoadBundleAsync(assetBundleName);
-            loadState = AssetLoadState.LoadAssetBundle;
+            LoadState = AssetLoadState.LoadAssetBundle;
         }
         else
         {
-            loadState = AssetLoadState.Loaded;
+            LoadState = AssetLoadState.Loaded;
         }
     }
 
@@ -57,12 +57,12 @@ public class ManifestRequest : AssetRequest
         if(!base.Update()) 
             return false;
 
-        if(loadState == AssetLoadState.Init) 
+        if(LoadState == AssetLoadState.Init) 
             return true;
 
         if(request == null)
         {
-            loadState = AssetLoadState.Loaded;
+            LoadState = AssetLoadState.Loaded;
             error = "request == null";
             return false;
         }
@@ -82,7 +82,7 @@ public class ManifestRequest : AssetRequest
                     LoadModule.OnManifestLoaded(manifest);
             }
 
-            loadState = AssetLoadState.Loaded;
+            LoadState = AssetLoadState.Loaded;
             return false;
         }
 

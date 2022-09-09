@@ -12,8 +12,7 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 
-public class ObjectPool<T> where T : new()
-{
+public class ObjectPool<T> where T : new() {
 	private readonly Stack<T> m_Stack = new Stack<T>();
 	private readonly UnityAction<T> m_ActionOnGet;
 	private readonly UnityAction<T> m_ActionOnRelease;
@@ -22,31 +21,28 @@ public class ObjectPool<T> where T : new()
 	public int countActive { get { return countAll - countInactive; } }
 	public int countInactive { get { return m_Stack.Count; } }
 
-	public ObjectPool(UnityAction<T> actionOnGet = null, UnityAction<T> actionOnRelease = null)
-	{
+	public ObjectPool(UnityAction<T> actionOnGet = null, UnityAction<T> actionOnRelease = null) {
 		m_ActionOnGet = actionOnGet;
 		m_ActionOnRelease = actionOnRelease;
 	}
 
-	public T Get()
-	{
+	public T Get() {
 		T element;
-		if(m_Stack.Count == 0)
-		{
+		if(m_Stack.Count == 0) {
 			element = new T();
 			countAll++;
-		}
-		else
-		{
+		} else {
 			element = m_Stack.Pop();
 		}
-		if(m_ActionOnGet != null)
+
+		if (m_ActionOnGet != null) {
 			m_ActionOnGet(element);
+		}
+		
 		return element;
 	}
 
-	public void Release(T element)
-	{
+	public void Release(T element) {
 		if(m_Stack.Count > 0 && ReferenceEquals(m_Stack.Peek(), element))
 			GameLog.LogError("Internal error. Trying to destroy object that is already released to pool.");
 		if(m_ActionOnRelease != null)
@@ -54,8 +50,7 @@ public class ObjectPool<T> where T : new()
 		m_Stack.Push(element);
 	}
 
-	public void PrintInfo()
-	{
+	public void PrintInfo() {
 		GameLog.Log("当前池子中对象数量：{0}", m_Stack.Count);
 	}
 }

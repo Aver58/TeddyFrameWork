@@ -20,7 +20,7 @@ public class Reference
     private List<Object> _requires;
     public int refCount;
 
-	public virtual void Retain()
+	public virtual void AddReferance()
 	{
 		refCount++;
 	}
@@ -40,7 +40,7 @@ public class Reference
 			_requires = new List<Object>();
 
 		_requires.Add(obj);
-		Retain();
+		AddReferance();
 	}
 
 	/// <summary>

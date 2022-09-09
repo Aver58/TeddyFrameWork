@@ -1,10 +1,9 @@
-using System;
 using Origins;
 using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
     // 子弹数据层
-    public abstract class Projectile : MonoBehaviour {
+    public abstract class Projectile : MonoBehaviour, IProjectile {
         private bool dodgeable;
         private float moveSpeed;
 

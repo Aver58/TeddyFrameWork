@@ -35,7 +35,7 @@ public class BundleAssetRequest : AssetRequest
             asset = ab.LoadAsset(assetName, assetType);
         if(asset == null) 
             error = "asset == null";
-        loadState = AssetLoadState.Loaded;
+        LoadState = AssetLoadState.Loaded;
     }
 
     internal override void Unload()

@@ -27,7 +27,7 @@ public class BundleAssetRequestAsync : BundleAssetRequest
         {
             if(isDone) return 1;
 
-            if(loadState == AssetLoadState.Init) return 0;
+            if(LoadState == AssetLoadState.Init) return 0;
 
             if(_request != null) return _request.progress * 0.7f + 0.3f;
 
@@ -53,7 +53,7 @@ public class BundleAssetRequestAsync : BundleAssetRequest
         error = bundleRequest.error;
         if(!string.IsNullOrEmpty(error))
         {
-            loadState = AssetLoadState.Loaded;
+            LoadState = AssetLoadState.Loaded;
             return true;
         }
 
@@ -64,7 +64,7 @@ public class BundleAssetRequestAsync : BundleAssetRequest
     {
         if(!base.Update()) return false;
 
-        if(loadState == AssetLoadState.Init) return true;
+        if(LoadState == AssetLoadState.Init) return true;
 
         if(_request == null)
         {
@@ -83,7 +83,7 @@ public class BundleAssetRequestAsync : BundleAssetRequest
             if(_request == null)
             {
                 error = "request == null";
-                loadState = AssetLoadState.Loaded;
+                LoadState = AssetLoadState.Loaded;
                 return false;
             }
 
@@ -93,7 +93,7 @@ public class BundleAssetRequestAsync : BundleAssetRequest
         if(_request.isDone)
         {
             asset = _request.asset;
-            loadState = AssetLoadState.Loaded;
+            LoadState = AssetLoadState.Loaded;
             if(asset == null) error = "asset == null";
             return false;
         }
@@ -106,13 +106,13 @@ public class BundleAssetRequestAsync : BundleAssetRequest
         BundleRequest = LoadModule.LoadBundleAsync(assetBundleName);
         var bundles = LoadModule.GetAllDependencies(assetBundleName);
         foreach(var item in bundles) children.Add(LoadModule.LoadBundleAsync(item));
-        loadState = AssetLoadState.LoadAssetBundle;
+        LoadState = AssetLoadState.LoadAssetBundle;
     }
 
     internal override void Unload()
     {
         _request = null;
-        loadState = AssetLoadState.Unload;
+        LoadState = AssetLoadState.Unload;
         base.Unload();
     }
 
@@ -126,7 +126,7 @@ public class BundleAssetRequestAsync : BundleAssetRequest
             asset = BundleRequest.assetBundle.LoadAsset(assetName, assetType);
         }
 
-        loadState = AssetLoadState.Loaded;
+        LoadState = AssetLoadState.Loaded;
         if(asset == null) error = "asset == null";
     }
 }

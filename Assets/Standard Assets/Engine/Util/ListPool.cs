@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 
-public static class ListPool<T>
-{
+public static class ListPool<T> {
     static readonly ObjectPool<List<T>> s_listPool = new ObjectPool<List<T>>(null, l => l.Clear());
 
     public static List<T> Get()

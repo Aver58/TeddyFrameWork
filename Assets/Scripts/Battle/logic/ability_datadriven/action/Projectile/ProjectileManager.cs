@@ -17,16 +17,37 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
-        // public T GetProjectile<T>() where T : Projectile {
-        //     T projectile = default;
-        //     var length = projectilePool.Count;
-        //     if (length == 0) {
-        //
-        //     } else {
-        //         projectile = projectilePool[length - 1];
-        //         // enemyActorPool.RemoveAt(length - 1);
-        //         // enemyActor.gameObject.SetActive(true);
-        //     }
-        // }
+        private void ReleaseProjectile(Projectile projectile) {
+            for (int i = 0; i < projectiles.Count; i++) {
+                if (projectiles[i] == projectile) {
+                    projectiles.RemoveAt(i);
+                    projectilePool.Add(projectile);
+                    projectile.gameObject.SetActive(false);
+                }
+            }
+        }
+        
+        public T GetProjectile<T>(string effectSign) where T: Projectile {
+            var length = projectilePool.Count;
+            if (length == 0) {
+                return GenerateProjectile<T>(effectSign);;
+            } else {
+                for (int i = 0; i < length; i++) {
+                    var projectile = projectilePool[i];
+                    // 性能热点！！
+                    if (projectile.GetType() == typeof(T)) {
+                        projectilePool.RemoveAt(i);
+                        projectile.gameObject.SetActive(true);
+                        return projectile as T;
+                    }
+                }
+            }
+
+            return default;
+        }
+
+        private T GenerateProjectile<T>(string effectSign) where T: Projectile {
+            return default;
+        }
     }
 }

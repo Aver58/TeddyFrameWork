@@ -48,8 +48,8 @@ namespace Battle.logic.ability_dataDriven {
             this.abilityConfig = abilityConfig;
         }
 
-        public void OnInit(int targetFrameRate) {
-            fps = targetFrameRate;
+        public void OnInit() {
+            // fps = targetFrameRate;
             currentTick = 0;
             abilitylevel = 1;
             abilityState = AbilityState.None;
@@ -59,6 +59,7 @@ namespace Battle.logic.ability_dataDriven {
         }
         
         public void OnFixedUpdate(float deltaTime) {
+            // Debug.LogError($"cooldown{cooldown} currentTick {currentTick}");
             cooldown -= deltaTime;
             currentTick += deltaTime;
 

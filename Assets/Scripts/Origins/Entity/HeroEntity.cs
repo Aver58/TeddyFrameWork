@@ -70,6 +70,7 @@ namespace Origins {
         private void InitDefaultSkill() {
             var ability = AbilityConfigParse.GetAbility(defaultSkillId);
             if (ability != null) {
+                ability.OnInit();
                 ability.SetCaster(this);
                 abilities.Add(ability);
             }

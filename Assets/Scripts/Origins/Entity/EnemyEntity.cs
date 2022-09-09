@@ -2,16 +2,12 @@ using UnityEngine;
 
 namespace Origins {
     public class EnemyEntity : AbsEntity {
-        public EnemyEntity(int roleId) {
-            RoleId = roleId;
-            InstanceId = EntityManager.instance.AutoIndex++;
-        }
-        
         public override void OnUpdate() {
             
         }
 
         public override void OnInit() {
+            InstanceId = EntityManager.instance.AutoIndex++;
             InitProperty(RoleId);
             
             ActorManager.instance.GetActorFromPool(this);

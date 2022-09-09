@@ -52,7 +52,7 @@ public class SceneAssetRequest : AssetRequest
             SceneManager.LoadScene(sceneName, loadSceneMode);
         }
 
-        loadState = AssetLoadState.Loaded;
+        LoadState = AssetLoadState.Loaded;
     }
 
     internal override void Unload()
@@ -71,6 +71,6 @@ public class SceneAssetRequest : AssetRequest
                 SceneManager.UnloadSceneAsync(sceneName);
 
         BundleRequest = null;
-        loadState = AssetLoadState.Unload;
+        LoadState = AssetLoadState.Unload;
     }
 }

@@ -17,28 +17,18 @@ using Object = UnityEngine.Object;
 
 public class AssetRequest : Reference, IEnumerator
 {
-    private AssetLoadState _loadState = AssetLoadState.Init;
     private List<Object> _requires;
     public Type assetType;
 
     public LoadedCallback completed;
     public string name;
 
-    public AssetRequest()
-    {
+    public AssetRequest() {
         asset = null;
-        loadState = AssetLoadState.Init;
+        LoadState = AssetLoadState.Init;
     }
 
-    public AssetLoadState loadState {
-        get { return _loadState; }
-        protected set {
-            _loadState = value;
-            if(value == AssetLoadState.Loaded) {
-                Complete();
-            }
-        }
-    }
+    public AssetLoadState LoadState { get; protected set; }
 
     protected void Complete()
     {
@@ -50,7 +40,7 @@ public class AssetRequest : Reference, IEnumerator
 
     public virtual bool isDone
     {
-        get { return loadState == AssetLoadState.Loaded || loadState == AssetLoadState.Unload; }
+        get { return LoadState == AssetLoadState.Loaded || LoadState == AssetLoadState.Unload; }
     }
 
     public virtual float progress
@@ -89,13 +79,21 @@ public class AssetRequest : Reference, IEnumerator
 
     internal virtual void Load()
     {
-        if(!LoadModule.runtimeMode && LoadModule.loadDelegate != null)
+#if UNITY_EDITOR
+        LoadModule.loadDelegate = UnityEditor.AssetDatabase.LoadAssetAtPath; 
+#endif
+        if (LoadModule.runtimeMode == false && LoadModule.loadDelegate != null) {
             asset = LoadModule.loadDelegate(name, assetType);
+        }
 
-        if(asset == null) 
+        if (asset == null) {
             error = "error! file not exist:" + name;
-
-        loadState = AssetLoadState.Loaded;
+            Debug.LogError(error);
+            return;
+        }
+        
+        LoadState = AssetLoadState.Loaded;
+        Complete();
     }
 
     internal virtual void Unload()
@@ -108,7 +106,7 @@ public class AssetRequest : Reference, IEnumerator
                 Resources.UnloadAsset(asset);
 
         asset = null;
-        loadState = AssetLoadState.Unload;
+        LoadState = AssetLoadState.Unload;
     }
 
     internal virtual bool Update()

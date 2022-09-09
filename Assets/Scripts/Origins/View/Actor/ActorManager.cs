@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace Origins {
@@ -37,20 +36,18 @@ namespace Origins {
                 return;
             }
 
-            var path = "Assets/Data/character/HeroActor101.prefab";
-            var go1 = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
-            Debug.LogError(go1);
-            var asset = LoadModule.Instance.LoadPrefab(characterItem.modelPath);
-            if (asset != null) {
-                var go = Object.Instantiate(asset, UIModule.Instance.GetParentTransform(ViewType.MAIN));
-                HeroActor = go.GetComponent<HeroActor>();
-                if (HeroActor != null) {
-                    HeroActor.OnInit();
-                    HeroActor.SetEntity(heroEntity);
+            var asset = LoadModule.LoadModel(characterItem.modelPath, delegate(AssetRequest request) {
+                if (request.asset != null) {
+                    var go = Object.Instantiate(request.asset as GameObject, UIModule.Instance.GetParentTransform(ViewType.MAIN));
+                    HeroActor = go.GetComponent<HeroActor>();
+                    if (HeroActor != null) {
+                        HeroActor.OnInit();
+                        HeroActor.SetEntity(heroEntity);
+                    }
+                } else {
+                    Debug.LogError("[AddHeroActor]没有找到指定模型：" + characterItem.modelPath);
                 }
-            } else {
-                Debug.LogError("[AddHeroActor]没有找到指定模型：" + characterItem.modelPath);
-            }
+            });
         }
         
         public void RemoveEnemyActor(EnemyActor enemyActor) {
@@ -84,10 +81,6 @@ namespace Origins {
             return enemyActor;
         }
 
-        public EnemyActor GetActor(int instanceId) {
-            return enemyActorMap.ContainsKey(instanceId) ? enemyActorMap[instanceId] : null;
-        }
-
         public void SetHeroActorPosition(Vector2 value) {
             if (HeroActor) {
                 HeroActor.SetPosition(value);
@@ -114,22 +107,23 @@ namespace Origins {
                 return null;
             }
 
-            var asset = LoadModule.Instance.LoadPrefab(characterItem.modelPath);
-            if (asset != null) {
-                var go = Object.Instantiate(asset, UIModule.Instance.GetParentTransform(ViewType.MAIN));
-                go.transform.localPosition = enemyEntity.Position;
+            var asset = LoadModule.LoadModel(characterItem.modelPath, delegate(AssetRequest request) {
+                if (request.asset != null) {
+                    var go = Object.Instantiate(request.asset as GameObject, UIModule.Instance.GetParentTransform(ViewType.MAIN));
+                    go.transform.localPosition = enemyEntity.Position;
                 
-                var enemyActor = go.GetComponent<EnemyActor>();
-                if (enemyActor != null) {
-                    enemyActor.OnInit();
-                    enemyActor.SetEntity(enemyEntity);
+                    var enemyActor = go.GetComponent<EnemyActor>();
+                    if (enemyActor != null) {
+                        enemyActor.OnInit();
+                        enemyActor.SetEntity(enemyEntity);
+                    }
+                
+                    entities.Add(enemyActor);
+                    enemyActorMap[enemyActor.InstanceId] = enemyActor;
+                } else {
+                    Debug.LogError("[AddEnemyActor]没有找到指定模型：" + characterItem.modelPath);
                 }
-                
-                entities.Add(enemyActor);
-                enemyActorMap[enemyActor.InstanceId] = enemyActor;
-            } else {
-                Debug.LogError("[AddEnemyActor]没有找到指定模型：" + characterItem.modelPath);
-            }
+            });
        
             return null;
         }

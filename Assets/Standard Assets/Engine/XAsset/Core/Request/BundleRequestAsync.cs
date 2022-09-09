@@ -21,7 +21,7 @@ public class BundleRequestAsync : BundleRequest
         {
             if(isDone) 
                 return 1;
-            if(loadState == AssetLoadState.Init) 
+            if(LoadState == AssetLoadState.Init) 
                 return 0;
             if(_request == null) 
                 return 1;
@@ -34,13 +34,13 @@ public class BundleRequestAsync : BundleRequest
         if(!base.Update()) 
             return false;
 
-        if(loadState == AssetLoadState.LoadAsset)
+        if(LoadState == AssetLoadState.LoadAsset)
             if(_request.isDone)
             {
                 assetBundle = _request.assetBundle;
                 if(assetBundle == null) 
                     error = string.Format("unable to load assetBundle:{0}", name);
-                loadState = AssetLoadState.Loaded;
+                LoadState = AssetLoadState.Loaded;
                 return false;
             }
 
@@ -58,14 +58,14 @@ public class BundleRequestAsync : BundleRequest
                 return;
             }
 
-            loadState = AssetLoadState.LoadAsset;
+            LoadState = AssetLoadState.LoadAsset;
         }
     }
 
     internal override void Unload()
     {
         _request = null;
-        loadState = AssetLoadState.Unload;
+        LoadState = AssetLoadState.Unload;
         base.Unload();
     }
 
@@ -75,6 +75,6 @@ public class BundleRequestAsync : BundleRequest
         assetBundle = _request.assetBundle;
         if(assetBundle != null) 
             GameLog.LogWarning("LoadImmediate:" + assetBundle.name);
-        loadState = AssetLoadState.Loaded;
+        LoadState = AssetLoadState.Loaded;
     }
 }

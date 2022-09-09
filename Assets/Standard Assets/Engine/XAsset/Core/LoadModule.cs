@@ -10,7 +10,6 @@
 #endregion
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -129,7 +128,7 @@ public sealed class LoadModule : ModuleBase {
             asset.completed += loadedCallback;
 
         asset.Load();
-        asset.Retain();
+        asset.AddReferance();
         _scenes.Add(asset);
         GameLog.Log(string.Format("LoadScene:{0}", path));
         return asset;
@@ -155,22 +154,24 @@ public sealed class LoadModule : ModuleBase {
 
     #region 业务
 
+    private const string PREFAB_SUFFIX = ".prefab";
+    private static string BundlePathPrefix = "Assets/Data/";
+    private static string BulletPathPrefix = "Assets/Data/bullet";
     private static string UIPathPrefix = "Assets/Data/ui/panel/";
     private static string ModelPathPrefix = "Assets/Data/character/";
     private static string JsonPathPrefix = "Assets/Scripts/DataTable/json/";
     private static StringBuilder stringBuilder = new StringBuilder();
 
-    public static AssetRequest LoadModel(string path, LoadedCallback loadedCallback = null)
-    {
+    public static AssetRequest LoadModel(string assetName, LoadedCallback loadedCallback = null) {
         Type type = typeof(GameObject);
         stringBuilder.Clear();
         stringBuilder.Append(ModelPathPrefix);
-        stringBuilder.Append(path);
+        stringBuilder.Append(assetName);
+        stringBuilder.Append(PREFAB_SUFFIX);
         return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
     }
 
-    public static AssetRequest LoadUI(string path, LoadedCallback loadedCallback = null)
-    {
+    public static AssetRequest LoadUI(string path, LoadedCallback loadedCallback = null) {
         Type type = typeof(GameObject);
         string suffix = GetSuffixOfAsset(type);
         stringBuilder.Clear();
@@ -205,14 +206,23 @@ public sealed class LoadModule : ModuleBase {
         }
     }
 
-    // todo 整个加载模块重写，抄得也太丑了吧
-    public GameObject LoadPrefab(string assetName) {
-        //todo 加载模块
-        var path = ModelPathPrefix + assetName;
-        // Debug.Log($"[LoadPrefab]{path}");
-        return UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
+    public static AssetRequest LoadBundle(string path, LoadedCallback loadedCallback = null) {
+        Type type = typeof(GameObject);
+        stringBuilder.Clear();
+        stringBuilder.Append(BundlePathPrefix);
+        stringBuilder.Append(path);
+        return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
     }
-
+    
+    public static AssetRequest LoadBullet(string assetName, LoadedCallback loadedCallback = null) {
+        Type type = typeof(GameObject);
+        stringBuilder.Clear();
+        stringBuilder.Append(BundlePathPrefix);
+        stringBuilder.Append(assetName);
+        stringBuilder.Append(PREFAB_SUFFIX);
+        return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
+    }
+    
     #endregion
 
     #endregion
@@ -324,7 +334,7 @@ public sealed class LoadModule : ModuleBase {
             for(int i = 0; i < Math.Min(max - _loadingBundles.Count, _toloadBundles.Count); ++i)
             {
                 BundleRequest item = _toloadBundles[i];
-                if(item.loadState == AssetLoadState.Init)
+                if(item.LoadState == AssetLoadState.Init)
                 {
                     item.Load();
                     _loadingBundles.Add(item);
@@ -376,8 +386,7 @@ public sealed class LoadModule : ModuleBase {
 
     private static AssetRequest LoadAsset(string path, Type type, bool async, LoadedCallback loadedCallback = null)
     {
-        if(string.IsNullOrEmpty(path))
-        {
+        if(string.IsNullOrEmpty(path)) {
             GameLog.LogError("empty path!");
             return null;
         }
@@ -385,10 +394,13 @@ public sealed class LoadModule : ModuleBase {
         path = GetExistPath(path);
 
         AssetRequest request;
-        if(_assets.TryGetValue(path, out request))
-        {
-            request.Retain();
+        if(_assets.TryGetValue(path, out request)) {
+            request.AddReferance();
             _loadingAssets.Add(request);
+            if (loadedCallback != null) {
+                loadedCallback(request);
+            }
+            
             return request;
         }
 
@@ -413,7 +425,7 @@ public sealed class LoadModule : ModuleBase {
             request.completed += loadedCallback;
         }
         request.Load();
-        request.Retain();
+        request.AddReferance();
         GameLog.Log(string.Format("LoadAsset:{0}", path));
         return request;
     }
@@ -535,7 +547,7 @@ public sealed class LoadModule : ModuleBase {
 
         if(_bundles.TryGetValue(url, out bundle))
         {
-            bundle.Retain();
+            bundle.AddReferance();
             _loadingBundles.Add(bundle);
             return bundle;
         }
@@ -564,7 +576,7 @@ public sealed class LoadModule : ModuleBase {
             GameLog.Log("LoadBundle: " + url);
         }
 
-        bundle.Retain();
+        bundle.AddReferance();
         return bundle;
     }
 
