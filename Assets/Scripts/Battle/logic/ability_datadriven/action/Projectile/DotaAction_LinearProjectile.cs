@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using Origins;
 using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
@@ -22,8 +23,8 @@ namespace Battle.logic.ability_dataDriven {
         private Vector2 startPosition;
         private float fixedDistance;//固定距离
 
-        public DotaAction_LinearProjectile(AbilityTarget actionTarget, [NotNull] string effectName,
-            [NotNull] string sourceAttachment, bool dodgeable, float moveSpeed) : base(actionTarget) {
+        public DotaAction_LinearProjectile(AbilityTarget abilityTarget, [NotNull] string effectName,
+            [NotNull] string sourceAttachment, bool dodgeable, float moveSpeed) : base(abilityTarget) {
             this.effectName = effectName ?? throw new ArgumentNullException(nameof(effectName));
             this.sourceAttachment = sourceAttachment ?? throw new ArgumentNullException(nameof(sourceAttachment));
             this.dodgeable = dodgeable;
@@ -35,9 +36,9 @@ namespace Battle.logic.ability_dataDriven {
             this.visionRadius = visionRadius;
         }
 
-        protected override void ExecuteBySingle() {
-            // var linearProjectile = new LinearProjectile();
-
+        protected override void ExecuteBySingle(AbsEntity entity) {
+            var projectileEntity = ProjectileManager.instance.GetProjectile();
+            projectileEntity.OnInit(entity, abilityTarget, effectName, moveSpeed, dodgeable);
         }
     }
 }

@@ -180,7 +180,7 @@ namespace Battle.logic.ability_dataDriven {
             }
             else {
                 var actionSingTarget = actionJsonData.GetEnumValue<ActionSingTarget>("Target");
-                abilityTarget.SetSingTarget(actionSingTarget);
+                abilityTarget.SetConfigSingleTarget(actionSingTarget);
             }
 
             return abilityTarget;

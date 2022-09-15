@@ -55,7 +55,9 @@ namespace Origins {
                 // rigidbody2D 没调试好，跑不起来
                 // rigidBody2D.velocity = cacheVector2;
                 var targetPos = entity.Position + cacheVector2 * entity.MoveSpeed * Time.deltaTime;
+                var targetDirection = targetPos - entity.Position;
                 SetPositionSync(targetPos);
+                entity.Forward = targetDirection;
             }
         }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using libx;
 using UnityEngine;
 
 namespace Origins {
@@ -69,22 +70,22 @@ namespace Origins {
 
         public void GetActorAsync(EnemyEntity enemyEntity) {
             if (enemyEntity == null) {
-                Debug.LogError("[AddEnemyActor]没有传入敌人对象！");
+                Debug.LogError("[GetActorAsync]没有传入敌人对象！");
                 return;
             }
             
             var characterItem = EnemyConfigTable.Instance.Get(enemyEntity.RoleId);
             if (characterItem == null) {
-                Debug.LogError("[AddEnemyActor]没有找到指定角色配置：" + enemyEntity.RoleId);
+                Debug.LogError("[GetActorAsync]没有找到指定角色配置：" + enemyEntity.RoleId);
                 return;
             }
             
-            EnemyActor enemyActor = null;
-            enemyActorPool.GetAsync(characterItem.modelPath, delegate(GameObject go) {
-                if (go != null) {
-                    go.transform.localPosition = enemyEntity.Position;
+            enemyActorPool.GetAsync(characterItem.modelPath, delegate(GameObject instance) {
+                if (instance != null) {
+                    instance.transform.SetParent(UIModule.Instance.GetParentTransform(ViewType.MAIN));
+                    instance.transform.localPosition = enemyEntity.Position;
 
-                    enemyActor = go.GetComponent<EnemyActor>();
+                    var enemyActor = instance.GetComponent<EnemyActor>();
                     if (enemyActor != null) {
                         enemyActor.OnInit();
                         enemyActor.SetEntity(enemyEntity);
@@ -93,7 +94,7 @@ namespace Origins {
                     entities.Add(enemyActor);
                     enemyActorMap[enemyActor.InstanceId] = enemyActor;
                 } else {
-                    Debug.LogError("[AddEnemyActor]没有找到指定模型：" + characterItem.modelPath);
+                    Debug.LogError("[GetActorAsync]没有找到指定模型：" + characterItem.modelPath);
                 }
             });
         }

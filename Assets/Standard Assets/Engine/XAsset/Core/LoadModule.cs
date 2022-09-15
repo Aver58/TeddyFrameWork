@@ -152,10 +152,10 @@ public sealed class LoadModule : ModuleBase {
 
     #region 业务
 
-    private static string BundlePathPrefix = "Assets/Data/";
-    private static string BulletPathPrefix = "Assets/Data/bullet";
-    private static string UIPathPrefix = "Assets/Data/ui/panel/";
+    public const string BULLET_PATH_PREFIX = "Assets/Data/bullet";
     public const string MODEL_PATH_PREFIX = "Assets/Data/character/";
+    private static string BundlePathPrefix = "Assets/Data/";
+    private static string UIPathPrefix = "Assets/Data/ui/panel/";
     private static string JsonPathPrefix = "Assets/Scripts/DataTable/json/";
     private static StringBuilder stringBuilder = new StringBuilder();
 

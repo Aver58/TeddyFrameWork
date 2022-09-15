@@ -14,7 +14,7 @@ namespace Battle.logic.ability_dataDriven {
         private bool currentHealthPercentBasedDamage;
         private bool maxHealthPercentBasedDamage;
 
-        public DotaAction_Damage(AbilityTarget actionTarget, float[] damages, AbilityUnitDamageType abilityUnitDamageType) : base(actionTarget) {
+        public DotaAction_Damage(AbilityTarget abilityTarget, float[] damages, AbilityUnitDamageType abilityUnitDamageType) : base(abilityTarget) {
             this.damages = damages;
             this.abilityUnitDamageType = abilityUnitDamageType;
         }

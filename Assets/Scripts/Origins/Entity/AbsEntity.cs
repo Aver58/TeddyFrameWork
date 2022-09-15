@@ -26,6 +26,7 @@ namespace Origins {
         public float AttackCooldown;
 
         public Vector2 Position { get; set; }
+        public Vector2 Forward { get; set; }
 
         public abstract void OnUpdate();
         public abstract void OnInit();

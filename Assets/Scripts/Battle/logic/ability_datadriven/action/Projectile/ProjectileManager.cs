@@ -1,13 +1,17 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
     public class ProjectileManager : Singleton<ProjectileManager> {
         private List<ProjectileEntity> projectiles;
         private ObjectPool<ProjectileEntity> projectileEntityPool;
+        private GameObjectPool projectileActorPool;
 
         public ProjectileManager() {
             projectiles = new List<ProjectileEntity>();
             projectileEntityPool = new ObjectPool<ProjectileEntity>();
+            projectileActorPool = new GameObjectPool(LoadModule.BULLET_PATH_PREFIX);
         }
 
         public void OnUpdate() {
@@ -27,17 +31,14 @@ namespace Battle.logic.ability_dataDriven {
             // }
         }
         
-        public ProjectileEntity GetProjectile(string effectSign) {
+        public ProjectileEntity GetProjectile() {
             var projectileEntity = projectileEntityPool.Get();
             
-            // projectileEntity.AddProjectileActor(effectSign);
             return projectileEntity;
         }
 
-        private ProjectileActor AddProjectileActor(string effectSign) {
-            
-            
-            return default;
+        public void GetActorAsync(string effectName, Action<GameObject> callback) {
+            projectileActorPool.GetAsync(effectName, callback);
         }
     }
 }

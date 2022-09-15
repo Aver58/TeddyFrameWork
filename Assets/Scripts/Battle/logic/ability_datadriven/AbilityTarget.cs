@@ -1,3 +1,5 @@
+using Origins;
+
 namespace Battle.logic.ability_dataDriven {
     public class AbilityTarget {
         private int maxTargets;
@@ -12,9 +14,13 @@ namespace Battle.logic.ability_dataDriven {
         public AbilityUnitTargetFlag AbilityExcludeUnitTargetFlag;
 
         // 单体目标
-        public void SetSingTarget(ActionSingTarget value) {
+        public void SetConfigSingleTarget(ActionSingTarget value) {
             IsSingleTarget = true;
             ActionSingTarget = value;
+        }
+
+        public AbsEntity GetSingleTarget() {
+            return default;
         }
 
         // 范围目标
