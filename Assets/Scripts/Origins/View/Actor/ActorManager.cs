@@ -4,12 +4,12 @@ using UnityEngine;
 namespace Origins {
     public class ActorManager : Singleton<ActorManager> {
         public HeroActor HeroActor;
-        public List<EnemyActor> entities;
+        private readonly List<EnemyActor> entities;
         private Dictionary<int, EnemyActor> enemyActorMap;
-        private List<EnemyActor> enemyActorPool;
+        private GameObjectPool enemyActorPool;
         public ActorManager() {
             entities = new List<EnemyActor>();
-            enemyActorPool = new List<EnemyActor>();
+            enemyActorPool = new GameObjectPool(LoadModule.MODEL_PATH_PREFIX);
             enemyActorMap = new Dictionary<int, EnemyActor>();
         }
 
@@ -60,25 +60,42 @@ namespace Origins {
                     //todo remove swap back 移动到后面去删
                     entities.RemoveAt(i);
                     enemyActorMap[enemyActor.InstanceId] = null;
-                    enemyActorPool.Add(enemyActor);
+                    enemyActorPool.Release(enemyActor.gameObject);
                     enemyActor.gameObject.SetActive(false);
                     break;
                 }
             }
         }
 
-        public EnemyActor GetActorFromPool(EnemyEntity enemyEntity) {
-            EnemyActor enemyActor = null;
-            var length = enemyActorPool.Count;
-            if (length == 0) {
-                enemyActor = AddEnemyActor(enemyEntity);
-            } else {
-                enemyActor = enemyActorPool[length - 1];
-                enemyActorPool.RemoveAt(length - 1);
-                enemyActor.gameObject.SetActive(true);
+        public void GetActorAsync(EnemyEntity enemyEntity) {
+            if (enemyEntity == null) {
+                Debug.LogError("[AddEnemyActor]没有传入敌人对象！");
+                return;
             }
+            
+            var characterItem = EnemyConfigTable.Instance.Get(enemyEntity.RoleId);
+            if (characterItem == null) {
+                Debug.LogError("[AddEnemyActor]没有找到指定角色配置：" + enemyEntity.RoleId);
+                return;
+            }
+            
+            EnemyActor enemyActor = null;
+            enemyActorPool.GetAsync(characterItem.modelPath, delegate(GameObject go) {
+                if (go != null) {
+                    go.transform.localPosition = enemyEntity.Position;
 
-            return enemyActor;
+                    enemyActor = go.GetComponent<EnemyActor>();
+                    if (enemyActor != null) {
+                        enemyActor.OnInit();
+                        enemyActor.SetEntity(enemyEntity);
+                    }
+
+                    entities.Add(enemyActor);
+                    enemyActorMap[enemyActor.InstanceId] = enemyActor;
+                } else {
+                    Debug.LogError("[AddEnemyActor]没有找到指定模型：" + characterItem.modelPath);
+                }
+            });
         }
 
         public void SetHeroActorPosition(Vector2 value) {
@@ -94,39 +111,6 @@ namespace Origins {
         }
         
         #region Private
-
-        private EnemyActor AddEnemyActor(EnemyEntity enemyEntity) {
-            if (enemyEntity == null) {
-                Debug.LogError("[AddEnemyActor]没有传入敌人对象！");
-                return null;
-            }
-            
-            var characterItem = EnemyConfigTable.Instance.Get(enemyEntity.RoleId);
-            if (characterItem == null) {
-                Debug.LogError("[AddEnemyActor]没有找到指定角色配置：" + enemyEntity.RoleId);
-                return null;
-            }
-
-            var asset = LoadModule.LoadModel(characterItem.modelPath, delegate(AssetRequest request) {
-                if (request.asset != null) {
-                    var go = Object.Instantiate(request.asset as GameObject, UIModule.Instance.GetParentTransform(ViewType.MAIN));
-                    go.transform.localPosition = enemyEntity.Position;
-                
-                    var enemyActor = go.GetComponent<EnemyActor>();
-                    if (enemyActor != null) {
-                        enemyActor.OnInit();
-                        enemyActor.SetEntity(enemyEntity);
-                    }
-                
-                    entities.Add(enemyActor);
-                    enemyActorMap[enemyActor.InstanceId] = enemyActor;
-                } else {
-                    Debug.LogError("[AddEnemyActor]没有找到指定模型：" + characterItem.modelPath);
-                }
-            });
-       
-            return null;
-        }
         
         #endregion
     }

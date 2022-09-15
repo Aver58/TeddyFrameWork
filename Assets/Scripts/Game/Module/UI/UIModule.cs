@@ -47,6 +47,21 @@ public class UIModule : ModuleBase
 
     private static GameObject m_UIMask;
     private static string m_prefabPath = "common/UIMask";
+    
+    public static readonly Vector3 HIDE_POINT = new Vector3(0, -10000, 0);
+
+    private static GameObject gameObjectPoolRoot;
+    public static GameObject GameObjectPoolRoot {
+        get {
+            if (gameObjectPoolRoot == null) {
+                gameObjectPoolRoot = new GameObject("GameObjectPool");
+                gameObjectPoolRoot.transform.position = HIDE_POINT;
+            }
+
+            return gameObjectPoolRoot;
+        }
+    }
+    
     public UIModule()
     {
         UINavigation.Init();

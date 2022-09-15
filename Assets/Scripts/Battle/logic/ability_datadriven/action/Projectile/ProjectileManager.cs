@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Battle.logic.ability_dataDriven {
     public class ProjectileManager : Singleton<ProjectileManager> {
-        private List<Projectile> projectiles;
-        private List<Projectile> projectilePool;
+        private List<ProjectileEntity> projectiles;
+        private ObjectPool<ProjectileEntity> projectileEntityPool;
 
         public ProjectileManager() {
-            projectiles = new List<Projectile>();
-            projectilePool = new List<Projectile>();
+            projectiles = new List<ProjectileEntity>();
+            projectileEntityPool = new ObjectPool<ProjectileEntity>();
         }
 
         public void OnUpdate() {
@@ -17,36 +17,26 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
-        private void ReleaseProjectile(Projectile projectile) {
-            for (int i = 0; i < projectiles.Count; i++) {
-                if (projectiles[i] == projectile) {
-                    projectiles.RemoveAt(i);
-                    projectilePool.Add(projectile);
-                    projectile.gameObject.SetActive(false);
-                }
-            }
+        private void ReleaseProjectile(ProjectileActor projectileActor) {
+            // for (int i = 0; i < projectiles.Count; i++) {
+            //     if (projectiles[i].Id == projectile.Id) {
+            //         projectiles.RemoveAt(i);
+            //         linearProjectilePool.Add(projectile);
+            //         projectile.gameObject.SetActive(false);
+            //     }
+            // }
         }
         
-        public T GetProjectile<T>(string effectSign) where T: Projectile {
-            var length = projectilePool.Count;
-            if (length == 0) {
-                return GenerateProjectile<T>(effectSign);;
-            } else {
-                for (int i = 0; i < length; i++) {
-                    var projectile = projectilePool[i];
-                    // 性能热点！！
-                    if (projectile.GetType() == typeof(T)) {
-                        projectilePool.RemoveAt(i);
-                        projectile.gameObject.SetActive(true);
-                        return projectile as T;
-                    }
-                }
-            }
-
-            return default;
+        public ProjectileEntity GetProjectile(string effectSign) {
+            var projectileEntity = projectileEntityPool.Get();
+            
+            // projectileEntity.AddProjectileActor(effectSign);
+            return projectileEntity;
         }
 
-        private T GenerateProjectile<T>(string effectSign) where T: Projectile {
+        private ProjectileActor AddProjectileActor(string effectSign) {
+            
+            
             return default;
         }
     }

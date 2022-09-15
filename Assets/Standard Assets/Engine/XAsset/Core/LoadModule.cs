@@ -134,8 +134,7 @@ public sealed class LoadModule : ModuleBase {
         return asset;
     }
 
-    public static void UnloadScene(SceneAssetRequest scene)
-    {
+    public static void UnloadScene(SceneAssetRequest scene) {
         scene.Release();
     }
 
@@ -147,80 +146,54 @@ public sealed class LoadModule : ModuleBase {
         return LoadAsset(path, type, false);
     }
 
-    public static void UnloadAsset(AssetRequest asset)
-    {
+    public static void UnloadAsset(AssetRequest asset) {
         asset.Release();
     }
 
     #region 业务
 
-    private const string PREFAB_SUFFIX = ".prefab";
     private static string BundlePathPrefix = "Assets/Data/";
     private static string BulletPathPrefix = "Assets/Data/bullet";
     private static string UIPathPrefix = "Assets/Data/ui/panel/";
-    private static string ModelPathPrefix = "Assets/Data/character/";
+    public const string MODEL_PATH_PREFIX = "Assets/Data/character/";
     private static string JsonPathPrefix = "Assets/Scripts/DataTable/json/";
     private static StringBuilder stringBuilder = new StringBuilder();
 
     public static AssetRequest LoadModel(string assetName, LoadedCallback loadedCallback = null) {
         Type type = typeof(GameObject);
         stringBuilder.Clear();
-        stringBuilder.Append(ModelPathPrefix);
+        stringBuilder.Append(MODEL_PATH_PREFIX);
         stringBuilder.Append(assetName);
-        stringBuilder.Append(PREFAB_SUFFIX);
+        stringBuilder.Append(GetAssetPostfix(type));
         return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
     }
 
     public static AssetRequest LoadUI(string path, LoadedCallback loadedCallback = null) {
         Type type = typeof(GameObject);
-        string suffix = GetSuffixOfAsset(type);
         stringBuilder.Clear();
         stringBuilder.Append(UIPathPrefix);
         stringBuilder.Append(path);
-        stringBuilder.Append(".");
-        stringBuilder.Append(suffix);
+        stringBuilder.Append(GetAssetPostfix(type));
         return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
     }
 
-    public static JsonData LoadJson(string path)
-    {
+    public static JsonData LoadJson(string path) {
         stringBuilder.Clear();
         stringBuilder.Append(JsonPathPrefix);
         stringBuilder.Append(path);
 
         path = stringBuilder.ToString();
         //Debug.Log("LoadJson: " + path);
-        if(FileHelper.IsFileExist(path))
-        {
-            using(StreamReader streamReader = new StreamReader(path))
-            {
+        if(FileHelper.IsFileExist(path)) {
+            using(StreamReader streamReader = new StreamReader(path)) {
                 string jsonText = streamReader.ReadToEnd();
                 JsonData jsonData = JsonMapper.ToObject(jsonText);
                 return jsonData;
             }
-        }
-        else
-        {
+        } else {
             GameLog.LogError(path + "不存在!");
             return null;
         }
-    }
-
-    public static AssetRequest LoadBundle(string path, LoadedCallback loadedCallback = null) {
-        Type type = typeof(GameObject);
-        stringBuilder.Clear();
-        stringBuilder.Append(BundlePathPrefix);
-        stringBuilder.Append(path);
-        return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
-    }
-    
-    public static AssetRequest LoadBullet(string assetName, LoadedCallback loadedCallback = null) {
-        Type type = typeof(GameObject);
-        stringBuilder.Clear();
-        stringBuilder.Append(BundlePathPrefix);
-        stringBuilder.Append(assetName);
-        stringBuilder.Append(PREFAB_SUFFIX);
-        return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
     }
     
     #endregion
@@ -426,7 +399,7 @@ public sealed class LoadModule : ModuleBase {
         }
         request.Load();
         request.AddReferance();
-        GameLog.Log(string.Format("LoadAsset:{0}", path));
+        GameLog.Log($"LoadAsset:{path}");
         return request;
     }
 
@@ -471,25 +444,25 @@ public sealed class LoadModule : ModuleBase {
     }
 
     // 获取资源在编辑器模式下的后缀
-    private static string GetSuffixOfAsset(Type type)
-    {
+    public static string GetAssetPostfix(Type type) {
         if(type == typeof(Font))
             return BaseDef.FONT_SUFFIX;
-        else if(type == typeof(AudioClip))
+        if(type == typeof(AudioClip))
             return BaseDef.MUSIC_SUFFIX;
-        else if(type == typeof(GameObject))
-            return "prefab";
-        else if(type == typeof(TextAsset))
-            return "bytes";
-        else if(type == typeof(Texture2D) || type == typeof(Sprite))
-            return "png";
-        else if(type == typeof(Material))
-            return "mat";
-        else if(type == typeof(ScriptableObject))
-            return "asset";
+        if(type == typeof(GameObject))
+            return ".prefab";
+        if(type == typeof(TextAsset))
+            return ".bytes";
+        if(type == typeof(Texture2D) || type == typeof(Sprite))
+            return ".png";
+        if(type == typeof(Material))
+            return ".mat";
+        if(type == typeof(ScriptableObject))
+            return ".asset";
 
         return "";
     }
+    
     #endregion
 
     #region Bundles

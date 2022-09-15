@@ -36,7 +36,6 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         protected override void ExecuteBySingle() {
-            // 创建子弹，子弹生命周期管理
             // var linearProjectile = new LinearProjectile();
 
         }

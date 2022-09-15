@@ -10,7 +10,7 @@ namespace Origins {
             InstanceId = EntityManager.instance.AutoIndex++;
             InitProperty(RoleId);
             
-            ActorManager.instance.GetActorFromPool(this);
+            ActorManager.instance.GetActorAsync(this);
         }
 
         public override void OnClear() {

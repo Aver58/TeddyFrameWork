@@ -2,8 +2,8 @@ using Origins;
 using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
-    // 子弹数据层
-    public abstract class Projectile : MonoBehaviour, IProjectile {
+    // 子弹表现层
+    public class ProjectileActor : MonoBehaviour {
         private bool dodgeable;
         private float moveSpeed;
 
