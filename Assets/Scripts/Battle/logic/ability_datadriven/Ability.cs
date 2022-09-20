@@ -10,7 +10,7 @@ namespace Battle.logic.ability_dataDriven {
     // 可预览的技能编辑
     // DOTA2 技能系统，按着对配置表的理解，自己进行梳理逻辑
     public class Ability {
-        public int abilitylevel;// 技能等级
+        public int AbilityLevel;// 技能等级
         
         private readonly AbilityConfig abilityConfig;
         
@@ -21,6 +21,7 @@ namespace Battle.logic.ability_dataDriven {
         // todo 怎么以帧为单位跑逻辑
         private int currentFrame;
         private float cooldown;
+        private bool isStartCd;
 
         private float backSwingPoint;
         //技能表现部分，动作以及融合
@@ -35,7 +36,7 @@ namespace Battle.logic.ability_dataDriven {
         public float BaseDamage {
             get {
                 if (abilityConfig.AbilityDamage != null) {
-                    baseDamage = abilityConfig.AbilityDamage[abilitylevel - 1];
+                    baseDamage = abilityConfig.AbilityDamage[AbilityLevel - 1];
                 }
 
                 return baseDamage;
@@ -51,28 +52,44 @@ namespace Battle.logic.ability_dataDriven {
         public void OnInit() {
             // fps = targetFrameRate;
             currentTick = 0;
-            abilitylevel = 1;
+            AbilityLevel = 1;
             abilityState = AbilityState.None;
-            cooldown = abilityConfig.AbilityCooldowns[abilitylevel];
+            cooldown = abilityConfig.AbilityCooldowns[AbilityLevel];
 
             backSwingPoint = abilityConfig.AbilityCastPoint + abilityConfig.AbilityChannelTime;
         }
         
-        public void OnFixedUpdate(float deltaTime) {
-            // Debug.LogError($"cooldown{cooldown} currentTick {currentTick}");
-            cooldown -= deltaTime;
+        public void OnUpdate(float deltaTime) {
+            // Debug.LogError($"cooldown{cooldown} currentTick {currentTick} {abilityConfig.AbilityCastPoint}  {backSwingPoint}  {abilityConfig.AbilityDuration}");
+            if (abilityState == AbilityState.None && currentTick <= abilityConfig.AbilityCastPoint) {
+                // 前摇时间：
+                //      技能开始，但是技能真正的结算流程还没开始
+                //      技能开始以后，机能相关的特效和动作就开始播放
+                abilityState = AbilityState.CastPoint;
+                ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
+            }
+
+            if (abilityState == AbilityState.CastPoint && currentTick >= abilityConfig.AbilityCastPoint && currentTick <= backSwingPoint) {
+                // 前摇时间结束：
+                //      技能前摇结束时技能开始真正的释放以及结算，等技能前摇结束以后，技能真正的释放并结算
+                //      释放包括创建相应的弹道／法术场和buff
+                abilityState = AbilityState.Channeling;
+                ExecuteEvent(AbilityEvent.OnSpellStart);
+            }
+
+            if (abilityState == AbilityState.Channeling && currentTick >= backSwingPoint && currentTick <= abilityConfig.AbilityDuration) {
+                // 技能后摇点：
+                //      技能播放到后摇点时间时，技能真正的结束。这时，技能对应的特效以及人物动作可能还会继续播放，但是技能流程已经正式结束了
+                //      也就是说，下一个技能可以执行
+                abilityState = AbilityState.CastBackSwing;
+                ExecuteEvent(AbilityEvent.OnChannelFinish);
+
+                SetStartCd();
+            }
+            
             currentTick += deltaTime;
-
-            if (currentTick > 0 && currentTick < abilityConfig.AbilityCastPoint) {
-                EnterCastPoint();
-            }
-
-            if (currentTick > abilityConfig.AbilityCastPoint && currentTick < backSwingPoint) {
-                EnterChannel();
-            }
-
-            if (currentTick > backSwingPoint && currentTick < abilityConfig.AbilityDuration) {
-                EnterBackSwing();
+            if (isStartCd && cooldown > 0) {
+                cooldown -= deltaTime;
             }
         }
 
@@ -84,45 +101,19 @@ namespace Battle.logic.ability_dataDriven {
             caster = entity;
         }
 
+        public void SetStartCd() {
+            isStartCd = true;
+        }
+        
         #endregion
         
         #region Private
 
-        // 前摇时间：
-        //      技能开始，但是技能真正的结算流程还没开始
-        //      技能开始以后，机能相关的特效和动作就开始播放
-        private void EnterCastPoint() {
-            if (abilityState == AbilityState.None) {
-                abilityState = AbilityState.CastPoint;
-                ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
-            }
-        }
-
-        // 前摇时间结束：
-        //      技能前摇结束时技能开始真正的释放以及结算，等技能前摇结束以后，技能真正的释放并结算
-        //      释放包括创建相应的弹道／法术场和buff
-        private void EnterChannel() {
-            if (abilityState == AbilityState.CastPoint) {
-                abilityState = AbilityState.Channeling;
-                ExecuteEvent(AbilityEvent.OnSpellStart);
-            }
-        }
-
-        // 技能后摇点：
-        //      技能播放到后摇点时间时，技能真正的结束。这时，技能对应的特效以及人物动作可能还会继续播放，但是技能流程已经正式结束了
-        //      也就是说，下一个技能可以执行
-        private void EnterBackSwing() {
-            if (abilityState == AbilityState.Channeling) {
-                abilityState = AbilityState.CastBackSwing;
-                ExecuteEvent(AbilityEvent.OnChannelFinish);
-            }
-        }
-
         // 驱动事件
-        private void ExecuteEvent(AbilityEvent abilityEvent)
-        {
+        private void ExecuteEvent(AbilityEvent abilityEvent) {
             if (abilityConfig.AbilityEventMap.ContainsKey(abilityEvent)) {
                 var d2Event = abilityConfig.AbilityEventMap[abilityEvent];
+                BattleLog.Log($"【ExecuteEvent】 技能名称：{abilityConfig.Name} 事件：{abilityEvent.ToString()}");
                 d2Event.Execute(caster);
             }
         }

@@ -4,7 +4,7 @@
   "AbilityCooldown": [2, 2, 2, 2],
   "AbilityCastPoint": 0,
   "AbilityCastRange": 500,
-  "AbilityCastDuration": 3,
+  "AbilityDuration": 3,
   "AbilityCastAnimation": "attack",
 
   "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY",

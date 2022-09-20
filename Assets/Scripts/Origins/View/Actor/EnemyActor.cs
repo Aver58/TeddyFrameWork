@@ -3,11 +3,12 @@ using UnityEngine;
 namespace Origins {
     public class EnemyActor : AbsActor {
         public EnemyEntity entity;
-
+        
+        private Rigidbody2D rigidBody2D;
         private float attackCd;
 
         public override void OnInit() {
-            cacheVector2 = new Vector2();
+            cacheVector3 = new Vector2();
             mTransform = transform;
             rigidBody2D = transform.GetComponent<Rigidbody2D>();
 

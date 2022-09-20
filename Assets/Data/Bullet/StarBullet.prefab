@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 487111596219770889}
   - component: {fileID: 4876848092379329770}
   - component: {fileID: 2489525497430991773}
+  - component: {fileID: 8418376472984496157}
   m_Layer: 5
   m_Name: StarBullet
   m_TagString: Untagged
@@ -101,3 +102,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 20}
   m_EdgeRadius: 0
+--- !u!114 &8418376472984496157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609770738291665035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68694f2ce0a74915aa6812be05b48134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

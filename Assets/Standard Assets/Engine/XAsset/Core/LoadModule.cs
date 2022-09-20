@@ -152,7 +152,7 @@ public sealed class LoadModule : ModuleBase {
 
     #region 业务
 
-    public const string BULLET_PATH_PREFIX = "Assets/Data/bullet";
+    public const string BULLET_PATH_PREFIX = "Assets/Data/bullet/";
     public const string MODEL_PATH_PREFIX = "Assets/Data/character/";
     private static string BundlePathPrefix = "Assets/Data/";
     private static string UIPathPrefix = "Assets/Data/ui/panel/";
@@ -412,8 +412,7 @@ public sealed class LoadModule : ModuleBase {
     private static string GetExistPath(string path)
     {
 #if UNITY_EDITOR
-        if(runtimeMode == false)
-        {
+        if(runtimeMode == false) {
             // 编辑器模式
             if(File.Exists(path))
                 return path;
@@ -425,7 +424,7 @@ public sealed class LoadModule : ModuleBase {
                     return existPath;
             }
 
-            GameLog.LogError("找不到资源路径" + path);
+            GameLog.LogError("【找不到资源路径】" + path);
             return path;
         }
 #endif

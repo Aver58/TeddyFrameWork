@@ -177,8 +177,7 @@ namespace Battle.logic.ability_dataDriven {
                 // var teamJsonData = GetStringValue(json, "Teams");
                 // var abilityTargetTeam = GetEnumValue<AbilityUnitTargetTeam>(teamJsonData);
                 // actionTarget.SetTargetTeam(abilityTargetTeam);
-            }
-            else {
+            } else {
                 var actionSingTarget = actionJsonData.GetEnumValue<ActionSingTarget>("Target");
                 abilityTarget.SetConfigSingleTarget(actionSingTarget);
             }
@@ -211,7 +210,6 @@ namespace Battle.logic.ability_dataDriven {
         #endregion
 
         #endregion
-
 
         #region Modifier
 

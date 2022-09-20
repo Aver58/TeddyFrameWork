@@ -18,7 +18,7 @@ namespace Origins {
                 if (abilities.Count > 0) {
                     for (int i = 0; i < abilities.Count; i++) {
                         var ability = abilities[i];
-                        ability.OnFixedUpdate(Time.fixedDeltaTime);
+                        ability.OnUpdate(Time.deltaTime);
                     }
                 }
             }

@@ -25,8 +25,8 @@ namespace Origins {
         public float MoveSpeed;
         public float AttackCooldown;
 
-        public Vector2 Position { get; set; }
-        public Vector2 Forward { get; set; }
+        public Vector3 Position { get; set; }
+        public Quaternion Rotation { get; set; }
 
         public abstract void OnUpdate();
         public abstract void OnInit();

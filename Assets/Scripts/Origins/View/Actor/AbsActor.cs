@@ -5,8 +5,7 @@ namespace Origins {
         public int InstanceId;
 
         protected Transform mTransform;
-        protected Rigidbody2D rigidBody2D;
-        protected Vector2 cacheVector2;
+        protected Vector3 cacheVector3;
 
         public abstract void OnInit();
         public abstract void OnUpdate();
@@ -15,7 +14,7 @@ namespace Origins {
         public virtual void Move() { }
         public virtual void BeAttack(int value) { }
 
-        public void SetPosition(Vector2 value) {
+        public void SetPosition(Vector3 value) {
             mTransform.localPosition = value;
         }
     }
