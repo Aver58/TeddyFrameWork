@@ -48,11 +48,11 @@ namespace Origins {
             return HeroEntity;
         }
 
-        private const int MinRang = 200;
-        private const int MaxRang = 1000;
+        private const int MIN_RANGE = 200;
+        private const int MAX_RANGE = 1000;
 
         public void AddEnemyEntity(int roleId) {
-            var distance = Random.Range(MinRang, MaxRang);
+            var distance = Random.Range(MIN_RANGE, MAX_RANGE);
             var randomPosX = HeroEntity.LocalPosition.x + distance * Mathf.Cos(distance * Mathf.PI / 180);
             var randomPosY = HeroEntity.LocalPosition.y + distance * Mathf.Sin(distance * Mathf.PI / 180);
             var entity = enemyEntityPool.Get();
@@ -62,6 +62,11 @@ namespace Origins {
             Debug.Log($"[EntityManager] 生成敌人：{entity.InstanceId} roleId: {roleId} pos:{entity.LocalPosition}");
 
             AddEntity(entity);
+        }
+
+        public AbsEntity GetSingleTarget() {
+
+            return default;
         }
 
         #endregion

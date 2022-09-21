@@ -14,7 +14,8 @@ namespace Battle.logic.ability_dataDriven {
         public virtual void Execute(AbsEntity entity) {
             Debug.Log($"【DotaAction Execute】名称：{AbilityName} entity：{entity.InstanceId}");
             if (abilityTarget.IsSingleTarget) {
-                ExecuteBySingle(entity);
+                var singleTarget = EntityManager.instance.GetSingleTarget();
+                ExecuteBySingle(singleTarget);
             } else {
                 ExecuteByMultiple();
             }
