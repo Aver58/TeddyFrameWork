@@ -5,7 +5,7 @@ namespace Battle.logic.ability_dataDriven {
     // 子弹数据层
     public class ProjectileEntity {
         public int Id;
-        public Vector3 Position;
+        public Vector3 LocalPosition;
         
         private Quaternion rotation;
         private string effectName;
@@ -22,10 +22,10 @@ namespace Battle.logic.ability_dataDriven {
             this.moveSpeed = moveSpeed;
             this.dodgeable = dodgeable;
             this.casterEntity = casterEntity;
-            Position = startPoint;
+            LocalPosition = startPoint;
             rotation = startRotation;
             flyTime = 0f;
-            flyToward = startRotation * Vector3.forward;
+            flyToward = startRotation * Vector3.up;
 
             if (string.IsNullOrEmpty(effectName)) {
                 Debug.LogError("[GetActorAsync]子弹特效名为空！");
@@ -36,8 +36,8 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         public void OnUpdate() {
-            if (moveSpeed  > 0) {
-                Position += flyToward * moveSpeed * Time.deltaTime;
+            if (moveSpeed > 0) {
+                LocalPosition += flyToward * moveSpeed * Time.deltaTime;
             }
 
             durning += Time.deltaTime;
@@ -60,7 +60,10 @@ namespace Battle.logic.ability_dataDriven {
                 instance.transform.SetParent(UIModule.Instance.GetParentTransform(ViewType.MAIN));
                 actor = instance.GetComponent<ProjectileActor>();
                 if (actor != null) {
-                    actor.transform.localPosition = Position;
+                    var transform = actor.transform;
+                    transform.localPosition = LocalPosition;
+                    var angle = Vector3.SignedAngle(Vector3.zero, flyToward, Vector3.forward);
+                    transform.localRotation = new Quaternion(0, 0, angle, 1);
                     actor.SetEntity(this);
                 }
             } else {

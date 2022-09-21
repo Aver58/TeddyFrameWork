@@ -18,7 +18,7 @@ namespace Origins {
         }
 
         public void SetPosition(Vector2 value) {
-            Position = value;
+            LocalPosition = value;
             ActorManager.instance.SetActorPosition(InstanceId, value);
         }
         

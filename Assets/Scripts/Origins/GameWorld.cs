@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Battle.logic.ability_dataDriven;
 using UnityEngine;
 
 namespace Origins {
@@ -6,17 +6,20 @@ namespace Origins {
         private GameMainLoop gameMainLoop;
         private EntityManager entityManager;
         private ActorManager actorManager;
+        private ProjectileManager projectileManager;
 
         private void Awake() {
             gameMainLoop = GameMainLoop.instance;
             entityManager = EntityManager.instance;
             actorManager = ActorManager.instance;
+            projectileManager = ProjectileManager.instance;
         }
 
         private void Update() {
             gameMainLoop.OnUpdate();
             entityManager.OnUpdate();
             actorManager.OnUpdate();
+            projectileManager.OnUpdate();;
         }
 
         private void FixedUpdate() {

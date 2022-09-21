@@ -25,8 +25,9 @@ namespace Origins {
         public float MoveSpeed;
         public float AttackCooldown;
 
-        public Vector3 Position { get; set; }
-        public Quaternion Rotation { get; set; }
+        // 因为做的是2d游戏，所以是 LocalPosition
+        public Vector3 LocalPosition { get; set; }
+        public Quaternion LocalRotation { get; set; } = Quaternion.identity;
 
         public abstract void OnUpdate();
         public abstract void OnInit();

@@ -33,6 +33,7 @@ namespace Battle.logic.ability_dataDriven {
         
         public ProjectileEntity GetProjectile() {
             var projectileEntity = projectileEntityPool.Get();
+            projectiles.Add(projectileEntity);
             
             return projectileEntity;
         }

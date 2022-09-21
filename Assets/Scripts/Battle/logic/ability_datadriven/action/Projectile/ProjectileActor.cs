@@ -16,7 +16,7 @@ namespace Battle.logic.ability_dataDriven {
         public event OnProjectileDodge OnProjectileDodgeEvent;
 
         public virtual void OnUpdate() {
-            transform.position = entity.Position;
+            transform.localPosition = entity.LocalPosition;
         }
 
         public virtual void OnClear() {

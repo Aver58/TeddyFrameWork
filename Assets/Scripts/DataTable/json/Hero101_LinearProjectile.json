@@ -22,7 +22,7 @@
       "Dodgeable" : 0,
       "ProvidesVision" : 0,
       "VisionRadius" : 0,
-      "MoveSpeed" : 500,
+      "MoveSpeed" : 50,
       "SourceAttachment" : "",
       "OnProjectileHitUnit": {
         "Damage": {
