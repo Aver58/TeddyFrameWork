@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using Battle.logic.ability_dataDriven;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Origins {
     public class EntityManager : Singleton<EntityManager> {
@@ -64,8 +67,14 @@ namespace Origins {
             AddEntity(entity);
         }
 
-        public AbsEntity GetSingleTarget() {
+        public AbsEntity GetSingleTarget(AbsEntity caster, AbilityTarget abilityTarget) {
+            if (abilityTarget.ActionSingleTarget == ActionSingleTarget.CASTER) {
+                return caster;
+            }
 
+
+
+            BattleLog.LogError("【GetSingleTarget】没有找到目标：{0}", abilityTarget.ActionSingleTarget.ToString());
             return default;
         }
 

@@ -6,7 +6,7 @@ namespace Battle.logic.ability_dataDriven {
         private bool isRandom;// 如果有多个目标，是否随机选择一个目标
 
         public bool IsSingleTarget;
-        public ActionSingTarget ActionSingTarget;
+        public ActionSingleTarget ActionSingleTarget;
         public AbilityUnitTargetTeam AbilityUnitTargetTeam;
         public AbilityUnitTargetType AbilityUnitTargetType;
         public AbilityUnitTargetType AbilityExcludeUnitTargetType;
@@ -14,9 +14,9 @@ namespace Battle.logic.ability_dataDriven {
         public AbilityUnitTargetFlag AbilityExcludeUnitTargetFlag;
 
         // 单体目标
-        public void SetConfigSingleTarget(ActionSingTarget value) {
+        public void SetConfigSingleTarget(ActionSingleTarget value) {
             IsSingleTarget = true;
-            ActionSingTarget = value;
+            ActionSingleTarget = value;
         }
 
         public AbsEntity GetSingleTarget() {

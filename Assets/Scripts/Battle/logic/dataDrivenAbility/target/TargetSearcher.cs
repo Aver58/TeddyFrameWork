@@ -132,7 +132,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
 
     #endregion
 
-    public TargetCollection CalculateAOETarget(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, AbilityTarget actionTarget)
+    public TargetCollection CalculateAOETarget(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, ActionTarget actionTarget)
     {
         var targetCollection = new TargetCollection();
 
@@ -187,10 +187,10 @@ public class TargetSearcher : Singleton<TargetSearcher>
         return targetCollection;
     }
 
-    public TargetCollection CalculateSingleTarget(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, AbilityTarget actionTarget)
+    public TargetCollection CalculateSingleTarget(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, ActionTarget actionTarget)
     {
         var targetCollection = new TargetCollection();
-        if(actionTarget.singTarget == ActionSingTarget.CASTER)
+        if(actionTarget.SingleTarget == ActionSingleTarget.CASTER)
         {
             targetCollection.targetType = AbilityRequestTargetType.UNIT;
             targetCollection.AddUnit(caster);
@@ -203,7 +203,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
             return null;
         }
 
-        if(actionTarget.singTarget == ActionSingTarget.TARGET)
+        if(actionTarget.SingleTarget == ActionSingleTarget.TARGET)
         {
             if(requestTarget.targetType == AbilityRequestTargetType.POINT)
             {
@@ -216,7 +216,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
             return targetCollection;
         }
 
-        if(actionTarget.singTarget == ActionSingTarget.POINT)
+        if(actionTarget.SingleTarget == ActionSingleTarget.POINT)
         {
             targetCollection.targetType = AbilityRequestTargetType.POINT;
             targetCollection.AddPoint(requestTarget.targetPos);
@@ -230,7 +230,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
     /// <summary>
     /// 获取所有攻击目标
     /// </summary>
-    public TargetCollection GetActionTargets(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, AbilityTarget actionTarget)
+    public TargetCollection GetActionTargets(BattleUnit caster, AbilityData abilityData, RequestTarget requestTarget, ActionTarget actionTarget)
     {
         TargetCollection targetCollection;
         if(actionTarget.isSingleTarget)

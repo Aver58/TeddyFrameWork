@@ -68,10 +68,9 @@ namespace Origins {
         #region SkillSystem
 
         private void InitDefaultSkill() {
-            var ability = AbilityConfigParse.GetAbility(defaultSkillId);
+            var ability = AbilityConfigParse.GetAbility(this, defaultSkillId);
             if (ability != null) {
                 ability.OnInit();
-                ability.SetCaster(this);
                 abilities.Add(ability);
             }
         }

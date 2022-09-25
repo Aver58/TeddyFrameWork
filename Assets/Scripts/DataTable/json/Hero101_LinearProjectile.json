@@ -12,7 +12,8 @@
   "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL",
 
   "AbilityBehavior": [
-    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "DOTA_ABILITY_BEHAVIOR_NO_TARGET",
+    "DOTA_ABILITY_BEHAVIOR_DIRECTIONAL"
   ],
 
   "OnSpellStart": {

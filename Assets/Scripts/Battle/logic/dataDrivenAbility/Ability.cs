@@ -239,36 +239,36 @@ public class Ability
         return abilityData.castDuration;
     }
 
-    public AbilityTarget GetAbilityTarget()
+    public ActionTarget GetAbilityTarget()
     {
-        return abilityData.abilityTarget;
+        return abilityData.ActionTarget;
     }
 
     public float GetAbilityAOERadius()
     {
-        return abilityData.abilityTarget.radius;
+        return abilityData.ActionTarget.radius;
     }
 
     public void GetSectorAoe(out float sectorRadius, out float sectorAngle)
     {
-        sectorRadius = abilityData.abilityTarget.sectorRadius;
-        sectorAngle = abilityData.abilityTarget.sectorAngle;
+        sectorRadius = abilityData.ActionTarget.sectorRadius;
+        sectorAngle = abilityData.ActionTarget.sectorAngle;
     }
 
     public void GetLineAoe(out float lineLength, out float lineThickness)
     {
-        lineLength = abilityData.abilityTarget.lineLength;
-        lineThickness = abilityData.abilityTarget.lineThickness;
+        lineLength = abilityData.ActionTarget.lineLength;
+        lineThickness = abilityData.ActionTarget.lineThickness;
     }
 
     public AbilityUnitTargetTeam GetTargetTeam()
     {
-        return abilityData.abilityTarget.targetTeam;
+        return abilityData.ActionTarget.targetTeam;
     }
 
     public AbilityUnitTargetType GetTargetType()
     {
-        return abilityData.abilityTarget.targetType;
+        return abilityData.ActionTarget.targetType;
     }
 
     public string GetCastAnimation()

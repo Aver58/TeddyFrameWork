@@ -14,10 +14,10 @@
 /// Within an action the Target key can be given a value to specify what it is that the target is. 
 /// This exposes some choices to make as to what you may want to target.
 /// </summary>
-public class AbilityTarget
+public class ActionTarget
 {
     public bool isSingleTarget;
-    public ActionSingTarget singTarget;
+    public ActionSingleTarget SingleTarget;
     public AbilityUnitTargetTeam targetTeam;
     public AbilityUnitTargetType targetType;
     public AbilityUnitTargetType excludeTypes;
@@ -33,15 +33,15 @@ public class AbilityTarget
     public float sectorRadius;
     public float sectorAngle;
 
-    public AbilityTarget()
+    public ActionTarget()
     {
         isSingleTarget = false;
     }
 
-    public void SetSingTarget(ActionSingTarget value)
+    public void SetSingTarget(ActionSingleTarget value)
     {
         isSingleTarget = true;
-        singTarget = value;
+        SingleTarget = value;
     }
 
     public void SetTargetTeam(AbilityUnitTargetTeam value)

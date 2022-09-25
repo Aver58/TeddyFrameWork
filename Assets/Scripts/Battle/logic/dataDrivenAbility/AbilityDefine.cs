@@ -222,10 +222,10 @@ public enum AbilityValueSourceType {
 /// <summary>
 /// 单个目标
 /// </summary>
-public enum ActionSingTarget {
+public enum ActionSingleTarget {
     CASTER,// 施法者
     TARGET,// 目标
-    POINT,// 点
+    POINT,// 鼠标指向的点
     ATTACKER,// 攻击者
     UNIT,// 单位
 }
@@ -269,11 +269,11 @@ public enum ActionMultipleTargets
 /// </summary>
 public enum AbilityUnitTargetTeam
 {
+    DOTA_UNIT_TARGET_TEAM_NONE,// 无
     DOTA_UNIT_TARGET_TEAM_BOTH,// 双方队伍
     DOTA_UNIT_TARGET_TEAM_CUSTOM,// 普通队伍
     DOTA_UNIT_TARGET_TEAM_ENEMY,// 敌方队伍
     DOTA_UNIT_TARGET_TEAM_FRIENDLY,// 友方队伍
-    DOTA_UNIT_TARGET_TEAM_NONE,// 无
 }
 
 /// <summary>
@@ -281,6 +281,7 @@ public enum AbilityUnitTargetTeam
 /// </summary>
 public enum AbilityUnitTargetType
 {
+    DOTA_UNIT_TARGET_NONE,// 没有
     DOTA_UNIT_TARGET_ALL,// 任意，包括隐藏的实体
     DOTA_UNIT_TARGET_BASIC,// 基本单位, 包括召唤单位
     DOTA_UNIT_TARGET_BUILDING,// 塔和建筑 npc_dota_tower, npc_dota_building  DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING
@@ -289,9 +290,8 @@ public enum AbilityUnitTargetType
     DOTA_UNIT_TARGET_CUSTOM,// 未开放? 例子: 水人复制, TB灵魂隔断, 谜团恶魔转化, 艾欧链接, 小狗感染...
     DOTA_UNIT_TARGET_HERO,// 英雄
     DOTA_UNIT_TARGET_MECHANICAL,// 机械单位（投石车） npc_dota_creep_siege  DOTA_NPC_UNIT_RELATIONSHIP_TYPE_SIEGE
-    DOTA_UNIT_TARGET_NONE,// 没有
-    DOTA_UNIT_TARGET_OTHER,// 任何前面不包括的单位
     DOTA_UNIT_TARGET_TREE,// 树木,ent_dota_tree 树 例子: 吃树, 补刀斧
+    DOTA_UNIT_TARGET_OTHER,// 任何前面不包括的单位
 }
 
 /// <summary>

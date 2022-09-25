@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using LitJson;
+using Origins;
 using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
     public static class AbilityConfigParse {
-        public static Ability GetAbility(int id) {
+        public static Ability GetAbility(AbsEntity caster, int id) {
             var skillMapItem = SkillMapTable.Instance.Get(id);
             if(skillMapItem == null) {
                 return null;
@@ -15,7 +16,7 @@ namespace Battle.logic.ability_dataDriven {
 
             var path = skillMapItem.config;
             var abilityConfig = LoadAbilityConfig(path);
-            var ability = new Ability(abilityConfig);
+            var ability = new Ability(caster, abilityConfig);
             return ability;
         }
 
@@ -178,7 +179,7 @@ namespace Battle.logic.ability_dataDriven {
                 // var abilityTargetTeam = GetEnumValue<AbilityUnitTargetTeam>(teamJsonData);
                 // actionTarget.SetTargetTeam(abilityTargetTeam);
             } else {
-                var actionSingTarget = actionJsonData.GetEnumValue<ActionSingTarget>("Target");
+                var actionSingTarget = actionJsonData.GetEnumValue<ActionSingleTarget>("Target");
                 abilityTarget.SetConfigSingleTarget(actionSingTarget);
             }
 

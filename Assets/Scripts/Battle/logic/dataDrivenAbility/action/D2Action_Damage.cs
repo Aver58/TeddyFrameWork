@@ -19,7 +19,7 @@ public class D2Action_Damage : D2Action
     private List<D2Action> m_SuccessActions;
 
     public D2Action_Damage(AbilityUnitDamageType unitDamageType, AbilityDamageFlag damageFlag, 
-        AbilityValueSource valueSource, List<D2Action> successActions, AbilityTarget actionTarget) :base(actionTarget)
+        AbilityValueSource valueSource, List<D2Action> successActions, ActionTarget actionTarget) :base(actionTarget)
     {
         this.unitDamageType = unitDamageType;
         this.damageFlag = damageFlag;

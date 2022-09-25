@@ -88,8 +88,8 @@ public static class AbilityReader {
 
     #region Action Map
 
-    private static Dictionary<string, Func<JsonData, AbilityTarget, AbilityData, D2Action>> AbilityActionCreateMap =
-        new Dictionary<string, Func<JsonData, AbilityTarget, AbilityData, D2Action>> {
+    private static Dictionary<string, Func<JsonData, ActionTarget, AbilityData, D2Action>> AbilityActionCreateMap =
+        new Dictionary<string, Func<JsonData, ActionTarget, AbilityData, D2Action>> {
             {"IsHit", CreateIsHitAction},
             {"ChangeEnergy", CreateChangeEnergyAction},
             {"Damage", CreateDamageAction},
@@ -103,7 +103,7 @@ public static class AbilityReader {
   "OnSuccess": {}
 },
  */
-    private static D2Action CreateIsHitAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData) {
+    private static D2Action CreateIsHitAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData) {
         var onSuccessActionConfig = GetJsonValue(json, "OnSuccess");
         if (onSuccessActionConfig == null) {
             BattleLog.LogError("技能[%s]中IsHit未找到key[OnSuccess]的配置", abilityData.configFileName);
@@ -117,7 +117,7 @@ public static class AbilityReader {
     }
 
     private static D2Action
-        CreateChangeEnergyAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData) {
+        CreateChangeEnergyAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData) {
         var energyParams = GetJsonValue(json, "EnergyParams");
         if (energyParams == null) {
             BattleLog.LogError("技能[{0}]中ChangeEnergy中未找到key[EnergyParams]的配置", abilityData.configFileName);
@@ -159,7 +159,7 @@ public static class AbilityReader {
           }
       }
   }*/
-    private static D2Action CreateDamageAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData) {
+    private static D2Action CreateDamageAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData) {
         var damageTypeConfig = GetStringValue(json, "DamageType");
         if (damageTypeConfig == null)
             return null;
@@ -194,7 +194,7 @@ public static class AbilityReader {
           }
         }
  */
-    private static D2Action CreateHealAction(JsonData json, AbilityTarget actionTarget, AbilityData abilityData) {
+    private static D2Action CreateHealAction(JsonData json, ActionTarget actionTarget, AbilityData abilityData) {
         var flagConfig = GetJsonValue(json, "HealFlags");
         if (flagConfig == null)
             return null;
@@ -214,7 +214,7 @@ public static class AbilityReader {
          "ModifierName":"dunji"
      }
      */
-    private static D2Action CreateApplyModifierAction(JsonData json, AbilityTarget actionTarget,
+    private static D2Action CreateApplyModifierAction(JsonData json, ActionTarget actionTarget,
         AbilityData abilityData) {
         var modifierName = GetStringValue(json, "ModifierName");
         if (string.IsNullOrEmpty(modifierName)) {
@@ -319,11 +319,11 @@ public static class AbilityReader {
     }
 
     // 大招技能指示器解析，这部分有点冗余，是自己抽出来的，不是dota源解析，那dota是怎么实现技能指示器的
-    private static AbilityTarget ParseAbilityRange(JsonData json, AbilityData abilityData) {
+    private static ActionTarget ParseAbilityRange(JsonData json, AbilityData abilityData) {
         if (json == null)
             return null;
 
-        var actionTarget = new AbilityTarget();
+        var actionTarget = new ActionTarget();
         var targetTeam = GetEnumValue<AbilityUnitTargetTeam>(json, "AbilityUnitTargetTeam");
 
         actionTarget.SetTargetTeam(targetTeam);
@@ -370,10 +370,10 @@ public static class AbilityReader {
         return actionTarget;
     }
 
-    private static AbilityTarget ParseActionTarget(JsonData json, AbilityData abilityData) {
+    private static ActionTarget ParseActionTarget(JsonData json, AbilityData abilityData) {
         if (json == null)
             return null;
-        var actionTarget = new AbilityTarget();
+        var actionTarget = new ActionTarget();
         if (json.IsObject) {
             var aoeAreaJsonData = GetJsonValue(json, "AoeArea");
             if (aoeAreaJsonData == null) {
@@ -422,7 +422,7 @@ public static class AbilityReader {
             actionTarget.SetTargetTeam(abilityTargetTeam);
         }
         else {
-            var target = (ActionSingTarget) Enum.Parse(typeof(ActionSingTarget), json.ToString());
+            var target = (ActionSingleTarget) Enum.Parse(typeof(ActionSingleTarget), json.ToString());
             actionTarget.SetSingTarget(target);
         }
 
@@ -435,7 +435,7 @@ public static class AbilityReader {
 
         var actions = new List<D2Action>();
         foreach (string key in json.Keys) {
-            Func<JsonData, AbilityTarget, AbilityData, D2Action> createMethodName;
+            Func<JsonData, ActionTarget, AbilityData, D2Action> createMethodName;
             if (AbilityActionCreateMap.TryGetValue(key, out createMethodName)) {
                 var actionJsonData = GetJsonValue(json, key);
                 var targetJsonData = GetJsonValue(actionJsonData, "Target");
@@ -642,7 +642,7 @@ public static class AbilityReader {
         abilityData.costType = GetEnumValue<AbilityCostType>(jsonData, "AbilityCostType");
         abilityData.costValue = GetFloatValue(jsonData, "AbilityCostValue");
 
-        abilityData.abilityTarget = ParseAbilityRange(jsonData, abilityData);
+        abilityData.ActionTarget = ParseAbilityRange(jsonData, abilityData);
 
         // 解析技能事件
         abilityData.eventMap = ParseAbilityEvents(jsonData, abilityData);

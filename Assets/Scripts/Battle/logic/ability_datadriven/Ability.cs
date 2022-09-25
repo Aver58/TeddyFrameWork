@@ -45,7 +45,8 @@ namespace Battle.logic.ability_dataDriven {
 
         #region LifeCycle
         
-        public Ability(AbilityConfig abilityConfig) {
+        public Ability(AbsEntity entity, AbilityConfig abilityConfig) {
+            caster = entity;
             this.abilityConfig = abilityConfig;
         }
 
@@ -96,10 +97,6 @@ namespace Battle.logic.ability_dataDriven {
         #endregion
 
         #region Public
-
-        public void SetCaster(AbsEntity entity) {
-            caster = entity;
-        }
 
         public void SetStartCd() {
             isStartCd = true;

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 public class D2Action_IsHit : D2Action
 {
     private List<D2Action> m_SuccessActions;
-    public D2Action_IsHit(List<D2Action> successActions, AbilityTarget actionTarget) : base(actionTarget)
+    public D2Action_IsHit(List<D2Action> successActions, ActionTarget actionTarget) : base(actionTarget)
     {
         m_SuccessActions = successActions;
     }
