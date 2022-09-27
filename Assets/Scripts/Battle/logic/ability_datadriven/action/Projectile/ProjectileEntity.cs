@@ -16,7 +16,7 @@ namespace Battle.logic.ability_dataDriven {
         private Vector3 flyToward;
         private AbsEntity casterEntity;
         private ProjectileActor actor;
-
+        
         public void OnInit(AbsEntity casterEntity, Vector3 startPoint, Quaternion startRotation, AbilityTarget abilityTarget, string effectName, float moveSpeed, bool dodgeable = false) {
             this.effectName = effectName;
             this.moveSpeed = moveSpeed;

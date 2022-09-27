@@ -225,7 +225,7 @@ public enum AbilityValueSourceType {
 public enum ActionSingleTarget {
     CASTER,// 施法者
     TARGET,// 目标
-    POINT,// 鼠标指向的点
+    POINT,// 点
     ATTACKER,// 攻击者
     UNIT,// 单位
 }

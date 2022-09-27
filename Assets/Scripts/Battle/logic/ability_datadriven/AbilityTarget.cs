@@ -18,14 +18,5 @@ namespace Battle.logic.ability_dataDriven {
             IsSingleTarget = true;
             ActionSingleTarget = value;
         }
-
-        public AbsEntity GetSingleTarget() {
-            return default;
-        }
-
-        // 范围目标
-        public void SetRangeTarget() {
-
-        }
     }
 }

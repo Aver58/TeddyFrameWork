@@ -98,7 +98,7 @@ namespace Battle.logic.ability_dataDriven {
 
         #region Public
 
-        public void SetStartCd() {
+        private void SetStartCd() {
             isStartCd = true;
         }
         

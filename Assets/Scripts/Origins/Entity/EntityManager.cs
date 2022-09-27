@@ -72,7 +72,9 @@ namespace Origins {
                 return caster;
             }
 
-
+            if (abilityTarget.ActionSingleTarget == ActionSingleTarget.TARGET) {
+                
+            }
 
             BattleLog.LogError("【GetSingleTarget】没有找到目标：{0}", abilityTarget.ActionSingleTarget.ToString());
             return default;
