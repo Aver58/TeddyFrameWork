@@ -33,7 +33,7 @@ namespace Origins {
         public abstract void OnInit();
         public abstract void OnClear();
 
-        protected abstract void InitProperty(int roleId);
+        protected virtual void InitProperty(int roleId){ }
 
         public virtual void Move() { }
         public virtual void BeAttack(int value) { }

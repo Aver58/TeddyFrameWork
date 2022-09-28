@@ -67,17 +67,31 @@ namespace Origins {
             AddEntity(entity);
         }
 
-        public AbsEntity GetSingleTarget(AbsEntity caster, AbilityTarget abilityTarget) {
+        public AbsEntity GetSingleTarget(AbsEntity caster, AbilityTarget abilityTarget, AbilityRequestContext abilityRequestContext) {
             if (abilityTarget.ActionSingleTarget == ActionSingleTarget.CASTER) {
                 return caster;
             }
 
             if (abilityTarget.ActionSingleTarget == ActionSingleTarget.TARGET) {
-                
+                if (!abilityRequestContext.IsUnitRequest) {
+                    BattleLog.LogError("【单体技能】目标配置为 TARGET，REQUEST TARGET却是 POINT 类型");
+                    return caster;
+                }
+
+                return abilityRequestContext.RequestTargetUnit;
             }
 
+            if (abilityTarget.ActionSingleTarget == ActionSingleTarget.POINT) {
+                if (abilityRequestContext.IsUnitRequest) {
+                    BattleLog.LogError("【单体技能】目标配置为 POINT，REQUEST TARGET却是 Unit 类型");
+                    return caster;
+                }
+
+                return caster;
+            }
+            
             BattleLog.LogError("【GetSingleTarget】没有找到目标：{0}", abilityTarget.ActionSingleTarget.ToString());
-            return default;
+            return caster;
         }
 
         #endregion

@@ -28,7 +28,7 @@ namespace Battle.logic.ability_dataDriven {
         private AnimationClip animationClip;
         private bool applyRootMotion;
         private bool cancelable;
-        private AbilityTarget abilityTarget;
+        private AbilityRequestContext abilityRequestContext;
         private AbilityState abilityState;
         private AbsEntity caster; 
 
@@ -55,6 +55,7 @@ namespace Battle.logic.ability_dataDriven {
             currentTick = 0;
             AbilityLevel = 1;
             abilityState = AbilityState.None;
+            abilityRequestContext = new AbilityRequestContext();
             cooldown = abilityConfig.AbilityCooldowns[AbilityLevel];
 
             backSwingPoint = abilityConfig.AbilityCastPoint + abilityConfig.AbilityChannelTime;
@@ -98,20 +99,30 @@ namespace Battle.logic.ability_dataDriven {
 
         #region Public
 
-        private void SetStartCd() {
-            isStartCd = true;
+        public void SetRequestTarget(AbsEntity entity) {
+            abilityRequestContext.IsUnitRequest = true;
+            abilityRequestContext.RequestTargetUnit = entity;
+        }
+        
+        public void SetRequestTarget(Vector3 position) {
+            abilityRequestContext.IsUnitRequest = false;
+            abilityRequestContext.RequestTargetPosition = position;
         }
         
         #endregion
         
         #region Private
 
+        private void SetStartCd() {
+            isStartCd = true;
+        }
+        
         // 驱动事件
         private void ExecuteEvent(AbilityEvent abilityEvent) {
             if (abilityConfig.AbilityEventMap.ContainsKey(abilityEvent)) {
                 var d2Event = abilityConfig.AbilityEventMap[abilityEvent];
                 BattleLog.Log($"【ExecuteEvent】 技能名称：{abilityConfig.Name} 事件：{abilityEvent.ToString()}");
-                d2Event.Execute(caster);
+                d2Event.Execute(caster, abilityRequestContext);
             }
         }
 

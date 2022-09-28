@@ -3,11 +3,8 @@ using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
     // 子弹数据层
-    public class ProjectileEntity {
+    public class ProjectileEntity : AbsEntity {
         public int Id;
-        public Vector3 LocalPosition;
-        
-        private Quaternion rotation;
         private string effectName;
         private bool dodgeable;
         private float moveSpeed;
@@ -16,14 +13,18 @@ namespace Battle.logic.ability_dataDriven {
         private Vector3 flyToward;
         private AbsEntity casterEntity;
         private ProjectileActor actor;
-        
-        public void OnInit(AbsEntity casterEntity, Vector3 startPoint, Quaternion startRotation, AbilityTarget abilityTarget, string effectName, float moveSpeed, bool dodgeable = false) {
+        public ProjectileType ProjectileType;
+
+        public override void OnInit() { }
+
+        public void OnInit(AbsEntity casterEntity, Vector3 startPoint, Quaternion startRotation, AbsEntity targetEntity, 
+            AbilityRequestContext abilityRequestContext, string effectName, float moveSpeed, bool dodgeable = false) {
             this.effectName = effectName;
             this.moveSpeed = moveSpeed;
             this.dodgeable = dodgeable;
             this.casterEntity = casterEntity;
             LocalPosition = startPoint;
-            rotation = startRotation;
+            LocalRotation = startRotation;
             flyTime = 0f;
             flyToward = startRotation * Vector3.up;
 
@@ -35,7 +36,7 @@ namespace Battle.logic.ability_dataDriven {
             ProjectileManager.instance.GetActorAsync(effectName, OnCreateProjectile);
         }
 
-        public void OnUpdate() {
+        public override void OnUpdate() {
             if (moveSpeed > 0) {
                 LocalPosition += flyToward * moveSpeed * Time.deltaTime;
             }
@@ -50,7 +51,7 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
-        public void OnClear() {
+        public override void OnClear() {
             actor = null;
             casterEntity = null;
         }

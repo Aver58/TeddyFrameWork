@@ -8,7 +8,9 @@ namespace Battle.logic.ability_dataDriven {
     // 例如一个弹射技能，在多个目标间弹射时会发生多次目标变更，这就需要多次同步。
     // 同步方式是主控端发起并预表现，服务器校验并广播，主控端收到经校验的数据后会进行修正，模拟客户端收到广播包后进行后续表现。
     public struct AbilityRequestContext {
+        public bool IsUnitRequest;
         public AbsEntity RequestTargetUnit { get; set; } // 目标对象
         public Vector3 RequestTargetPosition { get; set; } // 选点对象
+
     }
 }

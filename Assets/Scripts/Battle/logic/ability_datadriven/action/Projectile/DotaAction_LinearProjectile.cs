@@ -36,9 +36,9 @@ namespace Battle.logic.ability_dataDriven {
             this.visionRadius = visionRadius;
         }
 
-        protected override void ExecuteBySingle(AbsEntity entity) {
+        protected override void ExecuteByUnit(AbsEntity entity, AbsEntity targetEntity, AbilityRequestContext abilityRequestContext) {
             var projectileEntity = ProjectileManager.instance.GetProjectile();
-            projectileEntity.OnInit(entity, entity.LocalPosition, entity.LocalRotation, abilityTarget, effectName, moveSpeed, dodgeable);
+            projectileEntity.OnInit(entity, entity.LocalPosition, entity.LocalRotation, targetEntity, abilityRequestContext, effectName, moveSpeed, dodgeable);
         }
     }
 }

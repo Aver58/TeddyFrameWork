@@ -8,11 +8,10 @@ namespace Battle.logic.ability_dataDriven {
             this.actions = actions;
         }
 
-        public void Execute(AbsEntity entity) {
-            // BattleLog.Log("【D2Event】Execute {0}，source：{1}", GetType().Name, entity.InstanceId);
+        public void Execute(AbsEntity entity, AbilityRequestContext abilityRequestContext) {
             for (int i = 0; i < actions.Count; i++) {
                 var action = actions[i];
-                action.Execute(entity);
+                action.Execute(entity, abilityRequestContext);
             }
         }
     }

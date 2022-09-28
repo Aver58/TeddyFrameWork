@@ -667,4 +667,10 @@ public enum AbilityIndicatorType {
     SEGMENT_AREA
 }
 
+public enum ProjectileType {
+    Linear,      // 线性
+    Tracking,    // 追踪
+    Bouncing,    // 弹跳
+}
+
 #endregion

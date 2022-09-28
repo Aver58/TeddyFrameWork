@@ -11,18 +11,18 @@ namespace Battle.logic.ability_dataDriven {
             this.abilityTarget = abilityTarget;
         }
 
-        public virtual void Execute(AbsEntity entity) {
+        public virtual void Execute(AbsEntity entity, AbilityRequestContext abilityRequestContext) {
             Debug.Log($"【DotaAction Execute】名称：{AbilityName} entity：{entity.InstanceId}");
             if (abilityTarget.IsSingleTarget) {
-                var singleTarget = EntityManager.instance.GetSingleTarget(entity, abilityTarget);
-                ExecuteBySingle(singleTarget);
+                var singleTarget = EntityManager.instance.GetSingleTarget(entity, abilityTarget, abilityRequestContext);
+                ExecuteByUnit(entity, singleTarget, abilityRequestContext);
             } else {
-                ExecuteByMultiple();
+                ExecuteByPoint();
             }
         }
 
-        protected virtual void ExecuteBySingle(AbsEntity entity){}
-        protected virtual void ExecuteByMultiple(){}
+        protected virtual void ExecuteByUnit(AbsEntity casterEntity, AbsEntity targetEntity, AbilityRequestContext abilityRequestContext){}
+        protected virtual void ExecuteByPoint(){}
 
         public void SetAction(List<DotaAction> actions) {
             this.actions = actions;
