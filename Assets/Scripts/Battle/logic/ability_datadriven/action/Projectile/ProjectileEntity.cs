@@ -1,8 +1,11 @@
+using System;
 using Origins;
 using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
-    // 子弹数据层
+    /// <summary>
+    /// 子弹数据层
+    /// </summary>
     public class ProjectileEntity : AbsEntity {
         public int Id;
         private string effectName;
@@ -12,9 +15,10 @@ namespace Battle.logic.ability_dataDriven {
         private float flyTime;
         private Vector3 flyToward;
         private AbsEntity casterEntity;
-        private ProjectileActor actor;
         public ProjectileType ProjectileType;
-
+        public event Action OnProjectileHitUnitEvent;
+        public event Action OnProjectileFinishEvent;
+        public event Action OnProjectileDodgeEvent;
         public override void OnInit() { }
 
         public void OnInit(AbsEntity casterEntity, Vector3 startPoint, Quaternion startRotation, AbsEntity targetEntity, 
@@ -33,7 +37,6 @@ namespace Battle.logic.ability_dataDriven {
                 return;
             }
             
-            ProjectileManager.instance.GetActorAsync(effectName, OnCreateProjectile);
         }
 
         public override void OnUpdate() {
@@ -45,31 +48,11 @@ namespace Battle.logic.ability_dataDriven {
             if (flyTime >= durning) {
                 FlyEnd();
             }
-            
-            if (actor != null) {
-                actor.OnUpdate();
-            }
         }
 
         public override void OnClear() {
-            actor = null;
             casterEntity = null;
-        }
-
-        private void OnCreateProjectile(GameObject instance) {
-            if (instance != null) {
-                instance.transform.SetParent(UIModule.Instance.GetParentTransform(ViewType.MAIN));
-                actor = instance.GetComponent<ProjectileActor>();
-                if (actor != null) {
-                    var transform = actor.transform;
-                    transform.localPosition = LocalPosition;
-                    var angle = Vector3.SignedAngle(Vector3.zero, flyToward, Vector3.forward);
-                    transform.localRotation = new Quaternion(0, 0, angle, 1);
-                    actor.SetEntity(this);
-                }
-            } else {
-                Debug.LogError("[GetActorAsync] 回调返回的go为空！");
-            }
+            OnProjectileFinishEvent?.Invoke();
         }
 
         private void FlyEnd() {
