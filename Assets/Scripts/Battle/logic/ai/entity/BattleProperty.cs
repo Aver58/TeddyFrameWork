@@ -38,7 +38,7 @@ public class BattleProperty
         curHP += Mathf.CeilToInt(damage);
 
         curHP = Mathf.Clamp(curHP, 0, GetMaxHP());
-        GameMsg.instance.SendMessage(GameMsgDef.BattleEntity_HP_Updated, new HeorHPUpdateEventArgs(id, curHP,GetMaxHP()));
+        GameMsg.instance.DispatchEvent(GameMsgDef.BattleEntity_HP_Updated, id, curHP,GetMaxHP());
     }
 
     public void UpdateEnergy(int energy)

@@ -13,87 +13,71 @@ using System;
 using System.Collections.Generic;
 
 // 观察者模式
-public class GameMsg : Singleton<GameMsg>
-{
-    private Dictionary<GameMsgDef, Delegate> m_MsgMap = new Dictionary<GameMsgDef, Delegate>();
+public class GameMsg : Singleton<GameMsg> {
+    private Dictionary<GameMsgDef, Delegate> delegateMap = new Dictionary<GameMsgDef, Delegate>();
 
-
-    public void AddMessage(GameMsgDef msgName, Action listener)
-    {
-        if (listener == null)return;
+    public void RegisterListener(GameMsgDef msgName, Action listener) {
         AddDelegate(msgName, listener);
     }
 
-    public void AddMessage<T>(GameMsgDef msgName, Action<T> listener)
-    {
-        if (listener == null)return;
+    public void RegisterListener<T>(GameMsgDef msgName, Action<T> listener) {
         AddDelegate(msgName, listener);
     }
 
-    public void AddMessage<T1, T2>(GameMsgDef msgName, Action<T1, T2> listener)
-    {
-        if (listener == null)return;
+    public void RegisterListener<T1, T2>(GameMsgDef msgName, Action<T1, T2> listener) {
         AddDelegate(msgName, listener);
     }
 
-    public void AddMessage<T1, T2, T3>(GameMsgDef msgName, Action<T1, T2, T3> listener)
-    {
-        if (listener == null) return;
+    public void RegisterListener<T1, T2, T3>(GameMsgDef msgName, Action<T1, T2, T3> listener) {
         AddDelegate(msgName, listener);
     }
 
-    public void AddMessage<T1, T2, T3, T4>(GameMsgDef msgName, Action<T1, T2, T3, T4> listener)
-    {
-        if(listener == null) return;
+    public void RegisterListener<T1, T2, T3, T4>(GameMsgDef msgName, Action<T1, T2, T3, T4> listener) {
         AddDelegate(msgName, listener);
     }
-
 
     private void AddDelegate(GameMsgDef msgName, Delegate listener)
     {
-        if (listener == null)return;
+        if (listener == null) {
+            return;
+        }
 
         Delegate func = null;
-        if (m_MsgMap.TryGetValue(msgName, out func))
+        if (delegateMap.TryGetValue(msgName, out func)) {
             Delegate.Combine(func, listener);
-        else
+        } else {
             func = listener;
+        }
 
-        m_MsgMap[msgName] = func;
+        delegateMap[msgName] = func;
     }
 
     // todo test
-    public void RemoveMessage(GameMsgDef msgName, object sender)
-    {
-        if (sender == null)
+    public void UnRegisterListener(GameMsgDef msgName, object sender) {
+        if (sender == null) {
             return;
+        }
 
-        Delegate funcs = null;
-        if (m_MsgMap.TryGetValue(msgName, out funcs))
-        {
-            foreach (Delegate func in funcs.GetInvocationList())
-            {
-                if (func.Target == sender)
-                {
+        if (delegateMap.TryGetValue(msgName, out var funcs)) {
+            foreach (var func in funcs.GetInvocationList()) {
+                if (func.Target == sender) {
                     Delegate.Remove(funcs, func);
                 }
             }
         }
 
-        if (funcs == null)
-            m_MsgMap.Remove(msgName);
+        if (funcs == null) {
+            delegateMap.Remove(msgName);
+        }
     }
 
     #region SendMessage
 
     // 无参
-    public void SendMessage(GameMsgDef msgName)
-    {
+    public void DispatchEvent(GameMsgDef msgName) {
         Delegate funcs = null;
-        if (m_MsgMap.TryGetValue(msgName, out funcs))
-        {
-            foreach (Delegate func in funcs.GetInvocationList())
-            {
+        if (delegateMap.TryGetValue(msgName, out funcs)) {
+            foreach (Delegate func in funcs.GetInvocationList()) {
                 Action tmp = (Action)func;
                 tmp();
             }
@@ -101,13 +85,10 @@ public class GameMsg : Singleton<GameMsg>
     }
 
     // 1个参
-    public void SendMessage<T>(GameMsgDef msgName, T arg)
-    {
+    public void DispatchEvent<T>(GameMsgDef msgName, T arg) {
         Delegate funcs = null;
-        if (m_MsgMap.TryGetValue(msgName, out funcs))
-        {
-            foreach (Delegate func in funcs.GetInvocationList())
-            {
+        if (delegateMap.TryGetValue(msgName, out funcs)) {
+            foreach (Delegate func in funcs.GetInvocationList()) {
                 Action<T> tmp = (Action<T>)func;
                 tmp(arg);
             }
@@ -115,13 +96,10 @@ public class GameMsg : Singleton<GameMsg>
     }
 
     // 2个参
-    public void SendMessage<T1, T2>(GameMsgDef msgName, T1 arg1, T2 arg2)
-    {
+    public void DispatchEvent<T1, T2>(GameMsgDef msgName, T1 arg1, T2 arg2) {
         Delegate funcs = null;
-        if (m_MsgMap.TryGetValue(msgName, out funcs))
-        {
-            foreach (Delegate func in funcs.GetInvocationList())
-            {
+        if (delegateMap.TryGetValue(msgName, out funcs)) {
+            foreach (Delegate func in funcs.GetInvocationList()) {
                 Action<T1, T2> tmp = (Action<T1, T2>)func;
                 tmp(arg1, arg2);
             }
@@ -129,13 +107,10 @@ public class GameMsg : Singleton<GameMsg>
     }
 
     // 3个参
-    public void SendMessage<T1, T2, T3>(GameMsgDef msgName, T1 arg1, T2 arg2, T3 arg3)
-    {
+    public void DispatchEvent<T1, T2, T3>(GameMsgDef msgName, T1 arg1, T2 arg2, T3 arg3) {
         Delegate funcs = null;
-        if (m_MsgMap.TryGetValue(msgName, out funcs))
-        {
-            foreach (Delegate func in funcs.GetInvocationList())
-            {
+        if (delegateMap.TryGetValue(msgName, out funcs)) {
+            foreach (Delegate func in funcs.GetInvocationList()) {
                 Action<T1, T2, T3> tmp = (Action<T1, T2, T3>)func;
                 tmp(arg1, arg2, arg3);
             }
@@ -143,13 +118,10 @@ public class GameMsg : Singleton<GameMsg>
     }
 
     // 4个参
-    public void SendMessage<T1, T2, T3, T4>(GameMsgDef msgName, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-    {
+    public void DispatchEvent<T1, T2, T3, T4>(GameMsgDef msgName, T1 arg1, T2 arg2, T3 arg3, T4 arg4) {
         Delegate funcs = null;
-        if(m_MsgMap.TryGetValue(msgName, out funcs))
-        {
-            foreach(Delegate func in funcs.GetInvocationList())
-            {
+        if(delegateMap.TryGetValue(msgName, out funcs)) {
+            foreach(Delegate func in funcs.GetInvocationList()) {
                 Action<T1, T2, T3, T4> tmp = (Action<T1, T2, T3, T4>)func;
                 tmp(arg1, arg2, arg3, arg4);
             }

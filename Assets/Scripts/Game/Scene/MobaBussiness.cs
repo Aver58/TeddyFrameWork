@@ -23,17 +23,17 @@ public class MobaBussiness : Singleton<MobaBussiness>
     public MobaBussiness()
     {
         GameMsg instance = GameMsg.instance;
-        instance.AddMessage<int, float, float, float>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
-        instance.AddMessage<int, float, float, float>(GameMsgDef.Hero_TurnTo3D, OnHeroTurnTo);
-        instance.AddMessage<int,HeroState,string,bool>(GameMsgDef.Hero_ChangeState, OnHeroActorStateChanged);
+        instance.RegisterListener<int, float, float, float>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
+        instance.RegisterListener<int, float, float, float>(GameMsgDef.Hero_TurnTo3D, OnHeroTurnTo);
+        instance.RegisterListener<int,HeroState,string,bool>(GameMsgDef.Hero_ChangeState, OnHeroActorStateChanged);
     }
 
     ~MobaBussiness()
     {
         GameMsg instance = GameMsg.instance;
-        instance.RemoveMessage(GameMsgDef.Hero_MoveTo, this);
-        instance.RemoveMessage(GameMsgDef.Hero_TurnTo3D, this);
-        instance.RemoveMessage(GameMsgDef.Hero_ChangeState, this);
+        instance.UnRegisterListener(GameMsgDef.Hero_MoveTo, this);
+        instance.UnRegisterListener(GameMsgDef.Hero_TurnTo3D, this);
+        instance.UnRegisterListener(GameMsgDef.Hero_ChangeState, this);
     }
 
     public void Init()

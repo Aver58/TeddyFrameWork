@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Origins {
-    public class GameMainLoop : Singleton<GameMainLoop> {
+    public class GameMainLoop : Singleton<GameMainLoop>,ILifeCycle {
         private float currentTime = 0;
         private const int MAX_LEVEL_NUM = 1000;
         private HeroEntity heroEntity;
@@ -17,8 +17,15 @@ namespace Origins {
             LoadLevelConfig();
         }
 
+        public void OnInit() {
+
+        }
+
         public void OnUpdate() {
 
+        }
+
+        public void OnClear() {
         }
 
         public void OnFixedUpdate() {

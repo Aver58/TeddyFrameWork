@@ -40,7 +40,7 @@ public abstract class ViewBase
     /// <summary>
     /// 打开传入的参数
     /// </summary>
-    protected UIEventArgs openParam;
+    protected object[] openParam;
 
     private Transform m_parent;
     private AssetRequest m_assetRequest;
@@ -148,7 +148,7 @@ public abstract class ViewBase
         //todo 
     }
 
-    public void SetOpenParam(UIEventArgs args)
+    public void SetOpenParam(object[] args)
     {
         openParam = args;
     }
@@ -188,7 +188,7 @@ public abstract class ViewBase
     /// </summary>
     protected virtual void AddAllMessage() { }
     protected virtual void OnLoaded() { }
-    protected virtual void OnOpen(UIEventArgs args = null) { }
+    protected virtual void OnOpen(object[] args) { }
     protected virtual void OnClose() { }
     protected virtual void OnUpdate() { }
     protected virtual void BindView() { }

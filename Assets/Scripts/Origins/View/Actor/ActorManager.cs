@@ -3,7 +3,7 @@ using libx;
 using UnityEngine;
 
 namespace Origins {
-    public class ActorManager : Singleton<ActorManager> {
+    public class ActorManager : Singleton<ActorManager>, ILifeCycle {
         public HeroActor HeroActor;
         private readonly List<EnemyActor> entities;
         private Dictionary<int, EnemyActor> enemyActorMap;
@@ -12,6 +12,10 @@ namespace Origins {
             entities = new List<EnemyActor>();
             enemyActorPool = new GameObjectPool(LoadModule.MODEL_PATH_PREFIX);
             enemyActorMap = new Dictionary<int, EnemyActor>();
+        }
+
+        public void OnInit() {
+
         }
 
         public void OnUpdate() {
@@ -24,7 +28,11 @@ namespace Origins {
                 entity.OnUpdate();
             }
         }
-        
+
+        public void OnClear() {
+
+        }
+
         public void AddHeroActor(HeroEntity heroEntity) {
             if (heroEntity == null) {
                 Debug.LogError("[AddHeroActor]没有传入敌人对象！");

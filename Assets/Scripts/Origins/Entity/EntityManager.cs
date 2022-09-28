@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Origins {
-    public class EntityManager : Singleton<EntityManager> {
+    public class EntityManager : Singleton<EntityManager>, ILifeCycle {
         public int AutoIndex = 0;
         private const int HERO_ID = 101;
         public HeroEntity HeroEntity;
@@ -18,11 +18,19 @@ namespace Origins {
             enemyEntityPool = new ObjectPool<EnemyEntity>();
         }
 
+        public void OnInit() {
+
+        }
+
         public void OnUpdate() {
             for (var i = 0; i < entities.Count; i++) {
                 var entity = entities[i];
                 entity.OnUpdate();
             }
+        }
+
+        public void OnClear() {
+
         }
 
         #region Public

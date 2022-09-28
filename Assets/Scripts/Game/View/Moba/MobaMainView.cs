@@ -90,9 +90,9 @@ public partial class MobaMainView : MainViewBase
     {
         base.AddAllMessage();
 
-        GameMsg.instance.AddMessage<HeroActor, bool>(GameMsgDef.BattleActor_Created,OnHeroActorCreated);
-        GameMsg.instance.AddMessage<HeroActor, bool>(GameMsgDef.PlayerActor_Created, OnPlayerActorCreated);
-        GameMsg.instance.AddMessage<int, string>(GameMsgDef.Hero_Cast_Ability, OnHeroCastAbility);
+        GameMsg.instance.RegisterListener<HeroActor, bool>(GameMsgDef.BattleActor_Created,OnHeroActorCreated);
+        GameMsg.instance.RegisterListener<HeroActor, bool>(GameMsgDef.PlayerActor_Created, OnPlayerActorCreated);
+        GameMsg.instance.RegisterListener<int, string>(GameMsgDef.Hero_Cast_Ability, OnHeroCastAbility);
     }
 
     private MobaSkillItem GetSkillItem(AbilityCastType castType)

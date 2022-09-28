@@ -9,7 +9,7 @@ namespace Battle.logic.ability_dataDriven {
     // 逻辑以帧为单位
     // 可预览的技能编辑
     // DOTA2 技能系统，按着对配置表的理解，自己进行梳理逻辑
-    public class Ability {
+    public class Ability : ILifeCycle {
         public int AbilityLevel;// 技能等级
         
         private readonly AbilityConfig abilityConfig;
@@ -60,7 +60,15 @@ namespace Battle.logic.ability_dataDriven {
 
             backSwingPoint = abilityConfig.AbilityCastPoint + abilityConfig.AbilityChannelTime;
         }
-        
+
+        public void OnUpdate() {
+
+        }
+
+        public void OnClear() {
+
+        }
+
         public void OnUpdate(float deltaTime) {
             // Debug.LogError($"cooldown{cooldown} currentTick {currentTick} {abilityConfig.AbilityCastPoint}  {backSwingPoint}  {abilityConfig.AbilityDuration}");
             if (abilityState == AbilityState.None && currentTick <= abilityConfig.AbilityCastPoint) {

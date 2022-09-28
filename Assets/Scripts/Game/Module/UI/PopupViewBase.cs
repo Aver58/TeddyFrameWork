@@ -71,7 +71,7 @@ public class PopupViewBase : ViewBase
         HideMask();
     }
 
-    protected override void OnOpen(UIEventArgs args = null)
+    protected override void OnOpen(object[] args)
     {
         ShowMask();
 

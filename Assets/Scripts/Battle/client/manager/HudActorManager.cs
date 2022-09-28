@@ -28,23 +28,23 @@ public class HudActorManager : Singleton<HudActorManager>
         canvasTransform = hudParent;
         parentNode = hudParent;
 
-        GameMsg.instance.AddMessage<HeorHPUpdateEventArgs>(GameMsgDef.BattleEntity_HP_Updated, OnHeroHPUpdated);
+        GameMsg.instance.RegisterListener<int, int, int>(GameMsgDef.BattleEntity_HP_Updated, OnHeroHPUpdated);
     }
 
     ~HudActorManager()
     {
-        GameMsg.instance.RemoveMessage(GameMsgDef.BattleEntity_HP_Updated, this);
+        GameMsg.instance.UnRegisterListener(GameMsgDef.BattleEntity_HP_Updated, this);
     }
 
-    public void OnHeroHPUpdated(HeorHPUpdateEventArgs args)
+    public void OnHeroHPUpdated(int id, int curHp, int maxHp)
     {
-        int actorID = args.id;
+        int actorID = id;
 
         HudActor actor;
         m_actorMap.TryGetValue(actorID, out actor);
         if(actor!=null)
         {
-            float percent = (float)args.curHp / args.maxHp;
+            float percent = (float)curHp / maxHp;
 
             actor.SetValue(percent);
         }
