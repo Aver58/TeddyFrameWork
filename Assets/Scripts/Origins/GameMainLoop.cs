@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Origins {
-    public class GameMainLoop : Singleton<GameMainLoop>,ILifeCycle {
+    public class GameMainLoop : Singleton<GameMainLoop>, ILifeCycle {
         private float currentTime = 0;
         private const int MAX_LEVEL_NUM = 1000;
         private HeroEntity heroEntity;
@@ -22,13 +22,6 @@ namespace Origins {
         }
 
         public void OnUpdate() {
-
-        }
-
-        public void OnClear() {
-        }
-
-        public void OnFixedUpdate() {
             currentTime += Time.fixedDeltaTime;
             if (levels == null || levels.Count <= 0) {
                 return;
@@ -39,6 +32,9 @@ namespace Origins {
                 GenerateEnemy(config);
                 levels.RemoveAt(0);
             }
+        }
+
+        public void OnClear() {
         }
 
         #endregion

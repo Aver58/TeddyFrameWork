@@ -64,13 +64,13 @@ namespace Origins {
 
         public void AddEnemyEntity(int roleId) {
             var distance = Random.Range(MIN_RANGE, MAX_RANGE);
-            var randomPosX = HeroEntity.LocalPosition.x + distance * Mathf.Cos(distance * Mathf.PI / 180);
-            var randomPosY = HeroEntity.LocalPosition.y + distance * Mathf.Sin(distance * Mathf.PI / 180);
+            var randomPosX = HeroEntity.Position.x + distance * Mathf.Cos(distance * Mathf.PI / 180);
+            var randomPosY = HeroEntity.Position.y + distance * Mathf.Sin(distance * Mathf.PI / 180);
             var entity = enemyEntityPool.Get();
             entity.RoleId = roleId;
             entity.OnInit();
             entity.SetPosition(new Vector2(randomPosX, randomPosY));
-            Debug.Log($"[EntityManager] 生成敌人：{entity.InstanceId} roleId: {roleId} pos:{entity.LocalPosition}");
+            Debug.Log($"[EntityManager] 生成敌人：{entity.InstanceId} roleId: {roleId} pos:{entity.Position}");
 
             AddEntity(entity);
         }
@@ -86,7 +86,7 @@ namespace Origins {
                     return caster;
                 }
 
-                return abilityRequestContext.RequestTargetUnit;
+                return abilityRequestContext.RequestUnit;
             }
 
             if (abilityTarget.ActionSingleTarget == ActionSingleTarget.POINT) {

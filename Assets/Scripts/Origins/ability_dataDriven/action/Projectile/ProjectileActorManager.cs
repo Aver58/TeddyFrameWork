@@ -33,6 +33,11 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         private void OnProjectileActorCreated(int id, string effectName , Vector3 sourcePosition, Vector3 sourceToward) {
+            if (string.IsNullOrEmpty(effectName)) {
+                Debug.LogError("【OnProjectileActorCreated】子弹特效名为空！");
+                return;
+            }
+            
             gameObjectPool.GetAsync(effectName, (gameObject) => {
                 if (gameObject != null) {
                     gameObject.transform.SetParent(UIModule.Instance.GetParentTransform(ViewType.MAIN));

@@ -10,7 +10,7 @@
 #endregion
 
 // [数据驱动类技能](https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools:zh-cn/Scripting:zh-cn/Abilities_Data_Driven:zh-cn)
-
+// https://moddota.com/api/#!/vscripts
 using System;
 
 // 技能事件
@@ -218,6 +218,9 @@ public enum AbilityValueSourceType {
 }
 
 #region 操作目标 Action Target Values
+
+// "Target" is one bitch of a key.
+// https://moddota.com/abilities/datadriven/all-about-the-target
 
 /// <summary>
 /// 单个目标

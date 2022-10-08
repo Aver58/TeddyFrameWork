@@ -42,7 +42,7 @@ namespace Origins {
 
         private void SetPositionSync(Vector3 value) {
             SetPosition(value);
-            entity.LocalPosition = value;
+            entity.Position = value;
         }
 
         private void OnPlayerInput() {
@@ -55,10 +55,10 @@ namespace Origins {
                 // rigidbody2D.MovePosition(targetPos);
                 // rigidbody2D 没调试好，跑不起来
                 // rigidBody2D.velocity = cacheVector2;
-                var targetPos = entity.LocalPosition + cacheVector3 * entity.MoveSpeed * Time.deltaTime;
-                var targetDirection = targetPos - entity.LocalPosition;
+                var targetPos = entity.Position + cacheVector3 * entity.MoveSpeed * Time.deltaTime;
+                var targetDirection = targetPos - entity.Position;
                 SetPositionSync(targetPos);
-                entity.LocalRotation = Quaternion.LookRotation(targetDirection);
+                entity.Forward = targetDirection;
             }
         }
 

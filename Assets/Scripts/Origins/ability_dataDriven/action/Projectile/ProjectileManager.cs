@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Origins;
-using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
     public class ProjectileManager : Singleton<ProjectileManager>, ILifeCycle {
+        public int AutoIndex = 0;
+
         private List<ProjectileEntity> projectiles;
         private ObjectPool<ProjectileEntity> projectileEntityPool;
 
@@ -33,19 +34,36 @@ namespace Battle.logic.ability_dataDriven {
             //     }
             // }
         }
+
+        public void CreateLinearProjectile() {
+            
+        }
         
-        public T GetProjectile<T>(ProjectileType projectileType) where T : ProjectileEntity {
-            // todo 这里怎么做泛型？ projectileType 对应 不同的对象池
-
-            var projectileEntity = projectileEntityPool.Get();
+        public void CreateTrackingProjectile() {
+            
+        }
+        
+        public ProjectileEntity GetProjectile(ProjectileType projectileType) {
+            var factory = GetProjectileFactory(projectileType);
+            var projectileEntity = factory.GetProjectile();
             projectiles.Add(projectileEntity);
+            
+            return projectileEntity;
+        }
 
-            if (!(projectileEntity is T returnValue)) {
-                return default;
+        // 简单工厂
+        private ProjectileFactory GetProjectileFactory(ProjectileType projectileType) {
+            switch (projectileType) {
+                case ProjectileType.Linear:
+                    return new LinearProjectileFactory();
+                case ProjectileType.Tracking:
+                    break;
+                case ProjectileType.Bouncing:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(projectileType), projectileType, null);
             }
-
-            returnValue.ProjectileType = projectileType;
-            return returnValue;
+            return default;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Origins {
 
         public void SetPositionSync(Vector2 value) {
             SetPosition(value);
-            entity.LocalPosition = value;
+            entity.Position = value;
         }
 
         #region Private
@@ -45,9 +45,9 @@ namespace Origins {
                 return;
             }
 
-            var targetPos = targetEntity.LocalPosition;
-            var targetVector = targetPos - entity.LocalPosition;
-            var newPos = entity.LocalPosition + targetVector.normalized * entity.MoveSpeed * Time.deltaTime;
+            var targetPos = targetEntity.Position;
+            var targetVector = targetPos - entity.Position;
+            var newPos = entity.Position + targetVector.normalized * entity.MoveSpeed * Time.deltaTime;
             SetPositionSync(newPos);
         }
 

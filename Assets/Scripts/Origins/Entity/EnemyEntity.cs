@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Origins {
-    public class EnemyEntity : AbsEntity {
+    public class EnemyEntity : RoleEntity {
         public override void OnUpdate() {
             
         }
@@ -18,11 +18,11 @@ namespace Origins {
         }
 
         public void SetPosition(Vector2 value) {
-            LocalPosition = value;
+            Position = value;
             ActorManager.instance.SetActorPosition(InstanceId, value);
         }
-        
-        protected override void InitProperty(int roleId) {
+
+        private void InitProperty(int roleId) {
             var config = EnemyConfigTable.Instance.Get(roleId);
             MaxHp = config.maxHp;
             MaxMp = config.maxMp;

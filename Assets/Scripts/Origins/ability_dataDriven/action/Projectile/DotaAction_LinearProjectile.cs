@@ -37,8 +37,10 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         protected override void ExecuteByUnit(AbsEntity entity, AbsEntity targetEntity, AbilityRequestContext abilityRequestContext) {
-            var linearProjectile = ProjectileManager.instance.GetProjectile<LinearProjectile>(ProjectileType.Linear);
-            linearProjectile.OnInit(entity, entity.LocalPosition, entity.LocalRotation, targetEntity, abilityRequestContext, effectName, moveSpeed, dodgeable);
+            if (ProjectileManager.instance.GetProjectile(ProjectileType.Linear) is LinearProjectile linearProjectile) {
+                abilityRequestContext.SetRequestUnit(targetEntity);
+                linearProjectile.OnInit(entity, targetEntity, entity.Position, entity.Forward, abilityRequestContext, effectName, moveSpeed, dodgeable);
+            }        
         }
     }
 }

@@ -4,6 +4,10 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class GameObjectPool {
+    private static readonly Vector3 hidePoint = new Vector3(-5000, 0, 0);
+    private static GameObject root;
+    private const string GameObjectPoolRootName = "GameObjectPool";
+
     private string bundleName;
     private string assetName;
 
@@ -19,6 +23,8 @@ public class GameObjectPool {
         
         activeGameObjects = new List<GameObject>();
         freeGameObjects = new List<GameObject>();
+
+        CreateRoot();
     }
     
     public void GetAsync(string assetName, Action<GameObject> callback) {
@@ -27,7 +33,7 @@ public class GameObjectPool {
             LoadModule.LoadAssetAsync(bundleName + assetName + LoadModule.GetAssetPostfix(typeof(GameObject)), 
                 typeof(GameObject), delegate(AssetRequest request) {
                     if (request.asset != null) {
-                        instance = Object.Instantiate(request.asset as GameObject, UIModule.GameObjectPoolRoot.transform);
+                        instance = Object.Instantiate(request.asset as GameObject, root.transform);
                         activeGameObjects.Add(instance);
                         
                         callback?.Invoke(instance);
@@ -51,9 +57,19 @@ public class GameObjectPool {
         }
         
         if (activeGameObjects.Contains(instance)) {
-            instance.transform.SetParent(UIModule.GameObjectPoolRoot.transform);
+            instance.transform.SetParent(root.transform);
             instance.SetActive(false);
         }
         freeGameObjects.Add(instance);
+    }
+    
+    private static void CreateRoot() {
+        if (root == null) {
+            root = GameObject.Find(GameObjectPoolRootName);
+            if (root == null) {
+                root = new GameObject("GameObjectPool");
+                root.transform.position = hidePoint;
+            }
+        }
     }
 }

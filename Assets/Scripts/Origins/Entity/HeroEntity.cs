@@ -3,7 +3,7 @@ using Battle.logic.ability_dataDriven;
 using UnityEngine;
 
 namespace Origins {
-    public sealed class HeroEntity : AbsEntity {
+    public sealed class HeroEntity : RoleEntity {
         private int defaultSkillId;
         private List<Battle.logic.ability_dataDriven.Ability> abilities;
 
@@ -38,7 +38,7 @@ namespace Origins {
         #region Public
 
         public void SetPosition(Vector2 value) {
-            LocalPosition = value;
+            Position = value;
             ActorManager.instance.SetHeroActorPosition(value);
         }
 
@@ -46,7 +46,7 @@ namespace Origins {
 
         #region Private
 
-        protected override void InitProperty(int roleId) {
+        private void InitProperty(int roleId) {
             var config = HeroConfigTable.Instance.Get(roleId);
             MaxHp = config.maxHp;
             MaxMp = config.maxMp;
@@ -57,9 +57,7 @@ namespace Origins {
             defaultSkillId = config.defaultSkillId;
         }
 
-        protected override void Dead() {
-            base.Dead();
-
+        private void Dead() {
             GameMainLoop.instance.GameOver();
         }
 

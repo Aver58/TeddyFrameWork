@@ -10,7 +10,7 @@ namespace Battle.logic.ability_dataDriven {
     // 可预览的技能编辑
     // DOTA2 技能系统，按着对配置表的理解，自己进行梳理逻辑
     public class Ability : ILifeCycle {
-        public int AbilityLevel;// 技能等级
+        public int AbilityLevel; // 技能等级
         
         private readonly AbilityConfig abilityConfig;
         
@@ -72,29 +72,15 @@ namespace Battle.logic.ability_dataDriven {
         public void OnUpdate(float deltaTime) {
             // Debug.LogError($"cooldown{cooldown} currentTick {currentTick} {abilityConfig.AbilityCastPoint}  {backSwingPoint}  {abilityConfig.AbilityDuration}");
             if (abilityState == AbilityState.None && currentTick <= abilityConfig.AbilityCastPoint) {
-                // 前摇时间：
-                //      技能开始，但是技能真正的结算流程还没开始
-                //      技能开始以后，机能相关的特效和动作就开始播放
-                abilityState = AbilityState.CastPoint;
-                ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
+                OnAbilityPhaseStart();
             }
 
             if (abilityState == AbilityState.CastPoint && currentTick >= abilityConfig.AbilityCastPoint && currentTick <= backSwingPoint) {
-                // 前摇时间结束：
-                //      技能前摇结束时技能开始真正的释放以及结算，等技能前摇结束以后，技能真正的释放并结算
-                //      释放包括创建相应的弹道／法术场和buff
-                abilityState = AbilityState.Channeling;
-                ExecuteEvent(AbilityEvent.OnSpellStart);
+                OnSpellStart();
             }
 
             if (abilityState == AbilityState.Channeling && currentTick >= backSwingPoint && currentTick <= abilityConfig.AbilityDuration) {
-                // 技能后摇点：
-                //      技能播放到后摇点时间时，技能真正的结束。这时，技能对应的特效以及人物动作可能还会继续播放，但是技能流程已经正式结束了
-                //      也就是说，下一个技能可以执行
-                abilityState = AbilityState.CastBackSwing;
-                ExecuteEvent(AbilityEvent.OnChannelFinish);
-
-                SetStartCd();
+                OnChannelFinish();
             }
             
             currentTick += deltaTime;
@@ -107,20 +93,58 @@ namespace Battle.logic.ability_dataDriven {
 
         #region Public
 
+        #region Get
+
+        public int GetAbilityDamage() {
+            return -1;
+        }
+        
+
+        #endregion
+        
         public void SetRequestTarget(AbsEntity entity) {
             abilityRequestContext.IsUnitRequest = true;
-            abilityRequestContext.RequestTargetUnit = entity;
+            abilityRequestContext.RequestUnit = entity;
         }
         
         public void SetRequestTarget(Vector3 position) {
             abilityRequestContext.IsUnitRequest = false;
-            abilityRequestContext.RequestTargetPosition = position;
+            abilityRequestContext.RequestPosition = position;
         }
+        
+        public void EndChannel(bool interrupted){}
+        public void EndCooldown(){}
         
         #endregion
         
         #region Private
 
+        private void OnAbilityPhaseStart() {
+            // 前摇时间：
+            //      技能开始，但是技能真正的结算流程还没开始
+            //      技能开始以后，机能相关的特效和动作就开始播放
+            abilityState = AbilityState.CastPoint;
+            ExecuteEvent(AbilityEvent.OnAbilityPhaseStart);
+        }
+
+        private void OnSpellStart() {
+            // 前摇时间结束：
+            //      技能前摇结束时技能开始真正的释放以及结算，等技能前摇结束以后，技能真正的释放并结算
+            //      释放包括创建相应的弹道／法术场和buff
+            abilityState = AbilityState.Channeling;
+            ExecuteEvent(AbilityEvent.OnSpellStart);
+        }
+
+        private void OnChannelFinish() {
+            // 技能后摇点：
+            //      技能播放到后摇点时间时，技能真正的结束。这时，技能对应的特效以及人物动作可能还会继续播放，但是技能流程已经正式结束了
+            //      也就是说，下一个技能可以执行
+            abilityState = AbilityState.CastBackSwing;
+            ExecuteEvent(AbilityEvent.OnChannelFinish);
+
+            SetStartCd();
+        }
+        
         private void SetStartCd() {
             isStartCd = true;
         }

@@ -6,41 +6,32 @@ namespace Battle.logic.ability_dataDriven {
     /// <summary>
     /// 子弹数据层
     /// </summary>
-    public class ProjectileEntity : AbsEntity, IProjectile {
-        public int Id;
+    public class ProjectileEntity : AbsEntity {
         private string effectName;
-        private bool dodgeable;
-        private float moveSpeed;
-        private float durning = 3f;
-        private float flyTime;
-        private Vector3 flyToward;
         private AbsEntity casterEntity;
         private AbsEntity targetEntity;
-
         public ProjectileType ProjectileType;
         public event Action OnProjectileHitUnitEvent;
         public event Action OnProjectileFinishEvent;
         public event Action OnProjectileDodgeEvent;
-        public override void OnInit() { }
 
-        public void OnInit(AbsEntity casterEntity, Vector3 sourcePosition, Quaternion sourceRotation, AbsEntity targetEntity,
-            AbilityRequestContext abilityRequestContext, string effectName, float moveSpeed, bool dodgeable = false) {
+        public ProjectileEntity() {
+            InstanceId = ProjectileManager.instance.AutoIndex++;
+        }
+        
+        public void OnInit(AbsEntity casterEntity, AbsEntity targetEntity, Vector3 sourcePosition, Vector3 sourceForward,
+            AbilityRequestContext abilityRequestContext, string effectName) {
             this.effectName = effectName;
-            this.moveSpeed = moveSpeed;
-            this.dodgeable = dodgeable;
             this.casterEntity = casterEntity;
             this.targetEntity = targetEntity;
-            LocalPosition = sourcePosition;
-            LocalRotation = sourceRotation;
-            flyTime = 0f;
-            flyToward = sourceRotation * Vector3.up;
+            Position = sourcePosition;
+            Forward = sourceForward;
 
-            if (string.IsNullOrEmpty(effectName)) {
-                Debug.LogError("[GetActorAsync]子弹特效名为空！");
-                return;
-            }
+            GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorCreated, InstanceId, effectName, sourcePosition, sourceForward);
+        }
 
-            GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorCreated, Id, effectName, sourcePosition, flyToward);
+        public override void OnInit() {
+            
         }
 
         public override void OnUpdate() {
@@ -49,9 +40,7 @@ namespace Battle.logic.ability_dataDriven {
 
         public override void OnClear() {
             casterEntity = null;
-            OnProjectileFinishEvent?.Invoke();
-
-            OnProjectileFinishEvent = null;
+            targetEntity = null;
         }
     }
 }

@@ -91,7 +91,7 @@ namespace Origins {
             enemyActorPool.GetAsync(characterItem.modelPath, delegate(GameObject instance) {
                 if (instance != null) {
                     instance.transform.SetParent(UIModule.Instance.GetParentTransform(ViewType.MAIN));
-                    instance.transform.localPosition = enemyEntity.LocalPosition;
+                    instance.transform.localPosition = enemyEntity.Position;
 
                     var enemyActor = instance.GetComponent<EnemyActor>();
                     if (enemyActor != null) {
