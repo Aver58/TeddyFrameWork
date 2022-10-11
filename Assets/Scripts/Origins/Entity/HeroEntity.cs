@@ -9,22 +9,23 @@ namespace Origins {
 
         public HeroEntity(int roleId) {
             RoleId = roleId;
-            InstanceId = EntityManager.instance.AutoIndex++;
             abilities = new List<Battle.logic.ability_dataDriven.Ability>(1);
+            LocalForward = Vector2.up;
         }
 
         public override void OnUpdate() {
-            if (abilities != null) {
-                if (abilities.Count > 0) {
-                    for (int i = 0; i < abilities.Count; i++) {
-                        var ability = abilities[i];
-                        ability.OnUpdate(Time.deltaTime);
-                    }
+            if (abilities != null && abilities.Count > 0) {
+                for (int i = 0; i < abilities.Count; i++) {
+                    var ability = abilities[i];
+                    ability.OnUpdate(Time.deltaTime);
                 }
             }
+
+            AutoCastAbility();
         }
 
         public override void OnInit() {
+            BattleCamp = BattleCamp.FRIENDLY;
             InitProperty(RoleId);
             InitDefaultSkill();
 
@@ -69,10 +70,27 @@ namespace Origins {
             var ability = AbilityConfigParse.GetAbility(this, defaultSkillId);
             if (ability != null) {
                 ability.OnInit();
+                var targetEntity = EntityManager.instance.GetAbilityRequestTarget(this, ability);
+                ability.AbilityRequestContext.SetRequestUnit(targetEntity);
                 abilities.Add(ability);
             }
         }
 
+        private void AutoCastAbility() {
+            if (abilities != null && abilities.Count > 0) {
+                for (int i = 0; i < abilities.Count; i++) {
+                    var ability = abilities[i];
+                    if (ability.IsCastable()) {
+                        CastAbility(ability);
+                    }
+                }
+            }
+        }
+
+        private void CastAbility(Battle.logic.ability_dataDriven.Ability ability) {
+            ability.CastAbility();
+        }
+        
         #endregion
     }
 }

@@ -8,10 +8,14 @@ namespace Battle.logic.ability_dataDriven {
 
         private List<ProjectileEntity> projectiles;
         private ObjectPool<ProjectileEntity> projectileEntityPool;
+        private Dictionary<ProjectileType, IProjectileFactory> projectileFactoryMap;
 
         public void OnInit() {
             projectiles = new List<ProjectileEntity>();
             projectileEntityPool = new ObjectPool<ProjectileEntity>();
+            projectileFactoryMap = new Dictionary<ProjectileType, IProjectileFactory> {
+                {ProjectileType.Linear, new LinearProjectileFactory()},
+            };
         }
 
         public void OnUpdate() {
@@ -52,18 +56,8 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         // 简单工厂
-        private ProjectileFactory GetProjectileFactory(ProjectileType projectileType) {
-            switch (projectileType) {
-                case ProjectileType.Linear:
-                    return new LinearProjectileFactory();
-                case ProjectileType.Tracking:
-                    break;
-                case ProjectileType.Bouncing:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(projectileType), projectileType, null);
-            }
-            return default;
+        private IProjectileFactory GetProjectileFactory(ProjectileType projectileType) {
+            return projectileFactoryMap.ContainsKey(projectileType)? projectileFactoryMap[projectileType] : default;
         }
     }
 }

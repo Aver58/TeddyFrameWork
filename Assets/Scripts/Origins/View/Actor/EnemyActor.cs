@@ -33,7 +33,7 @@ namespace Origins {
         }
 
         public void SetPositionSync(Vector2 value) {
-            SetPosition(value);
+            SetLocalPosition(value);
             entity.Position = value;
         }
 

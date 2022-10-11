@@ -11,7 +11,8 @@ namespace Battle.logic.ability_dataDriven {
     // DOTA2 技能系统，按着对配置表的理解，自己进行梳理逻辑
     public class Ability : ILifeCycle {
         public int AbilityLevel; // 技能等级
-        
+        public AbilityRequestContext AbilityRequestContext;
+
         private readonly AbilityConfig abilityConfig;
         
         private string description;
@@ -28,7 +29,6 @@ namespace Battle.logic.ability_dataDriven {
         private AnimationClip animationClip;
         private bool applyRootMotion;
         private bool cancelable;
-        private AbilityRequestContext abilityRequestContext;
         private AbilityState abilityState;
         private AbsEntity caster; 
 
@@ -55,7 +55,7 @@ namespace Battle.logic.ability_dataDriven {
             currentTick = 0;
             AbilityLevel = 1;
             abilityState = AbilityState.None;
-            abilityRequestContext = new AbilityRequestContext();
+            AbilityRequestContext = new AbilityRequestContext();
             cooldown = abilityConfig.AbilityCooldowns[AbilityLevel];
 
             backSwingPoint = abilityConfig.AbilityCastPoint + abilityConfig.AbilityChannelTime;
@@ -95,25 +95,48 @@ namespace Battle.logic.ability_dataDriven {
 
         #region Get
 
+        public bool IsCastable() {
+            return cooldown <= 0;
+        }
+
+        public void CastAbility() {
+            OnAbilityPhaseStart();
+        }
+        
         public int GetAbilityDamage() {
             return -1;
         }
-        
 
+        public float GetAbilityCastRange() {
+            return abilityConfig.AbilityCastRange;
+        }
+
+        public AbilityUnitTargetTeam GetTargetTeams() {
+            return abilityConfig.AbilityUnitTargetTeam;
+        }
+        
+        public AbilityUnitTargetType GetTargetType() {
+            return abilityConfig.AbilityUnitTargetType;
+        }
+
+        public FindOrder GetFindOrder() {
+            return abilityConfig.FindOrder;
+        }
+        
         #endregion
         
         public void SetRequestTarget(AbsEntity entity) {
-            abilityRequestContext.IsUnitRequest = true;
-            abilityRequestContext.RequestUnit = entity;
+            AbilityRequestContext.IsUnitRequest = true;
+            AbilityRequestContext.RequestUnit = entity;
         }
         
         public void SetRequestTarget(Vector3 position) {
-            abilityRequestContext.IsUnitRequest = false;
-            abilityRequestContext.RequestPosition = position;
+            AbilityRequestContext.IsUnitRequest = false;
+            AbilityRequestContext.RequestPosition = position;
         }
         
-        public void EndChannel(bool interrupted){}
-        public void EndCooldown(){}
+        public void EndChannel(bool interrupted){ }
+        public void EndCooldown(){ }
         
         #endregion
         
@@ -154,7 +177,7 @@ namespace Battle.logic.ability_dataDriven {
             if (abilityConfig.AbilityEventMap.ContainsKey(abilityEvent)) {
                 var d2Event = abilityConfig.AbilityEventMap[abilityEvent];
                 BattleLog.Log($"【ExecuteEvent】 技能名称：{abilityConfig.Name} 事件：{abilityEvent.ToString()}");
-                d2Event.Execute(caster, abilityRequestContext);
+                d2Event.Execute(caster, AbilityRequestContext);
             }
         }
 

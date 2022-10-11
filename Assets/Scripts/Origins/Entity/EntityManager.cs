@@ -27,6 +27,8 @@ namespace Origins {
                 var entity = entities[i];
                 entity.OnUpdate();
             }
+            
+            HeroEntity.OnUpdate();
         }
 
         public void OnClear() {
@@ -54,8 +56,6 @@ namespace Origins {
             HeroEntity = new HeroEntity(HERO_ID);
             HeroEntity.OnInit();
             HeroEntity.SetPosition(Vector2.zero);
-
-            AddEntity(HeroEntity);
             return HeroEntity;
         }
 
@@ -69,8 +69,8 @@ namespace Origins {
             var entity = enemyEntityPool.Get();
             entity.RoleId = roleId;
             entity.OnInit();
-            entity.SetPosition(new Vector2(randomPosX, randomPosY));
-            Debug.Log($"[EntityManager] 生成敌人：{entity.InstanceId} roleId: {roleId} pos:{entity.Position}");
+            entity.SetLocalPosition(new Vector2(randomPosX, randomPosY));
+            // Debug.Log($"[EntityManager] 生成敌人：{entity.InstanceId} roleId: {roleId} pos:{entity.Position}");
 
             AddEntity(entity);
         }
@@ -102,6 +102,42 @@ namespace Origins {
             return caster;
         }
 
+        public AbsEntity GetAbilityRequestTarget(RoleEntity casterEntity, Battle.logic.ability_dataDriven.Ability ability) {
+            var castRange = ability.GetAbilityCastRange();
+            if (castRange <= 0) {
+                return casterEntity;
+            }
+
+            var targetList = new List<AbsEntity>();
+            // 找到施法范围内所有角色
+            var targetTeams = ability.GetTargetTeams();
+            if (targetTeams == AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_NONE) {
+                return null;
+            }
+
+            if (targetTeams == AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_ENEMY) {
+                targetList = entities;
+            }
+            
+            // 然后按配置的排序条件，进行筛选，取出符合条件的对象
+
+            if (targetList.Count <= 0) {
+                return null;
+            }
+            
+            var findOrder = ability.GetFindOrder();
+            switch (findOrder) {
+                case FindOrder.FIND_ANY_ORDER:
+                    return targetList[0];
+                case FindOrder.FIND_CLOSEST:
+                    return targetList[0];
+                case FindOrder.FIND_FARTHEST:
+                    return targetList[0];
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        
         #endregion
 
         #region Private

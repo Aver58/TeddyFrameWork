@@ -21,6 +21,7 @@ namespace Battle.logic.ability_dataDriven {
         public AbilityUnitTargetType AbilityUnitTargetType;
         public AbilityUnitTargetFlag AbilityUnitTargetFlag;
         public AbilityUnitDamageType AbilityUnitDamageType;
+        public FindOrder FindOrder;
 
         public AbilityBehavior AbilityBehavior;
         public Dictionary<AbilityEvent, DotaEvent> AbilityEventMap;

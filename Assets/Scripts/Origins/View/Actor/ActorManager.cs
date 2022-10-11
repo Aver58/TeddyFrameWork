@@ -109,13 +109,13 @@ namespace Origins {
 
         public void SetHeroActorPosition(Vector2 value) {
             if (HeroActor) {
-                HeroActor.SetPosition(value);
+                HeroActor.SetLocalPosition(value);
             }
         }
 
         public void SetActorPosition(int instanceId, Vector2 value) {
             if (enemyActorMap.ContainsKey(instanceId)) {
-                enemyActorMap[instanceId].SetPosition(value);
+                enemyActorMap[instanceId].SetLocalPosition(value);
             }
         }
         

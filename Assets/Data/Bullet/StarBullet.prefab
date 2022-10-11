@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 690762416050230483}
   - component: {fileID: 487111596219770889}
-  - component: {fileID: 8418376472984496157}
+  - component: {fileID: 3893440781959080384}
   m_Layer: 5
   m_Name: StarBullet
   m_TagString: Untagged
@@ -46,7 +46,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4609770738291665035}
   m_CullTransparentMesh: 0
---- !u!114 &8418376472984496157
+--- !u!114 &3893440781959080384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4609770738291665035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68694f2ce0a74915aa6812be05b48134, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a2b2889d84f4d889b64ffa90c19e623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4937070117945514029

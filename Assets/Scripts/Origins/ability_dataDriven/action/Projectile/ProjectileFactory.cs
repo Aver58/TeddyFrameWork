@@ -1,13 +1,13 @@
 using System;
 
 namespace Battle.logic.ability_dataDriven {
-    public abstract class ProjectileFactory {
-        public abstract ProjectileEntity GetProjectile();
+    public interface IProjectileFactory { 
+        ProjectileEntity GetProjectile();
     }
 
-    public sealed class LinearProjectileFactory : ProjectileFactory {
+    public sealed class LinearProjectileFactory : IProjectileFactory {
         private ObjectPool<LinearProjectile> projectilePool = new ObjectPool<LinearProjectile>();
-        public override ProjectileEntity GetProjectile() {
+        public ProjectileEntity GetProjectile() {
             return projectilePool.Get();
         }
     }

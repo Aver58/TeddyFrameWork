@@ -1,7 +1,11 @@
 namespace Origins {
     public class RoleEntity : AbsEntity {
-        public int RoleId;
+        protected RoleEntity() {
+            InstanceId = EntityManager.instance.AutoIndex++;
+        }
 
+        public int RoleId;
+        public BattleCamp BattleCamp;
         private float hp;
         public float Hp {
             get => hp;

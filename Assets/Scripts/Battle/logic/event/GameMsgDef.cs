@@ -22,4 +22,6 @@ public enum GameMsgDef
     DAMAGE_EFFECT_NOTICED,          //傷害特效通知
 
     OnProjectileActorCreated, // 子弹实例创建
+    OnProjectileActorDestroy, // 子弹实例销毁
+    OnProjectileActorMoveTo, // 子弹移动
 }

@@ -2,22 +2,14 @@ using UnityEngine;
 
 namespace Origins {
     public class EnemyEntity : RoleEntity {
-        public override void OnUpdate() {
-            
-        }
-
         public override void OnInit() {
-            InstanceId = EntityManager.instance.AutoIndex++;
+            BattleCamp = BattleCamp.ENEMY;
             InitProperty(RoleId);
             
             ActorManager.instance.GetActorAsync(this);
         }
 
-        public override void OnClear() {
-            
-        }
-
-        public void SetPosition(Vector2 value) {
+        public void SetLocalPosition(Vector2 value) {
             Position = value;
             ActorManager.instance.SetActorPosition(InstanceId, value);
         }

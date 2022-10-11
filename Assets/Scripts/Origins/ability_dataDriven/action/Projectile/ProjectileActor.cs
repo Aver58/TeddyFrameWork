@@ -6,17 +6,17 @@ namespace Battle.logic.ability_dataDriven {
     // 子弹表现层
     public sealed class ProjectileActor : ILifeCycle {
         private int id;
-        private GameObject gameObject;
+        public GameObject GameObject;
         private Vector3 sourcePosition;
         private Vector3 sourceForward;
+        private MoveComponent moveComponent;
 
         public void Clear() {
-            gameObject = null;
-            
+            GameObject = null;
         }
         
-        public void MoveTo(Vector3 targetPosition, Vector3 targetForward) {
-            
+        public void MoveTo(Vector3 position, Vector3 forward) {
+            moveComponent.MoveTo(position, forward);
         }
         
         public void Pause() {
@@ -28,11 +28,21 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         public void OnInit() { }
+        
         public void OnInit(int id, GameObject gameObject, Vector3 sourcePosition, Vector3 sourceForward) {
             this.id = id;
-            this.gameObject = gameObject;
+            GameObject = gameObject;
             this.sourcePosition = sourcePosition;
             this.sourceForward = sourceForward;
+
+            moveComponent = gameObject.GetComponent<MoveComponent>();
+
+            if (moveComponent != null) {
+                moveComponent.Init();
+                moveComponent.SetLocalPosition(sourcePosition);
+            } else {
+                BattleLog.LogError("【ProjectileActor】没有挂载 MoveComponent ！");
+            }
         }
 
         public void OnUpdate() {
@@ -40,6 +50,5 @@ namespace Battle.logic.ability_dataDriven {
 
         public void OnClear() {
         }
-
     }
 }

@@ -257,8 +257,7 @@ ScriptFile, Function, Radius, Count
 /// <summary>
 /// 技能目标中心点（AOE区域以中心点展开）
 /// </summary>
-public enum ActionMultipleTargets
-{
+public enum ActionMultipleTargets {
     CASTER,// 施法者
     TARGET,// 目标
     POINT,// 点
@@ -270,8 +269,7 @@ public enum ActionMultipleTargets
 /// <summary>
 ///  根据队伍筛选目标（一样可以用 | 来指定多种类型）
 /// </summary>
-public enum AbilityUnitTargetTeam
-{
+public enum AbilityUnitTargetTeam {
     DOTA_UNIT_TARGET_TEAM_NONE,// 无
     DOTA_UNIT_TARGET_TEAM_BOTH,// 双方队伍
     DOTA_UNIT_TARGET_TEAM_CUSTOM,// 普通队伍
@@ -282,8 +280,7 @@ public enum AbilityUnitTargetTeam
 /// <summary>
 /// 类型
 /// </summary>
-public enum AbilityUnitTargetType
-{
+public enum AbilityUnitTargetType {
     DOTA_UNIT_TARGET_NONE,// 没有
     DOTA_UNIT_TARGET_ALL,// 任意，包括隐藏的实体
     DOTA_UNIT_TARGET_BASIC,// 基本单位, 包括召唤单位
@@ -300,8 +297,7 @@ public enum AbilityUnitTargetType
 /// <summary>
 /// 标签允许对默认被忽略的目标单位 (例如魔法免疫敌人)施法, 或者忽略特定的单位类型 (例如远古单位和魔免友军)来允许对其施法.
 /// </summary>
-public enum AbilityUnitTargetFlag
-{
+public enum AbilityUnitTargetFlag {
     DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP,//禁用帮助的单位 尚不确定数据驱动技能如何使用？
     DOTA_UNIT_TARGET_FLAG_DEAD,//死亡单位忽略
     DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,//单位离开视野时打断 例子: 魔法汲取, 生命汲取
@@ -329,11 +325,16 @@ public enum AbilityUnitTargetFlag
 /// <summary>
 /// 伤害范围
 /// </summary>
-public enum AOEType
-{
+public enum AOEType {
     Radius,//圆形半径
     Line,//线性
     Sector,//扇形
+}
+
+public enum FindOrder {
+    FIND_ANY_ORDER,
+    FIND_CLOSEST,
+    FIND_FARTHEST,
 }
 
 #endregion

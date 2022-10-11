@@ -11,10 +11,9 @@ namespace Origins {
         public abstract void OnUpdate();
         public abstract void OnClear();
         
-        public virtual void Move() { }
         public virtual void BeAttack(int value) { }
 
-        public void SetPosition(Vector3 value) {
+        public void SetLocalPosition(Vector3 value) {
             mTransform.localPosition = value;
         }
     }

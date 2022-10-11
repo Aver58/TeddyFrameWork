@@ -19,13 +19,13 @@ namespace Battle.logic.ability_dataDriven {
             InstanceId = ProjectileManager.instance.AutoIndex++;
         }
         
-        public void OnInit(AbsEntity casterEntity, AbsEntity targetEntity, Vector3 sourcePosition, Vector3 sourceForward,
+        public virtual void OnInit(AbsEntity casterEntity, AbsEntity targetEntity, Vector3 sourcePosition, Vector3 sourceForward,
             AbilityRequestContext abilityRequestContext, string effectName) {
             this.effectName = effectName;
             this.casterEntity = casterEntity;
             this.targetEntity = targetEntity;
             Position = sourcePosition;
-            Forward = sourceForward;
+            LocalForward = sourceForward;
 
             GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorCreated, InstanceId, effectName, sourcePosition, sourceForward);
         }

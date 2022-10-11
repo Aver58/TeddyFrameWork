@@ -41,7 +41,7 @@ namespace Origins {
         #region Private
 
         private void SetPositionSync(Vector3 value) {
-            SetPosition(value);
+            SetLocalPosition(value);
             entity.Position = value;
         }
 
@@ -58,7 +58,7 @@ namespace Origins {
                 var targetPos = entity.Position + cacheVector3 * entity.MoveSpeed * Time.deltaTime;
                 var targetDirection = targetPos - entity.Position;
                 SetPositionSync(targetPos);
-                entity.Forward = targetDirection;
+                entity.LocalForward = targetDirection;
             }
         }
 
