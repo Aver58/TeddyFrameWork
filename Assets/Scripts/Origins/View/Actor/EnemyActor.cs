@@ -8,7 +8,6 @@ namespace Origins {
         private float attackCd;
 
         public override void OnInit() {
-            cacheVector3 = new Vector2();
             mTransform = transform;
             rigidBody2D = transform.GetComponent<Rigidbody2D>();
 
@@ -32,9 +31,9 @@ namespace Origins {
             InstanceId = value.InstanceId;
         }
 
-        public void SetPositionSync(Vector2 value) {
+        public void SetLocalPositionSync(Vector2 value) {
             SetLocalPosition(value);
-            entity.Position = value;
+            entity.LocalPosition = value;
         }
 
         #region Private
@@ -45,10 +44,10 @@ namespace Origins {
                 return;
             }
 
-            var targetPos = targetEntity.Position;
-            var targetVector = targetPos - entity.Position;
-            var newPos = entity.Position + targetVector.normalized * entity.MoveSpeed * Time.deltaTime;
-            SetPositionSync(newPos);
+            var targetPos = targetEntity.LocalPosition;
+            var targetVector = targetPos - entity.LocalPosition;
+            var newPos = entity.LocalPosition + targetVector.normalized * entity.MoveSpeed * Time.deltaTime;
+            SetLocalPositionSync(newPos);
         }
 
         private void OnTriggerEnter2D(Collider2D other) {

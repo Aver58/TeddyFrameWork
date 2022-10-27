@@ -14,11 +14,7 @@ namespace Battle.logic.ability_dataDriven {
         public void Clear() {
             GameObject = null;
         }
-        
-        public void MoveTo(Vector3 position, Vector3 forward) {
-            moveComponent.MoveTo(position, forward);
-        }
-        
+
         public void Pause() {
             
         }
@@ -45,6 +41,10 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
+        public void MoveTo(Vector3 position, Vector3 forward) {
+            moveComponent.MoveTo(position, forward);
+        }
+        
         public void OnUpdate() {
         }
 

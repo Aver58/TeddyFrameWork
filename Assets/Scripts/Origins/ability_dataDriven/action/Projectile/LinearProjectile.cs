@@ -7,9 +7,9 @@ namespace Battle.logic.ability_dataDriven {
         private float moveSpeed;
         private float durning = 3f;
         private float flyTime;
-        private Vector3 forward;
+        private Vector2 forward;
 
-        public void OnInit(AbsEntity casterEntity, AbsEntity targetEntity, Vector3 sourcePosition, Vector3 sourceForward,
+        public void OnInit(AbsEntity casterEntity, AbsEntity targetEntity, Vector2 sourcePosition, Vector2 sourceForward,
             AbilityRequestContext abilityRequestContext, string effectName, float moveSpeed, bool dodgeable) {
             base.OnInit(casterEntity, targetEntity, sourcePosition, sourceForward, abilityRequestContext, effectName);
 
@@ -22,9 +22,12 @@ namespace Battle.logic.ability_dataDriven {
             base.OnUpdate();
 
             if (moveSpeed > 0) {
-                Position += forward * moveSpeed * Time.deltaTime;
-                GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorMoveTo, InstanceId, Position, LocalForward);
+                LocalPosition += forward * moveSpeed * Time.deltaTime;
+                GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorMoveTo, InstanceId, LocalPosition, LocalForward);
             }
+            
+            // 碰撞 矩形与圆的相交
+            // Physics2D.BoxCastNonAlloc();
             
             durning += Time.deltaTime;
             if (flyTime >= durning) {

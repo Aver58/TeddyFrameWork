@@ -25,7 +25,7 @@ namespace Battle.logic.ability_dataDriven {
         private bool isStartCd;
 
         private float backSwingPoint;
-        //技能表现部分，动作以及融合
+        // 技能表现部分，动作以及融合
         private AnimationClip animationClip;
         private bool applyRootMotion;
         private bool cancelable;
@@ -52,13 +52,10 @@ namespace Battle.logic.ability_dataDriven {
 
         public void OnInit() {
             // fps = targetFrameRate;
-            currentTick = 0;
             AbilityLevel = 1;
-            abilityState = AbilityState.None;
-            AbilityRequestContext = new AbilityRequestContext();
-            cooldown = abilityConfig.AbilityCooldowns[AbilityLevel];
-
             backSwingPoint = abilityConfig.AbilityCastPoint + abilityConfig.AbilityChannelTime;
+
+            AbilityRequestContext = new AbilityRequestContext();
         }
 
         public void OnUpdate() {
@@ -84,7 +81,7 @@ namespace Battle.logic.ability_dataDriven {
             }
             
             currentTick += deltaTime;
-            if (isStartCd && cooldown > 0) {
+            if (cooldown > 0) {
                 cooldown -= deltaTime;
             }
         }
@@ -100,6 +97,9 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         public void CastAbility() {
+            currentTick = 0;
+            abilityState = AbilityState.None;
+
             OnAbilityPhaseStart();
         }
         
@@ -164,12 +164,8 @@ namespace Battle.logic.ability_dataDriven {
             //      也就是说，下一个技能可以执行
             abilityState = AbilityState.CastBackSwing;
             ExecuteEvent(AbilityEvent.OnChannelFinish);
-
-            SetStartCd();
-        }
-        
-        private void SetStartCd() {
-            isStartCd = true;
+            
+            cooldown = abilityConfig.AbilityCooldowns[AbilityLevel];
         }
         
         // 驱动事件

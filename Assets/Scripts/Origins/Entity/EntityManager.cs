@@ -55,7 +55,7 @@ namespace Origins {
         public HeroEntity AddHeroEntity() {
             HeroEntity = new HeroEntity(HERO_ID);
             HeroEntity.OnInit();
-            HeroEntity.SetPosition(Vector2.zero);
+            HeroEntity.SetLocalPosition(Vector2.zero);
             return HeroEntity;
         }
 
@@ -64,8 +64,8 @@ namespace Origins {
 
         public void AddEnemyEntity(int roleId) {
             var distance = Random.Range(MIN_RANGE, MAX_RANGE);
-            var randomPosX = HeroEntity.Position.x + distance * Mathf.Cos(distance * Mathf.PI / 180);
-            var randomPosY = HeroEntity.Position.y + distance * Mathf.Sin(distance * Mathf.PI / 180);
+            var randomPosX = HeroEntity.LocalPosition.x + distance * Mathf.Cos(distance * Mathf.PI / 180);
+            var randomPosY = HeroEntity.LocalPosition.y + distance * Mathf.Sin(distance * Mathf.PI / 180);
             var entity = enemyEntityPool.Get();
             entity.RoleId = roleId;
             entity.OnInit();

@@ -11,20 +11,17 @@ namespace Battle.logic.ability_dataDriven {
         private AbsEntity casterEntity;
         private AbsEntity targetEntity;
         public ProjectileType ProjectileType;
-        public event Action OnProjectileHitUnitEvent;
-        public event Action OnProjectileFinishEvent;
-        public event Action OnProjectileDodgeEvent;
 
         public ProjectileEntity() {
             InstanceId = ProjectileManager.instance.AutoIndex++;
         }
         
-        public virtual void OnInit(AbsEntity casterEntity, AbsEntity targetEntity, Vector3 sourcePosition, Vector3 sourceForward,
+        public virtual void OnInit(AbsEntity casterEntity, AbsEntity targetEntity, Vector2 sourcePosition, Vector2 sourceForward,
             AbilityRequestContext abilityRequestContext, string effectName) {
             this.effectName = effectName;
             this.casterEntity = casterEntity;
             this.targetEntity = targetEntity;
-            Position = sourcePosition;
+            LocalPosition = sourcePosition;
             LocalForward = sourceForward;
 
             GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorCreated, InstanceId, effectName, sourcePosition, sourceForward);

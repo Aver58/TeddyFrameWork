@@ -23,8 +23,8 @@ namespace Battle.logic.ability_dataDriven {
         private Vector2 startPosition;
         private float fixedDistance;//固定距离
 
-        public DotaAction_LinearProjectile(AbilityTarget abilityTarget, [NotNull] string effectName,
-            [NotNull] string sourceAttachment, bool dodgeable, float moveSpeed) : base(abilityTarget) {
+        public DotaAction_LinearProjectile(AbilityTarget abilityTarget, string effectName, string sourceAttachment, 
+            bool dodgeable, float moveSpeed) : base(abilityTarget) {
             this.effectName = effectName ?? throw new ArgumentNullException(nameof(effectName));
             this.sourceAttachment = sourceAttachment ?? throw new ArgumentNullException(nameof(sourceAttachment));
             this.dodgeable = dodgeable;
@@ -38,7 +38,7 @@ namespace Battle.logic.ability_dataDriven {
 
         protected override void ExecuteByUnit(AbsEntity entity, AbsEntity targetEntity, AbilityRequestContext abilityRequestContext) {
             if (ProjectileManager.instance.GetProjectile(ProjectileType.Linear) is LinearProjectile linearProjectile) {
-                linearProjectile.OnInit(entity, targetEntity, entity.Position, entity.LocalForward, abilityRequestContext, effectName, moveSpeed, dodgeable);
+                linearProjectile.OnInit(entity, targetEntity, entity.LocalPosition, entity.LocalForward, abilityRequestContext, effectName, moveSpeed, dodgeable);
             }        
         }
     }

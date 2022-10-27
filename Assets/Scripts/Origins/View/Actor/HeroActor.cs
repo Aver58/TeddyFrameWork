@@ -9,7 +9,8 @@ namespace Origins {
         [SerializeField] private HpSliderActor hpSliderActor = null;
 
         public override void OnInit() {
-            cacheVector3 = new Vector3();
+            cacheVector = new Vector2();
+            cacheQuaternion = new Quaternion();
             mTransform = transform;
             rigidBody2D = transform.GetComponent<Rigidbody2D>();
 
@@ -40,9 +41,14 @@ namespace Origins {
 
         #region Private
 
-        private void SetPositionSync(Vector3 value) {
+        private void SetLocalPositionSync(Vector2 value) {
             SetLocalPosition(value);
-            entity.Position = value;
+            entity.LocalPosition = value;
+        }
+
+        private void SetRotationSync(Vector3 value) {
+            cacheQuaternion.SetLookRotation(value);
+            SetLocalRotation(cacheQuaternion);
         }
 
         private void OnPlayerInput() {
@@ -50,14 +56,13 @@ namespace Origins {
             var horizontal = Input.GetAxisRaw("Horizontal");
 
             if (Math.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f) {
-                cacheVector3.x = horizontal;
-                cacheVector3.y = vertical;
+                cacheVector.x = horizontal;
+                cacheVector.y = vertical;
                 // rigidbody2D.MovePosition(targetPos);
-                // rigidbody2D 没调试好，跑不起来
                 // rigidBody2D.velocity = cacheVector2;
-                var targetPos = entity.Position + cacheVector3 * entity.MoveSpeed * Time.deltaTime;
-                var targetDirection = targetPos - entity.Position;
-                SetPositionSync(targetPos);
+                var targetPos = entity.LocalPosition + cacheVector * entity.MoveSpeed * Time.deltaTime;
+                var targetDirection = targetPos - entity.LocalPosition;
+                SetLocalPositionSync(targetPos);
                 entity.LocalForward = targetDirection;
             }
         }

@@ -13,9 +13,9 @@ namespace Battle.logic.ability_dataDriven {
             projectileActorPool = new ObjectPool<ProjectileActor>();
             gameObjectPool = new GameObjectPool(LoadModule.BULLET_PATH_PREFIX);
 
-            GameMsg.instance.RegisterListener<int, string, Vector3, Vector3>(GameMsgDef.OnProjectileActorCreated, OnProjectileActorCreated);
+            GameMsg.instance.RegisterListener<int, string, Vector2, Vector2>(GameMsgDef.OnProjectileActorCreated, OnProjectileActorCreated);
             GameMsg.instance.RegisterListener<int>(GameMsgDef.OnProjectileActorDestroy, OnProjectileActorDestroy);
-            GameMsg.instance.RegisterListener<int, Vector3, Vector2>(GameMsgDef.OnProjectileActorMoveTo, OnProjectileActorMoveTo);
+            GameMsg.instance.RegisterListener<int, Vector2, Vector2>(GameMsgDef.OnProjectileActorMoveTo, OnProjectileActorMoveTo);
         }
 
         public void OnUpdate() {
@@ -36,7 +36,7 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
-        private void OnProjectileActorCreated(int id, string effectName , Vector3 sourcePosition, Vector3 sourceForward) {
+        private void OnProjectileActorCreated(int id, string effectName , Vector2 sourcePosition, Vector2 sourceForward) {
             if (string.IsNullOrEmpty(effectName)) {
                 Debug.LogError("【OnProjectileActorCreated】子弹特效名为空！");
                 return;
@@ -61,7 +61,7 @@ namespace Battle.logic.ability_dataDriven {
             }
         }
 
-        private void OnProjectileActorMoveTo(int id, Vector3 position, Vector2 localForward) {
+        private void OnProjectileActorMoveTo(int id, Vector2 position, Vector2 localForward) {
             if (actorMap.ContainsKey(id)) {
                 var actor = actorMap[id];
                 actor.MoveTo(position, localForward);

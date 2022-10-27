@@ -38,8 +38,8 @@ namespace Origins {
 
         #region Public
 
-        public void SetPosition(Vector2 value) {
-            Position = value;
+        public void SetLocalPosition(Vector2 value) {
+            LocalPosition = value;
             ActorManager.instance.SetHeroActorPosition(value);
         }
 
