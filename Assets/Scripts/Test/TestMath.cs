@@ -14,6 +14,11 @@ public class TestMath : MonoBehaviour
         //transform.position = newPos;
         //Debug.Log("newpos " + newPos + " nowpos " + transform.position + " distance " + Vector3.Distance(newPos, transform.position));
         TestIsRectIntersect();
+
+        var test = 0.018f;
+        test *= 0.018f;
+        test /= 0.018f;
+        print(test);
     }
 
 	private float distance = 10f;

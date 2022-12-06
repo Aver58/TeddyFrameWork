@@ -1,0 +1,324 @@
+fileFormatVersion: 2
+guid: 5ebc7b7d2e8690a4789843141d5b9d7b
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Bip001
+  - first:
+      1: 100002
+    second: Bip001 Head
+  - first:
+      1: 100004
+    second: Bip001 L Calf
+  - first:
+      1: 100006
+    second: Bip001 L Foot
+  - first:
+      1: 100008
+    second: Bip001 L Thigh
+  - first:
+      1: 100010
+    second: Bip001 L Toe0
+  - first:
+      1: 100012
+    second: Bip001 Neck
+  - first:
+      1: 100014
+    second: Bip001 Pelvis
+  - first:
+      1: 100016
+    second: Bip001 R Calf
+  - first:
+      1: 100018
+    second: Bip001 R Foot
+  - first:
+      1: 100020
+    second: Bip001 R Thigh
+  - first:
+      1: 100022
+    second: Bip001 R Toe0
+  - first:
+      1: 100024
+    second: Bip001 Spine
+  - first:
+      1: 100026
+    second: Bip001 Spine1
+  - first:
+      1: 100028
+    second: //RootNode
+  - first:
+      1: 100030
+    second: PeterBabyBone001
+  - first:
+      1: 100032
+    second: PeterBabyBone003
+  - first:
+      1: 100034
+    second: PeterBabyBone004
+  - first:
+      1: 100036
+    second: PeterBabyBone005
+  - first:
+      1: 100038
+    second: PeterBabyBone006
+  - first:
+      1: 100040
+    second: PeterBabyBone007
+  - first:
+      1: 100042
+    second: PeterBabyBone011
+  - first:
+      1: 100044
+    second: PeterBabyBone012
+  - first:
+      1: 100046
+    second: PeterBabyBone013
+  - first:
+      1: 100048
+    second: PeterBabyBone015
+  - first:
+      1: 100050
+    second: PeterBabyBone016
+  - first:
+      1: 100052
+    second: PeterBabyBone017
+  - first:
+      1: 100054
+    second: PeterBabyBone018
+  - first:
+      1: 100056
+    second: PeterBabyBone019
+  - first:
+      1: 100058
+    second: PeterBabyBone023
+  - first:
+      1: 100060
+    second: PeterBabyBone025
+  - first:
+      1: 100062
+    second: PeterBabyBone026
+  - first:
+      1: 100064
+    second: PeterBabyBone033
+  - first:
+      1: 100066
+    second: PeterBabyBone034
+  - first:
+      1: 100068
+    second: PteroBaby
+  - first:
+      4: 400000
+    second: Bip001
+  - first:
+      4: 400002
+    second: Bip001 Head
+  - first:
+      4: 400004
+    second: Bip001 L Calf
+  - first:
+      4: 400006
+    second: Bip001 L Foot
+  - first:
+      4: 400008
+    second: Bip001 L Thigh
+  - first:
+      4: 400010
+    second: Bip001 L Toe0
+  - first:
+      4: 400012
+    second: Bip001 Neck
+  - first:
+      4: 400014
+    second: Bip001 Pelvis
+  - first:
+      4: 400016
+    second: Bip001 R Calf
+  - first:
+      4: 400018
+    second: Bip001 R Foot
+  - first:
+      4: 400020
+    second: Bip001 R Thigh
+  - first:
+      4: 400022
+    second: Bip001 R Toe0
+  - first:
+      4: 400024
+    second: Bip001 Spine
+  - first:
+      4: 400026
+    second: Bip001 Spine1
+  - first:
+      4: 400028
+    second: //RootNode
+  - first:
+      4: 400030
+    second: PeterBabyBone001
+  - first:
+      4: 400032
+    second: PeterBabyBone003
+  - first:
+      4: 400034
+    second: PeterBabyBone004
+  - first:
+      4: 400036
+    second: PeterBabyBone005
+  - first:
+      4: 400038
+    second: PeterBabyBone006
+  - first:
+      4: 400040
+    second: PeterBabyBone007
+  - first:
+      4: 400042
+    second: PeterBabyBone011
+  - first:
+      4: 400044
+    second: PeterBabyBone012
+  - first:
+      4: 400046
+    second: PeterBabyBone013
+  - first:
+      4: 400048
+    second: PeterBabyBone015
+  - first:
+      4: 400050
+    second: PeterBabyBone016
+  - first:
+      4: 400052
+    second: PeterBabyBone017
+  - first:
+      4: 400054
+    second: PeterBabyBone018
+  - first:
+      4: 400056
+    second: PeterBabyBone019
+  - first:
+      4: 400058
+    second: PeterBabyBone023
+  - first:
+      4: 400060
+    second: PeterBabyBone025
+  - first:
+      4: 400062
+    second: PeterBabyBone026
+  - first:
+      4: 400064
+    second: PeterBabyBone033
+  - first:
+      4: 400066
+    second: PeterBabyBone034
+  - first:
+      4: 400068
+    second: PteroBaby
+  - first:
+      21: 2100000
+    second: Material #3
+  - first:
+      43: 4300000
+    second: PteroBaby
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: PteroBaby
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #3
+    second: {instanceID: 0}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 1
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

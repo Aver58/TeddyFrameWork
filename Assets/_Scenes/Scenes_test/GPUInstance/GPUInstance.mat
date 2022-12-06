@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: gpuInstance
+  m_Name: GPUInstance
   m_Shader: {fileID: 4800000, guid: 5c098f0020819544b932beea205f4807, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
