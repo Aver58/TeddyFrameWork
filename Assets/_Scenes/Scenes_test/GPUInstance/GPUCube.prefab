@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3115933377281073719}
   - component: {fileID: 1357826184173605005}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: GPUCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

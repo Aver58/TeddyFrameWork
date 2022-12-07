@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PeterBaby@Skin
       objectReference: {fileID: 0}
+    - target: {fileID: 100028, guid: 5ebc7b7d2e8690a4789843141d5b9d7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ebc7b7d2e8690a4789843141d5b9d7b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.99999994
@@ -1823,6 +1827,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1040293853}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &1040293855 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13700000, guid: 5ebc7b7d2e8690a4789843141d5b9d7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1040293853}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1163848926 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100028, guid: 5ebc7b7d2e8690a4789843141d5b9d7b,
@@ -1836,9 +1846,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163848926}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cee5454c410420383a5b4511c37b691, type: 3}
+  m_Script: {fileID: 11500000, guid: c79417245d26449e9443cf61b81a9e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gobj_skinmesh_render_: {fileID: 1040293854}
@@ -1856,10 +1866,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fb14703bb3ce346bca35a65cf3da83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gobj_line_count_: 20
-  gobj_count_perline_: 20
+  skinmesh_render: {fileID: 1040293855}
+  gobj_line_count_: 10
+  gobj_count_perline_: 10
   gobj_gpu_instancing_: {fileID: 1163848926}
-  tex_surface_: {fileID: 0}
+  ani_clip_: {fileID: 7400002, guid: a67f533555f677f4db183140c970c7e9, type: 3}
+  mtrl_instance_: {fileID: 2100000, guid: aead9ed0c0cf7c04d80a504e7b251802, type: 2}
+  tex_surface_: {fileID: 2800000, guid: 0d285399eaf7254468c3d769d3ac4fdb, type: 3}
+  tex_ani_tmp_: {fileID: 0}
+--- !u!114 &1163848931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163848926}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be4db93e45fd564d9094d99a502f47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gobj_line_count_: 10
+  gobj_count_perline_: 10
+  gobj_gpu_instancing_: {fileID: 1163848926}
+  tex_surface_: {fileID: 2800000, guid: 0d285399eaf7254468c3d769d3ac4fdb, type: 3}
   tex_ani_: {fileID: 0}
   tex_ani_tmp_: {fileID: 0}
   tex_ani_side_length_: 0
@@ -1867,5 +1897,5 @@ MonoBehaviour:
   bone_count: 0
   ani_rate_: 1
   ani_prefix_name_: 
-  mtrl_instance_: {fileID: 0}
+  mtrl_instance_: {fileID: 2100000, guid: aead9ed0c0cf7c04d80a504e7b251802, type: 2}
   mtrl_work_: {fileID: 0}
