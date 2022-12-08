@@ -13,7 +13,6 @@
             // 开启多实例的变量编译
             #pragma multi_compile_instancing                        
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			
 			UNITY_INSTANCING_BUFFER_START(Props)                        // 定义多实例变量数组
@@ -27,21 +26,23 @@
             TEXTURE2D_FLOAT(_tex_ani);
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            
+            StructuredBuffer<float4> _instancing_color;
+
             // 贴图纹理：每帧、每个骨骼矩阵，一个矩阵4个像素
             // 计算骨骼矩阵
 		    float4x4 cal_bone_mtx(const uint bone_idx){
 		        // 拿到 C# 层传入的骨骼矩阵索引 
                 uint idx_1dx = (int)UNITY_ACCESS_INSTANCED_PROP(Props, _ani_matrix_index) + bone_idx * 4;
-                //uint idx_1dx = _ani_matrix_index[unity_InstanceID] + bone_idx * 4;
                 
                 uint x = idx_1dx % _tex_ani_side_length;
 				uint y = idx_1dx / _tex_ani_side_length;
 
 				float2 ani_xy = float2(0, 0);
+				// 为啥这里要再除一次呀？UV 以(0,1) 表示？
 				ani_xy.x = (float)x / _tex_ani_side_length;
 				ani_xy.y = (float)y / _tex_ani_side_length;
 
+                // 采样4个像素
 				float4 mat1 = SAMPLE_TEXTURE2D_LOD(_tex_ani, sampler_PointClamp, ani_xy + float2(0, 0), 0);
 				float4 mat2 = SAMPLE_TEXTURE2D_LOD(_tex_ani, sampler_PointClamp, ani_xy + float2(1.0 / _tex_ani_side_length, 0), 0);
 				float4 mat3 = SAMPLE_TEXTURE2D_LOD(_tex_ani, sampler_PointClamp, ani_xy + float2(2.0 / _tex_ani_side_length, 0), 0);
@@ -61,7 +62,6 @@
 				float2 uv : TEXCOORD0;
                 uint4 vBones : BLENDINDICES;
 				float4 vWeights : BLENDWEIGHTS;
-				float3 normal : NORMAL;
                 UNITY_VERTEX_INPUT_INSTANCE_ID                      //顶点着色器的 InstancingID 定义
             };
 
@@ -71,7 +71,6 @@
                 float4 positionCS               : SV_POSITION;
                 uint4 vBones : BLENDINDICES;
                 float4 vWeights : BLENDWEIGHTS;
-                float3 worldNormal: TEXCOORD1;
                 UNITY_VERTEX_INPUT_INSTANCE_ID                      //片元着色器的 InstancingID 定义
             };
 
@@ -102,8 +101,6 @@
 
                 o.vBones = v.vBones;
                 o.vWeights = v.vWeights;
-                VertexNormalInputs normalInput = GetVertexNormalInputs(v.normal);
-				o.worldNormal = normalInput.normalWS;
                 return o;
             }
 
@@ -111,6 +108,9 @@
                 UNITY_SETUP_INSTANCE_ID(i);                         //装配 InstancingID
                 //return UNITY_ACCESS_INSTANCED_PROP(Props, _Color);  //提取多实例中的当前实例的Color属性变量值
                 half4 col = tex2D(_MainTex, i.uv);
+                #ifdef UNITY_INSTANCING_ENABLED
+                    col *= _instancing_color[unity_InstanceID];
+                #endif
                 return col;
             }
             

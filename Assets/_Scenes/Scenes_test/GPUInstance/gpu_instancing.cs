@@ -8,7 +8,7 @@ using UnityEditor;
 //此脚本挂在任意物体(空物体也可)
 
 
-public class gpu_instancing_origin : MonoBehaviour
+public class gpu_instancing : MonoBehaviour
 {
     public int gobj_line_count_ = 20;
     public int gobj_count_perline_ = 20;
