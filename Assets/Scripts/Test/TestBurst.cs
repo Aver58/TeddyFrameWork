@@ -3,7 +3,7 @@ using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
 
-public class MyBurst2Behavior : MonoBehaviour {
+public class TestBurst : MonoBehaviour {
     void Start()
     {
         var input = new NativeArray<float>(10, Allocator.Persistent);

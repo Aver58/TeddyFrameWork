@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
  
@@ -7,6 +9,7 @@ using UnityEngine;
 public class TestBindPose : MonoBehaviour {
     private Vector3 bone0OriginPosition = Vector3.zero;
     private Vector3 bone1OriginPosition = new Vector3(0, 5, 0);
+    private Vector3 bone2OriginPosition = new Vector3(0, -5, 0);
     private Vector3 v1 = new Vector3(-1, 0, 0);
     private Vector3 v2 = new Vector3(1, 0, 0);
     private Vector3 v3 = new Vector3(-1, 5, 0);
@@ -52,18 +55,19 @@ public class TestBindPose : MonoBehaviour {
         // 附着在0，1索引顶点是第0个骨骼, 所以boneIndex0为0 
         // 附着在2索引顶点受2根骨骼影响，boneIndex0为0，权重为0.9f，boneIndex1为1，权重为0.1f
         // 附着在3索引顶点是第1个骨骼, 所以boneIndex0为1
-        var weights = new BoneWeight[4];
-        weights[0].boneIndex0 = 0;
-        weights[0].weight0 = 1;
-        weights[1].boneIndex0 = 0;
-        weights[1].weight0 = 1;
-        weights[2].boneIndex0 = 0;
-        weights[2].weight0 = 0.1f;
-        weights[2].boneIndex1 = 1;
-        weights[2].weight1 = 0.9f;
-        weights[3].boneIndex0 = 1;
-        weights[3].weight0 = 1;
-        mesh.boneWeights = weights;
+        
+        // var weights = new BoneWeight[4];
+        // weights[0].boneIndex0 = 0;
+        // weights[0].weight0 = 1;
+        // weights[1].boneIndex0 = 0;
+        // weights[1].weight0 = 1;
+        // weights[2].boneIndex0 = 0;
+        // weights[2].weight0 = 0.1f;
+        // weights[2].boneIndex1 = 1;
+        // weights[2].weight1 = 0.9f;
+        // weights[3].boneIndex0 = 1;
+        // weights[3].weight0 = 1;
+        // mesh.boneWeights = weights;
  
         var bones = new Transform[2];
         var bindPoses = new Matrix4x4[2];
@@ -98,7 +102,33 @@ public class TestBindPose : MonoBehaviour {
         anim.Play("test");
     }
 
+    private void OnGUI() {
+        if (Input.GetMouseButtonDown(0)) {
+            var bones = new Transform[1];
+            var bindPoses = new Matrix4x4[1];
+            
+            var bone2 = new GameObject("Lower2");
+            bones[0] = bone2.transform;
+            bones[0].parent = transform;
+            bones[0].localRotation = Quaternion.identity;
+            bones[0].localPosition = bone2OriginPosition;
+            // 绑定姿势是骨骼的逆矩阵。在这种情况下，我们也相对于根生成这个矩阵。 这样我们就可以自由地移动根游戏对象
+            bindPoses[0] = bones[0].worldToLocalMatrix * transform.localToWorldMatrix;
+
+            var newBones = new List<Transform>();
+            var newBindPoses = new List<Matrix4x4>();
+            newBones.AddRange(render.bones);
+            newBones.AddRange(bones);
+            
+            newBindPoses.AddRange(mesh.bindposes);
+            newBindPoses.AddRange(bindPoses);
+            mesh.bindposes = bindPoses.ToArray();
+            render.bones = bones.ToArray();
+        }
+    }
+
     private void OnDrawGizmos() {
+        return;
         if (mesh) {
             for (int i = 0; i < mesh.vertices.Length; i++) {
                 var vertexOriginPosition = mesh.vertices[i];
