@@ -15,7 +15,7 @@ public class MobaScene : SceneBase
     {
         UIModule.OpenView(ViewID.MobaMainView);
 
-        MobaBussiness.instance.Init();
+        MobaBussiness.Instance.Init();
     }
 
     public override void OnExit()

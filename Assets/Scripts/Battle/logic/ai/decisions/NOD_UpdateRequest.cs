@@ -34,7 +34,7 @@ public class NOD_UpdateRequest : TBTActionLeaf
                 var chaseTarget = caster.target;
                 if(chaseTarget == null)
                 {
-                    chaseTarget = TargetSearcher.instance.FindNearestEnemyUnit(caster);
+                    chaseTarget = TargetSearcher.Instance.FindNearestEnemyUnit(caster);
                 }
 
                 if(chaseTarget != null)

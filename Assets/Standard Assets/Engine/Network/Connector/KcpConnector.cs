@@ -352,7 +352,7 @@ public class KCPConnector : Singleton<KCPConnector>, INetConnector
     [MonoPInvokeCallbackAttribute(typeof(KcpOutput))]
     public static int KcpOutput(IntPtr bytes, int len, IntPtr kcp, IntPtr user)
     {
-        instance.OnOutput(bytes, len);
+        Instance.OnOutput(bytes, len);
         return len;
     }
 

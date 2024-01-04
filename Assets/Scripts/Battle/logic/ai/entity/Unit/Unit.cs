@@ -34,7 +34,7 @@ public abstract class Unit
 
     public Unit()
     {
-        int id = BattleUnitManager.instance.GetUniqueID();
+        int id = BattleUnitManager.Instance.GetUniqueID();
         this.id = id;
     }
 

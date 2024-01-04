@@ -76,13 +76,13 @@ public class HeroActor
 
         // todo 找一个区分玩家与友军的标记
         if(camp == BattleCamp.FRIENDLY)
-            GameMsg.instance.DispatchEvent(GameMsgDef.PlayerActor_Created, this, camp == BattleCamp.ENEMY);
+            GameMsg.Instance.DispatchEvent(GameMsgDef.PlayerActor_Created, this, camp == BattleCamp.ENEMY);
 
         gameObject.name = string.Format("[{0}][{1}][UID:{2}][CID:{3}][Lv:{4}][Speed:{5}]",
             battleUnit.GetName(),camp.ToString(),battleUnit.GetUniqueID(),battleUnit.GetID(),battleUnit.GetLevel(),battleUnit.GetMoveSpeed());
-        BattleActorManager.instance.AddActor(battleUnit.id, this);
+        BattleActorManager.Instance.AddActor(battleUnit.id, this);
 
-        GameMsg.instance.DispatchEvent(GameMsgDef.BattleActor_Created, this, camp == BattleCamp.ENEMY);
+        GameMsg.Instance.DispatchEvent(GameMsgDef.BattleActor_Created, this, camp == BattleCamp.ENEMY);
     }
 
     #region API

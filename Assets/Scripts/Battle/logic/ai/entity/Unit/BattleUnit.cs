@@ -162,7 +162,7 @@ public class BattleUnit : Unit
 
         SetState(HeroState.CASTING, ability.GetCastAnimation(), isSkipCastPoint);
 
-        GameMsg.instance.DispatchEvent(GameMsgDef.Hero_Cast_Ability, id, ability.GetCastAnimation());
+        GameMsg.Instance.DispatchEvent(GameMsgDef.Hero_Cast_Ability, id, ability.GetCastAnimation());
     }
 
     public void CastAbilityAnimation(Ability ability, bool isSkipCastPoint = false)
@@ -498,7 +498,7 @@ public class BattleUnit : Unit
     public void SetState(HeroState state, string skillName = null, bool isSkipCastPoint = false)
     {
         m_HeroState = state;
-        GameMsg.instance.DispatchEvent(GameMsgDef.Hero_ChangeState, id, state, skillName, isSkipCastPoint);
+        GameMsg.Instance.DispatchEvent(GameMsgDef.Hero_ChangeState, id, state, skillName, isSkipCastPoint);
     }
 
     /// <summary>

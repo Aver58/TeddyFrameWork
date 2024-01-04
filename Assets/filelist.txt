@@ -1,0 +1,4 @@
+file 'F:\Teddy FrameWork\Captures\filelist1.mp4'
+file 'F:\Teddy FrameWork\Captures\filelist2.mp4'
+file 'F:\Teddy FrameWork\Captures\filelist3.mp4'
+file 'F:\Teddy FrameWork\Captures\filelist4.mp4'

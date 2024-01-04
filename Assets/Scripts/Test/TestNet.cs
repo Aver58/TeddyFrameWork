@@ -18,7 +18,7 @@ public class TestNet : MonoBehaviour
         //KCPConnector.instance.Connect("127.0.0.1", 8090);
         //UDPClient.instance.Connect();
 
-        KCPClient.instance.Connect("127.0.0.1", 8090);
+        KCPClient.Instance.Connect("127.0.0.1", 8090);
         //注册
         NetMsg.AddListener(Network.OpCode.S2C_TestResponse, new NetHandler(Test));
     }

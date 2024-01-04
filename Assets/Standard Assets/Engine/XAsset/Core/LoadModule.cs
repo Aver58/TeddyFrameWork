@@ -154,10 +154,20 @@ public sealed class LoadModule : ModuleBase {
 
     public const string BULLET_PATH_PREFIX = "Assets/Data/bullet/";
     public const string MODEL_PATH_PREFIX = "Assets/Data/character/";
+    public const string TEST_PATH_PREFIX = "Assets/Data/Test/";
     private static string BundlePathPrefix = "Assets/Data/";
     private static string UIPathPrefix = "Assets/Data/ui/panel/";
     private static string JsonPathPrefix = "Assets/Scripts/DataTable/json/";
     private static StringBuilder stringBuilder = new StringBuilder();
+
+    public static AssetRequest LoadTestModel(string assetName, LoadedCallback loadedCallback = null) {
+        Type type = typeof(GameObject);
+        stringBuilder.Clear();
+        stringBuilder.Append(TEST_PATH_PREFIX);
+        stringBuilder.Append(assetName);
+        stringBuilder.Append(GetAssetPostfix(type));
+        return LoadAssetAsync(stringBuilder.ToString(), type, loadedCallback);
+    }
 
     public static AssetRequest LoadModel(string assetName, LoadedCallback loadedCallback = null) {
         Type type = typeof(GameObject);

@@ -22,7 +22,7 @@ public class MobaBussiness : Singleton<MobaBussiness>
 
     public MobaBussiness()
     {
-        GameMsg instance = GameMsg.instance;
+        GameMsg instance = GameMsg.Instance;
         instance.RegisterListener<int, float, float, float>(GameMsgDef.Hero_MoveTo, OnHeroMoveTo);
         instance.RegisterListener<int, float, float, float>(GameMsgDef.Hero_TurnTo3D, OnHeroTurnTo);
         instance.RegisterListener<int,HeroState,string,bool>(GameMsgDef.Hero_ChangeState, OnHeroActorStateChanged);
@@ -30,7 +30,7 @@ public class MobaBussiness : Singleton<MobaBussiness>
 
     ~MobaBussiness()
     {
-        GameMsg instance = GameMsg.instance;
+        GameMsg instance = GameMsg.Instance;
         instance.UnRegisterListener(GameMsgDef.Hero_MoveTo, this);
         instance.UnRegisterListener(GameMsgDef.Hero_TurnTo3D, this);
         instance.UnRegisterListener(GameMsgDef.Hero_ChangeState, this);
@@ -39,8 +39,8 @@ public class MobaBussiness : Singleton<MobaBussiness>
     public void Init()
     {
         m_DrawTool = GameObject.Find("MoveArea").GetComponent<DebugController>();
-        m_UnitMgr = BattleUnitManager.instance;
-        m_ActorMgr = BattleActorManager.instance;
+        m_UnitMgr = BattleUnitManager.Instance;
+        m_ActorMgr = BattleActorManager.Instance;
         
         //AddPlayer();
         BattleUnit myEntity = m_UnitMgr.playerUnit;

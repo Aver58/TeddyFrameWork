@@ -6,12 +6,12 @@ namespace Origins {
             BattleCamp = BattleCamp.ENEMY;
             InitProperty(RoleId);
             
-            ActorManager.instance.GetActorAsync(this);
+            ActorManager.Instance.GetActorAsync(this);
         }
 
         public void SetLocalPosition(Vector2 value) {
             LocalPosition = value;
-            ActorManager.instance.SetLocalPosition(InstanceId, value);
+            ActorManager.Instance.SetLocalPosition(InstanceId, value);
         }
 
         private void InitProperty(int roleId) {

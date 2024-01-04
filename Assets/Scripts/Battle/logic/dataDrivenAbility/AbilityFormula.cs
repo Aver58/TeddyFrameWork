@@ -24,7 +24,7 @@ public static class AbilityFormula
         // 吸血
 
         victim.UpdateHP(-finalDamage);
-        BattleLog.LogRpgBattleAttacker(BattleLogic.instance.logicFrame, caster, victim, configName, finalDamage);
+        BattleLog.LogRpgBattleAttacker(BattleLogic.Instance.logicFrame, caster, victim, configName, finalDamage);
     }
 
     // 计算不同伤害类型造成的伤害

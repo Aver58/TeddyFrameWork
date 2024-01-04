@@ -97,7 +97,7 @@ public abstract class AbilityInput
     /// </summary>
     private void OnCastSkillByAI()
     {
-        var target = TargetSearcher.instance.FindTargetUnitByAbilityRange(m_CasterActor.battleUnit, m_Ability);
+        var target = TargetSearcher.Instance.FindTargetUnitByAbilityRange(m_CasterActor.battleUnit, m_Ability);
         if(target == null)
         {
             GameLog.Log("ULT技能[{0}]AI未找到目标?", m_Ability.GetConfigName());

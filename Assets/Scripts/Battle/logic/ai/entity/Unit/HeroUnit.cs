@@ -18,7 +18,7 @@ public class HeroUnit : BattleUnit
 
     protected override BTAction GetBehaviorTree()
     {
-        return BehaviorTreeFactory.instance.GetMobaBehaviorTree();
+        return BehaviorTreeFactory.Instance.GetMobaBehaviorTree();
     }
 
     protected override BTAction GetDecisionTree()

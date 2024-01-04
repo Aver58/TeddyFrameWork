@@ -1,4 +1,4 @@
-﻿using Unity.Burst;
+﻿// using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -26,7 +26,8 @@ public class TestBurst : MonoBehaviour {
     // Using BurstCompile to compile a Job with burst
     // Set CompileSynchronously to true to make sure that the method will not be compiled asynchronously
     // but on the first schedule
-    [BurstCompile(CompileSynchronously = true)]
+
+    // [BurstCompile(CompileSynchronously = true)]
     private struct MyJob : IJob
     {
         [ReadOnly]

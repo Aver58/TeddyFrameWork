@@ -33,7 +33,7 @@ public class D2Action {
         this.abilityData = abilityData;
         this.requestTarget = requestTarget;
 
-        var targetCollection = TargetSearcher.instance.GetActionTargets(source, abilityData, requestTarget, actionTarget);
+        var targetCollection = TargetSearcher.Instance.GetActionTargets(source, abilityData, requestTarget, actionTarget);
         //BattleLog.Log("【D2Action】{0}， source：{1}，target：{2}" ,GetType().Name, source.GetName(), requestTarget.ToString());
         // 根据类型区分，单位和范围
         if(requestTarget.targetType == AbilityRequestTargetType.UNIT)

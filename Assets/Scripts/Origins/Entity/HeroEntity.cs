@@ -20,7 +20,6 @@ namespace Origins {
                     ability.OnUpdate(Time.deltaTime);
                 }
             }
-
             AutoCastAbility();
         }
 
@@ -29,7 +28,7 @@ namespace Origins {
             InitProperty(RoleId);
             InitDefaultSkill();
 
-            ActorManager.instance.AddHeroActor(this);
+            ActorManager.Instance.AddHeroActor(this);
         }
 
         public override void OnClear() {
@@ -40,7 +39,7 @@ namespace Origins {
 
         public void SetLocalPosition(Vector2 value) {
             LocalPosition = value;
-            ActorManager.instance.SetHeroActorPosition(value);
+            ActorManager.Instance.SetHeroActorPosition(value);
         }
 
         #endregion
@@ -59,7 +58,7 @@ namespace Origins {
         }
 
         private void Dead() {
-            GameMainLoop.instance.GameOver();
+            GameMainLoop.Instance.GameOver();
         }
 
         #endregion
@@ -70,7 +69,7 @@ namespace Origins {
             var ability = AbilityConfigParse.GetAbility(this, defaultSkillId);
             if (ability != null) {
                 ability.OnInit();
-                var targetEntity = EntityManager.instance.GetAbilityRequestTarget(this, ability);
+                var targetEntity = EntityManager.Instance.GetAbilityRequestTarget(this, ability);
                 ability.AbilityRequestContext.SetRequestUnit(targetEntity);
                 abilities.Add(ability);
             }

@@ -41,7 +41,7 @@ namespace Aver3
             if(distanceSquare < distanceToMove * distanceToMove)
             {
                 owner.Set3DPosition(targetPos);
-                GameMsg.instance.DispatchEvent(GameMsgDef.Hero_MoveTo, owner.id, targetPos.x, targetPos.y, targetPos.z);
+                GameMsg.Instance.DispatchEvent(GameMsgDef.Hero_MoveTo, owner.id, targetPos.x, targetPos.y, targetPos.z);
                 return BTResult.Finished;
             }
 
@@ -53,7 +53,7 @@ namespace Aver3
             GameLog.Log("【NOD_MoveTo】speed：{0} 当前位置：{1},{2} 目标位置：{3},{4} newPos：{5},{6}",moveSpeed, ownerPos.x,ownerPos.z, targetPos.x, targetPos.z, newPosX, newPosZ);
             
             owner.Set3DPosition(newPosX, targetPos.y, newPosZ);
-            GameMsg.instance.DispatchEvent(GameMsgDef.Hero_MoveTo, owner.id, newPosX, targetPos.y, newPosZ);
+            GameMsg.Instance.DispatchEvent(GameMsgDef.Hero_MoveTo, owner.id, newPosX, targetPos.y, newPosZ);
 
             return BTResult.Running;
         }

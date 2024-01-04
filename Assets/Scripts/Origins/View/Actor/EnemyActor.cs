@@ -39,7 +39,7 @@ namespace Origins {
         #region Private
 
         private void MoveToTarget() {
-            var targetEntity = EntityManager.instance.HeroEntity;
+            var targetEntity = EntityManager.Instance.HeroEntity;
             if (targetEntity == null) {
                 return;
             }

@@ -52,7 +52,7 @@ public class FrameTimer : ITimerBase
     private void Start()
     {
         IsRunning = true;
-        TimerMgr.instance.AddTimer(this);
+        TimerMgr.Instance.AddTimer(this);
     }
 
     // 停止定时器

@@ -25,7 +25,7 @@ public class BattleLogic : Singleton<BattleLogic>
         TableConfig config = new TableConfig();
         config.LoadTableConfig();
 
-        m_UnitMgr = BattleUnitManager.instance;
+        m_UnitMgr = BattleUnitManager.Instance;
 
         m_DecisionUpdater = delegate (BattleUnit entity, float gameTime, float deltaTime)
         {

@@ -13,7 +13,7 @@ namespace Battle.logic.ability_dataDriven {
         public ProjectileType ProjectileType;
 
         public ProjectileEntity() {
-            InstanceId = ProjectileManager.instance.AutoIndex++;
+            InstanceId = ProjectileManager.Instance.AutoIndex++;
         }
         
         public virtual void OnInit(AbsEntity casterEntity, AbsEntity targetEntity, Vector2 sourcePosition, Vector2 sourceForward,
@@ -24,7 +24,7 @@ namespace Battle.logic.ability_dataDriven {
             LocalPosition = sourcePosition;
             LocalForward = sourceForward;
 
-            GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorCreated, InstanceId, effectName, sourcePosition, sourceForward);
+            GameMsg.Instance.DispatchEvent(GameMsgDef.OnProjectileActorCreated, InstanceId, effectName, sourcePosition, sourceForward);
         }
 
         public override void OnInit() {

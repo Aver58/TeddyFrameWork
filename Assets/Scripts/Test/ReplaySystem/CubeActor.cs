@@ -1,57 +1,52 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeActor : Actor {
-    public float moveSpeed = 5f;
+namespace Test.ReplaySystem {
+    public class CubeActor : Actor {
+        private CubeSerializer lastSerializer;
 
-    private CubeSerializer lastSerializer;
+        public float moveSpeed = 5f;
+        public string AssetName;
+        public int MessageType => MessageTypeConst.CubeActor;
 
-    private struct CubeSerializer : IEqualityComparer<CubeSerializer> {
-        public ReplayType replayType;
-        public Vector3 position;
-        public Quaternion rotation;
+        private struct CubeSerializer {
+            public int ActorId;
+            public string AssetName;
+            public Vector3 Position;
+            public Quaternion Rotation;
 
-        public CubeSerializer(Vector3 position, Quaternion rotation) {
-            replayType = ReplayType.CubeActor;
-            this.position = position;
-            this.rotation = rotation;
-        }
-
-        public bool Equals(CubeSerializer x, CubeSerializer y) {
-            return x.position.Equals(y.position) && x.rotation.Equals(y.rotation);
-        }
-
-        public int GetHashCode(CubeSerializer obj) {
-            unchecked {
-                return (obj.position.GetHashCode() * 397) ^ obj.rotation.GetHashCode();
+            public CubeSerializer(int actorId, string assetName, Vector3 position, Quaternion rotation) {
+                ActorId = actorId;
+                AssetName = assetName;
+                Position = position;
+                Rotation = rotation;
             }
         }
-    }
 
-    private void Update() {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        private void Update() {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f) * moveSpeed * Time.deltaTime;
-        transform.Translate(movement);
-    }
+            Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f) * moveSpeed * Time.deltaTime;
+            transform.Translate(movement);
+        }
 
-    public override string Serialize() {
-        var transform1 = transform;
-        var newSerializer = new CubeSerializer(transform1.position, transform1.rotation);
-        // if (!lastSerializer.Equals(default) && lastSerializer.Equals(newSerializer)) {
-        //     return null;
-        // }
+        public override string Serialize() {
+            var transform1 = transform;
+            var newSerializer = new CubeSerializer(ActorId, AssetName, transform1.position, transform1.rotation);
+            // if (!lastSerializer.Equals(default) && lastSerializer.Equals(newSerializer)) {
+            //     return null;
+            // }
 
-        // lastSerializer = newSerializer;
-        var data = JsonUtility.ToJson(newSerializer);
-        return data;
-    }
+            // lastSerializer = newSerializer;
+            var data = JsonUtility.ToJson(newSerializer);
+            return data;
+        }
 
-    public override void Deserialize(string jsonData) {
-        var data = JsonUtility.FromJson<CubeSerializer>(jsonData);
-        var transform1 = transform;
-        transform1.position = data.position;
-        transform1.rotation = data.rotation;
+        public override void Deserialize(string dataString) {
+            var data = JsonUtility.FromJson<CubeSerializer>(dataString);
+            var transform1 = transform;
+            transform1.position = data.Position;
+            transform1.rotation = data.Rotation;
+        }
     }
 }

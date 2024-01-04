@@ -24,7 +24,7 @@ public class TargetSearcher : Singleton<TargetSearcher>
         // 找出敌对阵营
         BattleCamp enemyCamp = caster.enemyCamp;
         // 获取指定标记的所有单位
-        List<BattleUnit> entities = BattleUnitManager.instance.GetEntities(enemyCamp);
+        List<BattleUnit> entities = BattleUnitManager.Instance.GetEntities(enemyCamp);
         // 比较距离，找出最近单位
         float minDistance = Int32.MaxValue;
         foreach(BattleUnit entity in entities)
@@ -258,14 +258,14 @@ public class TargetSearcher : Singleton<TargetSearcher>
         switch(targetTeam)
         {
             case AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_ENEMY:
-                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
+                InsertToTargetList(BattleUnitManager.Instance.GetEntities(BattleCamp.ENEMY), targets);
                 break;
             case AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_FRIENDLY:
-                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
+                InsertToTargetList(BattleUnitManager.Instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
             case AbilityUnitTargetTeam.DOTA_UNIT_TARGET_TEAM_BOTH:
-                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.ENEMY), targets);
-                InsertToTargetList(BattleUnitManager.instance.GetEntities(BattleCamp.FRIENDLY), targets);
+                InsertToTargetList(BattleUnitManager.Instance.GetEntities(BattleCamp.ENEMY), targets);
+                InsertToTargetList(BattleUnitManager.Instance.GetEntities(BattleCamp.FRIENDLY), targets);
                 break;
             default:
                 break;

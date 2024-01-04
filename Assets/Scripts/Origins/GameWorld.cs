@@ -10,11 +10,11 @@ namespace Origins {
         private void Awake() {
             managers = new List<ILifeCycle>();
             
-            RegisterManager(GameMainLoop.instance);
-            RegisterManager(ProjectileManager.instance);
-            RegisterManager(ProjectileActorManager.instance);
-            RegisterManager(EntityManager.instance);
-            RegisterManager(ActorManager.instance);
+            RegisterManager(GameMainLoop.Instance);
+            RegisterManager(ProjectileManager.Instance);
+            RegisterManager(ProjectileActorManager.Instance);
+            RegisterManager(EntityManager.Instance);
+            RegisterManager(ActorManager.Instance);
             
             for (int i = 0; i < managers.Count; i++) {
                 var manager = managers[i];

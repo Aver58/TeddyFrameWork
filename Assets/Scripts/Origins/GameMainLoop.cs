@@ -50,12 +50,12 @@ namespace Origins {
         #region Private
 
         private void GenerateHero() {
-            heroEntity = EntityManager.instance.AddHeroEntity();
+            heroEntity = EntityManager.Instance.AddHeroEntity();
         }
 
         private void GenerateEnemy(LevelDetailItem levelDetailItem) {
             for (int i = 0; i < levelDetailItem.num; i++) {
-                EntityManager.instance.AddEnemyEntity(levelDetailItem.characterId);
+                EntityManager.Instance.AddEnemyEntity(levelDetailItem.characterId);
             }
         }
 

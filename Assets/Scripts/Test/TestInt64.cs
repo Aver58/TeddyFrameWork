@@ -1,6 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using LitJson;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TestInt64 : MonoBehaviour
 {
@@ -19,13 +23,38 @@ public class TestInt64 : MonoBehaviour
 
         var info = "{\"customConfig\":[[1592350156353703936,2],[1,2]],\"isInfiniteBullet\":false}";
         var infoTable = JsonMapper.ToObject(info);
-        Debug.Log(infoTable);
+        // Debug.Log(infoTable);
         // System.Text.Encoding.UTF8.GetBytes
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        var list = new List<string> { "许冰冰", "谢妤铮", "曾志伟" };
+        var index = Random.Range(0, list.Count);
+        Debug.Log(list[index]);
+        list.RemoveAt(index);
+        index = Random.Range(0, list.Count);
+        Debug.Log(list[index]);
+        list.RemoveAt(index);
+        Debug.Log(list[0]);
+
+        var hashTable = new Hashtable();
+        hashTable["111"] = 111;
+        hashTable["222"] = 222;
+        var sb = new StringBuilder();
+        foreach(string key in hashTable.Keys) {
+            sb.Append($"{key}: {hashTable[key]}\r\n");
+        }
+        Debug.Log(sb.ToString());
+        sb.Clear();
+
+        // 反射获取 TestState 的 WeakCanUse 字段
+        var weakCanUse = typeof(TestClass.TestState).GetField("WeakCanUse").GetValue(null);
+        var weakCanUseInt = Int32.Parse(weakCanUse.ToString());
+        Debug.LogError(weakCanUse);
+        Debug.LogError(weakCanUseInt);
+    }
+}
+
+public class TestClass {
+    public static class TestState {
+        public const byte WeakCanUse = 33;
     }
 }

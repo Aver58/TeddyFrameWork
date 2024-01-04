@@ -31,13 +31,13 @@ public static class NetMsg
 
     public static void SendUDPMsg(NetMsgData data)
     {
-        UDPClient.instance.Send(ProtoBufUtil.PackNetMsg(data));
+        UDPClient.Instance.Send(ProtoBufUtil.PackNetMsg(data));
         GameLog.Log("[Send]ID:{0},Data:{1}", data.ID, data.Data);
     }
 
     public static void SendKCPMsg(NetMsgData data)
     {
-        KCPClient.instance.Send(ProtoBufUtil.PackNetMsg(data));
+        KCPClient.Instance.Send(ProtoBufUtil.PackNetMsg(data));
         GameLog.Log("[Send]ID:{0},Data:{1}", data.ID, data.Data);
     }
 

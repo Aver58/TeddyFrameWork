@@ -2,16 +2,16 @@
 using UnityEngine.AI;
 
 public class ClientPlayer : MonoBehaviour {
-    private ServerPlayer ServerPlayer;
+    private PlayerNet playerNet;
     public Vector3 Destination;
     private NavMeshAgent navMeshAgent;
 
-    public void SetPlayer(ServerPlayer serverPlayer) {
-        ServerPlayer = serverPlayer;
-        ServerPlayer.OnPlayerDataChanged += OnPlayerDataChanged;
+    public void SetPlayer(PlayerNet playerNet) {
+        this.playerNet = playerNet;
+        this.playerNet.OnPlayerDataChanged += OnPlayerNetDataChanged;
     }
 
-    private void OnPlayerDataChanged(Vector3 position) {
+    private void OnPlayerNetDataChanged(Vector3 position) {
         Destination = position;
     }
 

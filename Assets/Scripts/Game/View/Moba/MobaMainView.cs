@@ -32,10 +32,10 @@ public partial class MobaMainView : MainViewBase
     {
         base.OnLoaded();
 
-        m_cameraManager = CameraManager.instance;
+        m_cameraManager = CameraManager.Instance;
         m_cameraManager.Init();
 
-        m_hudActorManager = HudActorManager.instance;
+        m_hudActorManager = HudActorManager.Instance;
         m_hudActorManager.Init(HPHuds);
 
         InitCheatPanel();
@@ -63,14 +63,14 @@ public partial class MobaMainView : MainViewBase
     // 添加一个人偶对象
     private void AddOneDummyUnit()
     {
-        var unit = BattleLogic.instance.AddOneDummyUnit();
-        MobaBussiness.instance.AddOneUnit(unit);
+        var unit = BattleLogic.Instance.AddOneDummyUnit();
+        MobaBussiness.Instance.AddOneUnit(unit);
     }
 
     private void AddOneEnemyUnit()
     {
-        var unit = BattleLogic.instance.AddOneEnemyUnit();
-        MobaBussiness.instance.AddOneUnit(unit);
+        var unit = BattleLogic.Instance.AddOneEnemyUnit();
+        MobaBussiness.Instance.AddOneUnit(unit);
     }
 
     #endregion
@@ -90,9 +90,9 @@ public partial class MobaMainView : MainViewBase
     {
         base.AddAllMessage();
 
-        GameMsg.instance.RegisterListener<HeroActor, bool>(GameMsgDef.BattleActor_Created,OnHeroActorCreated);
-        GameMsg.instance.RegisterListener<HeroActor, bool>(GameMsgDef.PlayerActor_Created, OnPlayerActorCreated);
-        GameMsg.instance.RegisterListener<int, string>(GameMsgDef.Hero_Cast_Ability, OnHeroCastAbility);
+        GameMsg.Instance.RegisterListener<HeroActor, bool>(GameMsgDef.BattleActor_Created,OnHeroActorCreated);
+        GameMsg.Instance.RegisterListener<HeroActor, bool>(GameMsgDef.PlayerActor_Created, OnPlayerActorCreated);
+        GameMsg.Instance.RegisterListener<int, string>(GameMsgDef.Hero_Cast_Ability, OnHeroCastAbility);
     }
 
     private MobaSkillItem GetSkillItem(AbilityCastType castType)
@@ -208,7 +208,7 @@ public partial class MobaMainView : MainViewBase
         if(Input.GetMouseButton(1))
         {
             // 鼠标位置转世界坐标位置：发射线，碰撞到的地板的位置
-            var worldCamera = CameraManager.instance.worldCamera;
+            var worldCamera = CameraManager.Instance.worldCamera;
             Vector3 mousePosOnScreen = Input.mousePosition;
             Ray ray = worldCamera.ScreenPointToRay(mousePosOnScreen);
             Debug.DrawLine(ray.origin, ray.direction, Color.red, 50f);

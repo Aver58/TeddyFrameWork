@@ -1,11 +1,10 @@
-﻿using System;
+﻿#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Unity.Mathematics;
 using UnityEditor;
-using UnityEngine.Rendering;
 
 //此脚本挂在任意物体(空物体也可) gpu_instancing 魔改版本
 public class gpu_instancing_aver : MonoBehaviour {
@@ -245,3 +244,5 @@ public class gpu_instancing_aver : MonoBehaviour {
         file_stream.Close();
     }
 }
+
+#endif

@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+
+using UnityEditor;
 using UnityEditor.Compilation;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
@@ -228,3 +230,5 @@ public class ScriptCompileReloadTools
     }
 
 }
+
+#endif

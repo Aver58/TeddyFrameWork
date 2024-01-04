@@ -41,7 +41,7 @@ public class NOD_TurnTo : BTAction
         if(angle < radianToTurn * Mathf.Rad2Deg)
         {
             source.Set3DForward(targetForward);
-            GameMsg.instance.DispatchEvent(GameMsgDef.Hero_TurnTo3D, source.id, targetForward.x, targetForward.y, targetForward.z);
+            GameMsg.Instance.DispatchEvent(GameMsgDef.Hero_TurnTo3D, source.id, targetForward.x, targetForward.y, targetForward.z);
             return BTResult.Finished;
         }
 
@@ -53,7 +53,7 @@ public class NOD_TurnTo : BTAction
         float y = targetForward.y;
         BattleMath.RotateByYAxis2D(sourceForward.x, sourceForward.z,radianToTurn,out float x,out float z);
         source.Set3DForward(x,y,z);
-        GameMsg.instance.DispatchEvent(GameMsgDef.Hero_TurnTo3D , source.id, x,y,z);
+        GameMsg.Instance.DispatchEvent(GameMsgDef.Hero_TurnTo3D , source.id, x,y,z);
         GameLog.Log("【NOD_TurnTo】自己朝向：{0} 目标朝向：{1} 相隔角度：{2} 旋转弧度：{3} 叉乘：{4} 新的朝向：{5},{6},{7}", sourceForward, targetForward, angle, radianToTurn * Mathf.Rad2Deg, cross, x, y, z);
         return BTResult.Running;
     }

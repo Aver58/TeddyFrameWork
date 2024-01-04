@@ -19,7 +19,7 @@ public class GameMain : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         config.Init();
 
-        m_moduleMgr = ModuleManager.instance;
+        m_moduleMgr = ModuleManager.Instance;
 
         AddModules();
 

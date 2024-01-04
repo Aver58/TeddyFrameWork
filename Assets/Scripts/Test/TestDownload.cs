@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+
+using UnityEditor;
 using UnityEngine;
 
 public class TestDownload : MonoBehaviour {
@@ -35,3 +37,5 @@ public class TestDownload : MonoBehaviour {
         StartCoroutine(httpDownLoad.Start(url, filePath));
     }
 }
+
+#endif

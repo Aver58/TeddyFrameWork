@@ -13,9 +13,9 @@ namespace Battle.logic.ability_dataDriven {
             projectileActorPool = new ObjectPool<ProjectileActor>();
             gameObjectPool = new GameObjectPool(LoadModule.BULLET_PATH_PREFIX);
 
-            GameMsg.instance.RegisterListener<int, string, Vector2, Vector2>(GameMsgDef.OnProjectileActorCreated, OnProjectileActorCreated);
-            GameMsg.instance.RegisterListener<int>(GameMsgDef.OnProjectileActorDestroy, OnProjectileActorDestroy);
-            GameMsg.instance.RegisterListener<int, Vector2, Vector2>(GameMsgDef.OnProjectileActorMoveTo, OnProjectileActorMoveTo);
+            GameMsg.Instance.RegisterListener<int, string, Vector2, Vector2>(GameMsgDef.OnProjectileActorCreated, OnProjectileActorCreated);
+            GameMsg.Instance.RegisterListener<int>(GameMsgDef.OnProjectileActorDestroy, OnProjectileActorDestroy);
+            GameMsg.Instance.RegisterListener<int, Vector2, Vector2>(GameMsgDef.OnProjectileActorMoveTo, OnProjectileActorMoveTo);
         }
 
         public void OnUpdate() {
@@ -26,9 +26,9 @@ namespace Battle.logic.ability_dataDriven {
         }
 
         public void OnClear() {
-            GameMsg.instance.UnRegisterListener(GameMsgDef.OnProjectileActorCreated, this);
-            GameMsg.instance.UnRegisterListener(GameMsgDef.OnProjectileActorDestroy, this);
-            GameMsg.instance.UnRegisterListener(GameMsgDef.OnProjectileActorMoveTo, this);
+            GameMsg.Instance.UnRegisterListener(GameMsgDef.OnProjectileActorCreated, this);
+            GameMsg.Instance.UnRegisterListener(GameMsgDef.OnProjectileActorDestroy, this);
+            GameMsg.Instance.UnRegisterListener(GameMsgDef.OnProjectileActorMoveTo, this);
 
             foreach (var item in actorMap) {
                 var actor = item.Value;

@@ -24,16 +24,16 @@ public class HudActorManager : Singleton<HudActorManager>
     {
         m_actorMap = new Dictionary<int, HudActor>();
 
-        uiCamera = CameraManager.instance.uiCamera;
+        uiCamera = CameraManager.Instance.uiCamera;
         canvasTransform = hudParent;
         parentNode = hudParent;
 
-        GameMsg.instance.RegisterListener<int, int, int>(GameMsgDef.BattleEntity_HP_Updated, OnHeroHPUpdated);
+        GameMsg.Instance.RegisterListener<int, int, int>(GameMsgDef.BattleEntity_HP_Updated, OnHeroHPUpdated);
     }
 
     ~HudActorManager()
     {
-        GameMsg.instance.UnRegisterListener(GameMsgDef.BattleEntity_HP_Updated, this);
+        GameMsg.Instance.UnRegisterListener(GameMsgDef.BattleEntity_HP_Updated, this);
     }
 
     public void OnHeroHPUpdated(int id, int curHp, int maxHp)

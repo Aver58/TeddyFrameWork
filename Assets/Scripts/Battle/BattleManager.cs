@@ -11,7 +11,7 @@ public class BattleManager : MonoBehaviour
 
 	private void Init()
 	{
-		m_BattleLogic = BattleLogic.instance;
+		m_BattleLogic = BattleLogic.Instance;
 		m_BattleLogic.Init();
 	}
 

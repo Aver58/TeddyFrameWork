@@ -34,8 +34,8 @@ public class D2Action_IsHit : D2Action
             {
                 if(IsDodge(source,target))
                 {
-                    BattleLog.LogTargetDodge(BattleLogic.instance.logicFrame, source, target, abilityData.configFileName);
-                    GameMsg.instance.DispatchEvent(GameMsgDef.DAMAGE_EFFECT_NOTICED, target.GetUniqueID(), DamageEffectDefine.DODGE);
+                    BattleLog.LogTargetDodge(BattleLogic.Instance.logicFrame, source, target, abilityData.configFileName);
+                    GameMsg.Instance.DispatchEvent(GameMsgDef.DAMAGE_EFFECT_NOTICED, target.GetUniqueID(), DamageEffectDefine.DODGE);
                 }
                 else
                 {

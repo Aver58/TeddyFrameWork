@@ -62,7 +62,7 @@ namespace libx
                 var asset = assets[index]; 
                 scenes[index] = new EditorBuildSettingsScene(asset, true);
             }
-            EditorBuildSettings.scenes = scenes;
+            // EditorBuildSettings.scenes = scenes;
         }
 
         [InitializeOnLoadMethod]

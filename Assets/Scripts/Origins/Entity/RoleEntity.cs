@@ -1,7 +1,9 @@
+using System;
+
 namespace Origins {
     public class RoleEntity : AbsEntity {
         protected RoleEntity() {
-            InstanceId = EntityManager.instance.AutoIndex++;
+            InstanceId = EntityManager.Instance.AutoIndex++;
         }
 
         public int RoleId;
@@ -23,7 +25,7 @@ namespace Origins {
         public float AttackCooldown;
 
         public override void OnInit() {
-            
+
         }
 
         public override void OnUpdate() {

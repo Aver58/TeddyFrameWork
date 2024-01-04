@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,14 +12,41 @@ public class TestMath : MonoBehaviour
 
         //transform.position = newPos;
         //Debug.Log("newpos " + newPos + " nowpos " + transform.position + " distance " + Vector3.Distance(newPos, transform.position));
-        TestIsRectIntersect();
+        // TestIsRectIntersect();
 
-        var test = 0.018f;
-        test *= 0.018f;
-        test /= 0.018f;
-        print(test);
+        // var test = 0.018f;
+        // test *= 0.018f;
+        // test /= 0.018f;
+        // print(test);
+        //
+        // var result = GetRandomUnRepeatArray(0, 7);
+        // for (int i = 0; i < result.Length; i++) {
+        //     print(result[i]);
+        // }
+
+        // IsPointInsideConvexPolygon 的单元测试
+        var points = new List<Vector3>();
+        points.Add(new Vector3(0, 0,0));
+        points.Add(new Vector3(0, 0,1));
+        points.Add(new Vector3(1, 0,1));
+        points.Add(new Vector3(1, 0,0));
+        var point = new Vector3(0.5f, 0,0.5f);
+        print(IsPointInsideConvexPolygon(points, point));
     }
 
+    private int[] GetRandomUnRepeatArray(int minValue, int maxValue) {
+        var random = new System.Random();
+        var length = maxValue - minValue + 1;
+        var keys = new byte[length];
+        random.NextBytes(keys);
+        var items = new int[length];
+        for (var i = 0; i < length; i++) {
+            items[i] = minValue + i;
+        }
+        Array.Sort(keys, items);
+        return items;
+    }
+    
 	private float distance = 10f;
     void Update()
     {
@@ -56,6 +82,21 @@ public class TestMath : MonoBehaviour
         u.y = Math.Max(u.y, 0);
         // 第三步：长度平方与半径平方比较
         return u.sqrMagnitude <= radius * radius;
+    }
+
+    // 点是否在多边形内
+    private bool IsPointInsideConvexPolygon(List<Vector3> polygon, Vector3 point) {
+        for (int i = 0; i < polygon.Count; i++) {
+            var p1 = polygon[i];
+            var p2 = polygon[(i + 1) % polygon.Count];
+            var v1 = p2 - p1;
+            var v2 = point - p1;
+            var cross = Vector3.Cross(v1, v2);
+            if (cross.z < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // 单元测试 判断两个矩形是否相交

@@ -23,7 +23,7 @@ namespace Battle.logic.ability_dataDriven {
 
             if (moveSpeed > 0) {
                 LocalPosition += forward * moveSpeed * Time.deltaTime;
-                GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorMoveTo, InstanceId, LocalPosition, LocalForward);
+                GameMsg.Instance.DispatchEvent(GameMsgDef.OnProjectileActorMoveTo, InstanceId, LocalPosition, LocalForward);
             }
             
             // 碰撞 矩形与圆的相交
@@ -38,7 +38,7 @@ namespace Battle.logic.ability_dataDriven {
         private void FlyEnd() {
             OnClear();
             
-            GameMsg.instance.DispatchEvent(GameMsgDef.OnProjectileActorDestroy, InstanceId);
+            GameMsg.Instance.DispatchEvent(GameMsgDef.OnProjectileActorDestroy, InstanceId);
         }
     }
 }

@@ -19,6 +19,8 @@ public class HierarchyEditor
     {
         Object obj = EditorUtility.InstanceIDToObject(instanceID);
         CustomItem(selectionRect, obj);
+        
+        
     }
 
     /// <summary>
