@@ -10,49 +10,57 @@
 #endregion
 
 using UnityEngine;
-using System.Collections.Generic;
 using System;
 using Object = UnityEngine.Object;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
 /// <summary>
+/// DoNothing | HideOther | NeedBack<para/>
+/// DoNothing：不关闭其他界面<para/>
+/// HideOther：显示时，关闭其他界面。关闭时，将其他页面处理为同时关闭，就达到了禁止返回上一页面的目的（例如：主面板-》子面板-》点击子面板确定按钮-》不需要返回主面板，主子面板全关）<para/>
+/// NeedBack：显示时，要前台显示；关闭时，显示前台后面的页面（只要其他页面不处理，就自动退回前一页面了）<para/>
+/// 注意：NeedBack或HideOther的页面只能关闭或返回同类型页面
+/// </summary>
+public enum UIMode
+{
+    DoNothing,      // 不关闭其他界面
+    HideOther,      // 关闭其他界面
+    NeedBack,       // 点击返回按钮关闭当前,不关闭其他界面(需要调整好层级关系)
+    //NoNeedBack,		// 关闭TopBar,关闭其他界面,不加入backSequence队列
+}
+
+/// <summary>
 /// 所有界面的抽象类
 /// </summary>
-public abstract class ViewBase
-{
-    public ViewID key { get; set; }
-    public ViewType viewType { get; set; }
+public abstract class ViewBase {
+    public ViewID ViewID { get; set; }
+    public ViewType ViewType { get; set; }
+    public UIMode UiMode;
     public float closeTime { get; set; }
-    public bool needNavigation { get { return viewType == ViewType.MAIN; } }
-    public bool isLoaded { get { return m_loadState == LoadState.LOADED; } }
-    public bool isOpen { get; private set; }
-    public GameObject gameObject;
+    public bool NeedNavigation { get { return UiMode == UIMode.HideOther || UiMode == UIMode.NeedBack; } }
+    public bool IsLoaded { get { return m_loadState == LoadState.LOADED; } }
+    public bool IsOpen { get; private set; }
+    private GameObject gameObject;
+    protected Transform transform;
     public string panelName;
     public string assetPath;
 
-    /// <summary>
-    /// 优化显示，隐藏的时候移到很远
-    /// </summary>
-    protected bool optimizationVisible = true;
-    protected Transform transform;
+    // 优化显示，隐藏的时候移到很远
+    private bool optimizationVisible = true;
 
-    /// <summary>
-    /// 打开传入的参数
-    /// </summary>
-    protected object[] openParam;
+    // 打开传入的参数
+    private object[] openParam;
 
     private Transform m_parent;
     private AssetRequest m_assetRequest;
-    private Action<ViewBase> m_loadedCallback;
+    private Action<ViewBase> m_loadedCallback;// 加载回调
     private LoadState m_loadState;// 加载状态
     protected Vector3 FarAwayPosition = new Vector3(10000, 10000, 0);
 
     protected ViewBase() {}
-    protected ViewBase(GameObject go,Transform parent)
-    {
-        if(go == null)
-        {
+    protected ViewBase(GameObject go,Transform parent) {
+        if(go == null) {
             GameLog.LogError("[ViewBase]构造初始化，没有传入GameObject！");
             return;
         }
@@ -64,13 +72,10 @@ public abstract class ViewBase
 
     #region API
 
-    public virtual bool CanOpen() { return true; }
-    public virtual bool CanClose() { return true; }
-    
-    /// <summary>
-    /// 界面加载
-    /// </summary>
-    /// <param name="loadedCallback"></param>
+    public bool CanOpen() { return true; }
+    public bool CanClose() { return true; }
+
+    // 界面加载
     public void Load(Action<ViewBase> loadedCallback = null)
     {
         m_loadedCallback = loadedCallback;
@@ -78,12 +83,10 @@ public abstract class ViewBase
         LoadModule.LoadUI(assetPath, OnLoadCompleted);
     }
 
-    /// <summary>
-    /// 界面打开
-    /// </summary>
+    // 界面打开
     public void Open()
     {
-        isOpen = true;
+        IsOpen = true;
         SetActive(true);
         AddAllMessage();
         OnOpen(openParam);
@@ -91,37 +94,36 @@ public abstract class ViewBase
         transform.SetAsLastSibling();
     }
 
-    /// <summary>
-    /// 界面关闭
-    /// </summary>
+    // 界面关闭
     public void Close()
     {
         GameLog.Log(panelName + "Close");
         closeTime = Time.time;
         openParam = null;
 
-        isOpen = false;
+        IsOpen = false;
         SetActive(false);
         RemoveAllMessage();
         OnClose();
     }
 
-    /// <summary>
-    /// 界面恢复
-    /// </summary>
-    public void Resume()
-    {
-        isOpen = true;
-        SetActive(true);
+    // 界面刷新
+    public void Refresh() {
+        OnRefresh();
     }
 
-    /// <summary>
-    /// 界面冻结
-    /// </summary>
-    public void Freeze()
-    {
-        isOpen = false;
+    // 界面显示
+    public void Active() {
+        IsOpen = true;
+        SetActive(true);
+        OnActive();
+    }
+
+    // 界面隐藏
+    public void Hide() {
+        IsOpen = false;
         SetActive(false);
+        OnHide();
     }
 
     public void Dispose()
@@ -179,28 +181,24 @@ public abstract class ViewBase
 
     #region LifeCycle
 
-    /// <summary>
-    /// 按钮监听
-    /// </summary>
-    protected virtual void AddAllListener() { }
-    /// <summary>
-    /// 事件监听
-    /// </summary>
-    protected virtual void AddAllMessage() { }
+    protected virtual void AddAllListener() { }// 按钮监听
+    protected virtual void AddAllMessage() { }// 事件监听
     protected virtual void OnLoaded() { }
     protected virtual void OnOpen(object[] args) { }
+    protected virtual void OnRefresh(){}
     protected virtual void OnClose() { }
+    protected virtual void OnActive() { }
+    protected virtual void OnHide() { }
     protected virtual void OnUpdate() { }
     protected virtual void BindView() { }
+
     #endregion
 
     #region Private
 
-    private void OnLoadCompleted(AssetRequest request)
-    {
+    private void OnLoadCompleted(AssetRequest request) {
         m_assetRequest = request;
-        if(!string.IsNullOrEmpty(request.error))
-        {
+        if(!string.IsNullOrEmpty(request.error)) {
             request.Release();
             GameLog.LogError("加载界面失败:" + panelName);
             return;
@@ -209,7 +207,7 @@ public abstract class ViewBase
         m_loadState = LoadState.LOADED;
 
         // 实例化
-        m_parent = UIModule.GetParent(viewType);
+        m_parent = UIModule.GetParent(ViewType);
         gameObject = GameObject.Instantiate(request.asset as GameObject, m_parent);
         gameObject.SetActive(true);
         gameObject.name = request.asset.name;
@@ -220,10 +218,14 @@ public abstract class ViewBase
         OnLoaded();
         AddAllListener();
 
-        if(m_loadedCallback != null)
-        {
+        if(m_loadedCallback != null) {
             m_loadedCallback(this);
         }
+    }
+
+    // popup view, 锚定在哪个节点下
+    private void AnchorUIGameObject() {
+
     }
 
     private void SetActive(bool active)

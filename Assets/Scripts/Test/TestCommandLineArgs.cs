@@ -15,7 +15,7 @@ public class TestCommandLineArgs : MonoBehaviour
                 var value = Convert.ToBoolean(commandLineArgs[i + 1]);
                 Debug.LogError("命令行参数：" + value);
                 if (value) {
-                    TestCommandLineArgsCall.TestCall();
+                    // TestCommandLineArgsCall.TestCall();
                 }
             }
         }

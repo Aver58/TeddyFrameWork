@@ -16,6 +16,6 @@ public class MainViewBase : ViewBase
     public MainViewBase() { }
     public MainViewBase(GameObject go, Transform parent) : base(go, parent)
     {
-        viewType = ViewType.MAIN;
+        ViewType = ViewType.MAIN;
     }
 }

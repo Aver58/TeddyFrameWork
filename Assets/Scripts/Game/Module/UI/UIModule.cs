@@ -41,17 +41,16 @@ public class UIModule : ModuleBase
     // 上次检查缓存的时间
     private float m_lastCacheCheckTime = 0f;
     // 已打开过的view哈希表
-    private static Dictionary<ViewID, ViewBase> m_viewMap;
+    private Dictionary<ViewID, ViewBase> m_viewMap;
     private static Dictionary<ViewType, Transform> m_viewRoot;
-    private static float UIPANEL_CACHE_TIME = ViewDefine.UIPANEL_CACHE_TIME;
-
+    private const float UI_PANEL_CACHE_TIME = 5;
     private static GameObject m_UIMask;
-    private static string m_prefabPath = "common/UIMask";
+    private const string m_prefabPath = "common/UIMask";
     
-    public static readonly Vector3 HIDE_POINT = new Vector3(0, -10000, 0);
+    private readonly Vector3 HIDE_POINT = new Vector3(0, -10000, 0);
 
-    private static GameObject gameObjectPoolRoot;
-    public static GameObject GameObjectPoolRoot {
+    private GameObject gameObjectPoolRoot;
+    public GameObject GameObjectPoolRoot {
         get {
             if (gameObjectPoolRoot == null) {
                 gameObjectPoolRoot = new GameObject("GameObjectPool");
@@ -61,12 +60,13 @@ public class UIModule : ModuleBase
             return gameObjectPoolRoot;
         }
     }
-    
-    public UIModule()
-    {
-        UINavigation.Init();
-        // 随缘7个
-        m_viewMap = new Dictionary<ViewID, ViewBase>(7);
+
+    private UINavigation uiNavigation;
+
+    public UIModule() {
+        uiNavigation = new UINavigation();
+        uiNavigation.Init();
+        m_viewMap = new Dictionary<ViewID, ViewBase>();
         m_viewRoot = new Dictionary<ViewType, Transform> {
             {ViewType.MAIN,GameObject.Find("Canvas/Main").transform },
             {ViewType.POPUP,GameObject.Find("Canvas/Popup").transform },
@@ -76,43 +76,38 @@ public class UIModule : ModuleBase
 
     #region API
 
-    // todo 这个传参也很麻烦，改成多个方法重载，1个参，2个参，3个参这样
-    public static void OpenView(ViewID key, object[] args = null)
+    // public void OpenView(ViewID key, object args0 = null) { }
+    // public void OpenView(ViewID key, object args0 = null, object args1 = null) { }
+    public void OpenView(ViewID key, object[] args = null)
     {
-        ViewBase view = GetView(key);
+        var view = GetView(key);
 
-        if(view != null)
-        {
+        if(view != null) {
             view.SetOpenParam(args);
-
-            if(BeforeOpen(view) == false)
+            if (BeforeOpen(view) == false) {
                 return;
+            }
 
             // 已加载过
-            if(view.isLoaded)
-            {
+            if(view.IsLoaded) {
                 InitView(view);
-            }
-            else
-            {
+            } else {
                 view.Load(InitView);    
             }
-        }
-        else
-        {
+        } else {
             GameLog.LogError("[UIModule]界面实例化失败" + key.ToString());
         }
     }
 
-    public static void CloseView(ViewID key)
+    public void CloseView(ViewID key)
     {
         ViewBase view = GetView(key);
         if(view != null)
         {
-            if(view.isOpen)
+            if(view.IsOpen)
             {
                 view.Close();
-                UINavigation.RemoveLastItem(view);
+                uiNavigation.RemoveLastItem(view);
             }
             else
             {
@@ -160,12 +155,11 @@ public class UIModule : ModuleBase
     /// <summary>
     /// 切换场景，资源管理相关
     /// </summary>
-    public static void SceneExit()
-    {
+    public void SceneExit() {
         foreach(var item in m_viewMap)
         {
             var view = item.Value;
-            if(view.isOpen)
+            if(view.IsOpen)
                 view.Close();
         }
     }
@@ -178,8 +172,8 @@ public class UIModule : ModuleBase
     public override void Update(float dt)
     {
         // 已打开界面的update,有需求才做
-        ViewBase curView = UINavigation.GetLastItem();
-        if(curView != null && curView.isOpen)
+        ViewBase curView = uiNavigation.GetLastItem();
+        if(curView != null && curView.IsOpen)
             curView.Update();
 
         // 自动回收cache的界面，todo这个是不是可以用个协程做
@@ -190,9 +184,9 @@ public class UIModule : ModuleBase
             {
                 var view = item.Value;
                 //Debug.Log((view.closeTime - curTime > UIPANEL_CACHE_TIME).ToString());
-                if(view.closeTime - curTime > UIPANEL_CACHE_TIME && !view.isOpen)
+                if(view.closeTime - curTime > UI_PANEL_CACHE_TIME && !view.IsOpen)
                 {
-                    m_viewMap[view.key] = null;
+                    m_viewMap[view.ViewID] = null;
                     view.Dispose();
                 }
             }
@@ -212,7 +206,7 @@ public class UIModule : ModuleBase
         return view.CanClose();
     }
 
-    private static ViewBase GetView(ViewID key)
+    private ViewBase GetView(ViewID key)
     {
         ViewBase view;
         if(m_viewMap.TryGetValue(key,out view))
@@ -226,7 +220,7 @@ public class UIModule : ModuleBase
         view = Activator.CreateInstance(viewClass) as ViewBase;
         if(view != null)
         {
-            view.key = key;
+            view.ViewID = key;
             view.assetPath = viewConfig.path;
             view.panelName = viewConfig.name;
             return view;
@@ -236,12 +230,14 @@ public class UIModule : ModuleBase
     }
 
     //初始化界面管理器状态
-    private static void InitView(ViewBase view)
+    private void InitView(ViewBase view)
     {
-        m_viewMap[view.key] = view;
+        m_viewMap[view.ViewID] = view;
 
-        UINavigation.AddItem(view);
         view.Open();
+        view.Active();
+        view.Refresh();
+        uiNavigation.Push(view);
         //--抛出界面打开完成事件
         //--设置场景摄像机状态
     }

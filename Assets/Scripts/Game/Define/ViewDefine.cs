@@ -46,8 +46,7 @@ public enum ViewID
 
 public static class ViewDefine
 {
-    public static float UIPANEL_CACHE_TIME = 5f;
-    public static Dictionary<ViewID, ViewConfig> ViewMapping = new Dictionary<ViewID, ViewConfig> 
+    public static Dictionary<ViewID, ViewConfig> ViewMapping = new Dictionary<ViewID, ViewConfig>
     {
         { ViewID.Test,new ViewConfig("TestView","test/TestPanel",typeof(TestView))},
         { ViewID.MobaMainView,new ViewConfig("MobaMainView","battle/MobaMainPanel",typeof(MobaMainView))},

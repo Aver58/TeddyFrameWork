@@ -98,7 +98,7 @@ public class SceneModule : ModuleBase
             m_curScene.OnExit();
 
         //调用ui模块的退出场景，
-        UIModule.SceneExit();
+        UIModule.Instance.SceneExit();
         // 卸载AB
         //主动触发GC
         System.GC.Collect();

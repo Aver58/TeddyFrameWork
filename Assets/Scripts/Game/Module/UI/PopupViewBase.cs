@@ -63,7 +63,7 @@ public class PopupViewBase : ViewBase
     private bool m_raycast { get { return m_PentrateType == PentrateType.ImPenetrable; } }
     public PopupViewBase()
     {
-        viewType = ViewType.POPUP;
+        ViewType = ViewType.POPUP;
     }
 
     protected override void OnClose()

@@ -12,65 +12,80 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UINavigation
-{
-    private static int count;
-    public static List<ViewBase> History;
+// 导航栈，（树状会不会更好管理？）
+// 控制每个页面关闭后返回前一页面（1>2>3>4>5）
+public class UINavigation {
+    private int count;
+    private List<ViewBase> openedViews;
 
-    public static void Init()
-    {
-        if(History != null) 
-            return;
-        History = new List<ViewBase>();
-    }
-
-    public static void Clear()
-    {
-        History.Clear();
-    }
-
-    public static void AddItem(ViewBase view)
-    {
-        if(view == null)
-            return;
-
-        if(view.needNavigation)
-        {
-            // 弹出窗体后面的窗体冻结
-            ViewBase lastView = GetLastItem();
-            if(lastView != null)
-                lastView.Freeze();
-            //Debug.Log("AddItem：" + view.ToString());
-            History.Add(view);
+    public void Init() {
+        if (openedViews == null) {
+            openedViews = new List<ViewBase>();
         }
     }
 
-    public static void RemoveLastItem(ViewBase view)
-    {
+    public void Clear() {
+        openedViews.Clear();
+    }
+
+    public void Push(ViewBase view) {
+        if (view == null) {
+            return;
+        }
+
+        if(view.NeedNavigation) {
+            //Debug.Log("AddItem：" + view.ToString());
+            // 如果UI页面在UI栈中任何一个位置，将其调出（从原位置移除，再放到栈顶——List的最后）
+            var isFound = false;
+            for (int i = 0; i < openedViews.Count; i++) {
+                if (openedViews[i].ViewID == view.ViewID) {
+                    openedViews.RemoveAt(i);
+                    openedViews.Add(view);
+                    isFound = true;
+                    break;
+                }
+            }
+
+            if (!isFound) {
+                openedViews.Add(view);
+            }
+
+            view.Active();
+
+            if (view.UiMode == UIMode.HideOther) {
+                for (int i = 1; i < openedViews.Count; i++) {
+                    if (openedViews[i].IsOpen) {
+                        openedViews[i].Hide();
+                    }
+                }
+            }
+        }
+    }
+
+    public void RemoveLastItem(ViewBase view) {
         if(view == null)
             return;
         
-        if(view.needNavigation)
+        if(view.NeedNavigation)
         {
             // 从栈中移除
             ViewBase lastView = GetLastItem();
             if(lastView == view)
             {
-                count = History.Count;
+                count = openedViews.Count;
                 if(count == 0)
                     return;
                 //Debug.Log("RemoveLastItem：" + view.ToString());
-                History.RemoveAt(count - 1);
+                openedViews.RemoveAt(count - 1);
             }
         }
     }
 
-    public static ViewBase GetLastItem()
-    {
-        count = History.Count;
+    public ViewBase GetLastItem() {
+        count = openedViews.Count;
         if(count == 0)
             return null;
-        ViewBase data = History[count - 1];
+        ViewBase data = openedViews[count - 1];
 
         return data;
     }

@@ -19,7 +19,7 @@ public class TestView : MainViewBase
 
     private void OpenView2()
     {
-        UIModule.OpenView(ViewID.Test2);
+        UIModule.Instance.OpenView(ViewID.Test2);
     }
 
     private void ChangeScene()

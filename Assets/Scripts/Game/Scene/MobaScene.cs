@@ -13,7 +13,7 @@ public class MobaScene : SceneBase
 {
     public override void OnEnter()
     {
-        UIModule.OpenView(ViewID.MobaMainView);
+        UIModule.Instance.OpenView(ViewID.MobaMainView);
 
         MobaBussiness.Instance.Init();
     }

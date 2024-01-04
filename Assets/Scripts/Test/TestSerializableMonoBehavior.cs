@@ -51,7 +51,7 @@ public class TestSerializableMonoBehavior : MonoBehaviour{
             }
         };
 
-        var json = Newtonsoft.Json.JsonConvert.SerializeObject(myStruct);
+        // var json = Newtonsoft.Json.JsonConvert.SerializeObject(myStruct);
         // var json = MiniJSON.jsonEncode(myStruct);
         // Debug.LogError(json);
 
