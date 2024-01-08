@@ -190,7 +190,7 @@ namespace libx
         private string RuledAssetBundleName(string name)
         {
             if (nameByHash)
-                return Utility.GetMD5Hash(name) + LoadModule.Extension; 
+                return TeddyFramework.Utility.GetMD5Hash(name) + LoadModule.Extension;
             return name.Replace("\\", "/").ToLower() + LoadModule.Extension;
         }
 

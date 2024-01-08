@@ -78,7 +78,7 @@ public static class Versions
 		{
 			using(var fs = File.OpenRead(outputPath + "/" + file))
 			{
-				disk.AddFile(file, fs.Length, Utility.GetCRC32Hash(fs));
+				disk.AddFile(file, fs.Length, TeddyFramework.Utility.GetCRC32Hash(fs));
 			}
 		}
 
@@ -92,7 +92,7 @@ public static class Versions
 			writer.Write(disk.files.Count + 1);
 			using(var fs = File.OpenRead(dataPath))
 			{
-				var file = new VFile { name = Dataname, len = fs.Length, hash = Utility.GetCRC32Hash(fs) };
+				var file = new VFile { name = Dataname, len = fs.Length, hash = TeddyFramework.Utility.GetCRC32Hash(fs) };
 				file.Serialize(writer);
 			}
 			foreach(var file in disk.files)
@@ -179,7 +179,7 @@ public static class Versions
 			if(verifyBy != VerifyBy.Hash)
 				return false;
 
-			return !Utility.GetCRC32Hash(stream).Equals(hash, StringComparison.OrdinalIgnoreCase);
+			return !TeddyFramework.Utility.GetCRC32Hash(stream).Equals(hash, StringComparison.OrdinalIgnoreCase);
 		}
 	}
 

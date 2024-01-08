@@ -188,7 +188,7 @@ namespace libx
 
             using (var fs = File.OpenRead(path))
             {
-                var crc = Utility.GetCRC32Hash(fs);
+                var crc = TeddyFramework.Utility.GetCRC32Hash(fs);
                 GameLog.Log(crc);
             }
         }
@@ -204,7 +204,7 @@ namespace libx
 
             using (var fs = File.OpenRead(path))
             {
-                var crc = Utility.GetMD5Hash(fs);
+                var crc = TeddyFramework.Utility.GetMD5Hash(fs);
                 GameLog.Log(crc);
             }
         }

@@ -193,7 +193,7 @@ public class Download : DownloadHandlerScript, IDisposable, ICloneable
                     if(Versions.verifyBy == VerifyBy.Hash)
                     {
                         const StringComparison compare = StringComparison.OrdinalIgnoreCase;
-                        if(!hash.Equals(Utility.GetCRC32Hash(fs), compare))
+                        if(!hash.Equals(TeddyFramework.Utility.GetCRC32Hash(fs), compare))
                         {
                             error = "下载文件哈希异常:" + hash;
                         }
