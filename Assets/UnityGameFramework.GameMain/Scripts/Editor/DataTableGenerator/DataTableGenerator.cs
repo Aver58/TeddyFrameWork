@@ -17,9 +17,9 @@ namespace StarForce.Editor.DataTableTools
 {
     public sealed class DataTableGenerator
     {
-        private const string DataTablePath = "Assets/UnityGameFramework.GameMain/DataTables";
-        private const string CSharpCodePath = "Assets/UnityGameFramework.GameMain/DataTables/DataTableGenerator";
-        private const string CSharpCodeTemplateFileName = "Assets/UnityGameFramework.GameMain/DataTables/DataTableGenerator/DataTableCodeTemplate.txt";
+        private const string DataTablePath = "Assets/UnityGameFramework.GameMain/ToBundle/DataTables";
+        private const string CSharpCodePath = "Assets/UnityGameFramework.GameMain/Scripts/DataTables/DataTableGenerator";
+        private const string CSharpCodeTemplateFileName = "Assets/UnityGameFramework.GameMain/Scripts/DataTables/DataTableGenerator/DataTableCodeTemplate.txt";
         private static readonly Regex EndWithNumberRegex = new Regex(@"\d+$");
         private static readonly Regex NameRegex = new Regex(@"^[A-Z][A-Za-z0-9_]*$");
 

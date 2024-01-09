@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 6153008633891076429}
   - component: {fileID: 6153008633891076430}
   m_Layer: 5
-  m_Name: PuzzleForgePanel
+  m_Name: PuzzleForgeForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
