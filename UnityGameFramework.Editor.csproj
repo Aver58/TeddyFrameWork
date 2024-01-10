@@ -50,78 +50,78 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\BaseComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\ConfigComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\DataNodeComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\DataTableComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\DebuggerComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\DownloadComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\EditorResourceComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\EntityComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\EventComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\FileSystemComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\FsmComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\GameFrameworkInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\LocalizationComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\NetworkComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\ObjectPoolComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\ProcedureComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\ReferencePoolComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\ResourceComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\SceneComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\SettingComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\SoundComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\UIComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Inspector\WebRequestComponentInspector.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\BuildSettings.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\BuildSettingsConfigPathAttribute.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\ConfigPathAttribute.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\Help.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\HelperInfo.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\LogRedirection.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\LogScriptingDefineSymbols.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\OpenFolder.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\ScriptingDefineSymbols.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\Misc\Type.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\AssetsOrder.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\DependencyData.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ResourceAnalyzer.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ResourceAnalyzerController.CircularDependencyChecker.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ResourceAnalyzerController.Stamp.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ResourceAnalyzerController.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ScatteredAssetsOrder.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\AssetBundleCompressionType.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\IBuildEventHandler.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\Platform.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilder.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderConfigPathAttribute.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.AssetData.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.BuildReport.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.FileSystemHelper.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.ResourceCode.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.ResourceData.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.VersionListData.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\Asset.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\AssetType.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\LoadType.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\Resource.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\ResourceCollection.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\ResourceCollectionConfigPathAttribute.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\AssetSorterType.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditor.MenuState.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditor.ResourceFolder.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditor.ResourceItem.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditor.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditorConfigPathAttribute.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditorController.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\SourceAsset.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\SourceFolder.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourcePackBuilder\ResourcePackBuilder.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourcePackBuilder\ResourcePackBuilderController.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceSyncTools\ResourceSyncTools.cs" />
-     <Compile Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\ResourceSyncTools\ResourceSyncToolsController.cs" />
-     <None Include="Assets\UnityGameFramework.GameMain\UnityGameFramework\Scripts\Editor\UnityGameFramework.Editor.asmdef" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\BaseComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\ConfigComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\DataNodeComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\DataTableComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\DebuggerComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\DownloadComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\EditorResourceComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\EntityComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\EventComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\FileSystemComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\FsmComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\GameFrameworkInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\LocalizationComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\NetworkComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\ObjectPoolComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\ProcedureComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\ReferencePoolComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\ResourceComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\SceneComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\SettingComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\SoundComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\UIComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Inspector\WebRequestComponentInspector.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\BuildSettings.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\BuildSettingsConfigPathAttribute.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\ConfigPathAttribute.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\Help.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\HelperInfo.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\LogRedirection.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\LogScriptingDefineSymbols.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\OpenFolder.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\ScriptingDefineSymbols.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\Misc\Type.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\AssetsOrder.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\DependencyData.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ResourceAnalyzer.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ResourceAnalyzerController.CircularDependencyChecker.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ResourceAnalyzerController.Stamp.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ResourceAnalyzerController.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceAnalyzer\ScatteredAssetsOrder.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\AssetBundleCompressionType.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\IBuildEventHandler.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\Platform.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilder.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderConfigPathAttribute.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.AssetData.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.BuildReport.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.FileSystemHelper.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.ResourceCode.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.ResourceData.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.VersionListData.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceBuilder\ResourceBuilderController.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\Asset.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\AssetType.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\LoadType.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\Resource.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\ResourceCollection.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceCollection\ResourceCollectionConfigPathAttribute.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\AssetSorterType.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditor.MenuState.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditor.ResourceFolder.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditor.ResourceItem.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditor.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditorConfigPathAttribute.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\ResourceEditorController.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\SourceAsset.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceEditor\SourceFolder.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourcePackBuilder\ResourcePackBuilder.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourcePackBuilder\ResourcePackBuilderController.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceSyncTools\ResourceSyncTools.cs" />
+     <Compile Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\ResourceSyncTools\ResourceSyncToolsController.cs" />
+     <None Include="Assets\GameMain\UnityGameFramework\Scripts\Editor\UnityGameFramework.Editor.asmdef" />
  <Reference Include="UnityEditor.UI">
  <HintPath>F:/Teddy FrameWork/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
@@ -350,11 +350,8 @@
  <Reference Include="ICSharpCode.NRefactory">
  <HintPath>F:/Teddy FrameWork/Library/PackageCache/com.unity.render-pipelines.core@7.7.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
  </Reference>
- <Reference Include="GameFramework">
- <HintPath>F:/Teddy FrameWork/Assets/UnityGameFramework.GameMain/UnityGameFramework/GameFrameworkLibraries/GameFramework.dll</HintPath>
- </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>F:/Teddy FrameWork/Assets/UnityGameFramework.GameMain/UnityGameFramework/GameFrameworkLibraries/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>F:/Teddy FrameWork/Assets/GameMain/UnityGameFramework/GameFrameworkLibraries/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>F:/Teddy FrameWork/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
@@ -721,6 +718,10 @@
     <ProjectReference Include="UnityGameFramework.Runtime.csproj">
       <Project>{1823e037-beda-d62f-ac10-7386c4cef03e}</Project>
       <Name>UnityGameFramework.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="GameFramework.csproj">
+      <Project>{594eb9c8-8f69-44a0-1386-85b029e9cbdc}</Project>
+      <Name>GameFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
