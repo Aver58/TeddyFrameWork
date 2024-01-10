@@ -433,6 +433,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec909dcc57501c4488d44391e735248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GridParent: {fileID: 6153008635370854458}
+  GridItemTemplate: {fileID: 5184555248392922163, guid: c546965e1be657d4da3a9c411f1f314f,
+    type: 3}
 --- !u!1 &6153008634818479328
 GameObject:
   m_ObjectHideFlags: 0
