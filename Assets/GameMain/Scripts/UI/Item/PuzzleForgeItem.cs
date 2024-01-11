@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityGameFramework.Runtime;
 
 public class PuzzleForgeItem : MonoBehaviour {
     private const int MinMergeCount = 3;
+    public int Level;  // 当前格子存储的资源等级
+    public int Index;
     public int RowIndex;
     public int ColumnIndex;
-    public int Index;
-    public int Level;  // 当前格子存储的资源等级
+
     public List<PuzzleForgeItem> NeighborGrids;
     private List<PuzzleForgeItem> toClearGrids;
-    
-    
+
     [SerializeField] private Image ImgBg;
     [SerializeField] private Image ImgIcon;
     [SerializeField] private Text TxtLevel;
@@ -23,12 +22,15 @@ public class PuzzleForgeItem : MonoBehaviour {
 
     public void Init(int rowIndex, int columnIndex, int index) {
         Level = 0;
+        Index = index;
         RowIndex = rowIndex;
         ColumnIndex = columnIndex;
-        Index = index;
+#if UNITY_EDITOR
+        gameObject.name = ToString();
+#endif
         NeighborGrids = new List<PuzzleForgeItem>();
         toClearGrids = new List<PuzzleForgeItem>(2);
-        
+
         BtnClick.onClick.AddListener(OnBtnClick);
     }
 
@@ -36,16 +38,16 @@ public class PuzzleForgeItem : MonoBehaviour {
         BtnClick.onClick.RemoveListener(OnBtnClick);
         
     }
-    
+
     public void AddNeighbor(PuzzleForgeItem item) {
         NeighborGrids.Add(item);
     }
 
-    public void ClearLevel() {
-        Level = 0;
-        TxtLevel.text = Level.ToString();
+    public override string ToString() {
+        var s = $"index:{Index} 行:{RowIndex + 1} 列:{ColumnIndex + 1}";
+        return s;
     }
-    
+
     #endregion
 
     #region Private
@@ -62,12 +64,14 @@ public class PuzzleForgeItem : MonoBehaviour {
     private void RequestMerge() {
         var count = 1;
         toClearGrids.Clear();
+        // 遍历邻居
         for (int i = 0; i < NeighborGrids.Count; i++) {
             var grid = NeighborGrids[i];
             if (grid.Level == Level) {
                 count++;
                 toClearGrids.Add(grid);
-                // 遍历第二层
+                Log.Debug($"【合并】新增 {grid}");
+                // 遍历邻居的邻居
                 for (int j = 0; j < grid.NeighborGrids.Count; j++) {
                     var grid2 = grid.NeighborGrids[j];
                     if (grid2.Index != Index && 
@@ -75,6 +79,7 @@ public class PuzzleForgeItem : MonoBehaviour {
                         grid2.Level == Level) {
                         count++;
                         toClearGrids.Add(grid2);
+                        Log.Debug($"【合并】新增 {grid2}");
                     }
                 }
             }
@@ -82,6 +87,14 @@ public class PuzzleForgeItem : MonoBehaviour {
 
         if (count >= MinMergeCount) {
             LevelUp();
+            // 清理其他格子
+            for (int i = 0; i < toClearGrids.Count; i++) {
+                var grid = toClearGrids[i];
+                grid.ClearLevel();
+            }
+
+            toClearGrids.Clear();
+
             // 死循环预警
             RequestMerge();
         }
@@ -91,14 +104,14 @@ public class PuzzleForgeItem : MonoBehaviour {
         Level++;
         // 先用数字代替吧
         TxtLevel.text = Level.ToString();
-        for (int i = 0; i < toClearGrids.Count; i++) {
-            var grid = toClearGrids[i];
-            grid.ClearLevel();
-        }
-
-        toClearGrids.Clear();
         // 设置图片
         // ImgIcon.sprite = "";
+    }
+
+    private void ClearLevel() {
+        Level = 0;
+        TxtLevel.text = Level.ToString();
+        Log.Debug($"清理 {ToString()}");
     }
 
     #endregion
