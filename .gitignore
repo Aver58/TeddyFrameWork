@@ -28,3 +28,9 @@ Assets/Plugins/Editor/JetBrains.meta
 Assets/Plugins/RenderHeads/AVProVideo
 Assets/Plugins/RenderHeads/AVProMovieCapture
 Assets/Standard Assets/Editor/com.unity.performance-tracking-master
+UnityGameFramework.Editor.csproj
+UnityGameFramework.Runtime.csproj
+UnityGameFramework.Editor.csproj
+UnityGameFramework.Runtime.csproj
+Teddy FrameWork.sln
+GameFramework.csproj
