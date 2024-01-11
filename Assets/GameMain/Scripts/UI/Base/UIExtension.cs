@@ -1,5 +1,6 @@
 using GameFramework.DataTable;
 using StarForce;
+using UnityEngine;
 using UnityGameFramework.Runtime;
 
 public static class UIExtension {
@@ -34,4 +35,9 @@ public static class UIExtension {
 
         return uiComponent.OpenUIForm(assetName, drUIForm.UIGroupName, Constant.AssetPriority.UIFormAsset, drUIForm.PauseCoveredUIForm, userData);
     }
+
+    // public static Sprite SetSprite(string assetName) {
+    //     string assetPath = AssetUtility.GetUISpriteAsset(assetName);
+    //     
+    // }
 }

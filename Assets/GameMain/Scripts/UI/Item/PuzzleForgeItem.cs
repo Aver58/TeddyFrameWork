@@ -105,7 +105,7 @@ public class PuzzleForgeItem : MonoBehaviour {
         // 先用数字代替吧
         TxtLevel.text = Level.ToString();
         // 设置图片
-        // ImgIcon.sprite = "";
+        // ImgIcon.sprite = ;
     }
 
     private void ClearLevel() {
