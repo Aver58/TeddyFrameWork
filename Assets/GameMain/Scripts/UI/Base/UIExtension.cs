@@ -1,7 +1,10 @@
+using System;
 using GameFramework.DataTable;
 using StarForce;
 using UnityEngine;
 using UnityGameFramework.Runtime;
+using UnityEngine.UI;
+using UIForm = StarForce.UIForm;
 
 public static class UIExtension {
     public static int? OpenUIForm(this UIComponent uiComponent, UIFormId uiFormId, object userData = null)
@@ -11,8 +14,8 @@ public static class UIExtension {
 
     public static int? OpenUIForm(this UIComponent uiComponent, int uiFormId, object userData = null)
     {
-        IDataTable<DRUIForm> dtUIForm = GameEntry.DataTable.GetDataTable<DRUIForm>();
-        DRUIForm drUIForm = dtUIForm.GetDataRow(uiFormId);
+        IDataTable<UIForm> dtUIForm = GameEntry.DataTable.GetDataTable<UIForm>();
+        UIForm drUIForm = dtUIForm.GetDataRow(uiFormId);
         if (drUIForm == null)
         {
             Log.Warning("Can not load UI form '{0}' from data table.", uiFormId.ToString());
@@ -35,9 +38,4 @@ public static class UIExtension {
 
         return uiComponent.OpenUIForm(assetName, drUIForm.UIGroupName, Constant.AssetPriority.UIFormAsset, drUIForm.PauseCoveredUIForm, userData);
     }
-
-    // public static Sprite SetSprite(string assetName) {
-    //     string assetPath = AssetUtility.GetUISpriteAsset(assetName);
-    //     
-    // }
 }

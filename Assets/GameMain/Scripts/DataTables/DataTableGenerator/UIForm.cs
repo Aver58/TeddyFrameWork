@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2024-01-08 14:31:38.207
+// 生成时间：2024-01-12 16:49:47.534
 //------------------------------------------------------------
 
 using GameFramework;
@@ -21,7 +21,7 @@ namespace StarForce
     /// <summary>
     /// 界面配置表。
     /// </summary>
-    public class DRUIForm : DataRowBase
+    public class UIForm : DataRowBase
     {
         private int m_Id = 0;
 
