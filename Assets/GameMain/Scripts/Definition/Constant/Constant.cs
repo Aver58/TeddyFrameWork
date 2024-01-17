@@ -11,5 +11,6 @@ public static class Constant {
         public const int UISoundAsset = 30;
 
         public const int EffectAsset = 80;
+        public const int SpriteAsset = 80;
     }
 }

@@ -8,12 +8,15 @@
 // 生成时间：__DATA_TABLE_CREATE_TIME__
 //------------------------------------------------------------
 
-using GameFramework;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
+using System.Collections.Generic;
+
 using UnityEngine;
+
+using GameFramework;
 using UnityGameFramework.Runtime;
 
 namespace __DATA_TABLE_NAME_SPACE__
@@ -21,25 +24,101 @@ namespace __DATA_TABLE_NAME_SPACE__
     /// <summary>
     /// __DATA_TABLE_COMMENT__
     /// </summary>
-    public class __DATA_TABLE_CLASS_NAME__ : DataRowBase
-    {
+    public class __DATA_TABLE_CLASS_NAME__ : DataRowBase {
         private int m_Id = 0;
-
-        /// <summary>
-        /// __DATA_TABLE_ID_COMMENT__
-        /// </summary>
-        public override int Id
-        {
-            get
-            {
-                return m_Id;
-            }
-        }
+        // __DATA_TABLE_ID_COMMENT__
+        public override int Id => m_Id;
 
 __DATA_TABLE_PROPERTIES__
 
 __DATA_TABLE_PARSER__
 
 __DATA_TABLE_PROPERTY_ARRAY__
+
+        static Dictionary<string, #ClassName#> configs = null;
+        public static #ClassName# Get(string id) {
+            if (!Inited) {
+                Init(true);
+            }
+    
+            if (string.IsNullOrEmpty(id)) {
+                return null;
+            }
+    
+            if (configs.ContainsKey(id)) {
+                return configs[id];
+            }
+    
+            #ClassName# config = null;
+            if (rawDatas.ContainsKey(id)) {
+                config = configs[id] = new #ClassName#();
+                config.ParseDataRow(rawDatas[id], null);
+                rawDatas.Remove(id);
+            }
+    
+            if (config == null) {
+                Debug.LogFormat("获取配置失败 #ClassName# id:{0}", id);
+            }
+    
+            return config;
+        }
+    
+        public static #ClassName# Get(int id) {
+            return Get(id.ToString());
+        }
+    
+        public static bool Has(string id) {
+            if (!Inited) {
+                Init(true);
+            }
+    
+            return configs.ContainsKey(id) || rawDatas.ContainsKey(id);
+        }
+    
+        public static List<string> GetKeys() {
+            if (!Inited) {
+                Init(true);
+            }
+    
+            var keys = new List<string>();
+            keys.AddRange(configs.Keys);
+            keys.AddRange(rawDatas.Keys);
+            return keys;
+        }
+    
+        public static bool Inited { get; private set; }
+        protected static Dictionary<string, string> rawDatas = null;
+        public static void Init(bool sync = false) {
+            Inited = false;
+            var path = AssetUtility.GetDataTableAsset("#ClassName#", false);
+            var lines = File.ReadAllLines(path);
+            configs = new Dictionary<string, #ClassName#>();
+    
+            if (sync) {
+                rawDatas = new Dictionary<string, string>(lines.Length - 4);
+                for (var i = 4; i < lines.Length; i++) {
+                    var line = lines[i];
+                    var array = line.Split(DataTableExtension.DataSplitSeparators);
+                    var id = array[1];
+    
+                    rawDatas.Add(id, line);
+                }
+                Inited = true;
+            } else {
+                ThreadPool.QueueUserWorkItem((object @object) => {
+                    rawDatas = new Dictionary<string, string>(lines.Length - 4);
+                    for (var i = 4; i < lines.Length; i++) {
+                        var line = lines[i];
+                        var array = line.Split(DataTableExtension.DataSplitSeparators);
+                        var id = array[1];
+    
+                        rawDatas.Add(id, line);
+                    }
+    
+                    Inited = true;
+                });
+            }
+        }
+
     }
 }

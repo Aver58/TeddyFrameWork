@@ -165,9 +165,9 @@ namespace libx
             Debug.Log(assetPath);
         }
 #endif
-        private const string KToJson = "Assets/ToJson";
+        // private const string KToJson = "Assets/ToJson";
 
-        [MenuItem(KToJson)]
+        // [MenuItem(KToJson)]
         private static void ToJson()
         {
             var path = AssetDatabase.GetAssetPath(Selection.activeObject);

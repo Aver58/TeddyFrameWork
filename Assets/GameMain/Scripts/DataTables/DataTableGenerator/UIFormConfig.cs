@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------
 //    [Author]:               Sausage
-//    [  Date ]:             2024年1月13日
+//    [  Date ]:             2024年1月14日
 //--------------------------------------------------------
 
 using System.Collections.Generic;
@@ -9,25 +9,37 @@ using System.Threading;
 using System;
 using UnityEngine;
 
-public partial class UISpriteConfig {
+public partial class UIFormConfig {
 
-    public readonly string SpriteName;
-	public readonly int AtlasId;
+    public readonly int Id;
+	public readonly string Remark;
+	public readonly string AssetName;
+	public readonly string UIGroupName;
+	public readonly bool AllowMultiInstance;
+	public readonly bool PauseCoveredUIForm;
 
     
 
-    public UISpriteConfig(string input) {
+    public UIFormConfig(string input) {
         try {
             var tables = input.Split('\t');
-            SpriteName = tables[0];
-			int.TryParse(tables[1],out AtlasId); 
+            int.TryParse(tables[0],out Id); 
+			Remark = tables[1];
+			AssetName = tables[2];
+			UIGroupName = tables[3];
+			var AllowMultiInstanceTemp = 0;
+			int.TryParse(tables[4],out AllowMultiInstanceTemp); 
+			AllowMultiInstance=AllowMultiInstanceTemp!=0;
+			var PauseCoveredUIFormTemp = 0;
+			int.TryParse(tables[5],out PauseCoveredUIFormTemp); 
+			PauseCoveredUIForm=PauseCoveredUIFormTemp!=0;
         } catch (Exception ex) {
             Debug.LogError(ex);
         }
     }
 
-    static Dictionary<string, UISpriteConfig> configs = null;
-    public static UISpriteConfig Get(string id) {
+    static Dictionary<string, UIFormConfig> configs = null;
+    public static UIFormConfig Get(string id) {
         if (!Inited) {
             Init(true);
         }
@@ -40,20 +52,20 @@ public partial class UISpriteConfig {
             return configs[id];
         }
 
-        UISpriteConfig config = null;
+        UIFormConfig config = null;
         if (rawDatas.ContainsKey(id)) {
-            config = configs[id] = new UISpriteConfig(rawDatas[id]);
+            config = configs[id] = new UIFormConfig(rawDatas[id]);
             rawDatas.Remove(id);
         }
 
         if (config == null) {
-            Debug.LogFormat("获取配置失败 UISpriteConfig id:{0}", id);
+            Debug.LogFormat("获取配置失败 UIFormConfig id:{0}", id);
         }
 
         return config;
     }
 
-    public static UISpriteConfig Get(int id) {
+    public static UIFormConfig Get(int id) {
         return Get(id.ToString());
     }
 
@@ -80,9 +92,9 @@ public partial class UISpriteConfig {
     protected static Dictionary<string, string> rawDatas = null;
     public static void Init(bool sync = false) {
         Inited = false;
-        var path = AssetUtility.GetDataTableAsset("UISpriteConfig", false);
+        var path = AssetUtility.GetDataTableAsset("UIFormConfig", false);
         var lines = File.ReadAllLines(path);
-        configs = new Dictionary<string, UISpriteConfig>();
+        configs = new Dictionary<string, UIFormConfig>();
 
         if (sync) {
             rawDatas = new Dictionary<string, string>(lines.Length - 3);

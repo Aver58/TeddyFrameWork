@@ -22,7 +22,7 @@ namespace StarForce.Editor.DataTableTools
         private const string CSharpCodeTemplateFileName = "Assets/GameMain/Scripts/DataTables/DataTableGenerator/DataTableCodeTemplate.txt";
         private static readonly Regex EndWithNumberRegex = new Regex(@"\d+$");
         private static readonly Regex NameRegex = new Regex(@"^[A-Z][A-Za-z0-9_]*$");
-        private static readonly string NameSpace = "StarForce";
+        private static readonly string NameSpace = "StarForce";// 替换成自己的namespace
 
         public static DataTableProcessor CreateDataTableProcessor(string dataTableName)
         {
@@ -82,6 +82,8 @@ namespace StarForce.Editor.DataTableTools
             codeContent.Replace("__DATA_TABLE_PROPERTIES__", GenerateDataTableProperties(dataTableProcessor));
             codeContent.Replace("__DATA_TABLE_PARSER__", GenerateDataTableParser(dataTableProcessor));
             codeContent.Replace("__DATA_TABLE_PROPERTY_ARRAY__", GenerateDataTablePropertyArray(dataTableProcessor));
+            // codeContent = Regex.Replace(codeContent, "#ClassName*#", dataTableName);
+            codeContent.Replace("#ClassName#", dataTableName);
         }
 
         private static string GenerateDataTableProperties(DataTableProcessor dataTableProcessor)
@@ -115,7 +117,7 @@ namespace StarForce.Editor.DataTableTools
                     .AppendLine("        /// <summary>")
                     .AppendFormat("        /// 获取{0}。", dataTableProcessor.GetComment(i)).AppendLine()
                     .AppendLine("        /// </summary>")
-                    .AppendFormat("        public {0} {1} {{get; private set;}}", dataTableProcessor.GetLanguageKeyword(i), dataTableProcessor.GetName(i)).AppendLine();
+                    .AppendFormat("        public {0} {1} {{ get; private set;}}", dataTableProcessor.GetLanguageKeyword(i), dataTableProcessor.GetName(i)).AppendLine();
             }
 
             return stringBuilder.ToString();

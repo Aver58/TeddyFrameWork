@@ -1,5 +1,4 @@
-﻿#	Atlas枚举配置表	
-#	Id	AtlasName
-#	int	string
-#	编号	图集名称
-	0	PuzzleForge
+﻿int	string
+Id	AtlasName
+编号	图集名称
+0	PuzzleForge

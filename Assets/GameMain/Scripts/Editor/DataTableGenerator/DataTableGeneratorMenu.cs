@@ -13,7 +13,7 @@ namespace StarForce.Editor.DataTableTools
 {
     public sealed class DataTableGeneratorMenu
     {
-        [MenuItem("Game Framework/Generate DataTables")]
+        // [MenuItem("Game Framework/Generate DataTables")]
         private static void GenerateDataTables()
         {
 
@@ -33,7 +33,6 @@ namespace StarForce.Editor.DataTableTools
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("Assets/Generate DataTables")]
         private static void GenerateOneDataTables() {
             if (Selection.activeObject != null) {
                 var dataTableName = Selection.activeObject.name;

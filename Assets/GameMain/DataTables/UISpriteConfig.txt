@@ -1,11 +1,10 @@
-﻿#	Sprite图集映射配置表	
-#	SpriteName	AtlasId
-#	string	int
-#	图片名称	图集编号
-	ChildrensDayBox	-1
-	box	0
-	res1	0
-	res2	0
-	res3	0
-	res4	0
-	res5	0
+﻿string	int
+SpriteName	AtlasId
+图片名称	图集编号
+ChildrensDayBox	-1
+box	0
+res1	0
+res2	0
+res3	0
+res4	0
+res5	0
