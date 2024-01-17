@@ -31,7 +31,6 @@ public class ProcedurePreload : ProcedureBase
 
 
             m_LoadedFlag.Clear();
-            PreloadResources();
         }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown) {

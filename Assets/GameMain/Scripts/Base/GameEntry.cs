@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using StarForce;
+using UnityEngine;
 using UnityGameFramework.Runtime;
 
 public class GameEntry : MonoBehaviour {
@@ -102,6 +103,8 @@ public class GameEntry : MonoBehaviour {
     /// </summary>
     public static WebRequestComponent WebRequest { get; private set; }
 
+    public static Controller Controller;
+    
     private void Start() {
         InitBuiltinComponents();
         InitCustomComponents();
@@ -131,6 +134,7 @@ public class GameEntry : MonoBehaviour {
     }
 
     private void InitCustomComponents() {
-
+        Controller = new Controller();
+        Controller.OnInit();
     }
 }

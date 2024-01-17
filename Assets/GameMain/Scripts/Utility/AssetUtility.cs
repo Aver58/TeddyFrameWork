@@ -7,9 +7,9 @@ public static class AssetUtility {
     }
 
     // todo ui资源收集工具接入
-    public static string GetUISpriteAsset(string assetName)
+    public static string GetUIAtlasAsset(string assetName)
     {
-        return Utility.Text.Format("Assets/GameMain/UI/UISprites/{0}.png", assetName);
+        return Utility.Text.Format("Assets/GameMain/UI/UIAtlas/{0}.spriteatlas", assetName);
     }
     
     
@@ -18,4 +18,9 @@ public static class AssetUtility {
         return Utility.Text.Format("Assets/GameMain/DataTables/{0}.{1}", assetName, fromBytes ? "bytes" : "txt");
     }
 
+    public static string GetEntityAsset(string assetName)
+    {
+        return Utility.Text.Format("Assets/GameMain/Entities/{0}.prefab", assetName);
+    }
+    
 }
