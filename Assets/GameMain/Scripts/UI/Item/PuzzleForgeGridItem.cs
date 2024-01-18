@@ -11,7 +11,6 @@ public class PuzzleForgeGridItem : MonoBehaviour {
     public int Index;
     public int RowIndex;
     public int ColumnIndex;
-    public List<int> NeighborGrids;
 
     private PuzzleForgeController puzzleForgeController;
     private Action<PuzzleForgeGridItem> onBtnClickGrid;
@@ -35,7 +34,6 @@ public class PuzzleForgeGridItem : MonoBehaviour {
 #if UNITY_EDITOR
         gameObject.name = ToString();
 #endif
-        NeighborGrids = puzzleForgeController.GetGridNeighbors(index);
         ImgIcon.enabled = false;
         TxtLevel.text = "";
         BtnClick.onClick.AddListener(OnBtnClick);
@@ -78,47 +76,6 @@ public class PuzzleForgeGridItem : MonoBehaviour {
 
         LevelUp();
         onBtnClickGrid?.Invoke(this);
-        // RequestMerge();
-    }
-
-    private void RequestMerge() {
-        // var count = 1;
-        // toClearGrids.Clear();
-        // // 遍历邻居
-        // for (int i = 0; i < NeighborGrids.Count; i++) {
-        //     var gridIndex = NeighborGrids[i];
-        //     var grid = gridIndex;
-        //     if (grid.Level == Level) {
-        //         count++;
-        //         toClearGrids.Add(grid);
-        //         Log.Debug($"【合并】新增 {grid}");
-        //         // 遍历邻居的邻居
-        //         for (int j = 0; j < grid.NeighborGrids.Count; j++) {
-        //             var grid2 = grid.NeighborGrids[j];
-        //             if (grid2.Index != Index && 
-        //                 grid2.Index != grid.Index && 
-        //                 grid2.Level == Level) {
-        //                 count++;
-        //                 toClearGrids.Add(grid2);
-        //                 Log.Debug($"【合并】新增 {grid2}");
-        //             }
-        //         }
-        //     }
-        // }
-        //
-        // if (count >= MinMergeCount) {
-        //     LevelUp();
-        //     // 清理其他格子
-        //     for (int i = 0; i < toClearGrids.Count; i++) {
-        //         var grid = toClearGrids[i];
-        //         grid.ClearLevel();
-        //     }
-        //
-        //     toClearGrids.Clear();
-        //
-        //     // 死循环预警
-        //     RequestMerge();
-        // }
     }
 
     #endregion

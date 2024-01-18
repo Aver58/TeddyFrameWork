@@ -1,27 +1,29 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityGameFramework.Runtime;
 
 public class PuzzleForgeForm : FullScreenForm {
-    public int GridRowCount;
-    public int GridColumnCount;
-    private int MinMergeCount = 3;
-
     [SerializeField] private Transform GridParent;
     [SerializeField] private GameObject GridItemTemplate;
-    [SerializeField] private List<Transform> TempleteParents;
-    private List<PuzzleForgeGridItem> gridItemMap;
+    [SerializeField] private List<Transform> TemplateParents;
+
+    [SerializeField] private GameObject TemplateItemTemplate;
+
+    private int MinMergeCount = 3;
     private PuzzleForgeController puzzleForgeController;
+    private List<PuzzleForgeGridItem> gridItemMap;
+    private List<PuzzleForgeGridItem> toClearGrids;
+    private List<PuzzleTemplateItem> templateItems;
 
     protected override void OnInit(object userData) {
         base.OnInit(userData);
         
         puzzleForgeController = GameEntry.Controller.PuzzleForgeController;
         MinMergeCount = puzzleForgeController.MinMergeCount;
-        GridRowCount = puzzleForgeController.GridRowCount;
-        GridColumnCount = puzzleForgeController.GridColumnCount;
         toClearGrids = new List<PuzzleForgeGridItem>(2);
-        LoadAllGrid();
+        InitAllGrid();
+        InitTemplateItem();
     }
 
     protected override void OnClose(bool isShutdown, object userData) {
@@ -32,7 +34,26 @@ public class PuzzleForgeForm : FullScreenForm {
         }
     }
 
-    private void LoadAllGrid() {
+    private void InitTemplateItem() {
+        var data = puzzleForgeController.GetTemplate();
+        for (int i = 0; i < data.Count; i++) {
+            var index = data[i];
+            if (index < TemplateParents.Count) {
+                var parent = TemplateParents[index];
+                var go = Instantiate(TemplateItemTemplate, parent);
+                var gridItem = go.GetComponent<PuzzleTemplateItem>();
+                if (gridItem != null) {
+                    gridItem.Init(i, OnBtnClickGrid);
+                    gridItemMap.Add(gridItem);
+                }
+            } else {
+                Log.Error($"【模具】索引越界 index {index} TemplateParents.Count {TemplateParents.Count}");
+            }
+
+        }
+    }
+
+    private void InitAllGrid() {
         var count = puzzleForgeController.GetGridCount();
         gridItemMap = new List<PuzzleForgeGridItem>(count);
         for (int i = 0; i < count; i++) {
@@ -45,7 +66,6 @@ public class PuzzleForgeForm : FullScreenForm {
         }
     }
 
-    private List<PuzzleForgeGridItem> toClearGrids;
     private void OnBtnClickGrid(PuzzleForgeGridItem item) {
         var count = 1;
         var index = item.Index;
@@ -61,14 +81,14 @@ public class PuzzleForgeForm : FullScreenForm {
                 toClearGrids.Add(grid);
                 Log.Debug($"【合并】新增 {grid}");
                 // 遍历邻居的邻居
-                for (int j = 0; j < grid.NeighborGrids.Count; j++) {
-                    var grid2Index = grid.NeighborGrids[j];
-                    var grid2Level = puzzleForgeController.GetGridLevel(index);
-                    if (grid2Index != index && 
+                var neighborGrids2 = puzzleForgeController.GetGridNeighbors(gridIndex);
+                for (int j = 0; j < neighborGrids2.Count; j++) {
+                    var grid2Index = neighborGrids2[j];
+                    var grid2 = gridItemMap[grid2Index];
+                    if (grid2Index != index &&
                         grid2Index != grid.Index && 
-                        grid2Level == level) {
+                        grid2.Level == level) {
                         count++;
-                        var grid2 = gridItemMap[gridIndex];
                         toClearGrids.Add(grid2);
                         Log.Debug($"【合并】新增 {grid2}");
                     }

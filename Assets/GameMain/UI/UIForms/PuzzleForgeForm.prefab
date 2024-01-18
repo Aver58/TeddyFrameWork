@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7387720309010435982}
   m_Layer: 5
-  m_Name: Templete3
+  m_Name: Template3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4186433628519654246}
   m_Layer: 5
-  m_Name: Templete1
+  m_Name: Template1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,6 +436,10 @@ MonoBehaviour:
   GridParent: {fileID: 6153008635370854458}
   GridItemTemplate: {fileID: 5184555248392922163, guid: c546965e1be657d4da3a9c411f1f314f,
     type: 3}
+  TemplateParents:
+  - {fileID: 4186433628519654246}
+  - {fileID: 1054309524011993228}
+  - {fileID: 7387720309010435982}
 --- !u!1 &6153008634818479328
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1054309524011993228}
   m_Layer: 5
-  m_Name: Templete2
+  m_Name: Template2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

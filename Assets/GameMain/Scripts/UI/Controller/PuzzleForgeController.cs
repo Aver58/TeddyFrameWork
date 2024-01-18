@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using StarForce;
+using UnityEngine;
+using UnityGameFramework.Runtime;
 
 public class PuzzleForgeController : Controller {
     public int GridRowCount = 5;
     public int GridColumnCount = 6;
     public int MinMergeCount = 3;
+    public int TemplateCount = 3;
 
     private List<int> gridLevelMap;
     private List<List<int>> gridNeighborMap;
+    private List<int> templateList;
 
     #region Public
 
@@ -22,6 +26,12 @@ public class PuzzleForgeController : Controller {
         for (int i = 0; i < count; i++) {
             var neighbors = InitGridNeighbors(i);
             gridNeighborMap.Add(neighbors);
+        }
+
+        for (int i = 0; i < TemplateCount; i++) {
+            var index = Random.Range(0, 2);
+            Log.Debug(index);
+            templateList.Add(index);
         }
     }
 
@@ -54,7 +64,18 @@ public class PuzzleForgeController : Controller {
 
         return null;
     }
-    
+
+    public List<int> GetTemplate() {
+        return templateList;
+    }
+
+    public void UseOneTemplate() {
+        templateList.Remove(0);
+        var index = Random.Range(0, 2);
+        Log.Debug(index);
+        templateList.Add(index);
+    }
+
     #endregion
 
     #region Private
