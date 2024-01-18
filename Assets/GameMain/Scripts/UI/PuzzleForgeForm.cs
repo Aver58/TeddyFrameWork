@@ -43,16 +43,14 @@ public class PuzzleForgeForm : FullScreenForm {
                 var go = Instantiate(TemplateItemTemplate, parent);
                 var gridItem = go.GetComponent<PuzzleTemplateItem>();
                 if (gridItem != null) {
-                    gridItem.Init(i, OnBtnClickGrid);
-                    gridItemMap.Add(gridItem);
+                    gridItem.Init(i);
                 }
             } else {
                 Log.Error($"【模具】索引越界 index {index} TemplateParents.Count {TemplateParents.Count}");
             }
-
         }
     }
-
+    
     private void InitAllGrid() {
         var count = puzzleForgeController.GetGridCount();
         gridItemMap = new List<PuzzleForgeGridItem>(count);

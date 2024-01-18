@@ -8,3 +8,6 @@ res2	0
 res3	0
 res4	0
 res5	0
+template0	0
+template1	0
+template2	0

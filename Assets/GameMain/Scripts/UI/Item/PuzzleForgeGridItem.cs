@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
+using UnityEngine.EventSystems;
 
-public class PuzzleForgeGridItem : MonoBehaviour {
-    private int GridRowCount;
+public class PuzzleForgeGridItem : MonoBehaviour, IDropHandler {
     private int GridColumnCount;
     public int Level;  
     public int Index;
@@ -23,7 +22,6 @@ public class PuzzleForgeGridItem : MonoBehaviour {
 
     public void Init(int index, Action<PuzzleForgeGridItem> onBtnClickGrid) {
         puzzleForgeController = GameEntry.Controller.PuzzleForgeController;
-        GridRowCount = puzzleForgeController.GridRowCount;
         GridColumnCount = puzzleForgeController.GridColumnCount;
         
         Level = puzzleForgeController.GetGridLevel(index);
@@ -63,6 +61,11 @@ public class PuzzleForgeGridItem : MonoBehaviour {
         TxtLevel.text = "";
         ImgIcon.enabled = false;
         Log.Debug($"清理 {ToString()}");
+    }
+    
+    public void OnDrop(PointerEventData eventData) {
+        Log.Debug($"OnDrop PuzzleForgeGridItem {Index}");
+        
     }
     
     #endregion

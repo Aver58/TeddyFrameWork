@@ -8,7 +8,8 @@ public class PuzzleForgeController : Controller {
     public int GridColumnCount = 6;
     public int MinMergeCount = 3;
     public int TemplateCount = 3;
-
+    public int DragTemplateIndex = -1;
+    
     private List<int> gridLevelMap;
     private List<List<int>> gridNeighborMap;
     private List<int> templateList;
@@ -19,6 +20,7 @@ public class PuzzleForgeController : Controller {
         var count = GridRowCount * GridColumnCount;
         gridLevelMap = new List<int>(count);
         gridNeighborMap = new List<List<int>>(count);
+        templateList = new List<int>(TemplateCount);
         for (int i = 0; i < count; i++) {
             gridLevelMap.Add(0);
         }

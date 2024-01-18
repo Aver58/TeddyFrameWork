@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 8010102183575753173}
   - component: {fileID: -1923961899002499730}
   m_Layer: 5
-  m_Name: PuzzleGridItem
+  m_Name: PuzzleForgeGridItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

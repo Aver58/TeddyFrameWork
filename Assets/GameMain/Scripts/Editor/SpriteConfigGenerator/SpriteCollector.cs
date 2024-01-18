@@ -18,13 +18,12 @@ namespace StarForce.Editor {
 
         public void GenerateConfig(string outputPath) {
             using (StreamWriter writer = new StreamWriter(outputPath, false, Encoding.UTF8)) {
-                writer.WriteLine("#\tSprite图集映射配置表\t");
-                writer.WriteLine("#\tSpriteName\tAtlasId");
-                writer.WriteLine("#\tstring\tint");
-                writer.WriteLine("#\t图片名称\t图集编号");
+                writer.WriteLine("string\tint");
+                writer.WriteLine("SpriteName\tAtlasId");
+                writer.WriteLine("图片名称\t图集编号");
 
                 foreach (var item in spriteItems) {
-                    writer.WriteLine($"\t{item.SpriteName}\t{item.AtlasId}");
+                    writer.WriteLine($"{item.SpriteName}\t{item.AtlasId}");
                 }
             }
         }

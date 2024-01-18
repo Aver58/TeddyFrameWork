@@ -35,15 +35,21 @@ SpriteAtlas:
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 945ffd816dae7fc4ca53d58218a0d60f, type: 3}
   - {fileID: 21300000, guid: 6dd24c028f16cc84bbf94d9130c2dacb, type: 3}
   - {fileID: 21300000, guid: c3f2320458d49574b8a54680ed5fc2af, type: 3}
+  - {fileID: 21300000, guid: 03fef706b2610724886cfd84c89c7da7, type: 3}
+  - {fileID: 21300000, guid: 1e6062c7942ff6c41b01d3da838e720b, type: 3}
   - {fileID: 21300000, guid: 9feeb3f7794e76f43a8212026683e827, type: 3}
   - {fileID: 21300000, guid: 9028a809acffd6543954bc4d329a16a4, type: 3}
   - {fileID: 21300000, guid: 1008ccca38c65b44b9bfbff64ffc2903, type: 3}
   - {fileID: 21300000, guid: 88fadeddad5224048a9fdb46b90f3446, type: 3}
   m_PackedSpriteNamesToIndex:
+  - template0
   - box
   - res5
+  - template2
+  - template1
   - res1
   - res2
   - res3
