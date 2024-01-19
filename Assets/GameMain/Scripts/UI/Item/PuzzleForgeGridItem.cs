@@ -64,6 +64,7 @@ public class PuzzleForgeGridItem : MonoBehaviour, IDropHandler {
     }
     
     public void OnDrop(PointerEventData eventData) {
+        // todo 抬起的时候，事件没收到
         Log.Debug($"OnDrop PuzzleForgeGridItem {Index}");
         
     }

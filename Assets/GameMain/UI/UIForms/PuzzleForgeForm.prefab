@@ -436,12 +436,12 @@ MonoBehaviour:
   GridParent: {fileID: 6153008635370854458}
   GridItemTemplate: {fileID: 5184555248392922163, guid: c546965e1be657d4da3a9c411f1f314f,
     type: 3}
+  TemplateItemTemplate: {fileID: 8424909531176458264, guid: 4d5e512aa5bff41449fe2630901a4904,
+    type: 3}
   TemplateParents:
   - {fileID: 4186433628519654246}
   - {fileID: 1054309524011993228}
   - {fileID: 7387720309010435982}
-  TemplateItemTemplate: {fileID: 8424909531176458264, guid: 4d5e512aa5bff41449fe2630901a4904,
-    type: 3}
 --- !u!1 &6153008634818479328
 GameObject:
   m_ObjectHideFlags: 0

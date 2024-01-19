@@ -31,8 +31,7 @@ public class PuzzleForgeController : Controller {
         }
 
         for (int i = 0; i < TemplateCount; i++) {
-            var index = Random.Range(0, 2);
-            Log.Debug(index);
+            var index = Random.Range(0, 3);
             templateList.Add(index);
         }
     }
@@ -74,7 +73,6 @@ public class PuzzleForgeController : Controller {
     public void UseOneTemplate() {
         templateList.Remove(0);
         var index = Random.Range(0, 2);
-        Log.Debug(index);
         templateList.Add(index);
     }
 

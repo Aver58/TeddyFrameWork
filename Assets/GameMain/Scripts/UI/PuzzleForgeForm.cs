@@ -1,18 +1,24 @@
 ﻿using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 using UnityGameFramework.Runtime;
 
 public class PuzzleForgeForm : FullScreenForm {
     [SerializeField] private Transform GridParent;
     [SerializeField] private GameObject GridItemTemplate;
-    [SerializeField] private List<Transform> TemplateParents;
 
     [SerializeField] private GameObject TemplateItemTemplate;
+    [SerializeField] private List<Transform> TemplateParents;
 
     private int MinMergeCount = 3;
+    private RectTransform formRectTransform;
+
     private PuzzleForgeController puzzleForgeController;
     private List<PuzzleForgeGridItem> gridItemMap;
+    private List<PuzzleTemplateItem> templateItemMap;
     private List<PuzzleForgeGridItem> toClearGrids;
     private List<PuzzleTemplateItem> templateItems;
 
@@ -22,6 +28,9 @@ public class PuzzleForgeForm : FullScreenForm {
         puzzleForgeController = GameEntry.Controller.PuzzleForgeController;
         MinMergeCount = puzzleForgeController.MinMergeCount;
         toClearGrids = new List<PuzzleForgeGridItem>(2);
+        templateItemMap = new List<PuzzleTemplateItem>(3);
+        formRectTransform = transform as RectTransform;
+
         InitAllGrid();
         InitTemplateItem();
     }
@@ -39,18 +48,32 @@ public class PuzzleForgeForm : FullScreenForm {
         for (int i = 0; i < data.Count; i++) {
             var index = data[i];
             if (index < TemplateParents.Count) {
-                var parent = TemplateParents[index];
+                var parent = TemplateParents[i];
                 var go = Instantiate(TemplateItemTemplate, parent);
-                var gridItem = go.GetComponent<PuzzleTemplateItem>();
-                if (gridItem != null) {
-                    gridItem.Init(i);
+                var item = go.GetComponent<PuzzleTemplateItem>();
+                if (item != null) {
+                    item.Init(i, index, formRectTransform, OnEndDragTemplateItem);
+                    templateItemMap.Add(item);
                 }
             } else {
-                Log.Error($"【模具】索引越界 index {index} TemplateParents.Count {TemplateParents.Count}");
+                Log.Error($"【输入模具】索引越界 index {index} TemplateParents.Count {TemplateParents.Count}");
             }
         }
     }
-    
+
+    private void OnEndDragTemplateItem() {
+        Log.Debug($"OnEndDragTemplateItem");
+        return;
+        // 如果消耗了才走
+        puzzleForgeController.UseOneTemplate();
+        var data = puzzleForgeController.GetTemplate();
+        for (int i = 0; i < templateItemMap.Count; i++) {
+            var item = templateItemMap[i];
+            var index = data[i];
+            item.Init(i, index, formRectTransform, OnEndDragTemplateItem);
+        }
+    }
+
     private void InitAllGrid() {
         var count = puzzleForgeController.GetGridCount();
         gridItemMap = new List<PuzzleForgeGridItem>(count);
