@@ -63,8 +63,31 @@ public class PuzzleForgeForm : FullScreenForm {
 
     private void OnEndDragTemplateItem() {
         Log.Debug($"OnEndDragTemplateItem");
-        return;
+        var selectGridIndex = puzzleForgeController.SelectGridIndex;
+        if (selectGridIndex == -1) {
+            return;
+        }
+
+        var grid = gridItemMap[selectGridIndex];
+        if (grid.Level > 0) {
+            return;
+        }
+
+        // 检测是否消耗
+        var isConsume = false;
+        toClearGrids.Clear();
+        var neighborGrids = puzzleForgeController.GetGridNeighbors(selectGridIndex);
+        for (int i = 0; i < neighborGrids.Count; i++) {
+            var neighborGridIndex = neighborGrids[i];
+            var neighborGrid1 = gridItemMap[neighborGridIndex];
+            
+        }
+
         // 如果消耗了才走
+        if (!isConsume) {
+            return;
+        }
+        
         puzzleForgeController.UseOneTemplate();
         var data = puzzleForgeController.GetTemplate();
         for (int i = 0; i < templateItemMap.Count; i++) {

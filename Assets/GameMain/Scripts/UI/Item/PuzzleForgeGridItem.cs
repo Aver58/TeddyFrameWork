@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 using UnityEngine.EventSystems;
 
-public class PuzzleForgeGridItem : MonoBehaviour, IDropHandler {
+public class PuzzleForgeGridItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     private int GridColumnCount;
     public int Level;  
     public int Index;
@@ -46,6 +46,19 @@ public class PuzzleForgeGridItem : MonoBehaviour, IDropHandler {
         return s;
     }
 
+    public void OnPointerEnter(PointerEventData eventData) {
+        if (puzzleForgeController.IsDragTemplate()) {
+            Log.Debug($"OnPointerEnter {Index}");
+            puzzleForgeController.SelectGridIndex = Index;
+        }
+    }
+    
+    public void OnPointerExit(PointerEventData eventData) {
+        if (puzzleForgeController.IsDragTemplate()) {
+            Log.Debug($"OnPointerExit {Index}");
+        }
+    }
+
     public void LevelUp() {
         Level++;
         TxtLevel.text = Level.ToString();
@@ -61,12 +74,6 @@ public class PuzzleForgeGridItem : MonoBehaviour, IDropHandler {
         TxtLevel.text = "";
         ImgIcon.enabled = false;
         Log.Debug($"清理 {ToString()}");
-    }
-    
-    public void OnDrop(PointerEventData eventData) {
-        // todo 抬起的时候，事件没收到
-        Log.Debug($"OnDrop PuzzleForgeGridItem {Index}");
-        
     }
     
     #endregion
