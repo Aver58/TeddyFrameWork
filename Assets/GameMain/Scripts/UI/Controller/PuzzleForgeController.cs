@@ -1,12 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
+using EventSystem;
 using StarForce;
 using UnityEngine;
 using UnityGameFramework.Runtime;
-
-public struct GridInfo {
-    public int Index;
-    public int Level;
-}
 
 public class PuzzleForgeController : Controller {
     public int GridRowCount = 5;
@@ -97,7 +94,56 @@ public class PuzzleForgeController : Controller {
     public bool IsDragTemplate() {
         return DragTemplateIndex != -1; 
     }
-    
+
+    // 请求放置材料
+    public void RequestPlaceGrid(int gridIndex) {
+        var gridLevel = GetGridLevel(gridIndex);
+        if (gridLevel > 0) {
+            return;
+        }
+
+        changedGrids.Clear();
+        AddGridLevel(gridIndex);
+        changedGrids.Add(gridIndex);
+        RequestLevelUpGrid(gridIndex);
+    }
+
+    // 请求放置模具
+    public void RequestPlaceTemplate(int gridIndex, int templateIndex) {
+        if (templateIndex == -1) {
+            return;
+        }
+
+        var level = GetGridLevel(gridIndex);
+        if (level > 0) {
+            return;
+        }
+
+        // 检测是否消耗
+        var isConsume = false;
+        toClearGridIndexs.Clear();
+        var neighborGrids = GetGridNeighbors(gridIndex);
+        // 遍历树？
+        for (int i = 0; i < neighborGrids.Count; i++) {
+            var neighborGridIndex = neighborGrids[i];
+            var neighborGrid1 = GetGridNeighbors(neighborGridIndex);
+
+        }
+
+        // 如果消耗了才走
+        if (!isConsume) {
+            return;
+        }
+
+        // UseOneTemplate();
+        // var data = GetTemplate();
+        // for (int i = 0; i < templateItemMap.Count; i++) {
+        //     var item = templateItemMap[i];
+        //     var index = data[i];
+        //     item.Init(i, index, formRectTransform, OnEndDragTemplateItem);
+        // }
+    }
+
     #endregion
 
     #region Private
@@ -130,22 +176,24 @@ public class PuzzleForgeController : Controller {
         return neighbors;
     }
 
-    // 请求放置材料
-    private void RequestPlaceGrid(int gridIndex) {
+    private void RequestForgeGridTemplate(int gridIndex) {
+
+    }
+
+    private void RequestLevelUpGrid(int gridIndex) {
         var gridLevel = GetGridLevel(gridIndex);
         var count = 1;
-        changedGrids.Clear();
         toClearGridIndexs.Clear();
         var neighborGrids = GetGridNeighbors(gridIndex);
         for (int i = 0; i < neighborGrids.Count; i++) {
             var neighborGridIndex = neighborGrids[i];
-            var neighborGridLevel = GetGridLevel(gridIndex);
+            var neighborGridLevel = GetGridLevel(neighborGridIndex);
             if (neighborGridLevel == gridLevel) {
                 count++;
                 toClearGridIndexs.Add(neighborGridIndex);
                 Log.Debug($"【合并】新增 {neighborGridIndex}");
                 // 遍历邻居的邻居
-                var neighborGrids2 = GetGridNeighbors(gridIndex);
+                var neighborGrids2 = GetGridNeighbors(neighborGridIndex);
                 for (int j = 0; j < neighborGrids2.Count; j++) {
                     var neighborGridIndex2 = neighborGrids2[j];
                     var neighborGridLevel2 = GetGridLevel(neighborGridIndex2);
@@ -172,11 +220,13 @@ public class PuzzleForgeController : Controller {
 
             toClearGridIndexs.Clear();
             // 死循环预警
-            RequestPlaceGrid(gridIndex);
+            RequestLevelUpGrid(gridIndex);
         }
         
         // 同步view层
-        // todo 消息系统 
+        foreach (var index in changedGrids) {
+            MessageSystem.Instance.DispatchMessage(MessageTypeConst.OnGridChanged, index);
+        }
     }
     
     #endregion

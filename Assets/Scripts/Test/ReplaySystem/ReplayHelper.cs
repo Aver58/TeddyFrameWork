@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Test.ReplaySystem.EventSystem;
 
 namespace Test.ReplaySystem {
     // 回放管理器
@@ -49,7 +48,7 @@ namespace Test.ReplaySystem {
             if (PlaybackFrames.ContainsKey(FrameIndex)) {
                 for (var i = 0; i < PlaybackFrames[FrameIndex].Count; i++) {
                     var packet = PlaybackFrames[FrameIndex][i];
-                    MessageSystem.Instance.DispatchMessage(packet.MessageType, packet.Data);
+                    // MessageSystem.Instance.DispatchMessage(packet.MessageType, packet.Data);
                 }
             }
 
@@ -94,7 +93,7 @@ namespace Test.ReplaySystem {
                 actor.AssetName = assetName;
 
                 if (IsRecording) {
-                    ReplaySystem.Instance.RegisterPacket(MessageTypeConst.LoadCubeActor, actor.Serialize());
+                    // ReplaySystem.Instance.RegisterPacket(MessageTypeConst.LoadCubeActor, actor.Serialize());
                 }
             });
         }

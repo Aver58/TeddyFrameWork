@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-namespace Test.ReplaySystem.EventSystem {
+namespace EventSystem {
     public struct Body {
         private int id;
         private Delegate handler;

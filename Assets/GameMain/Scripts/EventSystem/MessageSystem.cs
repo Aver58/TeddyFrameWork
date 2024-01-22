@@ -1,16 +1,16 @@
 using System;
 
-namespace Test.ReplaySystem.EventSystem {
+namespace EventSystem {
     public class MessageSystem : Singleton<MessageSystem> {
         private bool isDispose;
         private MsgRegister msgRegister;
 
-        public void OnInit() {
+        public MessageSystem() {
             isDispose = false;
             msgRegister = new MsgRegister();
         }
 
-        public void OnUnInit() {
+        ~MessageSystem() {
             isDispose = true;
             msgRegister = null;
         }
@@ -19,6 +19,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Dispatcher(id);
         }
 
@@ -26,6 +27,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Dispatcher(id, data);
         }
 
@@ -33,6 +35,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Dispatcher(id, data1, data2);
         }
 
@@ -40,6 +43,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Register(id, handler);
         }
 
@@ -47,6 +51,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Register(id, handler);
         }
 
@@ -54,6 +59,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Register(id, handler);
         }
 
@@ -61,6 +67,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Unregister(id, handler);
         }
 
@@ -68,6 +75,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Unregister(id, handler);
         }
 
@@ -75,6 +83,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Unregister(id, handler);
         }
 
@@ -82,6 +91,7 @@ namespace Test.ReplaySystem.EventSystem {
             if (isDispose) {
                 return;
             }
+
             msgRegister.Unregister(id, handler);
         }
     }

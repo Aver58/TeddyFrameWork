@@ -30,7 +30,7 @@ namespace Test.ReplaySystem.Command {
                 actor.AssetName = assetName;
 
                 if (ReplayHelper.IsRecording) {
-                    ReplaySystem.Instance.RegisterPacket(MessageTypeConst.LoadCubeActor, actor.Serialize());
+                    // ReplaySystem.Instance.RegisterPacket(MessageTypeConst.LoadCubeActor, actor.Serialize());
                 }
             });
         }

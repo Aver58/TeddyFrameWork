@@ -6,7 +6,7 @@ namespace Test.ReplaySystem {
 
         public float moveSpeed = 5f;
         public string AssetName;
-        public int MessageType => MessageTypeConst.CubeActor;
+        // public int MessageType => MessageTypeConst.CubeActor;
 
         private struct CubeSerializer {
             public int ActorId;

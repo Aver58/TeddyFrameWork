@@ -53,6 +53,7 @@ public class PuzzleTemplateItem : MonoBehaviour, IBeginDragHandler, IDragHandler
         }
 
         imgIconTransform.localPosition = Vector3.zero;
+
         onEndDrag?.Invoke();
     }
 

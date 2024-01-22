@@ -12,7 +12,6 @@ public class PuzzleForgeGridItem : MonoBehaviour, IPointerEnterHandler, IPointer
     public int ColumnIndex;
 
     private PuzzleForgeController puzzleForgeController;
-    private Action<PuzzleForgeGridItem> onBtnClickGrid;
     [SerializeField] private Image ImgBg;
     [SerializeField] private Image ImgIcon;
     [SerializeField] private Text TxtLevel;
@@ -20,7 +19,7 @@ public class PuzzleForgeGridItem : MonoBehaviour, IPointerEnterHandler, IPointer
 
     #region Public
 
-    public void Init(int index, Action<PuzzleForgeGridItem> onBtnClickGrid) {
+    public void Init(int index) {
         puzzleForgeController = GameEntry.Controller.PuzzleForgeController;
         GridColumnCount = puzzleForgeController.GridColumnCount;
         
@@ -28,7 +27,6 @@ public class PuzzleForgeGridItem : MonoBehaviour, IPointerEnterHandler, IPointer
         Index = index;
         RowIndex = index / GridColumnCount;
         ColumnIndex = index % GridColumnCount;
-        this.onBtnClickGrid = onBtnClickGrid;
 #if UNITY_EDITOR
         gameObject.name = ToString();
 #endif
@@ -59,34 +57,26 @@ public class PuzzleForgeGridItem : MonoBehaviour, IPointerEnterHandler, IPointer
         }
     }
 
-    public void LevelUp() {
-        Level++;
-        TxtLevel.text = Level.ToString();
-        puzzleForgeController.SetGridLevel(Index, Level);
-        ImgIcon.enabled = true;
-        ImgIcon.SetSprite("res" + Level);
+    public void OnRefresh() {
+        Level = puzzleForgeController.GetGridLevel(Index);
+        RefreshLevel();
     }
 
-    public void ClearLevel() {
-        Level = 0;
-        puzzleForgeController.SetGridLevel(Index, Level);
-
-        TxtLevel.text = "";
-        ImgIcon.enabled = false;
-        Log.Debug($"清理 {ToString()}");
-    }
-    
     #endregion
 
     #region Private
 
     private void OnBtnClick() {
-        if (Level > 0) {
-            return;
-        }
+        puzzleForgeController.RequestPlaceGrid(Index);
+    }
 
-        LevelUp();
-        onBtnClickGrid?.Invoke(this);
+    private void RefreshLevel() {
+        TxtLevel.text = Level == 0 ? "" : Level.ToString();
+        puzzleForgeController.SetGridLevel(Index, Level);
+        ImgIcon.enabled = Level != 0;
+        if (Level != 0) {
+            ImgIcon.SetSprite("res" + Level);
+        }
     }
 
     #endregion
