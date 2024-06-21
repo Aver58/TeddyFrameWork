@@ -8,6 +8,6 @@ public class ProcedureMain : ProcedureBase {
     protected override void OnEnter(IFsm<IProcedureManager> procedureOwner) {
         base.OnEnter(procedureOwner);
 
-        GameEntry.UI.OpenUIForm(UIFormId.PuzzleForgeForm, this);
+        GameEntry.UI.OpenUIForm(UIFormId.BangForm, this);
     }
 }

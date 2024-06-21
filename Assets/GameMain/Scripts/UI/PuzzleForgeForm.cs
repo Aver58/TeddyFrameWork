@@ -89,8 +89,9 @@ public class PuzzleForgeForm : FullScreenForm {
         var neighborGrids = puzzleForgeController.GetGridNeighbors(selectGridIndex);
         for (int i = 0; i < neighborGrids.Count; i++) {
             var neighborGridIndex = neighborGrids[i];
-            var neighborGrid1 = gridItemMap[neighborGridIndex];
-            
+            var neighborGrid = gridItemMap[neighborGridIndex];
+            var neighborGrids1 = puzzleForgeController.GetGridNeighbors(neighborGridIndex);
+
         }
 
         // 如果消耗了才走
