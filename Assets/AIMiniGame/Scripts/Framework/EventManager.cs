@@ -1,42 +1,30 @@
 using System;
 using System.Collections.Generic;
 
-public class EventManager : Singleton<EventManager>
-{
+public class EventManager : Singleton<EventManager> {
     private Dictionary<int, Delegate> eventDictionary = new Dictionary<int, Delegate>();
 
-    private void Register(int eventId, Delegate listener)
-    {
-        if (eventDictionary.TryGetValue(eventId, out var del))
-        {
+    private void Register(int eventId, Delegate listener) {
+        if (eventDictionary.TryGetValue(eventId, out var del)) {
             eventDictionary[eventId] = Delegate.Combine(del, listener);
-        }
-        else
-        {
+        } else {
             eventDictionary[eventId] = listener;
         }
     }
 
-    private void Unregister(int eventId, Delegate listener)
-    {
-        if (eventDictionary.TryGetValue(eventId, out var del))
-        {
+    private void Unregister(int eventId, Delegate listener) {
+        if (eventDictionary.TryGetValue(eventId, out var del)) {
             var currentDel = Delegate.Remove(del, listener);
-            if (currentDel == null)
-            {
+            if (currentDel == null) {
                 eventDictionary.Remove(eventId);
-            }
-            else
-            {
+            } else {
                 eventDictionary[eventId] = currentDel;
             }
         }
     }
 
-    private void Trigger(int eventId, params object[] parameters)
-    {
-        if (eventDictionary.TryGetValue(eventId, out var del))
-        {
+    private void Trigger(int eventId, params object[] parameters) {
+        if (eventDictionary.TryGetValue(eventId, out var del)) {
             del.DynamicInvoke(parameters);
         }
     }

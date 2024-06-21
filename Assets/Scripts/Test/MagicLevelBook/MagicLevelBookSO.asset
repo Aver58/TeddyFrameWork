@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45afc7940ff4eab935be98806eff609, type: 3}
+  m_Name: MagicLevelBookSO
+  m_EditorClassIdentifier: 
+  StartPosition: {x: -2.384596, y: 0, z: 0.8828882}
+  StartRotation: {x: -0, y: 0.26963446, z: -0, w: 0.96296275}
+  FlySpeed: 5
+  AnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9303887
+      value: 0.3294958
+      inSlope: 1.2274563
+      outSlope: 1.2274563
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ControlPointDirectionOffset: 1
+  ControlPointSphereRadius: 20
+  books:
+  - StartPoint: {x: -2.3895192, y: 0, z: 0.86130667}
+    EndPoint: {x: -20.47478, y: -11.79, z: 18.580359}
+    StartRotation: {x: -0, y: 0.26963446, z: -0, w: 0.96296275}
+    EndRotation: {x: 0.13827513, y: -0.23708504, z: 0.693113, w: 0.666532}
+  - StartPoint: {x: -2.2412705, y: 0, z: 1.1187563}
+    EndPoint: {x: -20.987726, y: -12.144, z: 18.88971}
+    StartRotation: {x: -0, y: 0.26963446, z: -0, w: 0.96296275}
+    EndRotation: {x: -0.4603599, y: 0.4542185, z: 0.49860024, w: 0.5771933}
+  - StartPoint: {x: -2.0885975, y: 0, z: 1.370007}
+    EndPoint: {x: -20.824188, y: -12.468, z: 18.723635}
+    StartRotation: {x: -0, y: 0.26963446, z: -0, w: 0.96296275}
+    EndRotation: {x: 0.5759168, y: 0.5423899, z: -0.3869618, w: 0.473702}
+  - StartPoint: {x: -1.9354051, y: 0, z: 1.6221125}
+    EndPoint: {x: -20.920774, y: -11.754, z: 19.14624}
+    StartRotation: {x: -0, y: 0.26963446, z: -0, w: 0.96296275}
+    EndRotation: {x: 0.5344639, y: 0.41961047, z: -0.43699327, w: 0.58933216}

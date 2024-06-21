@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "TestSerializable")]
+[CreateAssetMenu(menuName = "TestSerializable/TestSerializable")]
 public class TestSerializable : ScriptableObject {
     [Serializable]
     public struct MyStruct {

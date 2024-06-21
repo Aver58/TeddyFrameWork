@@ -2,42 +2,31 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServiceLocator : Singleton<ServiceLocator>
-{
+public class ServiceLocator : Singleton<ServiceLocator> {
     private Dictionary<Type, object> services = new Dictionary<Type, object>();
 
-    public void RegisterService<T>(T service)
-    {
+    public void RegisterService<T>(T service) {
         var type = typeof(T);
-        if (!services.ContainsKey(type))
-        {
+        if (!services.ContainsKey(type)) {
             services[type] = service;
-        }
-        else
-        {
+        } else {
             Debug.LogWarning($"Service of type {type} is already registered.");
         }
     }
 
-    public T GetService<T>()
-    {
+    public T GetService<T>() {
         var type = typeof(T);
-        if (services.TryGetValue(type, out var service))
-        {
+        if (services.TryGetValue(type, out var service)) {
             return (T)service;
-        }
-        else
-        {
+        } else {
             Debug.LogError($"Service of type {type} is not registered.");
             return default;
         }
     }
 
-    public void UnregisterService<T>()
-    {
+    public void UnregisterService<T>() {
         var type = typeof(T);
-        if (services.ContainsKey(type))
-        {
+        if (services.ContainsKey(type)) {
             services.Remove(type);
         }
     }
