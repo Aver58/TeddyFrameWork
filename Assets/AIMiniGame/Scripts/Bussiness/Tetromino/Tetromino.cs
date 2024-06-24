@@ -8,11 +8,14 @@ public class Tetromino : MonoBehaviour {
     public Vector2Int position;
     public Vector2Int[] cells;
     private const int cellSize = 90;
+    private const int cellSpacing = 5;
+    private RectTransform rectTransform;
 
     public void Initialize(int[,] shape, Color color, Vector2Int startPosition) {
         this.shape = shape;
         this.color = color;
-        this.position = startPosition;
+        position = startPosition;
+        rectTransform = transform.rectTransform();
         DrawShape();
         UpdateVisuals();
     }
@@ -22,14 +25,13 @@ public class Tetromino : MonoBehaviour {
         for (int y = 0; y < shape.GetLength(0); y++) {
             for (int x = 0; x < shape.GetLength(1); x++) {
                 if (shape[y, x] == 1) {
-                    ResourceManager.Instance.LoadResourceAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab", prefab => {
-                        if (prefab != null) {
-                            var cell = Instantiate(prefab, transform, true);
-                            cell.transform.localPosition = new Vector3(x, -y, 0) * cellSize;
-                            cell.GetComponent<Image>().color = color;
-                            cellList.Add(new Vector2Int(x, -y));
-                        }
-                    });
+                    var prefab = ResourceManager.Instance.LoadResourceSync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab");
+                    if (prefab != null) {
+                        var cell = Instantiate(prefab, transform, true);
+                        cell.transform.localPosition = new Vector3(x, -y, 0) * cellSize;
+                        cell.GetComponent<Image>().color = color;
+                        cellList.Add(new Vector2Int(x, -y));
+                    }
                 }
             }
         }
@@ -43,17 +45,17 @@ public class Tetromino : MonoBehaviour {
             cell.localPosition = (Vector2)cells[i] * cellSize;
         }
 
-        transform.localPosition = (Vector2)position * cellSize;
+        rectTransform.anchoredPosition = (Vector2)position * cellSize;
     }
 
     public void Move(Vector2Int direction) {
         position += direction;
-        transform.localPosition = new Vector3(position.x, position.y, 0) * cellSize;
+        rectTransform.anchoredPosition = new Vector3(position.x, position.y, 0) * cellSize;
     }
 
     public void SetPosition(Vector2Int newPosition) {
         position = newPosition;
-        transform.localPosition = (Vector2)position * cellSize;
+        rectTransform.anchoredPosition = (Vector2)position * cellSize;
     }
 
     public void Rotate() {
