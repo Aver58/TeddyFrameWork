@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class TetrominoGameManager : MonoBehaviour {
+    private int rows = 20;
+    private int columns = 10;
     private float dropInterval = 1.0f;
     private float dropTimer = 0.0f;
-    private Vector2Int spawnPosition = new Vector2Int(5, 20);
-    private GameObject currentTetromino;
-    private HashSet<Vector2Int> occupiedCells = new HashSet<Vector2Int>();
-    private int width = 10;
-    private int height = 20;
     public Transform CanvasTransform;
+    private GameObject currentTetromino;
+    private Vector2Int spawnPosition = new Vector2Int(5, 20);
+    private HashSet<Vector2Int> occupiedCells = new HashSet<Vector2Int>();
+    private List<GameObject> activeTetrominos = new List<GameObject>();
 
     void Start() {
         StartGame();
@@ -26,26 +26,24 @@ public class TetrominoGameManager : MonoBehaviour {
     }
 
     void OnDestroy() {
+
     }
 
     private void StartGame() {
         Debug.Log("Game Start!");
-        TetrominoManager.Instance.CanvasTransform = CanvasTransform;
         SpawnTetromino();
     }
 
     private void GameOver() {
         Debug.Log("Game Over!");
-        TetrominoManager.Instance.ClearTetrominos();
+        ClearTetrominos();
         occupiedCells.Clear();
     }
 
     private void SpawnTetromino() {
         var tetrominoIds = TetrominoConfig.GetKeys();
         var randomId = tetrominoIds[Random.Range(0, tetrominoIds.Count)];
-
-        Debug.Log($"SpawnTetromino randomId {randomId}");
-        TetrominoManager.Instance.SpawnTetromino(randomId, spawnPosition, OnTetrominoSpawned);
+        SpawnTetromino(randomId, spawnPosition, OnTetrominoSpawned);
     }
 
     private void OnTetrominoSpawned(GameObject tetromino) {
@@ -61,7 +59,7 @@ public class TetrominoGameManager : MonoBehaviour {
             Tetromino tetrominoComponent = currentTetromino.GetComponent<Tetromino>();
             Vector2Int newPosition = tetrominoComponent.position + new Vector2Int(0, -1);
             if (IsValidPosition(newPosition, tetrominoComponent.cells)) {
-                TetrominoManager.Instance.MoveTetromino(currentTetromino, new Vector2Int(0, -1));
+                MoveTetromino(currentTetromino, new Vector2Int(0, -1));
             } else {
                 FixTetromino(tetrominoComponent);
                 ClearCompleteLines();
@@ -69,6 +67,11 @@ public class TetrominoGameManager : MonoBehaviour {
             }
         }
     }
+
+    public void MoveTetromino(GameObject tetromino, Vector2Int direction) {
+        tetromino.GetComponent<Tetromino>().Move(direction);
+    }
+
     private void FixTetromino(Tetromino tetromino) {
         foreach (Vector2Int cell in tetromino.cells) {
             occupiedCells.Add(tetromino.position + cell);
@@ -78,7 +81,7 @@ public class TetrominoGameManager : MonoBehaviour {
     private bool IsValidPosition(Vector2Int position, Vector2Int[] cells) {
         foreach (Vector2Int cell in cells) {
             Vector2Int newPos = position + cell;
-            if (newPos.x < 0 || newPos.x >= width || newPos.y < 0 || occupiedCells.Contains(newPos)) {
+            if (newPos.x < 0 || newPos.x >= columns || newPos.y < 0 || occupiedCells.Contains(newPos)) {
                 return false;
             }
         }
@@ -110,8 +113,34 @@ public class TetrominoGameManager : MonoBehaviour {
         Tetromino tetrominoComponent = currentTetromino.GetComponent<Tetromino>();
         Vector2Int newPosition = tetrominoComponent.position + direction;
         if (IsValidPosition(newPosition, tetrominoComponent.cells)) {
-            TetrominoManager.Instance.MoveTetromino(currentTetromino, direction);
+            MoveTetromino(currentTetromino, direction);
         }
+    }
+
+    public void SpawnTetromino(string id, Vector2Int startPosition, System.Action<GameObject> callback) {
+        TetrominoConfig config = TetrominoConfig.Get(id);
+        Debug.Log($"SpawnTetromino randomId {id}");
+        if (config != null) {
+            ResourceManager.Instance.LoadResourceAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/Tetromino.prefab", prefab => {
+                if (prefab != null) {
+                    GameObject tetromino = Instantiate(prefab, CanvasTransform, true);
+                    tetromino.GetComponent<Tetromino>().Initialize(config.shape, config.color, startPosition);
+                    activeTetrominos.Add(tetromino);
+                    callback?.Invoke(tetromino);
+                } else {
+                    callback?.Invoke(null);
+                }
+            });
+        } else {
+            callback?.Invoke(null);
+        }
+    }
+
+    public void ClearTetrominos() {
+        foreach (var tetromino in activeTetrominos) {
+            Destroy(tetromino);
+        }
+        activeTetrominos.Clear();
     }
 
     private void RotateCurrentTetromino() {
@@ -126,9 +155,9 @@ public class TetrominoGameManager : MonoBehaviour {
 
     private void ClearCompleteLines() {
         List<int> completeLines = new List<int>();
-        for (int y = 0; y < height; y++) {
+        for (int y = 0; y < rows; y++) {
             bool isComplete = true;
-            for (int x = 0; x < width; x++) {
+            for (int x = 0; x < columns; x++) {
                 if (!occupiedCells.Contains(new Vector2Int(x, y))) {
                     isComplete = false;
                     break;
@@ -140,7 +169,7 @@ public class TetrominoGameManager : MonoBehaviour {
         }
 
         foreach (int line in completeLines) {
-            for (int x = 0; x < width; x++) {
+            for (int x = 0; x < columns; x++) {
                 occupiedCells.Remove(new Vector2Int(x, line));
             }
             List<Vector2Int> newOccupiedCells = new List<Vector2Int>();

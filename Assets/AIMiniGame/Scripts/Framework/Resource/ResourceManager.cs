@@ -24,6 +24,19 @@ public class ResourceManager : Singleton<ResourceManager> {
         };
     }
 
+    // 同步加载资源
+    public T LoadResourceSync<T>(string address) where T : UnityEngine.Object {
+        var handle = Addressables.LoadAssetAsync<T>(address);
+        handle.WaitForCompletion();
+        if (handle.Status == AsyncOperationStatus.Succeeded) {
+            loadedAssets[address] = handle;
+            return handle.Result;
+        } else {
+            Debug.LogError($"Failed to load asset: {address}");
+            return null;
+        }
+    }
+
     public void UnloadResource(string address) {
         if (loadedAssets.ContainsKey(address)) {
             Addressables.Release(loadedAssets[address]);
