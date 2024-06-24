@@ -8,8 +8,8 @@ public class ResourceManager : Singleton<ResourceManager> {
     private Dictionary<string, AsyncOperationHandle> loadedAssets = new Dictionary<string, AsyncOperationHandle>();
 
     public void LoadResourceAsync<T>(string address, Action<T> onSuccess, Action<string> onFailure = null) where T : UnityEngine.Object {
-        if (loadedAssets.ContainsKey(address)) {
-            onSuccess?.Invoke(loadedAssets[address].Result as T);
+        if (loadedAssets.TryGetValue(address, out var asset)) {
+            onSuccess?.Invoke(asset.Result as T);
             return;
         }
 

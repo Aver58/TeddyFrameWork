@@ -1,0 +1,4 @@
+id,playerSpeeds,maxScores,gameTitles
+string,float[],int[],string[]
+ID描述,玩家速度数组,最高分数组,游戏标题数组
+test_id,1.5;2.0;3.0,100;200;300,Title1;Title2;Title3

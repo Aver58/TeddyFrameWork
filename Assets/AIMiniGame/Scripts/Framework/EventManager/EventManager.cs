@@ -41,9 +41,39 @@ public class EventManager : Singleton<EventManager> {
     public void Unregister<T, U, V>(int eventId, Action<T, U, V> listener) => Unregister(eventId, (Delegate)listener);
     public void Unregister<T, U, V, W>(int eventId, Action<T, U, V, W> listener) => Unregister(eventId, (Delegate)listener);
 
-    public void Trigger(int eventId) => Trigger(eventId, Array.Empty<object>());
-    public void Trigger<T>(int eventId, T param) => Trigger(eventId, param);
-    public void Trigger<T, U>(int eventId, T param1, U param2) => Trigger(eventId, param1, param2);
-    public void Trigger<T, U, V>(int eventId, T param1, U param2, V param3) => Trigger(eventId, param1, param2, param3);
-    public void Trigger<T, U, V, W>(int eventId, T param1, U param2, V param3, W param4) => Trigger(eventId, param1, param2, param3, param4);
+    // 触发事件
+    public void Trigger(int eventId) {
+        if (eventDictionary.TryGetValue(eventId, out var value)) {
+            Action callback = value as Action;
+            callback?.Invoke();
+        }
+    }
+
+    public void Trigger<T>(int eventId, T param) {
+        if (eventDictionary.TryGetValue(eventId, out var value)) {
+            Action<T> callback = value as Action<T>;
+            callback?.Invoke(param);
+        }
+    }
+
+    public void Trigger<T1, T2>(int eventId, T1 param1, T2 param2) {
+        if (eventDictionary.TryGetValue(eventId, out var value)) {
+            Action<T1, T2> callback = value as Action<T1, T2>;
+            callback?.Invoke(param1, param2);
+        }
+    }
+
+    public void Trigger<T1, T2, T3>(int eventId, T1 param1, T2 param2, T3 param3) {
+        if (eventDictionary.TryGetValue(eventId, out var value)) {
+            Action<T1, T2, T3> callback = value as Action<T1, T2, T3>;
+            callback?.Invoke(param1, param2, param3);
+        }
+    }
+
+    public void Trigger<T1, T2, T3, T4>(int eventId, T1 param1, T2 param2, T3 param3, T4 param4) {
+        if (eventDictionary.TryGetValue(eventId, out var value)) {
+            Action<T1, T2, T3, T4> callback = value as Action<T1, T2, T3, T4>;
+            callback?.Invoke(param1, param2, param3, param4);
+        }
+    }
 }

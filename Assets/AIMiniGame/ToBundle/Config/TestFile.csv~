@@ -1,0 +1,5 @@
+string,float[],int[],string[]
+id,playerSpeeds,maxScores,gameTitles
+id,玩家速度,最大分数,游戏标题
+game_1,5.0;4.5;3.2,100;150;200,Awesome Game;Super Game;Mega Game
+game_2,4.5,150,Super Game

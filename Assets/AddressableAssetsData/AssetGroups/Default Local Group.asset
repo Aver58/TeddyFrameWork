@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: a26943426306d7b42900b85adb02fd2f
+  m_SerializeEntries:
+  - m_GUID: 8f0006192ddce7d4b80a6e401c091ddd
+    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1882c5dc6e7a75346810126335a0db71
+    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/Tetromino.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 70fb61b912323e94fb8f6add2785499d
+    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 0f728d266239ddb4c8a26b329c0e5a74, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 56fbe0caf6c19d14abd01a422f4a5a6c, type: 2}
+    - {fileID: 11400000, guid: 8857724b63bd55246a120a896f6f9c58, type: 2}
