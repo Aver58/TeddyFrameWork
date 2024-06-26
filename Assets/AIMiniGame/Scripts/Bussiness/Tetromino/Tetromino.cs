@@ -3,68 +3,69 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Tetromino : MonoBehaviour {
-    public int[,] shape;
-    public Color color;
-    public Vector2Int position;
-    public Vector2Int[] cells;
+    public TetrominoModel model;
+
     private const int cellSize = 90;
     private const int cellSpacing = 5;
     private RectTransform rectTransform;
 
-    public void Initialize(int[,] shape, Color color, Vector2Int startPosition) {
-        this.shape = shape;
-        this.color = color;
-        position = startPosition;
-        rectTransform = transform.rectTransform();
+    public void Initialize(TetrominoModel model) {
+        this.model = model;
+        rectTransform = GetComponent<RectTransform>();
         DrawShape();
         UpdateVisuals();
     }
 
     private void DrawShape() {
-        var cellList = new List<Vector2Int>();
-        for (int y = 0; y < shape.GetLength(0); y++) {
-            for (int x = 0; x < shape.GetLength(1); x++) {
-                if (shape[y, x] == 1) {
-                    var prefab = ResourceManager.Instance.LoadResourceSync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab");
-                    if (prefab != null) {
-                        var cell = Instantiate(prefab, transform, true);
-                        cell.transform.localPosition = new Vector3(x, -y, 0) * cellSize;
-                        cell.GetComponent<Image>().color = color;
-                        cellList.Add(new Vector2Int(x, -y));
-                    }
-                }
+        foreach (Vector2Int cell in model.cells) {
+            var prefab = ResourceManager.Instance.LoadResourceSync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab");
+            if (prefab != null) {
+                var cellGo = Instantiate(prefab, transform);
+                var cellRectTransform = cellGo.GetComponent<RectTransform>();
+                UpdateAnchoredPosition(cellRectTransform, cell);
+                cellGo.GetComponent<Image>().color = model.color;
             }
         }
-
-        cells = cellList.ToArray();
     }
 
     private void UpdateVisuals() {
-        for (int i = 0; i < cells.Length; i++) {
+        for (int i = 0; i < model.cells.Count; i++) {
             Transform cell = transform.GetChild(i);
-            cell.localPosition = (Vector2)cells[i] * cellSize;
+            UpdateAnchoredPosition(cell.GetComponent<RectTransform>(), model.cells[i]);
         }
+        UpdateAnchoredPosition(rectTransform, model.gridPosition);
+    }
 
-        rectTransform.anchoredPosition = (Vector2)position * cellSize;
+    private void UpdateAnchoredPosition(RectTransform rectTrans, Vector2Int grid) {
+        var column = grid.x;
+        var row = grid.y;
+        var posX = column * cellSize + column * cellSpacing;
+        var posY = row * cellSize + row * cellSpacing;
+        rectTrans.anchoredPosition = new Vector2(posX, posY);
     }
 
     public void Move(Vector2Int direction) {
-        position += direction;
-        rectTransform.anchoredPosition = new Vector3(position.x, position.y, 0) * cellSize;
+        model.Move(direction);
+        UpdateAnchoredPosition(rectTransform, model.gridPosition);
     }
 
     public void SetPosition(Vector2Int newPosition) {
-        position = newPosition;
-        rectTransform.anchoredPosition = (Vector2)position * cellSize;
+        model.SetPosition(newPosition);
+        UpdateAnchoredPosition(rectTransform, model.gridPosition);
     }
 
     public void Rotate() {
-        for (int i = 0; i < cells.Length; i++) {
-            int x = cells[i].x;
-            cells[i].x = cells[i].y;
-            cells[i].y = -x;
-        }
+        model.Rotate();
+        UpdateVisuals();
+    }
 
+    public void RemoveLine(int row) {
+        //??
+        model.RemoveLine(row);
+        foreach (Transform child in transform) {
+            Destroy(child.gameObject);
+        }
+        DrawShape();
         UpdateVisuals();
     }
 }

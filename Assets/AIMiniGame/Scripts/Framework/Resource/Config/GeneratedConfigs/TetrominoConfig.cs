@@ -18,10 +18,10 @@ public class TetrominoConfig : BaseConfig {
                 case "shape":
                     var rows = values[i].Split('|');
                     shape = new int[4, 4];
-                    for (int r = 0; r < rows.Length; r++) {
-                        var cols = rows[r].Split(';');
-                        for (int c = 0; c < cols.Length; c++) {
-                            shape[r, c] = int.Parse(cols[c]);
+                    for (int row = 0; row < rows.Length; row++) {
+                        var cols = rows[row].Split(';');
+                        for (int column = 0; column < cols.Length; column++) {
+                            shape[row, column] = int.Parse(cols[column]);
                         }
                     }
                     break;
