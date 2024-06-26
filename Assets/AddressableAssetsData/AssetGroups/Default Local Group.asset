@@ -29,6 +29,10 @@ MonoBehaviour:
     m_Address: Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: f8acf831bbccc4d4bb1eab9d7995a98d
+    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/GirdBg.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0f728d266239ddb4c8a26b329c0e5a74, type: 2}
   m_SchemaSet:
