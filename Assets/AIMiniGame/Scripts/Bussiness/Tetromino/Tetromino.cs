@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class Tetromino : MonoBehaviour {
     public TetrominoModel model;
-
     private const int cellSize = 90;
     private const int cellSpacing = 5;
     private RectTransform rectTransform;
+    private Dictionary<Vector2Int, GameObject> cellGoMap = new Dictionary<Vector2Int, GameObject>();
 
     public void Initialize(TetrominoModel model) {
         this.model = model;
@@ -24,6 +24,8 @@ public class Tetromino : MonoBehaviour {
                 var cellRectTransform = cellGo.GetComponent<RectTransform>();
                 UpdateAnchoredPosition(cellRectTransform, cell);
                 cellGo.GetComponent<Image>().color = model.color;
+                cellGo.name = cell.ToString();
+                cellGoMap.Add(cell, cellGo);
             }
         }
     }
@@ -33,7 +35,7 @@ public class Tetromino : MonoBehaviour {
             Transform cell = transform.GetChild(i);
             UpdateAnchoredPosition(cell.GetComponent<RectTransform>(), model.cells[i]);
         }
-        UpdateAnchoredPosition(rectTransform, model.gridPosition);
+        UpdateAnchoredPosition(rectTransform, model.grid);
     }
 
     private void UpdateAnchoredPosition(RectTransform rectTrans, Vector2Int grid) {
@@ -46,12 +48,7 @@ public class Tetromino : MonoBehaviour {
 
     public void Move(Vector2Int direction) {
         model.Move(direction);
-        UpdateAnchoredPosition(rectTransform, model.gridPosition);
-    }
-
-    public void SetPosition(Vector2Int newPosition) {
-        model.SetPosition(newPosition);
-        UpdateAnchoredPosition(rectTransform, model.gridPosition);
+        UpdateAnchoredPosition(rectTransform, model.grid);
     }
 
     public void Rotate() {
@@ -59,13 +56,18 @@ public class Tetromino : MonoBehaviour {
         UpdateVisuals();
     }
 
-    public void RemoveLine(int row) {
-        //??
-        model.RemoveLine(row);
-        foreach (Transform child in transform) {
-            Destroy(child.gameObject);
+    public void RemoveRow(int row) {
+        model.RemoveRow(row);
+        for (int i = 0; i < model.cells.Count; i++) {
+            var cell = model.cells[i];
+            if (cellGoMap.ContainsKey(cell)) {
+                var cellGo = cellGoMap[cell];
+                Destroy(cellGo);
+                cellGoMap.Remove(cell);
+                Debug.LogError($" Destroy Cell {cell} {cellGo}");
+            }
         }
-        DrawShape();
+
         UpdateVisuals();
     }
 }

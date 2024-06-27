@@ -4,13 +4,13 @@ using UnityEngine;
 public class TetrominoModel {
     public int[,] shape;
     public Color color;
-    public Vector2Int gridPosition;
+    public Vector2Int grid;
     public List<Vector2Int> cells = new List<Vector2Int>();
 
-    public TetrominoModel(int[,] shape, Color color, Vector2Int startPosition) {
+    public TetrominoModel(int[,] shape, Color color, Vector2Int start) {
         this.shape = shape;
         this.color = color;
-        gridPosition = startPosition;
+        grid = start;
         InitializeCells();
     }
 
@@ -26,11 +26,7 @@ public class TetrominoModel {
     }
 
     public void Move(Vector2Int direction) {
-        gridPosition += direction;
-    }
-
-    public void SetPosition(Vector2Int newPosition) {
-        gridPosition = newPosition;
+        grid += direction;
     }
 
     public void Rotate() {
@@ -43,16 +39,21 @@ public class TetrominoModel {
         }
     }
 
-    public void RemoveLine(int row) {
-        var newCells = new List<Vector2Int>();
+    public void RemoveRow(int row) {
+        var isRemoved = false;
         for (int i = cells.Count - 1; i >= 0; i--) {
             var cell = cells[i];
-            if (cell.y == row) {
+            if ((grid + cell).y == row) {
                 cells.RemoveAt(i);
-            } else {
-                newCells.Add(cell.y > row ? new Vector2Int(cell.x, cell.y - 1) : cell);
+                isRemoved = true;
+                Debug.LogError($"Cell removed {cell}");
+
             }
         }
-        cells = newCells;
+
+        // 所有超过完成行的单元格向下移动一行
+        if (isRemoved) {
+            Move(new Vector2Int(0, -1));
+        }
     }
 }
