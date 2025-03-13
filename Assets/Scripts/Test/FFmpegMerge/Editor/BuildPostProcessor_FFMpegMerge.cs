@@ -10,7 +10,7 @@ namespace FFMpegMerge {
         [PostProcessBuild]
         public static void OnPostProcessBuild(BuildTarget target, string pathToBuiltProject) {
             if (target == BuildTarget.StandaloneWindows64) {
-                MoveExeToBuildFolder(pathToBuiltProject);
+                // MoveExeToBuildFolder(pathToBuiltProject);
             }
         }
 

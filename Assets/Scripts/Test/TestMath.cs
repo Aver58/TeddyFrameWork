@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestMath : MonoBehaviour
-{
+public class TestMath : MonoBehaviour {
+    [FieldLabel("测试")]
+    public int test;
     // Start is called before the first frame update
     void Start()
     {

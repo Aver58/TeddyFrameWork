@@ -1,0 +1,1709 @@
+<html lang="en-US">
+
+    <head>
+        <!-- #region HEAD -->
+        <title>Easy Minimap System</title>
+        <link rel="shortcut icon" type="image/png" href="DocumentationFiles/favicon/favicon" />
+        <link rel="shortcut icon" type="image/png" href="DocumentationFiles/favicon/favicon" />
+        <link rel="stylesheet" type="text/css" href="DocumentationFiles/css/rainbow-dreamweaver.css">
+        <link rel="stylesheet" type="text/css" href="DocumentationFiles/css/all-css-content.css">
+        <script src="DocumentationFiles/js/rainbow-custom-min"></script>
+        <script src="DocumentationFiles/js/javascript-core"></script>
+        <meta name="viewport" content="width=device-width">
+        <meta charset="UTF-8">
+        <!-- #endregion -->
+    </head>
+
+    <body>
+        <!-- #region TOPBAR -->
+        <div class="topBar">
+            <div class="topBarLogoIcon"><img src="DocumentationFiles/logo/logo" height="100%" /></div>
+            <div class="topBarLogoTextContainer">
+                <div class="topBarLogoText">Easy Minimap System Documentation</div>
+            </div>
+            <div class="topBarItemContainer"><a href="https://www.youtube.com/channel/UCqAgiYBwAWajjFUqyJ6_xyw" target="_blank" title="MT Assets On Youtube"><img src="DocumentationFiles/topbar/youtube" /></a></div>
+            <div class="topBarItemContainer"><a href="https://windsoft.xyz/mtassets" target="_blank" title="MT Assets Website"><img src="DocumentationFiles/topbar/generic" /></a></div>
+            <div class="topBarItemContainer"><a href="https://assetstore.unity.com/publishers/40306" target="_blank" title="See More Assets From MT Assets!"><img src="DocumentationFiles/topbar/shop" /></a></div>
+            <div class="topBarItemDivider"></div>
+            <div class="topBarSupportTextContainer">
+                <div class="topBarSupportText">For support and contact</div>
+                <div class="topBarSupportTextEmail">mtassets@windsoft.xyz</div>
+            </div>
+        </div>
+        <div class="readProgressContainer">
+            <div class="readProgressBar" id="readProgressBar"></div>
+        </div>
+        <div class="fullscreenImageBackground" id="fullScreenImageViewerBg" onclick="CloseImageFullScreenViewer();"></div>
+        <div class="fullscreenImagePopupContent" id="fullScreenImageViewerPop">
+            <div class="fullscreenImagePopup">
+                <div class="fullscreenImagePopupClose"><img src="DocumentationFiles/tools/close.webp" id="fullScreenImageClose" title="Click here to close Viewer." onclick="CloseImageFullScreenViewer();" /></div>
+                <img src="" id="fullScreenImageViewerImg" />
+            </div>
+        </div>
+        <div class="fullscreenLoadingContent" id="fullscreenLoadingBlock">
+            <div class="fullscreenLoadingBg">
+                <div class="fullscreenLoading">
+                    <div><img src="DocumentationFiles/tools/loading.webp" /></div>
+                    <div></div>
+                    <div>Loading Documentation</div>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+        <!-- SUBBODY -->
+        <div class="subBody">
+            <!-- SUMMARY -->
+            <div class="subBodySummary" id="summary" onscroll="OnScrollSummary(this);" onmouseover="isMouseOverTheSummary(this, true);" onmouseout="isMouseOverTheSummary(this, false);">
+                <div class="subBodySummaryTitle">Summary of Documentation</div>
+                <!-- -------------------------------------------------------------------------- START OF SUMMARY CONTENT -------------------------------------------------------------------------- -->
+                <ul>
+                    <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="1">What is the Easy Minimap System?</a></li>
+                    <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="2">First steps to use</a></li>
+                    <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="3">How to create a Minimap</a></li>
+                    <li class="summarySubItem">Minimap Camera</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="4">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="5">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="6">Runtime API</a></li>
+                    </ul>
+                    <li class="summarySubItem">Minimap Item</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="7">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="8">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="9">Runtime API</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="9a">Setting the size of your Minimap Item when it is displayed on the border of the Minimap Renderer/Compass</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="9b">Highlighting your Minimap Item using animations within the Minimap</a></li>
+                    </ul>
+                    <li class="summarySubItem">Minimap Renderer</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="10">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="11">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="12">Runtime API</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="12a">How to make the Minimap in Circle format</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="12b">How to make the Minimap in Square format</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="12c">How to highlight distant items and make them appear on the Border</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="12d">How to create a World Map (Fullscreen Map)</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="12da">How to Zoom In/Out your Minimap</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="12e">How to receive Player Inputs (such as Touch/Clicks) and perform actions</a></li>
+                    </ul>
+                    <li class="summarySubItem">Minimap Compass</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="13">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="14">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="15">Runtime API</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="15a">How to highlight items and make them appear on the Compass</a></li>
+                    </ul>
+                    <li class="summarySubItem">Minimap Scanner</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="16">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="17">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="18">Runtime API</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="18a">How to adjust the height at which the scan will be performed?</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="18b">Marking specific GameObjects to be ignored during scanning</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="18c">How to create a new Scanner next to an existing one (In Editor)</a></li>
+                    </ul>
+                    <li class="summarySubItem">Minimap Text</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="19">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="20">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="21">Runtime API</a></li>
+                    </ul>
+                    <li class="summarySubItem">Minimap Line</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="22">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="23">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="24">Runtime API</a></li>
+                    </ul>
+                    <li class="summarySubItem">Minimap Routes</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="25">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="26">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27">Runtime API</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27a">How to use Minimap Routes?</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27b">Good practices that must be followed to create Waypoints</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27c">Setting the height tolerance for Route calculations</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27d">How to disable Waypoints to indicate obstructions on the path or ignore paths/parts of paths</a></li>
+                    </ul>
+                    <li class="summarySubItem">Minimap Fog</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27da">How this component works</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27db">Settings and Options</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27dc">Runtime API</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27dd">How to use Minimap Fog?</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="27de">How to Save/Load the Current State of Fog</a></li>
+                    </ul>
+                    <li class="summarySubItem">Incredible Tips That Can Be Useful</li>
+                    <ul>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="29">Changing the global size multiplier for all items on the Minimap</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="30">How to customize a Minimap Renderer or Minimap Compass?</a></li>
+                        <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="31">How to Edit Your PNG Texture Generated by Minimap Scanner</a></li>
+                    </ul>
+                    <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="32">Demo Scene</a></li>
+                    <li><a class="summaryItem" onclick="GoToDivSmoothly(this);" correspondentTopicId="33">Contact and Support</a></li>
+                </ul>
+                <!-- -------------------------------------------------------------------------- END OF SUMMARY CONTENT -------------------------------------------------------------------------- -->
+            </div>
+            <div class="subBodyDivider" id="divider">
+                <div id="summaryScrollIndicador" class="summaryScrollDownIndicator"><img src="DocumentationFiles/tools/scroll-down.webp" /></div>
+            </div>
+
+            <!-- DOCUMENTATION CONTENT -->
+            <div class="subBodyContent" id="content">
+                <!-- -------------------------------------------------------------------------- START OF DOCUMENTATION CONTENT -------------------------------------------------------------------------- -->
+
+                <!-- #region Welcome to Easy Minimap System Documentation! -->
+                <doc.topic>
+                    <doc.topictitle>Welcome to Easy Minimap System Documentation!</doc.topictitle>
+
+                    By reading this documentation, you will understand how Easy Minimap System works and how to use it and get the most out of it. Come on! Make sure that this HTML file is in the same directory as the "DocumentationFiles"
+                    folder. This way you will not have problems with formatting and displaying the videos and image on the page.
+                    <doc.info>
+                        If you still have problems with the tool, even after consulting this documentation, please contact <doc.detach>mtassets@windsoft.xyz</doc.detach> for help and support. If you have any questions, problems or feedback,
+                        feel free to contact me!
+                        <br>
+                        <br>
+                        I am always willing to help, open to suggestions and always do my best to offer a quick and useful service to my customers! 😀
+                    </doc.info>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region What is the Easy Minimap System? -->
+                <doc.topic topicid="1">
+                    <doc.topictitle>What is the Easy Minimap System?</doc.topictitle>
+
+                    Easy Minimap System is a tool that allows you to create the Minimap of your game in minutes. The focus of the tool is speed and efficiency, you'll see how simple it is to have your minimap ready in few moments.
+                    <doc.video src="DocumentationFiles/videos/what-is" thumbnail="DocumentationFiles/thumbs/what-is"></doc.video>
+                    Jump on <a href="#25">this portal</a>, if you want to go to the part where this documentation teaches you how to display GPS navigation routes using the Easy Minimap System!
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region First steps to use -->
+                <doc.topic topicid="2">
+                    <doc.topictitle>First steps to use</doc.topictitle>
+
+                    Before you start creating a Minimap, it is recommended (but not mandatory) that you configure your game cameras, so that they do not capture the <doc.detach>UI</doc.detach> layer. You can do this by changing the
+                    <doc.detach>Culling Mask</doc.detach> variable on your cameras.
+
+                    <doc.image src="DocumentationFiles/images/1">
+                        Remembering that this is not mandatory, but it is highly recommended if you have cameras that have an extremely high <doc.detach>far</doc.detach> value (over 90000).
+                    </doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region How to create a Minimap -->
+                <doc.topic topicid="3">
+                    <doc.topictitle>How to create a Minimap</doc.topictitle>
+
+                    Now, get to work. In this topic, we will learn how to create a basic Minimap using the Easy Minimap System. After reading this topic, you will be able to create your own Minimap. Everything will be divided into steps.
+                    <br>
+                    <br>
+                    <b>Step 1 -</b> Add the "Minimap Camera" component to your player. This component renders all Minimap Items that are within your field of view.
+                    <doc.image src="DocumentationFiles/images/2"></doc.image>
+                    <doc.list>
+                        <doc.listr>You can adjust the <doc.detach>Capture Shape</doc.detach> variable to define how the Minimap Camera will capture the surroundings. If you intend to create a square Minimap (with equal height and width), use the option <doc.detach>Square</doc.detach>. If you intend to create a rectangular or full screen minimap, use the <doc.detach>Rectangular</doc.detach> option.</doc.listr>
+                        <doc.listr>You can adjust the <doc.detach>Capture Resolution</doc.detach> variable until you reach the capture quality you want. Note that the higher the resolution, the more performance can be consumed.</doc.listr>
+                    </doc.list>
+
+                    <b>Step 2 -</b> Add the "Minimap Item" component to all GameObjects you want to display on the minimap. You can add this component to your Player or Enemies for example.
+                    <doc.image src="DocumentationFiles/images/3"></doc.image>
+                    <doc.list>
+                        <doc.listr>By changing the value of the <doc.detach>Particle Highlight Mode</doc.detach> variable, you can turn on an effect that highlights your Minimap Item within the Minimap.</doc.listr>
+                        <doc.listr>Change the <doc.detach>Order In Layer</doc.detach> variable to define whether this Minimap Item should be rendered above the others or not. The higher the value, the higher the Minimap Item will be rendered.</doc.listr>
+                    </doc.list>
+
+                    <b>Step 3 -</b> Create an empty GameObject in your UI Canvas and add the "Minimap Renderer" component. This component is responsible for taking the image of a target Minimap Camera and displaying it in the UI Canvas.
+                    <doc.image src="DocumentationFiles/images/4"></doc.image>
+                    <doc.list>
+                        <doc.listr>The first thing you should do after adding the "Minimap Renderer" to a GameObject from Canvas, is to drag a GameObject (containing a Minimap Camera) onto the <doc.detach>Minimap Camera To Show</doc.detach> variable. After that, Minimap Renderer will be able to display the entire image captured by that Minimap Camera while your game is running.</doc.listr>
+                        <doc.listr>You are able to change the format of your Minimap Renderer easily by clicking on the <b>Square</b> and <b>Circle</b> icons that are next to the <doc.detach>Base Shape Sprite</doc.detach> variable.</doc.listr>
+                        <doc.listr>You can add Minimap Items to the <doc.detach>Minimap Items For Highlight</doc.detach> list so that they are highlighted. If a Minimap Item is highlighted in the Minimap Renderer, whenever this Minimap Item is out of sight, it will be shown at the border of the Minimap.</doc.listr>
+                    </doc.list>
+
+                    <b>Step 4 -</b> Now just test it! Your Minimap Camera should accompany your player and display the Minimap Items in your scene. Keep reading the documentation to learn how to optimally display your scenario on the
+                    Minimap, and to learn more!
+                    <br>
+                    <br>
+                    <doc.achiev>
+                        Now you know the basics! The following topics below will show in more depth, how each component of the Easy Minimap System works. You can use the summary on the side to navigate between each component, if you
+                        prefer. Enjoy!
+                    </doc.achiev>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Camera: How this component works -->
+                <doc.topic topicid="4">
+                    <doc.topictitle>Minimap Camera: How this component works</doc.topictitle>
+
+                    Minimap Camera is the component responsible for creating your Minimap's camera. You must add it to a GameObject to which you want to display the Minimap Items next to it. Minimap Camera can follow rotation of your
+                    GameObject if you decide. While you are in the scene (in the Editor), Minimap Camera is only one component, the real camera (just like all Minimap Items) only works when your game runs.
+
+                    <doc.image src="DocumentationFiles/images/2"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Camera: Settings and Options -->
+                <doc.topic topicid="5">
+                    <doc.topictitle>Minimap Camera: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Capture Shape=>captureShape=>The format in which the camera will capture the surroundings. Use Square, if you intend to create a Square minimap (with equal height and width), otherwise use Rectangular.</doc.tabler>
+                        <doc.tabler>Capture Resolution=>captureResolutionSquare<br>or<br>captureResolutionRectangular=>The resolution at which the image will be captured. Change <doc.detach>captureResolutionSquare</doc.detach> if you choose<doc.detach>captureShape</doc.detach> in Square. Otherwise, change <doc.detach>captureResolutionRectangular</doc.detach>.</doc.tabler>
+                        <doc.tabler>Capture Mode=>captureMode=>The capture mode the camera will use to capture items on the Minimap.</doc.tabler>
+                        <doc.tabler>Layers To Capture=>layersToCaptureIn3d=><b>[Requires <doc.detach>captureMode</doc.detach> to be different from "TopView2D"]</b> The layers of your scene that will be captured by this camera.</doc.tabler>
+                        <doc.tabler>Field Of View=>fieldOfView=>The total area that the camera will be able to capture.</doc.tabler>
+                        <doc.tabler>Follow Rotation Of=>followRotationOf=>If this variable is in "This GameObject", this component will follow the rotation of the GameObject to which it is located. Change if you want this component to follow the rotation of another GameObject.</doc.tabler>
+                        <doc.tabler>GameObject To Follow=>customGameObjectToFollowRotation=>If the variable <doc.detach>followRotationOf</doc.detach> is in "Custom GameObject", provide the desired GameObject here.</doc.tabler>
+                        <doc.tabler>Movement Smoothing=>movementsSmoothing=>The smoothness you will have in the movements made by this component. The higher the value, the less the smoothing.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Camera: Runtime API -->
+                <doc.topic topicid="6">
+                    <doc.topictitle>Minimap Camera: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Camera component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapCamera someMinimapCamera;
+                        
+void Start()
+{
+    //- GetListOfAllMinimapCamerasInThisScene();
+    //  Returns all Minimap Cameras existing in this scene.
+    MinimapCamera[] allMinimapCameras = someMinimapCamera.GetListOfAllMinimapCamerasInThisScene();
+}
+                    </code></doc.code>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Item: How this component works -->
+                <doc.topic topicid="7">
+                    <doc.topictitle>Minimap Item: How this component works</doc.topictitle>
+
+                    Minimap Item is the component responsible for displaying a particular Sprite on the Minimap of your game. This component will generate a Sprite at runtime, this sprite can follow rotation of your GameObject and will
+                    represent this GameObject on the Minimap.
+
+                    <doc.image src="DocumentationFiles/images/3"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Item: Settings and Options -->
+                <doc.topic topicid="8">
+                    <doc.topictitle>Minimap Item: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Sprite of Item=>itemSprite=>This will be the Sprite that will represent, within the Minimap, the GameObject that the Minimap Item is on.</doc.tabler>
+                        <doc.tabler>Sprite Color=>spriteColor=>The color of the Sprite that will be rendered inside the Minimap.</doc.tabler>
+                        <doc.tabler>Flip In X Axis=>flipInX=>Rotate the Sprite 180º on the X axis?</doc.tabler>
+                        <doc.tabler>Flip In Y Axis=>flipInY=>Rotate the Sprite 180º on the Y axis?</doc.tabler>
+                        <doc.tabler>Raycast Target=>raycastTarget=>If this variable is activated, this Minimap Item can receive interactions (Inputs) from the player. In other words, it can be selected, or clicked (in some Minimap Renderer).</doc.tabler>
+                        <doc.tabler>Size On Minimap=>sizeOnMinimap=>The size at which the Sprite should appear on the Minimap. This size is given on the Unity Units scale. 1 Unit = 1 Meter.</doc.tabler>
+                        <doc.tabler>Size On Highlight=>sizeOnHighlight=>The size that the Sprite should be rendered in the UI, when it appears highlighted in a Minimap Renderer/Compass.</doc.tabler>
+                        <doc.tabler>Order In Layer=>orderInLayer=>Determines how far above the other Sprites this Sprite should be designed. The higher the value here, the higher it will be drawn.</doc.tabler>
+                        <doc.tabler>Particles Highlight Mode=>particlesHighlightMode=>Enables or disables an animation that uses Particles to highlight an Item within the Minimap.</doc.tabler>
+                        <doc.tabler>Particles Sprite=>particlesSprite=><b>[Requires <doc.detach>particlesHighlightMode</doc.detach> to be different from "Disabled"]</b> The Sprite that will be used on the Particles.</doc.tabler>
+                        <doc.tabler>Particles Color=>particlesColor=><b>[Requires <doc.detach>particlesHighlightMode</doc.detach> to be different from "Disabled"]</b> The Color that will be used on the Particles.</doc.tabler>
+                        <doc.tabler>Particles Size Multiplier=>particlesSizeMultiplier=><b>[Requires <doc.detach>particlesHighlightMode</doc.detach> to be different from "Disabled"]</b> The particles follow the size of the Minimap Item, but you can increase this value if you want even larger or smaller particles.</doc.tabler>
+                        <doc.tabler>Follow Rotation Of=>followRotationOf=>If this variable is in "This GameObject", this component will follow the rotation of the GameObject to which it is located. Change if you want this component to follow the rotation of another GameObject.</doc.tabler>
+                        <doc.tabler>GameObject To Follow=>customGameObjectToFollowRotation=>If the variable <doc.detach>followRotationOf</doc.detach> is in "Custom GameObject", provide the desired GameObject here.</doc.tabler>
+                        <doc.tabler>Movement Smoothing=>movementsSmoothing=>The smoothness you will have in the movements made by this component. The higher the value, the less the smoothing.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Item: Runtime API -->
+                <doc.topic topicid="9">
+                    <doc.topictitle>Minimap Item: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Item component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapItem someMinimapItem;
+                        
+void Start()
+{
+    //- isThisMinimapItemBeingVisibleByAnyMinimapCamera(takeIntoAccountTheParticlesHighlightToo);
+    //  Return true if this Minimap Item is currently visible on some Minimap Camera.
+    //  bool takeIntoAccountTheParticlesHighlightToo - If true, it will return true if any Particles that this Minimap Item is emitting are visible.
+    bool isVisible = someMinimapCamera.isThisMinimapItemBeingVisibleByAnyMinimapCamera(false);
+
+    //- GetListOfAllMinimapItemsInThisScene();
+    //  Returns a list with all Minimap Item existing in current scene.
+    MinimapItem[] allMinimapItems = someMinimapItem.GetListOfAllMinimapItemsInThisScene();
+}
+                    </code></doc.code>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Item: Setting the size of your Minimap Item when it is displayed on the border of the Minimap Renderer/Compass -->
+                <doc.topic topicid="9a">
+                    <doc.topictitle>Minimap Item: Setting the size of your Minimap Item when it is displayed on the border of the Minimap Renderer/Compass</doc.topictitle>
+
+                    To change the size of a Minimap Item that is rendered inside a Minimap Compass, or at the edge of a Minimap Renderer, you only need to change the value of the <doc.detach>sizeOnMinimap</doc.detach> variable. You can
+                    control the size of the Minimap Items individually as well, but you can also use the Minimap Item C# API to get all the Minimap Items in the scene and change their sizes if you prefer.
+
+                    <doc.image src="DocumentationFiles/images/5">
+                        Here I changed the value of the <doc.detach>sizeOnHighlight</doc.detach> variable in just 1 Minimap Item and it had its size increased in the Compass and the border of the Minimap.
+                    </doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Item: Highlighting your Minimap Item using animations within the Minimap -->
+                <doc.topic topicid="9b">
+                    <doc.topictitle>Minimap Item: Highlighting your Minimap Item using animations within the Minimap</doc.topictitle>
+
+                    To activate an animation that highlights a particular Minimap Item within the Minimap, use the <doc.detach>particlesHighlightMode</doc.detach> variable. You can choose one of the pre-existing animations within the
+                    <doc.detach>particlesHighlightMode</doc.detach>. When activating any of the animations, you can still choose the Sprite that will be used in the Particles, as well as its Color and Size.
+
+                    <doc.image src="DocumentationFiles/images/6"></doc.image>
+
+                    Changing the value to "Waves Increase", we have an animation in which our Minimap Items emits waves around it, and this helps to make it stand out among the other Minimap Items.
+
+                    <doc.video src="DocumentationFiles/videos/1" thumbnail="DocumentationFiles/thumbs/1"></doc.video>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: How this component works -->
+                <doc.topic topicid="10">
+                    <doc.topictitle>Minimap Renderer: How this component works</doc.topictitle>
+
+                    Minimap Renderer is the component responsible for creating and showing the Minimap in your UI Canvas. All you have to do is associate the Minimap Camera you want to display with this component on <doc.detach>
+                        minimapCameraToShow</doc.detach>, so the image captured by the target Minimap Camera will be displayed in the interface. You can also configure your Minimap's background, border colors, shape and so on.
+
+                    <doc.image src="DocumentationFiles/images/4"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: Settings and Options -->
+                <doc.topic topicid="11">
+                    <doc.topictitle>Minimap Renderer: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Minimap Camera To Show=>minimapCameraToShow=>You must associate a "Minimap Camera" component with this variable, and this Minimap Renderer will display all the content captured by the target Camera.</doc.tabler>
+                        <doc.tabler>Base Shape Sprite=>baseShapeSprite=>This is the Sprite that will define the shape of the Minimap. You can provide a Circular Sprite for example, and the Minimap will have the Circular format.<br>Note: Only Square, Rectangular and Circular formats are supported.</doc.tabler>
+                        <doc.tabler>Border Color=>borderColor=>This will be the color of the Minimap Border.</doc.tabler>
+                        <doc.tabler>Border Width Size=>borderWidthSize=>This will be the width of the Minimap Border.</doc.tabler>
+                        <doc.tabler>Background Sprite=>backgroundSprite=>This will be the Sprite that should be rendered as the background of the Minimap. This Sprite will appear below the image captured by the Minimap Camera.</doc.tabler>
+                        <doc.tabler>Background Color=>backgroundColor=>This will be the color of the Sprite that should be rendered in the background.</doc.tabler>
+                        <doc.tabler>Foreground Sprite=>foregroundSprite=>This will be the Sprite that will be rendered above all the content captured by the Minimap Camera.</doc.tabler>
+                        <doc.tabler>Foreground Color=>foregroundColor=>This will be the color of the Sprite that should be rendered in the foreground.</doc.tabler>
+                        <doc.tabler>Content Transparency=>contentTransparency=>The transparency of the content that is captured by the Minimap Camera and displayed within the Minimap.</doc.tabler>
+                        <doc.tabler>Render Content=>renderContent=>Render the content captured by the Minimap Camera?</doc.tabler>
+                        <doc.tabler>Icons Rotation Method=>iconsRotationMethod=>This variable defines the format in which the highlighted Minimap Items and the North icon must rotate. You can choose between Square and Circular.</doc.tabler>
+                        <doc.tabler>Show North Icon=>showNorthIcon=>Display the North icon?</doc.tabler>
+                        <doc.tabler>North Direction In World=>northDirection=><b>[Requires <doc.detach>showNorthIcon</doc.detach> to be true]</b> Choose an axis that will represent the North of the world. The default axis is Z Forward.</doc.tabler>
+                        <doc.tabler>Auto Rotate=>autoRotateNorthIcon=><b>[Requires <doc.detach>showNorthIcon</doc.detach> to be true]</b> If true, the north icon will be rotated and will always remain upright, even if the Minimap rotates.</doc.tabler>
+                        <doc.tabler>North Icon Sprite=>northIconSprite=><b>[Requires <doc.detach>showNorthIcon</doc.detach> to be true]</b> The Sprite that will be rendered as the North icon on the border of the Minimap.</doc.tabler>
+                        <doc.tabler>North Icon Size=>northIconSize=><b>[Requires <doc.detach>showNorthIcon</doc.detach> to be true]</b> The size of the icon that will be rendered as North at the border of the Minimap.</doc.tabler>
+                        <doc.tabler>Minimap Items For Highlight List=>minimapItemsToHightlight=>You can add Minimap Items to this list, and while they are out of sight of the Minimap, they will appear at the edge of the Minimap. You can simply add Minimap Items here, or you can use the Minimap Renderer C# API to manipulate this list very easily.</doc.tabler>
+                        <doc.tabler>On Input Click=>onInputClick=>This is an event. This event will call the methods you register here, whenever the player clicks, or touches anywhere in the area of your Minimap Renderer. Use this event to, for example, mark locations where the player clicked.<br>This event will pass you some parameters.<br><b>Parameter 1: </b>Stores the global position relative to where the player tapped or clicked.<br><b>Parameter 2: </b>Stores a reference to a Minimap Item that was clicked. If no Minimap Item has been clicked on in this interaction, the value will be null.</doc.tabler>
+                        <doc.tabler>On Input Drag=>onInputDrag=>This is an event. This event will call all the methods registered here, whenever the player starts to drag or continue dragging his Click/Touch through the Minimap Renderer. This can be useful for the player to move the map for example.<br>This event will pass you some parameters.<br><b>Parameter 1: </b>Stores the global position relative to the location where the player STARTED to drag his mouse or finger.<br><b>Parameter 2: </b>Stores the global position relative to where the player's finger or mouse is currently, while dragging.</doc.tabler>
+                        <doc.tabler>On Input Over=>onInputOver=>This is an event. This event will call all the methods registered here, whenever the player starts to mover your mouse or continue moving his mouse through the Minimap Renderer. This event is equivalent to MonoBehaviour's OnMouseOver. This can be useful for Minimap Items to be selected if the mouse is on top.<br>This event will pass you some parameters.<br><b>Parameter 1: </b>The value will be true, if the player's mouse is currently on top of anywhere in the Minimap Renderer area.<br><b>Parameter 2: </b>Stores the global position relative to the location where the player's mouse is.<br><b>Parameter 3: </b>Stores a reference to a Minimap Item that mouse is on top of it. If no Minimap Item have the mouse on top, the value will be null.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: Runtime API -->
+                <doc.topic topicid="12">
+                    <doc.topictitle>Minimap Renderer: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Renderer component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapRenderer someMinimapRenderer;
+public MinimapItem someMinimapItem;
+                        
+void Start()
+{
+    //- AddMinimapItemToBeHighlighted(minimapItem);
+    //  Adds the Minimap Item provided by you, the list of items to be highlighted.
+    //  MinimapItem minimapItem - The desired Minimap Item reference
+    someMinimapRenderer.AddMinimapItemToBeHighlighted(someMinimapItem);
+
+    //- RemoveMinimapItemOfHighlight(minimapItem);
+    //  Remove the Minimap Item provided by you, of the list of items to be highlighted.
+    //  MinimapItem minimapItem - The desired Minimap Item reference
+    someMinimapRenderer.RemoveMinimapItemOfHighlight(someMinimapItem);
+
+    //- isMinimapItemAddedToHighlight(minimapItem);
+    //  Return true if the desired Minimap Item is in list of items to be highlighted.
+    //  MinimapItem minimapItem - The desired Minimap Item reference
+    bool isInTheList = someMinimapRenderer.isMinimapItemAddedToHighlight(someMinimapItem);
+
+    //- RemoveAllMinimapItemsFromHighlight();
+    //  Remove all minimap items from the list of items to be highlighted.
+    someMinimapRenderer.RemoveAllMinimapItemsFromHighlight();
+
+    //- CountQuantityOfMinimapItemsInHighlight();
+    //  Return the quantity of items that is in the list of items to be highlighted.
+    int count = someMinimapRenderer.CountQuantityOfMinimapItemsInHighlight();
+
+    //- GetListOfAllMinimapRenderersInThisScene();
+    //  Returns a list with all Minimap Renderers existing in current scene.
+    MinimapRenderer[] allMinimapRenderers = someMinimapRenderer.GetListOfAllMinimapRenderersInThisScene();
+}
+                    </code></doc.code>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: How to make the Minimap in Circle format -->
+                <doc.topic topicid="12a">
+                    <doc.topictitle>Minimap Renderer: How to make the Minimap in Circle format</doc.topictitle>
+
+                    To make your Minimap have a circular shape, you can provide a Circle sprite for the <doc.detach>baseShapeSprite</doc.detach> variable. If you prefer, you can simply click on the Circle button that is in the "Minimap
+                    Renderer" component.
+
+                    <doc.image src="DocumentationFiles/images/7"></doc.image>
+
+                    A few things are worth noting...
+
+                    <doc.list>
+                        <doc.listr>The Ellipse Minimap is not officially supported. If you choose the Circle format, your Minimap must have the Circular format, that is, it must have equal height and width.</doc.listr>
+                        <doc.listr>On your Minimap Camera, you must choose the option "Square" in <doc.detach>captureShape</doc.detach>. The resolution can be any of those available for selection.</doc.listr>
+                        <doc.listr>Change the variable <doc.detach>iconsRotationMethod</doc.detach> to "Circle Shape", so that the icons on the border, rotate in Circular format.</doc.listr>
+                    </doc.list>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: How to make the Minimap in Square format -->
+                <doc.topic topicid="12b">
+                    <doc.topictitle>Minimap Renderer: How to make the Minimap in Square format</doc.topictitle>
+
+                    To make your Minimap have a square shape, you can provide a Square sprite for the <doc.detach>baseShapeSprite</doc.detach> variable. If you prefer, you can simply click on the Square button that is in the "Minimap
+                    Renderer" component.
+
+                    <doc.image src="DocumentationFiles/images/8"></doc.image>
+
+                    A few things are worth noting...
+
+                    <doc.list>
+                        <doc.listr>Only the Square and Rectangular formats (turned horizontally) are officially supported.</doc.listr>
+                        <doc.listr>On your Minimap Camera, you must choose the option "Square" in <doc.detach>captureShape</doc.detach> if your Minimap is a Square (with equal height and width), but if your Minimap is not a Square, you must select the option "Rectangular" in <doc.detach>captureShape</doc.detach>.</doc.listr>
+                        <doc.listr>Change the variable <doc.detach>iconsRotationMethod</doc.detach> to "Square Shape", so that the icons on the border, rotate in Square/Rectangular format.</doc.listr>
+                    </doc.list>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: How to highlight distant items and make them appear on the Border -->
+                <doc.topic topicid="12c">
+                    <doc.topictitle>Minimap Renderer: How to highlight distant items and make them appear on the Border</doc.topictitle>
+
+                    The highlighting function for Minimap Items can be useful on several occasions. The Minimap Renderer component has a function in which it highlights Minimap Items that are far enough away to be out of field of view of
+                    the Minimap, these highlighted items are placed on the Border of the Minimap. If the Minimap Item is visible again through the Minimap, that Minimap Item disappears from the Border of the Minimap.
+
+                    <doc.video src="DocumentationFiles/videos/2" thumbnail="DocumentationFiles/thumbs/2">Note that as the "Food" icon moves away from our player, it appears at the border of the Minimap.</doc.video>
+
+                    To highlight an item on the Minimap, simply add a Minimap Item to the "Minimap Items For Highlight" list and that's it!
+
+                    <doc.image src="DocumentationFiles/images/9">Click on "Add New Slot" and then drag a Minimap Item to the new Slot created in the list. You can also do this easily using the C# API.</doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: How to create a World Map (Fullscreen Map) -->
+                <doc.topic topicid="12d">
+                    <doc.topictitle>Minimap Renderer: How to create a World Map (Fullscreen Map)</doc.topictitle>
+
+                    To create a Fullscreen Map, everything is as simple as it looks!
+                    <br>
+                    <br>
+                    Create a Minimap Renderer on your Canvas. Adjust it using anchors and etc (as you would adjust any other element of the Canvas) so that it covers your entire canvas.
+
+                    <doc.image src="DocumentationFiles/images/31">
+                        Adjusting it in this way, it will already cover your entire screen.
+                    </doc.image>
+
+                    Now, go to the Minimap Camera that captures things to display in your Minimap Renderer.
+                    <br>
+                    <br>
+                    You need to set <doc.detach>Capture Shape</doc.detach> to <doc.detach>Rectangular</doc.detach> and <doc.detach>Capture Resolution</doc.detach> to a higher, rectangular resolution. Like <doc.detach>1280x720</doc.detach>
+                    or greater. You can choose a resolution according to the quality you want. You can also increase the <doc.detach>Field of View</doc.detach> if you want! So the Minimap Camera will capture an even larger area!
+
+                    <doc.image src="DocumentationFiles/images/39">
+                        In this way, the camera will capture things in a Rectangular format (in the form of screens) and will also capture things in good quality.
+                    </doc.image>
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: How to Zoom In/Out your Minimap -->
+                <doc.topic topicid="12da">
+                    <doc.topictitle>Minimap Renderer: How to Zoom In/Out your Minimap</doc.topictitle>
+
+                    By using the Easy Minimap System you can create a Zoom system for your Minimaps (this goes for Fullscreen Minimaps as well). In the Easy Minimap System demo scene you will find a demo of a Zoom control, more precisely in
+                    the <doc.detach>FPS/TPS</doc.detach> demo scene. Just press <doc.detach>M</doc.detach> to open the map in fullscreen and see how Zoom works.
+                    <br>
+                    <br>
+                    First, you can zoom by manipulating the <doc.detach>Field Of View</doc.detach> of your Minimap Camera. Reducing the <doc.detach>Field Of View</doc.detach> of your Minimap Camera will have a Zoom In effect, but Increasing
+                    the <doc.detach>Field Of View</doc.detach> will have a Zoom Out effect.
+
+                    <doc.image src="DocumentationFiles/images/43">
+                        The Field Of View.
+                    </doc.image>
+
+                    When Reducing the Field Of View of your Minimap Camera, you will notice that the size of the Minimap Items will also increase. This is expected behavior as this may sometimes be desired. To reduce the size of your
+                    Minimap Items as Field Of View is reduced, you can control the Easy Minimap System <doc.detach>Global Size Multiplier</doc.detach>, this is quite simple, but you can have more details by clicking <a href="#29">here</a>.
+                    <br>
+                    <br>
+                    <b>Briefly, To Zoom In:</b> Reduce the Field Of View of your Minimap Camera and reduce the Global Size Multiplier to reduce the size of your Minimap Items.
+                    <br>
+                    <br>
+                    <b>Briefly, To Zoom Out:</b> Increase the Field Of View of your Minimap Camera and increase the Global Size Multiplier to increase the size of your Minimap Items.
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Renderer: How to receive Player Inputs (such as Touch/Clicks) and perform actions -->
+                <doc.topic topicid="12e">
+                    <doc.topictitle>Minimap Renderer: How to receive Player Inputs (such as Touch/Clicks) and perform actions</doc.topictitle>
+
+                    The Minimap Renderer has an API and Events kit so that you can receive data to manipulate the Inputs that a player makes (such as clicks or touches for example) on your Minimap Renderer area.
+                    <br>
+                    <br>
+                    In the Minimap Renderer interface, you can register C# Methods from your scripts, so that these C# Methods are Called whenever the player Clicks, or Drag over the area of a Minimap Renderer for example.
+
+                    <doc.image src="DocumentationFiles/images/40"></doc.image>
+
+                    Thus, whenever a Player clicks on the Minimap Renderer area, for example, one of its methods will be called and some C# logic that you program will be executed. You can program, for example, whenever the player clicks
+                    on a place, that place will be marked.
+                    <br>
+                    <br>
+                    Below you will see examples of codes to be implemented. The examples below use the Events API, and you can modify the codes below as needed.
+
+                    <doc.warn>
+                        To allow your Minimap Renderer to receive the player's events, avoid leaving other elements of the canvas (such as Images for example) on top of your Minimap Renderer, because if there is any other element on
+                        top of your Minimap Renderer, it will intercept the touches or player inputs. You can also disable the <doc.detach>Raycast Target</doc.detach> options for UI elements that need to be on top of your Minimap
+                        Renderer, to prevent this from happening.
+                    </doc.warn>
+
+                    <doc.topicsubtitle>Displaying a Marker at the location that the Player Clicked on the map</doc.topicsubtitle>
+
+                    Using the code below, you can show a marker where the player double-clicks.
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+private Vector3 lastWorldPosClickInMinimap = Vector3.zero;
+private int clicksToCreateMarkInMinimap = 0;
+
+public MinimapItem marker;
+
+public void OnClickInMinimapRendererArea(Vector3 clickWorldPos, MinimapItem clickedMinimapItem) //<-- this method was registered in "OnInputClick" of myMinimapRenderer
+{
+    //If is the first click on map, start the routine of double click to mark
+    if (clicksToCreateMarkInMinimap == 0)
+        StartCoroutine(OnClickInMinimapRendererArea_DoubleClickRoutine());
+    //Increase the counter of clicks
+    clicksToCreateMarkInMinimap += 1;
+    //Store the last click data
+    lastWorldPosClickInMinimap = clickWorldPos;
+    //Show the Minimap Item Clicked
+    if (clickedMinimapItem != null) //<- if was clicked on a MinimapItem, value will not be null
+        Debug.Log("You clicked on Minimap Item \"" + clickedMinimapItem.gameObject.name + "\".");
+}
+
+IEnumerator OnClickInMinimapRendererArea_DoubleClickRoutine()
+{
+    int milisecondsPassed = 0;
+
+    while (enabled)
+    {
+        if (milisecondsPassed >= 25) //<-- if is passed 25ms, reset the counter of clicks and break the loop 
+        { 
+            clicksToCreateMarkInMinimap = 0; 
+            break; 
+        } 
+        if (clicksToCreateMarkInMinimap >= 2)
+        {
+            marker.gameObject.SetActive(true);
+            marker.transform.position = lastWorldPosClickInMinimap;
+            clicksToCreateMarkInMinimap = 0;
+            break;
+        }
+
+        yield return new WaitForSecondsRealtime(0.001f); //<-- 0.001 is 1ms
+        milisecondsPassed +=1; 
+    } 
+}
+                    </code></doc.code>
+
+                    <doc.topicsubtitle>Moving the map according to the Drag of the player in Minimap Renderer</doc.topicsubtitle>
+
+                    Using the code below, you will be able to move a Minimap Camera in the World position, according to the drag movements, which are done on top of your Minimap Renderer area.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapCamera myFullScreenMinimapCamera;
+
+public void OnDragInMinimapRendererArea(Vector3 onStartThisDragWorldPos, Vector3 onDraggingWorldPos) //<-- this method was registered in "OnInputDrag" of myMinimapRenderer
+{
+    //Use the position of drag start and current position of drag to move the Minimap Camera of fullscreen minimap
+    Vector3 deltaPositionToMoveMap = (onDraggingWorldPos - onStartThisDragWorldPos) * -1.0f;
+    playerMinimapCamera.transform.position += (deltaPositionToMoveMap * 10.0f * Time.deltaTime);
+}
+                    </code></doc.code>
+
+                    <doc.topicsubtitle>Displaying a Minimap Item that accompanies the player's cursor as he moves</doc.topicsubtitle>
+
+                    Using the code below, you can display a Minimap Item that will follow the player's mouse movement, as long as the mouse is on top of the Minimap Renderer. Remember to disable <doc.detach>Raycast Target</doc.detach> for
+                    this Minimap Item that will be moved!
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapItem cursor;
+
+public void OnOverInMinimapRendererArea(bool isOverMinimapRendererArea, Vector3 mouseWorldPos, MinimapItem overMinimapItem) //<-- this method was registered in "OnInputOver" of myMinimapRenderer
+{
+    //Hide the cursor
+    if (isOverMinimapRendererArea == false)
+        cursor.gameObject.SetActive(false);
+    //Show the cursor and run logic of on mouse over
+    if (isOverMinimapRendererArea == true)
+    {
+        //Show cursor
+        cursor.gameObject.SetActive(true); //<- "Raycast Target" of this Minimap Item, is off
+
+        //Move the cursor
+        cursor.gameObject.transform.position = mouseWorldPos;
+    }
+}
+                    </code></doc.code>
+
+                    In short, you only need to register your own public C# methods in your Minimap Renderer events. Whenever a player interacts with a Minimap Renderer that has methods registered in its events, it will call its methods so
+                    that its C# logic is executed. The events also provide parameters for you to use in your logic, parameters such as position in the world, referring to the position of the click on the Minimap, etc.
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Compass: How this component works -->
+                <doc.topic topicid="13">
+                    <doc.topictitle>Minimap Compass: How this component works</doc.topictitle>
+
+                    Minimap Compass is the component responsible for creating and showing a Compass in your UI Canvas. You just need to associate the Transform of a GameObject (Player for example) to this component, in the variable
+                    <doc.detach>targetPlayerTransform</doc.detach>, and then Minimap Compass will display the Compass rotation based on the <doc.detach>targetPlayerTransform</doc.detach> rotation.
+
+                    <doc.image src="DocumentationFiles/images/10"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Compass: Settings and Options -->
+                <doc.topic topicid="14">
+                    <doc.topictitle>Minimap Compass: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Target Player Transform=>targetPlayerTransform=>The Transform that Compass will use as a base to rotate.</doc.tabler>
+                        <doc.tabler>North Direction In World=>northDirection=>Choose an axis that will represent the North of the world. The default axis is Z Forward.</doc.tabler>
+                        <doc.tabler>Compass Texture=>compassTexture=>The texture that will be used as the background of the Compass.</doc.tabler>
+                        <doc.tabler>Compass Texture Color=>compassTextureColor=>The color that will be used as the background Texture color of the Compass.</doc.tabler>
+                        <doc.tabler>Show Degrees To North=>showDegreesToNorth=>If this option is true, Minimap Compass will display a text in the center of the Compass, which displays the degrees of rotation of the Compass.</doc.tabler>
+                        <doc.tabler>Degrees Position=>degreesPosition=><b>[Requires <doc.detach>showDegreesToNorth</doc.detach> to be true]</b> The position at which the degree text should appear in Compass.</doc.tabler>
+                        <doc.tabler>Degrees Font=>degreesFont=><b>[Requires <doc.detach>showDegreesToNorth</doc.detach> to be true]</b> The font that will be used in the degree text.</doc.tabler>
+                        <doc.tabler>Degrees Font Size=>degreesFontSize=><b>[Requires <doc.detach>showDegreesToNorth</doc.detach> to be true]</b> The font size that will be used in the degree text.</doc.tabler>
+                        <doc.tabler>Degrees Font Color=>degreesFontColor=><b>[Requires <doc.detach>showDegreesToNorth</doc.detach> to be true]</b> The font color that will be used in the degree text.</doc.tabler>
+                        <doc.tabler>Degrees Font Style=>degreesFontStyle=><b>[Requires <doc.detach>showDegreesToNorth</doc.detach> to be true]</b> The font style that will be used in the degree text.</doc.tabler>
+                        <doc.tabler>Minimap Items For Highlight List=>minimapItemsToHightlight=>You can add Minimap Items to this list, they will be displayed inside the Compass and will rotate according to the rotation to indicate the direction of these Minimap Items or you can use the Minimap Compass C# API to manipulate this list very easily.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Compass: Runtime API -->
+                <doc.topic topicid="15">
+                    <doc.topictitle>Minimap Compass: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Compass component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapCompass someMinimapCompass;
+public MinimapItem someMinimapItem;
+                        
+void Start()
+{
+    //- AddMinimapItemToBeHighlighted(minimapItem);
+    //  Adds the Minimap Item provided by you, the list of items to be highlighted.
+    //  MinimapItem minimapItem - The desired Minimap Item reference
+    someMinimapCompass.AddMinimapItemToBeHighlighted(someMinimapItem);
+
+    //- RemoveMinimapItemOfHighlight(minimapItem);
+    //  Remove the Minimap Item provided by you, of the list of items to be highlighted.
+    //  MinimapItem minimapItem - The desired Minimap Item reference
+    someMinimapCompass.RemoveMinimapItemOfHighlight(someMinimapItem);
+
+    //- isMinimapItemAddedToHighlight(minimapItem);
+    //  Return true if the desired Minimap Item is in list of items to be highlighted.
+    //  MinimapItem minimapItem - The desired Minimap Item reference
+    bool isInTheList = someMinimapCompass.isMinimapItemAddedToHighlight(someMinimapItem);
+
+    //- RemoveAllMinimapItemsFromHighlight();
+    //  Remove all minimap items from the list of items to be highlighted.
+    someMinimapCompass.RemoveAllMinimapItemsFromHighlight();
+
+    //- CountQuantityOfMinimapItemsInHighlight();
+    //  Return the quantity of items that is in the list of items to be highlighted.
+    int count = someMinimapCompass.CountQuantityOfMinimapItemsInHighlight();
+
+    //- GetCurrentDegreesToNorth();
+    //  Return the current degrees to north, according to targetPlayerTransform rotation.
+    int degrees = someMinimapCompass.GetCurrentDegreesToNorth();
+
+    //- GetListOfAllMinimapCompassInThisScene();
+    //  Returns a list with all Minimap Compass existing in current scene.
+    MinimapCompass[] allMinimapCompass = someMinimapCompass.GetListOfAllMinimapCompassInThisScene();
+}
+                    </code></doc.code>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Compass: How to highlight items and make them appear on the Compass -->
+                <doc.topic topicid="15a">
+                    <doc.topictitle>Minimap Compass: How to highlight items and make them appear on the Compass</doc.topictitle>
+
+                    The highlighting function for Minimap Items can be useful on several occasions. Minimap Compass has a function in which it displays the direction of Minimap Items marked to be highlighted. These Items appear inside the
+                    Compass and move according to the direction of each Item in relation to the <doc.detach>targetPlayerTransform</doc.detach>.
+
+                    <doc.video src="DocumentationFiles/videos/3" thumbnail="DocumentationFiles/thumbs/3">Note that as the "Food" icon moves away from our player, it appears at the border of the Minimap.</doc.video>
+
+                    To highlight an item on the Compass, simply add a Minimap Item to the "Minimap Items For Highlight" list and that's it!
+
+                    <doc.image src="DocumentationFiles/images/11">Click on "Add New Slot" and then drag a Minimap Item to the new Slot created in the list. You can also do this easily using the C# API.</doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Scanner: How this component works -->
+                <doc.topic topicid="16">
+                    <doc.topictitle>Minimap Scanner: How this component works</doc.topictitle>
+
+                    Minimap Scanner is a component that literally scans your scene and generates a PNG image from your scene. This image is generated with a top-down view (as if it were a Satellite) and then the PNG image is saved to your
+                    project files automatically. After you perform a scan using the Minimap Scanner, you just need to keep the component in your scene and then it will display the scan within the Minimap automatically. That same PNG image
+                    can be edited by you later if you want, and you can provide your own images for Minimap Scanner to display on Minimap.
+                    <br>
+                    <br>
+                    This is the most optimized way possible, to display your scene inside your Minimap, so that there is not a high performance consumption because of your Minimap! You can perform scans even at Runtime!
+
+                    <doc.image src="DocumentationFiles/images/12"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Scanner: Settings and Options -->
+                <doc.topic topicid="17">
+                    <doc.topictitle>Minimap Scanner: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Texture Result Of Scan=>textureResultOfScan=>This is the texture that represents the scan made by the Minimap Scanner and this texture will be displayed within Minimap throughout the territory of the Minimap Scanner.<br><br><b>Note that this variable is automatically filled in if you scan using the Minimap Scanner. You can also provide your own image.</b></b></M></doc.tabler>
+                        <doc.tabler>Scan Height=>scanHeight=>This variable represents the height at which the scan will take place. For example, if you need to scan a cave that is below the ground, you can set a height less than 0 and the Minimap Scanner will ignore everything above that.</doc.tabler>
+                        <doc.tabler>Scan Area=>scanArea=>This variable represents the size (territory) of the area that will be scanned by your Minimap Scanner.</doc.tabler>
+                        <doc.tabler>Scan Resolution=>scanResolution=>This variable represents the quality at which the PNG image resulting from the scan will have. Higher resolutions may take longer to scan.</doc.tabler>
+                        <doc.tabler>Color Of Scan In Game=>colorOfScanInGame=>The color in which the PNG image resulting from the merge should be rendered within the Minimap.</doc.tabler>
+                        <doc.tabler>GameObjects To Ignore=>gameObjectsToIgnore=>You can add GameObjects to this list. All GameObjects that are in that list at the time of scanning will be ignored.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Scanner: Runtime API -->
+                <doc.topic topicid="18">
+                    <doc.topictitle>Minimap Scanner: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Scanner component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapScanner someMinimapScanner;
+                                        
+void Start()
+{
+    //- CreateNewMinimapScannerBeside(sideToCreateNewScanner);
+    //  Creates a new Minimap Scanner automatically, on the side you prefer. Positioning is automatic, you just need to specify which side you want to create.
+    //  CreateScanInSide sideToCreateNewScanner - Enum in which you can choose the side.
+    someMinimapScanner.CreateNewMinimapScannerBeside(CreateScanInSide.Forward);
+
+    //- DoScanInThisAreaOfComponentAndShowOnMinimap();
+    //  Performs the scanning in the entire territory covered by this Minimap Scanner.
+    someMinimapScanner.DoScanInThisAreaOfComponentAndShowOnMinimap();
+
+    //- isThisMinimapScanBeingVisibleByAnyMinimapCamera();
+    //  Returns true if the PNG texture generated from this scan is visible to any Minimap Camera.
+    bool isVisible = someMinimapScanner.isThisMinimapScanBeingVisibleByAnyMinimapCamera();
+
+    //- GetListOfAllMinimapScannersInThisScene();
+    //  Returns a list with all Minimap Compass existing in current scene.
+    MinimapScanner[] allMinimapScanners = someMinimapScanner.GetListOfAllMinimapScannersInThisScene();
+}
+                </code></doc.code>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Scanner: How to adjust the height at which the scan will be performed? -->
+                <doc.topic topicid="18a">
+                    <doc.topictitle>Minimap Scanner: How to adjust the height at which the scan will be performed?</doc.topictitle>
+
+                    The scan height setting feature can be useful in a variety of situations, such as...
+                    <doc.list>
+                        <doc.listr>Moments when you want to scan a cave that is below the ground, but you don't want the Minimap Scanner to scan the surface. At those times you just need to adjust the <doc.detach>scanHeight</doc.detach> and then you can place it at a height where the scan takes the cave, but not the surface.</doc.listr>
+                        <doc.listr>Times when you want to scan very high surfaces.</doc.listr>
+                    </doc.list>
+                    In the Editor, you can see a representation of the scanning height automatically, if you select a GameObject that contains a Minimap Scanner.
+
+                    <doc.image src="DocumentationFiles/images/13">
+                        The blue, transparent and filled square shows the current height of the <doc.detach>scanHeight</doc.detach>. As you lower or increase the <doc.detach>scanHeight</doc.detach>, you can see the height through this
+                        square. Everything above the square is ignored when scanning.
+                    </doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Scanner: Marking specific GameObjects to be ignored during scanning -->
+                <doc.topic topicid="18b">
+                    <doc.topictitle>Minimap Scanner: Marking specific GameObjects to be ignored during scanning</doc.topictitle>
+
+                    When scanning your scene, using the Minimap Scanner, you can register GameObjects to be easily ignored. Registered GameObjects will not be included in the PNG image generated from the scan.
+                    <br>
+                    To do this, simply add the GameObjects you want to ignore during the scan, the <doc.detach>gameObjectsToIgnore</doc.detach> list. The rest, the Minimap Scanner will do!
+
+                    <doc.image src="DocumentationFiles/images/14"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Scanner: How to create a new Scanner next to an existing one (In Editor) -->
+                <doc.topic topicid="18c">
+                    <doc.topictitle>Minimap Scanner: How to create a new Scanner next to an existing one (In Editor)</doc.topictitle>
+
+                    After you place a Minimap Scanner on the scene, you can easily use a shortcut to create a new Minimap Scanner right next to the Minimap Scanner you created. This is useful so that you can easily scan your scene.
+                    <br>
+                    <br>
+                    After adding your Minimap Scanner, configure it the way you prefer, you just need to click on one of the yellow arrows that are on the sides of the Minimap Sanner, and a new Minimap Scanner will be created in that
+                    direction. The new Minimap Scanner will inherit the settings from the first Minimap Scanner you created.
+
+                    <doc.image src="DocumentationFiles/images/15">You can also do this easily using the Minimap Scanner C# API, at runtime.</doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Text: How this component works -->
+                <doc.topic topicid="19">
+                    <doc.topictitle>Minimap Text: How this component works</doc.topictitle>
+
+                    Minimap Text is a component that simply renders text inside your Minimap! This can be useful for example, to put a name on some area of your Minimap!
+
+                    <doc.image src="DocumentationFiles/images/16"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Text: Settings and Options -->
+                <doc.topic topicid="20">
+                    <doc.topictitle>Minimap Text: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Text To Render=>textToRender=>The text that will be rendered by Minimap Text and displayed on your Minimap.</doc.tabler>
+                        <doc.tabler>Text Color=>textColor=>The color of the text that will be rendered.</doc.tabler>
+                        <doc.tabler>Text Font=>font=>The font of the text that will be rendered.</doc.tabler>
+                        <doc.tabler>Font Size=>fontSize=>The font size of the text that will be rendered.</doc.tabler>
+                        <doc.tabler>Follow Rotation Of=>followRotationOf=>If this variable is in "This GameObject", this component will follow the rotation of the GameObject to which it is located. Change if you want this component to follow the rotation of another GameObject.</doc.tabler>
+                        <doc.tabler>GameObject To Follow=>customGameObjectToFollowRotation=>If the variable <doc.detach>followRotationOf</doc.detach> is in "Custom GameObject", provide the desired GameObject here.</doc.tabler>
+                        <doc.tabler>Movement Smoothing=>movementsSmoothing=>The smoothness you will have in the movements made by this component. The higher the value, the less the smoothing.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Text: Runtime API -->
+                <doc.topic topicid="21">
+                    <doc.topictitle>Minimap Text: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Text component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapText someMinimapText;
+                                        
+void Start()
+{
+    //- isThisMinimapTextBeingVisibleByAnyMinimapCamera();
+    //  Returns true if the text rendered by this component is currently visible to any Minimap Camera.
+    bool isVisible = someMinimapText.isThisMinimapTextBeingVisibleByAnyMinimapCamera();
+
+    //- GetListOfAllMinimapTextsInThisScene();
+    //  Returns a list with all Minimap Text existing in current scene.
+    MinimapText[] allMinimapText = someMinimapText.GetListOfAllMinimapTextsInThisScene();
+}
+                </code></doc.code>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Line: How this component works -->
+                <doc.topic topicid="22">
+                    <doc.topictitle>Minimap Line: How this component works</doc.topictitle>
+
+                    Minimap Line is a component that renders a line inside your Minimap. To use this component, you just need to provide a list of positions where the line will travel in your world. These positions are only on a global
+                    scale. While your game is not running, you can provide these positions through the Inspector, but while the game is running, positions can only be provided through the C# API of this component.
+
+                    <doc.image src="DocumentationFiles/images/17"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Line: Settings and Options -->
+                <doc.topic topicid="23">
+                    <doc.topictitle>Minimap Line: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Line Render Color=>lineRenderColor=>The color of the line to be rendered.</doc.tabler>
+                        <doc.tabler>Line Width Size=>lineWidthSize=>The width of the line to be rendered.</doc.tabler>
+                        <doc.tabler>Round Line Corners=>roundLineCorners=>Should the line have its corners rounded?</doc.tabler>
+                        <doc.tabler>Movement Smoothing=>movementsSmoothing=>The smoothness you will have in the movements made by this component. The higher the value, the less the smoothing.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Line: Runtime API -->
+                <doc.topic topicid="24">
+                    <doc.topictitle>Minimap Line: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Line component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapLine someMinimapLine;
+public Vector3[] somePositions = new Vector3[]{ position1, position2 };
+                                        
+void Start()
+{
+    //- SetNewWorldPositions(worldPositions);
+    //  Defines a new list of positions for this line to be rendered.
+    //  Vector3[] worldPositions - The array of positions.
+    someMinimapLine.SetNewWorldPositions(somePositions);
+
+    //- GetDefinedWorldPositions();
+    //  Returns all positions that are currently defined in this component.
+    Vector3[] worldPositions = someMinimapLine.GetDefinedWorldPositions();
+
+    //- isThisMinimapLineBeingVisibleByAnyMinimapCamera();
+    //  Returns true if the line rendered by this component is currently visible to any Minimap Camera.
+    bool isVisible = someMinimapLine.isThisMinimapLineBeingVisibleByAnyMinimapCamera();
+
+    //- GetListOfAllMinimapLinesInThisScene();
+    //  Returns a list with all Minimap Line existing in current scene.
+    MinimapLine[] allMinimapLines = someMinimapLine.GetListOfAllMinimapLinesInThisScene();
+}
+                </code></doc.code>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Routes: How this component works -->
+                <doc.topic topicid="25">
+                    <doc.topictitle>Minimap Routes: How this component works</doc.topictitle>
+
+                    Minimap Routes is a component that has the sole focus of showing Routes (like a GPS system) inside your Minimap. All you need to do is use the Minimap Routes interface to demarcate in your scene (via Waypoints) all the
+                    paths/streets/passages that exist in your scene, and then the component will use an internal algorithm to calculate the best and most short possible route between a start Transform and a target Transform that you define.
+                    The route is updated in real time based on the position of the Destination/Start point and displayed automatically.
+
+                    <doc.image src="DocumentationFiles/images/18"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Routes: Settings and Options -->
+                <doc.topic topicid="26">
+                    <doc.topictitle>Minimap Routes: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Line Render Color=>lineRenderColor=>The color of the line to be rendered.</doc.tabler>
+                        <doc.tabler>Line Width Size=>lineWidthSize=>The width of the line to be rendered.</doc.tabler>
+                        <doc.tabler>Starting Point=>startingPoint=>The Transform that will be the starting point of the route. Normally, it should be your Player's Transform, or Car for example.</doc.tabler>
+                        <doc.tabler>Destination Point=>destinationPoint=>The Transform that will be the destination point of the route. Normally, it must be the Transform of some part of your scene. A Store, or some NPC for example.</doc.tabler>
+                        <doc.tabler>Show Routes On Start=>showRoutesOnStart=>If this option is true, Minimap Routes will start displaying the Route automatically, right at the beginning of the game.</doc.tabler>
+                        <doc.tabler>Routes Update Frequency=>routesUpdatesFrequency=>This variable defines the number of times the route is updated per second. The more updates that occur, the more fluid the animation of the route becomes, however, the more resources can be spent, depending on the number of existing Waypoints, as well as the number of paths.</doc.tabler>
+                        <doc.tabler>Starting Point Find Method=>startingPointFindMethod=>This variable defines the distance calculation algorithm for Route calculations. Normally, changing this variable will not bring performance benefits, but it may be necessary on rare occasions.</doc.tabler>
+                        <doc.tabler>Starting Height Tolerance=>startingHeightTolerance=>This variable defines the height tolerance of the Waypoint closest to the Start point. <b>It is recommended that you read <a href="#27a">this topic</a> and <a href="#27c">this topic</a> as well, here in this documentation for more information about it! Or just keep reading and you will have all the information you need!</b></doc.tabler>
+                        <doc.tabler>Movement Smoothing=>movementsSmoothing=>The smoothness you will have in the movements made by this component. The higher the value, the less the smoothing.</doc.tabler>
+                        <doc.tabler>On Update Routes Renderization=>onUpdateRoutesRenderization=>This is an event. This event is called whenever the Route is updated within the Minimap.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Routes: Runtime API -->
+                <doc.topic topicid="27">
+                    <doc.topictitle>Minimap Routes: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Routes component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapRoutes someMinimapRoutes;
+                                        
+void Start()
+{
+    //- isCurrentlyShowingRoutes();
+    //  Returns true if Minimap Routes is currently calculating and displaying the best route between the Start and Destination points.
+    bool isShowingRoutes = someMinimapRoutes.isCurrentlyShowingRoutes();
+
+    //- StartCalculatingAndShowRotesToDestination();
+    //  Send a command to Minimap Routes to automatically start calculating and displaying a route between the Start and Destination points.
+    someMinimapRoutes.StartCalculatingAndShowRotesToDestination();
+
+    //- StopCalculatingAndHideRotesToDestination();
+    //  Send a command to Minimap Routes to stop calculating and displaying the route between the Start and Destination points.
+    someMinimapRoutes.StopCalculatingAndHideRotesToDestination();
+
+    //- GetCurrentGeneratedRouteIfIsCalculingAndShowingRoutes();
+    // This method returns a CurrentDisplayingRoute object (if there is a route being displayed by the component). This object contains all the
+    // information about the route that is currently being displayed and is updated along with the route. This object contains information
+    // such as total distance of the route, Waypoints used in the route, Positions of Waypoints used in the route and etc. You can use the
+    // information in this method to draw a Route within your game world for example.
+    CurrentDisplayingRoute currentRouteData = someMinimapRoutes.GetCurrentGeneratedRouteIfIsCalculingAndShowingRoutes();
+
+    //- SetWaypointEnabled(waypointId, enable);
+    //  Enables or disables a especific Waypoint.
+    //  int waypointId - The ID of especific Waypoint.
+    //  bool enable - Enable or disable the especific Waypoint?
+    someMinimapRoutes.SetWaypointEnabled(11, true);
+
+    //- isWaypointEnabled(waypointId);
+    //  Returns true if a specific Waypoint is disabled.
+    //  int waypointId - The ID of especific Waypoint.
+    bool isEnabled = someMinimapRoutes.isWaypointEnabled(11);
+
+    //- SetAllWaypointsEnabled(enable);
+    //  Enables or disables all Waypoints.
+    //  bool enable - Enable or disable all Waypoints?
+    someMinimapRoutes.SetAllWaypointsEnabled(true);
+
+    //- GetWaypointPosition(waypointId);
+    //  Return the global position of a especific waypoint.
+    //  int waypointId - The ID of especific Waypoint.
+    Vector3 position = someMinimapRoutes.GetWaypointPosition(11);
+
+    //- GetIdOfAllExistantsWaypoints();
+    //  Return a array that contains all existants waypoints ids.
+    int[] allWapointsIds = someMinimapRoutes.GetIdOfAllExistantsWaypoints();
+
+    //- GetIdsOfWaypointsConnectedsToThis(waypointId);
+    //  Return a array of ids of all waypoints that is connected to especific waypoint.
+    //  int waypointId - The ID of especific Waypoint.
+    int[] allConnectedWaypointsIds = someMinimapRoutes.GetIdsOfWaypointsConnectedsToThis(11);
+
+    //- ForceMinimapRoutesToCalculateOrUpdateAllCachesAgain();
+    //  This method forces Minimap Routes to re-do all of its Cache calculations. This can be a very heavy task and is only necessary if you
+    //  modify the "currentExistingWaypointsItems" list, which is not recommended under any circumstances.
+    someMinimapRoutes.ForceMinimapRoutesToCalculateOrUpdateAllCachesAgain();
+
+    //- isThisMinimapLineRouteBeingVisibleByAnyMinimapCamera();
+    //  Returns true if the line of route of this component is currently visible to any Minimap Camera.
+    bool isVisible = someMinimapRoutes.isThisMinimapLineRouteBeingVisibleByAnyMinimapCamera();
+
+    //- GetListOfAllMinimapRoutesInThisScene();
+    //  Returns a list with all Minimap Routes existing in current scene.
+    MinimapRoutes[] allMinimapRoutes = someMinimapRoutes.GetListOfAllMinimapRoutesInThisScene();
+}
+                </code></doc.code>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Routes: How to use Minimap Routes? -->
+                <doc.topic topicid="27a">
+                    <doc.topictitle>Minimap Routes: How to use Minimap Routes?</doc.topictitle>
+
+                    Minimap Routes will display the best and shortest possible routes between point A and point B of your scene. The calculation and update of the route is done in real time and in an automated and optimized way. Minimap
+                    Routes will take care of everything, but before that, you just need to show it where all the paths of your scene are. Using Minimap Routes Waypoints, you can do this easily and in a very intuitive way. In this topic you
+                    will learn about the Minimap Routes Interface, and how to manipulate Waypoints.
+                    <br>
+                    <br>
+                    To begin, create a new empty GameObject in your scene. Add the Minimap Routes component to this newly created GameObject.
+
+                    <doc.image src="DocumentationFiles/images/19"></doc.image>
+
+                    After adding the Minimap Routes component, you will see a warning that there are no Waypoints in the scene. You need to create the first Waypoint so that the normal Minimap Routes Interface is unlocked. Click on the
+                    "Create First Waypoint" button.
+
+                    <doc.image src="DocumentationFiles/images/20"></doc.image>
+
+                    After that, you will be able to see the complete Minimap Routes interface. With this interface, you will be able to create, delete and perform other types of manipulations in the Waypoints of your scene.
+
+                    <doc.image src="DocumentationFiles/images/21"></doc.image>
+
+                    Now, let's understand what each button on this interface does exactly. After understanding what each Button does, we will have a better knowledge and we will be able to create the Waypoints of our scene, more easily.
+
+                    <doc.table>
+                        <doc.tablec>Icon=>Name=>Shortcut Key=>Description</doc.tablec>
+                        <doc.tablecw>14px=>20%=>15%=>auto</doc.tablecw>
+                        <doc.tabler><img src="DocumentationFiles/images/21a" width="18px" />=>Show/Hide Waypoints=>None=>This button changes between the enabled or disabled view of Waypoints. Use this if you want to hide the Waypoints of a Minimap Routes.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21b" width="18px" />=>Export Waypoints DB=>None=>This button will export all existing Waypoints (and their information) to an external file.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21c" width="18px" />=>Import Waypoints DB=>None=>This button will import all existing Waypoints in an external file.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21d" width="18px" />=>Selection Tool=>A=>While this tool is selected, you can select the desired Waypoint to view its information and manipulate it.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21e" width="18px" />=>Move Tool=>V=>With this tool, you can move Waypoints. You can also define a new position in the Waypoint, from Vector3 in the Minimap Routes Inspector.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21f" width="18px" />=>Create Tool=>N=>With this tool, you can create new Waypoints, whether connected or not. If you choose to create a new connected Waypoint, it will be created connected to the currently selected Waypoint.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21g" width="18px" />=>Delete Tool=>D=>With this tool, you can delete existing Waypoints.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21h" width="18px" />=>Connect Tool=>C=>With this tool, you can create a connection between 2 Waypoints that have no connection.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21i" width="18px" />=>Disconnect Tool=>X=>With this tool, you can delete the connection that 2 Waypoints have.</doc.tabler>
+                        <doc.tabler><img src="DocumentationFiles/images/21j" width="18px" />=>Cutter Tool=>K=>With this tool, you can create a new Waypoint that will be between 2 Waypoints that have a connection. You just need to click in the middle of the connection line between 2 Waypoints, and a new Waypoint will appear at that location.</doc.tabler>
+                    </doc.table>
+
+                    Now, let's see short videos that show each tool in action.
+
+                    <doc.topicsubtitle>Selection Tool</doc.topicsubtitle>
+                    <doc.video src="DocumentationFiles/videos/4" thumbnail="DocumentationFiles/thumbs/4">When a Waypoint is Red, it means that it is currently selected.</doc.video>
+
+                    <doc.topicsubtitle>Move Tool</doc.topicsubtitle>
+                    <doc.video src="DocumentationFiles/videos/5" thumbnail="DocumentationFiles/thumbs/5">When a Waypoint is Red, it means that it is currently selected.</doc.video>
+
+                    <doc.topicsubtitle>Create Tool</doc.topicsubtitle>
+                    <doc.video src="DocumentationFiles/videos/6" thumbnail="DocumentationFiles/thumbs/6">When a Waypoint is Red, it means that it is currently selected.</doc.video>
+
+                    <doc.topicsubtitle>Delete Tool</doc.topicsubtitle>
+                    <doc.video src="DocumentationFiles/videos/7" thumbnail="DocumentationFiles/thumbs/7">When a Waypoint is Red, it means that it is currently selected.</doc.video>
+
+                    <doc.topicsubtitle>Connect Tool</doc.topicsubtitle>
+                    <doc.video src="DocumentationFiles/videos/8" thumbnail="DocumentationFiles/thumbs/8">When a Waypoint is Red, it means that it is currently selected.</doc.video>
+
+                    <doc.topicsubtitle>Disconnect Tool</doc.topicsubtitle>
+                    <doc.video src="DocumentationFiles/videos/9" thumbnail="DocumentationFiles/thumbs/9">When a Waypoint is Red, it means that it is currently selected.</doc.video>
+
+                    <doc.topicsubtitle>Cutter Tool</doc.topicsubtitle>
+                    <doc.video src="DocumentationFiles/videos/10" thumbnail="DocumentationFiles/thumbs/10">When a Waypoint is Red, it means that it is currently selected.</doc.video>
+
+                    Now that you know what each tool does and how each tool handles Waypoints, watch a video below (accelerated) that shows the creation of Waypoints marking all the paths of a scene.
+
+                    <doc.video src="DocumentationFiles/videos/11" thumbnail="DocumentationFiles/thumbs/11">
+                        Follow the example in this video to get a sense of how to position Waypoints in your scenes. You can also view the Demo scenes that come with the package, to see how Waypoints are positioned.
+                    </doc.video>
+
+                    Now that we already have all our Waypoints created and positioned correctly in the scene, Minimap Routes already knows where each path of our game is.
+                    <br>
+                    <br>
+                    Now, to display routes on our Minimap, all we need to do is inform Minimap Routes, our Start and Destination points, and then give the commands when we want to display the routes or not.
+                    <br>
+                    <br>
+                    To start, associate your Player or Car for example, the variable <doc.detach>startingPoint</doc.detach>. Also associate the desired Destination point (Home, Location for example) to the variable <doc.detach>
+                        destinationPoint</doc.detach>. This will show Minimap Routes, where the route should start and where the route should end. (Point A and B). You can also define this without problems, through the component's C# API.
+
+                    <doc.image src="DocumentationFiles/images/22"></doc.image>
+
+                    Now that you have informed Minimap Routes of Start and Destination points, we only need to use Minimap Routes <doc.detach>StartCalculatingAndShowRotesToDestination()</doc.detach> or
+                    <doc.detach>StopCalculatingAndHideRotesToDestination()</doc.detach> methods to choose when the display of Routes between points A and B should happen or not.
+                    <br>
+                    <br>
+                    You can also just activate the <doc.detach>showRoutesOnStart</doc.detach> variable and Minimap Routes will automatically display Routes at the Start of the game.
+                    <br>
+                    <br>
+                    After performing all these steps, this is the result!
+
+                    <doc.video src="DocumentationFiles/videos/12" thumbnail="DocumentationFiles/thumbs/12">
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Routes: Good practices that must be followed to create Waypoints -->
+                <doc.topic topicid="27b">
+                    <doc.topictitle>Minimap Routes: Good practices that must be followed to create Waypoints</doc.topictitle>
+
+                    In the topic above, you saw the essentials for preparing and configuring Minimap Routes to display GPS Routes. In this topic, you will see, what is the correct way to create Waypoints in your scene. You will now see some
+                    tips and good practices that are recommended to ensure that the Minimap Routes Route Calculation algorithm works in the best possible way.
+
+                    <doc.topicsubtitle>Correct positioning of Waypoints</doc.topicsubtitle>
+                    Waypoints must be placed according to the streets or paths of your scene, as shown in the image below.
+                    <doc.image src="DocumentationFiles/images/23"></doc.image>
+
+                    <doc.topicsubtitle>Positioning of Waypoints on Curves</doc.topicsubtitle>
+                    On curves, use as many Waypoints as needed, but position them so that they reflect the shape closest to the curve, as shown in the image below.
+                    <doc.image src="DocumentationFiles/images/24"></doc.image>
+
+                    <doc.topicsubtitle>Positioning Waypoints on streets that form squares</doc.topicsubtitle>
+                    In streets that form squares, it is recommended that you use the "Cutter" tool to subdivide (create Waypoints between the Waypoints of each corner) so that, thus, the line that will represent the route appears more
+                    smoothed in several cases in game. See the image below as an example.
+                    <doc.image src="DocumentationFiles/images/25">Note that more Waypoints have been added between the Waypoints on each corner.</doc.image>
+
+                    <doc.topicsubtitle>Connection of Waypoints</doc.topicsubtitle>
+                    Waypoints should ONLY be connected if there is a physical path between them. Do not connect 2 Waypoints if there is no physical path between them. If there is a physical path between 2 Waypoints, it is recommended that
+                    the two have a connection.
+                    <doc.image src="DocumentationFiles/images/26"></doc.image>
+
+                    <doc.topicsubtitle>Try to keep Waypoints always in the center of Path</doc.topicsubtitle>
+                    Always try to keep Waypoints positioned in the center of the paths. This will guarantee the rendering of the route, in the correct in-game locations. See the image below for an example.
+                    <doc.image src="DocumentationFiles/images/27">This goes for all paths.</doc.image>
+
+                    <doc.topicsubtitle>Avoid leaving isolated Waypoints</doc.topicsubtitle>
+                    Never leave isolated Waypoints (without any connection) loose around the scene. All existing Waypoints in the scene must have at least one connection with other Waypoints. This will ensure that there are no incorrect
+                    calculated paths.
+                    <doc.image src="DocumentationFiles/images/28"></doc.image>
+
+                    <doc.topicsubtitle>Waypoints on paths that have steep slopes</doc.topicsubtitle>
+                    Paths that are very steep (both downhill and uphill), need to have more Waypoints than normal. This will ensure that the route can always be calculated correctly, starting from the Starting Point and finding the closest
+                    Waypoint in steep regions, without any problems. In the image below, we have an example of a bridge. In the part of the ascent to the bridge, more Waypoints are used in order to guarantee a more accurate route
+                    calculation while the Player passes in that region.
+                    <doc.image src="DocumentationFiles/images/29"></doc.image>
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Routes: Setting the height tolerance for Route calculations -->
+                <doc.topic topicid="27c">
+                    <doc.topictitle>Minimap Routes: Setting the height tolerance for Route calculations</doc.topictitle>
+
+                    This topic tries to better explain how to set the <doc.detach>startingHeightTolerance</doc.detach> variable in the Minimap Routes component. But first, we need to understand how Minimap Routes calculates routes between
+                    the Start and Destination points.
+                    <br>
+                    <br>
+                    When Minimap Routes calculates the route between the Start point and the Destination point, it follows a few steps...
+                    <doc.list isnumeric="true">
+                        <doc.listr>Obtains the current location of the Start point</doc.listr>
+                        <doc.listr>Gets the current height at which the Start point is</doc.listr>
+                        <doc.listr>Search for the Waypoint closest to the Start point. The Waypoint must also be at a height close to the height of the Starting point. This nearby height has a limit and that limit is defined by variable <doc.detach>startingHeightTolerance</doc.detach>.</doc.listr>
+                        <doc.listr>Disregards any Waypoints that have a height difference greater than the current height of the (Starting Point + <doc.detach>startingHeightTolerance</doc.detach>)</doc.listr>
+                        <doc.listr>After finding the Waypoint closest to the Starting point, using this rule, the route is calculated and then the best Waypoints are selected to compose the route between Starting and Destination.</doc.listr>
+                        <doc.listr>The route is rendered on the Minimap.</doc.listr>
+                    </doc.list>
+                    If you still don't fully understand, the image below may help to clarify things further.
+
+                    <doc.image src="DocumentationFiles/images/30">
+                        Note the height of the Player, the height of the Bridge, the height of the Waypoints on the ground and the height of the Waypoints on the Bridge.
+                    </doc.image>
+
+                    The yellow mark represents the <doc.detach>startingHeightTolerance</doc.detach> variable. And this yellow representation moves along with the height of our Player, that is, if our Player was on the ground, the mark would
+                    also be on the ground.
+                    <br>
+                    If we increase the value of variable <doc.detach>startingHeightTolerance</doc.detach>, that yellow mark also increases.
+                    <br>
+                    Knowing this, any Waypoint that is outside the height of that yellow mark will be ignored in step 3 and will not be considered during the route calculation.
+                    <br>
+                    <br>
+                    <b>But why is this necessary?</b>
+                    <br>
+                    Without this variable, Waypoints that are at a height very different from the height of the Player, would be considered and thus the routes would leave incorrect points, and from incorrect heights. In the image, for
+                    example, the Waypoints that are on the ground would be considered when calculating the start of the route and this is not correct, as the Player is over the bridge. With variable <doc.detach>startingHeightTolerance
+                    </doc.detach>, this can be avoided. Just adjust to a comfortable height and unnecessary Waypoints will be ignored during the calculation at the beginning of the route. Usually the recommended height is 3.5 but you can
+                    lower it if you need to, however, you will need to create more Waypoints in regions that are very steep.
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Routes: How to disable Waypoints to indicate obstructions on the path or ignore paths/parts of paths -->
+                <doc.topic topicid="27d">
+                    <doc.topictitle>Minimap Routes: How to disable Waypoints to indicate obstructions on the path or ignore paths/parts of paths</doc.topictitle>
+
+                    When using the Minimap Routes of the Easy Minimap System, you can Disable certain Waypoints as you wish. When a Waypoint is Disabled, it will not be included or processed in any way by the Minimap Routes route generation
+                    algorithm. This means that if any street has a Disabled Waypoint, that street will be ignored and Minimap Routes will try to find a path that passes through another street, which has Waypoints normally activated.
+
+                    <doc.image src="DocumentationFiles/images/41">
+                        Note that the path has an obstruction. Then, the Waypoint that is in the middle of the path has been Disabled, to indicate to Minimap Routes, that there is an obstruction there, so Minimap Routes will always look
+                        for paths that do not pass this street. This street will always be ignored.
+                    </doc.image>
+
+                    To Disable a Waypoint, in the Editor, you only need to select a Waypoint with the "Selection" tool and then uncheck the box next to its name, in the Inspector. Disabled Waypoints will be black, and the connection
+                    indicator lines will also become black, to indicate that that path will not be considered.
+                    <br>
+                    <br>
+                    To Disable Waypoints at runtime, you can use the Minimap Routes C# API, using methods like <doc.detach>SetWaypointEnabled();</doc.detach> and <doc.detach>isWaypointEnabled();</doc.detach> you can do this easily.
+                    <br>
+                    <br>
+                    See below, a comparison showing a route generated to the same destination, and with the player in the same position, on this street. In both comparisons, the player and destination are in the same position, but on one
+                    side we have the street with the obstruction and the Waypoint disabled, and on the other side we have the same street, but without obstruction.
+
+                    <doc.image src="DocumentationFiles/images/42">
+
+                    </doc.image>
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Fog: How this component works -->
+                <doc.topic topicid="27da">
+                    <doc.topictitle>Minimap Fog: How this component works</doc.topictitle>
+
+                    Minimap Fog is a component that can add a fog that hides all the content on your Minimap and only shows places where the Player is exploring, or has already explored. You can set your preferences and define which
+                    GameObjects will be able to reveal what's under the fog. You can also save the current fog state and load it later. This is useful for preserving places already explored by the player, even after the game is closed.
+
+                    <doc.image src="DocumentationFiles/images/44"></doc.image>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Fog: Settings and Options -->
+                <doc.topic topicid="27db">
+                    <doc.topictitle>Minimap Fog: Settings and Options</doc.topictitle>
+
+                    Now see a table that contains all the settings, explanations and their corresponding variables, which can be changed in realtime.
+                    <br>
+                    In the Editor Inspector, you can also always hover over a variable name, to see a detailed description of what the variable does.
+
+                    <doc.table>
+                        <doc.tablec>Name=>Variable=>Description</doc.tablec>
+                        <doc.tablecw>20%=>20%=>auto</doc.tablecw>
+                        <doc.tabler>Fog Removal Method=>X=>This variable defines the method of removing Fog Of War from your Minimap. If you set <doc.detach>PathsTraveledByTargets</doc.detach> the fog will be removed in locations where the targets are and also in locations already explored by the targets. If you set <doc.detach>OnlyTargetsCurrentPosition</doc.detach> the fog will be removed only in locations where the targets are.</doc.tabler>
+                        <doc.tabler>View Dist. For Chunks=>X=><b>[Requires <doc.detach>Fog Removal Method</doc.detach> as "PathsTraveledByTargets"]</b> Sets the distance at which Chunks will be considered visible by Targets so their Fogs can be removed.</doc.tabler>
+                        <doc.tabler>Fogs Quant. Per Chunk=>X=><b>[Requires <doc.detach>Fog Removal Method</doc.detach> as "PathsTraveledByTargets"]</b> Defines the amount of Fogs each Chunk will have. The more Fogs a Chunk has, the smoother the Fog Of War will be. Higher amounts of Fogs can consume a little more memory and performance.</doc.tabler>
+                        <doc.tabler>Fogs Updates Frequency=>X=><b>[Requires <doc.detach>Fog Removal Method</doc.detach> as "PathsTraveledByTargets"]</b> Defines the number of times Fogs will be parsed and rendered per second. Larger amounts of updates can consume more performance, but they can bring more accuracy.</doc.tabler>
+                        <doc.tabler>Fogs Base Sprite=>X=>The Sprite that will be used by Fog Of War.</doc.tabler>
+                        <doc.tabler>Fogs Base Color=>X=>The color that the Fog Of War will be rendered.</doc.tabler>
+                        <doc.tabler>Revealer Base Sprite=>X=>The Sprite that will be used as a way to reveal what's under the Fog. You can define Sprites to be Square, Circular or even Octagonal.</doc.tabler>
+                        <doc.tabler>View Dist. For Fogs=>viewDistanceForFogs=>Indicates the distance at which Fogs will be removed by Targets.</doc.tabler>
+                        <doc.tabler>Fogs Revealer Save ID=>fogsRevealedSaveId=><b>[Requires <doc.detach>Fog Removal Method</doc.detach> as "PathsTraveledByTargets"]</b> This is an ID that defines the current state of Fogs that should be loaded or saved. You can provide a different ID for each state. If you want to load a different state, just change this ID and load it using the C# API.</doc.tabler>
+                        <doc.tabler>Targets That Can Remove Fog=>targetsThatCanRemoveFog=>This is a list of Transforms in which you can indicate which targets will be able to remove Fogs around each one.</doc.tabler>
+                        <doc.tabler>On Reveal Fog=>onRevealFog=><b>[Requires <doc.detach>Fog Removal Method</doc.detach> as "PathsTraveledByTargets"]</b> This is a event. This event is called whenever a Fog is removed from your Minimap.<br><b>Parameter 1:</b> Returns the global position of the removed Fog.</doc.tabler>
+                        <doc.tabler>On Unreveal Fog=>onUnrevealFog=><b>[Requires <doc.detach>Fog Removal Method</doc.detach> as "PathsTraveledByTargets"]</b> This is a event. This event is called whenever a Fog is unrevealed from your Minimap.<br><b>Parameter 1:</b> Returns the global position of the unrevealed Fog.</doc.tabler>
+                        <doc.tabler>On Start Load State=>onStartLoadState=><b>[Requires <doc.detach>Fog Removal Method</doc.detach> as "PathsTraveledByTargets"]</b> This is a event. This event is called whenever the Minimap Fog STARTS loading a saved Fog State.</doc.tabler>
+                        <doc.tabler>On Done Load State=>onDoneLoadState=><b>[Requires <doc.detach>Fog Removal Method</doc.detach> as "PathsTraveledByTargets"]</b> This is a event. This event is called whenever the Minimap Fog FINISH load a saved Fog State.</doc.tabler>
+                    </doc.table>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Fog: Runtime API -->
+                <doc.topic topicid="27dc">
+                    <doc.topictitle>Minimap Fog: Runtime API</doc.topictitle>
+
+                    See now the complete C# API for Minimap Fog component.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapFog someMinimapFog;
+                                        
+void Start()
+{
+    /*
+     * USABLE ONLY WHEN MODE "PathsTraveledByTargets" OF THE "FOGS REMOVAL METHOD" IS ENABLED.
+    */
+
+    //- RevealThisWorldPosition(globalPosition);
+    //  Reveal what's under the Fog, in a given global position.
+    //  Vector3 globalPosition - The global position that should be revealed.
+    someMinimapFog.RevealThisWorldPosition(new Vector3(100, 0, 20));
+
+    //- UnRevealThisWorldPosition(globalPosition);
+    //  Hide a global position using Fog.
+    //  Vector3 globalPosition - The global position that should be hided.
+    someMinimapFog.UnRevealThisWorldPosition(new Vector3(100, 0, 20));
+
+    //- isThisWorldPositionRevealed(globalPosition);
+    //  Returns true if a given global position is already revealed and there is no Fog on it.
+    //  Vector3 globalPosition - The global position to be verified.
+    bool isRevealed = someMinimapFog.isThisWorldPositionRevealed(new Vector3(100, 0, 20));
+
+    //- SaveStateOfFogOfWar();
+    //  Saves the current state of the Fog so it can be loaded later. This also saves all previously explored locations.
+    //  Saving is done using the ID given in "fogsRevealedSaveId" and can be loaded later if you set the same ID to load.
+    someMinimapFog.SaveStateOfFogOfWar();
+
+    //- LoadStateOfFogOfWarAsync();
+    //  Loads a previously saved Fog State.
+    //  IMPORTANT: This is an asynchronous task. The loading of the save file is done instantly, however, the rendering of
+    //             the loaded Fog is done over a few moments, according to the size of the area already explored. This is to
+    //             avoid bottlenecks while running your game. AVOID using other API methods while this rendering takes place.
+    //             Use "isThisComponentLoadingSomeFogOfWarState()" to find out if loading is currently taking place.
+    //  The loading is done based on the ID given in "fogsRevealedSaveId" which you provided to save.
+    //  You can change the id to "fogsRevealedSaveId" and load different states if you like.
+    bool isSuccessfully = someMinimapFog.LoadStateOfFogOfWarAsync();
+
+    //- isFileOfSaveSateOfFogOfWarExistant();
+    //  Returns true if the Fog State save file for the current id given in "fogsRevealedSaveId" exists.
+    bool isExistant = someMinimapFog.isFileOfSaveSateOfFogOfWarExistant();
+
+    //- DeleteFileOfSaveStateOfFogOfWar();
+    //  Deletes the Fog State save file based on the ID given in "fogsRevealedSaveId".
+    someMinimapFog.DeleteFileOfSaveStateOfFogOfWar();
+
+    //- isThisComponentLoadingSomeFogOfWarState();
+    //  Returns true if the Minimap Fog is currently loading a Fog State.
+    bool isLoading = someMinimapFog.isThisComponentLoadingSomeFogOfWarState();
+}
+                </code></doc.code>
+
+                    <doc.warn>
+                        IMPORTANT: Method <doc.detach>LoadStateOfFogOfWarAsync()</doc.detach> loads a Fog State that was previously saved and is an asynchronous task. It takes several Frames to complete, so it's very important that
+                        you don't use other Minimap Fog C# API methods until the loading is complete. You can consult method <doc.detach>isThisComponentLoadingSomeFogOfWarState()</doc.detach> to see if there are currently any loads being
+                        done.
+                    </doc.warn>
+
+                    See below for an example and best practice when using a C# API method of this component!
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+public MinimapFog someMinimapFog;
+                                        
+void Start()
+{
+    //Let's reveal a location on the map...
+    StartCoroutine(RevealLocalization(new Vector3(100, 0, 20)));
+}
+
+IEnumerator RevealLocalization(Vector3 globalPosition)
+{
+    //Prepare the wait
+    WaitForSeconds wait = new WaitForSeconds(0.10f);
+
+    //If minimap fog is loading something, wait the finish of load
+    while (someMinimapFog.isThisComponentLoadingSomeFogOfWarState() == true)
+        yield return wait;
+
+    //When the load is finished, reveal the position
+    someMinimapFog.RevealThisWorldPosition(globalPosition);
+}
+
+//It is recommended that this technique be used when using any of Minimap Fog's C# API methods.
+                </code></doc.code>
+
+                    If this technique is not used, there may be some problems, for example, if you try to hide a position using Fog while Minimap Fog is still loading a Fog State, the component might end up ignoring the hide request, so
+                    stop to avoid these problems, it is always recommended to use the methods only while no load is being done, so the Fog handling will not conflict with a Fog load or rendering being done by the loading. You can also use
+                    the <doc.detach>onStartLoadState</doc.detach> and <doc.detach>onDoneLoadState</doc.detach> events to know when a load has started or completed, so you have even more security to use the methods!
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Fog: How to use Minimap Fog? -->
+                <doc.topic topicid="27dd">
+                    <doc.topictitle>Minimap Fog: How to use Minimap Fog?</doc.topictitle>
+
+                    To get started, add the Minimap Fog component to a GameObject in your scene. It is recommended that this GameObject is empty and has no children GameObjects.
+                    <br>
+                    <br>
+                    The Minimap Fog works on a Chunks principle, this means that you need to determine which area of your scene will be covered by the Chunks that will contain the Fogs while your game is running. As soon as you add the
+                    Minimap Fogs component to a GameObject, you will see a marker that will represent your first Chunk in your scene. Use the yellow arrows to increase and create new Chunks until your entire scene is covered.
+
+                    <doc.image src="DocumentationFiles/images/45"></doc.image>
+
+                    Now, you need to choose the method in which the Fog will be removed. You can do this by changing the <doc.detach>Fog Removal Method</doc.detach>.
+
+                    <doc.image src="DocumentationFiles/images/46"></doc.image>
+
+                    Finally, now you just need to show Minimap Fog which Transforms (targets) will be able to remove the Fogs around each one.
+
+                    <doc.image src="DocumentationFiles/images/47"></doc.image>
+
+                    Now, just start your game and test it!
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Minimap Fog: How to Save/Load the Current State of Fog -->
+                <doc.topic topicid="27de">
+                    <doc.topictitle>Minimap Fog: How to Save/Load the Current State of Fog</doc.topictitle>
+
+                    The Minimap Fog component supports loading and saving of Fog States. When saving the current Fog State of your scene, Minimap Fog saves all already explored and unexplored locations to a file. This file is automatically
+                    managed internally by Minimap Fog. You can load this file (fog state) later whenever you want.
+                    <br>
+                    <br>
+                    First you need to understand how Minimap Fog references each Fog State (or file) to know which one to load, or which one to save.
+
+                    <doc.image src="DocumentationFiles/images/48"></doc.image>
+
+                    In the <doc.detach>Fogs Revealed Save ID</doc.detach> variable you can define an ID that will refer to the Fog State you want Minimap Fog to save or load. For example. When you use Minimap Fog's C# API to save the
+                    current Fog State, Minimap Fog will use the ID that is currently entered in <doc.detach>Fogs Revealed Save ID</doc.detach> to save the Fog State. Later, when you want to load a Fog State, Minimap Fog will use the ID
+                    entered in <doc.detach>Fogs Revealed Save ID</doc.detach> to look for the Fog State that uses that ID.
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Incredible Tips That Can Be Useful: Changing the global size multiplier for all items on the Minimap -->
+                <doc.topic topicid="29">
+                    <doc.topictitle>Incredible Tips That Can Be Useful: Changing the global size multiplier for all items on the Minimap</doc.topictitle>
+
+                    Easy Minimap Sytem has a Global size multiplier that applies to various items on the Minimap. The default value of this multiplier is 1, but if you change it to 2 for example, the items on the Mini Map will have their
+                    size doubled, and so on.
+                    <br>
+                    <br>
+                    To change this global multiplier, just use the static C# API below.
+
+                    <doc.code language="csharp"><code>
+using MTAssets.EasyMinimapSystem;
+
+void Start()
+{
+    //Change global size multiplier to double the size of items on the Minimap.
+    MinimapDataGlobal.SetMinimapItemsSizeGlobalMultiplier(2.0f);
+
+    //Get current size multiplier
+    float currentMultiplier = MinimapDataGlobal.GetMinimapItemsSizeGlobalMultiplier();
+}
+                    </code></doc.code>
+
+                    This multiplier applies to the following components: <b>Minimap Item, Minimap Line, Minimap Routes and Minimap Text</b>.
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Incredible Tips That Can Be Useful: How to customize a Minimap Renderer or Minimap Compass? -->
+                <doc.topic topicid="30">
+                    <doc.topictitle>Incredible Tips That Can Be Useful: How to customize a Minimap Renderer or Minimap Compass?</doc.topictitle>
+
+                    The Easy Minimap System offers many customization possibilities for your Minimap Renderer and Minimap Compass. You just need to let your creativity flow, but here are some tips so that you can further customize your
+                    Minimap Compass and Minimap Renderer!
+
+                    <doc.topicsubtitle>About Minimap Renderer</doc.topicsubtitle>
+
+                    The Easy Minimap System works as a standard component of Unity's Canvas.
+
+                    <doc.image src="DocumentationFiles/images/32"></doc.image>
+
+                    To customize your Minimap Renderer, it is not recommended that you Edit any of its child GameObjects and it is also not recommended that you add or remove GameObjects children from Minimap Renderer. To customize your
+                    Minimap Renderer (in relation to color, model sprites, background sprites, etc.) it is recommended that you use its variables, such as: Base Shape Sprite, Border Color, Border Width Size, Background Sprite, etc...
+                    <br>
+                    You are already able to edit and customize your Minimap in several ways just by modifying these variables. Remember that in the "Sprites" and "Formats" folders that come with this package, you have several base Sprites
+                    that can be used to customize your Minimap Renderer.
+                    <br>
+                    <br>
+                    However, you can still add GameObjects above or below your Minimap Renderer GameObject, as shown in the image below. For example, if you need to add a circle behind your Minimap and fill it according to the player's life
+                    bar, you can do it without any problems. See the image below as an example.
+
+                    <doc.image src="DocumentationFiles/images/33">
+                        In this example, I added an image (the green circle) behind the Minimap and it is filled according to whether the player's life is full or not, and it has already given a very cool look to our Minimap.
+                        Note that nothing has been added or removed from the Minimap Renderer's child GameObjects.
+                    </doc.image>
+
+                    <doc.topicsubtitle>About Minimap Compass</doc.topicsubtitle>
+
+                    To customize your Minimap Compass, you can use the same tricks I mentioned above...
+                    <doc.list>
+                        <doc.listr>Do not add or remove GameObjects children from Minimap Compass.</doc.listr>
+                        <doc.listr>Modify only the Minimap Compass customization variables, such as: Compass Texture, Compass Texture Color, Degrees Position, etc. You can already make several customizations by modifying only these variables.</doc.listr>
+                        <doc.listr>If you want to add things above or below your Minimap Compass, create GameObjects that are behind or above your Minimap Compass as in the example mentioned previously.</doc.listr>
+                    </doc.list>
+
+                    <doc.image src="DocumentationFiles/images/34"></doc.image>
+                    <doc.image src="DocumentationFiles/images/35">
+                        In the example above, I used the Minimap Compass "Degrees Position" variable to display the Degrees of rotation below the Compass, and then created a GameObject behind the Minimap Compass, and then added the triangle
+                        sprite to mark the center of the Compass. Note that the triangle is not a child of Minimap Compass, but is behind Minimap Compass.
+                    </doc.image>
+
+                    <b>There's one more thing!</b>
+                    <br>
+                    The Easy Minimap System also provides the PSD file of the Minimap Compass base texture. You can edit this file using a compatible Image Editor like Photoshop, and then create your own background texture for Minimap
+                    Compass, in an easy and customizable way. Just enjoy the template file that comes included with the Easy Minimap System!
+                    <doc.image src="DocumentationFiles/images/36"></doc.image>
+
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Incredible Tips That Can Be Useful: How to Edit Your PNG Texture Generated by Minimap Scanner -->
+                <doc.topic topicid="31">
+                    <doc.topictitle>Incredible Tips That Can Be Useful: How to Edit Your PNG Texture Generated by Minimap Scanner</doc.topictitle>
+
+                    When you scan your scene, using the Minimap Scanner, the component will save the PNG image generated from the scan, in the "Assets/MT Assets/_AssetsData/Scans" path. Knowing this, you can edit the generated PNG
+                    images, in an external Image Editor, or even use them as a basis to create stylized images maps.
+
+                    <doc.image src="DocumentationFiles/images/37"></doc.image>
+
+                    After finishing editing in an external Image Editor, just save the image and import it into your project files. After that, just drag your new edited PNG image into the <doc.detach>Texture Result Of Scan</doc.detach>
+                    variable of your Minimap Scanner component.
+
+                    <doc.image src="DocumentationFiles/images/38"></doc.image>
+
+                    <doc.warn>
+                        If you edit the PNG image generated from the Minimap Scanner, you must maintain the original resolution of the generated PNG image. Do not resize the image to avoid possible problems with rendering and positioning
+                        your PNG image on the map. The image must have the same resolution selected in <doc.detach>scanResolution</doc.detach> on the Minimap Scanner.
+                    </doc.warn>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Demo Scene -->
+                <doc.topic topicid="32">
+                    <doc.topictitle>Demo Scene</doc.topictitle>
+
+                    The Easy Minimap System has some demonstration scenes, in which you can see up close, examples that show how the Easy Minimap System works, for example, use in Runtime, Use of the GPS system, use of the other components
+                    and etc. The demo scenes start with the prefix "DemoScene".
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- #region Contact and Support -->
+                <doc.topic topicid="33">
+                    <doc.topictitle>Contact and Support</doc.topictitle>
+
+                    <center>
+                        <font style="font-size: 18px; color: #00771d;">mtassets@windsoft.xyz</font>
+                    </center>
+                    <br>
+                    <doc.achiev>
+                        Congratulations, you have reached the end of the documentation! Thanks for reading!
+                        <br>
+                        <br>
+                        If you need to contact me for any difficulty, feature suggestion, bug fix, question or support, just contact me through my email above!
+                    </doc.achiev>
+                </doc.topic>
+                <!-- #endregion -->
+
+                <!-- --------------------------------------------------------------------------- END OF DOCUMENTATION CONTENT --------------------------------------------------------------------------- -->
+            </div>
+        </div>
+
+        <div class="endOfBodyContentPoint" id="contentEndPoint"></div>
+        <!-- #region FOOTER -->
+        <div class="footer">
+            <center>
+                <small>
+                    <b>Developed with ❤ by Marcos Tomaz (MT Assets)</b>
+                    <br>
+                    <div class="processingTimeResult">
+                        Page processed in <div id="processingTime">0</div> ms
+                    </div>
+                    <br>
+                    <a href="https://assetstore.unity.com/publishers/40306" target="_blank">See More Assets From MT Assets</a>
+                    •
+                    <a href="https://windsoft.xyz/mtassets" target="_blank">MT Assets Website</a>
+                    •
+                    <a href="https://www.youtube.com/channel/UCqAgiYBwAWajjFUqyJ6_xyw" target="_blank">MT Assets On YouTube</a>
+
+
+                    <div style="display: inline; margin-left: 8px; margin-right: 8px;">|</div>
+                    <a href="https://github.com/marcos4503/documentation-template" target="_blank">
+                        <div style="display: inline;"><img src="DocumentationFiles/footer/github" style="width: 14px; height: 14px; border-radius: 14px; transform: translateY(2px);"></div> See This Documentation Template On GitHub!
+                    </a>
+                </small>
+            </center>
+        </div>
+        <div class="footerSpacement"></div>
+        <div class="gotoTopButton" id="gotoTopButtonItem" onclick="GoToToButton();"><img src="DocumentationFiles/tools/up.webp" title="Click here to go to top of page." /></div>
+        <!-- #endregion -->
+    </body>
+
+</html>

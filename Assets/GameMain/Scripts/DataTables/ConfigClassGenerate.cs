@@ -5,6 +5,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 public class ConfigClassGenerate {
     private const string retract1 = "\t";
     private const string retract2 = "\t\t";
@@ -259,3 +261,5 @@ public class ConfigClassGenerate {
         ProjectWindowUtil.ShowCreatedAsset(o);
     }
 }
+
+#endif
