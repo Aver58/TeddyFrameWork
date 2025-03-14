@@ -1,30 +1,30 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class TetrominoGameManager : MonoBehaviour {
     private int rows = 20;
     private int columns = 10;
     private float dropInterval = 1.0f;
     private float dropTimer = 0.0f;
+    private const int cellSize = 90;
+    private const int cellSpacing = 5;
     public Transform TetrominoParnet;
     public Transform GridLayoutBG;
-    private Tetromino currentTetromino;
+    private TetrominoView currentTetrominoView;
     private Vector2Int spawnPosition = new Vector2Int(5, 20);
     private HashSet<Vector2Int> occupiedCells = new HashSet<Vector2Int>();
-    private List<Tetromino> activeTetrominos = new List<Tetromino>();
-
-    private Dictionary<int, TextMeshProUGUI> textMap = new Dictionary<int, TextMeshProUGUI>();
+    private List<TetrominoView> activeTetrominos = new List<TetrominoView>();
+    public Dictionary<Vector2Int, GameObject> gridCells = new Dictionary<Vector2Int, GameObject>();
+    private Dictionary<int, Image> gridMap = new Dictionary<int, Image>();
 
     void Start() {
-#if UNITY_EDITOR
-        InitBG();
-#endif
+        InitGrid();
         StartGame();
     }
 
-    private void InitBG() {
+    private void InitGrid() {
         ResourceManager.Instance.LoadResourceAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/GirdBg.prefab", prefab => {
             if (prefab != null) {
                 for (int row = 0; row < rows; row++) {
@@ -32,8 +32,7 @@ public class TetrominoGameManager : MonoBehaviour {
                         var cell = Instantiate(prefab, GridLayoutBG);
                         var textComponent = cell.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                         textComponent.text = $"{column},{row}";
-
-                        textMap.Add(row * columns + column, textComponent);
+                        gridMap.Add(row * columns + column, cell.GetComponent<Image>());
                     }
                 }
             }
@@ -75,7 +74,7 @@ public class TetrominoGameManager : MonoBehaviour {
             ResourceManager.Instance.LoadResourceAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/Tetromino.prefab", prefab => {
                 if (prefab != null) {
                     var tetrominoGo = Instantiate(prefab, TetrominoParnet);
-                    var tetromino = tetrominoGo.GetComponent<Tetromino>();
+                    var tetromino = tetrominoGo.GetComponent<TetrominoView>();
                     var model = new TetrominoModel(config.shape, config.color, startPosition);
                     tetromino.Initialize(model);
                     activeTetrominos.Add(tetromino);
@@ -83,7 +82,7 @@ public class TetrominoGameManager : MonoBehaviour {
                     if (IsPositionOccupied(model.grid)) {
                         GameOver();
                     } else {
-                        currentTetromino = tetromino;
+                        currentTetrominoView = tetromino;
                     }
                 }
             });
@@ -91,49 +90,56 @@ public class TetrominoGameManager : MonoBehaviour {
     }
 
     private void OnDownCurrentTetromino() {
-        if (currentTetromino != null) {
-            Vector2Int newPosition = currentTetromino.model.grid;
+        if (currentTetrominoView != null) {
+            Vector2Int newPosition = currentTetrominoView.model.grid;
             while (true) {
                 Vector2Int testPosition = newPosition + new Vector2Int(0, -1);
-                if (IsValidPosition(testPosition, currentTetromino.model.cells)) {
+                if (IsValidPosition(testPosition, currentTetrominoView.model.cells)) {
                     newPosition = testPosition;
                 } else {
                     break;
                 }
             }
-            MoveTetromino(currentTetromino, newPosition - currentTetromino.model.grid);
-            AddOccupyCells(currentTetromino);
+            MoveTetromino(currentTetrominoView, newPosition - currentTetrominoView.model.grid);
+            AddOccupyCells(currentTetrominoView);
             ClearCompleteLines();
             SpawnTetromino();
         }
     }
 
     private void DropCurrentTetromino() {
-        if (currentTetromino != null) {
-            Vector2Int newPosition = currentTetromino.model.grid + new Vector2Int(0, -1);
-            if (IsValidPosition(newPosition, currentTetromino.model.cells)) {
-                MoveTetromino(currentTetromino, new Vector2Int(0, -1));
+        if (currentTetrominoView != null) {
+            Vector2Int newPosition = currentTetrominoView.model.grid + new Vector2Int(0, -1);
+            if (IsValidPosition(newPosition, currentTetrominoView.model.cells)) {
+                MoveTetromino(currentTetrominoView, new Vector2Int(0, -1));
             } else {
-                AddOccupyCells(currentTetromino);
+                AddOccupyCells(currentTetrominoView);
                 ClearCompleteLines();
                 SpawnTetromino();
             }
         }
     }
 
-    public void MoveTetromino(Tetromino tetromino, Vector2Int direction) {
-        tetromino.Move(direction);
+    public void MoveTetromino(TetrominoView tetrominoView, Vector2Int direction) {
+        tetrominoView.Move(direction);
     }
 
-    private void AddOccupyCells(Tetromino tetromino) {
-        foreach (Vector2Int cell in tetromino.model.cells) {
-            var grid = tetromino.model.grid + cell;
-            occupiedCells.Add(grid);
+    private void AddOccupyCells(TetrominoView tetrominoView) {
+        var cells = currentTetrominoView.GetCells();
+        for (int i = 0; i < cells.Count; i++) {
+            var cell = cells[i];
+            var gridPos = currentTetrominoView.model.grid + cell;
+            occupiedCells.Add(gridPos);
 
-            var column = grid.x;
-            var row = grid.y;
-            textMap[row * columns + column].color = Color.red;
+            var cellGo = currentTetrominoView.GetCellGameObject(i);
+            cellGo.transform.SetParent(TetrominoParnet);
+            cellGo.GetComponent<RectTransform>().anchoredPosition = GetCellPosition(gridPos);
+            cellGo.name = gridPos.ToString();
+            // gridCells[gridPos] = cellGo;
         }
+
+        Destroy(currentTetrominoView.gameObject);
+        currentTetrominoView = null;
     }
 
     private bool IsValidPosition(Vector2Int position, List<Vector2Int> cells) {
@@ -154,7 +160,7 @@ public class TetrominoGameManager : MonoBehaviour {
     }
 
     private void HandleInput() {
-        if (currentTetromino == null) return;
+        if (currentTetrominoView == null) return;
 
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             TryMoveCurrentTetromino(new Vector2Int(-1, 0));
@@ -171,9 +177,9 @@ public class TetrominoGameManager : MonoBehaviour {
     }
 
     private void TryMoveCurrentTetromino(Vector2Int direction) {
-        Vector2Int newPosition = currentTetromino.model.grid + direction;
-        if (IsValidPosition(newPosition, currentTetromino.model.cells)) {
-            MoveTetromino(currentTetromino, direction);
+        Vector2Int newPosition = currentTetrominoView.model.grid + direction;
+        if (IsValidPosition(newPosition, currentTetrominoView.model.cells)) {
+            MoveTetromino(currentTetrominoView, direction);
         }
     }
 
@@ -186,11 +192,11 @@ public class TetrominoGameManager : MonoBehaviour {
     }
 
     private void RotateCurrentTetromino() {
-        currentTetromino.Rotate();
-        if (!IsValidPosition(currentTetromino.model.grid, currentTetromino.model.cells)) {
-            currentTetromino.Rotate(); // Undo rotation
-            currentTetromino.Rotate();
-            currentTetromino.Rotate();
+        currentTetrominoView.Rotate();
+        if (!IsValidPosition(currentTetrominoView.model.grid, currentTetrominoView.model.cells)) {
+            currentTetrominoView.Rotate(); // Undo rotation
+            currentTetrominoView.Rotate();
+            currentTetrominoView.Rotate();
         }
     }
 
@@ -211,26 +217,36 @@ public class TetrominoGameManager : MonoBehaviour {
 
         foreach (int row in completeRows) {
             for (int column = 0; column < columns; column++) {
-                occupiedCells.Remove(new Vector2Int(column, row));
-                textMap[row * columns + column].color = Color.white;
+                var gridPos = new Vector2Int(column, row);
+                occupiedCells.Remove(gridPos);
+                // gridCells.Remove(gridPos);
             }
 
             var newOccupiedCells = new List<Vector2Int>();
+            // 所有超过完成行的单元格向下移动一行
             foreach (Vector2Int cell in occupiedCells) {
                 if (cell.y > row) {
-                    // 所有超过完成行的单元格向下移动一行
-                    newOccupiedCells.Add(new Vector2Int(cell.x, cell.y - 1));
-                    textMap[(cell.y - 1) * columns + cell.x].color = Color.red;
+                    var newCell = new Vector2Int(cell.x, cell.y - 1);
+                    newOccupiedCells.Add(newCell);
+                    // todo 会存在 cell.y - 1 格也有格子，导致覆盖数据，原先格子的数据变成野指针
+                    // var cellGo = gridCells[cell];
+                    // gridCells.Remove(cell);
+                    // gridCells[newCell] = cellGo;
+                    // cellGo.name = newCell.ToString();
+                    // cellGo.GetComponent<RectTransform>().anchoredPosition = GetCellPosition(newCell);
                 } else {
                     newOccupiedCells.Add(cell);
-                    textMap[cell.y * columns + cell.x].color = Color.red;
                 }
             }
             occupiedCells = new HashSet<Vector2Int>(newOccupiedCells);
-
-            foreach (var tetromino in activeTetrominos) {
-                tetromino.RemoveRow(row);
-            }
         }
+    }
+
+    private Vector2 GetCellPosition(Vector2Int grid) {
+        var column = grid.x;
+        var row = grid.y;
+        var posX = column * cellSize + column * cellSpacing;
+        var posY = row * cellSize + row * cellSpacing;
+        return new Vector2(posX, posY);
     }
 }

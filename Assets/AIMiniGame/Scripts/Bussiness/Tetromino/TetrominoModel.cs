@@ -38,22 +38,4 @@ public class TetrominoModel {
             cells[i] = cell;
         }
     }
-
-    public void RemoveRow(int row) {
-        var isRemoved = false;
-        for (int i = cells.Count - 1; i >= 0; i--) {
-            var cell = cells[i];
-            if ((grid + cell).y == row) {
-                cells.RemoveAt(i);
-                isRemoved = true;
-                Debug.LogError($"Cell removed {cell}");
-
-            }
-        }
-
-        // 所有超过完成行的单元格向下移动一行
-        if (isRemoved) {
-            Move(new Vector2Int(0, -1));
-        }
-    }
 }

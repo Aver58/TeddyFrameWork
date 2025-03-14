@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tetromino : MonoBehaviour {
+public class TetrominoView : MonoBehaviour {
     public TetrominoModel model;
     private const int cellSize = 90;
     private const int cellSpacing = 5;
     private RectTransform rectTransform;
-    private Dictionary<Vector2Int, GameObject> cellGoMap = new Dictionary<Vector2Int, GameObject>();
+    private Dictionary<int, GameObject> cellGoMap = new Dictionary<int, GameObject>();
 
     public void Initialize(TetrominoModel model) {
         this.model = model;
@@ -17,21 +17,22 @@ public class Tetromino : MonoBehaviour {
     }
 
     private void DrawShape() {
-        foreach (Vector2Int cell in model.cells) {
+        var cells = GetCells();
+        for (int i = 0; i < cells.Count; i++) {
+            var cell = cells[i];
             var prefab = ResourceManager.Instance.LoadResourceSync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab");
             if (prefab != null) {
                 var cellGo = Instantiate(prefab, transform);
                 var cellRectTransform = cellGo.GetComponent<RectTransform>();
                 UpdateAnchoredPosition(cellRectTransform, cell);
                 cellGo.GetComponent<Image>().color = model.color;
-                cellGo.name = cell.ToString();
-                cellGoMap.Add(cell, cellGo);
+                cellGoMap.Add(i, cellGo);
             }
         }
     }
 
     private void UpdateVisuals() {
-        for (int i = 0; i < model.cells.Count; i++) {
+        for (int i = 0; i < GetCells().Count; i++) {
             Transform cell = transform.GetChild(i);
             UpdateAnchoredPosition(cell.GetComponent<RectTransform>(), model.cells[i]);
         }
@@ -56,18 +57,11 @@ public class Tetromino : MonoBehaviour {
         UpdateVisuals();
     }
 
-    public void RemoveRow(int row) {
-        model.RemoveRow(row);
-        for (int i = 0; i < model.cells.Count; i++) {
-            var cell = model.cells[i];
-            if (cellGoMap.ContainsKey(cell)) {
-                var cellGo = cellGoMap[cell];
-                Destroy(cellGo);
-                cellGoMap.Remove(cell);
-                Debug.LogError($" Destroy Cell {cell} {cellGo}");
-            }
-        }
+    public List<Vector2Int> GetCells() {
+        return model.cells;
+    }
 
-        UpdateVisuals();
+    public GameObject GetCellGameObject(int i) {
+        return cellGoMap[i];
     }
 }

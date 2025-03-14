@@ -26,7 +26,8 @@ public class TetrominoConfig : BaseConfig {
                     }
                     break;
                 case "color":
-                    ColorUtility.TryParseHtmlString(values[i], out color);
+                    var colorStr = values[i].Replace("\r", "");
+                    ColorUtility.TryParseHtmlString(colorStr, out color);
                     break;
             }
         }
