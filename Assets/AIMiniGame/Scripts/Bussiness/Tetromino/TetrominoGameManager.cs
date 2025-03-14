@@ -24,8 +24,8 @@ public class TetrominoGameManager : MonoBehaviour {
         StartGame();
     }
 
-    private void InitGrid() {
-        ResourceManager.Instance.LoadResourceAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/GirdBg.prefab", prefab => {
+    private void InitBG() {
+        ResourceManager.Instance.LoadAssetAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/GirdBg.prefab", prefab => {
             if (prefab != null) {
                 for (int row = 0; row < rows; row++) {
                     for (int column = 0; column < columns; column++) {
@@ -71,7 +71,7 @@ public class TetrominoGameManager : MonoBehaviour {
     public void SpawnTetromino(string id, Vector2Int startPosition) {
         TetrominoConfig config = TetrominoConfig.Get(id);
         if (config != null) {
-            ResourceManager.Instance.LoadResourceAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/Tetromino.prefab", prefab => {
+            ResourceManager.Instance.LoadAssetAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/Tetromino.prefab", prefab => {
                 if (prefab != null) {
                     var tetrominoGo = Instantiate(prefab, TetrominoParnet);
                     var tetromino = tetrominoGo.GetComponent<TetrominoView>();

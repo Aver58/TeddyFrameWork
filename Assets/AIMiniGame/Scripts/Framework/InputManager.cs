@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : Singleton<InputManager> {
+public class InputManager : MonoSingleton<InputManager> {
     private Dictionary<int, Delegate> eventDictionary = new Dictionary<int, Delegate>();
 
     private void Register(int eventId, Delegate listener) {

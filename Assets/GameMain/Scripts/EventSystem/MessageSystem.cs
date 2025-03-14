@@ -1,7 +1,7 @@
 using System;
 
 namespace EventSystem {
-    public class MessageSystem : Singleton<MessageSystem> {
+    public class MessageSystem : MonoSingleton<MessageSystem> {
         private bool isDispose;
         private MsgRegister msgRegister;
 

@@ -17,17 +17,17 @@ public class TetrominoView : MonoBehaviour {
     }
 
     private void DrawShape() {
-        var cells = GetCells();
-        for (int i = 0; i < cells.Count; i++) {
-            var cell = cells[i];
-            var prefab = ResourceManager.Instance.LoadResourceSync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab");
-            if (prefab != null) {
-                var cellGo = Instantiate(prefab, transform);
-                var cellRectTransform = cellGo.GetComponent<RectTransform>();
-                UpdateAnchoredPosition(cellRectTransform, cell);
-                cellGo.GetComponent<Image>().color = model.color;
-                cellGoMap.Add(i, cellGo);
-            }
+        foreach (Vector2Int cell in model.cells) {
+            ResourceManager.Instance.LoadAssetAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab", obj => {
+                if (obj != null) {
+                    var cellGo = Instantiate(obj, transform);
+                    var cellRectTransform = cellGo.GetComponent<RectTransform>();
+                    UpdateAnchoredPosition(cellRectTransform, cell);
+                    cellGo.GetComponent<Image>().color = model.color;
+                    cellGo.name = cell.ToString();
+                    cellGoMap.Add(cell, cellGo);
+                }
+            });
         }
     }
 

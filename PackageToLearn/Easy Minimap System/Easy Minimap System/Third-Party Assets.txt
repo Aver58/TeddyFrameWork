@@ -1,0 +1,38 @@
+
+/////////////////////
+	  MT ASSETS
+	   Credits
+/////////////////////
+
+- Low Poly Tree
+	created by PaulsenDesign
+	used through TurboSquid's "Royalty Free License", just as a demonstration model of the operation of this asset.
+	available in
+	https://www.turbosquid.com/FullPreview/Index.cfm/ID/961487 (Free)
+
+- Low Poly LumberJack
+	created by 3DAssetForge
+	used through TurboSquid's "Royalty Free License", just as a demonstration model of the operation of this asset.
+	available in
+	https://www.turbosquid.com/FullPreview/Index.cfm/ID/525305 (Free)
+
+- Ant
+	created by ZERG_LURKER
+	used through TurboSquid's "Royalty Free License", just as a demonstration model of the operation of this asset.
+	available in
+	https://www.turbosquid.com/3d-models/ant-animation-running-3ds-free/856094 (Free)
+
+	Please note that: All third party assets (that were not created by MT Assets) included here, are used based on
+	the license of the original authors contained in each asset link. You cannot use the third party assets included
+	in this package, if you want to use them in your creation, purchase them from each link (informed above) and
+	make sure you have permission from the author or carefully read the license that is in each link.
+
+	However, any asset in this package, which is not listed here, was created by MT Assets, and since you have purchased
+	this package, you can use them in accordance with the license contained on this package's page on the Asset Store.
+	If you have any questions about licensing or permission to use assets, do not hesitate to contact us through 
+	mtassets@windsoft.xyz
+
+/////////////////////
+  Email for support
+mtassets@windsoft.xyz
+/////////////////////

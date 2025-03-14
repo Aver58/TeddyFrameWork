@@ -11,7 +11,7 @@
 
 using UnityEngine;
 
-public class MobaBussiness : Singleton<MobaBussiness>
+public class MobaBussiness : MonoSingleton<MobaBussiness>
 {
     private HeroActor m_playerActor;
 

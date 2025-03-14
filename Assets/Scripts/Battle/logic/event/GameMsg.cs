@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 
 // 观察者模式
-public class GameMsg : Singleton<GameMsg> {
+public class GameMsg : MonoSingleton<GameMsg> {
     private Dictionary<GameMsgDef, Delegate> delegateMap = new Dictionary<GameMsgDef, Delegate>();
 
     public void RegisterListener(GameMsgDef msgName, Action listener) {

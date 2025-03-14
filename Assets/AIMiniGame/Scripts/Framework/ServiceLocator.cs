@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServiceLocator : Singleton<ServiceLocator> {
+public class ServiceLocator : MonoSingleton<ServiceLocator> {
     private Dictionary<Type, object> services = new Dictionary<Type, object>();
 
     public void RegisterService<T>(T service) {

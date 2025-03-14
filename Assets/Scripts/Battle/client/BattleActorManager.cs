@@ -11,7 +11,7 @@
 
 using System.Collections.Generic;
 
-public class BattleActorManager : Singleton<BattleActorManager>
+public class BattleActorManager : MonoSingleton<BattleActorManager>
 {
     private Dictionary<int,HeroActor> m_ActorMap;
     private List<HeroActor> m_Temps;

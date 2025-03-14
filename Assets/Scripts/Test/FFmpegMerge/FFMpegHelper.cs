@@ -83,7 +83,9 @@ public class FFMpegHelper {
             } else {
                 var commandLine = $"\"{processPath}\" {args}";
                 UnityEngine.Debug.Log(commandLine);
-                ptr = StartExternalProcess.Start(commandLine, null);
+                #if UNITY_EDITOR
+                    ptr = StartExternalProcess.Start(commandLine, null);
+                #endif
                 UnityEngine.Debug.Log($"pid:{ptr}");
             }
         } else {

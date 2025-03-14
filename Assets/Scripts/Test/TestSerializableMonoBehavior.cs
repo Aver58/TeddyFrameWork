@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,8 +34,65 @@ public class TestSerializableMonoBehavior : MonoBehaviour{
         public List<VideoSlice> SliceList;
     }
 
+    [Serializable]
+    public class TurnBasedMode1v1Record {
+        public bool IsWin;
+        public int BlueScore;
+        public int RedScore;
+        public int GradeType;
+        public int ContinueWinTimes;
+        public long PlayerId;
+
+        public override string ToString() {
+            return $"IsWin {IsWin} BlueScore {BlueScore} RedScore {RedScore} GradeType {GradeType} " +
+                   $"ContinueWinTimes {ContinueWinTimes} PlayerId {PlayerId}";
+        }
+    }
+
+    public class MyClass {
+        public List<TurnBasedMode1v1Record> SaveData;
+    }
+
+    public struct MyStruct1 {
+        public bool IsWin;
+    }
 
     private void Start() {
+        var struct1 = new MyStruct1() {
+        };
+        Debug.LogError(struct1.IsWin);
+
+        MyClass c = new MyClass();
+        c.SaveData = new List<TurnBasedMode1v1Record>();
+        c.SaveData.Add(new TurnBasedMode1v1Record() {
+            IsWin = true,
+            BlueScore = 1,
+            RedScore = 2,
+            GradeType = 3,
+            ContinueWinTimes = 4,
+            PlayerId = 5
+        });
+        var newJson = JsonUtility.ToJson(c);
+        var records2 = LitJson.JsonMapper.ToObject<MyClass>(newJson);
+        Debug.LogError($"newJson: {newJson}");
+        Debug.LogError($"newJson: {records2.SaveData[0].BlueScore}");
+
+        var records = new List<TurnBasedMode1v1Record>();
+        records.Add(new TurnBasedMode1v1Record() {
+            IsWin = true,
+            BlueScore = 1,
+            RedScore = 2,
+            GradeType = 3,
+            ContinueWinTimes = 4,
+            PlayerId = 5
+        });
+
+        newJson = LitJson.JsonMapper.ToJson(records);
+        var records3 = LitJson.JsonMapper.ToObject<List<TurnBasedMode1v1Record>>(newJson);
+        Debug.LogError($"newJson: {newJson}");
+        Debug.LogError($"newJson: {records3[0].BlueScore}");
+
+
         var myStruct = new MyStruct {
             // test = Vector3.one,
             wulinInns = new List<PositionInfo>() {

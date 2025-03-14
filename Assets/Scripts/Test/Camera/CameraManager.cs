@@ -35,7 +35,7 @@ namespace TestCamera {
         public bool Active;
     }
 
-    public class CameraManager : Singleton<CameraManager> {
+    public class CameraManager : MonoSingleton<CameraManager> {
         private List<CodeDrivenCameraRequest> codeDrivenCameraRequests = new List<CodeDrivenCameraRequest>(4);
         private List<DesignerCameraRequest> designerCameraRequests = new List<DesignerCameraRequest>(2);
         private List<CameraStack> cameraStacks = new List<CameraStack>(4);

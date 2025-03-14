@@ -1,0 +1,233 @@
+
+
+/////////////////////
+	  MT ASSETS
+	  CHANGELOG
+/////////////////////
+
+v2.4.1
+	- Now the officially supported minimum version is Unity 2019.4 or higher. Support for this version of Unity or
+	  higher will make it possible to add different new features and improvements in the future. This change also aims
+	  to ensure that the tool can always have mature, stable and continuous update support!
+
+v2.4.0
+	- Support for local multiplayer split-screen games (which use two Minimap Renderers) has been improved in the backend
+	  of the Minimap Renderer component.
+	- A demo scene has been added that simulates a split-screen local multiplayer game.
+	- The "Minimap Fog" component has been added! The Easy Minimap System now supports Fogs of War! The "Minimap Fog"
+	  component will display a fog on your Minimap. It will be possible to reveal what's under the fog only where the
+	  player is, but it will also be possible to reveal all the places the player has walked in! You can also reveal
+	  locations near other Transforms that are not a player.
+	- A demo scene has been added, which shows how Fog of War works.
+	- Documentation has been updated to contain the new changes.
+
+v2.3.1
+	- A new C# API (based on events) has been added, so that Minimap Renderers can now receive incoming events from the
+	  player. The Events that Minimap Renderers can recognize are the Click, Over events and Drag events. Using these
+	  events you can add your own logic so that the player can interact with the Minimap of your game, for example,
+	  marking or selecting points on a map and so on. The C# API automatically translates the point where the player
+	  interacted, and returns the position in the world, to which the player interacted. You can use this for Full Screen
+	  Minimap Renderers too.
+	- The TPS/FPS demo scene now also uses the new Minimap Renderers C# API to show you an example of using this cool
+	  new API!
+	- Fixed a small bug with the highlight of Minimap Items, on the border/highlight of a Minimap Renderer/Compass.
+	- Now the Minimap Renderer/Compass components can warn you if you find any incorrect settings on your Canvas.
+	- Now scans made with Minimap Scanners will be rendered so that they are as far back as possible. This can prevent
+	  some rendering unforeseen events, which are very rare, but which were possible.
+	- Improved rendering time for Minimap Items that were created at Runtime. This is not an optimization, but they should
+	  now appear instantly whenever created at Runtime, instead of appearing after a few milliseconds.
+	- Now Minimap Line does not work with just another GameObject to connect, forming a line. Now you can provide a Vector3
+	  array of positions to customize your Minimap Line as much as possible.
+	- It is now possible to deactivate or temporarily activate existing Waypoints. Deactivated Waypoints will NEVER be
+	  considered as possible paths in Route calculations, that is, you can deactivate Waypoints of streets that have
+	  obstructions (such as broken bridges, traffic blocks, etc). If the player is on a street that has a block, for
+	  example, Minimap Routes will search for another route to the destination, a route that does not pass on the street
+	  that has that block.
+	- The GPS demonstration scene has been updated to contain some obstructions, to demonstrate the deactivation or
+	  activation of Waypoints.
+	- The Minimap Routes component has gained new methods for its C# API. These methods are used to manipulate Waypoints
+	  at runtime. Consult the documentation for more details.
+	- Now Minimap Routes will try to trace a route even if there is no Waypoint near the player/destination and at a height
+	  similar to the player/destination.
+	- Now Minimap Routes will display a Gizmo that will represent the variable "startingHeightTolerance" in Destination
+	  and Starting Transforms.
+	- The documentation has been updated to include new tips, instructions and new changes.
+
+v2.2.0
+	- The feature of realtime capturing the scene in 3D (on the Minimap Camera) has been brought up again. Now with some
+	  additional parameters. This can be useful for games in which the scenario constantly changes, making the use of a
+	  Minimap Scanner impracticable.
+	- The documentation has been updated to include the new change.
+
+v2.1.1
+	- The components have been rearranged in the Inspector's "Add Component" menu.
+
+v2.1.0
+	** WARNING **
+	  This is a major update. Many C# API methods and variables of the Easy Minimap System components have been renamed,
+	  changed or removed. The rendering scale method and how some components work have also changed slightly.
+	  If you are already an Easy Minimap System user, it is highly recommended that you make a backup of your project,
+	  before proceeding with this update.
+	  * Additional note: If you are already an Easy Minimap System user and want to upgrade to this version, you may need
+	  to delete the Minimap Renderer components in your scenes (and the GameObjects children of these Minimap Renderers)
+	  and then add the new Minimap Renderers however you like. This is necessary because the new Minimap Renderer code
+	  is more modern and has several new functions, so it is not compatible with the old Minimap Renderer code.
+	*************
+	- 
+	- All components of the Easy Minimap System have been updated to support the workflow where it is possible
+	  to add all components at run time, without any problems. This was possible before, but now it is even easier.
+	- Now the Minimap Camera component no longer needs to be activated when it is added to a GameObject.
+	- The update system for mini-map items has been updated. You should now notice greater fidelity and optimization
+	  as items on the minimap are created, destroyed, activated, deactivated or updated.
+	- The scripts for the entire Easy Minimap System have undergone revisions where several have been rewritten from
+	  scratch, adapted or reorganized.
+	- Some interfaces for some components have undergone minor updates.
+	- Minimap Renderer now has a C# API with checkers and methods to further facilitate the handling of Minimap
+	  Items featured in the "Minimap Renderer" component. The new API allows you to add, remove or verify that a Minimap
+	  Item already exists, with just 1 line of code. You can still manipulate the list of featured Minimap Items easily
+	  through the component's UI.
+	- The option to display the field of view of a Minimap Item has been removed to bring further optimization to the system.
+	- Now the "Minimap Item" components will no longer display an additional Gizmo just above the pivot of their respective
+	  GameObject. This will help to reduce visual pollution, will bring a little optimization to the Editor and the
+	  component itself, when executed in the Editor.
+	- The "Minimap Scanner" component can now be added at run time and scanning can also be performed at run time! You
+	  can scan areas or update the existing scan easily via the component's C# API.
+	- In this update, making the system as a whole even easier to use was a focus.
+	- Now "Minimap Renderer" will no longer create a hierarchy of necessary GameObjects, as soon as you add this component
+	  to your scene, in the Editor.
+	- Minor improvements and optimization of the algorithm for updating the border icons (highlighted) of the Minimap Renderer.
+	- Now, for the minimap items highlighted at the edge of the Minimap Renderer to be displayed correctly, it is no longer
+	  necessary for the associated Minimap Camera to have to be rotated at zero on the X axis.
+	- Fixed a bug that caused Minimap Items removed from Minimap Items For Highlight in a Minimap Renderer component,
+	  not to be disabled from the border of the Minimap.
+	- Minimap Camera now has more capture resolutions, increasing the rendering quality of maps that occupy the entire screen.
+	- Fixed a bug that caused some of the high resolution scans made on the "Minimap Scanner" components to not be correctly
+	  saved and loaded by the components, when scanned through the Editor.
+	- New area sizes, power of two (2, 4, 16...) have been added to the Minimap Scanner. This should make it easier for games
+	  that use chunks or similar systems to be able to frequently update certain Minimap Scanners at run time, without major
+	  performance losses.
+	- The "Minimap Item" component now allows you to change the size of an item separately in height or width. This allows
+	  a wider range of images/sprites to be used to be rendered on the minimap.
+	- The rendering scale of the Sprites in the Minimap Item has been changed to Units (Meters), for better adjustments and
+	  scaling of your sprites in the Minimap. You may need to re-adjust all rendering scales for your Minimap Items in
+	  your project.
+	- Now the minimap components will ALWAYS follow the GameObjects they are on.
+	- You can now provide another GameObject for a particular minimap item to follow its rotation, instead of just following
+	  the GameObject rotation in which the minimap item is.
+	- All components of the Easy Minimap System have been adjusted so that they are completely usable and can be added at runtime.
+	- The "Minimap Line" component was added to the system. You can now render lines on the minimap in the positions you prefer!
+	- The welcome message has been changed and the top menu has also undergone some changes.
+	- A new component has been added to the Easy Minimap System. The new component is "Minimap Routes" and this component is
+	  capable of displaying routes in real time (such as GPS) and you can display routes from point A to point B from anywhere
+	  on your map. You just need to show Minimap Routes where the streets and paths of your world are through Waypoints and
+	  Minimap Routes offers an easy, self-explanatory and functional interface for you to create all Waypoints. You can even
+	  create routes that start from your player and go anywhere on the map.
+	- Now, each component of the Easy Minimap System has a public method so that you can get all the same components in the scene.
+	  For example, you can access a Minimap Item component and call the "GetListOfAllMinimapItemsInThisScene()" method to
+	  obtain a complete list containing all Minimap Items in the scene in question.
+	- Now the Easy Minimap System has a global and static multiplier to which you can change the value and change the size of all
+	  items being rendered on the Minimap in an easy and fast way so that you have even more control. This can be very useful
+	  in scenarios where you want to make a global zoom or minimap system in your application. (This global multiplier only applies
+	  to components that have a size variable such as Minimap Item, Minimap Line, Minimap Routes and etc...)
+	- Minimap Items that are highlighted in a Minimap Renderer component can now rotate in a square format, not just a circular
+	  shape as before. This goes for the north icon as well.
+	- It is now possible to disable the rendering of the content of a Minimap Renderer.
+	- You can now provide a Sprite that will serve as a Foreground for your Minimap Renderer.
+	- A new component called "Minimap Compass" has been added. This component renders a horizontal compass system as in some
+	  RPG/FPS games.
+	- More optimizations were made in codes that run in several frames, in each component of the system.
+	- The system documentation has been updated to support all new changes and functionality.
+	- It is now possible to also customize the size of Minimap Items when they are displayed prominently in a Minimap Renderer
+	  or Minimap Compass.
+	- A method has been added to make it possible to check whether a particular Minimap Item, Minimap Line etc, is currently
+	  visible to a Minimap Camera or not.
+	- Now the Minimap Items highlighted also followed the rotation of the Minimap Items displayed inside the minimap (flipX
+	  or flipY).
+	- Now, Minimap Renderer allows you to disable Minimap content, change the Minimap Background or Foreground image, in addition
+	  to other customizations so that you can further style your Minimap! For example, when defining a Background sprite for your
+	  Minimap, you avoid that when the Player reaches the limits of your map, he sees the transparent part of the Minimap!
+	- Now the icons highlighted in a Minimap Renderer can rotate in different formats, such as square, circle, rectangle and even
+	  ellipse!
+	- Minimap Renderer will now display a warning if the format of your Minimap Renderer is not compatible with the Capture format
+	  of your Minimap Camera, to help avoid distortions in the display of the Minimap.
+	- The documentation has been completely redone and updated as well. Now the new documentation is more modern
+	  and more beautiful, it can be found in the folder "_Documentation/Documentation.html" and you can open it
+	  directly from within your Unity Editor. If your project still has the old "Documentation.zip" file, you can
+	  delete it without any problems.
+	- The Minimap Item now displays a Gizmo that shows the area it will occupy (in the world) when displayed on the Minimap.
+	- Now, the gizmo that displays the field of view of the "Minimap Camera" component rotates along with the GameObject to which
+	  it is following the rotation.
+	- The "Minimap Scanner" component now allows you to select a scanning height. This makes it possible for you to do cave scans
+	  below zero coordinate or even structures that are in higher positions.
+	- The "Minimap Scanner" component now allows you to provide your own scanning texture more easily.
+	- The "Minimap Scanner" component now renders (only in the Editor) the area that it will capture during scanning, in addition
+	  to a scan height display.
+	- Some fields that were used only for internal codes, but which were not used for external scripts, were hidden
+	  to avoid confusion.
+
+v1.3.4
+	- Fixed a bug that caused some scripts of some Easy Minimap System components to not be compiled in 2020.1
+	  versions of Unity, or newer.
+
+v1.3.3
+	- Correction of small bugs.
+	- There's more to come, soon!
+
+v1.3.2
+	- A bug has been fixed that caused the automatic deactivation of some scripts' Gizmos to stop working.
+	- Fixed a bug where changing some UI components parameters did not work on some versions of Unity
+	  2019.3.x.
+
+v1.3.1
+	- The Minimap Camera component now works only after the camera is active. This will avoid rendering
+	  problems when instantiating this component, at run time.
+	- Fixed an issue that generated log errors on the console, if you left a Minimap Camera not yet
+	  activated, in a Minimap Renderer with items registered for highlights.
+	- Now, if a minimap item is destroyed, you will no longer see any error messages and the icon will
+	  no longer be rendered on your minimap either.
+	- Now even if your minimap item is a child of another GameObject and you disable the parent
+	  GameObject, the item will also disappear from the minimap.
+	- Fixed a bug that caused textures resulting from scanning to have a border for repetition.
+	- Now you can create the comp components Minimap Camera, Minimap Text and etc., using the right mouse button!
+	- Now disabling a GameObject that contains a Minimap Item highlighted in the Minimap Renderer, or disabling
+	  its parent GameObject, will also cause the item to disappear from the Minimap.
+	- To avoid problems, Minimap Renderer will no longer accept a Minimap Camera that has not yet enabled.
+	- It is no longer necessary to save to view changes to the scene after creating a Minimap Renderer.
+
+v1.2.2
+	- The documentation has been updated to ensure greater clarity, volume of information, tips and minor corrections!
+
+v1.2.1
+	- Following the rhythm of Unity Engine versions and to guarantee the good permanent support of this asset,
+	  now the minimum recommended version is 2018.1, however, you can still use this asset in the 2017.4 LTS
+	  version if you prefer. This will allow this asset to always have the latest features and better and
+	  more effective support!
+
+v1.2.0
+	- All resources, persistent asset data and other files are now saved in "MT Assets/_AssetsData".
+	  This makes it easy to manage all files generated by MT assets and if you need to remove any asset,
+	  just delete the asset folder. So, even if you want to remove some MT assets from your project, or
+	  update it, you will not lose any files or information that you would like to keep!
+	- Small improvements have been made to the component interface.
+
+v1.1.1
+	- Fixed a bug that caused the compilation or loading time of the scene execution to increase considerably
+	  in the editor.
+
+v1.1.0
+	- Fixed a bug when importing this asset for the first time, where a file error message was displayed.
+	  It was more common with Windows 10 users.
+	- Minor corrections in the demo scene.
+	- Lists have also been enhanced in the inspector.
+	- There was a slight change in the asset API. Now, to access the API methods of this asset,
+	  use "using MTAssets.EasyMinimapSystem".
+
+v1.0.0
+	- The Easy Minimap System has just been released! I will always be working to support and add new features!
+	  Do you have any suggestions, Bug reports or any problems with using this asset? Contact by email!
+	  (mtassets@windsoft.xyz)
+
+/////////////////////
+  Email for support
+mtassets@windsoft.xyz
+/////////////////////
