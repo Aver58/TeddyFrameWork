@@ -1,9 +1,9 @@
 using AIMiniGame.Scripts.Framework.Resource;
-public class ResourceManager : MonoSingleton<ResourceManager> {
+public class ResourceManager : Singleton<ResourceManager> {
     private IResourceLoader m_loader;
     private ResourceCache m_cache = new ResourceCache();
 
-    private void Awake() {
+    public ResourceManager() {
         switch (ResourceConfig.Instance.loadMode) {
             case ResourceConfig.LoadMode.Addressables:
                 m_loader = new AddressableLoader();
