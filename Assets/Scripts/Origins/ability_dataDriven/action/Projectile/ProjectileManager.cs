@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Origins;
 
 namespace Battle.logic.ability_dataDriven {
-    public class ProjectileManager : Singleton<ProjectileManager>, ILifeCycle {
+    public class ProjectileManager : MonoSingleton<ProjectileManager>, ILifeCycle {
         public int AutoIndex = 0;
 
         private List<ProjectileEntity> projectiles;

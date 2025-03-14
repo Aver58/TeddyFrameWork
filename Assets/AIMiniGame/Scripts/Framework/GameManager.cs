@@ -7,7 +7,7 @@ public enum GameState {
     Ended
 }
 
-public class GameManager : Singleton<GameManager> {
+public class GameManager : MonoSingleton<GameManager> {
     private GameState currentState;
 
     public GameState CurrentState {

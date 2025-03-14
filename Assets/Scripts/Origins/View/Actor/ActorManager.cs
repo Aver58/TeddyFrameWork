@@ -3,7 +3,7 @@ using libx;
 using UnityEngine;
 
 namespace Origins {
-    public class ActorManager : Singleton<ActorManager>, ILifeCycle {
+    public class ActorManager : MonoSingleton<ActorManager>, ILifeCycle {
         public HeroActor HeroActor;
         private readonly List<EnemyActor> entities;
         private Dictionary<int, EnemyActor> enemyActorMap;

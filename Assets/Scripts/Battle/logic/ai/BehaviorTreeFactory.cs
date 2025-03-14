@@ -3,7 +3,7 @@
 using TsiU;
 using Aver3;
 
-public class BehaviorTreeFactory : Singleton<BehaviorTreeFactory>
+public class BehaviorTreeFactory : MonoSingleton<BehaviorTreeFactory>
 {
 	private static TBTActionPrioritizedSelector m_DecisionTree;
 	private static TBTActionPrioritizedSelector m_BehaviorTree;

@@ -1,61 +1,41 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
+using AIMiniGame.Scripts.Framework.Resource;
+public class ResourceManager : MonoSingleton<ResourceManager> {
+    private IResourceLoader m_loader;
+    private ResourceCache m_cache = new ResourceCache();
 
-public class ResourceManager : Singleton<ResourceManager> {
-    private Dictionary<string, AsyncOperationHandle> loadedAssets = new Dictionary<string, AsyncOperationHandle>();
+    private void Awake() {
+        switch (ResourceConfig.Instance.loadMode) {
+            case ResourceConfig.LoadMode.Addressables:
+                m_loader = new AddressableLoader();
+                break;
+            case ResourceConfig.LoadMode.AssetBundle:
+                m_loader = new AssetBundleLoader();
+                break;
+        }
 
-    public void LoadResourceAsync<T>(string address, Action<T> onSuccess, Action<string> onFailure = null) where T : UnityEngine.Object {
-        if (loadedAssets.TryGetValue(address, out var asset)) {
-            onSuccess?.Invoke(asset.Result as T);
+        m_loader.Initialize();
+    }
+
+    public void LoadAssetAsync<T>(string key, System.Action<T> onComplete) where T : UnityEngine.Object {
+        var cachedAsset = m_cache.Get<T>(key);
+        if (cachedAsset != null) {
+            onComplete?.Invoke(cachedAsset);
             return;
         }
 
-        var handle = Addressables.LoadAssetAsync<T>(address);
-        handle.Completed += (operation) => {
-            if (operation.Status == AsyncOperationStatus.Succeeded) {
-                loadedAssets[address] = operation;
-                onSuccess?.Invoke(operation.Result);
-            } else {
-                onFailure?.Invoke($"Failed to load asset at {address}");
-            }
-        };
+        m_loader.LoadAssetAsync<T>(key, asset => {
+            m_cache.Add(key, asset);
+            onComplete?.Invoke(asset);
+        });
     }
 
-    // 同步加载资源
-    public T LoadResourceSync<T>(string address) where T : UnityEngine.Object {
-        var handle = Addressables.LoadAssetAsync<T>(address);
-        handle.WaitForCompletion();
-        if (handle.Status == AsyncOperationStatus.Succeeded) {
-            loadedAssets[address] = handle;
-            return handle.Result;
-        } else {
-            Debug.LogError($"Failed to load asset: {address}");
-            return null;
-        }
+    public void UnloadAsset(string key) {
+        m_loader.UnloadAsset(key);
+        m_cache.Remove(key);
     }
 
-    public void UnloadResource(string address) {
-        if (loadedAssets.ContainsKey(address)) {
-            Addressables.Release(loadedAssets[address]);
-            loadedAssets.Remove(address);
-        }
-    }
-
-    public void InstantiateResourceAsync(string address, Vector3 position, Quaternion rotation, Action<GameObject> onSuccess, Action<string> onFailure = null) {
-        LoadResourceAsync<GameObject>(address, prefab => {
-            if (prefab != null) {
-                var instance = Instantiate(prefab, position, rotation);
-                onSuccess?.Invoke(instance);
-            } else {
-                onFailure?.Invoke($"Failed to instantiate asset at {address}");
-            }
-        }, onFailure);
-    }
-
-    public void ReleaseInstance(GameObject instance) {
-        Addressables.ReleaseInstance(instance);
+    public void UnloadAll() {
+        m_loader.UnloadAll();
+        m_cache.Clear();
     }
 }

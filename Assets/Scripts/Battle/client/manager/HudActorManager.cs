@@ -12,7 +12,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HudActorManager : Singleton<HudActorManager>
+public class HudActorManager : MonoSingleton<HudActorManager>
 {
     private const string path = "battle/component/HpBar";
     public Transform parentNode; 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Test.ReplaySystem.Command;
 
 namespace Test.ReplaySystem {
-    public class ReplaySystem : Singleton<ReplaySystem> {
+    public class ReplaySystem : MonoSingleton<ReplaySystem> {
         public static int ActorInstanceId;
         private Dictionary<int, IActor> activeActorMap;
         public void Init() {

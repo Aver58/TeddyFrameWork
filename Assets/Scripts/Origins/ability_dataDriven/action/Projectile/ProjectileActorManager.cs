@@ -3,7 +3,7 @@ using Origins;
 using UnityEngine;
 
 namespace Battle.logic.ability_dataDriven {
-    public class ProjectileActorManager : Singleton<ProjectileActorManager>, ILifeCycle {
+    public class ProjectileActorManager : MonoSingleton<ProjectileActorManager>, ILifeCycle {
         private GameObjectPool gameObjectPool;
         private ObjectPool<ProjectileActor> projectileActorPool;
         private Dictionary<int, ProjectileActor> actorMap;

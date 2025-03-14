@@ -11,7 +11,7 @@
 
 using UnityEngine;
 
-public class CameraManager : Singleton<CameraManager>
+public class CameraManager : MonoSingleton<CameraManager>
 {
     public Camera worldCamera { get; private set; }
     public Camera uiCamera { get; private set; }

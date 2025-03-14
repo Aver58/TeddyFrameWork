@@ -11,7 +11,7 @@
 
 using System.Collections.Generic;
 
-public class BattleUnitManager : Singleton<BattleUnitManager>
+public class BattleUnitManager : MonoSingleton<BattleUnitManager>
 {
     //--------------------------------------------------------------------------------------
     public delegate int AIEntityUpdater(BattleUnit entity, float gameTime, float deltaTime);

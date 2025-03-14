@@ -15,7 +15,7 @@ using UnityEngine;
 
 public delegate bool IsInRange(Vector2 sourcePos, Vector2 targetPos, float viewRange);
 
-public class TargetSearcher : Singleton<TargetSearcher>
+public class TargetSearcher : MonoSingleton<TargetSearcher>
 {
     // 寻找离指定施放者最近的单位
     public BattleUnit FindNearestEnemyUnit(BattleUnit caster)

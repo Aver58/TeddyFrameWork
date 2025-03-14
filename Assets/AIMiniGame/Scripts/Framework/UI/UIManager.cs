@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : Singleton<UIManager> {
+public class UIManager : MonoSingleton<UIManager> {
     private GameObject currentPanel;
     private Dictionary<string, GameObject> uiPanels = new Dictionary<string, GameObject>();
     private Dictionary<string, Coroutine> loadingCoroutines = new Dictionary<string, Coroutine>();
@@ -26,12 +26,9 @@ public class UIManager : Singleton<UIManager> {
         bool isLoaded = false;
         GameObject panelPrefab = null;
 
-        ResourceManager.Instance.LoadResourceAsync<GameObject>(panelName, (asset) => {
+        ResourceManager.Instance.LoadAssetAsync<GameObject>(panelName, (asset) => {
             isLoaded = true;
             panelPrefab = asset;
-        }, (error) => {
-            isLoaded = true;
-            Debug.LogError($"Failed to load panel: {panelName}, Error: {error}");
         });
 
         yield return new WaitUntil(() => isLoaded);

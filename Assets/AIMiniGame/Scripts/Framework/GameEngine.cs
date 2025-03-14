@@ -4,21 +4,31 @@ public class GameEngine : MonoBehaviour {
     public GameObject Canvas;
     private void Start() {
         // 加载资源示例
-        ResourceManager.Instance.LoadResourceAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab", obj => {
+        ResourceManager.Instance.LoadAssetAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab", obj => {
             if (obj != null) {
                 var go = Instantiate(obj, Canvas.transform, true);
                 go.transform.localPosition = Vector3.zero;
             }
         });
 
+        // 卸载资源示例
+        // ResourceManager.Instance.UnloadAsset("Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab");
+
         // 注册事件示例
         EventManager.Instance.Register<string>(EventConstantId.OnTestEvent, OnTestEvent);
+        EventManager.Instance.Register<string>(EventConstantId.OnTestEvent, OnTestEvent2);
 
         // 触发事件示例
-        EventManager.Instance.Trigger(EventConstantId.OnTestEvent, "Hello, World!");
+        EventManager.Instance.Dispatch(EventConstantId.OnTestEvent, "Hello, World!");
+        EventManager.Instance.Unregister<string>(EventConstantId.OnTestEvent, OnTestEvent);
+        EventManager.Instance.Dispatch(EventConstantId.OnTestEvent, "Hello, World!2");
 
         // 加载配置示例
         // TestConfig();
+    }
+
+    private void OnTestEvent2(string message) {
+        Debug.Log($"Received event message2: {message}");
     }
 
     void OnDestroy() {

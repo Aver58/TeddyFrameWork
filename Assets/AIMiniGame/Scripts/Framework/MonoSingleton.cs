@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
+public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour {
     private static T instance;
     private static readonly object lockObject = new object();
     private static bool isApplicationQuitting = false;

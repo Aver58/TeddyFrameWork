@@ -11,7 +11,7 @@
 
 using UnityEngine;
 
-public class BattleLogic : Singleton<BattleLogic>
+public class BattleLogic : MonoSingleton<BattleLogic>
 {
     public int logicFrame = 0;
     private BattleUnitManager m_UnitMgr;
