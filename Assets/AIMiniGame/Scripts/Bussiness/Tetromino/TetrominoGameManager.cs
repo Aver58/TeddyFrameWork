@@ -20,7 +20,7 @@ public class TetrominoGameManager : MonoBehaviour {
     private Dictionary<int, Image> gridMap = new Dictionary<int, Image>();
 
     void Start() {
-        InitGrid();
+        InitBG();
         StartGame();
     }
 

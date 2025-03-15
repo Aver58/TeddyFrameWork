@@ -17,7 +17,9 @@ public class TetrominoView : MonoBehaviour {
     }
 
     private void DrawShape() {
-        foreach (Vector2Int cell in model.cells) {
+        var cells = GetCells();
+        for (int i = 0; i < cells.Count; i++) {
+            Vector2Int cell = cells[i];
             ResourceManager.Instance.LoadAssetAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TetrominoCell.prefab", obj => {
                 if (obj != null) {
                     var cellGo = Instantiate(obj, transform);
@@ -25,7 +27,7 @@ public class TetrominoView : MonoBehaviour {
                     UpdateAnchoredPosition(cellRectTransform, cell);
                     cellGo.GetComponent<Image>().color = model.color;
                     cellGo.name = cell.ToString();
-                    cellGoMap.Add(cell, cellGo);
+                    cellGoMap.Add(i, cellGo);
                 }
             });
         }

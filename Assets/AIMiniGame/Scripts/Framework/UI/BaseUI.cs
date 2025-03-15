@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace AIMiniGame.Scripts.Framework.UI {
     public abstract class BaseUI : MonoBehaviour {
-        public abstract UILayer Layer { get; } // 所属层级
+        public UILayer Layer;// 所属层级
         public virtual void Init(UILayer layer) {}
         public virtual void OnShow() {}     // 界面显示回调
         public virtual void OnHide() {}     // 界面隐藏回调

@@ -16,7 +16,7 @@ UI Framework
 │    ├── BaseUI             -- 所有UI的基类
 │    ├── MVVM Components    -- 数据绑定组件
 │    └── AnimationSystem    -- 动画控制器
-└──── **Adapter Layer**       -- 适配层
+└──── **Adapter Layer**     -- 适配层
      ├── DeviceAdapter      -- 设备分辨率适配
      └── Localization       -- 多语言支持
  */
@@ -25,7 +25,7 @@ public class UIManager : MonoSingleton<UIManager> {
     private Stack<BaseUI> _uiStack = new Stack<BaseUI>(); // 界面堆栈
     private Dictionary<string, BaseUI> _uiCache = new Dictionary<string, BaseUI>(); // 缓存已加载界面
 
-    // 打开界面（泛型版本）
+    // 打开界面
     public T OpenUI<T>(UILayer layer = UILayer.Normal) where T : BaseUI {
         string uiName = typeof(T).Name;
         if (_uiCache.TryGetValue(uiName, out BaseUI ui)) {
@@ -54,4 +54,13 @@ public class UIManager : MonoSingleton<UIManager> {
             ui.gameObject.SetActive(false);
         }
     }
+
+    // 内存管理
+    // 定期清理长时间未使用的缓存界面
+    // 使用Resources.UnloadUnusedAssets释放残留资源
+
+
+    // 异步加载优化
+    // 预加载高频使用界面（如主菜单）
+    // 显示加载进度条（使用AsyncOperation.progress）
 }

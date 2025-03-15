@@ -1,4 +1,7 @@
+using System;
+
 namespace AIMiniGame.Scripts.Framework.UI {
+    [Serializable]
     public enum UILayer {
         Background,  // 底层UI（如场景背景）
         Normal,       // 普通界面（如设置面板）
