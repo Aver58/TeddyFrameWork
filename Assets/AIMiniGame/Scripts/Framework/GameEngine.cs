@@ -1,15 +1,14 @@
 using UnityEngine;
 
 public class GameEngine : MonoBehaviour {
-    public GameObject Canvas;
     private void Start() {
         // 加载资源示例
-        ResourceManager.Instance.LoadAssetAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab", obj => {
-            if (obj != null) {
-                var go = Instantiate(obj, Canvas.transform, true);
-                go.transform.localPosition = Vector3.zero;
-            }
-        });
+        // ResourceManager.Instance.LoadAssetAsync<GameObject>("Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab", obj => {
+        //     if (obj != null) {
+        //         var go = Instantiate(obj);
+        //         go.transform.localPosition = Vector3.zero;
+        //     }
+        // });
 
         // 卸载资源示例
         // ResourceManager.Instance.UnloadAsset("Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab");
@@ -36,6 +35,10 @@ public class GameEngine : MonoBehaviour {
 
     void OnDestroy() {
         // 注销事件示例
+        if (EventManager.Instance == null) {
+            return;
+        }
+
         EventManager.Instance.Unregister<string>(EventConstantId.OnTestEvent, OnTestEvent);
     }
 

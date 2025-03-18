@@ -15,4 +15,4 @@ MonoBehaviour:
   LoadMode: 0
   RemoteBaseURL: 
   LocalAssetBundlePath: 
-  UIAssetPathPrefix: Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/
+  UIAssetPathPrefix: Assets/AIMiniGame/ToBundle/Prefabs

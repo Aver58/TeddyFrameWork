@@ -8,6 +8,10 @@ public class EventManager : MonoSingleton<EventManager> {
     private Dictionary<int, List<Delegate>> eventMap = new Dictionary<int, List<Delegate>>();
 
     private void Register(int id, Delegate handler) {
+        if (Instance == null) {
+            return;
+        }
+
         if (eventMap.TryGetValue(id, out var listeners)) {
             eventMap[id].Add(handler);
         } else {
@@ -16,6 +20,10 @@ public class EventManager : MonoSingleton<EventManager> {
     }
 
     private void Unregister(int id, Delegate handler) {
+        if (Instance == null) {
+            return;
+        }
+
         if (eventMap.TryGetValue(id, out var handlers)) {
             for (int i = 0; i < handlers.Count; i++) {
                 var currentDel = handlers[i];
