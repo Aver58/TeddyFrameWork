@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AIMiniGame.Scripts.Framework.Resource;
 using AIMiniGame.Scripts.Framework.UI;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -21,23 +22,36 @@ UI Framework
      └── Localization       -- 多语言支持
  */
 
+// 路径图：
+// 1. 界面传参
+// 2. 内存管理
+//      定期清理长时间未使用的缓存界面
+//      使用Resources.UnloadUnusedAssets释放残留资源
+// 3. 预加载高频使用界面
 public class UIManager : MonoSingleton<UIManager> {
     private Stack<BaseUI> _uiStack = new Stack<BaseUI>(); // 界面堆栈
     private Dictionary<string, BaseUI> _uiCache = new Dictionary<string, BaseUI>(); // 缓存已加载界面
 
     // 打开界面
-    public T OpenUI<T>(UILayer layer = UILayer.Normal) where T : BaseUI {
-        string uiName = typeof(T).Name;
+    public T OpenUI<T>() where T : BaseUI {
+        var uiName = typeof(T).Name;
         if (_uiCache.TryGetValue(uiName, out BaseUI ui)) {
             // 从缓存中激活
             ui.gameObject.SetActive(true);
             ui.OnShow();
         } else {
             // 异步加载预制体
-            Addressables.LoadAssetAsync<GameObject>(uiName).Completed += handle => {
+            var config = UIViewDefineConfig.Get(uiName);
+            if (config == null) {
+                Debug.LogError($"UI {uiName} not found in UIViewDefineConfig");
+                return null;
+            }
+
+            var assetPath = $"{ResourceConfig.Instance.UIAssetPathPrefix}/{config.assetName}.prefab";
+            Addressables.LoadAssetAsync<GameObject>(assetPath).Completed += handle => {
                 GameObject go = Instantiate(handle.Result);
                 ui = go.GetComponent<T>();
-                ui.Init(layer);
+                ui.Init((UILayer)config.uILayer);
                 _uiCache.Add(uiName, ui);
                 _uiStack.Push(ui);
             };
@@ -54,13 +68,4 @@ public class UIManager : MonoSingleton<UIManager> {
             ui.gameObject.SetActive(false);
         }
     }
-
-    // 内存管理
-    // 定期清理长时间未使用的缓存界面
-    // 使用Resources.UnloadUnusedAssets释放残留资源
-
-
-    // 异步加载优化
-    // 预加载高频使用界面（如主菜单）
-    // 显示加载进度条（使用AsyncOperation.progress）
 }

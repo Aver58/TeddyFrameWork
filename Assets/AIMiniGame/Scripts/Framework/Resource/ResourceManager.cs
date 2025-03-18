@@ -4,11 +4,11 @@ public class ResourceManager : Singleton<ResourceManager> {
     private ResourceCache m_cache = new ResourceCache();
 
     public ResourceManager() {
-        switch (ResourceConfig.Instance.loadMode) {
-            case ResourceConfig.LoadMode.Addressables:
+        switch (ResourceConfig.Instance.LoadMode) {
+            case ResourceConfig.LoadModeEnum.Addressables:
                 m_loader = new AddressableLoader();
                 break;
-            case ResourceConfig.LoadMode.AssetBundle:
+            case ResourceConfig.LoadModeEnum.AssetBundle:
                 m_loader = new AssetBundleLoader();
                 break;
         }

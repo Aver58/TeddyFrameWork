@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UIView
+  m_EditorClassIdentifier: 
+  m_GroupName: UIView
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bd9e5590f1c2ab844a2a6535e790e478
+  m_SerializeEntries:
+  - m_GUID: 96007cd47c6654348af6f492b49ff461
+    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/TestFolder/TestView2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c17de57489c89564b917b9bd8c2c2819
+    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/TestView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 0f728d266239ddb4c8a26b329c0e5a74, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: fe585ae087cdcf649bb3ca6d14aa749f, type: 2}
+    - {fileID: 11400000, guid: bb72528078806c647a22c4719bf760b4, type: 2}

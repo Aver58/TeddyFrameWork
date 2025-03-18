@@ -107,10 +107,11 @@ public class CSVToConfigClassGenerator : Editor {
         sb.AppendLine("    }");
         sb.AppendLine("}");
 
-        string directoryPath = Application.dataPath + @"\AIMiniGame\Scripts\Framework\Resource\Config\GeneratedConfigs\";
+        string directoryPath = Application.dataPath + @"\AIMiniGame\Scripts\Framework\Config\GeneratedConfigs\";
         string outputPath = Path.Combine(directoryPath, className + ".cs");
         File.WriteAllText(outputPath, sb.ToString());
 
+        AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log($"Generated config class: {outputPath}");
     }

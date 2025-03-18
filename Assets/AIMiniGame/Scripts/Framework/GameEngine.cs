@@ -27,7 +27,7 @@ public class GameEngine : MonoBehaviour {
         // TestConfig();
 
         // 加载界面示例
-        // UIManager.Instance.OpenUI<MainUI>();
+        UIManager.Instance.OpenUI<TestView>();
     }
 
     private void OnTestEvent2(string message) {

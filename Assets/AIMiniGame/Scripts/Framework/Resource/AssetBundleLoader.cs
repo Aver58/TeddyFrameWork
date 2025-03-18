@@ -25,7 +25,7 @@ namespace AIMiniGame.Scripts.Framework.Resource {
         }
 
         private void LoadBundleAsync(string bundleName, System.Action<AssetBundle> onComplete) {
-            var request = AssetBundle.LoadFromFileAsync($"{m_resourceConfig.localAssetBundlePath}/{bundleName}");
+            var request = AssetBundle.LoadFromFileAsync($"{m_resourceConfig.LocalAssetBundlePath}/{bundleName}");
             request.completed += operation => {
                 var bundle = request.assetBundle;
                 m_loadedBundles[bundleName] = bundle;

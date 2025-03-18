@@ -1,16 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AIMiniGame.Scripts.Framework.Resource {
     [CreateAssetMenu(fileName = "ResourceConfig", menuName = "AIMiniGame/ResourceConfig")]
     public class ResourceConfig : ScriptableObject {
-        public enum LoadMode {
+        public enum LoadModeEnum {
             Addressables,
             AssetBundle
         }
 
-        public LoadMode loadMode = LoadMode.Addressables;
-        public string remoteBaseURL; // 远程资源地址
-        public string localAssetBundlePath; // 本地AssetBundle路径
+        public LoadModeEnum LoadMode = LoadModeEnum.Addressables;
+        public string RemoteBaseURL; // 远程资源地址
+        public string LocalAssetBundlePath; // 本地AssetBundle路径
+        public string UIAssetPathPrefix; // UI资源路径前缀
 
         private static ResourceConfig instance;
         public static ResourceConfig Instance {
@@ -22,6 +24,5 @@ namespace AIMiniGame.Scripts.Framework.Resource {
                 return instance;
             }
         }
-
     }
 }

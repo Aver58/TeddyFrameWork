@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b37cbcc4c54b06ba7f2fab852cd0e5, type: 3}
-  m_Name: ResourceConfig
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: UIView_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  LoadMode: 0
-  RemoteBaseURL: 
-  LocalAssetBundlePath: 
-  UIAssetPathPrefix: Assets/AIMiniGame/ToBundle/Prefabs/Tetromino/
+  m_Group: {fileID: 11400000, guid: 7e1dbc3553034a64c951457a82428e4b, type: 2}
+  m_StaticContent: 0
