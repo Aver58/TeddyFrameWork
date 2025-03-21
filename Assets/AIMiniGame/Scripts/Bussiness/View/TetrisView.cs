@@ -4,8 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AIMiniGame.Scripts.TetrisGame {
-    public class TetrisView : UIViewBase {
+namespace AIMiniGame.Scripts.TetrisGame
+{
+    public class TetrisView : UIViewBase
+    {
         [SerializeField] private GridLayoutGroup gameboardGrid;
         [SerializeField] private GridLayoutGroup nextTetrominoGrid;
         [SerializeField] private TextMeshProUGUI scoreText;
@@ -36,7 +38,8 @@ namespace AIMiniGame.Scripts.TetrisGame {
         private Image[,] nextTetrominoCells;
         private TetrisController tetrisController => Controller as TetrisController;
 
-        private void Awake() {
+        private void Awake()
+        {
             // 初始化控制器
             BindController(new TetrisController(this));
 
@@ -56,12 +59,14 @@ namespace AIMiniGame.Scripts.TetrisGame {
             tetrisController.StartGame();
         }
 
-        public override void OnOpen() {
+        public override void OnOpen()
+        {
             base.OnOpen();
             gameOverPanel.SetActive(false);
         }
 
-        private void InitGameboardGrid() {
+        private void InitGameboardGrid()
+        {
             int rows = tetrisController.TetrisModel.Rows;
             int cols = tetrisController.TetrisModel.Cols;
 
@@ -72,8 +77,10 @@ namespace AIMiniGame.Scripts.TetrisGame {
             // 创建单元格
             boardCells = new Image[rows, cols];
 
-            for (int y = 0; y < rows; y++) {
-                for (int x = 0; x < cols; x++) {
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < cols; x++)
+                {
                     GameObject cell = new GameObject($"Cell_{y}_{x}");
                     cell.transform.SetParent(gameboardGrid.transform, false);
 
@@ -85,7 +92,8 @@ namespace AIMiniGame.Scripts.TetrisGame {
             }
         }
 
-        private void InitNextTetrominoGrid() {
+        private void InitNextTetrominoGrid()
+        {
             // 配置网格布局
             nextTetrominoGrid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
             nextTetrominoGrid.constraintCount = 4;
@@ -93,8 +101,10 @@ namespace AIMiniGame.Scripts.TetrisGame {
             // 创建单元格
             nextTetrominoCells = new Image[4, 4];
 
-            for (int y = 0; y < 4; y++) {
-                for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 0; x < 4; x++)
+                {
                     GameObject cell = new GameObject($"NextCell_{y}_{x}");
                     cell.transform.SetParent(nextTetrominoGrid.transform, false);
 
@@ -106,7 +116,8 @@ namespace AIMiniGame.Scripts.TetrisGame {
             }
         }
 
-        protected override void UpdateView() {
+        protected override void UpdateView()
+        {
             if (tetrisController == null)
                 return;
 
@@ -128,16 +139,22 @@ namespace AIMiniGame.Scripts.TetrisGame {
             gameOverPanel.SetActive(tetrisController.TetrisModel.IsGameOver);
         }
 
-        private void UpdateGameboard() {
+        private void UpdateGameboard()
+        {
             int rows = tetrisController.TetrisModel.Rows;
             int cols = tetrisController.TetrisModel.Cols;
 
-            for (int y = 0; y < rows; y++) {
-                for (int x = 0; x < cols; x++) {
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < cols; x++)
+                {
                     int cellValue = tetrisController.TetrisModel.GameBoard[y, x];
-                    if (cellValue != 0) {
+                    if (cellValue != 0)
+                    {
                         boardCells[y, x].color = blockColors[cellValue];
-                    } else {
+                    }
+                    else
+                    {
                         // 空白处保持棋盘格背景
                         boardCells[y, x].color = lightGray;
                     }
@@ -145,7 +162,8 @@ namespace AIMiniGame.Scripts.TetrisGame {
             }
         }
 
-        private void UpdateCurrentTetromino() {
+        private void UpdateCurrentTetromino()
+        {
             if (tetrisController.TetrisModel.CurrentTetromino == null)
                 return;
 
@@ -155,14 +173,18 @@ namespace AIMiniGame.Scripts.TetrisGame {
             int height = tetromino.Shape.GetLength(0);
             int width = tetromino.Shape.GetLength(1);
 
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    if (tetromino.Shape[y, x] != 0) {
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (tetromino.Shape[y, x] != 0)
+                    {
                         int boardX = position.x + x;
                         int boardY = position.y + y;
 
                         // 确保在游戏板范围内
-                        if (boardX >= 0 && boardX < tetrisController.TetrisModel.Cols && boardY >= 0 && boardY < tetrisController.TetrisModel.Rows) {
+                        if (boardX >= 0 && boardX < tetrisController.TetrisModel.Cols && boardY >= 0 && boardY < tetrisController.TetrisModel.Rows)
+                        {
                             boardCells[boardY, boardX].color = blockColors[tetromino.Shape[y, x]];
                         }
                     }
@@ -170,13 +192,16 @@ namespace AIMiniGame.Scripts.TetrisGame {
             }
         }
 
-        private void UpdateNextTetromino() {
+        private void UpdateNextTetromino()
+        {
             if (tetrisController.TetrisModel.NextTetromino == null)
                 return;
 
             // 先清除预览区
-            for (int y = 0; y < 4; y++) {
-                for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 0; x < 4; x++)
+                {
                     nextTetrominoCells[y, x].color = Color.clear;
                 }
             }
@@ -186,9 +211,12 @@ namespace AIMiniGame.Scripts.TetrisGame {
             int height = nextTetromino.Shape.GetLength(0);
             int width = nextTetromino.Shape.GetLength(1);
 
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    if (nextTetromino.Shape[y, x] != 0) {
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (nextTetromino.Shape[y, x] != 0)
+                    {
                         nextTetrominoCells[y, x].color = blockColors[nextTetromino.Shape[y, x]];
                     }
                 }
@@ -196,40 +224,55 @@ namespace AIMiniGame.Scripts.TetrisGame {
         }
 
         // 按钮事件处理
-        public void OnLeftButtonClick() {
+        public void OnLeftButtonClick()
+        {
             tetrisController.MoveLeft();
         }
 
-        public void OnRightButtonClick() {
+        public void OnRightButtonClick()
+        {
             tetrisController.MoveRight();
         }
 
-        public void OnDownButtonClick() {
+        public void OnDownButtonClick()
+        {
             tetrisController.MoveDown();
         }
 
-        public void OnRotateButtonClick() {
+        public void OnRotateButtonClick()
+        {
             tetrisController.RotateTetromino();
         }
 
-        public void OnHardDropButtonClick() {
+        public void OnHardDropButtonClick()
+        {
             tetrisController.HardDrop();
         }
 
         // 键盘输入处理
-        private void Update() {
+        private void Update()
+        {
             if (tetrisController.TetrisModel.IsGameOver)
                 return;
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
                 tetrisController.MoveLeft();
-            } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
                 tetrisController.MoveRight();
-            } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
                 tetrisController.MoveDown();
-            } else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
                 tetrisController.RotateTetromino();
-            } else if (Input.GetKeyDown(KeyCode.Space)) {
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
                 tetrisController.HardDrop();
             }
         }
