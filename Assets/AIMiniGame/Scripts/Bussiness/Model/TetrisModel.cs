@@ -1,97 +1,131 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using AIMiniGame.Scripts.Framework.UI;
 using UnityEngine;
 
-public enum TetrominoType { I, O, T, S, Z, J, L }
-[Serializable]
-public class TetrominoData
+namespace AIMiniGame.Scripts.TetrisGame
 {
-    public TetrominoType type;
-    public Vector2Int[,] cells; // 存放各旋转状态下的块坐标
-
-    public TetrominoData(TetrominoType type, Vector2Int[,] cells)
+    public class TetrisModel : ModelBase
     {
-        this.type = type;
-        this.cells = cells;
-    }
-}
+        private readonly int _rows = 20;
+        private readonly int _cols = 10;
+        
+        private int[,] _gameBoard;
+        private int _score;
+        private int _level;
+        private int _linesCleared;
+        private bool _isGameOver;
+        private TetrominoData _currentTetromino;
+        private TetrominoData _nextTetromino;
+        private Vector2Int _currentPosition;
 
-public class TetrisModel : MonoBehaviour {
-    public static TetrisModel Instance;
+        public int[,] GameBoard 
+        { 
+            get => _gameBoard; 
+            set 
+            { 
+                _gameBoard = value; 
+                RaisePropertyChanged(); 
+            } 
+        }
 
-    // 游戏网格大小
-    public int gridWidth = 10;
-    public int gridHeight = 20;
-    public int[,] grid; // 用于记录已固定的块
+        public int Score 
+        { 
+            get => _score; 
+            set 
+            { 
+                _score = value; 
+                RaisePropertyChanged(); 
+            } 
+        }
 
-    // 定义俄罗斯方块形状字典
-    public Dictionary<TetrominoType, TetrominoData> tetrominoDict;
+        public int Level 
+        { 
+            get => _level; 
+            set 
+            { 
+                _level = value; 
+                RaisePropertyChanged(); 
+            } 
+        }
 
-    // 当前活跃的方块数据
-    public TetrominoType currentType;
-    public Vector2Int currentPosition; // 当前块的网格位置
-    public int currentRotation = 0;
+        public int LinesCleared 
+        { 
+            get => _linesCleared; 
+            set 
+            { 
+                _linesCleared = value; 
+                RaisePropertyChanged(); 
+            } 
+        }
 
-    public TetrisModel()
-    {
-        if (Instance == null)
+        public bool IsGameOver 
+        { 
+            get => _isGameOver; 
+            set 
+            { 
+                _isGameOver = value; 
+                RaisePropertyChanged(); 
+            } 
+        }
+
+        public TetrominoData CurrentTetromino 
+        { 
+            get => _currentTetromino; 
+            set 
+            { 
+                _currentTetromino = value; 
+                RaisePropertyChanged(); 
+            } 
+        }
+
+        public TetrominoData NextTetromino 
+        { 
+            get => _nextTetromino; 
+            set 
+            { 
+                _nextTetromino = value; 
+                RaisePropertyChanged(); 
+            } 
+        }
+
+        public Vector2Int CurrentPosition 
+        { 
+            get => _currentPosition; 
+            set 
+            { 
+                _currentPosition = value; 
+                RaisePropertyChanged(); 
+            } 
+        }
+
+        public int Rows => _rows;
+        public int Cols => _cols;
+
+        public TetrisModel()
         {
-            Instance = this;
-            InitializeGrid();
-            InitializeTetrominoes();
+            ResetGame();
+        }
+
+        public void ResetGame()
+        {
+            GameBoard = new int[_rows, _cols];
+            Score = 0;
+            Level = 1;
+            LinesCleared = 0;
+            IsGameOver = false;
         }
     }
-
-    void InitializeGrid()
+    
+    // 方块数据结构
+    public class TetrominoData
     {
-        grid = new int[gridWidth, gridHeight];
-        // 初始化网格，0 表示空，非0 表示占用（可以存储颜色或ID）
-        for (int x = 0; x < gridWidth; x++)
+        public int[,] Shape { get; set; }
+        public int Type { get; set; }
+        
+        public TetrominoData(int type, int[,] shape)
         {
-            for (int y = 0; y < gridHeight; y++)
-            {
-                grid[x, y] = 0;
-            }
+            Type = type;
+            Shape = shape;
         }
-    }
-
-    void InitializeTetrominoes() {
-        tetrominoDict = new Dictionary<TetrominoType, TetrominoData>();
-
-        // 示例：添加一个简单的“I”形方块，定义两种旋转状态（水平、垂直）
-        // 注意：实际项目中需定义所有旋转状态，以下仅为示例
-        Vector2Int[,] cellsI = new Vector2Int[2, 4] {
-            { new Vector2Int(0,0), new Vector2Int(1,0), new Vector2Int(2,0), new Vector2Int(3,0) },
-            { new Vector2Int(0,0), new Vector2Int(0,1), new Vector2Int(0,2), new Vector2Int(0,3) }
-        };
-        tetrominoDict.Add(TetrominoType.I, new TetrominoData(TetrominoType.I, cellsI));
-
-        // 同理，其他类型可添加O, T, S, Z, J, L等
-
-    }
-
-    // 根据当前类型和旋转状态获取当前方块的相对单元格坐标数组
-    public Vector2Int[] GetCurrentCells()
-    {
-        TetrominoData data = tetrominoDict[currentType];
-        int rotationState = currentRotation % data.cells.GetLength(0);
-        Vector2Int[] cells = new Vector2Int[data.cells.GetLength(1)];
-        for (int i = 0; i < cells.Length; i++)
-        {
-            cells[i] = data.cells[rotationState, i];
-        }
-        return cells;
-    }
-
-    // 重置当前方块（随机生成）
-    public void SpawnNewTetromino()
-    {
-        Array values = Enum.GetValues(typeof(TetrominoType));
-        currentType = (TetrominoType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
-        currentRotation = 0;
-        // 初始位置通常在网格顶部中间
-        currentPosition = new Vector2Int(gridWidth / 2 - 2, gridHeight - 1);
     }
 }
