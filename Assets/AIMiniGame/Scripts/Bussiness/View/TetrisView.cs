@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AIMiniGame.Scripts.Bussiness.Controller;
 using AIMiniGame.Scripts.Framework.UI;
 using TMPro;
 using UnityEngine;
@@ -36,33 +37,27 @@ namespace AIMiniGame.Scripts.TetrisGame
 
         private Image[,] boardCells;
         private Image[,] nextTetrominoCells;
-        private TetrisController tetrisController => Controller as TetrisController;
+        private TetrisViewController tetrisController => Controller as TetrisViewController;
 
-        private void Awake()
+        public override void Init(UILayer layer)
         {
-            // 初始化控制器
-            BindController(new TetrisController(this));
-
+            base.Init(layer);
             // 设置按钮监听
             leftButton.onClick.AddListener(OnLeftButtonClick);
             rightButton.onClick.AddListener(OnRightButtonClick);
             downButton.onClick.AddListener(OnDownButtonClick);
             rotateButton.onClick.AddListener(OnRotateButtonClick);
             hardDropButton.onClick.AddListener(OnHardDropButtonClick);
-
-            // 创建游戏板网格
-            InitGameboardGrid();
-
-            // 创建预览方块区域
-            InitNextTetrominoGrid();
-
-            tetrisController.StartGame();
         }
 
-        public override void OnOpen()
-        {
+        public override void OnOpen() {
             base.OnOpen();
             gameOverPanel.SetActive(false);
+            // 创建游戏板网格
+            InitGameboardGrid();
+            // 创建预览方块区域
+            InitNextTetrominoGrid();
+            tetrisController.StartGame();
         }
 
         private void InitGameboardGrid()
@@ -252,6 +247,10 @@ namespace AIMiniGame.Scripts.TetrisGame
         // 键盘输入处理
         private void Update()
         {
+            if (tetrisController == null) {
+                return;
+            }
+
             if (tetrisController.TetrisModel.IsGameOver)
                 return;
 

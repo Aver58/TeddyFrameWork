@@ -1,3 +1,5 @@
+using AIMiniGame.Scripts.Bussiness.Controller;
+using AIMiniGame.Scripts.TetrisGame;
 using UnityEngine;
 
 public class GameEngine : MonoBehaviour {
@@ -14,19 +16,21 @@ public class GameEngine : MonoBehaviour {
         // ResourceManager.Instance.UnloadAsset("Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab");
 
         // 注册事件示例
-        EventManager.Instance.Register<string>(EventConstantId.OnTestEvent, OnTestEvent);
-        EventManager.Instance.Register<string>(EventConstantId.OnTestEvent, OnTestEvent2);
+        // EventManager.Instance.Register<string>(EventConstantId.OnTestEvent, OnTestEvent);
+        // EventManager.Instance.Register<string>(EventConstantId.OnTestEvent, OnTestEvent2);
 
         // 触发事件示例
-        EventManager.Instance.Dispatch(EventConstantId.OnTestEvent, "Hello, World!");
-        EventManager.Instance.Unregister<string>(EventConstantId.OnTestEvent, OnTestEvent);
-        EventManager.Instance.Dispatch(EventConstantId.OnTestEvent, "Hello, World!2");
+        // EventManager.Instance.Dispatch(EventConstantId.OnTestEvent, "Hello, World!");
+        // EventManager.Instance.Unregister<string>(EventConstantId.OnTestEvent, OnTestEvent);
+        // EventManager.Instance.Dispatch(EventConstantId.OnTestEvent, "Hello, World!2");
 
         // 加载配置示例
         // TestConfig();
 
         // 加载界面示例
-        UIManager.Instance.OpenUI<TestView>();
+        // UIManager.Instance.OpenUI<TestView>();
+
+        ControllerManager.Instance.OpenAsync<TetrisViewController>();
     }
 
     private void OnTestEvent2(string message) {

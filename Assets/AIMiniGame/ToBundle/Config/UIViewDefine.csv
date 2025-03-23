@@ -3,3 +3,4 @@ string,string,string,int
 唯一标识,名称,相对资源路径,ui层级（0. 底层UI（如场景背景） 1. 普通界面（如设置面板） 2. 弹窗（如确认框） 3. 顶层UI（如加载提示） 4. 系统级（如FPS显示））
 TestView,测试界面,TestView,1
 TestView2,测试界面2,TestFolder/TestView2,1
+TetrisView,俄罗斯方块,TetrisView,1

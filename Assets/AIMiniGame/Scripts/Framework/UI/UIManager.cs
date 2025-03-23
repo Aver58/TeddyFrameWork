@@ -27,28 +27,56 @@ UI Framework
 // 4. 返回导航栈
 // 5. 弹窗模糊实现
 // 6. 数据绑定
-public class UIManager : MonoSingleton<UIManager> {
-    public Canvas UICanvas; // UI根节点
+public class UIManager : Singleton<UIManager> {
+    private Canvas _uiCanvas; // UI根节点
+    public Canvas UICanvas {
+        get {
+            if (_uiCanvas == null) {
+                _uiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
+            }
+
+            return _uiCanvas;
+        }
+    }
     private Stack<UIViewBase> _uiStack = new(); // 界面堆栈
     private Dictionary<string, UIViewBase> _uiCache = new(); // 缓存已加载界面
-    private const string Controller = "Controller";
-    private const string ControllerNameSpace = "AIMiniGame.Scripts.Bussiness.Controller.";
-
-
-    private void Awake() {
-        UICanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
-    }
+    private readonly Dictionary<string, UIViewBase> windows = new ();
 
     // 打开界面
-    public T OpenUI<T>() where T : UIViewBase {
-        var uiViewName = typeof(T).Name;
-        if (_uiCache.TryGetValue(uiViewName, out UIViewBase uiView)) {
-            uiView.gameObject.SetActive(true);
-            uiView.OnOpen();
+    public UIViewBase Open(ControllerBase controller) {
+        var viewName = controller.FunctionName;
+        var window = FindWindow(viewName);
+        if (window == null) {
+            window = InitializeWindow(controller);
+        }
+
+        return window;
+    }
+
+    // 关闭当前界面
+    public void CloseTopUI() {
+        if (_uiStack.Count > 0) {
+            var uiViewBase = _uiStack.Pop();
+            uiViewBase.OnClose();
+            uiViewBase.gameObject.SetActive(false);
+        }
+    }
+
+    private UIViewBase FindWindow(string windowName) {
+        _uiCache.TryGetValue(windowName, out var window);
+        return window;
+    }
+
+    private UIViewBase InitializeWindow(ControllerBase controller) {
+        string viewName = controller.FunctionName;
+        var parent = UICanvas.transform;
+        if (_uiCache.TryGetValue(viewName, out var uiViewBase)) {
+            uiViewBase.gameObject.SetActive(true);
+            uiViewBase.OnOpen();
         } else {
-            var config = UIViewDefineConfig.Get(uiViewName);
+            var config = UIViewDefineConfig.Get(viewName);
             if (config == null) {
-                Debug.LogError($"UI {uiViewName} not found in UIViewDefineConfig");
+                Debug.LogError($"{viewName} not found in UIViewDefineConfig.csv");
                 return null;
             }
 
@@ -59,35 +87,17 @@ public class UIManager : MonoSingleton<UIManager> {
                     return;
                 }
 
-                GameObject go = Instantiate(handle.Result, UICanvas.transform);
-                uiView = go.GetComponent<T>();
+                var go = Object.Instantiate(handle.Result, parent);
+                uiViewBase = go.GetComponent<UIViewBase>();
                 var layer = (UILayer)config.uILayer;
-                uiView.Init(layer);
-                var controllerName = uiViewName + Controller;
-                // 反射获取Controller
-                var fullName = ControllerNameSpace + controllerName;
-                var controllerType = System.Type.GetType(fullName);
-                if (controllerType != null) {
-                    var controller = System.Activator.CreateInstance(controllerType) as ControllerBase;
-                    uiView.BindController(controller);
-                } else {
-                    Debug.LogError($"[OpenUI] Controller fullName {fullName} not found! uiViewName : {uiViewName}");
-                }
-
-                _uiCache.Add(uiViewName, uiView);
-                _uiStack.Push(uiView);
+                uiViewBase.Init(layer);
+                uiViewBase.BindController(controller);
+                uiViewBase.OnOpen();
+                _uiCache.Add(viewName, uiViewBase);
+                _uiStack.Push(uiViewBase);
             };
         }
 
-        return uiView as T;
-    }
-
-    // 关闭当前界面
-    public void CloseTopUI() {
-        if (_uiStack.Count > 0) {
-            var uiViewBase = _uiStack.Pop();
-            uiViewBase.OnClose();
-            uiViewBase.gameObject.SetActive(false);
-        }
+        return uiViewBase;
     }
 }
