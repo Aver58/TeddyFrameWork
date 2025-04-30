@@ -4,3 +4,4 @@ string,string,string,int
 TestView,测试界面,TestView,1
 TestView2,测试界面2,TestFolder/TestView2,1
 TetrisView,俄罗斯方块,TetrisView,1
+PetView,宠物界面,PetView,1

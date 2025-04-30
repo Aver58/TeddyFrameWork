@@ -30,7 +30,7 @@ public class GameEngine : MonoBehaviour {
         // 加载界面示例
         // UIManager.Instance.OpenUI<TestView>();
 
-        ControllerManager.Instance.OpenAsync<TetrisViewController>();
+        ControllerManager.Instance.OpenAsync<PetViewController>();
     }
 
     private void OnTestEvent2(string message) {

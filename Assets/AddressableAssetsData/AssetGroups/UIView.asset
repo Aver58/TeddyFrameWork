@@ -25,6 +25,14 @@ MonoBehaviour:
     m_Address: Assets/AIMiniGame/ToBundle/Prefabs/TestView.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5fd21c4ecbc30b64393676672c6a6093
+    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/PetView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: aafdebb77d1d01749bf87bdddbe76e63
+    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/TetrisView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0f728d266239ddb4c8a26b329c0e5a74, type: 2}
   m_SchemaSet:

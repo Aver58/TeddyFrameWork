@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Config
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: Config
   m_Data:
     m_SerializedData: []
-  m_GUID: a26943426306d7b42900b85adb02fd2f
+  m_GUID: d3084e61f2470d64c96b34c284f888f4
   m_SerializeEntries:
-  - m_GUID: 8f0006192ddce7d4b80a6e401c091ddd
-    m_Address: Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab
+  - m_GUID: 57743805576f5514da85fba533f060af
+    m_Address: Assets/AIMiniGame/ToBundle/Config/UIViewDefine.csv
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0f728d266239ddb4c8a26b329c0e5a74, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 56fbe0caf6c19d14abd01a422f4a5a6c, type: 2}
-    - {fileID: 11400000, guid: 8857724b63bd55246a120a896f6f9c58, type: 2}
+    - {fileID: 11400000, guid: 412855bfd91558748b88624c28414716, type: 2}
+    - {fileID: 11400000, guid: d75c9a5b6b52ac34c862079956d32ccc, type: 2}

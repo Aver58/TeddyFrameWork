@@ -89,6 +89,11 @@ public class UIManager : Singleton<UIManager> {
 
                 var go = Object.Instantiate(handle.Result, parent);
                 uiViewBase = go.GetComponent<UIViewBase>();
+                if (uiViewBase == null) {
+                    Debug.LogError($"{go} prefab not found UIViewBase component!");
+                    return;
+                }
+
                 var layer = (UILayer)config.uILayer;
                 uiViewBase.Init(layer);
                 uiViewBase.BindController(controller);
