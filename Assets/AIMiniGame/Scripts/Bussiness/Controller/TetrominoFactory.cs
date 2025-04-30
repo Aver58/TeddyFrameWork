@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AIMiniGame.Scripts.TetrisGame
-{
-    public static class TetrominoFactory
-    {
+namespace AIMiniGame.Scripts.TetrisGame {
+    public static class TetrominoFactory {
         // 方块形状定义
-        private static readonly Dictionary<int, int[,]> TetrominoShapes = new Dictionary<int, int[,]>
-        {
+        private static readonly Dictionary<int, int[,]> TetrominoShapes = new Dictionary<int, int[,]> {
             // I形方块
             { 0, new int[,] {
                 {0, 0, 0, 0},
@@ -52,22 +49,18 @@ namespace AIMiniGame.Scripts.TetrisGame
             } }
         };
 
-        public static TetrominoData GetRandomTetromino()
-        {
+        public static TetrominoData GetRandomTetromino() {
             int type = Random.Range(0, TetrominoShapes.Count);
             return new TetrominoData(type, TetrominoShapes[type]);
         }
 
-        public static int[,] RotateMatrix(int[,] matrix)
-        {
+        public static int[,] RotateMatrix(int[,] matrix) {
             int n = matrix.GetLength(0);
             int[,] result = new int[n, n];
 
             // 转置
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
                     result[i, j] = matrix[n - j - 1, i];
                 }
             }

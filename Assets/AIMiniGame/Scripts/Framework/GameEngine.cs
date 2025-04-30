@@ -39,11 +39,11 @@ public class GameEngine : MonoBehaviour {
 
     void OnDestroy() {
         // 注销事件示例
-        if (EventManager.Instance == null) {
-            return;
-        }
-
-        EventManager.Instance.Unregister<string>(EventConstantId.OnTestEvent, OnTestEvent);
+        // if (EventManager.Instance == null) {
+        //     return;
+        // }
+        //
+        // EventManager.Instance.Unregister<string>(EventConstantId.OnTestEvent, OnTestEvent);
     }
 
     private void OnTestEvent(string message) {

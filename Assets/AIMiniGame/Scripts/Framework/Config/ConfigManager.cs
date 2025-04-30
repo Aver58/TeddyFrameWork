@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class ConfigManager {
     private static ConfigManager instance;
     private static string classDirectoryPath = Application.dataPath + @"\AIMiniGame\Scripts\Framework\Resource\Config\GeneratedConfigs\";
-    private static string configDirectoryPath = Application.dataPath + @"\AIMiniGame\ToBundle\Config\";
+    private static string configDirectoryPath = "Assets/AIMiniGame/ToBundle/Config/";
 
     public static ConfigManager Instance {
         get {
@@ -18,16 +20,16 @@ public class ConfigManager {
     }
 
     public Dictionary<string, T> LoadConfig<T>(string fileName) where T : BaseConfig, new() {
-        string filePath = GetRelativePath(fileName);
-        if (!File.Exists(filePath)) {
-            Debug.LogError($"Config file not found: {filePath}");
-            return null;
-        }
+        string fileFullPath = GetRelativePath(fileName);
+        // if (!Addressables.ResourceLocators.Any(locator => locator.Locate(fileFullPath, typeof(TextAsset), out _))) {
+        //     Debug.LogError($"The file '{fileFullPath}' is not found in Addressables.");
+        //     return null;
+        // }
 
-        string csvContent = File.ReadAllText(filePath);
+        string csvContent = Addressables.LoadAssetAsync<TextAsset>(fileFullPath).WaitForCompletion().text;//File.ReadAllText(filePath); 改成 Addressables 同步加载，会阻塞进程
         var lines = csvContent.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
         if (lines.Length < 4) {
-            Debug.LogError($"Config file has no data: {filePath}");
+            Debug.LogError($"Config file has no data: {fileFullPath}");
             return null;
         }
 
@@ -45,7 +47,6 @@ public class ConfigManager {
     }
 
     private string GetRelativePath(string fileName) {
-        // todo bundle
-        return configDirectoryPath + fileName;
+        return Path.Combine(configDirectoryPath, fileName);
     }
 }

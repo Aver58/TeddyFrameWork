@@ -44,8 +44,8 @@ namespace AIMiniGame.Scripts.Bussiness.Controller {
             }
 
             timer = 0;
-            if (!MoveTetromino(0, 1)) // 向下移动
-            {
+            // 向下移动
+            if (!MoveTetromino(0, 1)) {
                 // 不能下落了，固定当前方块
                 PlaceTetromino();
                 // 检查是否有可以消除的行

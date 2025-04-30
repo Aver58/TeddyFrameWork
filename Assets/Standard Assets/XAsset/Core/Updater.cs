@@ -45,7 +45,7 @@ public class Updater : MonoBehaviour, IUpdater, INetworkMonitorListener
 
     private Step _step;
 
-    [SerializeField] private string baseURL = "http://127.0.0.1:7888/DLC/";
+    [SerializeField] private string baseURL;
     [SerializeField] private string gameScene = "Game.unity";
     [SerializeField] private bool enableVFS = true;
     public bool development;
