@@ -46,7 +46,7 @@ public class PetManager : MonoBehaviour {
     }
 
     void Update() {
-        #region ﹚竡秙籔牟祇笆礶
+        #region
 
         if (Input.GetKeyDown(KeyCode.Alpha0)) {
             anim = Anim.Maguma;
@@ -207,7 +207,6 @@ public class PetManager : MonoBehaviour {
             return false;
         }
 
-        // ǐ隔笆礶穦ゴ耞ㄤタ冀笆礶
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) {
             animator.SetBool("Walk", true);
             audio_manager.interruptAudio();
@@ -223,12 +222,9 @@ public class PetManager : MonoBehaviour {
         y_position = Mathf.Min(y_max, Mathf.Max(transform.position.y + y_move * Time.deltaTime * speed, y_min));
         transform.position = new Vector3(x_position, y_position, transform.position.z);
 
-        // Walk 笆礶惠骸ì: 1. Walk == true 2. 簿笆计簿笆耬穦砆牟祇
         animator.SetFloat("Move", Mathf.Abs(x_move) + Mathf.Abs(y_move));
 
-        // ス秨﹍簿笆碞盢 Walk 砞 false磷狡牟祇
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) {
-            // Walk 笆礶挡惠骸ì: 1. Walk == false 2. 簿笆计繰ゎ耬
             animator.SetBool("Walk", false);
         }
 

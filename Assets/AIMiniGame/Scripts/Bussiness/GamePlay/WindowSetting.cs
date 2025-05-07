@@ -15,7 +15,7 @@ public class WindowSetting : MonoBehaviour {
     // Places the window above all non-topmost windows. The window maintains its topmost position even when it is deactivated.
     static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
 
-    #region 嘿莱赣ぃ睹э琌ㄏノ Window 矗ㄑ dll
+    #region
 
     private struct MARGINS {
         public int cxLeftWidth;
@@ -24,7 +24,7 @@ public class WindowSetting : MonoBehaviour {
         public int cyBottomHeight;
     }
 
-    #region Define function signatures to import from Windows APIs (把计嘿璹)
+    #region Define function signatures to import from Windows APIs
 
     [DllImport("user32.dll")]
     private static extern IntPtr GetActiveWindow();
@@ -48,15 +48,16 @@ public class WindowSetting : MonoBehaviour {
     void Start() {
 #if !UNITY_EDITOR
         window = GetActiveWindow();
-
+        // 全屏模式下扩展窗口到客户端区域 -> 为了透明 // 边距内嵌值确定在窗口四侧扩展框架的距离 -1为没有窗口边框
         MARGINS margins = new MARGINS() { cxLeftWidth = -1 };
         DwmExtendFrameIntoClientArea(window, ref margins);
+        // 设置为透明、无边框
         SetWindowLong(window, GWL_EXSTYLE, WS_EX_LAYERED);
-        // 透明
+        // bAlpha 透明
         SetLayeredWindowAttributes(window, crKey: 0, bAlpha: 0, LWA_COLORKEY);
+        // 窗口置顶
         SetWindowPos(window, HWND_TOPMOST, 0, 0, 0, 0, 0);
-
-        Application.runInBackground = true;
 #endif
+        Application.runInBackground = true;
     }
 }

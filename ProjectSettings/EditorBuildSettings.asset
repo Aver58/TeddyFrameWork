@@ -6,17 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Init.unity
-    guid: 41515a2b3f98a445e88e746ac77f43d1
-  - enabled: 1
-    path: Assets/Scene/Scenes_test/TestAB.unity
-    guid: d9f2c870487b3492a97fe55f70b65202
-  - enabled: 1
-    path: Assets/Scene/GameMain.unity
-    guid: 616be2274b8f2fd418cd2c9dcde074fa
-  - enabled: 1
-    path: Assets/Scene/MobaScene.unity
-    guid: 493667a2b867df04c966b43b93fce637
+    path: Assets/AIMiniGame/Scenes/Main.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: e80e290a903645941818e00a2673f39d,
       type: 2}
