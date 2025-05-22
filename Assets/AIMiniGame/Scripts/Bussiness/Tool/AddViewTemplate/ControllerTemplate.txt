@@ -1,0 +1,13 @@
+using AIMiniGame.Scripts.Bussiness.Model;
+using AIMiniGame.Scripts.Framework.UI;
+using UnityEngine;
+
+namespace AIMiniGame.Scripts.Bussiness.Controller {
+    public class #ClassName#Controller : ControllerBase {
+        public #ClassName#Model Model { get; private set; }
+        public #ClassName#Controller() {
+            Model = new #ClassName#Model { };
+            Model.PropertyChanged += (sender, args) => NotifyModelChanged();
+        }
+    }
+}

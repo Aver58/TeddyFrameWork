@@ -1,0 +1,17 @@
+using AIMiniGame.Scripts.Framework.UI;
+
+namespace AIMiniGame.Scripts.Bussiness.Model {
+    public class #ClassName#Model : ModelBase {
+        private int _health;
+        public int Health {
+            get => _health;
+            set {
+                if (_health != value) {
+                    _health = value;
+                    // 触发数据变更事件
+                    RaisePropertyChanged();
+                }
+            }
+        }
+    }
+}
