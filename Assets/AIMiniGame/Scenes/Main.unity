@@ -199,6 +199,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -391,7 +392,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174009633
 GameObject:
@@ -439,7 +440,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1174009637
 MonoBehaviour:
@@ -482,6 +483,12 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!95 &1196386317 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5586393358606200564, guid: 5fd21c4ecbc30b64393676672c6a6093,
+    type: 3}
+  m_PrefabInstance: {fileID: 1843972233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1692459127
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +613,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1692459132
 MonoBehaviour:
@@ -627,6 +634,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 273288738}
     m_Modifications:
+    - target: {fileID: -8589082613806332106, guid: 5fd21c4ecbc30b64393676672c6a6093,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1196386317}
     - target: {fileID: 3170607894583565328, guid: 5fd21c4ecbc30b64393676672c6a6093,
         type: 3}
       propertyPath: m_Pivot.x
@@ -736,6 +748,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PetView
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141431731524630042, guid: 5fd21c4ecbc30b64393676672c6a6093,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fd21c4ecbc30b64393676672c6a6093, type: 3}

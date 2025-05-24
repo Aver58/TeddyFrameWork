@@ -46,7 +46,7 @@ namespace AIMiniGame.Scripts.TetrisGame {
             hardDropButton.onClick.AddListener(OnHardDropButtonClick);
         }
 
-        public override void OnOpen() {
+        protected override void OnOpen() {
             base.OnOpen();
             gameOverPanel.SetActive(false);
             // 创建游戏板网格

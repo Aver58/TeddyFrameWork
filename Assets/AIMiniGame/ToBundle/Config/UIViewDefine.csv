@@ -1,7 +1,9 @@
 Key,Name,AssetName,UILayer
 string,string,string,int
-Î¨Ò»±êÊ¶,Ãû³Æ,Ïà¶Ô×ÊÔ´Â·¾¶,ui²ã¼¶£¨0. µ×²ãUI£¨Èç³¡¾°±³¾°£© 1. ÆÕÍ¨½çÃæ£¨ÈçÉèÖÃÃæ°å£© 2. µ¯´°£¨ÈçÈ·ÈÏ¿ò£© 3. ¶¥²ãUI£¨Èç¼ÓÔØÌáÊ¾£© 4. ÏµÍ³¼¶£¨ÈçFPSÏÔÊ¾£©£©
-TestView,²âÊÔ½çÃæ,TestView,1
-TestView2,²âÊÔ½çÃæ2,TestFolder/TestView2,1
-TetrisView,¶íÂŞË¹·½¿é,TetrisView,1
-PetView,³èÎï½çÃæ,PetView,1
+å”¯ä¸€æ ‡è¯†,åç§°,ç›¸å¯¹èµ„æºè·¯å¾„,uiå±‚çº§ï¼ˆ0. åº•å±‚UIï¼ˆå¦‚åœºæ™¯èƒŒæ™¯ï¼‰ 1. æ™®é€šç•Œé¢ï¼ˆå¦‚è®¾ç½®é¢æ¿ï¼‰ 2. å¼¹çª—ï¼ˆå¦‚ç¡®è®¤æ¡†ï¼‰ 3. é¡¶å±‚UIï¼ˆå¦‚åŠ è½½æç¤ºï¼‰ 4. ç³»ç»Ÿçº§ï¼ˆå¦‚FPSæ˜¾ç¤ºï¼‰ï¼‰
+TestView,æµ‹è¯•ç•Œé¢,TestView,1
+TestView2,æµ‹è¯•ç•Œé¢2,TestFolder/TestView2,1
+TetrisView,ä¿„ç½—æ–¯æ–¹å—,TetrisView,1
+PetView,å® ç‰©ç•Œé¢,PetView,1
+SettingView,Settingç•Œé¢,SettingView,1
+SettingView,Settingç•Œé¢,SettingView,1

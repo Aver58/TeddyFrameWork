@@ -57,7 +57,7 @@ public class UIManager : Singleton<UIManager> {
     public void CloseTopUI() {
         if (_uiStack.Count > 0) {
             var uiViewBase = _uiStack.Pop();
-            uiViewBase.OnClose();
+            uiViewBase.Close();
             uiViewBase.gameObject.SetActive(false);
         }
     }
@@ -72,7 +72,7 @@ public class UIManager : Singleton<UIManager> {
         var parent = UICanvas.transform;
         if (_uiCache.TryGetValue(viewName, out var uiViewBase)) {
             uiViewBase.gameObject.SetActive(true);
-            uiViewBase.OnOpen();
+            uiViewBase.Open();
         } else {
             var config = UIViewDefineConfig.Get(viewName);
             if (config == null) {
@@ -97,7 +97,7 @@ public class UIManager : Singleton<UIManager> {
                 var layer = (UILayer)config.uILayer;
                 uiViewBase.Init(layer);
                 uiViewBase.BindController(controller);
-                uiViewBase.OnOpen();
+                uiViewBase.Open();
                 _uiCache.Add(viewName, uiViewBase);
                 _uiStack.Push(uiViewBase);
             };

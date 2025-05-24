@@ -8,18 +8,13 @@ public class TestView : UIViewBase {
     [SerializeField] private Button _testBtn;
     [SerializeField] private TextMeshProUGUI _testText;
 
-    public override void Init(UILayer layer) {
-        base.Init(layer);
+    protected override void OnInit() {
         _testBtn.onClick.AddListener(OnTakeDamageButtonClick);
     }
 
-    public override void OnOpen() {
-        Debug.Log("TestView OnShow");
-    }
-
-    public override void OnClose() {
-        Debug.Log("TestView OnHide");
-    }
+    protected override void OnClear() { }
+    protected override void OnOpen() { }
+    protected override void OnClose() { }
 
     protected override void UpdateView() {
         if (Controller is TestViewController testViewController) {

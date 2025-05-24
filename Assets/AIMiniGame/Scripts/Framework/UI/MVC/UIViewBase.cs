@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +12,26 @@ namespace AIMiniGame.Scripts.Framework.UI {
             if (graphicRaycaster == null) {
                 graphicRaycaster = transform.gameObject.AddComponent<GraphicRaycaster>();
             }
+
+            OnInit();
         }
 
-        public virtual void OnOpen() {}     // 界面显示回调
-        public virtual void OnClose() {}     // 界面隐藏回调
+        public void Open() {
+            OnOpen();
+        }
+
+        public void Close() {
+            OnClose();
+        }
+
+        public void Clear() {
+            OnClear();
+        }
+
+        protected virtual void OnInit(){}
+        protected virtual void OnOpen() {}     // 界面显示回调
+        protected virtual void OnClose() {}     // 界面隐藏回调
+        protected virtual void OnClear() { }
 
         // 绑定Controller（手动或通过依赖注入）
         public void BindController(ControllerBase controller) {

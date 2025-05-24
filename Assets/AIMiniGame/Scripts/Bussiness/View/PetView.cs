@@ -1,17 +1,45 @@
 using System;
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using AIMiniGame.Scripts.Framework.UI;
 using UnityEngine.EventSystems;
 
-public class PetView : UIViewBase {
+public enum PetState
+{
+    Idle,
+    Drag,
+    Music,
+    Sleep,
+    Walk,
+}
+
+public class PetView : UIViewBase
+{
+    public Animator animator;
     public EventTrigger moveObj;
     private RectTransform rectTransform;
 
-    private void Start() {
-        if (moveObj == null) {
+    private PetState petState = PetState.Idle;
+    private PetState PetState
+    {
+        get
+        {
+            return petState;
+        }
+        set
+        {
+            petState = value;
+            animator.SetInteger(StateInt, (int)value);
+        }
+    }
+
+    private bool isMusicOn = false;
+    private int StateInt = Animator.StringToHash("State");
+
+    private void Start()
+    {
+        if (moveObj == null)
+        {
             return;
         }
 
@@ -22,32 +50,40 @@ public class PetView : UIViewBase {
         entry.callback.AddListener((data) => { OnPointerDown((PointerEventData)data); });
         moveObj.triggers.Add(entry);
 
+        var entry1 = new EventTrigger.Entry();
+        entry1.eventID = EventTriggerType.PointerUp;
+        entry1.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
+        moveObj.triggers.Add(entry1);
+
         var entry2 = new EventTrigger.Entry();
         entry2.eventID = EventTriggerType.Drag;
         entry2.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
         moveObj.triggers.Add(entry2);
-
-        var entry3 = new EventTrigger.Entry();
-        entry3.eventID = EventTriggerType.Drop;
-        entry3.callback.AddListener((data) => { OnDrop((PointerEventData)data); });
-        moveObj.triggers.Add(entry3);
     }
 
-    private void OnPointerDown(BaseEventData eventData) {
+    private void OnPointerDown(BaseEventData eventData)
+    {
         PointerEventData pointerEventData = (PointerEventData)eventData;
-        if (pointerEventData.button == PointerEventData.InputButton.Right) {
+        if (pointerEventData.button == PointerEventData.InputButton.Right)
+        {
             Debug.Log("Right mouse button clicked");
             // 打开界面
         }
 
-        if (pointerEventData.button == PointerEventData.InputButton.Left) {
+        if (pointerEventData.button == PointerEventData.InputButton.Left)
+        {
             Debug.Log("Left mouse button clicked");
             // 关闭界面
         }
     }
 
-    private void OnDrag(PointerEventData eventData) {
-        // 移动 moveObj 对象的位置
+    private void OnPointerUp(PointerEventData eventData)
+    {
+        PetState = PetState.Idle;
+    }
+
+    private void OnDrag(PointerEventData eventData)
+    {
         Vector3 worldPosition;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(
             rectTransform,
@@ -57,19 +93,16 @@ public class PetView : UIViewBase {
         );
 
         rectTransform.position = worldPosition;
+        PetState = PetState.Drag;
     }
 
-    // todo 无效 EndDrag
-    private void OnDrop(PointerEventData eventData) {
-        Debug.Log("Dropped on: " + eventData.pointerDrag.name);
-        throw new NotImplementedException();
-    }
-
-    private void Update() {
+    private void Update()
+    {
 
     }
 
-    protected override void UpdateView() {
+    protected override void UpdateView()
+    {
         // if (Controller is TestViewController testViewController) {
         //     _testText.text = $"Health: {testViewController.Model.Health}";
         // }
