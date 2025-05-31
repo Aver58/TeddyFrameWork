@@ -2,12 +2,13 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class AddViewTool : EditorWindow {
     // todo viewName 缓存
     private string viewName = ""; // 界面名称
     private bool isGenerateController = true;
-    private bool isGenerateModel = true;
+    private bool isGenerateModel = false;
     private bool isGenerateView = true;
     private bool isGenerateViewCsv = true;
     [MenuItem("Tools/AddViewTool")]
@@ -142,13 +143,23 @@ public class AddViewTool : EditorWindow {
                 var prefab = new GameObject($"{viewName}View");
                 if (prefab != null) {
                     var viewComponentType = System.Type.GetType($"{viewName}View");
+                    var assemblies = System.AppDomain.CurrentDomain.GetAssemblies();
+                    foreach (var assembly in assemblies) {
+                        var type = assembly.GetType($"{viewName}View");
+                        if (type != null) {
+                            viewComponentType = type;
+                            break;
+                        }
+                    }
                     if (viewComponentType == null) {
                         Debug.LogError($"未找到类型 {viewName}View，请检查类名和命名空间！");
                         return;
                     }
                     prefab.AddComponent(viewComponentType);
                     prefab.AddComponent<RectTransform>();
+
                     PrefabUtility.SaveAsPrefabAsset(prefab, prefabPath);
+                    Debug.Log($"已保存预制：{prefabPath}", prefab);
 
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();

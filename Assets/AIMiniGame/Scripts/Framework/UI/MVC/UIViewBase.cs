@@ -30,7 +30,7 @@ namespace AIMiniGame.Scripts.Framework.UI {
 
         protected virtual void OnInit(){}
         protected virtual void OnOpen() {}     // 界面显示回调
-        protected virtual void OnClose() {}     // 界面隐藏回调
+        protected virtual void OnClose() {}    // 界面隐藏回调
         protected virtual void OnClear() { }
 
         // 绑定Controller（手动或通过依赖注入）
@@ -40,7 +40,7 @@ namespace AIMiniGame.Scripts.Framework.UI {
         }
 
         // 抽象方法：子类实现具体UI更新逻辑
-        protected abstract void UpdateView();
+        protected virtual void UpdateView(){}
     }
 
     // // 示例View（玩家血条UI）

@@ -19,7 +19,7 @@ namespace AIMiniGame.Scripts.Bussiness.Controller {
             // 订阅Model属性变化事件
             TetrisModel.PropertyChanged += (sender, args) => NotifyModelChanged();
 
-            UpdateManager.Instance.RegisterUpdate(OnUpdate);
+            UpdateRegister.Instance.RegisterUpdate(OnUpdate);
         }
 
         private void OnUpdate(float delta) {

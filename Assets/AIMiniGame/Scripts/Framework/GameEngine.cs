@@ -30,6 +30,8 @@ public class GameEngine : MonoBehaviour {
         // 加载界面示例
         // UIManager.Instance.OpenUI<TestView>();
 
+        GameWorld gameWorld = new GameWorld();
+        gameWorld.Init();
         ControllerManager.Instance.OpenAsync<PetViewController>();
     }
 

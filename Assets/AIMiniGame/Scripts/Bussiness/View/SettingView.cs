@@ -1,13 +1,47 @@
-using AIMiniGame.Scripts.Bussiness.Controller;
 using AIMiniGame.Scripts.Framework.UI;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingView : UIViewBase {
-    protected override void OnInit() {}
+    public Toggle isWindowsTop;
+    public Dropdown languageDropdown;
+    private const string IsWindowsTop = "IsWindowsTop";
+    protected override void OnInit() {
+        isWindowsTop.isOn = PlayerPrefs.GetInt(IsWindowsTop, 0) == 1;
+        isWindowsTop.onValueChanged.AddListener(OnToggleIsTopChanged);
+
+        languageDropdown.captionText.text = LocalizationFeature.GetLanguageName(LocalizationFeature.CurrentLanguage);
+        languageDropdown.ClearOptions();
+        languageDropdown.options.Add(new Dropdown.OptionData() {
+            text = "中文"
+        });
+        languageDropdown.options.Add(new Dropdown.OptionData() {
+            text = "English"
+        });
+        languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
+    }
+
     protected override void OnClear() { }
     protected override void OnOpen() { }
     protected override void OnClose() { }
-    protected override void UpdateView() {}
+
+    // 显示在其他应用上
+    private void OnToggleIsTopChanged(bool isOn) {
+
+        Debug.LogError($"isOn {isOn}");
+        PlayerPrefs.SetInt(IsWindowsTop, isOn ? 1 : 0);
+    }
+
+    private void OnLanguageChanged(int index) {
+        switch (index) {
+            case 0:
+                LocalizationFeature.CurrentLanguage = SystemLanguage.Chinese;
+                break;
+            case 1:
+                LocalizationFeature.CurrentLanguage = SystemLanguage.English;
+                break;
+        }
+
+        LocalizationFeature.SetCurrentLanguage(LocalizationFeature.CurrentLanguage);
+    }
 }

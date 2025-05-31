@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: Assets/AIMiniGame/ToBundle/Prefabs/MyPrefab.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5ea27fee66484590ab20bd6d04975440
+    m_Address: Assets/AIMiniGame/ToBundle/Config/Localization/Chinese/Language.csv
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: edc45afaa5f546c48d2cd5198256a1f3
+    m_Address: Assets/AIMiniGame/ToBundle/Config/Localization/English/Language.csv
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0f728d266239ddb4c8a26b329c0e5a74, type: 2}
   m_SchemaSet:

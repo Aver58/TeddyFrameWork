@@ -26,7 +26,8 @@ public class ConfigManager {
         //     return null;
         // }
 
-        string csvContent = Addressables.LoadAssetAsync<TextAsset>(fileFullPath).WaitForCompletion().text;//File.ReadAllText(filePath); 改成 Addressables 同步加载，会阻塞进程
+        //File.ReadAllText(filePath); 改成 Addressables 同步加载，会阻塞进程
+        string csvContent = Addressables.LoadAssetAsync<TextAsset>(fileFullPath).WaitForCompletion().text;
         var lines = csvContent.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
         if (lines.Length < 4) {
             Debug.LogError($"Config file has no data: {fileFullPath}");

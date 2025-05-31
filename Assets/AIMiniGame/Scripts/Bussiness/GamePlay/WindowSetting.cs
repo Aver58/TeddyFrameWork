@@ -58,6 +58,7 @@ public class WindowSetting : MonoBehaviour {
         // 窗口置顶
         SetWindowPos(window, HWND_TOPMOST, 0, 0, 0, 0, 0);
 #endif
+        // 设置窗口最大化
         Application.runInBackground = true;
     }
 }

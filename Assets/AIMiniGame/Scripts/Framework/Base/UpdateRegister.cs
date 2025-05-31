@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public delegate void UpdateDelegate(float delta);
 
-public class UpdateManager : MonoSingleton<UpdateManager> {
-    private static UpdateManager instance;
+public class UpdateRegister : MonoSingleton<UpdateRegister> {
+    private static UpdateRegister instance;
     private List<UpdateDelegate> updateables = new List<UpdateDelegate>();
     private List<UpdateDelegate> fixedUpdateables = new List<UpdateDelegate>();
     private List<UpdateDelegate> lateUpdateables = new List<UpdateDelegate>();

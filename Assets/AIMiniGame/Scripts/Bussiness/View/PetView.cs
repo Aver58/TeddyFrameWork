@@ -3,15 +3,8 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 using AIMiniGame.Scripts.Framework.UI;
 using UnityEngine.EventSystems;
-
-public enum PetState
-{
-    Idle,
-    Drag,
-    Music,
-    Sleep,
-    Walk,
-}
+using System.Windows.Forms;
+using ContextMenu = System.Windows.Forms.ContextMenuStrip;
 
 public class PetView : UIViewBase
 {
@@ -36,10 +29,8 @@ public class PetView : UIViewBase
     private bool isMusicOn = false;
     private int StateInt = Animator.StringToHash("State");
 
-    private void Start()
-    {
-        if (moveObj == null)
-        {
+    protected override void OnInit() {
+        if (moveObj == null) {
             return;
         }
 
@@ -59,6 +50,10 @@ public class PetView : UIViewBase
         entry2.eventID = EventTriggerType.Drag;
         entry2.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
         moveObj.triggers.Add(entry2);
+    }
+
+    protected override void OnClear() {
+        base.OnClear();
     }
 
     private void OnPointerDown(BaseEventData eventData)
@@ -107,4 +102,12 @@ public class PetView : UIViewBase
         //     _testText.text = $"Health: {testViewController.Model.Health}";
         // }
     }
+}
+
+public enum PetState {
+    Idle,
+    Drag,
+    Music,
+    Sleep,
+    Walk,
 }
