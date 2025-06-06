@@ -199,7 +199,6 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -763,6 +762,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PetView
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141431731524630042, guid: 5fd21c4ecbc30b64393676672c6a6093,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fd21c4ecbc30b64393676672c6a6093, type: 3}

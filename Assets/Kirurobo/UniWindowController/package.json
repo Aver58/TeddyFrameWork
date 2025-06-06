@@ -1,0 +1,25 @@
+{
+    "name": "com.kirurobo.uniwinc",
+    "version": "0.9.6",
+    "displayName": "UniWindowController",
+    "description": "Unified window controller for Mac and Windows",
+    "unity": "2021.3",
+    "unityRelease": "",
+    "dependencies": {},
+    "keywords": [
+        "Windows API",
+        "macOS"
+    ],
+  "author": {
+    "name": "Kirurobo",
+    "email": "kirurobo@gmail.com",
+    "url": "https://github.com/kirurobo/uniwindowcontroller"
+  },
+  "samples": [
+    {
+      "displayName": "UniWinC samples",
+      "description": "Sample scenes for UniWindowController",
+      "path": "Samples~"
+    }
+  ]
+}

@@ -36,7 +36,6 @@ namespace AIMiniGame.Scripts.Framework.UI {
         protected virtual void OnClose() { }
         public void Init(string functionName) {
             FunctionName = functionName;
-            Model.PropertyChanged += (sender, args) => NotifyModelChanged();
         }
     }
 }
