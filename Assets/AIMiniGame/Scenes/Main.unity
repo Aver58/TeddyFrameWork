@@ -199,7 +199,6 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -396,7 +395,7 @@ PrefabInstance:
     - target: {fileID: 3335046747505344946, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.45454547
+      value: 0.99998426
       objectReference: {fileID: 0}
     - target: {fileID: 5851287690258711615, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
@@ -411,7 +410,7 @@ PrefabInstance:
     - target: {fileID: 5851287690258711615, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 292.5
+      value: 266.3306
       objectReference: {fileID: 0}
     - target: {fileID: 5851287690258711615, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
@@ -421,7 +420,7 @@ PrefabInstance:
     - target: {fileID: 5851287690258711615, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 151.25
+      value: 138.1653
       objectReference: {fileID: 0}
     - target: {fileID: 5851287690258711615, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
@@ -486,7 +485,7 @@ PrefabInstance:
     - target: {fileID: 7117357251744186174, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.8991818
+      value: 0.0008564832
       objectReference: {fileID: 0}
     - target: {fileID: 8308190549866999162, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
@@ -521,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 9181430770090930058, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 292.5
+      value: 266.3306
       objectReference: {fileID: 0}
     - target: {fileID: 9181430770090930058, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
@@ -531,7 +530,7 @@ PrefabInstance:
     - target: {fileID: 9181430770090930058, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 448.75
+      value: 409.4959
       objectReference: {fileID: 0}
     - target: {fileID: 9181430770090930058, guid: 21a34d661c6b1f5429bfc15cd920e42e,
         type: 3}
@@ -931,7 +930,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692459127}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca94c1079b9841b6849d606652c637e1, type: 3}
   m_Name: 
@@ -1052,6 +1051,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PetView
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141431731524630042, guid: 5fd21c4ecbc30b64393676672c6a6093,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fd21c4ecbc30b64393676672c6a6093, type: 3}

@@ -10,6 +10,7 @@ public class SettingView : UIViewBase{
     public Toggle isWindowsTop;
     public Toggle isClickThrough;
     public Dropdown languageDropdown;
+    public Button btnClose;
 
     private UniWindowController uniWindowController;
     
@@ -26,6 +27,10 @@ public class SettingView : UIViewBase{
         languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
 
         uniWindowController = UniWindowController.current;
+
+        btnClose.onClick.AddListener(() => {
+            ControllerManager.Instance.Close<SettingController>();
+        });
     }
 
     protected override void OnClear() { }

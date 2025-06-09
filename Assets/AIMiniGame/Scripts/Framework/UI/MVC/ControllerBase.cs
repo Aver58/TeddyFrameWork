@@ -6,7 +6,7 @@ namespace AIMiniGame.Scripts.Framework.UI {
         public bool IsClear { get; private set; } = false;
         public bool IsOpen { get; private set; }
         public string FunctionName { get; private set; }
-        public UIViewBase Window { get; private set; }
+        public UIViewBase Window { get; set; }
 
         public event Action OnModelChanged;
         protected ModelBase Model;
@@ -19,6 +19,9 @@ namespace AIMiniGame.Scripts.Framework.UI {
 
             IsOpen = true;
             Window = UIManager.Instance.Open(this);
+            if (Window) {
+                Window.gameObject.SetActive(true);
+            }
             OnOpen();
         }
 
@@ -30,6 +33,9 @@ namespace AIMiniGame.Scripts.Framework.UI {
             IsOpen = false;
             IsClear = true;
             OnClose();
+            if (Window) {
+                Window.gameObject.SetActive(false);
+            }
         }
 
         protected virtual void OnOpen() { }

@@ -98,6 +98,7 @@ public class UIManager : Singleton<UIManager> {
                 uiViewBase.Init(layer);
                 uiViewBase.BindController(controller);
                 uiViewBase.Open();
+                controller.Window = uiViewBase;
                 _uiCache.Add(viewName, uiViewBase);
                 _uiStack.Push(uiViewBase);
             };

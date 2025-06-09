@@ -58,11 +58,6 @@ public class PetView : UIViewBase {
         entry1.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
         moveObj.triggers.Add(entry1);
 
-        var entry2 = new EventTrigger.Entry();
-        entry2.eventID = EventTriggerType.Drag;
-        entry2.callback.AddListener((data) => { OnDrag((PointerEventData)data); });
-        moveObj.triggers.Add(entry2);
-
         InitSetting();
     }
 
@@ -82,31 +77,15 @@ public class PetView : UIViewBase {
     private void OnPointerDown(BaseEventData eventData) {
         PointerEventData pointerEventData = (PointerEventData)eventData;
         if (pointerEventData.button == PointerEventData.InputButton.Right){
-            // 打开界面
             ControllerManager.Instance.OpenAsync<SettingController>();
         }
 
         if (pointerEventData.button == PointerEventData.InputButton.Left){
-            // 关闭界面
             ControllerManager.Instance.Close<SettingController>();
         }
     }
 
     private void OnPointerUp(PointerEventData eventData) {
-        PetState = PetState.Idle;
-    }
-
-    private void OnDrag(PointerEventData eventData) {
-        Vector3 worldPosition;
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(
-            rectTransform,
-            eventData.position,
-            eventData.pressEventCamera,
-            out worldPosition
-        );
-
-        rectTransform.position = worldPosition;
-        PetState = PetState.Drag;
     }
 
     private void Update() {
@@ -120,9 +99,7 @@ public class PetView : UIViewBase {
             }
         }
 
-        // 检测不同屏幕的输入，键盘输入，任意一个键被按下
         if (Input.anyKeyDown) {
-            Debug.Log("任意键被按下");
             InputCount++;
         }
     }
