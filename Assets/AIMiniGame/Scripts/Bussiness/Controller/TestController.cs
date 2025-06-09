@@ -3,10 +3,10 @@ using AIMiniGame.Scripts.Framework.UI;
 using UnityEngine;
 
 namespace AIMiniGame.Scripts.Bussiness.Controller {
-    public class TestViewController : ControllerBase {
+    public class TestController : ControllerBase {
         public TestViewModel Model { get; private set; }
 
-        public TestViewController() {
+        public TestController() {
             Model = new TestViewModel { Health = 100 };
             Model.PropertyChanged += (sender, args) => NotifyModelChanged();
         }

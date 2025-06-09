@@ -41,4 +41,11 @@ public class ControllerManager : Singleton<ControllerManager> {
 
         return null;
     }
+
+    public void Close<T>() where T : ControllerBase, new() {
+        var controller = Find<T>();
+        if (controller != null) {
+            controller.Close();
+        }
+    }
 }

@@ -1,0 +1,5 @@
+id,petSprites
+int,string[]
+ID,宠物图片列表
+0,Pet0_Left;Pet0_Right
+1,Pet1_Left;Pet1_Right

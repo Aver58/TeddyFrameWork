@@ -46,18 +46,18 @@ public class WindowSetting : MonoBehaviour {
     #endregion
 
     void Start() {
-#if !UNITY_EDITOR
-        window = GetActiveWindow();
-        // 全屏模式下扩展窗口到客户端区域 -> 为了透明 // 边距内嵌值确定在窗口四侧扩展框架的距离 -1为没有窗口边框
-        MARGINS margins = new MARGINS() { cxLeftWidth = -1 };
-        DwmExtendFrameIntoClientArea(window, ref margins);
-        // 设置为透明、无边框
-        SetWindowLong(window, GWL_EXSTYLE, WS_EX_LAYERED);
-        // bAlpha 透明
-        SetLayeredWindowAttributes(window, crKey: 0, bAlpha: 0, LWA_COLORKEY);
-        // 窗口置顶
-        SetWindowPos(window, HWND_TOPMOST, 0, 0, 0, 0, 0);
-#endif
+//#if !UNITY_EDITOR
+//        window = GetActiveWindow();
+//        // 全屏模式下扩展窗口到客户端区域 -> 为了透明 // 边距内嵌值确定在窗口四侧扩展框架的距离 -1为没有窗口边框
+//        MARGINS margins = new MARGINS() { cxLeftWidth = -1 };
+//        DwmExtendFrameIntoClientArea(window, ref margins);
+//        // 设置为透明、无边框
+//        SetWindowLong(window, GWL_EXSTYLE, WS_EX_LAYERED);
+//        // bAlpha 透明
+//        SetLayeredWindowAttributes(window, crKey: 0, bAlpha: 0, LWA_COLORKEY);
+//        // 窗口置顶
+//        SetWindowPos(window, HWND_TOPMOST, 0, 0, 0, 0, 0);
+//#endif
         // 设置窗口最大化
         Application.runInBackground = true;
     }

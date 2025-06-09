@@ -34,7 +34,7 @@ namespace AIMiniGame.Scripts.TetrisGame {
         private Color lightGray = new Color(0.078f, 0.192f, 0.31f);
         private Image[,] boardCells;
         private Image[,] nextTetrominoCells;
-        private TetrisViewController tetrisController => Controller as TetrisViewController;
+        private TetrisController tetrisController => Controller as TetrisController;
 
         public override void Init(UILayer layer) {
             base.Init(layer);

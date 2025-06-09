@@ -17,12 +17,12 @@ public class TestView : UIViewBase {
     protected override void OnClose() { }
 
     protected override void UpdateView() {
-        if (Controller is TestViewController testViewController) {
+        if (Controller is TestController testViewController) {
             _testText.text = $"Health: {testViewController.Model.Health}";
         }
     }
 
     private void OnTakeDamageButtonClick() {
-        (Controller as TestViewController)?.TakeDamage(10);
+        (Controller as TestController)?.TakeDamage(10);
     }
 }

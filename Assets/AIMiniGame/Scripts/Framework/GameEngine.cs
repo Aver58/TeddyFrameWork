@@ -32,7 +32,7 @@ public class GameEngine : MonoBehaviour {
 
         GameWorld gameWorld = new GameWorld();
         gameWorld.Init();
-        ControllerManager.Instance.OpenAsync<PetViewController>();
+        ControllerManager.Instance.OpenAsync<PetController>();
     }
 
     private void OnTestEvent2(string message) {

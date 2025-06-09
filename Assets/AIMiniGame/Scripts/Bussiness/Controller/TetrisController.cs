@@ -4,14 +4,14 @@ using AIMiniGame.Scripts.Framework.UI;
 using AIMiniGame.Scripts.TetrisGame;
 
 namespace AIMiniGame.Scripts.Bussiness.Controller {
-    public class TetrisViewController : ControllerBase {
+    public class TetrisController : ControllerBase {
         public TetrisModel TetrisModel { get; private set; }
         private float _fallTime;
         private float _fallTimeDefault = 1.0f;
         private Coroutine _gameLoopCoroutine;
         private float timer = 0;
 
-        public TetrisViewController() {
+        public TetrisController() {
             TetrisModel = new TetrisModel();
             Model = TetrisModel;
             _fallTime = _fallTimeDefault;

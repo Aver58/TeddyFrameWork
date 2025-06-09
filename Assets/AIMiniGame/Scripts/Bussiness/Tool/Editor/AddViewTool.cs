@@ -116,7 +116,7 @@ public class AddViewTool : EditorWindow {
 
             // csvContent 文件尾新增一行 PetView,宠物界面,PetView,1
             var csvLines = System.IO.File.ReadAllLines(csvPath).ToList();
-            var viewId = $"{viewName}View";
+            var viewId = $"{viewName}";
             var newLine = $"{viewId},{viewName}界面,{viewName}View,1";
             csvLines.Add(newLine);
             System.IO.File.WriteAllLines(csvPath, csvLines);
